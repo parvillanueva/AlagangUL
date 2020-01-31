@@ -15,3 +15,29 @@ ERROR - 2020-01-31 08:41:32 --> Severity: Warning --> include(D:\webroot\team_ap
 ERROR - 2020-01-31 08:41:33 --> Severity: Warning --> include(): Failed opening 'D:\webroot\team_app\application\views\errors\html\error_exception.php' for inclusion (include_path='D:\xampp\php\PEAR') D:\webroot\team_app\system\core\Exceptions.php 227
 ERROR - 2020-01-31 08:42:13 --> Severity: Notice --> Undefined property: Api::$Api_model D:\webroot\team_app\application\core\GS_Controller.php 16
 ERROR - 2020-01-31 08:42:13 --> Severity: error --> Exception: Call to a member function check_token() on null D:\webroot\team_app\application\core\GS_Controller.php 16
+ERROR - 2020-01-31 08:52:50 --> Severity: Notice --> Undefined index: last_name D:\webroot\team_app\application\controllers\api\Users.php 34
+ERROR - 2020-01-31 08:53:12 --> Severity: Notice --> Trying to get property 'last_name' of non-object D:\webroot\team_app\application\controllers\api\Users.php 34
+ERROR - 2020-01-31 01:54:08 --> Severity: Compile Error --> Cannot use isset() on the result of an expression (you can use "null !== expression" instead) D:\webroot\team_app\application\controllers\api\Users.php 34
+ERROR - 2020-01-31 08:55:55 --> Severity: Notice --> Undefined index: last_name D:\webroot\team_app\application\controllers\api\Users.php 34
+ERROR - 2020-01-31 02:02:18 --> Severity: error --> Exception: syntax error, unexpected ',' D:\webroot\team_app\application\controllers\api\Users.php 34
+ERROR - 2020-01-31 09:02:35 --> Severity: error --> Exception: Call to undefined method Users::validate() D:\webroot\team_app\application\controllers\api\Users.php 34
+ERROR - 2020-01-31 02:07:20 --> Severity: error --> Exception: syntax error, unexpected ';', expecting ',' or ')' D:\webroot\team_app\application\core\GS_Controller.php 58
+ERROR - 2020-01-31 09:10:28 --> Severity: Notice --> Undefined variable: result D:\webroot\team_app\application\controllers\api\Users.php 36
+ERROR - 2020-01-31 02:14:38 --> Severity: error --> Exception: syntax error, unexpected '$this' (T_VARIABLE) D:\webroot\team_app\application\controllers\api\Users.php 36
+ERROR - 2020-01-31 09:15:56 --> Severity: Notice --> Undefined index: birthday D:\webroot\team_app\application\core\GS_Controller.php 57
+ERROR - 2020-01-31 09:41:51 --> Severity: Notice --> Undefined index: user_image D:\webroot\team_app\application\core\GS_Controller.php 115
+ERROR - 2020-01-31 09:41:51 --> Severity: Notice --> Undefined index: user_image D:\webroot\team_app\application\core\GS_Controller.php 115
+ERROR - 2020-01-31 09:42:52 --> Severity: Notice --> Undefined index: user_image D:\webroot\team_app\application\core\GS_Controller.php 119
+ERROR - 2020-01-31 09:42:52 --> Severity: Notice --> Undefined index: user_image D:\webroot\team_app\application\core\GS_Controller.php 119
+ERROR - 2020-01-31 09:43:09 --> Severity: Notice --> Undefined index: user_image D:\webroot\team_app\application\core\GS_Controller.php 116
+ERROR - 2020-01-31 09:43:09 --> Severity: Notice --> Undefined index: user_image D:\webroot\team_app\application\core\GS_Controller.php 116
+ERROR - 2020-01-31 10:30:50 --> Severity: error --> Exception: Call to undefined method Api_model::save() D:\webroot\team_app\application\controllers\api\Users.php 56
+ERROR - 2020-01-31 10:31:18 --> Severity: error --> Exception: Call to undefined method Api_model::save() D:\webroot\team_app\application\controllers\api\Users.php 56
+ERROR - 2020-01-31 10:40:42 --> Severity: Notice --> Array to string conversion D:\webroot\team_app\system\database\DB_driver.php 1466
+ERROR - 2020-01-31 10:40:42 --> Query error: Unknown column 'Array' in 'field list' - Invalid query: UPDATE `tbl_users` SET `imagepath` = Array
+WHERE `id` = 3
+ERROR - 2020-01-31 10:42:25 --> Severity: error --> Exception: Too few arguments to function Users::register(), 1 passed in D:\webroot\team_app\application\controllers\api\Users.php on line 12 and exactly 2 expected D:\webroot\team_app\application\controllers\api\Users.php 33
+ERROR - 2020-01-31 10:42:48 --> Severity: error --> Exception: Too few arguments to function Users::register(), 1 passed in D:\webroot\team_app\application\controllers\api\Users.php on line 12 and exactly 2 expected D:\webroot\team_app\application\controllers\api\Users.php 33
+ERROR - 2020-01-31 10:43:13 --> Severity: error --> Exception: Too few arguments to function Users::register(), 1 passed in D:\webroot\team_app\application\controllers\api\Users.php on line 12 and exactly 2 expected D:\webroot\team_app\application\controllers\api\Users.php 33
+ERROR - 2020-01-31 10:43:33 --> Severity: error --> Exception: Too few arguments to function Users::register(), 1 passed in D:\webroot\team_app\application\controllers\api\Users.php on line 12 and exactly 2 expected D:\webroot\team_app\application\controllers\api\Users.php 33
+ERROR - 2020-01-31 10:43:51 --> Severity: error --> Exception: Too few arguments to function Users::register(), 1 passed in D:\webroot\team_app\application\controllers\api\Users.php on line 12 and exactly 2 expected D:\webroot\team_app\application\controllers\api\Users.php 33
