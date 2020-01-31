@@ -1,0 +1,17 @@
+
+$config['{custom_name}']    = array(
+                                'type'          => '{type}', 
+                                'name'          => '{name}',
+                                'form-align'    => 'horizontal', 
+                                'class'         => 'form-control {class}', 
+                                'id'            => '{id}', 
+                                'required'      => {required}, 
+                                'filemanager'   => false, 
+                                'youtube'       => false, 
+                                'placeholder'   => '{placeholder}',
+                                'label'         => '{label}',
+                                'maxlength'     => {maxlength},
+                                'note'          => '{note}'
+                            );
+
+//custom_standard_config

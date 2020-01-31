@@ -1,0 +1,86 @@
+
+#breadcrumb {
+    list-style: none;
+    display: inline-block;
+    padding: 0;
+}
+
+#breadcrumb .icon {
+  font-size: 14px;
+}
+#breadcrumb li {
+  float: left;
+}
+#breadcrumb li a {
+    display: block;
+    text-decoration: none;
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px 0 5px;
+    text-align: center;
+    margin-right: 23px;
+}
+
+
+/**** SKIN ****/
+
+
+
+/*
+ * Skin: Green
+ * ----------
+ */
+
+.skin-green #breadcrumb li a {
+    color: #fff;
+    background-color: #00a65a;
+}
+
+.skin-green #breadcrumb li:nth-child(even) a {
+    background-color: #00a65a;
+}
+
+.skin-green #breadcrumb li:nth-child(even) a:before {
+    border-color: #00a65a;
+    border-left-color: transparent;
+}
+.skin-green #breadcrumb li:nth-child(even) a:after {
+    border-left-color: #00a65a;
+}
+.skin-green #breadcrumb li:first-child a {
+  padding-left: 15px;
+  -moz-border-radius: 4px 0 0 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px 0 0 4px;
+}
+.skin-green #breadcrumb li:first-child a:before {
+  border: none;
+}
+.skin-green #breadcrumb li:last-child a {
+  padding-right: 15px;
+  -moz-border-radius: 0 4px 4px 0;
+  -webkit-border-radius: 0;
+  border-radius: 0 4px 4px 0;
+}
+.skin-green #breadcrumb li:last-child a:after {
+  border: none;
+}
+.skin-green #breadcrumb li a:before, #breadcrumb li a:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    border: 0 solid #00a65a;
+    border-width: 20px 10px;
+    width: 0;
+    height: 0;
+}
+.skin-green #breadcrumb li a:before {
+    left: -20px;
+    border-left-color: transparent;
+}
+.skin-green #breadcrumb li a:after {
+    left: 100%;
+    border-color: transparent;
+    border-left-color: #00a65a;
+}

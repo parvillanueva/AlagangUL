@@ -1,0 +1,61 @@
+/*  -------------------- START FOOTER STYLES  ------------------------------ */
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: auto;
+  background-color: #fff;
+	z-index:99;
+	left:0;
+	right:0;
+}
+.footer-logo{
+	height:55px;
+	width:auto;
+	padding-top:5px;
+}
+.footer-logo.ulssi{
+	padding:12px 0px 6px 0px;
+	margin:0px 5px;
+}
+.footerprivacy{
+	font-weight:600;
+	font-size:14px;
+	color:#455b64;
+	padding:20px 0px;
+	margin-bottom:0px;
+}
+
+@media (min-width: 991px) {
+	body {
+  		margin-bottom: 60px;
+	}
+	.footer {
+	  	height: 60px;
+	}
+}
+@media (max-width:767px){
+	.footerprivacy{
+		text-align:center;
+		padding:15px 0px 10px 0px;
+	}
+	.footer-logo{
+		margin-left:auto;
+		margin-right:auto;
+		float:right;
+		padding:0px;
+		margin-bottom:5px;
+		margin-top:15px;
+	}
+	.footer-logo.ulssi{
+		margin:10px 10px 5px auto;
+	}
+}
+/*  -------------------- END FOOTER STYLES  ------------------------------ */
