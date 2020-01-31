@@ -35,18 +35,6 @@
 											</div>
 										</form>
 									</div>
-										<ul class="bg-bubbles">
-											<li></li>
-											<li></li>
-											<li></li>
-											<li></li>
-											<li></li>
-											<li></li>
-											<li></li>
-											<li></li>
-											<li></li>
-											<li></li>
-										</ul>
 								</div>
 							</div>
 						</div>
@@ -65,14 +53,16 @@
 				$(".alert_failed").hide();
         		if(validate.standard("<?= $id; ?>")){
         			modal.loading(true);
-        			var url = "<?= base_url('login/azure') ?>";
+        			var url = '<?php echo base_url()."api/users?token=".$token ?>';
         			var data = {
-        				ad_user : $("#ad_user").val(),
-        				ad_password : $("#password").val()
+						CMDEvent: 'authenticate',
+        				email_address : $("#ad_user").val(),
+        				password : $("#password").val()
         			}
 					
-        			aJax.post(url, data, function(obj){
-        				if(obj.status == true){
+        			aJax.post(url, data, function(result){
+						console.log(result);
+        				/* if(obj.status == true){
         					location.href = '<?=base_url("applications");?>';
         				} else if(obj.status == 'failed'){
 							$(".alert_failed").show();
@@ -80,7 +70,7 @@
 						} else {
         					$(".alert_false").show();
         					modal.loading(false);
-        				}
+        				} */
         			});
         		}
         	});

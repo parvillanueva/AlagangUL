@@ -68,3 +68,4 @@ ERROR - 2020-01-31 15:00:26 --> Severity: Notice --> Trying to get property 'cms
 ERROR - 2020-01-31 15:00:33 --> Severity: Notice --> Undefined variable: cms_title D:\xampp\htdocs\teamapp\application\views\layout\header.php 32
 ERROR - 2020-01-31 15:00:33 --> Severity: Notice --> Trying to get property 'cms_skin' of non-object D:\xampp\htdocs\teamapp\application\views\layout\header.php 32
 >>>>>>> master_doms
+ERROR - 2020-01-31 08:46:29 --> 404 Page Not Found: Login/index

@@ -52,6 +52,7 @@ $config['package_field_duplicate']  = "Required fields has duplicate values.";
 //ERRORS
 $config['invalid_user_password']        = "Invalid username and password. Please try again.";
 $config['invalid_password']             = "Incorrect password. Please try again.";
+$config['duplicate_entry']             = "Duplicate entry please check!";
 
 //CUSTOM MESSAGE
 $config['newsletter_subscribed']       = "Success!<br>You have subscribed to our newsletter.";
@@ -2744,7 +2745,7 @@ $config['user_mobile']    = array(
                                 'id'            => 'user_mobile',
                                 'required'      => false,
 								'no_html'       => true,
-                                'maxlength'     => 250,
+                                'maxlength'     => 10,
                                 'placeholder'   => 'Mobile Number',
                                 'label'         => 'Mobile Number'
                             );
