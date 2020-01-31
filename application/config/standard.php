@@ -2681,6 +2681,43 @@ $config['user_email']    = array(
                                 'maxlength'     => 250,
                                 'placeholder'   => 'Email Address',
                                 'label'         => 'Email Address'
-                            );	
+                            );
+
+$config['user_lastname']    = array(
+                                'type'          => 'text',
+                                'name'          => 'user_lastname',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control hoverable',
+                                'id'            => 'user_lastname',
+                                'required'      => true,
+								'no_html'       => true,
+                                'maxlength'     => 250,
+                                'placeholder'   => 'Last Name',
+                                'label'         => 'Last Name'
+                            );
+$config['user_firstname']    = array(
+                                'type'          => 'text',
+                                'name'          => 'user_firstname',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control hoverable',
+                                'id'            => 'user_firstname',
+                                'required'      => true,
+								'no_html'       => true,
+                                'maxlength'     => 250,
+                                'placeholder'   => 'First Name',
+                                'label'         => 'First Name'
+                            );
+$config['user_middlename']    = array(
+                                'type'          => 'text',
+                                'name'          => 'user_middlename',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control hoverable',
+                                'id'            => 'user_middlename',
+                                'required'      => false,
+								'no_html'       => true,
+                                'maxlength'     => 250,
+                                'placeholder'   => 'Middle Name',
+                                'label'         => 'Middle Name'
+                            );							
 
 ?>
