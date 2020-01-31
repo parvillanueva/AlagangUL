@@ -61,16 +61,25 @@
         			}
 					
         			aJax.post(url, data, function(result){
-						console.log(result);
-        				/* if(obj.status == true){
-        					location.href = '<?=base_url("applications");?>';
-        				} else if(obj.status == 'failed'){
-							$(".alert_failed").show();
-        					modal.loading(false);
-						} else {
-        					$(".alert_false").show();
-        					modal.loading(false);
-        				} */
+						var result_code = result.Code;
+						switch(result_code){
+							case 202:
+								var url_login = '<?php echo base_url()."login/session_set" ?>';
+								var data_login = {
+									email : $("#ad_user").val(),
+								};
+								aJax.post(url_login, data_login, function(result_set){
+									if(result_set){
+										location.href = '<?=base_url("user");?>';
+										modal.loading(false);
+									}
+								});
+							break;
+							case 508:
+								$(".alert_false").show();
+								modal.loading(false);
+							break;
+						}
         			});
         		}
         	});

@@ -23,7 +23,7 @@
         var modal_obj = '<?= $this->standard->confirm("confirm_logout"); ?>';
         modal.standard(modal_obj, function(result){
             if(result){
-                location.href = "<?= base_url('azure_login/destroy');?>";
+                location.href = "<?= base_url('logout');?>";
             }
         });
     });
