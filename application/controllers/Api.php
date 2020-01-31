@@ -3,9 +3,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Api extends GS_Controller {
 
-	public function index()
+	public function users()
 	{
 		$Event = $GLOBALS['CMDEvent'];
-		print_r($Event);
+		switch ($Event) {
+			case 'register':
+				# code...
+				break;
+
+			case 'update':
+				# code...
+				break;
+
+			case 'login':
+				# code...
+				break;
+
+			case 'profile':
+				# code...
+				break;
+			
+			default:
+				# code...
+				break;
+		}
 	}
 }
