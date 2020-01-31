@@ -34,17 +34,20 @@ class Users extends GS_Controller {
 
 		$LastName 		= $this->validate($post, 'last_name', ["required"]);
 		$FirstName 		= $this->validate($post, 'first_name', ["required"]);
-		$MiddleName 	= $this->validate($post, 'middle_name');
+		$Gender 		= $this->validate($post, 'gender',["required"]);
 		$Birthday 		= $this->validate($post, 'birthday', ["required","date"]);
 		$EmailAddress 	= $this->validate($post, 'email_address', ["required","email"]);
 		$MobileNumber 	= $this->validate($post, 'mobile_number', ["required","mobile_no"]);
 		$Password 		= $this->validate($post, 'password', ["required","password"], 'confirm_password');
 		$Image 			= $this->validate($post, 'user_image', ["file"]);
 
+		$this->uniquedata("tbl_users","email_address",$EmailAddress);
+		$this->uniquedata("tbl_users","mobile_number",$MobileNumber);
+
 		$save_data = array(
 			"last_name"		=> $LastName,
 			"first_name"	=> $FirstName,
-			"middle_name"	=> $MiddleName,
+			"gender"		=> $Gender,
 			"birthday"		=> $Birthday,
 			"email_address"	=> $EmailAddress,
 			"mobile_number"	=> $MobileNumber,
@@ -53,9 +56,6 @@ class Users extends GS_Controller {
 			"create_date"	=> date("Y-m-d H:i:s")
 		);
 
-
-
-
 		$user_id = $this->Api_model->save_data("tbl_users", $save_data);
 		if($user_id){
 			$image_path = $this->upload($Image, "user_image");
@@ -63,7 +63,20 @@ class Users extends GS_Controller {
 				"imagepath"	=> $image_path
 			);
 			if($this->Api_model->update_data("tbl_users",$update_data,"id",$user_id)){
-				$this->output(true, "Saving record success.");
+
+				$points_data = array(
+					"user_id"			=> $user_id,
+					"current_points"	=> 0,
+					"total_points"		=> 0,
+					"update_date"		=> date("Y-m-d H:i:s")
+				);
+
+				if($this->Api_model->save_data("tbl_users_points", $points_data)){
+					$this->output(true, "Success saving record.");
+				} else {
+					$this->output(false, "Error saving record. please try again.");	
+				}
+				
 			} else {
 				$this->output(false, "Error saving record. please try again.");	
 			}
@@ -72,10 +85,6 @@ class Users extends GS_Controller {
 			$this->output(false, "Error saving record. please try again.");
 		}
 
-
-	}
-
-	function sendsms($user_id, $mobile_number){
 
 	}
 

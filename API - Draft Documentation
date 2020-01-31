@@ -1,9 +1,9 @@
 ### USERS #############################
 
 ###### REGISTRATION ###################
-
 url : api/users?token=[token]
 parameters :
+	CMDEvent 		: register
 	last_name 		: required
 	first_name 		: required
 	middle_name 	: optional

@@ -39,6 +39,18 @@ class GS_Controller extends CI_Controller {
     	
 	}
 
+    function uniquedata($table, $field, $value){
+
+    	$query = 'SELECT * FROM ' . $table . ' WHERE ' . $field . ' = "' . $value . '" AND status = 1';
+    	$result = $this->Api_model->run_query($query);
+    	if(count($result) > 0){
+    		$this->output(false, $value . " already exisit on the record, " . $field . " must be unique.");
+    		die();
+    	} else {
+    		return true;
+    	}
+	}
+
     function upload($file,$folder){
     	$uploaddir = 'uploads/' . $folder . "/";
 
@@ -47,7 +59,7 @@ class GS_Controller extends CI_Controller {
 		}
 
     	$Filepath = $file['name'];
-		$filenamekey = md5(uniqid($Filepath, true));     
+		$filenamekey = md5(uniqid(time(), true));     
 		$Fileext = pathinfo($Filepath, PATHINFO_EXTENSION);
 
 		$uploadfile = $uploaddir .  $filenamekey.'.'.$Fileext;
