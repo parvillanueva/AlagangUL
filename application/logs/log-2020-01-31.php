@@ -46,6 +46,7 @@ ERROR - 2020-01-31 03:59:10 --> Severity: Compile Error --> Only variables can b
 =======
 ERROR - 2020-01-31 14:15:29 --> Query error: Unknown column 'middle_name' in 'field list' - Invalid query: INSERT INTO `tbl_users` (`last_name`, `first_name`, `middle_name`, `birthday`, `email_address`, `mobile_number`, `password`, `status`, `create_date`) VALUES ('sobs', 'doms', 'sobs', '1991-01-01', 'phpdeveloper3@unilab.com.ph', '9073157715', '55673b53ad08bf54037192336609db4e', 1, '2020-01-31 14:15:29')
 >>>>>>> master_doms
+<<<<<<< HEAD
 ERROR - 2020-01-31 14:33:11 --> Severity: error --> Exception: Call to undefined function coung() D:\webroot\team_app\application\controllers\api\Users.php 102
 ERROR - 2020-01-31 14:50:09 --> Severity: Notice --> Undefined variable: CI D:\webroot\team_app\application\core\GS_Controller.php 35
 ERROR - 2020-01-31 14:50:09 --> Severity: Notice --> Trying to get property 'config' of non-object D:\webroot\team_app\application\core\GS_Controller.php 35
@@ -57,3 +58,13 @@ ERROR - 2020-01-31 15:08:11 --> Severity: Notice --> Undefined variable: config 
 ERROR - 2020-01-31 15:08:47 --> Severity: Notice --> Undefined variable: config D:\webroot\team_app\application\core\GS_Controller.php 192
 ERROR - 2020-01-31 15:09:17 --> Severity: Notice --> Undefined offset: 201 D:\webroot\team_app\application\core\GS_Controller.php 192
 ERROR - 2020-01-31 15:17:30 --> Severity: Notice --> Undefined index: Authentication Success D:\webroot\team_app\application\core\GS_Controller.php 209
+=======
+ERROR - 2020-01-31 14:58:49 --> Severity: Notice --> Undefined variable: cms_title D:\xampp\htdocs\teamapp\application\views\layout\header.php 33
+ERROR - 2020-01-31 14:58:49 --> Severity: Notice --> Trying to get property 'cms_skin' of non-object D:\xampp\htdocs\teamapp\application\views\layout\header.php 33
+ERROR - 2020-01-31 14:59:55 --> Severity: Notice --> Undefined variable: cms_title D:\xampp\htdocs\teamapp\application\views\layout\header.php 32
+ERROR - 2020-01-31 14:59:55 --> Severity: Notice --> Trying to get property 'cms_skin' of non-object D:\xampp\htdocs\teamapp\application\views\layout\header.php 32
+ERROR - 2020-01-31 15:00:26 --> Severity: Notice --> Undefined variable: cms_title D:\xampp\htdocs\teamapp\application\views\layout\header.php 32
+ERROR - 2020-01-31 15:00:26 --> Severity: Notice --> Trying to get property 'cms_skin' of non-object D:\xampp\htdocs\teamapp\application\views\layout\header.php 32
+ERROR - 2020-01-31 15:00:33 --> Severity: Notice --> Undefined variable: cms_title D:\xampp\htdocs\teamapp\application\views\layout\header.php 32
+ERROR - 2020-01-31 15:00:33 --> Severity: Notice --> Trying to get property 'cms_skin' of non-object D:\xampp\htdocs\teamapp\application\views\layout\header.php 32
+>>>>>>> master_doms

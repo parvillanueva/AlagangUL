@@ -8,8 +8,8 @@
 		<?php
 			$inputs = [
 				'user_firstname',
-				'user_middlename',
 				'user_lastname',
+				'user_gender',
 				'user_birthday',
 				'user_email',
 				'user_mobile',
@@ -46,40 +46,48 @@
 		$('#user_image').hide();
 	});
 	$(document).on('click', '#btn_save', function(){
-		var lastname = $('#user_lastname').val();
-		var firstname = $('#user_firstname').val();
-		var middlename = $('#user_middlename').val();
-		var birthday = $('#user_birthday').val();
-		var email = $('#email_address').val();
-		var mobile = $('#user_mobile').val();
-		var password = $('#password').val();
-		var con_password = $('#confirm_password').val();
-		var file_data = $('#user_image').prop('files')[0];   
-		var form_data = new FormData();                  
-		form_data.append('user_image', file_data);
-		form_data.append('CMDEvent', 'register');
-		form_data.append('last_name', lastname);
-		form_data.append('first_name', firstname);
-		form_data.append('middle_name', middlename);
-		form_data.append('birthday', birthday);
-		form_data.append('email_address', email);
-		form_data.append('mobile_number', mobile);
-		form_data.append('password', password);
-		form_data.append('confirm_password', con_password);
-		var url = '<?php echo base_url()."api/users?token=".$token ?>';
-		console.log(form_data);                             
-		$.ajax({
-			url: url,
-			dataType: 'text',  
-			cache: false,
-			contentType: false,
-			processData: false,
-			data: form_data,                         
-			type: 'post',
-			success: function(php_script_response){
-				console.log(php_script_response);
-			}
-		 });
+		if(validate.standard("<?php echo $id?>")) {
+			var modal_obj = '<?= $this->standard->confirm("confirm_save"); ?>'; 
+			modal.standard(modal_obj, function(result){
+				if(result){
+					var lastname = $('#user_lastname').val();
+					var firstname = $('#user_firstname').val();
+					var gender = $('#user_gender').val();
+					var birthday = $('#user_birthday').val();
+					var email = $('#email_address').val();
+					var mobile = $('#user_mobile').val();
+					var password = $('#password').val();
+					var con_password = $('#confirm_password').val();
+					var file_data = $('#user_image').prop('files')[0];   
+					var form_data = new FormData();                  
+					form_data.append('user_image', file_data);
+					form_data.append('CMDEvent', 'register');
+					form_data.append('last_name', lastname);
+					form_data.append('first_name', firstname);
+					form_data.append('gender', gender);
+					form_data.append('birthday', birthday);
+					form_data.append('email_address', email);
+					form_data.append('mobile_number', mobile);
+					form_data.append('password', password);
+					form_data.append('confirm_password', con_password);
+					var url = '<?php echo base_url()."api/users?token=".$token ?>';                           
+					$.ajax({
+						url: url,
+						dataType: 'text',  
+						cache: false,
+						contentType: false,
+						processData: false,
+						data: form_data,                         
+						type: 'post',
+						success: function(result){
+							var obj = is_json(result);
+							console.log(obj);
+							modal.alert(obj.Message);
+						}
+					});
+				}
+			});
+		}		
 	});
 	
 	$(document).on('click', '.user_image_button', function(){
