@@ -41,4 +41,8 @@ ERROR - 2020-01-31 10:42:48 --> Severity: error --> Exception: Too few arguments
 ERROR - 2020-01-31 10:43:13 --> Severity: error --> Exception: Too few arguments to function Users::register(), 1 passed in D:\webroot\team_app\application\controllers\api\Users.php on line 12 and exactly 2 expected D:\webroot\team_app\application\controllers\api\Users.php 33
 ERROR - 2020-01-31 10:43:33 --> Severity: error --> Exception: Too few arguments to function Users::register(), 1 passed in D:\webroot\team_app\application\controllers\api\Users.php on line 12 and exactly 2 expected D:\webroot\team_app\application\controllers\api\Users.php 33
 ERROR - 2020-01-31 10:43:51 --> Severity: error --> Exception: Too few arguments to function Users::register(), 1 passed in D:\webroot\team_app\application\controllers\api\Users.php on line 12 and exactly 2 expected D:\webroot\team_app\application\controllers\api\Users.php 33
+<<<<<<< HEAD
 ERROR - 2020-01-31 03:59:10 --> Severity: Compile Error --> Only variables can be passed by reference D:\webroot\team_app\application\core\GS_Controller.php 47
+=======
+ERROR - 2020-01-31 14:15:29 --> Query error: Unknown column 'middle_name' in 'field list' - Invalid query: INSERT INTO `tbl_users` (`last_name`, `first_name`, `middle_name`, `birthday`, `email_address`, `mobile_number`, `password`, `status`, `create_date`) VALUES ('sobs', 'doms', 'sobs', '1991-01-01', 'phpdeveloper3@unilab.com.ph', '9073157715', '55673b53ad08bf54037192336609db4e', 1, '2020-01-31 14:15:29')
+>>>>>>> master_doms
