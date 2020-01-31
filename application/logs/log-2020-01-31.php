@@ -46,3 +46,14 @@ ERROR - 2020-01-31 03:59:10 --> Severity: Compile Error --> Only variables can b
 =======
 ERROR - 2020-01-31 14:15:29 --> Query error: Unknown column 'middle_name' in 'field list' - Invalid query: INSERT INTO `tbl_users` (`last_name`, `first_name`, `middle_name`, `birthday`, `email_address`, `mobile_number`, `password`, `status`, `create_date`) VALUES ('sobs', 'doms', 'sobs', '1991-01-01', 'phpdeveloper3@unilab.com.ph', '9073157715', '55673b53ad08bf54037192336609db4e', 1, '2020-01-31 14:15:29')
 >>>>>>> master_doms
+ERROR - 2020-01-31 14:33:11 --> Severity: error --> Exception: Call to undefined function coung() D:\webroot\team_app\application\controllers\api\Users.php 102
+ERROR - 2020-01-31 14:50:09 --> Severity: Notice --> Undefined variable: CI D:\webroot\team_app\application\core\GS_Controller.php 35
+ERROR - 2020-01-31 14:50:09 --> Severity: Notice --> Trying to get property 'config' of non-object D:\webroot\team_app\application\core\GS_Controller.php 35
+ERROR - 2020-01-31 14:50:09 --> Severity: error --> Exception: Call to a member function item() on null D:\webroot\team_app\application\core\GS_Controller.php 35
+ERROR - 2020-01-31 15:05:11 --> Severity: Notice --> Undefined variable: message D:\webroot\team_app\application\core\GS_Controller.php 36
+ERROR - 2020-01-31 15:05:31 --> Severity: error --> Exception: Too few arguments to function CI_Config::item(), 0 passed in D:\webroot\team_app\application\core\GS_Controller.php on line 32 and at least 1 expected D:\webroot\team_app\system\core\Config.php 197
+ERROR - 2020-01-31 15:07:29 --> Severity: Notice --> Undefined offset: 201 D:\webroot\team_app\application\core\GS_Controller.php 192
+ERROR - 2020-01-31 15:08:11 --> Severity: Notice --> Undefined variable: config D:\webroot\team_app\application\core\GS_Controller.php 192
+ERROR - 2020-01-31 15:08:47 --> Severity: Notice --> Undefined variable: config D:\webroot\team_app\application\core\GS_Controller.php 192
+ERROR - 2020-01-31 15:09:17 --> Severity: Notice --> Undefined offset: 201 D:\webroot\team_app\application\core\GS_Controller.php 192
+ERROR - 2020-01-31 15:17:30 --> Severity: Notice --> Undefined index: Authentication Success D:\webroot\team_app\application\core\GS_Controller.php 209
