@@ -1,0 +1,15 @@
+### USERS #############################
+
+###### REGISTRATION ###################
+
+url : api/users?token=[token]
+parameters :
+	last_name 		: required
+	first_name 		: required
+	middle_name 	: optional
+	birthday		: required | format Y-m-d
+	email_address	: required
+	mobile_number	: required | format 9XXXXXXXXXX
+	password		: required
+	confirm_password: required
+	user_image		: file | img/*
