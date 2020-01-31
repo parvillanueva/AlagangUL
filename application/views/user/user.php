@@ -50,6 +50,7 @@
 			var modal_obj = '<?= $this->standard->confirm("confirm_save"); ?>'; 
 			modal.standard(modal_obj, function(result){
 				if(result){
+					modal.loading(true);
 					var lastname = $('#user_lastname').val();
 					var firstname = $('#user_firstname').val();
 					var gender = $('#user_gender').val();
@@ -82,7 +83,19 @@
 						success: function(result){
 							var obj = is_json(result);
 							console.log(obj);
-							modal.alert(obj.Message);
+							var result_code = obj.Code;
+							switch(result_code){
+								case 201:
+									var message = '<?= $this->standard->dialog("save_success"); ?>';
+									modal.loading(false);
+									modal.alert(message);
+								break;
+								case 504:
+									var message = '<?= $this->standard->dialog("duplicate_entry"); ?>';
+									modal.loading(false);
+									modal.alert(message);
+								break;
+							}
 						}
 					});
 				}
