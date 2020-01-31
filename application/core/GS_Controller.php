@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+date_default_timezone_set('Asia/Manila');
 $CMDDateTime = date('Y-m-d H:i:s');
 $CMDEvent;
 class GS_Controller extends CI_Controller {
@@ -195,7 +196,7 @@ class GS_Controller extends CI_Controller {
 		//SUCCESS
 		$code['201'] = "Success saving record.";
 		$code['202'] = "Authentication Success";
-		$code['203'] = null;
+		$code['203'] = "Success";
 		$code['204'] = null;
 		$code['205'] = null;
 		$code['206'] = null;
@@ -210,7 +211,7 @@ class GS_Controller extends CI_Controller {
 		$code['503'] = "Command Event required.";
 		$code['504'] = "Data already exisit";
 		$code['505'] = "Failed to uploaded file.";
-		$code['506'] = "Validation Failed.";
+		$code['506'] = "Request Failed.";
 		$code['507'] = "Error saving record. please try again.";
 		$code['508'] = "Authentication failed. Please try again.";
 		$code['509'] = "Invalid Event";

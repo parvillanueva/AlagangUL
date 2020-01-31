@@ -114,7 +114,34 @@ class Users extends GS_Controller {
 	}
 
 	function profile($post){
+		$UserID 	= $this->validate($post, 'user_id', ["required","number"]);
 
+		$query = "SELECT * FROM tbl_users WHERE id =" . $UserID;
+		$result = $this->Api_model->run_query($query);
+
+		$q_points = "SELECT * FROM tbl_users_points WHERE user_id = " . $result[0]->id;
+		$r_points = $this->Api_model->run_query($q_points);
+
+		$data = array(
+			"personal_details" =>  array(
+				"user_id"		=> $result[0]->id,
+				"first_name"	=> $result[0]->first_name,
+				"last_name"		=> $result[0]->last_name,
+				"display_name"	=> $result[0]->first_name . " " . $result[0]->last_name,
+				"email_address"	=> $result[0]->email_address,
+				"mobile_number"	=> $result[0]->mobile_number,
+				"gender"		=> $result[0]->gender,
+				"imagepath"		=> base_url() . $result[0]->imagepath,
+			),
+			"created_program"	=> array(),
+			"joined_program"	=> array(),
+			"point"				=> array(
+				"total_points"		=> (int) $r_points[0]->total_points,
+				"current_points"	=> (int) $r_points[0]->current_points,
+				"update_date"		=> $r_points[0]->update_date,
+			)			
+		);
+		$this->output(true, 203, $data);		
 	}
 
 }
