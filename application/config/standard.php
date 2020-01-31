@@ -2707,20 +2707,24 @@ $config['user_firstname']    = array(
                                 'placeholder'   => 'First Name',
                                 'label'         => 'First Name'
                             );
-$config['user_middlename']    = array(
-                                'type'          => 'text',
-                                'name'          => 'user_middlename',
+$config['user_gender']    = array(
+                                'type'          => 'dropdown',
+                                'name'          => 'user_gender',
                                 'form-align'    => 'horizontal',
                                 'class'         => 'form-control hoverable',
-                                'id'            => 'user_middlename',
+                                'id'            => 'user_gender',
                                 'required'      => false,
 								'no_html'       => true,
                                 'maxlength'     => 250,
-                                'placeholder'   => 'Middle Name',
-                                'label'         => 'Middle Name'
+                                'placeholder'   => 'Gender',
+                                'label'         => 'Gender',
+								'list_value'    => array(
+                                                    'M'     => 'Male',
+                                                    'F'     => 'Female'
+                                                )
                             );
 $config['user_birthday']    = array(
-                                'type'          => 'text',
+                                'type'          => 'date',
                                 'name'          => 'user_birthday',
                                 'form-align'    => 'horizontal',
                                 'class'         => 'form-control hoverable',

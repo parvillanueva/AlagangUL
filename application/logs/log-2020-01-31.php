@@ -46,3 +46,11 @@ ERROR - 2020-01-31 03:59:10 --> Severity: Compile Error --> Only variables can b
 =======
 ERROR - 2020-01-31 14:15:29 --> Query error: Unknown column 'middle_name' in 'field list' - Invalid query: INSERT INTO `tbl_users` (`last_name`, `first_name`, `middle_name`, `birthday`, `email_address`, `mobile_number`, `password`, `status`, `create_date`) VALUES ('sobs', 'doms', 'sobs', '1991-01-01', 'phpdeveloper3@unilab.com.ph', '9073157715', '55673b53ad08bf54037192336609db4e', 1, '2020-01-31 14:15:29')
 >>>>>>> master_doms
+ERROR - 2020-01-31 14:58:49 --> Severity: Notice --> Undefined variable: cms_title D:\xampp\htdocs\teamapp\application\views\layout\header.php 33
+ERROR - 2020-01-31 14:58:49 --> Severity: Notice --> Trying to get property 'cms_skin' of non-object D:\xampp\htdocs\teamapp\application\views\layout\header.php 33
+ERROR - 2020-01-31 14:59:55 --> Severity: Notice --> Undefined variable: cms_title D:\xampp\htdocs\teamapp\application\views\layout\header.php 32
+ERROR - 2020-01-31 14:59:55 --> Severity: Notice --> Trying to get property 'cms_skin' of non-object D:\xampp\htdocs\teamapp\application\views\layout\header.php 32
+ERROR - 2020-01-31 15:00:26 --> Severity: Notice --> Undefined variable: cms_title D:\xampp\htdocs\teamapp\application\views\layout\header.php 32
+ERROR - 2020-01-31 15:00:26 --> Severity: Notice --> Trying to get property 'cms_skin' of non-object D:\xampp\htdocs\teamapp\application\views\layout\header.php 32
+ERROR - 2020-01-31 15:00:33 --> Severity: Notice --> Undefined variable: cms_title D:\xampp\htdocs\teamapp\application\views\layout\header.php 32
+ERROR - 2020-01-31 15:00:33 --> Severity: Notice --> Trying to get property 'cms_skin' of non-object D:\xampp\htdocs\teamapp\application\views\layout\header.php 32

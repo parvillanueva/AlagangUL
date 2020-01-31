@@ -15,7 +15,20 @@
 <link href="<?= base_url();?>assets/css/fontawesome.min.css" rel="stylesheet">
 
 <!-- Bootstrap core CSS -->
-<link href="<?= base_url();?>assets/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="<?= base_url();?>cms/font-awesome/css/font-awesome.min.css">
+<link href="<?= base_url();?>cms/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="<?= base_url();?>cms/css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="<?= base_url();?>cms/css/cms.css" rel="stylesheet" type="text/css" />
+<link href="<?= base_url();?>cms/css/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="<?= base_url();?>cms/css/dropzone.css" rel="stylesheet" type="text/css" />
+<link href="<?= base_url();?>cms/css/iconpicker.css" rel="stylesheet" type="text/css" />
+<link href="<?= base_url();?>cms/css/skins/_all-skins.css" rel="stylesheet" type="text/css" />
+<link href="<?= base_url();?>cms/css/datetimepicker.css" rel="stylesheet" type="text/css" />
+<link href="<?= base_url();?>cms/css/timepicki.css" rel="stylesheet" type="text/css" />
+<link href="<?= base_url();?>cms/css/datatables.min.css" rel="stylesheet" type="text/css" />
+<link href="<?= base_url();?>cms/morris.js/morris.css" rel="stylesheet" type="text/css" />
+<link href="<?= base_url();?>cms/powertip/jquery.powertip.min.css" rel="stylesheet" type="text/css" />
+<link href="<?= base_url();?>cms/css/bootstrap-material-datetimepicker.css" rel="stylesheet" type="text/css" />
 
 <!-- Custom styles for this template -->
 <link href="<?= base_url();?>assets/css/OverlayScrollbars.min.css" rel="stylesheet">
@@ -31,7 +44,25 @@
 <script src="<?= base_url();?>assets/js/sidenav.js"></script>
 <script src="<?= base_url();?>assets/js/scripts.js"></script>
 <script src="<?= base_url();?>assets/js/custom.js"></script>
-<script src="<?= base_url();?>assets/js/bootbox.min.js"></script>
+<script type="text/javascript" src="<?= base_url();?>/cms/js/bootbox.min.js" ></script>
+<script type="text/javascript" src="<?= base_url();?>/cms/js/moment.js" ></script>
+<script type="text/javascript" src="<?= base_url();?>/cms/js/dropzone.js" ></script>
+<script type="text/javascript" src="<?= base_url();?>/cms/js/app.min.js" ></script>
+<script type="text/javascript" src="<?= base_url();?>/cms/js/jquery-ui.js" ></script>
+<script type="text/javascript" src="<?= base_url();?>/cms/js/numeral.min.js" ></script>
+<script type="text/javascript" src="<?= base_url();?>/cms/js/iconpicker.js" ></script>
+<script type="text/javascript" src="<?= base_url();?>/cms/js/datetimepicker.js" ></script>
+<script type="text/javascript" src="<?= base_url();?>/cms/js/timepicki.js" ></script>
+<script type="text/javascript" src="<?= base_url();?>/cms/ckeditor/ckeditor.js" ></script>
+<script type="text/javascript" src="<?= base_url();?>/cms/ckeditor/config.js" ></script>
+<script type="text/javascript" src="<?= base_url();?>/cms/raphael/raphael.min.js" ></script>
+<script type="text/javascript" src="<?= base_url();?>/cms/js/datatables.min.js" ></script>
+<script type="text/javascript" src="<?= base_url();?>/cms/morris.js/morris.js" ></script>
+<script type="text/javascript" src="<?= base_url();?>/cms/powertip/jquery.powertip.min.js" ></script>
+<script type="text/javascript" src="<?= base_url();?>/cms/js/resumable.js" ></script>
+<script type="text/javascript" src="<?= base_url();?>/cms/js/placeholder.js" ></script>
+<script type="text/javascript" src="<?= base_url();?>/cms/js/bootstrap-material-datetimepicker.js" ></script>
+<script type="text/javascript" src="<?= base_url();?>/cms/js/sorttable.js"></script>
  <script type="text/javascript">
         var base_url = "<?= base_url();?>";
         var form_empty_error = "<?= $this->standard->dialog("form_empty");?>";
