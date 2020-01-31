@@ -2718,6 +2718,52 @@ $config['user_middlename']    = array(
                                 'maxlength'     => 250,
                                 'placeholder'   => 'Middle Name',
                                 'label'         => 'Middle Name'
-                            );							
+                            );
+$config['user_birthday']    = array(
+                                'type'          => 'text',
+                                'name'          => 'user_birthday',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control hoverable',
+                                'id'            => 'user_birthday',
+                                'required'      => false,
+								'no_html'       => true,
+                                'maxlength'     => 250,
+                                'placeholder'   => 'Birthday',
+                                'label'         => 'Birthday'
+                            );
+$config['user_mobile']    = array(
+                                'type'          => 'text',
+                                'name'          => 'user_mobile',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control hoverable',
+                                'class'         => 'form-control hoverable',
+                                'id'            => 'user_mobile',
+                                'required'      => false,
+								'no_html'       => true,
+                                'maxlength'     => 250,
+                                'placeholder'   => 'Mobile Number',
+                                'label'         => 'Mobile Number'
+                            );
+$config['user_password']         = array(
+                                'type'          => 'password',
+                                'name'          => 'password',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control hoverable',
+                                'id'            => 'password',
+                                'required'      => true,
+                                'placeholder'   => 'Password',
+                                'label'         => 'Password'
+                            );
+$config['user_confirm_password']         = array(
+                                'type'          => 'password',
+                                'name'          => 'confirm_password',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control hoverable',
+                                'id'            => 'confirm_password',
+                                'required'      => true,
+                                'placeholder'   => 'Confirm Password',
+                                'label'         => 'Confirm Password'
+                            );
+							
 
 ?>
