@@ -9,42 +9,29 @@ class GS_Controller extends CI_Controller {
        	$this->load->model("Api_model");
 		$token = $this->input->get("token");
 		if(trim($token) == ""){
-			$this->output(false, 'Auth Token not found.');
+			$this->output(false, 501);
 			die();
 		}
 
 		if(count($this->Api_model->check_token($token)) == 0){
-			$this->output(false, 'Auth Token provided is invalid.');
+			$this->output(false, 502);
 			die();
 		}
 
 
 		$GLOBALS['CMDEvent'] =  $this->input->post("CMDEvent");
 		if(trim($GLOBALS['CMDEvent']) == ""){
-			$this->output(false, 'Event required.');
+			$this->output(false, 503);
 			die();
 		}
     }
-
-    function output($status = false, $message = null, $data = null){
-
-    	header('Content-Type: application/json');
-    	$result = array(
-			'Status' 	=> $status, 
-			'Message' 	=> $message, 
-			'Data' 		=> $data, 
-			'DateTime'  => $GLOBALS['CMDDateTime']
-		);
-    	echo json_encode($result);
-    	
-	}
 
     function uniquedata($table, $field, $value){
 
     	$query = 'SELECT * FROM ' . $table . ' WHERE ' . $field . ' = "' . $value . '" AND status = 1';
     	$result = $this->Api_model->run_query($query);
     	if(count($result) > 0){
-    		$this->output(false, $value . " already exisit on the record, " . $field . " must be unique.");
+    		$this->output(false, 504);
     		die();
     	} else {
     		return true;
@@ -67,7 +54,7 @@ class GS_Controller extends CI_Controller {
 		if (move_uploaded_file($file['tmp_name'], "./" . $uploadfile)) {
 		    return $uploadfile;
 		} else {
-		    $this->output(false, "Failed to move uploaded file.");
+		    $this->output(false, 505);
 		    die();
 		}
     	
@@ -163,7 +150,11 @@ class GS_Controller extends CI_Controller {
 		if($success){
 			return $data;
 		} else {
-			$this->output(false, $field , $error);	
+			$response = array(
+				"field" => $field,
+				"error"	=> $error
+			);
+			$this->output(false, 506 , $response);	
 			die();
 
 		}
@@ -182,5 +173,54 @@ class GS_Controller extends CI_Controller {
 	function validateDateTime($date, $format = 'Y-m-d H:i:s'){
 	    $d = DateTime::createFromFormat($format, $date);
 	    return $d && $d->format($format) === $date;
+	}
+
+
+
+	function output($status = false, $code = null, $data = null){
+    	header('Content-Type: application/json');
+    	$result = array(
+			'Status' 		=> $status, 
+			'Code' 			=> $code, 
+			'Message' 		=> $this->api_code($code), 
+			'Data' 			=> $data, 
+			'DateTime'  	=> $GLOBALS['CMDDateTime']
+		);
+    	echo json_encode($result);
+    	
+	}
+
+	function api_code($val){
+
+		//SUCCESS
+		$code['201'] = "Success saving record.";
+		$code['202'] = "Authentication Success";
+		$code['203'] = null;
+		$code['204'] = null;
+		$code['205'] = null;
+		$code['206'] = null;
+		$code['207'] = null;
+		$code['208'] = null;
+		$code['209'] = null;
+		$code['210'] = null;
+
+		//ERRORS
+		$code['501'] = "Auth Token not found.";
+		$code['502'] = "Auth Token provided is invalid.";
+		$code['503'] = "Command Event required.";
+		$code['504'] = "Data already exisit";
+		$code['505'] = "Failed to uploaded file.";
+		$code['506'] = "Validation Failed.";
+		$code['507'] = "Error saving record. please try again.";
+		$code['508'] = "Authentication failed. Please try again.";
+		$code['509'] = "Invalid Event";
+		$code['510'] = null;
+		$code['511'] = null;
+		$code['512'] = null;
+		$code['513'] = null;
+		$code['514'] = null;
+		$code['515'] = null;
+
+		return $code[strval($val)];
 	}
 }

@@ -16,7 +16,7 @@ class Users extends GS_Controller {
 				$this->update($Post);
 				break;
 
-			case 'login':
+			case 'authenticate':
 				$this->login($Post);
 				break;
 
@@ -25,7 +25,7 @@ class Users extends GS_Controller {
 				break;
 			
 			default:
-				$this->output(false, 'Invalid Event.');
+				$this->output(false, 509);
 				break;
 		}
 	}
@@ -72,17 +72,17 @@ class Users extends GS_Controller {
 				);
 
 				if($this->Api_model->save_data("tbl_users_points", $points_data)){
-					$this->output(true, "Success saving record.");
+					$this->output(true, 201);
 				} else {
-					$this->output(false, "Error saving record. please try again.");	
+					$this->output(false, 507);	
 				}
 				
 			} else {
-				$this->output(false, "Error saving record. please try again.");	
+				$this->output(false, 507);	
 			}
 			
 		} else {
-			$this->output(false, "Error saving record. please try again.");
+			$this->output(false, 507);
 		}
 
 
@@ -93,7 +93,24 @@ class Users extends GS_Controller {
 	}
 
 	function login($post){
+		$EmailAddress 	= $this->validate($post, 'email_address', ["required","email"]);
+		$Password 	= $this->validate($post, 'password', ["required"]);
 
+		$query = "SELECT * FROM tbl_users WHERE email_address ='" . $EmailAddress . "' AND password ='" . md5($Password) . "' AND status = 1";
+		$result = $this->Api_model->run_query($query);
+
+		if(count($result) > 0){
+			$data = array(
+				"user_id"		=> $result[0]->id,
+				"first_name"	=> $result[0]->first_name,
+				"last_name"		=> $result[0]->last_name,
+				"display_name"	=> $result[0]->first_name . " " . $result[0]->last_name,
+				"email_address"	=> $result[0]->email_address
+			);
+			$this->output(true, 202, $data);
+		} else {
+			$this->output(false, 508);
+		}
 	}
 
 	function profile($post){

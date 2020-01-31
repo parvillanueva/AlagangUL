@@ -13,3 +13,11 @@ parameters :
 	password		: required
 	confirm_password: required
 	user_image		: file | img/*
+
+
+###### LOGIN ###################
+url : api/users?token=[token]
+parameters :
+	CMDEvent 		: authenticate
+	email_address	: required
+	password		: required
