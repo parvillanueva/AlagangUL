@@ -1,0 +1,22 @@
+.ui-datepicker-month > option {
+    color : #000 !important;
+}
+
+.ui-datepicker-month {
+    color : #000 !important;
+}
+
+.ui-datepicker-year > option {
+    color : #000 !important;
+}
+.ui-datepicker-year {
+    color : #000 !important;
+}
+
+.loader {
+    width: 34px;
+}
+
+.ui-datepicker-year, .ui-datepicker-month {
+    color: #000;
+}

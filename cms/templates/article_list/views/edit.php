@@ -98,8 +98,6 @@
 
 <script type="text/javascript">
 	
-    AJAX.config.base_url(base_url);
-
 	CKEDITOR.replace( 'body',{height: '500px'});
 	CKEDITOR.instances.body.setData('<?= $details[0]->body;?>');
 	$('.ui-tooltip').attr("stlye","hidden");
@@ -172,19 +170,25 @@
 			if(result){
 				// if(validate.required('.required') == 0){
 					var editor = CKEDITOR.instances.body.getData();
+					var url = "<?=base_url();?>content_management/global_controller"; //URL OF CONTROLLER
+				    var data = {
+				    	event : "update", // list, insert, update, delete
+				    	field : "id", //field name
+		        		where : "<?= $this->uri->segment(4);?>", //equals to
+				        table : "{table}", //table
+				        data : {
+			        		title : $("#title").val(),
+			        		alias : $("#alias").val(),
+			        		short_description : $("#short_description").val(),
+			        		body : editor,
+			        		thumbnail : $("#img_thumbnail").val(),
+			        		banner_img : $("#img_banner").val(),
+			        		update_date : moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+			        		user : "<?= $this->session->userdata('sess_uid');?>"
+				        } //data to insert
+				    }
 
-				    AJAX.update.table("{table}");
-				    AJAX.update.where("id", "<?= $this->uri->segment(4);?>");
-				    AJAX.update.params("title", $("#title").val());
-				    AJAX.update.params("alias", $("#alias").val());
-				    AJAX.update.params("short_description", $("#short_description").val());
-				    AJAX.update.params("body", editor);
-				    AJAX.update.params("thumbnail", $("#img_thumbnail").val());
-				    AJAX.update.params("banner_img", $("#img_banner").val());
-				    AJAX.update.params("update_date", moment(new Date()).format('YYYY-MM-DD HH:mm:ss'));
-				    AJAX.update.params("user", "<?= $this->session->userdata('sess_uid');?>");
-
-				    AJAX.update.exec(function(result){
+				    aJax.post(url,data,function(result){
 			    		//success code here
 			    		modal.alert("Successfully Saved!",function(){
 							location.href = "<?= base_url('content_management/site_{menu}');?>";		

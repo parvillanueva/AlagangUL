@@ -5,6 +5,20 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('welcome_message');
+
+		$data['content'] = "site/welcome/default.php";
+		$data['meta'] = array(
+			"title"         =>  "Welcome",
+			"description"   =>  "[Page Description]",
+			"keyword"       =>  "[Page Keyword]"
+		);
+		
+		$data['fb_og'] = array(
+			"type"          =>  "[page type]",
+			"title"         =>  "Welcome",
+			"image"         =>  "[page image]"
+		);
+		$this->load->view("site/layout/template",$data);
 	}
+
 }

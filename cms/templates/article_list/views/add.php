@@ -65,8 +65,6 @@
 
 <script type="text/javascript">
 	
-    AJAX.config.base_url(base_url);
-
 	CKEDITOR.replace( 'body',{height: '500px'});
 	$('.ui-tooltip').attr("stlye","hidden");
 
@@ -137,20 +135,25 @@
 			if(result){
 			// if(validate.required('.required') == 0){
 				var editor = CKEDITOR.instances.body.getData();
+				var url = "<?=base_url();?>content_management/global_controller"; //URL OF CONTROLLER
+			    var data = {
+			    	event : "insert", // list, insert, update, delete
+			        table : "{table}", //table
+			        data : {
+		        		title : $("#title").val(),
+		        		alias : $("#alias").val(),
+		        		short_description : $("#short_description").val(),
+		        		body : editor,
+		        		thumbnail : $("#img_thumbnail").val(),
+		        		banner_img : $("#img_banner").val(),
+		        		status : $("#status").val(),
+		        		create_date : moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+		        		update_date : moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+		        		user : "<?= $this->session->userdata('sess_uid');?>"
+			        } //data to insert
+			    }
 
-			    AJAX.insert.table("{table}");
-			    AJAX.insert.params("title", $("#title").val());
-			    AJAX.insert.params("alias", $("#alias").val());
-			    AJAX.insert.params("short_description", $("#short_description").val());
-			    AJAX.insert.params("body", editor);
-			    AJAX.insert.params("thumbnail", $("#img_thumbnail").val());
-			    AJAX.insert.params("banner_img", $("#img_banner").val());
-			    AJAX.insert.params("status", $("#status").val());
-			    AJAX.insert.params("create_date", moment(new Date()).format('YYYY-MM-DD HH:mm:ss'));
-			    AJAX.insert.params("update_date", moment(new Date()).format('YYYY-MM-DD HH:mm:ss'));
-			    AJAX.insert.params("user", "<?= $this->session->userdata('sess_uid');?>");
-
-			    AJAX.insert.exec(function(result){
+			    aJax.post(url,data,function(result){
 		    		//success code here
 		    		modal.alert("Successfully Saved!",function(){
 						location.href = "<?= base_url('content_management/site_{menu}');?>";		

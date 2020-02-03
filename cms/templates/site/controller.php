@@ -22,6 +22,4 @@ class {name} extends CI_Controller {
 		$this->load->view("site/layout/template",$data);
 	}
 
-	/*{Additional Function}*/
-
 }
