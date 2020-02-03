@@ -204,7 +204,7 @@
                                                 </li>
                                                 <li class=""><a data-toggle="tab" href="#m_product" aria-expanded="false">Product</a>
                                                 </li>
-                                                <li class=""><a data-toggle="tab" href="#m_privacy_policy" aria-expanded="false">Privacy Statement</a>
+                                                <li class=""><a data-toggle="tab" href="#m_privacy_policy" aria-expanded="false">Privacy Policy</a>
                                                 </li>                                   
                                                 <li class=""><a data-toggle="tab" href="#m_terms_of_use" aria-expanded="false">Terms of Use</a>
                                                 </li>
@@ -291,7 +291,7 @@
                         </div>
                     </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <div id="custom_package_form">
                         <div id="drop_area_div">
                             <h3>Package Form</h3>
@@ -688,7 +688,7 @@ body .package-modal-inactive {
         obj_placeholder += '</div>';
         obj_placeholder += '</div>';
 
-        var obj_maxlength = '<div class="form-group" id="remove_maxlength">';
+        var obj_maxlength = '<div class="form-group">';
         obj_maxlength += '<label class="control-label col-md-3">Max Length</label>';
         obj_maxlength += '<div class="col-md-9">';
         obj_maxlength += '<input type="number" class="form-control input_maxlength'+counter_attr+'"  min="0" onkeypress="check_max_length_input('+counter_attr+')" onpaste="return false;" name="maxlength_'+counter_attr+'" placeholder="Enter Maxlength">';
@@ -1003,7 +1003,7 @@ body .package-modal-inactive {
                         name:'id_image_thumbnail'
                     });
                     $('.input_name'+counter_attr).attr({
-                        value:'banner_thumbnail',
+                        value:'image_thumbnail',
                         name:'name_image_thumbnail'
                     });
                     $('.input_label'+counter_attr).attr({
@@ -1722,10 +1722,6 @@ body .package-modal-inactive {
             validating_field(name_result,'Name');
             $('.error_message').closest('.panel-default').css('border-color','red');
         }
-    });
-    
-    $(document).on("click",'div[data-id="s_image_banner"], div[data-id="s_banner"], div[data-id="s_image"], div[data-id="s_status"], div[data-id="s_image_thumbnail"]',function(){
-        $('#remove_maxlength').remove();       
     });
 
     function validating_field(data,field)

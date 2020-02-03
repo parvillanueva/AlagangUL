@@ -27,21 +27,29 @@
 </body>
 
 <script type="text/javascript">
-  
-  AJAX.config.base_url("<?=base_url();?>"); 
-
   $(document).ready(function(){
     
     $(document).on('keypress', '#search_query', function(e) {
       query = "";                          
       if (e.keyCode == 13) {
           var keyword = $(this).val();
-          get_list(keyword);
+          var search_arr = {input_data};
+          query += " status >= 0 AND (";
+          for (var i = 0; i < search_arr.length; i++) {
+            if (i != search_arr.length - 1) {
+              query += search_arr[i]+" like '%" + keyword + "%' OR ";
+            } else {
+              query += search_arr[i]+" like '%" + keyword + "%' ";
+            }
+          }
+          query += " )";
+          get_list();
+          get_pagination();
       }
     });
 
     get_list();
-   // get_pagination();
+    get_pagination();
     $('.selectall').prop('checked', false);
 
     var sorttable = $('tbody').sortable();
@@ -62,32 +70,28 @@ $(document).on('click', '#btn_add', function(e){
    location.href = ('<?= base_url()."content_management/"?>{page}/add');
 });
 
- var limit = 10;
- var offset = 1;
+var limit = 10;
+var query = "status >= 0";
+var offset = 1;
 
-function get_list(keyword){
+function get_list(){
     modal.loading(true);
-    var search_arr = {input_data};
-
-    AJAX.select.table("{table_name}");
-    AJAX.select.select({input_custom_table_field});
-    AJAX.select.where.greater_equal("status", 0);
-    AJAX.select.offset(offset);
-    AJAX.select.limit(limit);
-    AJAX.select.order.asc("orders");
-
-    if(keyword)
-    {
-      for (var i = 0; i < search_arr.length; i++) {
-        if (i != search_arr.length - 1) {
-          AJAX.select.where.like(search_arr[0], keyword);
-          AJAX.select.where.or.like(search_arr[i+1], keyword);
-        } 
-      }
+    var url = "<?= base_url('content_management/global_controller');?>";
+    var data = {
+        event : "list", 
+        select : {input_custom_table_field}, 
+        query : query, 
+        offset : offset, 
+        limit : limit, 
+        table : "{table_name}",
+        order: {
+          field : "orders",
+          order : "asc"
+        }
     }
     // ajax get post
-    AJAX.select.exec(function(result){
-        var obj = result;
+     aJax.post(url,data,function(result){
+        var obj = is_json(result);
         var htm = "";
         var status_action = null;
         
@@ -123,10 +127,27 @@ function get_list(keyword){
 
         $('.listdata tbody').html(htm);
         modal.loading(false);
-    }, function(obj){
         pagination.generate(obj.total_page, '.list_pagination', get_list);
     });
   }
+
+function get_pagination(){
+    var url = "<?= base_url('content_management/global_controller');?>";
+    var data = {
+      event : "pagination", 
+      select : "id", 
+      query : query, 
+      offset : offset, 
+      limit : limit, 
+      table : "{table_name}",   
+    }
+
+    aJax.post(url,data,function(result){
+        var obj = is_json(result);
+        modal.loading(false);
+        pagination.generate(obj.total_page, '.list_pagination', get_list);
+    });
+}
 
 pagination.onchange(function(){
       offset = $(this).val();
@@ -136,12 +157,16 @@ pagination.onchange(function(){
 function save_sort() {
   $('.order').each(function() {       
     var orders = $(this).attr("data-order");
+    var url = "http://localhost/cms/content_management/global_controller";
+    var data = {
+      event : "update", 
+      table : "{table_name}",
+      field : "id", 
+      where : $(this).attr("data-id"), 
+      data : {orders : orders} 
+    }
 
-    AJAX.update.table("{table_name}");
-    AJAX.update.where("id", $(this).attr("data-id"));
-    AJAX.update.params(orders, orders);
-
-    AJAX.update.exec(function(result){});
+    aJax.post(url,data,function(result){ });
   });
 
 }
@@ -155,16 +180,23 @@ $(document).on('click','.btn_status',function(e){
           $('.selectall').prop('checked', false);
           $('.select:checked').each(function(index) { 
               id = $(this).attr('data-id');
+              var url = "<?= base_url("content_management/global_controller");?>";
+              var data = {
+                  event : "update",
+                  table : "{table_name}", 
+                  field : "id", 
+                  where : id, 
+                  data : { 
+                        status : status,
+                        update_date : moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+                  }, 
+              }
 
-              AJAX.update.table("{table_name}");
-              AJAX.update.where("id", id);
-              AJAX.update.params("status", status);
-              AJAX.update.params("update_date", moment(new Date()).format('YYYY-MM-DD HH:mm:ss'));
-
-              AJAX.update.exec(function(result){
-                var obj = result;
+              aJax.post(url,data,function(result){
+                var obj = is_json(result);
                 if (obj.length > 0) {
                   get_list();
+                  get_pagination();
                   $('.status_action').hide();
                 } else {
                   console.log(obj);

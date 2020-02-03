@@ -6,7 +6,7 @@
  *
  * This content is released under the MIT License (MIT)
  *
- * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+ * Copyright (c) 2014 - 2017, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +29,8 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
- * @license	https://opensource.org/licenses/MIT	MIT License
+ * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
@@ -137,7 +137,7 @@ class CI_Loader {
 	{
 		$this->_ci_ob_level = ob_get_level();
 		$this->_ci_classes =& is_loaded();
-
+		$this->submenu = '';
 		log_message('info', 'Loader Class Initialized');
 	}
 
@@ -956,13 +956,13 @@ class CI_Loader {
 		 *	then stop the timer it won't be accurate.
 		 */
 		ob_start();
-
 		include($_ci_path); // include() vs include_once() allows for multiple views with the same name
 		log_message('info', 'File loaded: '.$_ci_path);
 
 		// Return the file data if requested
 		if ($_ci_return === TRUE)
 		{
+            $CI =& get_instance();
 			$buffer = ob_get_contents();
 			@ob_end_clean();
 			return $buffer;
@@ -983,7 +983,7 @@ class CI_Loader {
 		}
 		else
 		{
-			$_ci_CI->output->append_output(ob_get_contents());
+			$_ci_CI->output->append_output(trim(ob_get_contents()));
 			@ob_end_clean();
 		}
 
@@ -1402,4 +1402,364 @@ class CI_Loader {
 		$CI =& get_instance();
 		return $CI->$component;
 	}
+
+	public function site_menu()
+	{
+		$CI =& get_instance();
+		$role = $CI->session->userdata('sess_role');
+		$urls = $this->uri->segment(1);
+
+		$result = $CI->Global_model->get_list_menu("site_menu","menu_status = 1 AND menu_parent_id = 0");
+		$html = '';
+		foreach ($result as $key => $value) 
+		{
+	        $class = str_replace(" ", "_", strtolower($value->menu_name));
+			if($urls == $value->menu_url)
+			{
+	            $class = "active";
+	        } 
+			
+			if($value->menu_type == "Group Menu")
+			{
+				$html .= '<li class="dropdown">';
+	            $html .= '  <a class="dropdown-toggle" data-toggle="dropdown" href="#">' . strtoupper($value->menu_name);
+	            $html .= '  <span class="caret"></span></a>';
+	            $html .= '  <ul class="dropdown-menu">';
+	            $this->get_sub_menu($value->id);
+	            $html .= $this->submenu;
+				$html .= '  </ul>';
+	            $html .= '</li>';
+			}
+			elseif($value->menu_type == "Module")
+			{
+				$html .= '<li class="'.$class.'"><a href="'.base_url($value->menu_url).'">'.strtoupper($value->menu_name).'</a></li>' . "\n";
+			}
+			elseif($value->menu_type == "Buy Now")
+			{
+				if ($value->menu_status == 1) {
+					$html .= '<li class="'.$class.'"><a class="buy-now-menu" href="javascript:void(0)">'.strtoupper($value->menu_name).'</a></li>' . "\n";
+				}
+			}
+		}
+
+		return $html;
+	}
+
+	public function get_sub_menu($id)
+	{
+		$CI =& get_instance();
+		$html = '';
+		$result = $CI->Global_model->get_list_menu("site_menu","menu_status = 1 AND menu_parent_id = ".$id);
+        foreach ($result as $key => $value) 
+		{
+           	if($value->menu_type == "Group Menu")
+			{
+				$html .= '<li class="dropdown-submenu">';
+                    $html .= '<a href="#" class="dropdown-toggle" data-toggle="dropdown">'.strtoupper($value->menu_name).'</a>';
+                   	$html .= '<ul class="dropdown-menu">';
+                        $html .= '<li class="dropdown-submenu">';
+		                   	$this->get_sub_menu($value->id);
+			            	$html .= $this->submenu;
+                        $html .= '</li>';
+                    $html .= '</ul>';
+                $html .= '</li>';
+			}
+			elseif($value->menu_type == "Module")
+			{
+				$html .= '<li><a href="'.base_url($value->menu_url).'">'.strtoupper($value->menu_name).'</a></li>' . "\n";
+			}
+        }
+
+        $this->submenu = $html;
+	}
+
+    public function site_meta()
+    {
+        $CI =& get_instance();
+    }
+
+	public function site_title($string = null)
+	{
+		$CI =& get_instance();
+		$result = $CI->Global_model->get_by_id("site_information",1);
+		if($string != null){
+			echo $string . " | " . $result[0]->title;
+		} else {
+			echo $result[0]->title;
+		}
+		
+	}
+
+	public function site_description($string = null)
+	{	
+		$CI =& get_instance();
+		$result = $CI->Global_model->get_by_id("site_information",1);
+        if($string == null){
+		    echo $result[0]->description;
+        } else {
+            echo $string;
+        }
+	}
+
+	public function site_keyword($string = null)
+	{
+		$CI =& get_instance();
+		$result = $CI->Global_model->get_by_id("site_information",1);
+        if($string == null){
+            echo $result[0]->keyword;
+        } else {
+            echo $string;
+        }
+	}
+
+	public function google_analytics()
+	{
+		$CI =& get_instance();
+		$result = $CI->Global_model->get_by_id("site_information",1);
+		if($result[0]->ga_status == 1){
+			$tracking_id = $result[0]->ga_id;
+			echo "\n\n\t\t<!-- Global site tag (gtag.js) - Google Analytics -->";
+			echo "\n\t\t<script async src='https://www.googletagmanager.com/gtag/js?id=".$tracking_id."'></script>";
+			echo "\n\t\t<script>";
+			echo "\n\t\t\twindow.dataLayer = window.dataLayer || [];";
+			echo "\n\t\t\tfunction gtag(){dataLayer.push(arguments);}";
+			echo "\n\t\t\tgtag('js', new Date());";
+			echo "\n\t\t\tgtag('config', '".$tracking_id."');";
+			echo "\n\t\t</script>;\n\n";
+		}
+	}
+
+	public function facebook_og($data = array()){
+
+		echo "\n\n\t\t<!--- Facebook OpenGraph Tags --->";
+		// if(isset($data['app_id'])){
+		// 	echo "\n" . '<meta property="fb:app_id" content="'.$data['app_id'].'" />';
+		// }
+
+        if(isset($data['type'])){
+            echo "\n\t\t" .  '<meta property="og:type" content="'.$data['type'].'" /> ';
+        }
+
+		if(isset($data['url'])){
+			echo "\n\t\t" .  '<meta property="og:url" content="'.$data['url'].'" /> ';
+		}
+		
+		if(isset($data['title'])){
+			echo "\n\t\t" .'<meta property="og:title" content="'.$data['title'].'" /> ';
+		}
+
+		if(isset($data['description'])){
+			echo "\n\t\t" .'<meta property="og:description" content="'.$data['description'].'" /> ';
+		}
+
+		if(isset($data['image'])){
+			echo "\n\t\t" .'<meta property="og:image" content="'.$data['image'].'" /> ';
+		}
+
+		if(isset($data['keyword'])){
+			echo "\n" .'<meta name="keyword" content="'.$data['keyword'].'" /> ';
+		}
+
+		if(isset($data['default-description'])){
+			echo "\n" .'<meta name="description" content="'.$data['default-description'].'" /> ';
+		}
+
+		if(isset($data['default-title'])){
+			echo "\n" .'<meta name="title" content="'.$data['default-title'].'" /> ';
+		}
+
+		echo "\n\n";
+
+	}
+
+	public function site_analytics()
+	{
+		//get current url
+		$slug = substr($_SERVER['REQUEST_URI'], 1) ;
+
+		//if not in content management 
+		if (strpos($slug, 'content_management') === false) {
+
+			//create instance
+			$CI =& get_instance();	
+
+			//load cookie helper
+			$CI->load->helper('cookie');
+
+			//generate id using codeigniter session
+			$id = session_id();
+
+			//get browser 
+			$browser = $this->get_browser_name($_SERVER['HTTP_USER_AGENT']); 
+
+			//check if unid cookies name is existed
+			$unid = $CI->input->cookie("__unid", FALSE);
+			if(!$unid){
+				//generate unid
+				setcookie("__unid",$id,2147483647);
+
+				//insert to unique global
+				$global = array(
+					"unid"=> $id,
+					"url"=> $slug,
+					"datetime"=>date('Y-m-d H:i:s'),
+					"browser"=> $browser,
+					"type"=> "global"
+				);
+				$CI->Global_model->save_data("site_analytics",$global);
+				$this->set_analytics($id, $slug, $browser);
+				// $this->user_journey($id, $slug);
+			} else {
+				$this->set_analytics($unid, $slug, $browser);
+				// $this->user_journey($unid, $slug);
+			}
+
+
+		}
+
+	}
+
+	function set_analytics($unid, $slug, $browser)
+	{
+		//create instance
+		$CI =& get_instance();
+
+		//check if page is already visited today
+		$daily = $CI->Global_model->check_visit($unid, "daily", $slug, date('Y-m-d'));
+		if($daily == 0){
+			//insert to daily
+			$daily = array(
+				"unid"=> $unid,
+				"url"=> $slug,
+				"datetime"=>date('Y-m-d H:i:s'),
+				"browser"=> $browser,
+				"type"=> "daily"
+			);
+			$CI->Global_model->save_data("site_analytics",$daily);
+		}
+
+		//check if page is already visited before
+		$unique = $CI->Global_model->check_visit($unid, "unique", $slug);
+		if($unique == 0){
+			//insert to unique 
+			$unique = array(
+				"unid"=> $unid,
+				"url"=> $slug,
+				"datetime"=>date('Y-m-d H:i:s'),
+				"browser"=> $browser,
+				"type"=> "unique"
+			);
+			$CI->Global_model->save_data("site_analytics",$unique);
+		}
+	}
+
+	function get_browser_name($user_agent)
+	{
+	    if (strpos($user_agent, 'Opera') || strpos($user_agent, 'OPR/')) return 'Opera';
+	    elseif (strpos($user_agent, 'Edge')) return 'Edge';
+	    elseif (strpos($user_agent, 'Chrome')) return 'Chrome';
+	    elseif (strpos($user_agent, 'Safari')) return 'Safari';
+	    elseif (strpos($user_agent, 'Firefox')) return 'Firefox';
+	    elseif (strpos($user_agent, 'MSIE') || strpos($user_agent, 'Trident/7')) return 'Internet Explorer';
+	    
+	    return 'Other';
+	}
+
+	function user_journey($unid, $slug)
+	{
+
+	}
+
+	public function assets_bg()
+	{	
+		$CI =& get_instance();
+		$result = $CI->Global_model->get_by_id("site_assets",1);
+		return base_url() . $result[0]->background_image;
+	}
+
+	public function assets_top_ribbon()
+	{	
+		$CI =& get_instance();
+		$result = $CI->Global_model->get_by_id("site_assets",1);
+		return base_url() . $result[0]->ul_ribbon_top;
+	}
+
+	public function asset_footer_img()
+	{	
+		$CI =& get_instance();
+		$result = $CI->Global_model->get_by_id("site_assets",1);
+		return base_url() . $result[0]->footer_img;
+	}
+
+	public function asset_logo()
+	{	
+		$CI =& get_instance();
+		$result = $CI->Global_model->get_by_id("site_assets",1);
+		return base_url() . $result[0]->logo;
+	}
+
+    public function shop_url()
+    {   
+        $CI =& get_instance();
+        $result = $CI->Global_model->get_by_id("site_information",1);
+        return $result[0]->shop_url;
+    }
+
+	public function details($table,$id)
+	{	
+		$CI =& get_instance();
+		$result = $CI->Global_model->get_by_id($table,$id);
+		return $result;
+	}
+
+    public function active_list($table, $query = "", $order_field = null, $order_type = null)
+    {   
+        $CI =& get_instance();
+        $select =  "*";
+
+        $limit = 99999;
+        $offset = 1;
+        $join = null;
+        $group= null;      
+
+        $result_data = $CI->Global_model->get_data_list($table, $query, $limit, ($offset - 1) * $limit, $select,$order_field,$order_type, $join, $group);
+        return $result_data;
+    }
+
+    public function all_list($table, $query = "", $order_field = null, $order_type = null)
+    {   
+        $CI =& get_instance();
+        $select =  "*";
+
+        $limit = 99999;
+        $offset = 1;
+        $join = null;
+        $group= null;
+
+        $result_data = $CI->Global_model->get_data_list($table, $query, $limit, ($offset - 1) * $limit, $select,$order_field,$order_type, $join, $group); 
+        return $result_data;
+    }
+
+    public function send_email($from_email, $from_name = null, $to_email, $subject, $body){
+
+    	$CI =& get_instance();
+
+    	$details = $CI->Global_model->get_by_id('cms_preference', 1);
+    	if($from_name == null){
+    		$from_name =  'Content Management - ' . $details[0]->cms_title;
+    	}
+
+        $CI->load->library('email');
+        $CI->email->from($from_email, $from_name);
+        $CI->email->to($to_email);
+        $CI->email->subject($subject);
+
+        $CI->email->message($body);
+        if (!$CI->email->send()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }

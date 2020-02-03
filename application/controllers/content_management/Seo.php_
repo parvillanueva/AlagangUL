@@ -1,0 +1,45 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Seo extends CI_Controller {
+
+	public function __construct()
+    {
+		parent::__construct();
+        if($this->session->userdata('sess_email')=='' ) { 
+            redirect(base_url("content_management/login"));
+        }
+	}
+
+    public function index()
+    {
+        $data['title'] = "Content Management - SEO";
+        $data['PageName'] = "SEO";
+        $data['content'] = "content_management/cms_seo/list";
+        $this->load->view('content_management/template/layout', $data);
+    }
+
+    public function get_list()
+    {
+        $result = $this->Global_model->get_users_model("cms_users");
+        echo json_encode($result);
+    }
+
+    public function edit_seo()
+    {
+        $data['title'] = "Content Management";
+        $data['PageName'] = "Edit SEO";
+        $data['content'] = "content_management/cms_seo/edit";
+        $this->load->view('content_management/template/layout', $data);
+
+    }
+    public function add_seo()
+    {
+        $data['title'] = "Content Management";
+        $data['PageName'] = "Add SEO";
+        $data['content'] = "content_management/cms_seo/add";
+        $this->load->view('content_management/template/layout', $data);
+
+    }
+
+}

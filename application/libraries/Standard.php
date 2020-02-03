@@ -239,9 +239,7 @@ class Standard {
                         echo "<br><small class='standard-note'><i> <b>Note:</b> ".ucfirst($config['note']).".</i></small>";
                     }
                     echo '</div>';
-
-                    if(isset($config['validated']) && $config['validated'] == true){
-                        echo '<label class="control-label col-sm-2"></label>
+                    echo '<label class="control-label col-sm-2"></label>
                             <div class="col-sm-10">
                                 <div id="password_chcklist">
                                     <p>Password Must:</p>
@@ -263,8 +261,6 @@ class Standard {
                                     </div>
                                  </div>
                             </div>';
-                    }
-
                     echo '<div class="clearfix"></div>';
                     break;
                 
@@ -407,7 +403,7 @@ class Standard {
                             $is_checked = true;
                         }
                         echo '<div class="radio-inline">';
-                        echo '  <span>' . form_checkbox($config['name'], $k, $is_checked, $config) . " " . $v . '</span>';
+                        echo '  <span>' . form_checkbox('gender', $k, $is_checked, $config) . " " . $v . '</span>';
                         echo '</div>';
                     }
                     if(isset($config['note'])){
@@ -513,66 +509,15 @@ class Standard {
                     
                     echo form_input($config);
 
-                    if(isset( $config['minDate'])){
-                        echo "<script>$('#".$config['id']."').materialDatePicker({time : false,weekStart : 0,clearButton : true,minDate : '".$config['minDate']."'});$(document).on('cut copy paste input', '#".$config['id']."', function(e) {e.preventDefault();});</script>";
-                    } else {
-                        echo "<script>$('#".$config['id']."').materialDatePicker({time : false,weekStart : 0,clearButton : true});$(document).on('cut copy paste input', '#".$config['id']."', function(e) {e.preventDefault();});</script>";
-                    }
+                    echo "<script>$('#".$config['id']."').materialDatePicker({time : false,weekStart : 0});$(document).on('cut copy paste input', '#".$config['id']."', function(e) {e.preventDefault();});</script>";
                     if(isset($config['note'])){
                         echo "<small class='standard-note'><i> <b>Note:</b> ".ucfirst($config['note']).".</i></small>";
                     }
 
                     echo '</div>';
                     echo '<div class="clearfix"></div>';
-                    break; 
-					
-				case 'date_new':
-                    if($value != null){
-                        $config["value"] = $value;
-                    }
-                    $config['class'] = $config['class'] . " " . $config['id'] .  "_input no_html";
+                    break;  
 
-                    $label_col = "";
-                    $input_col = "";
-
-                    if(isset($config["form-align"])){
-                        if($config["form-align"] == "horizontal"){
-                            $label_col = "col-sm-2";
-                            $input_col = "col-sm-10";
-                        }
-                        unset($config["form-align"]);
-                    }
-
-                    $config['type'] = "text";
-                    if(isset($config["required"])){
-                        if($config["required"]){
-                            $config['class'] = $config['class'] . " required_input";
-                            echo '<label class="control-label '.$config['id'].'_label '.$label_col.'">'.$config['label'].'<span style="color: red;">*</span> :</label>';
-                        } else {
-                            echo '<label class="control-label '.$config['id'].'_label '.$label_col.'">'.$config['label'].':</label>';
-                        }
-                        unset($config["required"]);
-                    } else {
-                        echo '<label class="control-label '.$config['id'].'_label '.$label_col.'">'.$config['label'].':</label>';
-                    }
-
-                    echo '<div class="'.$input_col.'">';
-                    
-                    echo form_input($config);
-
-                    if(isset( $config['minDate'])){
-                        echo "<script>$('#".$config['id']."').materialDatePicker({time : false, format: 'MMMM DD, YYYY', weekStart : 0,clearButton : true,minDate : '".$config['minDate']."'});$(document).on('cut copy paste input', '#".$config['id']."', function(e) {e.preventDefault();});</script>";
-                    } else {
-                        echo "<script>$('#".$config['id']."').materialDatePicker({time : false, format: 'MMMM DD, YYYY', weekStart : 0,clearButton : true});$(document).on('cut copy paste input', '#".$config['id']."', function(e) {e.preventDefault();});</script>";
-                    }
-                    if(isset($config['note'])){
-                        echo "<small class='standard-note'><i> <b>Note:</b> ".ucfirst($config['note']).".</i></small>";
-                    }
-
-                    echo '</div>';
-                    echo '<div class="clearfix"></div>';
-                    break; 
-					
                 case 'timepicker':
                     if($value != null){
                         $config["value"] = $value;
@@ -607,57 +552,14 @@ class Standard {
                     echo '<div class="'.$input_col.'">';
                     
                     echo form_input($config);
-                    echo "<script>$('#".$config['id']."').materialDatePicker({date : false, format: 'HH:mm:ss'});$(document).on('cut copy paste input', '#".$config['id']."', function(e) {e.preventDefault();});</script>";
+                    echo "<script>$('#".$config['id']."').materialDatePicker({date : false});$(document).on('cut copy paste input', '#".$config['id']."', function(e) {e.preventDefault();});</script>";
                     if(isset($config['note'])){
                         echo "<small class='standard-note'><i> <b>Note:</b> ".ucfirst($config['note']).".</i></small>";
                     }
 
                     echo '</div>';
                     echo '<div class="clearfix"></div>';
-                    break;
-					
-				case 'timepicker_new':
-                    if($value != null){
-                        $config["value"] = $value;
-                    }
-
-                    $config['class'] = $config['class'] . " " . $config['id'] .  "_input no_html";
-
-                    $label_col = "";
-                    $input_col = "";
-
-                    if(isset($config["form-align"])){
-                        if($config["form-align"] == "horizontal"){
-                            $label_col = "col-sm-2";
-                            $input_col = "col-sm-10";
-                        }
-                        unset($config["form-align"]);
-                    }
-
-                    $config['type'] = "text";
-                    if(isset($config["required"])){
-                        if($config["required"]){
-                            $config['class'] = $config['class'] . " required_input";
-                            echo '<label class="control-label '.$config['id'].'_label '.$label_col.'">'.$config['label'].'<span style="color: red;">*</span> :</label>';
-                        } else {
-                            echo '<label class="control-label '.$config['id'].'_label '.$label_col.'">'.$config['label'].':</label>';
-                        }
-                        unset($config["required"]);
-                    } else {
-                        echo '<label class="control-label '.$config['id'].'_label '.$label_col.'">'.$config['label'].':</label>';
-                    }
-
-                    echo '<div class="'.$input_col.'">';
-                    
-                    echo form_input($config);
-                    echo "<script>$('#".$config['id']."').materialDatePicker({date : false, format: 'hh:mm A'});$(document).on('cut copy paste input', '#".$config['id']."', function(e) {e.preventDefault();});</script>";
-                    if(isset($config['note'])){
-                        echo "<small class='standard-note'><i> <b>Note:</b> ".ucfirst($config['note']).".</i></small>";
-                    }
-
-                    echo '</div>';
-                    echo '<div class="clearfix"></div>';
-                    break;
+                    break;   
 
                 case 'filemanager':
                     if($value != null){
@@ -721,10 +623,10 @@ class Standard {
                     echo '<div class="'.$input_col.'">';
                     echo '<div class="input-group '.$config['id'].'"> ';
                     echo '  <input id="'.$config['id'].'" class="form-control '.$is_required.' ' . $filter . ' ' . $max_size_class . '" readonly value="'.$config["value"].'" accept="'.$accept.'" name="'.$config['name'].'" max_size="'.$max_size.'" />';
-                    echo '      <span class="input-group-btn" style="vertical-align: top;">';
+                    echo '      <span class="input-group-btn">';
                     echo '          <button type="button" data-id="'.$config['id'].'" class="file_manager_'.$config['id'].' btn btn-info btn-flat">Open File Manager</button>';
                     echo '      </span>';
-                    echo '  </div>';
+                    echo '  </div>';                   
 
                     //put preview here
                     if($config["value"] != ""){
@@ -734,7 +636,7 @@ class Standard {
                             case 'jpeg':
                             case 'gif':
                             case 'png':
-                                echo '<img class="img_banner_preview" id="img_ban_'.$config['id'].'" src="'. base_url() . $config["value"].'" style="max-width:200px" /><br>';
+                                echo '<img class="img_banner_preview" src="'. base_url() . $config["value"].'" width="100%" />';
                                 break;
 
                             case 'mp4':
@@ -767,30 +669,15 @@ class Standard {
                         
                         echo "<small class='standard-note'><i> <b>Note:</b> ".ucfirst($config['note']).".</i></small>";
                     }
-					echo '<div id="img_delete_button" class="img_delete_button_'.$config['id'].'"></div>';
+
                     echo '</div>';
 
                     
                     echo '<script>';
-					echo 'function img_delete_'.$config['id'].'(){';
-					echo '$(".img_delete_button_'.$config['id'].'").html("<div><a href=\'#\' id=\'btn_delete_image\' id-identifier=\''.$config['id'].'\' class=\'btn_delete btn-sm btn btn-default cms-btn\' style=\'width: 120px; margin-top: 5px;\'><span class=\'fa fa-trash\'></span> Remove Preview </a> </div>");';
-					echo '}';
-					echo '$(document).ready(function(){';
-					echo 'var input_image_val = $("#'.$config['id'].'").val();';
-					echo 'if(input_image_val != ""){';
-					echo 'img_delete_'.$config['id'].'()';
-					echo '}';
-					echo '});';
                     echo "  $(document).on('click', '.file_manager_".$config['id']."', function(e){";
                     echo '      var data_id ="'.$config['id'].'";';
                     echo '      modal.file_manager(data_id);';
                     echo '  });';
-					echo '$(document).on("click", "#btn_delete_image", function(){';
-					echo 'var data_identify = $(this).attr("id-identifier");';
-					echo '$("#img_ban_"+data_identify+"").remove();';
-					echo '$(this).remove();';
-					echo '$("#"+data_identify+"").val("")';
-					echo '});';
                     echo '</script>';
 
                     echo '<div class="clearfix"></div>';

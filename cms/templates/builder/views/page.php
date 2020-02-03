@@ -20,8 +20,6 @@
 </div>
 <script>
 
-    AJAX.config.base_url(base_url); 
-       
     $(document).on('click', '#btn_update', function(){
         var form_data = {};
         $(':input[class*="_input"]').each(function() {
@@ -42,14 +40,16 @@
             modal.standard(modal_obj, function(result){
                 if(result){
                     modal.loading(true);
+                    var url = "<?= base_url('content_management/global_controller');?>"; 
+                    var data = {
+                        event : "update",
+                        table : "{table_name}", 
+                        field : "id", 
+                        where : 1, 
+                        data : form_data
+                    }
 
-                    AJAX.update.table("{table_name}");
-                    AJAX.update.where("id", 1);
-                    $.each(form_data, function(a,b) {
-                        AJAX.update.params(a, b);
-                    });
-                    
-                    AJAX.update.exec(function(result){
+                    aJax.post(url,data,function(result){
                         modal.loading(false);
                         modal.alert("<?= $this->standard->dialog("update_success"); ?>", function(){
                             location.reload();
