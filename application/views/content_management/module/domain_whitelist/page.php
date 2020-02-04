@@ -50,7 +50,7 @@
              $.each(obj,function(x,y){
                 html += '<tr>';
                 html += '   <td>'+y.domain+'</td>';
-                html += '   <td><a href = "javascript:void(0)" data-id ="'+y.id+'"><center>Edit</center></a></td>'
+                html += '   <td><a  href="<?= base_url()."content_management/"?>site_domain_whitelist/update/'+y.id+'" data-id ="'+y.id+'" class="app_class">Edit</a></td>'
                 html += '</tr>'
              });
 
@@ -65,6 +65,9 @@
     }
 
     $(document).on('click','.btn_add',function(e){
+        location.href = ('<?= base_url()."content_management/"?>site_domain_whitelist/add');
     })
+
+    
 </script>
 

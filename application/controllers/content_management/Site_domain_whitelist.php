@@ -17,7 +17,7 @@ class Site_domain_whitelist extends CI_Controller {
 		$data["PageName"] = ("domain whitelist");
 		$data['edit_title'] = true;
 		$data["content"] = "content_management/module/domain_whitelist/page";
-		$data['breadcrumb'] = array('domain whitelist' => '');
+		$data['breadcrumb'] = array('Domain Whitelist' => '');
 		$this->load->view("content_management/template/layout", $data);	
 	}
 
@@ -27,7 +27,17 @@ class Site_domain_whitelist extends CI_Controller {
 		$data["PageName"] = ("domain whitelist");
 		$data['edit_title'] = true;
 		$data["content"] = "content_management/module/domain_whitelist/add";
-		$data['breadcrumb'] = array('domain whitelist' => '');
+		$data['breadcrumb'] = array('Domain Whitelist' => '');
+		$this->load->view("content_management/template/layout", $data);	
+	}
+
+	public function update()
+	{
+		$data["title"] = "Content Management";
+		$data["PageName"] = ("domain whitelist");
+		$data['edit_title'] = true;
+		$data["content"] = "content_management/module/domain_whitelist/edit";
+		$data['breadcrumb'] = array('Domain Whitelist' => '');
 		$this->load->view("content_management/template/layout", $data);	
 	}
 	//controller_config

@@ -1406,6 +1406,19 @@ $config['link_type']        = array(
                                                 )
                             );
 
+$config['domain']             = array(
+                                'type'          => 'text',
+                                'name'          => 'domain',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control',
+                                'id'            => 'domain',
+                                'maxlength'     => 250,
+                                'required'      => true,
+                                'accept'        => '/[^a-zA-Z0-9\u00f1\u00d1 .,-\/\']/g',
+                                'placeholder'   => 'Domain',
+                                'label'         => 'Domain'
+                            );
+
 
 //custom_standard_config
 
