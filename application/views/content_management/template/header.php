@@ -61,7 +61,7 @@
 		<script type="text/javascript" src="<?= base_url();?>/cms/js/base64.js" ></script>
 		<script type="text/javascript" src="<?= base_url();?>/cms/js/jspdf.plugin.table.js" ></script>
 		<script type="text/javascript" src="<?= base_url();?>/cms/js/jquery.tablesorter.min.js" ></script>
-
+		<script type="text/javascript" src="<?= base_url();?>/cms/js/gcontroller.js" ></script>
         <style type="text/css">
                 .cke_button__youtube_label { display: inline !important; }
                 pre { border-radius: 0px !important; }

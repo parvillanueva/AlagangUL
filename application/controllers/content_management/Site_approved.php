@@ -17,7 +17,7 @@ class Site_approved extends CI_Controller {
 		$data["PageName"] = ("approved");
 		$data['edit_title'] = true;
 		$data["content"] = "content_management/module/approved/page";
-		$data['breadcrumb'] = array('approved' => '');
+		$data['breadcrumb'] = array('Approved' => '');
 		$this->load->view("content_management/template/layout", $data);	
 	}
 
