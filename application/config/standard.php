@@ -1420,6 +1420,19 @@ $config['domain']             = array(
                             );
 
 
+$config['team_name']             = array(
+                                'type'          => 'text',
+                                'name'          => 'team_name',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control',
+                                'id'            => 'team_name',
+                                'maxlength'     => 250,
+                                'required'      => true,
+                                'accept'        => '/[^a-zA-Z0-9\u00f1\u00d1 .,-\/\']/g',
+                                'placeholder'   => 'Team Name',
+                                'label'         => 'Team Name'
+                            );
+
 //custom_standard_config
 
 ?>
