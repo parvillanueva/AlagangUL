@@ -5,4 +5,4 @@
 		$autoload["helper"] = array("url","html","file","captcha");
 		$autoload["config"] = array();
 		$autoload["language"] = array();
-		$autoload["model"] = array("content_management/Global_model","content_management/Custom_model");
+		$autoload["model"] = array("content_management/Global_model","content_management/Custom_model","Site_model");

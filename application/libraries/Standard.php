@@ -88,6 +88,127 @@ class Standard {
                 case 'separator':
                     echo "<hr>";
                     break;
+                case 'file':
+                    if($value != null){
+                        $config["value"] = $value; 
+                    }
+
+                    $label_col = "";
+                    $input_col = "";
+                    $config['class'] = $config['class'] . " " . $config['id'] .  "_input";
+
+                    if(isset($config["form-align"])){
+                        if($config["form-align"] == "horizontal"){
+                            $label_col = "col-sm-2";
+                            $input_col = "col-sm-10";
+                        }
+                        unset($config["form-align"]);
+                    }
+
+                    if(isset($config["required"])){
+                        if($config["required"]){
+                            $config['class'] = $config['class'] . " required_input";
+                            echo '<label class="control-label '.$config['id'].'_label '.$label_col.'">'.$config['label'].'<span style="color: red;">*</span> :</label>';
+                        } else {
+                            echo '<label class="control-label '.$config['id'].'_label '.$label_col.'">'.$config['label'].':</label>';
+                        }
+                        unset($config["required"]);
+                    } else {
+                        echo '<label class="control-label '.$config['id'].'_label '.$label_col.'">'.$config['label'].':</label>';
+                    }
+
+                    if(isset($config["accept"])){
+                        if($config["accept"]){
+                            $config['onkeyup'] = "this.value=this.value.replace(".$config["accept"].",'');";
+                        }
+                        unset($config["alphaonly"]);
+                    }
+
+
+                    echo '<div class="'.$input_col.'">';
+                    $config['onchange'] = 'readURLImgStandardPreview(this);';
+                    echo form_input($config);
+                    
+                    if(isset($config['note'])){
+                        echo "<small class='standard-note'><i> <b>Note:</b> ".ucfirst($config['note']).". ,</i></small>";
+                    }
+
+                    echo '<img id="img_banner_preview_'.$config["id"].'" width="50%"/>';
+
+                    echo '</div>';
+                    echo '<div class="clearfix"></div>';
+
+                    break;
+                case 'number':
+                    if($value != null){
+                        $config["value"] = $value; 
+                    }
+
+                    $label_col = "";
+                    $input_col = "";
+                    $config['class'] = $config['class'] . " " . $config['id'] .  "_input";
+
+                    if(isset($config["form-align"])){
+                        if($config["form-align"] == "horizontal"){
+                            $label_col = "col-sm-2";
+                            $input_col = "col-sm-10";
+                        }
+                        unset($config["form-align"]);
+                    }
+
+                    if(isset($config["required"])){
+                        if($config["required"]){
+                            $config['class'] = $config['class'] . " required_input";
+                            echo '<label class="control-label '.$config['id'].'_label '.$label_col.'">'.$config['label'].'<span style="color: red;">*</span> :</label>';
+                        } else {
+                            echo '<label class="control-label '.$config['id'].'_label '.$label_col.'">'.$config['label'].':</label>';
+                        }
+                        unset($config["required"]);
+                    } else {
+                        echo '<label class="control-label '.$config['id'].'_label '.$label_col.'">'.$config['label'].':</label>';
+                    }
+
+                    if(isset($config["alphaonly"])){
+                        if($config["alphaonly"]){
+                            $config['class'] = $config['class'] . " alphaonly";
+                        }
+                        unset($config["alphaonly"]);
+                    }
+
+                    if(isset($config["accept"])){
+                        if($config["accept"]){
+                            $config['onkeyup'] = "this.value=this.value.replace(".$config["accept"].",'');";
+                        }
+                        unset($config["alphaonly"]);
+                    }
+
+
+                    if(isset($config["no_html"])){
+                        if($config["no_html"]){
+                            $config['class'] = $config['class'] . " no_html";
+                            
+                        }
+                        unset($config["no_html"]);
+                    }
+
+                    echo '<div class="'.$input_col.'">';
+                    echo form_input($config);
+                    
+                    if(isset($config['note'])){
+                        echo "<small class='standard-note'><i> <b>Note:</b> ".ucfirst($config['note']).". ,</i></small>";
+                    }
+
+                    
+                    if(isset($config['maxlength'])){
+                        echo "<small class='standard-max'><i>Maximum character count is ".$config['maxlength'].".</i></small>";
+                    }
+                    
+
+
+                    echo '</div>';
+                    echo '<div class="clearfix"></div>';
+
+                    break;
                 case 'text':
                     if($value != null){
                         $config["value"] = $value; 
@@ -960,6 +1081,8 @@ class Standard {
             }
     
             echo '</div>'  ."\n\n";
+
+            echo '<script>function readURLImgStandardPreview(e){var a=$(e).attr("id");if(e.files&&e.files[0]){var r=new FileReader;r.onload=function(e){$("#img_banner_preview_"+a).attr("src",e.target.result)},r.readAsDataURL(e.files[0])}}</script>';
         } else {
             echo "Error : Input config not defined.";
         }
