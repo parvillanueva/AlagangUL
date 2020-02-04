@@ -2,13 +2,13 @@
 		<div class="au-navigation au-container">
 			<nav class="au-navbar navbar navbar-expand-lg">
 				<button type="button" class="au-navbar-toggler navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-					<img src="<?=base_url()?>/site_assets/img/au-menu.svg" width="28px" height="28px">
+					<img src="<?=base_url()?>assets/site/img/au-menu.svg" width="28px" height="28px">
 				</button>
 				<a href="home" class="au-navbar-brand navbar-brand">
-					<img src="<?=base_url()?>/site_assets/img/au-logo.png" alt="Alagang Unilab Logo" class="au-logo">
+					<img src="<?=base_url()?>assets/site/img/au-logo.png" alt="Alagang Unilab Logo" class="au-logo">
 				</a>
 				<div class="d-lg-none">
-					<img src="<?=base_url()?>/site_assets/img/au-avatar.svg" class="au-avatar">
+					<img src="<?=base_url()?>assets/site/img/au-avatar.svg" class="au-avatar">
 				</div>
 
 				<div class="collapse navbar-collapse" id="navbarCollapse">
@@ -39,7 +39,7 @@
 							<div class="au-acc">
 								<button type="button" class="au-accbtn dropdown-toggle d-none d-lg-block" data-toggle="dropdown">
 									<div class="au-inner">
-										<img src="<?=base_url()?>/site_assets/img/au-avatar.svg" class="au-avatar">
+										<img src="<?=base_url()?>assets/site/img/au-avatar.svg" class="au-avatar">
 									</div>
 									<div class="au-inner">
 										<span class="au-accname">John Michael Doe</span>
@@ -50,7 +50,7 @@
 								<div class="au-accmobile d-lg-none">
 									<a href="#">
 										<div class="au-inner">
-											<img src="<?=base_url()?>/site_assets/img/au-avatar.svg" class="au-avatar-lg">
+											<img src="<?=base_url()?>assets/site/img/au-avatar.svg" class="au-avatar-lg">
 										</div>
 										<div class="au-inner">
 											<span class="au-accname">John Michael Doe</span>

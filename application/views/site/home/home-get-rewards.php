@@ -6,7 +6,7 @@
 							<div class="row">
 								<div class="col-lg-12 col-sm-6">
 									<div class="au-inner">
-										<img src="<?=base_url()?>/site_assets/img/au-group.svg" class="au-group">
+										<img src="<?=base_url()?>assets/site/img/au-group.svg" class="au-group">
 									</div>
 								</div>						
 								<div class="col-lg-12 col-sm-6">
@@ -27,7 +27,7 @@
 										<div class="col-sm-5">
 											<div class="row">
 												<div class="au-r-thumbnail">
-													<img src="<?=base_url()?>/site_assets/img/au-sample-product.jpg" class="au-r-thumbnailimg">
+													<img src="<?=base_url()?>assets/site/img/au-sample-product.jpg" class="au-r-thumbnailimg">
 												</div>
 											</div>
 										</div>
@@ -52,7 +52,7 @@
 										<div class="col-sm-5">
 											<div class="row">
 												<div class="au-r-thumbnail">
-													<img src="<?=base_url()?>/site_assets/img/au-sample-product.jpg" class="au-r-thumbnailimg">
+													<img src="<?=base_url()?>assets/site/img/au-sample-product.jpg" class="au-r-thumbnailimg">
 												</div>
 											</div>
 										</div>
@@ -77,7 +77,7 @@
 										<div class="col-sm-5">
 											<div class="row">
 												<div class="au-r-thumbnail">
-													<img src="<?=base_url()?>/site_assets/img/au-sample-product.jpg" class="au-r-thumbnailimg">
+													<img src="<?=base_url()?>assets/site/img/au-sample-product.jpg" class="au-r-thumbnailimg">
 												</div>
 											</div>
 										</div>
@@ -102,7 +102,7 @@
 										<div class="col-sm-5">
 											<div class="row">
 												<div class="au-r-thumbnail">
-													<img src="<?=base_url()?>/site_assets/img/au-sample-product.jpg" class="au-r-thumbnailimg">
+													<img src="<?=base_url()?>assets/site/img/au-sample-product.jpg" class="au-r-thumbnailimg">
 												</div>
 											</div>
 										</div>
