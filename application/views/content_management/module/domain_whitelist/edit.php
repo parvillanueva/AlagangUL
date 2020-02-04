@@ -1,6 +1,6 @@
 <div class="box">
 	<?php
-		$data['buttons'] = ['update','close_maintenance'];
+		$data['buttons'] = ['update','close'];
 		$this->load->view("content_management/template/buttons",$data);
 	?>
 	<div class="box-body">
@@ -41,13 +41,12 @@ $(document).on('click', '#btn_update', function(){
         // form_data["update_date"] = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
 
         if(validate.all()){
-            var domain = $('#domain').val();
-            domain = domain.split('.').slice(1);
-            var allowedDomains = [ 'com.ph','com'];
-            $('.validate_error_message').remove();
-            $('#domain').css('border-color','black');    
+                var domain = $('#domain').val();
+                var re = /^(?!(https:\/\/|http:\/\/|www\.|mailto:|smtp:|ftp:\/\/|ftps:\/\/))(((([a-zA-Z0-9])|([a-zA-Z0-9][a-zA-Z0-9\-]{0,86}[a-zA-Z0-9]))\.(([a-zA-Z0-9])|([a-zA-Z0-9][a-zA-Z0-9\-]{0,73}[a-zA-Z0-9]))\.(([a-zA-Z0-9]{2,12}\.[a-zA-Z0-9]{2,12})|([a-zA-Z0-9]{2,25})))|((([a-zA-Z0-9])|([a-zA-Z0-9][a-zA-Z0-9\-]{0,162}[a-zA-Z0-9]))\.(([a-zA-Z0-9]{2,12}\.[a-zA-Z0-9]{2,12})|([a-zA-Z0-9]{2,25}))))$/g;
 
-            if ($.inArray(domain[0], allowedDomains) !== -1) {
+                var domainFormat = re.test(domain);
+
+            if (domainFormat) {
                 if((!is_exist('tbl_email_domain_whitelist', 'domain', $('#domain').val(),table_id) != 0)){
                     var modal_obj = '<?= $this->standard->confirm("confirm_update"); ?>'; 
                     modal.standard(modal_obj, function(result){
@@ -81,8 +80,12 @@ $(document).on('click', '#btn_update', function(){
                 $(error_message2).insertAfter($('#domain'));
             }
         }
-    });
+});
 
+
+$(document).on('click','#btn_close',function(e){
+    location.href = '<?=base_url("content_management/site_domain_whitelist") ?>';
+});
 function is_exist(table, field, value,table_id){
     var query = ""+ field +" = '" + value + "' AND id != "+table_id+"" ;
     var exists = 0;
