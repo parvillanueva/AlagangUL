@@ -1407,6 +1407,106 @@ $config['link_type']        = array(
                             );
 
 
-//custom_standard_config
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//custom_standard_config
+$config['program_team']        = array(
+                                'type'          => 'dropdown',
+                                'name'          => 'program_team',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control',
+                                'id'            => 'program_team',
+                                'required'      => true,
+                                'placeholder'   => 'Team',
+                                'label'         => 'Team',
+                                'list_value'    => array()
+                            );
+
+$config['program_name']       = array(
+                                'type'          => 'text', 
+                                'name'          => 'program_name', 
+                                'form-align'    => 'horizontal', 
+                                'class'         => 'form-control', 
+                                'id'            => 'program_name', 
+                                'required'      => true, 
+                                'maxlength'     => 255, 
+                                'alphaonly'     => false, 
+                                'placeholder'   => 'Program Name', 
+                                'label'         => 'Program Name'
+                            );
+
+$config['program_short_description'] = array(
+                                'type'          => 'textarea',
+                                'name'          => 'program_short_description',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control ',
+                                'id'            => 'program_short_description',
+                                'required'      => true,
+                                'maxlength'     => 255,
+                                'placeholder'   => 'Short Description',
+                                'label'         => 'Short Description'
+                            );
+
+$config['program_overview'] = array(
+                                'type'          => 'textarea',
+                                'name'          => 'program_overview',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control ',
+                                'id'            => 'program_overview',
+                                'required'      => true,
+                                'maxlength'     => 255,
+                                'placeholder'   => 'Overview',
+                                'label'         => 'Overview'
+                            );
+$config['area_covered']       = array(
+                                'type'          => 'text', 
+                                'name'          => 'area_covered', 
+                                'form-align'    => 'horizontal', 
+                                'class'         => 'form-control', 
+                                'id'            => 'area_covered', 
+                                'required'      => true, 
+                                'maxlength'     => 255, 
+                                'alphaonly'     => false, 
+                                'placeholder'   => 'Area Covered', 
+                                'label'         => 'Area Covered'
+                            );
+$config['join_points']       = array(
+                                'type'          => 'number', 
+                                'name'          => 'join_points', 
+                                'form-align'    => 'horizontal', 
+                                'class'         => 'form-control', 
+                                'id'            => 'join_points', 
+                                'required'      => true, 
+                                'maxlength'     => 10, 
+                                'alphaonly'     => false, 
+                                'placeholder'   => 'Reward Points', 
+                                'label'         => 'Reward Points'
+                            );
+$config['program_image']       = array(
+                                'type'          => 'file', 
+                                'name'          => 'program_image', 
+                                'form-align'    => 'horizontal', 
+                                'class'         => 'form-control', 
+                                'id'            => 'program_image', 
+                                'required'      => true, 
+                                'maxlength'     => 10, 
+                                'alphaonly'     => false, 
+                                'accept'        => "image/*", 
+                                'placeholder'   => 'Program Image', 
+                                'label'         => 'Program Image'
+                            );
 ?>
