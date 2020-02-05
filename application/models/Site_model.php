@@ -13,7 +13,7 @@ date_default_timezone_set('Asia/Taipei');
 
 		function get_featured_programs()
 		{
-			$this->db->select("p.id, p.image_thumbnail, p.name, p.short_description, p.overview, COUNT(pm.program_id) AS member_count");
+			$this->db->select("p.id, p.url_alias, p.image_thumbnail, p.name, p.short_description, p.overview, COUNT(pm.program_id) AS member_count");
 			$this->db->from("tbl_programs p");
 			$this->db->join("tbl_program_members pm", "pm.program_id = p.id", "LEFT");
 			$this->db->group_by("p.id");
