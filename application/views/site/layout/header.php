@@ -59,6 +59,7 @@
         <script type="text/javascript" src="<?= base_url();?>/cms/js/custom.js" ></script>
         <script type="text/javascript" src="<?= base_url();?>/cms/js/placeholder.js" ></script>
         <script src='https://www.google.com/recaptcha/api.js'></script>
+        <script type="text/javascript" src="<?= base_url();?>/cms/js/gcontroller.js" ></script>
 
         <style type="text/css">
         
