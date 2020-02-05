@@ -1509,4 +1509,132 @@ $config['program_image']       = array(
                                 'placeholder'   => 'Program Image', 
                                 'label'         => 'Program Image'
                             );
+
+// BANNER CONFIG                    
+$config['banner_title']       = array(
+                            'type'          => 'text',
+                            'name'          => 'banner_title',
+                            'form-align'    => 'horizontal',
+                            'class'         => 'form-control',
+                            'id'            => 'banner_title',
+                            'required'      => true,
+                            'maxlength'     => 255,
+                            'label'         => 'Title'
+                        );
+
+$config['banner_description'] = array(
+                            'type'          => 'textarea',
+                            'name'          => 'banner_description',
+                            'form-align'    => 'horizontal',
+                            'class'         => 'form-control meta_description_input',
+                            'id'            => 'banner_description',
+                            'required'      => true,
+                            'maxlength'     => 500,
+                            'label'         => 'Description'
+                        );
+
+
+$config['banner_media_web'] = array(
+                            'type'          => 'filemanager',
+                            'name'          => 'banner_media_web',
+                            'form-align'    => 'horizontal',
+                            'class'         => 'form-control',
+                            'id'            => 'banner_media_web',
+                            'accept'        => 'jpg,png,jpeg',
+                            'max_size'      => '50',
+                            'required'      => true,
+                            'label'         => 'Banner Media (Web)',
+                        );
+
+
+
+$config['banner_media_tablet'] = array(
+                            'type'          => 'filemanager',
+                            'name'          => 'banner_media_tablet',
+                            'form-align'    => 'horizontal',
+                            'class'         => 'form-control',
+                            'id'            => 'banner_media_tablet',
+                            'accept'        => 'jpg,png,jpeg',
+                            'max_size'      => '50',
+                            'label'         => 'Banner Media (Tablet)',
+                        );
+
+$config['banner_media_mobile'] = array(
+                            'type'          => 'filemanager',
+                            'name'          => 'banner_media_mobile',
+                            'form-align'    => 'horizontal',
+                            'class'         => 'form-control',
+                            'id'            => 'banner_media_mobile',
+                            'accept'        => 'jpg,png,jpeg',
+                            'max_size'      => '50',
+                            'required'      => true,
+                            'label'         => 'Banner Media (Mobile)',
+                        );
+
+$config['banner_logo'] = array(
+                            'type'          => 'filemanager',
+                            'name'          => 'banner_logo',
+                            'form-align'    => 'horizontal',
+                            'class'         => 'form-control',
+                            'id'            => 'banner_logo',
+                            'accept'        => 'jpg,png,jpeg',
+                            'max_size'      => '5',
+                            'required'      => false,
+                            'label'         => 'Banner Logo',
+                        );
+
+
+$config['banner_button_url']      = array(
+                            'type'          => 'text',
+                            'name'          => 'banner_button_url',
+                            'form-align'    => 'horizontal',
+                            'class'         => 'form-control redirect_url_input',
+                            'id'            => 'banner_button_url',
+                            'label'         => 'Button Redirect URL',
+                        );
+
+$config['banner_button_text']  = array(
+                            'type'          => 'text',
+                            'name'          => 'banner_button_text',
+                            'form-align'    => 'horizontal',
+                            'class'         => 'form-control',
+                            'id'            => 'banner_button_text',
+                            'maxlength'     => 50,
+                            'label'         => 'Button Text'
+                        );
+
+$config['banner_navigation_text']  = array(
+                            'type'          => 'text',
+                            'name'          => 'banner_navigation_text',
+                            'form-align'    => 'horizontal',
+                            'class'         => 'form-control',
+                            'id'            => 'banner_navigation_text',
+                            'maxlength'     => 50,
+                            'label'         => 'Navigation Text'
+                        );
+
+$config['banner_navigation_url']      = array(
+                            'type'          => 'text',
+                            'name'          => 'banner_navigation_url',
+                            'form-align'    => 'horizontal',
+                            'class'         => 'form-control redirect_url_input',
+                            'id'            => 'banner_navigation_url',
+                            'label'         => 'Navigation Redirect URL',
+                        );
+
+
+$config['banner_status']           = array(
+                            'type'          => 'dropdown',
+                            'name'          => 'banner_status',
+                            'form-align'    => 'horizontal',
+                            'class'         => 'form-control status_input',
+                            'id'            => 'banner_status',
+                            'required'      => true,
+                            'placeholder'   => 'Status',
+                            'label'         => 'Status',
+                            'list_value'    => array(
+                                                '1'     => 'Active',
+                                                '0'     => 'Inactive'
+                                            )
+                        );
 ?>

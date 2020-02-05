@@ -76,8 +76,9 @@
 			}
 
 		?>
-
-        <?php $this->load->view($content); ?>
+		<div class="au-wrapper">
+			<?php $this->load->view($content); ?>
+		</div>
         <?php $this->load->view("site/layout/footer"); ?>
         
     </body>

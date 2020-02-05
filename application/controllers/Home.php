@@ -5,6 +5,11 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
+		//banner data
+		$data['banners']  = $this->Site_model->get_banners();		
+		//featured programs
+		$data['programs'] = $this->Site_model->get_featured_programs();
+		//get rewards
 
 		$data['content'] = "site/home/default.php";
 		$data['meta'] = array(
@@ -19,7 +24,7 @@ class Home extends CI_Controller {
 			// "description"         =>  $this->Global_model->site_meta_og(38, 'site_menu', 'og_description'),
 			// "image"         =>  base_url().$this->Global_model->site_meta_og(38, 'site_menu', 'og_image'),
 		);
-		$this->load->view("site/layout/template",$data);
+		$this->parser->parse("site/layout/template",$data);
 	}
 
 }
