@@ -6,7 +6,7 @@ class Home extends CI_Controller {
 	public function index()
 	{
 		//banner data
-		$data['banners']  = $this->Site_model->get_banners();		
+		$data['banners']  = $this->Site_model->get_banners();	
 		//featured programs
 		$data['programs'] = $this->Site_model->get_featured_programs();
 		//get rewards
@@ -24,6 +24,7 @@ class Home extends CI_Controller {
 			// "description"         =>  $this->Global_model->site_meta_og(38, 'site_menu', 'og_description'),
 			// "image"         =>  base_url().$this->Global_model->site_meta_og(38, 'site_menu', 'og_image'),
 		);
+		
 		$this->parser->parse("site/layout/template",$data);
 	}
 
