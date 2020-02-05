@@ -1,17 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class About extends CI_Controller {
 
 	public function index()
 	{
-		//banner data
-		$data['banners']  = $this->Site_model->get_banners();	
-		//featured programs
-		$data['programs'] = $this->Site_model->get_featured_programs();
-		//get rewards
 
-		$data['content'] = "site/home/default";
+		$data['content'] = "site/about/default";
 		$data['meta'] = array(
 			// "title"         =>  "Home",
 			// "description"   =>  $this->Global_model->site_meta_og(38, 'site_menu', 'meta_description'),
@@ -24,9 +19,8 @@ class Home extends CI_Controller {
 			// "description"         =>  $this->Global_model->site_meta_og(38, 'site_menu', 'og_description'),
 			// "image"         =>  base_url().$this->Global_model->site_meta_og(38, 'site_menu', 'og_image'),
 		);
-
-		$data['active_menu'] = "home";
 		
+		$data['active_menu'] = "about";
 		$this->parser->parse("site/layout/template",$data);
 	}
 

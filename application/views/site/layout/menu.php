@@ -14,11 +14,11 @@
 				<div class="collapse navbar-collapse" id="navbarCollapse">
 					<div class="au-navbar-nav navbar-nav ml-auto flex-column-reverse flex-lg-row">
 						<div class="au-menu">
-							<a href="#" class="nav-item nav-link active">Home</a>
-							<a href="#" class="nav-item nav-link">About</a>
-							<a href="#" class="nav-item nav-link">Programs</a>
-							<a href="#" class="nav-item nav-link">Events</a>
-							<a href="#" class="nav-item nav-link">Get Rewards</a>
+							<a id="home" href="<?= base_url();?>" class="nav-item nav-link">Home</a>
+							<a id="about" href="<?= base_url("about");?>" class="nav-item nav-link">About</a>
+							<a id="programs"  href="<?= base_url("programs");?>" class="nav-item nav-link">Programs</a>
+							<a id="events"  href="<?= base_url("events");?>" class="nav-item nav-link">Events</a>
+							<a id="get_rewards"  href="<?= base_url("get-rewards");?>" class="nav-item nav-link">Get Rewards</a>
 
 							<div class="d-lg-none">								
 								<a href="#" class="nav-item nav-link">Sign In</a><!-- show this when logged out -->
@@ -72,3 +72,6 @@
 			</nav>
 		</div>
 	</header>
+	<script type="text/javascript">
+		$("#<?= $active_menu;?>").addClass("active")
+	</script>
