@@ -14,10 +14,10 @@
 |
 */
 
-// ALERT SUCCESS
-$config['add_success']          = "<b>Success!</b> Record(s) have been added.";
-$config['save_success']         = "<b>Success!</b> Record(s) has been saved.";
-$config['update_success']       = "<b>Success!</b> Record(s) have been updated.";
+// ALERT
+$config['add_success']          = "<b>Success!</b> Record has been added.";
+$config['save_success']         = "<b>Success!</b> Record has been saved.";
+$config['update_success']       = "<b>Success!</b> Record has been updated.";
 $config['delete_success']       = "<b>Success!</b> Record(s) have been deleted.";
 $config['activate_success']     = "<b>Success!</b> Record(s) have been activated.";
 $config['deactivate_success']   = "<b>Success!</b> Record(s) have been deactivated.";
@@ -27,16 +27,6 @@ $config['submitted_success']    = "<b>Success!</b> Record has been submitted.";
 $config['cancelled_success']    = "<b>Success!</b> Record has been cancelled.";
 $config['declined_success']     = "<b>Success!</b> Record has been declined.";
 $config['package_success']      = "<b>Success!</b> Package has been installed.";
-$config['publish_success']      = "<b>Success!</b> Record(s) have been published.";
-$config['unpublish_success']    = "<b>Success!</b> Record(s) have been unpublished.";
-$config['deleted_file_success'] = "<b>Success!</b> File(s) has been deleted.";
-$config['export_success']       = "<b>Success!</b> Export completed!";
-$config['image_update_success']       = "<b>Success!</b> Image(s) have been updated.";
-//ALERT FAILED
-$config['no_file']              = "<b>Error!</b> File does not exists.";
-$config['insert_failed']        = "<b>Error!</b> Failed to Insert Data.";
-$config['update_failed']        = "<b>Error!</b> Failed to Update Data.";
-$config['sent_failed']         = "<b>Error!</b> Failed to send.";
 
 //VALIDATION
 $config['data_exist']           = "The information already exists.";
@@ -52,7 +42,6 @@ $config['package_field_duplicate']  = "Required fields has duplicate values.";
 //ERRORS
 $config['invalid_user_password']        = "Invalid username and password. Please try again.";
 $config['invalid_password']             = "Incorrect password. Please try again.";
-$config['duplicate_entry']             = "Duplicate entry please check!";
 
 //CUSTOM MESSAGE
 $config['newsletter_subscribed']       = "Success!<br>You have subscribed to our newsletter.";
@@ -115,12 +104,6 @@ $config['confirm_save'] = array(
                             "confirm"  => "Save",
                             "cancel"   => "Cancel",
                         );
-						
-$config['confirm_logout'] = array(
-                            "message"  => "Are you sure you want to log out?",
-                            "confirm"  => "Yes",
-                            "cancel"   => "No",
-                        );
 
 $config['confirm_draft'] = array(
                             "message"  => "Are you sure you want to save this record as draft?",
@@ -160,18 +143,6 @@ $config['confirm_submit'] = array(
 
 $config['confirm_cancel'] = array(
                             "message"  => "Are you sure you want to cancel this record?",
-                            "confirm"  => "Yes",
-                            "cancel"   => "No",
-                        );
-
-$config['confirm_add_cancel'] = array(
-                            "message"  => "Are you sure you want to cancel adding this record?",
-                            "confirm"  => "Yes",
-                            "cancel"   => "No",
-                        );
-
-$config['confirm_edit_cancel'] = array(
-                            "message"  => "Are you sure you want to cancel editing this record?",
                             "confirm"  => "Yes",
                             "cancel"   => "No",
                         );
@@ -223,19 +194,6 @@ $config['confirm_delete_meta'] = array(
                             "confirm"  => "Delete",
                             "cancel"   => "Cancel",
                         );
-
-$config['confirm_delete_image'] = array(
-                            "message"  => "Are you sure you want to delete this image?",
-                            "confirm"  => "Delete",
-                            "cancel"   => "Cancel",
-                        );
-
-$config['confirm_cancel'] = array(
-                            "message"  => "Are you sure you want to close this record?",
-                            "confirm"  => "Yes",
-                            "cancel"   => "No",
-                        );
-
 
 
 
@@ -316,44 +274,18 @@ $config['captcha']       = array(
                             );
 
 
-$config['application_title']       = array(
+$config['meta_title']       = array(
                                 'type'          => 'text',
-                                'name'          => 'application_title',
-                                'form-align'    => 'vertical',
+                                'name'          => 'meta_title',
+                                'form-align'    => 'horizontal',
                                 'class'         => 'form-control',
-                                'id'            => 'application_title',
+                                'id'            => 'meta_title',
                                 'required'      => true,
-                                'maxlength'     => 250,
-                                'placeholder'   => 'Application Title',
-                                'label'         => 'Application Title'
-                            );
-
-$config['application_url']       = array(
-                                'type'          => 'text',
-                                'name'          => 'application_url',
-                                'form-align'    => 'vertical',
-                                'class'         => 'form-control',
-                                'id'            => 'application_url',
-                                'required'      => true,
-                                'placeholder'   => 'Application URL',
-                                'label'         => 'Application URL'
-                            );
-
-$config['application_framework']           = array(
-                                'type'          => 'dropdown',
-                                'name'          => 'application_framework',
-                                'form-align'    => 'vertical',
-                                'class'         => 'form-control status_input',
-                                'id'            => 'status',
-                                'required'      => false,
-                                'no_html'       => true,
-                                'placeholder'   => 'Framework',
-                                'label'         => 'Framework',
-                                'list_value'    => array(
-                                                    'ci'     => 'Codeigniter',
-                                                    'jml'     => 'Joomla',
-                                                    'net'     => '.Net'
-                                                )
+                                'maxlength'     => 255,
+                                'alphaonly'     => true,
+                                'accept'        => '/[^a-zA-Z .,-]/g',
+                                'placeholder'   => 'Meta Title',
+                                'label'         => 'Meta Title'
                             );
 
 $config['meta_description'] = array(
@@ -376,8 +308,8 @@ $config['meta_keyword'] = array(
                                 'id'            => 'meta_keyword',
                                 'required'      => true,
                                 'maxlength'     => 255,
-                                'placeholder'   => 'Meta Keywords',
-                                'label'         => 'Meta Keywords'
+                                'placeholder'   => 'Meta Keyword',
+                                'label'         => 'Meta Keyword'
                             );
 
 $config['meta_image'] = array(
@@ -391,7 +323,6 @@ $config['meta_image'] = array(
                                 'required'      => true,
                                 'placeholder'   => 'Meta Image',
                                 'label'         => 'Meta Image',
-								'note'			=> 'Recommended dimension 1280px x 1280px',
                             );
 
 $config['asc_ref']       = array(
@@ -400,7 +331,8 @@ $config['asc_ref']       = array(
                                 'form-align'    => 'horizontal',
                                 'class'         => 'form-control',
                                 'id'            => 'asc_ref',
-                                'required'      => true,
+                                'required'      => false,
+                                'alphaonly'     => true,
                                 'placeholder'   => 'ASC Ref Code',
                                 'label'         => 'ASC Ref Code'
                             );
@@ -509,8 +441,8 @@ $config['status']           = array(
                                 'placeholder'   => 'Status',
                                 'label'         => 'Status',
                                 'list_value'    => array(
-                                                    '1'     => 'Active',
-                                                    '0'     => 'Inactive'
+                                                    '0'     => 'Inactive',
+                                                    '1'     => 'Active'
                                                 )
                             );
 
@@ -540,27 +472,17 @@ $config['email_address']    = array(
                                 'label'         => 'Email Address'
                             );
 
-$config['ad_user']    = array(
-                                'type'          => 'text',
-                                'name'          => 'email_address',
-                                'form-align'    => 'vertical',
-                                'class'         => 'form-control hoverable',
-                                'id'            => 'ad_user',
-                                'required'      => true,
-                                'placeholder'   => 'Email',
-                                'label'         => 'Email'
-                            );
-
 $config['password']         = array(
                                 'type'          => 'password',
                                 'name'          => 'password',
-                                'form-align'    => 'vertical',
-                                'class'         => 'form-control hoverable',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control',
                                 'id'            => 'password',
                                 'required'      => true,
                                 'placeholder'   => 'Password',
                                 'label'         => 'Password'
                             );
+
 $config['home_address']          = array(
                                 'type'          => 'ckeditor',
                                 'name'          => 'home_address',
@@ -594,12 +516,11 @@ $config['image']           = array(
                                 'form-align'    => 'horizontal',
                                 'class'         => 'form-control',
                                 'id'            => 'image',
-                                'accept'        => 'jpg,png,jpeg,mp4',
+                                'accept'        => 'jpg,gif,png,jpeg,mp4',
                                 'max_size'      => '50',
                                 'required'      => true,
                                 'placeholder'   => 'Image',
                                 'label'         => 'Image',
-								'note'			=> 'Recommended dimension 1280px x 1280px',
                                 
                             );
 
@@ -613,7 +534,6 @@ $config['image_banner']           = array(
                                 'required'      => true,
                                 'placeholder'   => 'Image Banner',
                                 'label'         => 'Image Banner',
-								'note'			=> 'Recommended dimension 1280px x 1280px',
                             );
 
 $config['image_thumbnail']          = array(
@@ -622,12 +542,11 @@ $config['image_thumbnail']          = array(
                                 'form-align'    => 'horizontal',
                                 'class'         => 'form-control',
                                 'id'            => 'banner_thumbnail',
-                                'accept'        => 'jpg,png,jpeg',
+                                'accept'        => 'jpg,gif,png,jpeg',
                                 'max_size'      => '5',
                                 'required'      => true,
                                 'placeholder'   => 'Image Thumbnail',
                                 'label'         => 'Image Thumbnail',
-								'note'			=> 'Recommended dimension 1280px x 1280px',
                                 
                             );
 
@@ -667,21 +586,6 @@ $config['article_body']          = array(
                                 'required'      => true,
                                 'placeholder'   => 'Article Body',
                                 'label'         => 'Article Body',
-                                
-                            );
-
-$config['article_thumbnail']          = array(
-                                'type'          => 'filemanager',
-                                'name'          => 'article_thumbnail',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'article_thumbnail',
-                                'accept'        => 'jpg,gif,png,jpeg',
-                                'max_size'      => '3',
-                                'required'      => true,
-                                'placeholder'   => 'Article Thumbnail',
-                                'label'         => 'Article Thumbnail',
-								'note'			=> 'Recommended dimension 1280px x 1280px',
                                 
                             );
 
@@ -732,7 +636,7 @@ $config['title']       = array(
                                 'form-align'    => 'horizontal',
                                 'class'         => 'form-control',
                                 'id'            => 'title',
-                                'maxlength'     => 250,
+                                'maxlength'     => 255,
                                 'required'      => true,
                                 'placeholder'   => 'Title',
                                 'label'         => 'Title',
@@ -788,11 +692,10 @@ $config['product_image']       = array(
                                 'class'         => 'form-control',
                                 'id'            => 'product_image',
                                 'accept'        => 'jpg,gif,png,jpeg',
-                                'max_size'      => '3',
+                                'max_size'      => '5',
                                 'required'      => true,
                                 'placeholder'   => 'Product Image',
                                 'label'         => 'Product Image',
-								'note'			=> 'Recommended dimension 1280px x 1280px',
                                 
                             );
 
@@ -820,8 +723,8 @@ $config['privacy_statement']    = array(
                                 'required'      => true,
                                 'filemanager'   => false,
                                 'youtube'       => false,
-                                'placeholder'   => 'Privacy Statement',
-                                'label'         => 'Privacy Statement',
+                                'placeholder'   => 'Privacy Policy Statement',
+                                'label'         => 'Privacy Policy Statement',
                                 
                             );
 
@@ -834,7 +737,7 @@ $config['terms_title']       = array(
                                 'maxlength'     => 255,
                                 'required'      => true,
                                 'placeholder'   => 'Terms of Use - Title',
-                                'label'         => 'Title',
+                                'label'         => 'Terms of Use - Title',
                                 
                             );
 
@@ -849,7 +752,7 @@ $config['terms_statement']    = array(
                                 'filemanager'   => false,
                                 'youtube'       => false,
                                 'placeholder'   => 'Terms of Use Statement',
-                                'label'         => 'Content',
+                                'label'         => 'Terms of Use Statement',
                                 
                             );
 
@@ -861,7 +764,7 @@ $config['brief_description'] = array(
                                 'id'            => 'brief_description',
                                 'required'      => true,
                                 'no_html'      => true,
-                                'maxlength'     => 150,
+                                'maxlength'     => 500,
                                 'placeholder'   => 'Brief Description',
                                 'label'         => 'Brief Description',
                                 
@@ -1223,7 +1126,6 @@ $config['upload_video'] = array(
                                 'form-align'    => 'horizontal',
                                 'class'         => 'form-control',
                                 'id'            => 'upload_video',
-                                'accept'        => 'mp4',
                                 'required'      => true,
                                 'placeholder'   => 'Upload Video',
                                 'label'         => 'Upload Video'
@@ -1236,7 +1138,6 @@ $config['upload_thumbnail'] = array(
                                 'form-align'    => 'horizontal',
                                 'class'         => 'form-control',
                                 'id'            => 'upload_thumbnail',
-                                'accept'        => 'jpg,gif,png,jpeg',
                                 'required'      => true,
                                 'placeholder'   => 'Upload Video Thumbnail',
                                 'label'         => 'Upload Video Thumbnail',
@@ -1250,8 +1151,8 @@ $config['banner_type'] = array(
                                 'class'         => 'banner_type',
                                 'id'            => 'banner_type',
                                 'required'      => true,
-                                'placeholder'   => 'Upload Type',
-                                'label'         => 'Upload Type',
+                                'placeholder'   => 'Image/Video/Youtube link',
+                                'label'         => 'Image/Video/Youtube link',
                                 'list_value'    => array(
                                                     '0'     => 'Image / Video Upload',
                                                     '1'     => 'Youtube Link',
@@ -1282,12 +1183,10 @@ $config['banner']           = array(
                                 'form-align'    => 'horizontal',
                                 'class'         => 'form-control ',
                                 'id'            => 'banner_img',
-                                'accept'        => 'jpg,png,jpeg,mp4',
-                                'required'      => false,
-                                'max_size'      => 3,
-                                'placeholder'   => 'Photo',
-                                'label'         => 'Photo',
-								'note'			=> 'Recommended dimension 1280px x 1280px',
+                                'accept'        => 'jpg,gif,png,jpeg,mp4',
+                                'required'      => true,
+                                'placeholder'   => 'Banner',
+                                'label'         => 'Banner',
 
                             );
 
@@ -1303,7 +1202,6 @@ $config['thumbnail']          = array(
                                 'required'      => true,
                                 'placeholder'   => 'Image Thumbnail',
                                 'label'         => 'Image Thumbnail',
-								'note'			=> 'Recommended dimension 1280px x 1280px',
                             );
 
 $config['url']              = array(
@@ -1503,1272 +1401,148 @@ $config['link_type']        = array(
                                 'placeholder'   => 'Link Type',
                                 'label'         => 'Link Type',
                                 'list_value'    => array(
-                                                    '1'     => 'Parent',
-                                                    '2'     => 'Child'
+                                                    'Parent'     => '1',
+                                                    'Child'     => '2'
                                                 )
                             );
 
-$config['shop_url']              = array(
-                                'type'          => 'text',
-                                'name'          => 'shop_url',
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//custom_standard_config
+$config['program_team']        = array(
+                                'type'          => 'dropdown',
+                                'name'          => 'program_team',
                                 'form-align'    => 'horizontal',
                                 'class'         => 'form-control',
-                                'id'            => 'shop_url',
-                                'required'      => false,
-                                'placeholder'   => '',
-                                'label'         => 'Shop URL'
+                                'id'            => 'program_team',
+                                'required'      => true,
+                                'placeholder'   => 'Team',
+                                'label'         => 'Team',
+                                'list_value'    => array()
                             );
 
-$config['favicon_img']           = array(
-                                'type'          => 'filemanager',
-                                'name'          => 'favicon_img',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'favicon_img',
-                                'accept'        => 'jpg,gif,png,jpeg,ico',
-                                'required'      => false,
-                                'placeholder'   => '',
-                                'label'         => 'Favicon',
-								'note'			=> 'Recommended dimension 1280px x 1280px',
+$config['program_name']       = array(
+                                'type'          => 'text', 
+                                'name'          => 'program_name', 
+                                'form-align'    => 'horizontal', 
+                                'class'         => 'form-control', 
+                                'id'            => 'program_name', 
+                                'required'      => true, 
+                                'maxlength'     => 255, 
+                                'alphaonly'     => false, 
+                                'placeholder'   => 'Program Name', 
+                                'label'         => 'Program Name'
                             );
 
-$config['brand_logo']           = array(
-                                'type'          => 'filemanager',
-                                'name'          => 'brand_logo',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'brand_logo',
-                                'accept'        => 'jpg,gif,png,jpeg',
-                                'max_size'      => '5',
-                                'required'      => false,
-                                'placeholder'   => '',
-                                'label'         => 'Brand Logo',
-								'note'			=> 'Recommended dimension 1280px x 1280px',
-                            );
-
-$config['google_analytics']       = array(
-                                'type'          => 'text',
-                                'name'          => 'google_analytics',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'google_analytics',
-                                'required'      => false,
-                                'placeholder'   => 'Tracking ID',
-                                'label'         => 'Google Analytics',
-                            );
-
-$config['gtm_header'] = array(
+$config['program_short_description'] = array(
                                 'type'          => 'textarea',
-                                'name'          => 'gtm_header',
+                                'name'          => 'program_short_description',
                                 'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'gtm_header',
-                                'required'      => false,
-                                'placeholder'   => '',
-                                'label'         => 'Google Tag Manager(Header)'
-                            );
-
-$config['gtm_body'] = array(
-                                'type'          => 'textarea',
-                                'name'          => 'gtm_body',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'gtm_body',
-                                'required'      => false,
-                                'placeholder'   => '',
-                                'label'         => 'Google Tag Manager(Body)'
-                            );
-
-$config['facebook']          = array(
-                                'type'          => 'text',
-                                'name'          => 'facebook',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'facebook',
-                                'required'      => false,
-                                'placeholder'   => '',
-                                'label'         => 'Facebook Link'
-                            );
-
-$config['twitter']          = array(
-                                'type'          => 'text',
-                                'name'          => 'twitter',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'twitter',
-                                'required'      => false,
-                                'placeholder'   => '',
-                                'label'         => 'Twitter Link'
-                            );
-
-$config['instagram']          = array(
-                                'type'          => 'text',
-                                'name'          => 'instagram',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'instagram',
-                                'required'      => false,
-                                'placeholder'   => '',
-                                'label'         => 'Instagram Link'
-                            );
-
-$config['pinterest']          = array(
-                                'type'          => 'text',
-                                'name'          => 'pinterest',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'pinterest',
-                                'required'      => false,
-                                'placeholder'   => '',
-                                'label'         => 'Pinterest Link'
-                            );
-
-$config['linked_in']          = array(
-                                'type'          => 'text',
-                                'name'          => 'linked_in',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'linked_in',
-                                'required'      => false,
-                                'placeholder'   => '',
-                                'label'         => 'Linked in Link'
-                            );
-
-$config['youtube_link']       = array(
-                                'type'          => 'text',
-                                'name'          => 'youtube_link',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'youtube_link',
-                                'required'      => false,
-                                'placeholder'   => '',
-                                'label'         => 'Youtube Link'
-                            );
-
-$config['tumblr']             = array(
-                                'type'          => 'text',
-                                'name'          => 'tumblr',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'tumblr',
-                                'required'      => false,
-                                'placeholder'   => '',
-                                'label'         => 'Tumblr Link'
-                            );
-
-$config['email_protocol']     = array(
-                                'type'          => 'dropdown',
-                                'name'          => 'protocol',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'protocol',
-                                'required'      => false,
-                                'placeholder'   => '',
-                                'label'         => 'Protocol',
-                                'list_value'    => array(
-                                                    'sendgrid' => 'Sendgrid',
-                                                    'smtp'     => 'SMTP',
-                                                    'sendmail'     => 'Sendmail'
-                                                )
-                            );
-
-$config['email_host']         = array(
-                                'type'          => 'text',
-                                'name'          => 'host',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'host',
+                                'class'         => 'form-control ',
+                                'id'            => 'program_short_description',
                                 'required'      => true,
-                                'placeholder'   => '',
-                                'label'         => 'Host'
-                            );
-
-$config['email_user']         = array(
-                                'type'          => 'text',
-                                'name'          => 'email',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'email',
-                                'required'      => true,
-                                'placeholder'   => '',
-                                'label'         => 'Email'
-                            );
-
-$config['email_password']     = array(
-                                'type'          => 'password',
-                                'name'          => 'email_password',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'email_password',
-                                'required'      => true,
-                                'validated'     => false,
-                                'placeholder'   => '',
-                                'label'         => 'Password'
-                            );
-
-$config['email_port']         = array(
-                                'type'          => 'text',
-                                'name'          => 'port',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'port',
-                                'required'      => true,
-                                'placeholder'   => '',
-                                'label'         => 'Port'
-                            );
-
-$config['email_default']         = array(
-                                'type'          => 'text',
-                                'name'          => 'email_default',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'email_default',
-                                'required'      => true,
-                                'placeholder'   => '',
-                                'label'         => 'Default Email'
-                            );
-
-$config['notification_status']   = array(
-                                'type'          => 'dropdown',
-                                'name'          => 'notification_status',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'notification_status',
-                                'required'      => false,
-                                'placeholder'   => '',
-                                'label'         => 'Status',
-                                'list_value'    => array(
-                                                    '1'     => 'Show',
-                                                    '0'     => 'Hide'
-                                                )
-                            );
-
-$config['notification_position']  = array(
-                                'type'          => 'dropdown',
-                                'name'          => 'notification_position',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'notification_position',
-                                'required'      => false,
-                                'placeholder'   => '',
-                                'label'         => 'Position',
-                                'list_value'    => array(
-                                                    'top'     => 'Top',
-                                                    'bottom'  => 'Bottom'
-                                                )
-                            );
-
-$config['browser_display']  = array(
-                                'type'          => 'checkbox',
-                                'name'          => 'notification_browser',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'notification_browser',
-                                'id'            => 'browser_display',
-                                'label'         => 'Browser Display',
-                                'list_value'    => array(
-                                                    'mozilla_firefox'   => 'Mozilla Firefox',
-                                                    'google_chrome'     => 'Google Chrome',
-                                                    'internet_explorer' => 'Internet Explorer',
-                                                    'safari'            => 'Safari'
-                                                )
-                            );
-
-$config['notification_message'] = array(
-                                'type'          => 'textarea',
-                                'name'          => 'notification_message',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'notification_message',
-                                'required'      => false,
-                                'placeholder'   => '',
-                                'label'         => 'Notification Message'
-                            );
-
-
-$config['cms_title']       = array(
-                                'type'          => 'text',
-                                'name'          => 'cms_title',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'cms_title',
-                                'required'      => true,
-                                'placeholder'   => 'CMS Title',
-                                'label'         => 'CMS Title',
-                            );
-
-$config['skin']  = array(
-                                'type'          => 'dropdown',
-                                'name'          => 'skin',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'skin',
-                                'required'      => true,
-                                'label'         => 'Skin',
-                                'list_value'    => array(
-                                                    '_all-skins'     => '_all-skins',
-                                                    'skin-black-light'  => 'skin-black-light',
-                                                    'skin-black'  => 'skin-black',
-                                                    'skin-blue-light'  => 'skin-blue-light',
-                                                    'skin-blue'  => 'skin-blue',
-                                                    'skin-green-light'  => 'skin-green-light',
-                                                    'skin-green'  => 'skin-green',
-                                                    'skin-purple-light'  => 'skin-purple-light',
-                                                    'skin-purple'  => 'skin-purple',
-                                                    'skin-red-light'  => 'skin-red-light',
-                                                    'skin-red'  => 'skin-red',
-                                                    'skin-yellow-light'  => 'skin-yellow-light',
-                                                    'skin-yellow'  => 'skin-yellow'
-                                                )
-                            );
-
-$config['edit_header_label']  = array(
-                                'type'          => 'dropdown',
-                                'name'          => 'edit_header_label',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'edit_header_label',
-                                'required'      => true,
-                                'label'         => 'Edit Header Label',
-                                'list_value'    => array(
-                                                    '1'  => 'Yes',
-                                                    '0'  => 'No',
-                                                )
-                            );
-
-$config['ad_authentication']  = array(
-                                'type'          => 'dropdown',
-                                'name'          => 'ad_authentication',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'ad_authentication',
-                                'required'      => true,
-                                'label'         => 'AD Authentication',
-                                'list_value'    => array(
-                                                    '0'  => 'No',
-                                                    '1'  => 'Yes',
-                                                    '2'  => 'Both',
-                                                )
-                            );
-
-$config['password_validated'] = array(
-                                'type'          => 'password',
-                                'name'          => 'password',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'password',
-                                'required'      => true,
-                                'validated'     => true,
-                                'placeholder'   => 'Password',
-                                'label'         => 'Password'
-                            );
-
-$config['navigation_position'] = array(
-                                'type'          => 'radio',
-                                'name'          => 'navigation_position',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'navigation_position',
-                                'id'            => 'navigation_position',
-                                'placeholder'   => 'Navigation Position',
-                                'label'         => 'Navigation Postion',
-                                'list_value'    => array(
-                                                    'top'     => 'Top',
-                                                    'left'    => 'Left',
-                                                    'right'   => 'Right',
-                                                ),
-                            );
-
-$config['email_template_name'] = array(
-                                'type'          => 'text',
-                                'name'          => 'email_name',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'email_name',
-                                'required'      => true,
-                                'placeholder'   => 'Name',
-                                'label'         => 'Name',
-                            );
-							
-$config['email_template_message'] = array(
-                                'type'          => 'textarea',
-                                'name'          => 'email_message',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'email_message',
-                                'required'      => true,
-                                'placeholder'   => 'Message',
-                                'label'         => 'Message',
-                            );
-							
-$config['email_template_status'] = array(
-                                'type'          => 'dropdown',
-                                'name'          => 'email_status',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'email_status',
-                                'required'      => true,
-                                'placeholder'   => 'Status',
-                                'label'         => 'Status',
-                                'list_value'    => array(
-                                                    '1'    => 'Active',
-                                                    '0'   => 'Inactive',
-                                                ),
-                            );
-
-$config['email_template_logo'] = array(
-                                'type'          => 'filemanager',
-                                'name'          => 'email_logo',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'email_logo',
-                                'accept'        => 'jpg,gif,png,jpeg',
-                                'required'      => true,
-                                'placeholder'   => 'Logo',
-                                'label'         => 'Logo',
-								'note'			=> 'Recommended dimension 1280px x 1280px',
-                            );	
-
-$config['email_template_header'] = array(
-                                'type'          => 'text',
-                                'name'          => 'email_header',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'email_header',
-                                'required'      => true,
-                                'placeholder'   => 'Header',
-                                'label'         => 'Header',
-                            );
-
-$config['email_template_footer'] = array(
-                                'type'          => 'text',
-                                'name'          => 'email_footer',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'email_footer',
-                                'required'      => true,
-                                'placeholder'   => 'Footer',
-                                'label'         => 'Footer',
-                            );
-							
-$config['email_template_subject'] = array(
-                                'type'          => 'text',
-                                'name'          => 'email_subject',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'email_subject',
-                                'required'      => true,
-                                'placeholder'   => 'Subject',
-                                'label'         => 'Subject',
-                            );	
-							
-$config['email_template_color'] = array(
-                                'type'          => 'text',
-                                'name'          => 'email_color',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'email_color',
-                                'required'      => true,
-                                'placeholder'   => 'Color',
-                                'label'         => 'Color',
-                            );
-
-$config['sendgrid_from_email'] = array(
-                                'type'          => 'text',
-                                'name'          => 'sendgrid_from_email',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'sendgrid_from_email',
-                                'required'      => true,
-                                'placeholder'   => 'From Email',
-                                'label'         => 'From Email',
-                            );  
-
-$config['sendgrid_from_name'] = array(
-                                'type'          => 'text',
-                                'name'          => 'sendgrid_from_name',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'sendgrid_from_name',
-                                'required'      => true,
-                                'placeholder'   => 'From Name',
-                                'label'         => 'From Name'
-                            );
-
-$config['sendgrid_token'] = array(
-                                'type'          => 'text',
-                                'name'          => 'sendgrid_token',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'sendgrid_token',
-                                'required'      => true,
-                                'placeholder'   => 'Token',
-                                'label'         => 'Token',
-                            );
-
-$config['disclaimer_title'] = array(
-                                'type'          => 'text',
-                                'name'          => 'disclaimer_title',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'disclaimer_title',
                                 'maxlength'     => 255,
-                                'required'      => true,
-                                'placeholder'   => 'Title',
-                                'label'         => 'Title',
+                                'placeholder'   => 'Short Description',
+                                'label'         => 'Short Description'
                             );
 
-$config['disclaimer_description'] = array(
-                                'type'          => 'ckeditor',
-                                'name'          => 'disclaimer_description',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'disclaimer_description',
-                                'required'      => true,
-                                'filemanager'   => false,
-                                'youtube'       => false,
-                                'placeholder'   => 'Description',
-                                'label'         => 'Description',
-                            );
-
-$config['media_type'] = array(
-                                'type'          => 'dropdown',
-                                'name'          => 'media_type',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'media_type',
-                                'required'      => true,
-                                'label'         => 'Media Type',
-                                'list_value'    => array(
-                                                    'album'  => 'Album',
-                                                    'image'  => 'Image',
-                                                    'video'  => 'Video',
-                                                )
-                            );
-
-$config['media_image'] = array(
-                                'type'          => 'filemanager',
-                                'name'          => 'media_image',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'media_image',
-                                'accept'        => 'jpg,gif,png,jpeg',
-                                'max_size'      => '15',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'Image',
-                                'label'         => 'Image', 
-								'note'			=> 'Recommended dimension 1280px x 1280px',								
-                            );
-
-$config['media_video'] = array(
-                                'type'          => 'filemanager',
-                                'name'          => 'media_video',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'media_video',
-                                'accept'        => 'mp4',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'Upload Video',
-                                'label'         => 'Upload Video'
-                            );				
-
- $config['banner_thumbnail']          = array(
-                                'type'          => 'filemanager',
-                                'name'          => 'banner_thumbnail',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'banner_thumbnail',
-                                'accept'        => 'jpg,gif,png,jpeg',
-                                'max_size'      => '5',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'Image Thumbnail',
-                                'label'         => 'Image Thumbnail',
-								'note'			=> 'Recommended dimension 1280px x 1280px',
-                                
-                            );	
-$config['token_android']          = array(
-                                'type'          => 'text',
-                                'name'          => 'token_android',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'token_android',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'Android',
-                                'label'         => 'Android',
-                                
-                            );
-$config['event_name']          = array(
-                                'type'          => 'text',
-                                'name'          => 'event_name',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'event_name',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'Event Title',
-                                'label'         => 'Event Title',
-                                'maxlength'     => 250,
-                                
-                            );
-$config['event_date']          = array(
-                                'type'          => 'date_new',
-                                'name'          => 'event_date',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'event_date',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'minDate'       => date('Y-m-d'),
-                                'placeholder'   => 'Event Date',
-                                'label'         => 'Event Date',
-                                
-                            );	
-$config['location_map']          = array(
-                                'type'          => 'filemanager',
-                                'name'          => 'location_map',
-                                'form-align'    => 'horizontal',
-                                'accept'        => 'jpg,png,jpeg',
-                                'class'         => 'form-control',
-                                'id'            => 'location_map',
-                                'required'      => false,
-                                'no_html'       => true,
-                                'placeholder'   => 'Location Map',
-                                'label'         => 'Location Map',
-                                'max_size'      => '3',
-								'note'			=> 'Recommended dimension 1280px x 1280px',
-                                
-                            );
-$config['event_image']          = array(
-                                'type'          => 'filemanager',
-                                'name'          => 'event_image',
-                                'form-align'    => 'horizontal',
-								'accept'        => 'jpg,png,jpeg',
-                                'class'         => 'form-control',
-                                'id'            => 'event_image',
-                                'required'      => false,
-                                'no_html'       => true,
-                                'placeholder'   => 'Event Image',
-                                'label'         => 'Event Image',
-                                'max_size'      => '3',
-								'note'			=> 'Recommended dimension 1280px x 1280px',
-                                
-                            );
-$config['venue']          = array(
-                                'type'          => 'text',
-                                'name'          => 'venue',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'venue',
-                                'required'      => false,
-                                'no_html'       => true,
-                                'placeholder'   => 'Venue',
-                                'label'         => 'Venue',
-                                'maxlength'     => 250
-                                
-                            );
-$config['address']          = array(
-                                'type'          => 'text',
-                                'name'          => 'address',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'address',
-                                'required'      => false,
-                                'no_html'       => true,
-                                'placeholder'   => 'Address',
-                                'label'         => 'Address',
-                                'maxlength'     => 250
-                                
-                            );
-$config['parking_option']          = array(
-                                'type'          => 'text',
-                                'name'          => 'parking_option',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'parking_option',
-                                'required'      => false,
-                                'no_html'       => true,
-                                'placeholder'   => 'Parking Option',
-                                'label'         => 'Parking Option',
-                                'maxlength'     => 250
-                                
-                            );
-$config['validity_date_from']    = array(
-                                'type'          => 'text',
-                                'name'          => 'validity_date_from',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'validity_date_from',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'minDate'       => date('F d, Y'),
-                                'placeholder'   => 'Event Date From',
-                                'label'         => 'Event Date From',
-                                
-                            );
-$config['validity_date_to']    = array(
-                                'type'          => 'text',
-                                'name'          => 'validity_date_to',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'validity_date_to',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'minDate'       => date('F d, Y'),
-                                'placeholder'   => 'Event Date To',
-                                'label'         => 'Event Date To',
-                                
-                            );							
-$config['event_guide']          = array(
-                                'type'          => 'text',
-                                'name'          => 'event_guide',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'event_guide',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'Event Guide',
-                                'label'         => 'Event Guide',
-                                
-                            );
-$config['hash_tag']          = array(
-                                'type'          => 'text',
-                                'name'          => 'hash_tag',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'hash_tag',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'Hash Tag',
-                                'label'         => 'Hash Tag'
-                                
-                            );
-
-$config['session_status']           = array(
-                                'type'          => 'dropdown',
-                                'name'          => 'status',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control status_input',
-                                'id'            => 'status',
-                                'required'      => false,
-                                'no_html'       => true,
-                                'placeholder'   => 'Status',
-                                'label'         => 'Status',
-                                'list_value'    => array(
-                                                    '1'     => 'Active',
-                                                    '0'     => 'Inactive'
-                                                )
-                            );
-$config['session_date']          = array(
-                                'type'          => 'text',
-                                'name'          => 'session_date',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'session_date',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'Date',
-                                'label'         => 'Date',
-                                
-                            );
-$config['session_time_start']    = array(
-                                'type'          => 'text',
-                                'name'          => 'timepicker',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'session_time_start',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'Time Start',
-                                'label'         => 'Time Start',
-                                
-                            );
-$config['session_time_end']    = array(
-                                'type'          => 'text',
-                                'name'          => 'timepicker',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'session_time_end',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'Time End',
-                                'label'         => 'Time End',
-                                
-                            );
-$config['session_code']         = array(
-                                'type'          => 'text',
-                                'name'          => 'session_code',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'session_code',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'maxlength'     => 250,
-                                'placeholder'   => 'Session Title',
-                                'label'         => 'Session Title',
-                                
-                            );
-$config['session_track']         = array(
-                                'type'          => 'text',
-                                'name'          => 'session_track',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'session_track',
-                                'required'      => false,
-                                'no_html'       => true,
-                                'placeholder'   => 'Track',
-                                'label'         => 'Track',
-                                
-                            );
-$config['session_lecture']       = array(
-                                'type'          => 'text',
-                                'name'          => 'session_lecture',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'session_lecture',
-                                'required'      => false,
-                                'no_html'       => true,
-                                'maxlength'     => 250,
-                                'placeholder'   => 'Lecture',
-                                'label'         => 'Lecture',
-                                
-                            );
-$config['session_room']       = array(
-                                'type'          => 'text',
-                                'name'          => 'session_room',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'session_room',
-                                'required'      => false,
-                                'no_html'       => true,
-                                'maxlength'     => 250,
-                                'placeholder'   => 'Conference Room',
-                                'label'         => 'Conference Room',
-                                
-                            );
-$config['session_speaker']     = array(
-                                'type'          => 'text',
-                                'name'          => 'session_speaker',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'session_speaker',
-                                'required'      => false,
-                                'no_html'       => true,
-                                'maxlength'     => 250,
-                                'placeholder'   => 'Speaker',
-                                'label'         => 'Speaker',
-                                
-                            );
-$config['session_abstract']     = array(
-                                'type'          => 'filemanager',
-                                'name'          => 'session_abstract',
-                                'form-align'    => 'horizontal',
-								'accept'        => 'jpg,png,jpeg,pdf',
-                                'class'         => 'form-control',
-                                'id'            => 'session_abstract',
-                                'required'      => false,
-                                'no_html'       => true,
-                                'placeholder'   => 'Abstract',
-                                'label'         => 'Abstract',
-                                'max_size'      => '150',
-								'note'			=> 'Recommended dimension 1280px x 1280px / File size limit 3MB',
-                                
-                            );
-$config['session_objectives']   = array(
+$config['program_overview'] = array(
                                 'type'          => 'textarea',
-                                'name'          => 'session_objectives',
+                                'name'          => 'program_overview',
                                 'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'session_objectives',
-                                'required'      => false,
-                                'no_html'       => true,
-                                'maxlength'     => 8000,
-                                'placeholder'   => 'Learning Objectives',
-                                'label'         => 'Learning Objectives',
-                                
-                            );
-$config['announcemnet_title']     = array(
-                                'type'          => 'text',
-                                'name'          => 'announcemnet_title',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'announcemnet_title',
+                                'class'         => 'form-control ',
+                                'id'            => 'program_overview',
                                 'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'Title',
-                                'label'         => 'Title',
-                                
+                                'maxlength'     => 255,
+                                'placeholder'   => 'Overview',
+                                'label'         => 'Overview'
                             );
-$config['announcemnet_banner']     = array(
-                                'type'          => 'filemanager',
-                                'name'          => 'announcemnet_banner',
-                                'form-align'    => 'horizontal',
-								'accept'        => 'jpg,png,jpeg',
-                                'class'         => 'form-control',
-                                'id'            => 'announcemnet_banner',
-                                'placeholder'   => 'Banner',
-                                'no_html'       => true,
-                                'label'         => 'Banner',
-								'note'			=> 'Recommended dimension 1280px x 1280px',
-                                
+$config['area_covered']       = array(
+                                'type'          => 'text', 
+                                'name'          => 'area_covered', 
+                                'form-align'    => 'horizontal', 
+                                'class'         => 'form-control', 
+                                'id'            => 'area_covered', 
+                                'required'      => true, 
+                                'maxlength'     => 255, 
+                                'alphaonly'     => false, 
+                                'placeholder'   => 'Area Covered', 
+                                'label'         => 'Area Covered'
                             );
-$config['announcemnet_content']   = array(
-                                'type'          => 'textarea',
-                                'name'          => 'announcemnet_content',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'announcemnet_content',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'Content',
-                                'label'         => 'Content',
-                                
+$config['join_points']       = array(
+                                'type'          => 'number', 
+                                'name'          => 'join_points', 
+                                'form-align'    => 'horizontal', 
+                                'class'         => 'form-control', 
+                                'id'            => 'join_points', 
+                                'required'      => true, 
+                                'maxlength'     => 10, 
+                                'alphaonly'     => false, 
+                                'placeholder'   => 'Reward Points', 
+                                'label'         => 'Reward Points'
                             );
-$config['about_us_title']     = array(
-                                'type'          => 'text',
-                                'name'          => 'about_us_title',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'about_us_title',
-                                'required'      => false,
-                                'placeholder'   => 'Title',
-                                'no_html'       => true,
-                                'label'         => 'Title',
-                                'maxlength'     => 8000,
-                                
+$config['program_image']       = array(
+                                'type'          => 'file', 
+                                'name'          => 'program_image', 
+                                'form-align'    => 'horizontal', 
+                                'class'         => 'form-control', 
+                                'id'            => 'program_image', 
+                                'required'      => true, 
+                                'maxlength'     => 10, 
+                                'alphaonly'     => false, 
+                                'accept'        => "image/*", 
+                                'placeholder'   => 'Program Image', 
+                                'label'         => 'Program Image'
                             );
-$config['about_us_banner']     = array(
-                                'type'          => 'filemanager',
-                                'name'          => 'about_us_banner',
-                                'form-align'    => 'horizontal',
-                                'accept'        => 'jpg,png,jpeg',
-                                'class'         => 'form-control',
-                                'id'            => 'about_us_banner',
-                                'placeholder'   => 'Photo',
-                                'no_html'       => true,
-                                'label'         => 'Photo',
-                                'max_size'      => '3',
-								'note'			=> 'Recommended dimension 1280px x 1280px',
-                                
-                            );
-$config['about_us_content']   = array(
-                                'type'          => 'textarea',
-                                'name'          => 'about_us_content',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'about_us_content',
-                                'required'      => false,
-                                'no_html'       => true,
-                                'placeholder'   => 'Content',
-                                'label'         => 'Content',
-                                'maxlength'     => 8000,
-                                
-                            );
-$config['m_last_name']   = array(
-                                'type'          => 'text',
-                                'name'          => 'm_last_name',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'm_last_name',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'Last Name',
-                                'label'         => 'Last Name',
-                                
-                            );
-$config['m_first_name']   = array(
-                                'type'          => 'text',
-                                'name'          => 'm_first_name',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'm_first_name',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'First Name',
-                                'label'         => 'First Name',
-                                
-                            );
-
-
-$config['banner_image'] = array(
-                                'type'          => 'filemanager',
-                                'name'          => 'banner_image',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'banner_image',
-                                'accept'        => 'jpg,png,jpeg',
-                                'max_size'      => '3',
-                                'no_html'       => true,
-                                'required'      => true,
-                                'placeholder'   => 'Banner Image',
-                                'label'         => 'Banner Image',
-								'note'			=> 'Recommended dimension 1280px x 1280px',
-                            );
-// $config['redirect_link']          = array(
-//                                 'type'          => 'text',
-//                                 'name'          => 'redirect_link',
-//                                 'form-align'    => 'horizontal',
-//                                 'class'         => 'form-control',
-//                                 'id'            => 'redirect_link',
-//                                 'required'      => false,
-//                                 'no_html'       => true,
-//                                 'placeholder'   => 'Redirect Link',
-//                                 'label'         => 'Redirect Link'
-                                
-//                             );
-
-$config['m_middle_initial']   = array(
-                                'type'          => 'text',
-                                'name'          => 'm_middle_initial',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'm_middle_initial',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'Middle Initial',
-                                'label'         => 'Middle Initial',
-                                
-                            );
-$config['m_email_address']   = array(
-                                'type'          => 'text',
-                                'name'          => 'm_email_address',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'm_email_address',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'Email Address',
-                                'label'         => 'Email Address',
-                                
-                            );
-$config['m_mobile_number']   = array(
-                                'type'          => 'text',
-                                'name'          => 'm_mobile_number',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'm_mobile_number',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'Mobile Number',
-                                'label'         => 'Mobile Number',
-                                
-                            );
-$config['m_prc_number']   = array(
-                                'type'          => 'text',
-                                'name'          => 'm_prc_number',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'm_prc_number',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'PRC Number',
-                                'label'         => 'PRC Number',
-                                
-                            );
-$config['m_designation']   = array(
-                                'type'          => 'text',
-                                'name'          => 'm_designation',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'm_designation',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'Designation',
-                                'label'         => 'Designation',
-                                
-                            );
-$config['m_member_status']   = array(
-                                'type'          => 'text',
-                                'name'          => 'm_member_status',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'm_member_status',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'Member Status',
-                                'label'         => 'Member Status',
-                                
-                            );
-$config['event_guide']     = array(
-                                'type'          => 'filemanager',
-                                'name'          => 'event_guide',
-                                'form-align'    => 'horizontal',
-								'accept'        => 'jpg,png,jpeg',
-                                'class'         => 'form-control',
-                                'id'            => 'event_guide',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'Event Guide',
-                                'label'         => 'Event Guide',
-                                'max_size'		=> '3',
-								'note'			=> 'Recommended dimension 1280px x 1280px',
-
-                            );		
-$config['banner_image'] = array(
-                                'type'          => 'filemanager',
-                                'name'          => 'banner_image',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'banner_image',
-                                'accept'        => 'jpg,png,jpeg',
-                                'max_size'      => '3',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'Banner Image',
-                                'label'         => 'Banner Image',
-								'note'			=> 'Recommended dimension 1280px x 1280px',
-                            );
-$config['redirect_link']          = array(
-                                'type'          => 'text',
-                                'name'          => 'redirect_link',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'redirect_link',
-                                'required'      => false,
-                                'no_html'       => true,
-                                'placeholder'   => 'eg. http:// or https://link.com',
-                                'label'         => 'Redirect Link'
-                                
-                            );
-$config['content']      = array(
-                                'type'          => 'textarea',
-                                'name'          => 'content',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'content',
-                                'required'      => false,
-                                'no_html'      => false,
-                                'filemanager'   => false,
-                                'youtube'       => false,
-                                'placeholder'   => 'Content',
-                                'label'         => 'Content',
-                                'maxlength'     => 8000
-                            );
-$config['event_id']           = array(
-                                'type'          => 'dropdown',
-                                'name'          => 'event_id',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'event_id',
-                                'required'      => true,
-                                'no_html'       => true,
-                                'placeholder'   => 'Event Title',
-                                'label'         => 'Event Title',
-                            );
-
-$config['session_status']           = array(
-                                'type'          => 'dropdown',
-                                'name'          => 'status',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control status_input',
-                                'id'            => 'status',
-                                'required'      => false,
-                                'no_html'       => true,
-                                'placeholder'   => 'Status',
-                                'label'         => 'Status',
-                                'list_value'    => array(
-                                                    '1'     => 'Active',
-                                                    '0'     => 'Inactive'
-                                                )
-                            );
-$config['user_email']    = array(
-                                'type'          => 'email',
-                                'name'          => 'email_address',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control hoverable',
-                                'id'            => 'email_address',
-                                'required'      => true,
-                                'maxlength'     => 250,
-                                'placeholder'   => 'Email Address',
-                                'label'         => 'Email Address'
-                            );
-
-$config['user_lastname']    = array(
-                                'type'          => 'text',
-                                'name'          => 'user_lastname',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control hoverable',
-                                'id'            => 'user_lastname',
-                                'required'      => true,
-								'no_html'       => true,
-                                'maxlength'     => 250,
-                                'placeholder'   => 'Last Name',
-                                'label'         => 'Last Name'
-                            );
-$config['user_firstname']    = array(
-                                'type'          => 'text',
-                                'name'          => 'user_firstname',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control hoverable',
-                                'id'            => 'user_firstname',
-                                'required'      => true,
-								'no_html'       => true,
-                                'maxlength'     => 250,
-                                'placeholder'   => 'First Name',
+$config['user_firstname']       = array(
+                                'type'          => 'text', 
+                                'name'          => 'user_firstname', 
+                                'form-align'    => 'horizontal', 
+                                'class'         => 'form-control', 
+                                'id'            => 'user_firstname', 
+                                'required'      => true, 
+                                'maxlength'     => 255, 
+                                'alphaonly'     => false, 
+                                'placeholder'   => 'First Name', 
                                 'label'         => 'First Name'
                             );
-$config['user_gender']    = array(
-                                'type'          => 'dropdown',
-                                'name'          => 'user_gender',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control hoverable',
-                                'id'            => 'user_gender',
-                                'required'      => false,
-								'no_html'       => true,
-                                'maxlength'     => 250,
-                                'placeholder'   => 'Gender',
-                                'label'         => 'Gender',
-								'list_value'    => array(
-                                                    'M'     => 'Male',
-                                                    'F'     => 'Female'
-                                                )
+$config['user_lastname']       = array(
+                                'type'          => 'text', 
+                                'name'          => 'user_lastname', 
+                                'form-align'    => 'horizontal', 
+                                'class'         => 'form-control', 
+                                'id'            => 'user_lastname', 
+                                'required'      => true, 
+                                'maxlength'     => 255, 
+                                'alphaonly'     => false, 
+                                'placeholder'   => 'Last Name', 
+                                'label'         => 'Last Name'
                             );
-$config['user_birthday']    = array(
-                                'type'          => 'date',
-                                'name'          => 'user_birthday',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control hoverable',
-                                'id'            => 'user_birthday',
-                                'required'      => false,
-								'no_html'       => true,
-                                'maxlength'     => 250,
-                                'placeholder'   => 'Birthday',
-                                'label'         => 'Birthday'
+$config['user_email']       = array(
+                                'type'          => 'text', 
+                                'name'          => 'user_email', 
+                                'form-align'    => 'horizontal', 
+                                'class'         => 'form-control', 
+                                'id'            => 'user_email', 
+                                'required'      => true, 
+                                'maxlength'     => 255, 
+                                'alphaonly'     => false, 
+                                'placeholder'   => 'Email Address', 
+                                'label'         => 'Email Address'
                             );
-$config['user_mobile']    = array(
-                                'type'          => 'text',
-                                'name'          => 'user_mobile',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control hoverable',
-                                'class'         => 'form-control hoverable',
-                                'id'            => 'user_mobile',
-                                'required'      => false,
-								'no_html'       => true,
-                                'maxlength'     => 10,
-                                'placeholder'   => 'Mobile Number',
-                                'label'         => 'Mobile Number'
-                            );
-$config['user_password']         = array(
-                                'type'          => 'password',
-                                'name'          => 'password',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control hoverable',
-                                'id'            => 'password',
-                                'required'      => true,
-                                'placeholder'   => 'Password',
-                                'label'         => 'Password'
-                            );
-$config['user_confirm_password']         = array(
-                                'type'          => 'password',
-                                'name'          => 'confirm_password',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control hoverable',
-                                'id'            => 'confirm_password',
-                                'required'      => true,
-                                'placeholder'   => 'Confirm Password',
-                                'label'         => 'Confirm Password'
-                            );
-							
-
 ?>

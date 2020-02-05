@@ -87,7 +87,6 @@ AJAX = {
 				url = InsertData_url;
 			}
 
-
 	    	var data = {
 	            event 	: "insert", 
 	            table 	: InsertData_table, 

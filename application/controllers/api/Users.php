@@ -44,6 +44,16 @@ class Users extends GS_Controller {
 		$this->uniquedata("tbl_users","email_address",$EmailAddress);
 		$this->uniquedata("tbl_users","mobile_number",$MobileNumber);
 
+
+		$email_domain = explode("@", $EmailAddress)[1];
+		$query_domain = "SELECT * FROM tbl_email_domain_whitelist WHERE domain ='" . $email_domain . "'";
+		$result_domain = $this->Api_model->run_query($query_domain);
+
+		$status = 0;
+		if(count($result_domain) > 0){
+			$status = 1;
+		}
+
 		$save_data = array(
 			"last_name"		=> $LastName,
 			"first_name"	=> $FirstName,
@@ -52,7 +62,7 @@ class Users extends GS_Controller {
 			"email_address"	=> $EmailAddress,
 			"mobile_number"	=> $MobileNumber,
 			"password"		=> $Password,
-			"status"		=> 1,
+			"status"		=> $status,
 			"create_date"	=> date("Y-m-d H:i:s")
 		);
 
@@ -72,7 +82,11 @@ class Users extends GS_Controller {
 				);
 
 				if($this->Api_model->save_data("tbl_users_points", $points_data)){
-					$this->output(true, 201);
+					if($status == 0){
+						$this->output(true, 201);
+					} else {
+						$this->output(true, 200);
+					}
 				} else {
 					$this->output(false, 507);	
 				}
@@ -89,7 +103,7 @@ class Users extends GS_Controller {
 	}
 
 	function update($post){
-
+		
 	}
 
 	function login($post){
@@ -122,6 +136,11 @@ class Users extends GS_Controller {
 		$q_points = "SELECT * FROM tbl_users_points WHERE user_id = " . $result[0]->id;
 		$r_points = $this->Api_model->run_query($q_points);
 
+		$email_domain = explode("@", $result[0]->email_address)[1];
+		$query_domain = "SELECT * FROM tbl_email_domain_whitelist WHERE domain ='" . $email_domain . "'";
+		$result_domain = $this->Api_model->run_query($query_domain);
+		$show_share_workplace = count($result_domain);
+
 		$data = array(
 			"personal_details" =>  array(
 				"user_id"		=> $result[0]->id,
@@ -133,6 +152,7 @@ class Users extends GS_Controller {
 				"gender"		=> $result[0]->gender,
 				"imagepath"		=> base_url() . $result[0]->imagepath,
 			),
+			"share_workplace"	=> $show_share_workplace,
 			"created_program"	=> array(),
 			"joined_program"	=> array(),
 			"point"				=> array(

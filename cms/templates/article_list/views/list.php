@@ -28,12 +28,12 @@
  </div>
 
  <script type="text/javascript">
-
-    AJAX.config.base_url(base_url);
+	var query = "{table}.status >= 0";
     var limit = 10;
 
     $(document).ready(function(){
         get_data();
+        get_pagination();
     });
 
     $(document).on('keypress', '#search_query', function(e) {                          
@@ -41,25 +41,37 @@
             var keyword = $(this).val()
             query = "{search_query}";
             get_data();
+            get_pagination();
         }
     });
 
     function get_data()
     {
         modal.loading(true); //show loading
-
-        AJAX.select.table("{table}");
-        AJAX.select.select("{table}.*, cms_users.name as author");
-        AJAX.select.where.greater_equal("status", 0);
-        AJAX.select.offset(offset);
-        AJAX.select.limit(limit);
-        AJAX.select.order.desc("update_date");
-        AJAX.select.join.left("cms_users", "cms_users.id", "{table}.user");
-
+    	var url = "<?= base_url("content_management/global_controller");?>";
+        var data = {
+        	event : "list", // list, insert, update, delete
+            select : "{table}.*, cms_users.name as author", //select
+            query : query, //query
+            offset : offset, // offset or start
+            limit : limit, // limit
+            table : "{table}", // table
+            order : {
+                field : "update_date", //field to order
+                order : "desc" //asc or desc
+            },
+            join : [ //optional
+                {
+                    table : "cms_users", //table
+                    query : "cms_users.id = {table}.user", //join query
+                    type : "left" //type of join
+                }
+            ]
+        }
 
         //get list
-        AJAX.select.exec(function(result){
-        	var obj = result; //check if result is valid JSON format, Format to JSON if not
+        aJax.post(url,data,function(result){
+        	var obj = is_json(result); //check if result is valid JSON format, Format to JSON if not
         	var html = "";
             if(obj.length > 0){
                 $.each(obj, function(x,y){
@@ -87,9 +99,39 @@
         	
         	$(".table_body").html(html);
             modal.loading(false); //hide loading
-        }, function(obj){
+        });
+    }
+
+    function get_pagination()
+    {
+        var url = "<?= base_url("content_management/global_controller");?>";
+        var data = {
+        	event : "list", // list, insert, update, delete
+            select : "{table}.*, cms_users.name as author", //select
+            query : query, //query
+            offset : offset, // offset or start
+            limit : limit, // limit
+            table : "{table}", // table
+            order : {
+                field : "update_date", //field to order
+                order : "desc" //asc or desc
+            },
+            join : [ //optional
+                {
+                    table : "cms_users", //table
+                    query : "cms_users.id = {table}.user", //join query
+                    type : "left" //type of join
+                }
+            ]
+        }
+
+        //get list
+        aJax.post(url,data,function(result){
+            var obj = is_json(result); //check if result is valid JSON format, Format to JSON if not
+            console.log(obj);
+            modal.loading(false);
             pagination.generate(obj.total_page, ".list_pagination", get_data);
-           });
+        });
     }
 
     pagination.onchange(function(){
@@ -111,16 +153,24 @@
                 $('.select:checked').each(function(index) { 
                     id = $(this).attr('data-id');
                     title = $(this).attr('data-title');
+                    var url = "<?=base_url();?>content_management/global_controller"; //URL OF CONTROLLER
+                    var data = {
+                        event : "update", // list, insert, update, delete
+                        table : "{table}", //table
+                        field : "id", //field name
+                        where : id, //equals to
+                        data : {
+                            title : title,
+                            status : status,
+                            update_date : moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+                        }, //data to insert
+                    }
 
-                    AJAX.update.table("{table}");
-                    AJAX.update.where("id", id);
-                    AJAX.update.params("title", title);
-                    AJAX.update.params("status", status);
-                    AJAX.update.params("update_date", moment(new Date()).format('YYYY-MM-DD HH:mm:ss'));
-                    AJAX.update.exec(function(result){
+                    aJax.post(url,data,function(result){
                         //code here
                         //reload listing
                         get_data();
+                        get_pagination();
 
                     });
                 });

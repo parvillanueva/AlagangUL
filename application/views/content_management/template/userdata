@@ -1,0 +1,25 @@
+
+<!-- HTML Header -->
+<?php $this->load->view("content_management/template/header"); ?>
+
+
+<!-- Nav Menu-->
+<?php $this->load->view("content_management/template/modals"); ?>
+
+<!-- side Menu-->
+<?php $this->load->view("content_management/template/sidemenu"); ?>
+
+<div class="content-wrapper">
+    <section class="content-header">
+      	<h1><?= $PageName;?></h1>
+    </section>
+    <section class="content">
+    	<?php $this->load->view($content); ?>
+    </section>
+</div>
+
+
+
+
+<!-- footer Menu-->
+<?php $this->load->view("content_management/template/footer"); ?>

@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 require(__DIR__.'/vendor/autoload.php');
 
@@ -23,13 +23,12 @@ if(@$returned['id_token']!=''){
 		'first_name' => $idtoken->claim('given_name'),
 		'last_name' => $idtoken->claim('family_name'),
 		'display_name' => $idtoken->claim('name'),
-		'email' => $idtoken->claim('upn'),
-		'password' => $_POST['password'],
+		'email' => $idtoken->claim('upn')
 		);
 	echo json_encode(array('status' => 'success', 'dataresult' => $data));
 }
 else{
-	echo json_encode(array('status' => 'error', 'dataresult' => $returned));
+	echo json_encode(array('status' => 'error', 'dataresult' => '0'));
 }
 
 

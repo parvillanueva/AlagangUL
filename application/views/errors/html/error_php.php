@@ -1,33 +1,53 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
+
+if(trim($message) =='Undefined property: Welcome::$db'){
+	redirect("content_management/install");
+}
+if(trim($message) =='Undefined property: Login::$db'){
+	redirect("content_management/install");
+}
+
 ?>
 
-<div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
+<style type="text/css">
+    html {
+            color: #888;
+            display: table;
+            font-family: sans-serif;
+            height: 100%;
+            width: 100%;
+        }
 
-<h4>A PHP Error was encountered</h4>
+</style>
+<div style="border:1px solid #dd4814;padding-left:20px;margin:10px 0;">
 
-<p>Severity: <?php echo $severity; ?></p>
-<p>Message:  <?php echo $message; ?></p>
-<p>Filename: <?php echo $filepath; ?></p>
-<p>Line Number: <?php echo $line; ?></p>
+	<h4>A PHP Error was encountered</h4>
 
-<?php if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE === TRUE): ?>
+	<p>Severity: <?php echo $severity; ?></p>
+	<p>Message:  <?php echo $message; ?></p>
+	<p>Filename: <?php echo $filepath; ?></p>
+	<p>Line Number: <?php echo $line; ?></p>
+    <p>How to Fix : <a href="https://stackoverflow.com/search?q=codeigniter <?php echo $message; ?>" target="_blank">STOCKOVERFLOW</a> | <a href="https://www.google.com.ph/search?q=codeigniter <?php echo $message; ?>" target="_blank">GOOGLE</a></p>
 
-	<p>Backtrace:</p>
-	<?php foreach (debug_backtrace() as $error): ?>
+	<?php if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE === TRUE): ?>
 
-		<?php if (isset($error['file']) && strpos($error['file'], realpath(BASEPATH)) !== 0): ?>
+		<p>Backtrace:</p>
+		<?php foreach (debug_backtrace() as $error): ?>
 
-			<p style="margin-left:10px">
-			File: <?php echo $error['file'] ?><br />
-			Line: <?php echo $error['line'] ?><br />
-			Function: <?php echo $error['function'] ?>
-			</p>
+			<?php if (isset($error['file']) && strpos($error['file'], realpath(BASEPATH)) !== 0): ?>
 
-		<?php endif ?>
+				<p style="margin-left:10px">
+				File: <?php echo $error['file'] ?><br />
+				Line: <?php echo $error['line'] ?><br />
+				Function: <?php echo $error['function'] ?>
+				</p>
 
-	<?php endforeach ?>
+			<?php endif ?>
 
-<?php endif ?>
+		<?php endforeach ?>
+
+	<?php endif ?>
 
 </div>

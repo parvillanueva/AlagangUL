@@ -1,0 +1,65 @@
+footer,.rewards-banner,.home-notification,.how_to_earn,.home-banner{
+	float:left;
+}
+
+@media(max-width: 1024px){
+	body{
+		background-size: cover;
+	}
+	.notification-body .col-md-2.col-md-offset-2{
+	   /* margin-left: 3%;*/
+    	width: 20%;
+	} 
+	.notification-div{
+		/*width: 70%;*/
+	}
+	.notification-close{
+		margin-right: 0px !important;
+	}
+	.form-horizontal .control-label{
+		font-size: 12px;
+	}
+	#myNavbar{
+	    position: absolute;
+	    margin-top: 5%;
+	    z-index: 1;
+	}
+	.rewards-selector{
+		min-height: 300px;
+	}
+	.page_title{
+		margin-left: 0px !important;
+	}
+	.profile-banner > .upload_receipt_div{
+		margin-top: 50px !important;
+		width: 70% !important;
+	}
+	.container.points{
+		width: 100%;
+	}
+}
+@media(max-width: 960px){
+	.howtoearn-selector{
+		width: 275px !important;
+	}
+
+	.notification-div {
+	    float: left;
+	}
+	.rewards-banner .container{
+		width: 100%;
+	}
+	.rewards-image {
+	    height: 130px !important;
+	    width: auto;
+	}
+}
+@media(max-width: 480px){
+	.rewards-selector{
+		min-height: 200px;
+	}
+	.notification-body .col-md-2.col-md-offset-2{
+	    margin-left: 3%;
+    	width: 100%;
+	} 
+}

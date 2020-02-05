@@ -12,9 +12,6 @@
 </div>
 
 <script>
-
-    AJAX.config.base_url("<?=base_url();?>"); 
-
     $(document).on('click', '#btn_save', function(){
         var form_data = {};
         $(':input[class*="_input"]').each(function() {
@@ -38,13 +35,14 @@
             modal.standard(modal_obj, function(result){
                 if(result){
                     modal.loading(true);
+                    var url = "<?= base_url('content_management/global_controller');?>"; 
+                    var data = {
+                        event : "insert",
+                        table : "{table_name}",
+                        data : form_data
+                    }
 
-                    AJAX.insert.table("{table_name}");
-                    $.each(form_data, function(a,b) {
-                        AJAX.insert.params(a, b);
-                    });
-
-                    AJAX.insert.exec(function(result){
+                    aJax.post(url,data,function(result){
                         modal.loading(false);
                         modal.alert("<?= $this->standard->dialog("add_success"); ?>", function(){
                             location.href = '<?=base_url("content_management/{module}") ?>';

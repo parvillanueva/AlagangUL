@@ -1,6 +1,6 @@
 //convert seo url
 
-//youtube id parser
+//youtube id parser 
 function youtube_parser(url){
     var reg_exp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
     var match = url.match(reg_exp);
@@ -23,7 +23,7 @@ function is_json(str) {
     } catch (e) {
         return $.trim(str)
     }
-}
+} 
 
 function check_field_status(pckg_name){
 	var url = "content_management/global_controller";
@@ -53,7 +53,7 @@ function is_text(str) {
     } catch (e) {
         return $.trim(str)
     }
-}
+} 
 
 //strip_html tags
 
@@ -143,13 +143,13 @@ var validate = {
 	            	counter++;
 	          	}else{
 	            	$(this).css('border-color','#ccc');
-	              	$(this).next(".validate_error_message").remove();
+	              	$(this).next(".validate_error_message").remove();       	
 	          	}
 	    	} else {
 	    		$(this).css('border-color','red');
 	    		$(error_message).insertAfter(this);
 	    	}
-
+	          
 				});
 
 				//alpha only
@@ -197,7 +197,7 @@ var validate = {
 						counter++;
 						$(this).css('border-color','red');
 						$("<span class='validate_error_message' style='color: red;'>"+form_invalid_mobile_no+"<br></span>").insertAfter(this);
-
+					
 					}
 				});
 
@@ -210,7 +210,7 @@ var validate = {
 						counter++;
 						$(this).css('border-color','red');
 	          $("<span class='validate_error_message' style='color: red;'>"+form_invalid_email+"<br></span>").insertAfter(this);
-
+					
 					}
 				});
 	    return counter;
@@ -229,13 +229,13 @@ var validate = {
 	            	counter++;
 	          	}else{
 	            	$(this).css('border-color','#ccc');
-	              $(this).next(".validate_error_message").remove();
+	              $(this).next(".validate_error_message").remove();       	
 	          	}
 	    	} else {
 	    		$(this).css('border-color','red');
 	    		$(error_message).insertAfter(this);
 	    	}
-
+	          
 				});
 
 				//alpha only
@@ -284,7 +284,7 @@ var validate = {
 						counter++;
 						$(this).css('border-color','red');
 						$("<span class='validate_error_message' style='color: red;'>"+form_invalid_mobile_no+"<br></span>").insertAfter(this);
-
+					
 					}
 				});
 
@@ -297,7 +297,7 @@ var validate = {
 						counter++;
 						$(this).css('border-color','red');
 	          $("<span class='validate_error_message' style='color: red;'>"+form_invalid_email+"<br></span>").insertAfter(this);
-
+					
 					}
 				});
 		if(counter == 0){
@@ -307,7 +307,7 @@ var validate = {
 		}
 	},
 	standard: function(element_id){
-
+		
 		var element = '#'+element_id+' .required_input';
 		var counter = 0;
 		$(this).css('border-color','#ccc');
@@ -324,7 +324,7 @@ var validate = {
 		            	counter++;
 		          	}else{
 		            	$(this).css('border-color','#ccc');
-		              	$(this).next(".validate_error_message").remove();
+		              	$(this).next(".validate_error_message").remove();       	
 		          	}
 		    	} else {
 		    		$(this).css('border-color','red');
@@ -398,7 +398,7 @@ var validate = {
 					counter++;
 					$(this).css('border-color','red');
 					$("<span class='validate_error_message' style='color: red;'>"+form_invalid_mobile_no+"<br></span>").insertAfter(this);
-
+				
 				}
 			});
 		}
@@ -415,7 +415,7 @@ var validate = {
 						$("<span class='validate_error_message' style='color: red;'>"+form_invalid_captcha+"<br></span>").insertAfter(this);
 					}
 				}
-
+				
 			});
 		}
 
@@ -455,7 +455,7 @@ var validate = {
 				      	if(max < total_size_MB){
 				      		counter++;
 							$(this_element).css('border-color','red');
-							$("<span class='validate_error_message' style='color: red;'>"+form_max_size+"<br></span>").insertAfter(this_element);
+							$("<span class='validate_error_message' style='color: red;'>"+form_max_size+"<br></span>").insertAfter(this_element);		
 						}
 				    }
 				});
@@ -520,9 +520,9 @@ var validate = {
 				counter++;
 				$(".cke_editor_" + id).css('border-color','red');
 				$("<span class='validate_error_message' style='color: red;'>"+form_script+"<br></span>").insertAfter(".cke_editor_" + id);
-			}
+			}	
 		});
-
+		
 
 		$('.password_checkbox').each(function(){
 			var id = $(this).attr("id");
@@ -638,9 +638,9 @@ var modal = {
 	},
 	loading : function(isloading){
 		if(isloading){
-			bootbox.dialog({
-				message: '<center><i class="fa fa-spinner fa-spin" style="font-size:54px"></i><h2>Loading...</h2></center>',
-				closeButton: false
+			bootbox.dialog({ 
+				message: '<center><i class="fa fa-spinner fa-spin" style="font-size:54px"></i><h2>Loading...</h2></center>', 
+				closeButton: false 
 			});
 		} else {
 			$('.bootbox').modal('hide');
@@ -653,11 +653,11 @@ var modal = {
 			var src = path.replace(base_url, "");
 			var body = '<iframe src="'+path+'" width="100%" height="500px" style="border: none;">This browser does not support PDFs. Please download the PDF to view it: <a href="'+path+'">Download PDF</a></iframe><hr><input id="file_url" value="'+src+'" class=" required hidden" style="width: 100%;" placeholder="Url"><input id="file_alt" class=" required hidden"  style="width: 100%;" placeholder="Image alt"><input id="file_width" class=" required hidden"  style="width: 100%;" value="100%"><input id="file_height" class=" required hidden"  style="width: 100%;" value="auto"><button class="btn btn-primary btn_insert" hidden identifier="'+identifier+'">Insert File</button>'
 		}
-		bootbox.dialog({
-			message: body,
+		bootbox.dialog({ 
+			message: body, 
 			closeButton: true
 		});
-
+		
 	},
 	image_view : function(src, identifier){
 		if(identifier == ""){
@@ -668,7 +668,7 @@ var modal = {
 		}
 		bootbox.dialog({
 		    message: body,
-		    closeButton: true
+		    closeButton: true 
 		});
 	},
 	video_view : function(src, identifier){
@@ -683,7 +683,7 @@ var modal = {
 		}
 		bootbox.dialog({
 		    message: body,
-		    closeButton: true
+		    closeButton: true 
 		});
 	},
 	view_file : function(path){
@@ -692,8 +692,8 @@ var modal = {
 		} else {
 			var body = '<h3>"'+path+'"</h3><hr><button class="btn btn-danger" id="download_file" path="'+path+'">Download File</button><input id="file_url" value="+src+" class=" required hidden" style="width: 100%;" placeholder="Url"><input id="file_alt" class=" required hidden"  style="width: 100%;" placeholder="Image alt"><input id="file_width" class=" required hidden"  style="width: 100%;" value="100%"><input id="file_height" class=" required hidden"  style="width: 100%;" value="auto"><button class="btn btn-primary btn_insert btn-sm" hidden identifier="'+identifier+'">Insert File</button>';
 		}
-		bootbox.dialog({
-			message: body,
+		bootbox.dialog({ 
+			message: body, 
 			closeButton: true
 		});
 	},
@@ -792,9 +792,9 @@ var pagination = {
 		  }
 		  htm += '</select>';
 		  $(element).html(htm);
-
-		   if(total_page < 2){
-		     $(element).hide();
+		  
+		   if(total_page < 2){   
+		     $(element).hide();			 
 		   } else {
 		     $(element).show();
 		   }
@@ -849,7 +849,7 @@ $(document).on("change", ".record-entries", function(e) {
 	modal.loading(false);
 });
 
-$(document).on('keypress', '#search_query', function(e) {
+$(document).on('keypress', '#search_query', function(e) {  
 	if(e.keyCode == 13){
 		var keyword = $(this).val();
 		offset = 1;
@@ -919,7 +919,7 @@ $(document).on('click','#next_page', function() {
 		//offset = next;
 		$('.pager_number').val(next).change();
 		$('.pager_no').html("Page " + numeral(next).format('0,0') );
-
+		
 		if(tp_data == next){
 			$('#last_page').attr("disabled", 'disabled');
 			$('#next_page').attr("disabled", 'disabled');
@@ -980,31 +980,31 @@ $(document).on('click', '.pg_no', function(e){
 
 $(document).on('change', '.selectall', function(){
 	var del = 0;
-	if(this.checked) {
-		$('.select').each(function() {
-			this.checked = true;
-			$('.btn_status').show();
+	if(this.checked) { 
+		$('.select').each(function() { 
+			this.checked = true;  
+			$('.btn_status').show();         
 		});
 	}else{
-		$('.select').each(function() {
+		$('.select').each(function() { 
 			$('.btn_status').hide();
-			this.checked = false;
-		});
+			this.checked = false;                 
+		});         
 	}
 });
 
 $(document).on('change', '.selectall_new', function(){
 	var del = 0;
-	if(this.checked) {
-		$('.selectt').each(function() {
-			this.checked = true;
-			$('.btn_status_ac').show();
+	if(this.checked) { 
+		$('.selectt').each(function() { 
+			this.checked = true;  
+			$('.btn_status_ac').show();         
 		});
 	}else{
-		$('.selectt').each(function() {
+		$('.selectt').each(function() { 
 			$('.btn_status_ac').hide();
-			this.checked = false;
-		});
+			this.checked = false;                 
+		});         
 	}
 });
 
@@ -1012,12 +1012,12 @@ $(document).on('change', '.select', function(){
 	var del = 0;
 	var x = 0;
 	var select_count = $('.select').length;
-	$('.select').each(function(){
+	$('.select').each(function(){  
 		var ischecked =  $(this).is(":checked");
 
-		if(this.checked==true){
+		if(this.checked==true){ 
 			x++;
-		}
+		} 
 
 		if(x > 0 ){
 		  $('.btn_status').show();
@@ -1039,12 +1039,12 @@ $(document).on('change', '.selectt', function(){
 	var del = 0;
 	var x = 0;
 	var select_count = $('.selectt').length;
-	$('.selectt').each(function(){
+	$('.selectt').each(function(){  
 		var ischecked =  $(this).is(":checked");
 
-		if(this.checked==true){
+		if(this.checked==true){ 
 			x++;
-		}
+		} 
 
 		if(x > 0 ){
 		  $('.btn_status_ac').show();
@@ -1053,7 +1053,7 @@ $(document).on('change', '.selectt', function(){
 		  $('.selectall_new').prop('checked', true);
 		}
 	});
-
+	
 
 	if(select_count != x){
 		$('.selectall_new').prop('checked', false);
@@ -1067,9 +1067,9 @@ $(document).on('change', '.select_export', function(){
 	var b = 0;
 
 	$('.select_export').each(function(){
-		if(this.checked==true){
+		if(this.checked==true){ 
 			b++;
-		}
+		} 
 	});
 
 	if(a != b){
@@ -1080,7 +1080,7 @@ $(document).on('change', '.select_export', function(){
 });
 
 $(document).on('change', '.select-display', function(){
-	if (this.checked==true) {
+	if (this.checked==true) { 
 	 	$(this).val(1);
 	} else {
 		$(this).val(0);
@@ -1225,7 +1225,7 @@ function sha1(msg) {
 }
 
 //for sorting of table
-$('thead tr th').on("click", function(e) {
+$('thead tr th').on("click", function(e) {  
     var selected = $(this);
     var index = selected[0].cellIndex;
     if(index > 0){
@@ -1251,9 +1251,9 @@ function is_exists(table, field, value, status){
     var exists = 0;
     var url = base_url+"content_management/global_controller";
     var data = {
-        event : "list",
+        event : "list", 
         select : ""+field+", "+status+"",
-        query : query,
+        query : query, 
         table : table
     }
     aJax.post(url,data,function(result){
@@ -1264,7 +1264,7 @@ function is_exists(table, field, value, status){
         else{
             exists = 0;
         }
-
+        
     });
     return exists;
 }
@@ -1281,24 +1281,26 @@ var entityMap_e = {
 };
 
 function encode_Html (string) {
-  	return String(string).replace(/[&<>"'`=\/]/g, function (s) {
-    	return entityMap_e[s];
-  	});
+  return String(string).replace(/[&<>"'`=\/]/g, function (s) {
+    return entityMap_e[s];
+  });
 }
 
 var entityMap_d = {
-  	'&amp;':  '&',
-  	'&lt;':   '<',
-  	'&gt;':   '>',
-  	'&quot;': '"',
-  	'&#39;':  "'",
-  	'&#x2F;': '/',
-  	'&#x60;': '`',
-  	'&#x3D;': '='
+  '&amp;':  '&',
+  '&lt;':   '<',
+  '&gt;':   '>',
+  '&quot;': '"',
+  '&#39;':  "'",
+  '&#x2F;': '/',
+  '&#x60;': '`',
+  '&#x3D;': '='
 };
 
 function decode_Html (string) {
-  	return String(string).replace('&amp;&lt;&gt;&quot;&#39;&#x2F;&#x60;&#x3D;', function (s) {
-	    return entityMap_d[s];
-  	});
+  return String(string).replace('&amp;&lt;&gt;&quot;&#39;&#x2F;&#x60;&#x3D;', function (s) {
+    return entityMap_d[s];
+  });
 }
+
+

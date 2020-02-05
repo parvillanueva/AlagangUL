@@ -194,7 +194,8 @@ class GS_Controller extends CI_Controller {
 	function api_code($val){
 
 		//SUCCESS
-		$code['201'] = "Success saving record.";
+		$code['200'] = "Success saving record and already activated.";
+		$code['201'] = "Success saving record but needs approval from the administrators.";
 		$code['202'] = "Authentication Success";
 		$code['203'] = "Success";
 		$code['204'] = null;
