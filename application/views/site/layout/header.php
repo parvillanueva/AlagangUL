@@ -43,8 +43,19 @@
             }
 
         ?>
-
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        
+        <!-- Scripts -->
+        <script type="text/javascript" src="<?= base_url();?>/assets/js/jquery.min.js" ></script>
+        <script type="text/javascript" src="<?= base_url();?>/assets/js/bootstrap.min.js" ></script>
+        <script type="text/javascript" src="<?= base_url();?>/assets/js/masking.js" ></script>
+        <script type="text/javascript" src="<?= base_url();?>/assets/js/numeral.min.js" ></script>
+        <script type="text/javascript" src="<?= base_url();?>/cms/js/jquery-ui.js" ></script>
+        <script type="text/javascript" src="<?= base_url();?>/cms/js/bootbox.min.js" ></script>
+        <script type="text/javascript" src="<?= base_url();?>/cms/js/moment.js" ></script>
+        <script type="text/javascript" src="<?= base_url();?>/cms/js/custom.js" ></script>
+        <script type="text/javascript" src="<?= base_url();?>/cms/js/placeholder.js" ></script>
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+        <script type="text/javascript" src="<?= base_url();?>/cms/js/gcontroller.js" ></script>
 
         <!-- bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">

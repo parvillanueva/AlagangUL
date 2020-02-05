@@ -63,6 +63,7 @@
 <script type="text/javascript" src="<?= base_url();?>/cms/js/placeholder.js" ></script>
 <script type="text/javascript" src="<?= base_url();?>/cms/js/bootstrap-material-datetimepicker.js" ></script>
 <script type="text/javascript" src="<?= base_url();?>/cms/js/sorttable.js"></script>
+<script type="text/javascript" src="<?= base_url();?>/cms/js/gcontroller.js" ></script>
  <script type="text/javascript">
         var base_url = "<?= base_url();?>";
         var form_empty_error = "<?= $this->standard->dialog("form_empty");?>";

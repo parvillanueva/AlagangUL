@@ -282,4 +282,28 @@ class Gcontroller extends CI_Controller {
 	  	$data2['create_date'] = date('Y-m-d H:i:s');
 	  	$this->Global_model->save_data('cms_audit_trail',$data2);
 	}
+
+	public function upload_file(){
+		header('Content-Type: application/json');
+		$base64 = $this->input->post("base64");
+		$extension = $this->input->post("extension");
+
+		$temp_folder = "uploads/files/";
+		$output_file = $temp_folder . md5(time().uniqid()) . "." . $extension ;
+
+
+		if (!file_exists($temp_folder)) {
+		    mkdir($temp_folder, 0777, true);
+		}
+
+		$ifp = fopen( $output_file, 'wb' ); 
+	    $data = explode( ',', $base64 );
+	    fwrite( $ifp, base64_decode($data[1]));
+	    fclose( $ifp ); 
+
+	    echo json_encode(array(
+	    	"path"		=>  $output_file,
+	    	"fullpath"	=> base_url() . $output_file,
+	    ));
+	}
 }
