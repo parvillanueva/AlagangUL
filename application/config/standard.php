@@ -1436,19 +1436,6 @@ $config['domain']             = array(
                             );
 
 
-$config['team_name']             = array(
-                                'type'          => 'text',
-                                'name'          => 'team_name',
-                                'form-align'    => 'horizontal',
-                                'class'         => 'form-control',
-                                'id'            => 'team_name',
-                                'maxlength'     => 250,
-                                'required'      => true,
-                                'accept'        => '/[^a-zA-Z0-9\u00f1\u00d1 .,-\/\']/g',
-                                'placeholder'   => 'Team Name',
-                                'label'         => 'Team Name'
-                            );
-
 
 
 
@@ -1678,4 +1665,132 @@ $config['banner_status']           = array(
                                                 '0'     => 'Inactive'
                                             )
                         );
+
+
+$config['team_name']             = array(
+                                'type'          => 'text',
+                                'name'          => 'team_name',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control',
+                                'id'            => 'team_name',
+                                'maxlength'     => 250,
+                                'required'      => true,
+                                'accept'        => '/[^a-zA-Z0-9\u00f1\u00d1 .,-\/\']/g',
+                                'placeholder'   => 'Team Name',
+                                'label'         => 'Team Name'
+                            );
+
+
+
+
+$config['reward_name']      = array(
+                                'type'          => 'text',
+                                'name'          => 'reward_name',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control',
+                                'id'            => 'reward_name',
+                                'maxlength'     => 250,
+                                'required'      => true,
+                                // 'accept'        => '/[^a-zA-Z0-9\u00f1\u00d1 .,-\/\']/g',
+                                'placeholder'   => 'Reward Name',
+                                'label'         => 'Reward Name'
+                            );
+
+$config['reward_image']     = array(
+                                'type'          => 'filemanager',
+                                'name'          => 'reward_image',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control',
+                                'id'            => 'reward_image',
+                                'accept'        => 'jpg,gif,png,jpeg',
+                                'max_size'      => '50',
+                                'required'      => true,
+                                'placeholder'   => 'Reward Image',
+                                'label'         => 'Reward Image',
+                                
+                            );
+
+$config['reward_description'] = array(
+                                'type'          => 'textarea',
+                                'name'          => 'reward_description',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control reward_description_input',
+                                'id'            => 'reward_description',
+                                'required'      => true,
+                                'maxlength'     => 255,
+                                'placeholder'   => 'Reward Description',
+                                'label'         => 'Reward Description'
+                              );
+
+$config['reward_points_needed']       = array(
+                                'type'          => 'text',
+                                'name'          => 'points_needed',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control',
+                                'id'            => 'points_needed',
+                                'required'      => true,
+                                'accept'        => '/[^0-9]/g',
+                                'placeholder'   => 'Points Needed',
+                                'label'         => 'Points Needed'
+                                // 'maxlength'     => 11
+                                // 'note'          => 'Required Format : 09XXXXXXXXX',
+                            );
+
+$config['reward_rating']  = array(
+                                'type'          => 'text',
+                                'name'          => 'reward_rating',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control',
+                                'id'            => 'reward_rating',
+                                'required'      => true,
+                                'accept'        => '/[^0-9]/g',
+                                'placeholder'   => 'Reward Rating',
+                                'label'         => 'Reward Rating',
+                                // 'maxlength'     => 11
+                            );
+
+$config['category_select']    = array(
+                                'type'          => 'dropdown', 
+                                'name'          => 'category_id',
+                                'form-align'    => 'horizontal', 
+                                'class'         => 'form-control category_id', 
+                                'id'            => 'category_id', 
+                                'required'      => true, 
+                                'filemanager'   => false, 
+                                'youtube'       => false, 
+                                'placeholder'   => 'Category',
+                                'label'         => 'Category',
+                                'maxlength'     => 255,
+                                'note'          => 'Required field',
+                                // 'select2'       => true
+                                // 'list_value'    => array()
+                       );
+
+
+$config['initial_stock']  = array(
+                                'type'          => 'text',
+                                'name'          => 'initial_stock',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control',
+                                'id'            => 'initial_stock',
+                                'required'      => true,
+                                'accept'        => '/[^0-9]/g',
+                                'placeholder'   => 'Initial Stock',
+                                'label'         => 'Initial Stock',
+                                // 'maxlength'     => 11
+                            );
+
+
+$config['category_name']      = array(
+                                'type'          => 'text',
+                                'name'          => 'name',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control',
+                                'id'            => 'name',
+                                'maxlength'     => 250,
+                                'required'      => true,
+                                // 'accept'        => '/[^a-zA-Z0-9\u00f1\u00d1 .,-\/\']/g',
+                                'placeholder'   => 'Category Name',
+                                'label'         => 'Category Name'
+                            );
 ?>
