@@ -28,7 +28,6 @@
     var id       = 0;
     AJAX.config.base_url(base_url);
     $(document).ready(function(){
-        // alert(user_id);
         get_data(keyword);
     });
     function get_data(keyword){
@@ -50,7 +49,7 @@
              $.each(obj,function(x,y){
                 html += '<tr>';
                 html += '   <td>'+y.domain+'</td>';
-                html += '   <td><a  href="<?= base_url()."content_management/"?>site_domain_whitelist/update/'+y.id+'" data-id ="'+y.id+'" class="app_class">Edit</a></td>'
+                html += '   <td><a  href="<?= base_url()."content_management/"?>site_domain_whitelist/update/'+y.id+'" data-id ="'+y.id+'" class="app_class">Edit</a> | <a  href="javascript:void(0)" data-id ="'+y.id+'" class="btn_delete">Delete</a></td>'
                 html += '</tr>'
              });
 
@@ -67,6 +66,29 @@
     $(document).on('click','.btn_add',function(e){
         location.href = ('<?= base_url()."content_management/"?>site_domain_whitelist/add');
     })
+
+    $(document).on('click','.btn_delete',function(e){
+        table_id = $(this).attr('data-id');
+        var modal_obj = '<?= $this->standard->confirm("confirm_delete"); ?>'; 
+        modal.standard(modal_obj, function(result){
+            $.ajax({
+                type : "POST",
+                url  :  "<?= base_url('content_management/site_domain_whitelist/delete');?>",
+                dataType : "JSON",
+                data : {id:table_id,},
+                  beforeSend: function() {
+                  modal.loading(true);
+                  },
+                  success: function(data) {
+                  },
+                  complete: function(data){
+                    modal.loading(false);
+                    get_data(keyword);
+                  }
+            });
+        });
+    })
+
 
     
 </script>

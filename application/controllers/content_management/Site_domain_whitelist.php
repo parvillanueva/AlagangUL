@@ -40,6 +40,11 @@ class Site_domain_whitelist extends CI_Controller {
 		$data['breadcrumb'] = array('Domain Whitelist' => '');
 		$this->load->view("content_management/template/layout", $data);	
 	}
+
+	public function delete(){
+		$id = $this->input->post('id');
+		$this->Global_model->delete_data('tbl_email_domain_whitelist',$id);
+	}
 	//controller_config
 }
 	    
