@@ -1,12 +1,12 @@
-<!-- HTML Header -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <!-- <title><?php //$this->load->site_title($title);?></title> -->
-        <!-- <meta name="description" content="<?php //$this->load->site_description($description);?>" /> -->
-        <!-- <meta name="keywords" content="<?php //$this->load->site_keyword($keyword);?>" /> -->
         
-        <title>Alagang Unilab</title>
+
+        <title>Alagang Unilab | <?= @$meta['title'];?></title>
+        <meta name="description" content="<?= @$meta['description'];?>" />
+        <meta name="keywords" content="<?= @$meta['keyword'];?>" />
         <!-- required -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

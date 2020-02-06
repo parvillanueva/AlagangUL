@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Get_rewards extends CI_Controller {
+class Privacy_policy extends CI_Controller {
 
 	public function index()
 	{
 
-		$data['content'] = "site/get_rewards/default";
+		$data['content'] = "site/privacy_policy/default";
 		$data['meta'] = array(
-			"title"         =>  "Rewards",
+			"title"         =>  "Home",
 			"description"   =>  "",
 			"keyword"       =>  ""
 		);
@@ -19,9 +19,8 @@ class Get_rewards extends CI_Controller {
 			// "description"         =>  $this->Global_model->site_meta_og(38, 'site_menu', 'og_description'),
 			// "image"         =>  base_url().$this->Global_model->site_meta_og(38, 'site_menu', 'og_image'),
 		);
-
-		$data['active_menu'] = "get_rewards";
 		
+		$data['active_menu'] = "about";
 		$this->parser->parse("site/layout/template",$data);
 	}
 

@@ -8,9 +8,9 @@ class Events extends CI_Controller {
 
 		$data['content'] = "site/events/list";
 		$data['meta'] = array(
-			// "title"         =>  "Home",
-			// "description"   =>  $this->Global_model->site_meta_og(38, 'site_menu', 'meta_description'),
-			// "keyword"       =>  $this->Global_model->site_meta_og(38, 'site_menu', 'meta_keywords')
+			"title"         =>  "Event List",
+			"description"   =>  "",
+			"keyword"       =>  ""
 		);
 		
 		$data['fb_og'] = array(
@@ -29,9 +29,9 @@ class Events extends CI_Controller {
 
 		$data['content'] = "site/events/view";
 		$data['meta'] = array(
-			// "title"         =>  "Home",
-			// "description"   =>  $this->Global_model->site_meta_og(38, 'site_menu', 'meta_description'),
-			// "keyword"       =>  $this->Global_model->site_meta_og(38, 'site_menu', 'meta_keywords')
+			"title"         =>  "Event",
+			"description"   =>  "",
+			"keyword"       =>  ""
 		);
 		
 		$data['fb_og'] = array(

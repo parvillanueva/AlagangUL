@@ -8,9 +8,9 @@ class Programs extends CI_Controller {
 
 		$data['content'] = "site/programs/list";
 		$data['meta'] = array(
-			// "title"         =>  "Home",
-			// "description"   =>  $this->Global_model->site_meta_og(38, 'site_menu', 'meta_description'),
-			// "keyword"       =>  $this->Global_model->site_meta_og(38, 'site_menu', 'meta_keywords')
+			"title"         =>  "Programs",
+			"description"   =>  "",
+			"keyword"       =>  ""
 		);
 		
 		$data['fb_og'] = array(
@@ -28,9 +28,9 @@ class Programs extends CI_Controller {
 
 		$data['content'] = "site/programs/view";
 		$data['meta'] = array(
-			// "title"         =>  "Home",
-			// "description"   =>  $this->Global_model->site_meta_og(38, 'site_menu', 'meta_description'),
-			// "keyword"       =>  $this->Global_model->site_meta_og(38, 'site_menu', 'meta_keywords')
+			"title"         =>  "Program",
+			"description"   =>  "",
+			"keyword"       =>  ""
 		);
 		
 		$data['fb_og'] = array(
