@@ -4,11 +4,17 @@
         $route["default_controller"] = "homeindex";
 
 
+        $route["login"] = "site/login";
+        $route["register"] = "site/login/register_email";
+
+
         $route["home"] = "site/home";
         $route["about"] = "site/about";
         $route["programs"] = "site/programs";
         $route["events"] = "site/events";
         $route["get-rewards"] = "site/get_rewards";
+        $route["terms-and-conditions"] = "site/terms_and_condition";
+        $route["privacy-statement"] = "site/privacy_policy";
 
 
         $route["create-program"] = "site/create_program";
