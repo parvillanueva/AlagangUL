@@ -5,10 +5,12 @@
         <!-- <title><?php //$this->load->site_title($title);?></title> -->
         <!-- <meta name="description" content="<?php //$this->load->site_description($description);?>" /> -->
         <!-- <meta name="keywords" content="<?php //$this->load->site_keyword($keyword);?>" /> -->
-        <meta equiv="Content-type" content="text/html; charset=utf-8" />
-        <meta name="robots" content="no-cache" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge;" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>Alagang Unilab</title>
+        <!-- required -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
         <?php
             $fullurl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
             $url = str_replace(base_url(), '', $fullurl);
@@ -41,13 +43,7 @@
             }
 
         ?>
-
-        <!-- Styles -->
-        <link href="<?= base_url();?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="<?= base_url();?>/cms/css/jquery-ui.css" rel="stylesheet" type="text/css" />
-        <link href="<?= base_url();?>/cms/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
-        <link href="<?= base_url();?>assets/css/style.css" rel="stylesheet" type="text/css" />
-
+        
         <!-- Scripts -->
         <script type="text/javascript" src="<?= base_url();?>/assets/js/jquery.min.js" ></script>
         <script type="text/javascript" src="<?= base_url();?>/assets/js/bootstrap.min.js" ></script>
@@ -59,24 +55,15 @@
         <script type="text/javascript" src="<?= base_url();?>/cms/js/custom.js" ></script>
         <script type="text/javascript" src="<?= base_url();?>/cms/js/placeholder.js" ></script>
         <script src='https://www.google.com/recaptcha/api.js'></script>
+        <script type="text/javascript" src="<?= base_url();?>/cms/js/gcontroller.js" ></script>
 
-        <style type="text/css">
+        <!-- bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/site/css/main-style.css">
+        <link rel="stylesheet" type="text/css" href="https://use.typekit.net/scj2ogv.css">
+        <link rel="icon" href="<?= base_url();?>assets/site/img/favicon.png" type="image/png" sizes="16x16">
         
-        /** { 
-            outline: 1px solid #657aec;
-            outline-offset: -1px;
-        }*/
 
-        </style>
-
-
-
-        <?php
-            $dir = dirname(__FILE__);
-            $this->minify->css($dir . "/asset/style.css", "Global Style"); //STYLE CSS FILE GOES HERE
-            $this->minify->css($dir . "/asset/responsive.css", "Global Responsive"); // RESPONSIVE CSS FILE GOES HERE
-            $this->minify->js($dir . "/asset/function.js", "Global Javascript"); //JAVASCRIPT/JQUERY FUNCTIONS GOES HERE
-        ?>
 
 
         <?php

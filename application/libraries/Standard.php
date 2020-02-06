@@ -88,6 +88,204 @@ class Standard {
                 case 'separator':
                     echo "<hr>";
                     break;
+                case 'file':
+                    if($value != null){
+                        $config["value"] = $value; 
+                    }
+
+                    $label_col = "";
+                    $input_col = "";
+                    $config['class'] = $config['class'] . " " . $config['id'] .  "_input hidden";
+
+                    if(isset($config["form-align"])){
+                        if($config["form-align"] == "horizontal"){
+                            $label_col = "col-sm-2";
+                            $input_col = "col-sm-10";
+                        }
+                        unset($config["form-align"]);
+                    }
+
+                    $file_required = "";
+
+                    if(isset($config["required"])){
+                        if($config["required"]){
+                             $file_required = "required_input";
+                            echo '<label class="control-label '.$config['id'].'_label '.$label_col.'">'.$config['label'].'<span style="color: red;">*</span> :</label>';
+                            unset($config["required"]);
+                        } else {
+                            echo '<label class="control-label '.$config['id'].'_label '.$label_col.'">'.$config['label'].':</label>';
+                        }
+                    } else {
+                        echo '<label class="control-label '.$config['id'].'_label '.$label_col.'">'.$config['label'].':</label>';
+                    }
+
+                    $id_input =  $config['id'] . "_file_input";
+                    $id_input_path =  $config['id'];
+
+                    $config['id'] = $id_input;
+                    $config['data-id'] = $id_input_path;
+
+                    echo '<div class="'.$input_col.'">';
+                    $config['onchange'] = 'readURLImgStandardPreview(this);';
+                    echo form_input($config);
+
+                    $config['readonly'] = 'readonly';
+                    $config['id'] = $id_input_path;
+
+                    $config['class'] = $config['id'] . "_input_result " .$config['id'] .  "_input form-control " . $file_required;
+                    $config['type'] = "text";
+
+                    $hidden = "inline-block";
+                    if(trim($config["value"])==""){
+                        $hidden = "none";
+                    }
+
+                    echo '<div class="input-group"> ' . form_input($config) . '
+                            <span class="input-group-btn">
+                                <button data-id="'.$config['id'].'" class="btn btn-primary browse_file">Browse</button>
+                                <button data-path="'.$config['value'].'" data-id="'.$config['id'].'" class="btn btn-danger delete_file  delete_'.$config['id'].'" style="display : '.$hidden.'">Remove</button>
+                            </span>
+                        </div>';
+                    
+                    if(isset($config['note'])){
+                        echo "<small class='standard-note'><i> <b>Note:</b> ".ucfirst($config['note']).". ,</i></small>";
+                    }
+                    echo "<br>";
+                    echo '<img id="img_banner_preview_'.$config["id"].'" width="50%"/>';
+
+                    echo '</div>';
+                    echo '<div class="clearfix"></div>';
+
+                    echo "<script>";
+                    echo 'function readURLImgStandardPreview(input) {
+                            modal.loading(true);
+                            var id = $(input).attr("data-id");
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
+                                reader.onload = function(e) {
+                                    var extension = input.files[0].name.split('.').pop().toLowerCase();
+                                    var base64 = e.target.result;
+
+                                    var url = "' .base_url() .'content_management/gcontroller/upload_file";
+                                    var data = {
+                                        base64 : base64,
+                                        extension : extension
+                                    }
+                                    aJax.post(url,data,function(result){
+                                        modal.loading(false);
+                                        console.log(result.path);
+                                        $("." + id + "_input_result").val(result.path);
+                                        $("#img_banner_preview_"+id).attr("src", result.fullpath);
+                                        $(".delete_"+id).show();
+                                        $(".delete_"+id).attr("data-path", result.path);
+
+                                    });
+
+                                    
+                                }
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        }';
+
+                    echo "$(document).on('click', '.delete_file', function(){
+                            var path = $(this).attr('data-path');
+                            var id = $(this).attr('data-id');
+                            var element = $(this);
+                            var modal_obj = '";
+                    $CI->standard->confirm("confirm_delete_file");
+
+                    echo "'";
+
+                    echo '; 
+
+                            console.log(modal_obj);
+                            modal.standard(modal_obj, function(result){
+                                if(result){
+                                    element.hide();
+                                    $("." + id + "_input_result").val("");
+                                    $("#img_banner_preview_" + id).attr("src", "");
+                                }
+                            });
+                        });
+                    ';
+
+                    echo '$(document).on("click", ".browse_file", function(){
+                        var id = $(this).attr("data-id");
+                        $("#" + id + "_file_input").click();
+                    });';
+                    echo "</script>";
+
+                    break;
+                case 'number':
+                    if($value != null){
+                        $config["value"] = $value; 
+                    }
+
+                    $label_col = "";
+                    $input_col = "";
+                    $config['class'] = $config['class'] . " " . $config['id'] .  "_input";
+
+                    if(isset($config["form-align"])){
+                        if($config["form-align"] == "horizontal"){
+                            $label_col = "col-sm-2";
+                            $input_col = "col-sm-10";
+                        }
+                        unset($config["form-align"]);
+                    }
+
+                    if(isset($config["required"])){
+                        if($config["required"]){
+                            $config['class'] = $config['class'] . " required_input";
+                            echo '<label class="control-label '.$config['id'].'_label '.$label_col.'">'.$config['label'].'<span style="color: red;">*</span> :</label>';
+                        } else {
+                            echo '<label class="control-label '.$config['id'].'_label '.$label_col.'">'.$config['label'].':</label>';
+                        }
+                        unset($config["required"]);
+                    } else {
+                        echo '<label class="control-label '.$config['id'].'_label '.$label_col.'">'.$config['label'].':</label>';
+                    }
+
+                    if(isset($config["alphaonly"])){
+                        if($config["alphaonly"]){
+                            $config['class'] = $config['class'] . " alphaonly";
+                        }
+                        unset($config["alphaonly"]);
+                    }
+
+                    if(isset($config["accept"])){
+                        if($config["accept"]){
+                            $config['onkeyup'] = "this.value=this.value.replace(".$config["accept"].",'');";
+                        }
+                        unset($config["alphaonly"]);
+                    }
+
+
+                    if(isset($config["no_html"])){
+                        if($config["no_html"]){
+                            $config['class'] = $config['class'] . " no_html";
+                            
+                        }
+                        unset($config["no_html"]);
+                    }
+
+                    echo '<div class="'.$input_col.'">';
+                    echo form_input($config);
+                    
+                    if(isset($config['note'])){
+                        echo "<small class='standard-note'><i> <b>Note:</b> ".ucfirst($config['note']).". ,</i></small>";
+                    }
+
+                    
+                    if(isset($config['maxlength'])){
+                        echo "<small class='standard-max'><i>Maximum character count is ".$config['maxlength'].".</i></small>";
+                    }
+                    
+
+
+                    echo '</div>';
+                    echo '<div class="clearfix"></div>';
+
+                    break;
                 case 'text':
                     if($value != null){
                         $config["value"] = $value; 
@@ -960,6 +1158,8 @@ class Standard {
             }
     
             echo '</div>'  ."\n\n";
+
+            echo '<script></script>';
         } else {
             echo "Error : Input config not defined.";
         }
