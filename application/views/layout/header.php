@@ -43,7 +43,7 @@
 <script src="<?= base_url();?>assets/js/footer.js"></script>
 <script src="<?= base_url();?>assets/js/sidenav.js"></script>
 <script src="<?= base_url();?>assets/js/scripts.js"></script>
-<script src="<?= base_url();?>assets/js/custom.js"></script>
+<script type="text/javascript" src="<?= base_url();?>/cms/js/custom.js" ></script>
 <script type="text/javascript" src="<?= base_url();?>/cms/js/bootbox.min.js" ></script>
 <script type="text/javascript" src="<?= base_url();?>/cms/js/moment.js" ></script>
 <script type="text/javascript" src="<?= base_url();?>/cms/js/dropzone.js" ></script>

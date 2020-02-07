@@ -1550,6 +1550,52 @@ $config['user_lastname']       = array(
                                 'placeholder'   => 'Last Name', 
                                 'label'         => 'Last Name'
                             );
+$config['user_mobile']       = array(
+                                'type'          => 'text', 
+                                'name'          => 'user_mobile', 
+                                'form-align'    => 'horizontal', 
+                                'class'         => 'form-control', 
+                                'id'            => 'user_mobile', 
+                                'required'      => true, 
+                                'maxlength'     => 10, 
+                                'alphaonly'     => false, 
+                                'placeholder'   => 'Mobile Number', 
+                                'label'         => 'Mobile Number'
+                            );
+$config['user_password']         = array(
+                                'type'          => 'password',
+                                'name'          => 'user_password',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control',
+                                'id'            => 'user_password',
+                                'required'      => true,
+                                'placeholder'   => 'Password',
+                                'label'         => 'Password'
+                            );
+$config['user_confirm_password']         = array(
+                                'type'          => 'password',
+                                'name'          => 'user_confirm_password',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control',
+                                'id'            => 'user_confirm_password',
+                                'required'      => true,
+                                'placeholder'   => 'Confirm Password',
+                                'label'         => 'Confirm Password'
+                            );							
+$config['user_gender']       = array(
+                            'type'          => 'dropdown',
+                            'name'          => 'user_gender',
+                            'form-align'    => 'horizontal',
+                            'class'         => 'form-control user_gender',
+                            'id'            => 'user_gender',
+                            'required'      => true,
+                            'placeholder'   => 'Gender',
+                            'label'         => 'Gender',
+                            'list_value'    => array(
+                                                'M'     => 'Male',
+                                                'F'     => 'Female'
+                                            )
+							);
 $config['user_email']       = array(
                                 'type'          => 'text', 
                                 'name'          => 'user_email', 
@@ -1562,7 +1608,18 @@ $config['user_email']       = array(
                                 'placeholder'   => 'Email Address', 
                                 'label'         => 'Email Address'
                             );
-=======
+$config['user_birthday']       = array(
+                                'type'          => 'date', 
+                                'name'          => 'user_birthday', 
+                                'form-align'    => 'horizontal', 
+                                'class'         => 'form-control', 
+                                'id'            => 'user_birthday', 
+                                'required'      => true, 
+                                'maxlength'     => 255, 
+                                'alphaonly'     => false, 
+                                'placeholder'   => 'Birthday', 
+                                'label'         => 'Birthday'
+                            );
                                               
 $config['banner_title']       = array(
                             'type'          => 'text',
@@ -1690,5 +1747,15 @@ $config['banner_status']           = array(
                                                 '0'     => 'Inactive'
                                             )
                         );
+$config['user_otp'] = array(
+                            'type'          => 'text',
+                            'name'          => 'user_otp',
+                            'form-align'    => 'horizontal',
+                            'class'         => 'form-control meta_description_input',
+                            'id'            => 'user_otp',
+                            'required'      => true,
+                            'maxlength'     => 6,
+                            'label'         => 'OTP'
+                        );						
 
 ?>

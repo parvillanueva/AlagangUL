@@ -17,8 +17,19 @@
 				
 				
             ];
-
-            $id = $this->standard->inputs($inputs);
+			
+			$values = [
+				'',
+				'',
+				'',
+				'',
+				$data_set[0]->email_address,
+				'',
+				'',
+				'',
+			];
+			
+            $id = $this->standard->inputs($inputs, $values);
 		?>
 		<div class="form-group">
 			<label class="control-label user_profile_image col-sm-2" style="">Image:</label>
@@ -43,8 +54,10 @@
 <script>
 	$(document).ready(function(){
 		$('#user_image').hide();
+		$('#user_email').attr('readonly', true);
 	});
 	$(document).on('click', '#btn_save', function(){
+		console.log(validate.standard("<?php echo $id?>"));
 		if(validate.standard("<?php echo $id?>")) {
 			var modal_obj = '<?= $this->standard->confirm("confirm_save"); ?>'; 
 			modal.standard(modal_obj, function(result){
@@ -54,23 +67,20 @@
 					var firstname = $('#user_firstname').val();
 					var gender = $('#user_gender').val();
 					var birthday = $('#user_birthday').val();
-					var email = $('#email_address').val();
 					var mobile = $('#user_mobile').val();
 					var password = $('#password').val();
 					var con_password = $('#confirm_password').val();
 					var file_data = $('#user_image').prop('files')[0];   
 					var form_data = new FormData();                  
 					form_data.append('user_image', file_data);
-					form_data.append('CMDEvent', 'register');
 					form_data.append('last_name', lastname);
 					form_data.append('first_name', firstname);
 					form_data.append('gender', gender);
 					form_data.append('birthday', birthday);
-					form_data.append('email_address', email);
 					form_data.append('mobile_number', mobile);
 					form_data.append('password', password);
 					form_data.append('confirm_password', con_password);
-					var url = '<?php echo base_url()."api/users?token=".$token ?>';                           
+					var url = '<?php echo base_url()."site/user/save" ?>';                           
 					$.ajax({
 						url: url,
 						dataType: 'text',  
@@ -80,21 +90,8 @@
 						data: form_data,                         
 						type: 'post',
 						success: function(result){
-							var obj = is_json(result);
-							console.log(obj);
-							var result_code = obj.Code;
-							switch(result_code){
-								case 201:
-									var message = '<?= $this->standard->dialog("save_success"); ?>';
-									modal.loading(false);
-									modal.alert(message);
-								break;
-								case 504:
-									var message = '<?= $this->standard->dialog("duplicate_entry"); ?>';
-									modal.loading(false);
-									modal.alert(message);
-								break;
-							}
+							console.log(result);
+							//var obj = is_json(result);
 						}
 					});
 				}
