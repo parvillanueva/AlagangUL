@@ -76,7 +76,7 @@
            }
 
         }, function(obj){
-            pagination.generate(obj.total_page, ".list_pagination",10, 'table_body', 5);
+            pagination.generate(obj.total_page, ".list_pagination",10, 'table_body', 6);
             // console.log(result);
         }); 
         
@@ -122,5 +122,38 @@
             });
         });
     })
+
+    $(document).on('click','.status_action',function(e){
+        var status = $(this).attr("data-status");
+        var id = "";
+        var name = "";
+
+        modal.confirm("Are you sure you want to Update this record?",function(result){
+            if(result){
+                $('.selectall_user').prop('checked', false);
+                $('.select:checked').each(function(index) {
+                    id = $(this).attr('data-id');
+                    // name = $(this).attr('data-name');
+
+                    AJAX.update.table("tbl_reward_products");
+                    AJAX.update.where("id",id);
+
+                    AJAX.update.params("status",status);
+
+                    AJAX.update.exec(function(result){
+                        AJAX.update.table("tbl_reward_inventory");
+                        AJAX.update.where("product_id",id);
+
+                        AJAX.update.params("status",status);
+
+                        AJAX.update.exec(function(result){
+                            get_data(keyword);
+                        });
+                    });
+
+                });
+            }
+        })
+    });
 </script>
 

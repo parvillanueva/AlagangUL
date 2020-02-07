@@ -8,7 +8,9 @@
                 <thead>
                     <tr>
                         <th style="width: 50px"><center><input class="selectall" type = "checkbox"></center></th>
-                        <th>Name</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Banner</th>
                         <th>Status</th>
                         <th style="width: 100px;">Action</th>
                     </tr>
@@ -36,16 +38,16 @@
     function get_data(keyword){
         AJAX.select.offset(offset); //offset or Start
         AJAX.select.limit(limit); //limit result
-        AJAX.select.table('tbl_category'); //selecting table
-        AJAX.select.select('id,name,status'); //selecting result : not accepting *
+        AJAX.select.table('tbl_about_us'); //selecting table
+        AJAX.select.select('id,title,description,banner,status'); //selecting result : not accepting *
 
         if(keyword) {
-            AJAX.select.query(" (name like '%"+keyword+"%') and status >= 0");
+            AJAX.select.query(" (title like '%"+keyword+"%' OR description like '%"+keyword+"%') and status >= 0");
         }else{
             AJAX.select.where.greater_equal("status",0); 
         }
 
-        AJAX.select.order.asc("name"); 
+        AJAX.select.order.asc("title"); 
         AJAX.select.exec(function(result){
            var obj = result;
            var html = '';
@@ -53,10 +55,18 @@
              $.each(obj,function(x,y){
                 var status = (y.status === "1") ? status = "Active" : status = "Inactive";
                 html += '<tr>';
-                html+="      <td class='text-center'><input class = 'select'  data-id = '"+y.id+"' data-name='"+y.name+"' type ='checkbox'></td>";
-                html += '   <td>'+y.name+'</td>';
+                html+="      <td class='text-center'><input class = 'select'  data-id = '"+y.id+"' data-name='"+y.title+"' type ='checkbox'></td>";
+                html += '   <td>'+y.title+'</td>';
+                html += '   <td>'+y.description+'</td>';
+                html += '   <td>';
+                    if (y.banner != '' ) {
+                        // alert(1);
+                html += "<img style='max-width:200px;' src='<?= base_url()."/"?>"+y.banner+"'>";
+                        // status_action = 1;
+                    }
+                html += '   </td>';
                 html += '   <td>'+status+'</td>';
-                html += '   <td><a  href="<?= base_url()."content_management/"?>site_category/update/'+y.id+'" data-id ="'+y.id+'" class="app_class">Edit</a></td>'
+                html += '   <td><a  href="<?= base_url()."content_management/"?>site_about_us/update/'+y.id+'" data-id ="'+y.id+'" class="app_class">Edit</a></td>'
                 html += '</tr>'
              });
 
@@ -64,14 +74,14 @@
            }
 
         }, function(obj){
-            pagination.generate(obj.total_page, ".list_pagination",10, 'table_body', 4);
+            pagination.generate(obj.total_page, ".list_pagination",10, 'table_body', 5);
             // console.log(result);
         }); 
         
     }
 
     $(document).on('click','.btn_add',function(e){
-        location.href = ('<?= base_url()."content_management/"?>site_category/add');
+        location.href = ('<?= base_url()."content_management/"?>site_about_us/add');
     })
 
     $(document).on('click','.status_action',function(e){
@@ -86,7 +96,7 @@
                     id = $(this).attr('data-id');
                     // name = $(this).attr('data-name');
 
-                    AJAX.update.table("tbl_category");
+                    AJAX.update.table("tbl_about_us");
                     AJAX.update.where("id",id);
 
                     AJAX.update.params("status",status);
