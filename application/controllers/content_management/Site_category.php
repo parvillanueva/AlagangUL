@@ -2,7 +2,7 @@
 <?php
 defined("BASEPATH") OR exit("No direct script access allowed");
 
-class Site_domain_whitelist extends CI_Controller {
+class Site_category extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
@@ -14,36 +14,32 @@ class Site_domain_whitelist extends CI_Controller {
 	public function index()
 	{
 		$data["title"] = "Content Management";
-		$data["PageName"] = ("domain whitelist");
+		$data["PageName"] = ("category");
 		$data['edit_title'] = true;
-		$data["content"] = "content_management/module/domain_whitelist/page";
-		$data['breadcrumb'] = array('Domain Whitelist' => '');
+		$data["content"] = "content_management/module/category/page";
+		$data['breadcrumb'] = array('Category' => '');
 		$this->load->view("content_management/template/layout", $data);	
 	}
+
 
 	public function add()
 	{
 		$data["title"] = "Content Management";
-		$data["PageName"] = ("domain whitelist");
+		$data["PageName"] = ("category");
 		$data['edit_title'] = true;
-		$data["content"] = "content_management/module/domain_whitelist/add";
-		$data['breadcrumb'] = array('Domain Whitelist' => '');
+		$data["content"] = "content_management/module/category/add";
+		$data['breadcrumb'] = array('Category' => '');
 		$this->load->view("content_management/template/layout", $data);	
 	}
 
 	public function update()
 	{
 		$data["title"] = "Content Management";
-		$data["PageName"] = ("domain whitelist");
+		$data["PageName"] = ("category");
 		$data['edit_title'] = true;
-		$data["content"] = "content_management/module/domain_whitelist/edit";
-		$data['breadcrumb'] = array('Domain Whitelist' => '');
+		$data["content"] = "content_management/module/category/edit";
+		$data['breadcrumb'] = array('Category' => '');
 		$this->load->view("content_management/template/layout", $data);	
-	}
-
-	public function delete(){
-		$id = $this->input->post('id');
-		$this->Global_model->delete_data('tbl_email_domain_whitelist',$id);
 	}
 	//controller_config
 }

@@ -100,6 +100,9 @@
 
     $(document).on('click','.app_class',function(e){
         id = $(this).attr('data-id');
+        $('#user_password').css('border-color','');
+        $('#user_password').val('');
+        $('.validate_error_message').remove();
         $('#confirm_modal').modal('show');
     })
 
