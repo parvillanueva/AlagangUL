@@ -16,8 +16,8 @@ class User_profile extends CI_Controller {
 		$data['data_set'] = $result;
 		$data["title"] = "Content Management";
 		$data["PageName"] = ("User");
-		$data["content"] = "site/user_profile/page2";
-		$this->load->view("layout/layout", $data);	
+		$data["content"] = "site/user_profile/page";
+		$this->load->view("site/layout/template2",$data);		
 	}
 	
 	public function submit(){
@@ -32,7 +32,8 @@ class User_profile extends CI_Controller {
 			'imagepath' => $_FILES['file_set']['name'],
 		);
 		$this->Gmodel->update_data('tbl_users', $arrData, 'email_address', $_POST['email']);
-				
+		header("Location: ".base_url('login').""); 
+		exit();		
 	}
 	
 	public function upload_file($file){

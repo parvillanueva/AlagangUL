@@ -41,7 +41,7 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 						<div class="col">											
-							<input type="text" class="form-control required_input email" id="email" placeholder="Work Email" name="email" value="dominicsobrevilla@gmail.com">
+							<input type="text" class="form-control required_input email" id="email" placeholder="Work Email" name="email" value="<?= $data_set[0]->email_address?>">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
