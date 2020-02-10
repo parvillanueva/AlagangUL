@@ -2,12 +2,8 @@
 		
 
         $route["default_controller"] = "homeindex";
-
-
-        $route["login"] = "site/login";
-        $route["register"] = "site/login/register_email";
-
-
+	$route["login"] = "site/login";
+	$route["signup"] = "site/sign_up";
         $route["home"] = "site/home";
         $route["about"] = "site/about";
         $route["programs"] = "site/programs";
@@ -23,4 +19,3 @@
         $route["content_management"] = "content_management/home";
         $route["404_override"] = "";
         $route["translate_uri_dashes"] = FALSE;
-        
