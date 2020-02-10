@@ -94,7 +94,6 @@
                 $('.selectall_user').prop('checked', false);
                 $('.select:checked').each(function(index) {
                     id = $(this).attr('data-id');
-                    // name = $(this).attr('data-name');
 
                     AJAX.update.table("tbl_about_us");
                     AJAX.update.where("id",id);
