@@ -1,3 +1,12 @@
+<?php
+	$user_id = $this->session->userdata('sess_id');
+	$arr_where = array(
+		'id' => $user_id
+	);
+	$user_details = $this->Gmodel->get_query('tbl_users',"id = " . $user_id);
+	$points_details = $this->Gmodel->get_query('tbl_users_points',"user_id = " . $user_id);
+?>
+
 <header class="au-header">
 		<div class="au-navigation au-container">
 			<nav class="au-navbar navbar navbar-expand-lg">
@@ -42,8 +51,8 @@
 										<img src="<?=base_url()?>assets/site/img/au-avatar.svg" class="au-avatar">
 									</div>
 									<div class="au-inner">
-										<span class="au-accname">John Michael Doe</span>
-										<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> 1234 points</span>
+										<span class="au-accname"><?= $user_details[0]->first_name . " " . $user_details[0]->last_name;?></span>
+										<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> <?= $points_details[0]->current_points ?> points</span>
 									</div>
 								</button>
 
@@ -53,8 +62,8 @@
 											<img src="<?=base_url()?>assets/site/img/au-avatar.svg" class="au-avatar-lg">
 										</div>
 										<div class="au-inner">
-											<span class="au-accname">John Michael Doe</span>
-											<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> 1234 points</span>	
+											<span class="au-accname"><?= $user_details[0]->first_name . " " . $user_details[0]->last_name;?></span>
+											<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> <?= $points_details[0]->current_points ?> points</span>	
 										</div>
 									</a>
 								</div>
