@@ -84,7 +84,7 @@
 				var obj = is_json(result);
 				if(obj.responce == 'success'){
 					modal.loading(false);
-					window.location.href = "<?php echo base_url().'site/user_profile/' ?>"+obj.user_id;
+					window.location.href = "<?php echo base_url().'user_profile/' ?>"+obj.user_id;
 				} else{
 					$(".alert_failed").show();
 					modal.loading(false);
