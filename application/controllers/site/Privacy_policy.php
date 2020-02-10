@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Privacy_policy extends CI_Controller {
+class Privacy_policy extends GS_Controller {
 
 	public function index()
 	{

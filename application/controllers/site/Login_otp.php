@@ -4,7 +4,7 @@ defined("BASEPATH") OR exit("No direct script access allowed");
 class Login_otp extends CI_Controller {
 	
 	public function index(){
-		$this->load->view("login/otp");
+		$this->load->view("site/login/otp");
 	}
 	
 	public function otp_check(){

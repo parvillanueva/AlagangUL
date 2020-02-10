@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Terms_and_condition extends CI_Controller {
+class Terms_and_condition extends GS_Controller {
 
 	public function index()
 	{
