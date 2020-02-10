@@ -49,7 +49,7 @@ class Login_otp extends CI_Controller {
 		$arr_user = array(
 			'email_address' => $result[0]->email_address
 		);
-		$result_user = $this->Gmodel->get_query('tbl_otp_record', $arr_user);
+		$result_user = $this->Gmodel->get_query('tbl_users', $arr_user);
 		if(!empty($result_user)){
 			return 'not_empty';
 		} else{
