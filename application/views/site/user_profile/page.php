@@ -33,7 +33,7 @@
 					</div>
 					<div class="form-row">
 						<div class="col">
-							<select class="form-control custom-select" >
+							<select class="form-control custom-select required_input" >
 								<option value="" selected disabled>Division / Business Unit</option>
 								<option value="sample">Sample</option>
 							</select>
@@ -60,14 +60,14 @@
 					</div>
 					<div class="form-row">
 						<div class="col">
-							<input type="password" class="form-control required_input" id="password" placeholder="Password" name="password" pattern="(?=.*\d)(?=.*[a-z]).{8,}">
+							<input type="password" class="form-control required_input new-password" id="password" placeholder="Password" name="password" pattern="(?=.*\d)(?=.*[a-z]).{8,}">
 							<div class="valid-feedback"></div>
-							<div class="invalid-feedback">Password does not meet requirements</div>
+							<div class="invalid-feedback" id="invalid_pass">Password does not meet requirements</div>
 						</div>
 						<div class="col">											
-							<input type="password" class="form-control required_input" id="cpassword" placeholder="Confirm Password" name="cpassword">
+							<input type="password" class="form-control required_input re-password" id="cpassword" placeholder="Confirm Password" name="cpassword">
 							<div class="valid-feedback"></div>
-							<div class="invalid-feedback">Passwords do not match.</div>
+							<div class="invalid-feedback" id="invalid_confirm">Passwords do not match.</div>
 						</div>
 						<div class="col-12">
 							<span class="au-p3">Use 8 or more characters with a mix of letters, numbers & symbols for a strong password.</span>
@@ -76,7 +76,7 @@
 					<div class="form-row">
 						<div class="col">
 							<div class="custom-file">
-								<input type="file" class="custom-file-input required_input" name="file_set" id="customFile">
+								<input type="file" class="custom-file-input required_input" name="file_set" id="customFile" accept="image/x-png,image/gif,image/jpeg" />
 								<label class="custom-file-label" for="customFile">Choose file</label>
 							</div>
 						</div>
@@ -115,13 +115,51 @@
 	$(document).on('click', '#btnSubmit', function(e){
 		e.preventDefault();
 		if(validate.standard("signups")){
-			$("#signups").submit();
+			var password = $('#password').val();
+			var pass_check = checkPasswordStrength(password);
+			if(pass_check){
+				$("#signups").submit();
+			}
 		}
 	});
 
 	$(window).resize(function() {
 		responsive();
 	});
+	
+	function checkPasswordStrength(password) {
+		var number = /([0-9])/;
+		var alphabets = /([a-zA-Z])/;
+		var special_characters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
+		var confirm_pass = $('#cpassword').val();
+		if (password.length < 8) {
+			$('#invalid_pass').show();
+			confirm_password(password, confirm_pass);
+			return false;
+		} else {
+			if (password.match(number) && password.match(alphabets) && password.match(special_characters)) {
+				if(confirm_password(password, confirm_pass)){
+					return true;
+				} else{
+					return false;
+				}
+				
+			} else {
+				$('#invalid_pass').show();
+				confirm_password(password, confirm_pass);
+				return false;
+			}
+		}
+	}
+	
+	function confirm_password(pass, confirm){
+		if(pass == confirm){
+			return true;
+		} else{
+			$('#invalid_confirm').show();
+			return false;
+		}
+	}
 
 	function responsive() {
 		//minimum height for hero banner
