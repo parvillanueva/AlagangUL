@@ -1,16 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Programs extends CI_Controller {
+class Programs extends GS_Controller {
 
 	public function index()
 	{
 
 		$data['content'] = "site/programs/list";
 		$data['meta'] = array(
-			// "title"         =>  "Home",
-			// "description"   =>  $this->Global_model->site_meta_og(38, 'site_menu', 'meta_description'),
-			// "keyword"       =>  $this->Global_model->site_meta_og(38, 'site_menu', 'meta_keywords')
+			"title"         =>  "Programs",
+			"description"   =>  "",
+			"keyword"       =>  ""
 		);
 		
 		$data['fb_og'] = array(
@@ -26,11 +26,15 @@ class Programs extends CI_Controller {
 	public function view()
 	{
 
+		$program_id = $this->uri->segment(2);
+		$program_alias = $this->uri->segment(3);
+		$user_details = $this->Gmodel->get_query('tbl_programs',"id = " . $program_id . " AND url_alias ='" . $program_alias . "'");
+		$data['details'] = $user_details;
 		$data['content'] = "site/programs/view";
 		$data['meta'] = array(
-			// "title"         =>  "Home",
-			// "description"   =>  $this->Global_model->site_meta_og(38, 'site_menu', 'meta_description'),
-			// "keyword"       =>  $this->Global_model->site_meta_og(38, 'site_menu', 'meta_keywords')
+			"title"         =>  "Program",
+			"description"   =>  "",
+			"keyword"       =>  ""
 		);
 		
 		$data['fb_og'] = array(

@@ -1,16 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Get_rewards extends CI_Controller {
+class Get_rewards extends GS_Controller {
 
 	public function index()
 	{
 
 		$data['content'] = "site/get_rewards/default";
 		$data['meta'] = array(
-			// "title"         =>  "Home",
-			// "description"   =>  $this->Global_model->site_meta_og(38, 'site_menu', 'meta_description'),
-			// "keyword"       =>  $this->Global_model->site_meta_og(38, 'site_menu', 'meta_keywords')
+			"title"         =>  "Rewards",
+			"description"   =>  "",
+			"keyword"       =>  ""
 		);
 		
 		$data['fb_og'] = array(

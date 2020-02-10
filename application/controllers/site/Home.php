@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Home extends GS_Controller {
 
 	public function index()
 	{
@@ -13,9 +13,9 @@ class Home extends CI_Controller {
 
 		$data['content'] = "site/home/default";
 		$data['meta'] = array(
-			// "title"         =>  "Home",
-			// "description"   =>  $this->Global_model->site_meta_og(38, 'site_menu', 'meta_description'),
-			// "keyword"       =>  $this->Global_model->site_meta_og(38, 'site_menu', 'meta_keywords')
+			"title"         =>  "Home",
+			"description"   =>  "",
+			"keyword"       =>  ""
 		);
 		
 		$data['fb_og'] = array(
