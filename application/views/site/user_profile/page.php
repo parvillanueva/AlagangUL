@@ -104,6 +104,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		responsive();
+		$('#email').attr('readonly', true);
 	});
 	
 	$(".custom-file-input").on("change", function() {
