@@ -10,6 +10,7 @@ class User extends CI_Controller {
 	}
 	
 	public function view($user_id){
+		$data['division'] = $this->Global_model->get_list_all('tbl_division');
 		$arrWhere = array(
 			'id' => $user_id
 		);

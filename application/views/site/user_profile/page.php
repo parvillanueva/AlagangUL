@@ -34,8 +34,10 @@
 					<div class="form-row">
 						<div class="col">
 							<select class="form-control custom-select required_input" >
-								<option value="" selected disabled>Division / Business Unit</option>
-								<option value="sample">Sample</option>
+									<option value="" selected disabled>Division / Business Unit</option>
+								<?php foreach($division as $div_lop){ ?>
+									<option value="<?php echo $div_lop->id; ?>"><?php echo $div_lop->name; ?></option>
+								<?php } ?>
 							</select>
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
