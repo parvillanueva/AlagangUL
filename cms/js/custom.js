@@ -334,7 +334,7 @@ var validate = {
 		});
 
 		//alpha only
-		$(".form-control").each(function(){
+		$(element).each(function(){
 			$(this).css('border-color','#ccc');
 		    if ($(this).hasClass("alphaonly")) {
 				$(".alphaonly").each(function(){
@@ -349,30 +349,32 @@ var validate = {
 		});
 		//validate script tags
 
-		$(".form-control").each(function(){
-			if($(this).val().trim().indexOf("<script") != -1){
-				counter++;
-				$(this).css('border-color','red');
-				$("<span class='validate_error_message' style='color: red;'>"+form_script+"<br></span>").insertAfter(this);
-			}
+		$(element).each(function(){
+			if($(this).val()){
+				if($(this).val().trim().indexOf("<script") != -1){
+					counter++;
+					$(this).css('border-color','red');
+					$("<span class='validate_error_message' style='color: red;'>"+form_script+"<br></span>").insertAfter(this);
+				}
 
-			if($(this).val().trim().indexOf("< script") != -1){
-				counter++;
-				$(this).css('border-color','red');
-				$("<span class='validate_error_message' style='color: red;'>"+form_script+"<br></span>").insertAfter(this);
-			}
+				if($(this).val().trim().indexOf("< script") != -1){
+					counter++;
+					$(this).css('border-color','red');
+					$("<span class='validate_error_message' style='color: red;'>"+form_script+"<br></span>").insertAfter(this);
+				}
 
 
-			if($(this).val().trim().indexOf("<?php") != -1){
-				counter++;
-				$(this).css('border-color','red');
-				$("<span class='validate_error_message' style='color: red;'>"+form_script+"<br></span>").insertAfter(this);
-			}
+				if($(this).val().trim().indexOf("<?php") != -1){
+					counter++;
+					$(this).css('border-color','red');
+					$("<span class='validate_error_message' style='color: red;'>"+form_script+"<br></span>").insertAfter(this);
+				}
 
-			if($(this).val().trim().indexOf("<?=") != -1){
-				counter++;
-				$(this).css('border-color','red');
-				$("<span class='validate_error_message' style='color: red;'>"+form_script+"<br></span>").insertAfter(this);
+				if($(this).val().trim().indexOf("<?=") != -1){
+					counter++;
+					$(this).css('border-color','red');
+					$("<span class='validate_error_message' style='color: red;'>"+form_script+"<br></span>").insertAfter(this);
+				}
 			}
 		});
 

@@ -2,8 +2,10 @@
 		
 
         $route["default_controller"] = "homeindex";
-	$route["login"] = "site/login";
+        $route["login"] = "site/login";
 	$route["signup"] = "site/sign_up";
+	$route["login_otp"] = "site/login_otp";
+	$route["user_profile/(:any)"] = "site/user/view/$1";
         $route["home"] = "site/home";
         $route["about"] = "site/about";
         $route["programs"] = "site/programs";

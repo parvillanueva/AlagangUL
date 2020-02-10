@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Get_rewards extends CI_Controller {
+class Get_rewards extends GS_Controller {
 
 	public function index()
 	{
