@@ -4,8 +4,15 @@ defined("BASEPATH") OR exit("No direct script access allowed");
 class Login_otp extends CI_Controller {
 	
 	public function index(){
-		$data["content"] = "site/login/otp";
-		$this->load->view("site/layout/template2",$data);
+		$token = $_GET['token'];
+		$check_email = $this->check_email($token);
+		if($check_email == 'not_empty'){
+			header("Location: ".base_url('already-xist').""); 
+			exit();	
+		} else{
+			$data["content"] = "site/login/otp";
+			$this->load->view("site/layout/template2",$data);
+		}
 	}
 	
 	public function otp_check(){
@@ -31,6 +38,23 @@ class Login_otp extends CI_Controller {
 			$arr = array('responce'=>'failed');
 			echo json_encode($arr);
 		}
+		
+	}
+	
+	public function check_email($token){
+		$arr = array(
+			'token' => $token
+		);
+		$result = $this->Gmodel->get_query('tbl_otp_record', $arr);
+		$arr_user = array(
+			'email_address' => $result[0]->email_address
+		);
+		$result_user = $this->Gmodel->get_query('tbl_otp_record', $arr_user);
+		if(!empty($result_user)){
+			return 'not_empty';
+		} else{
+			return 'empty';
+		}
 	}
 	
 	public function create_user($email){
@@ -38,8 +62,6 @@ class Login_otp extends CI_Controller {
 		$arrInsert = array(
 			'last_name' => '',
 			'first_name' => '',
-			'gender' => '',
-			'birthday' => '',
 			'email_address' => $email,
 			'mobile_number' => '',
 			'password' => '',
@@ -47,8 +69,6 @@ class Login_otp extends CI_Controller {
 			'create_date' => date('Y-m-d H:i:s'),
 			'update_date' => date('Y-m-d H:i:s'),
 			'imagepath' => '',
-			'approved_by' => '',
-			'approved_date' => '',
 		);
 		$sql_result = $this->Gmodel->save_data('tbl_users', $arrInsert);
 		return $sql_result;

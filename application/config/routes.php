@@ -11,7 +11,7 @@
         $route["programs"] = "site/programs";
         $route["events"] = "site/events";
         $route["get-rewards"] = "site/get_rewards";
-
+		$route["already-xist"] = "site/logout/already_exist";
 
         $route["create-program"] = "site/create_program";
         $route["programs/(:any)/(:any)"] = "site/programs/view/$1/$2";

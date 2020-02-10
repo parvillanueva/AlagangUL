@@ -24,7 +24,7 @@
 								<a href="#" class="nav-item nav-link">Sign In</a><!-- show this when logged out -->
 								<a href="#" class="nav-item nav-link">Sign Up</a><!-- show this when logged out -->
 								<a href="#" class="nav-item nav-link">Account Settings</a><!-- show this when logged in -->
-								<a href="#" class="nav-item nav-link">Logout</a><!-- show this when logged in -->
+								<a href="#" class="nav-item nav-link logout" id="logout">Logout</a><!-- show this when logged in -->
 							</div>
 						</div>
 						<div class="au-user">
@@ -61,7 +61,7 @@
 								<div class="au-dropdown dropdown-menu">
 									<a class="dropdown-item" href="#"><i class="fas fa-user"></i> Visit Profile</a>
 									<a class="dropdown-item" href="#"><i class="fas fa-user-cog"></i> Account Settings</a>
-									<a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+									<a class="dropdown-item" href="#" id="logout" ><i class="fas fa-sign-out-alt"></i> Logout</a>
 								</div>
 							</div>
 							<!-- end -->
@@ -73,5 +73,8 @@
 		</div>
 	</header>
 	<script type="text/javascript">
-		$("#<?= $active_menu;?>").addClass("active")
+		$("#<?= $active_menu;?>").addClass("active");
+		$(document).on('click', '#logout', function(){
+			window.location.href = "<?php echo base_url('site/logout') ?>";
+		});
 	</script>
