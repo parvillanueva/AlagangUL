@@ -54,6 +54,7 @@
 									<form action="index.html" class="au-form" id="login">
 										<span class="au-h4" id="failed_label"><font color="red">Incorrect username and Password!</font></span>
 										<span class="au-h4">Login</span>
+										<span class="au-h4" id="failed_label"><font color="red"><small>Incorrect username and Password. Please try again.</small></font></span>
 										<div class="form-row">
 											<div class="col au-iconned">
 												<i class="fas fa-envelope"></i>
