@@ -131,7 +131,7 @@
 							modal.loading(false);
 						} else{
 							modal.loading(false);
-							location.href = '<?=base_url("user");?>';	
+							location.href = '<?=base_url();?>';	
 						}
         			});
         		} else{

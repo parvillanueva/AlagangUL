@@ -8,14 +8,11 @@ class Login extends CI_Controller {
 		$this->load->view("site/login/login", $data);	
 	}
 	
-	public function session_set(){
-		$email = $_POST['email'];
-		$arr_where = array('email_address'=>$email);
-		$sql_result = $this->Gmodel->get_query('tbl_users',$arr_where);
+	public function session_set($data){
 		$arr_session = array(
-			'sess_email' => $sql_result[0]->email_address,
-			'sess_id'  => $sql_result[0]->id,
-			'sess_pass'  => $sql_result[0]->password,
+			'sess_email' => $data[0]->email_address,
+			'sess_id'  => $data[0]->id,
+			'sess_pass'  => $data[0]->password,
 			'sess_role'  => 1 
 		);
 		$this->session->set_userdata($arr_session);
@@ -25,13 +22,14 @@ class Login extends CI_Controller {
 	public function login_register(){
 		$arr_where = array(
 			'email_address' => $_POST['email_address'],
-			'password' => $_POST['password']
+			'password' => md5($_POST['password'])
 		);
 		$sql_result = $this->Gmodel->get_query('tbl_users',$arr_where);
 		if(empty($sql_result)){
 			$result = array('responce'=>'failed');
 			echo json_encode($result);
 		} else{
+			$this->session_set($sql_result);
 			$result = array('responce'=>'success');
 			echo json_encode($result);
 		}
