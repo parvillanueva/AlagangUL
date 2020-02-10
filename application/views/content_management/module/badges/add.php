@@ -3,62 +3,42 @@
 			$data['buttons'] = ['save','close']; // add, save, update
 			$this->load->view("content_management/template/buttons", $data);
 		?>	
- 		<div class="box-body">   
- 			<div id = "menu" class="form-horizontal">
-	            <div class="form-group">
-	              	<label class="col-sm-2 control-label">Menu Name</label>
-	              	<div class="col-sm-5">
-	                	<input id="menu_name" class="form-control required_input" placeholder="Menu Name">
-	              	</div>
-	            </div>
-	            <div class="form-group">
-	              	<label class="col-sm-2 control-label">Icon</label>
-	              	<div class="col-sm-5">
-	              		<div class="input-group"> 
-		                	<input id="icon" class="form-control required_input" placeholder="Click to Pick" readonly>
-		                	<span class="input-group-addon icon_preview"></span>
+		<form id="submit_form">
+	 		<div class="box-body">   
+	 			<div id = "badge" class="form-horizontal">
+		            <div class="form-group">
+		              	<label class="col-sm-2 control-label">Badge Name</label>
+		              	<div class="col-sm-5">
+		                	<input id="name" name="name" class="form-control required_input" placeholder="Badge Name">
 		              	</div>
-	              	</div>
-	            </div>
-	            <div class="form-group">
-	              	<label class="col-sm-2 control-label">Display</label>
-	              	<div class="col-sm-5">
-	              			<div id='roles'>
-	              				<table class="table table-bordered">
-						            <thead>
-						                <tr>
-						                    <th>Roles</th>
-						                    <th>Read</th>
-						                    <th >Write</th>
-						                    <th >Delete</th>
-						                </tr>
-						            </thead>
-						            <tbody class="table_body"></tbody>
-						        </table>
-	              			</div>
-	              	</div>
-	            </div>
-	            <!-- <div class="form-group">
-	              	<label class="col-sm-2 control-label">Status</label>
-	              	<div class="col-sm-5">
-	              		<select id="status" class="form-control">
-	                		<option value=1>Active</option>
-	                		<option value=0>Inactive</option>
-	                	</select>
-	              	</div>
-	            </div> -->
-	            <div class="form-group div_type">
-	              	<label class="col-sm-2 control-label">Type</label>
-	              	<div class="col-sm-5">
-	                	<select class="form-control menu_type required_input">
-	                		<option selected disabled>Select..</option>
-                            <option>Module</option>
-	                		<option>Group Menu</option>
-	                	</select>
-	              	</div>
-	            </div>
-	        </div>
- 		</div>
+		            </div>
+		            <div class="form-group">
+		              	<label class="col-sm-2 control-label">Icon</label>
+		              	<div class="col-sm-5">
+		              		<div class="input-group"> 
+			                	<input id="icon" class="form-control required_input" name="icon" placeholder="Click to Pick" readonly>
+			                	<span class="input-group-addon icon_preview"></span>
+			              	</div>
+		              	</div>
+		            </div>
+		            <div class="form-group">
+		              	<label class="col-sm-2 control-label">Color:</label>
+		              	<div class="col-sm-5">
+		                	<input id="color" name="color" class="form-control required_input jscolor" placeholder="Color">
+		              	</div>
+		            </div>
+		            <div class="form-group">
+		              	<label class="col-sm-2 control-label">Status</label>
+		              	<div class="col-sm-5">
+		              		<select id="status" name="status" class="form-control">
+		                		<option value=1>Active</option>
+		                		<option value=0>Inactive</option>
+		                	</select>
+		              	</div>
+		            </div>
+		        </div>
+	 		</div>
+ 		</form>
  </div>
 
 <div id="iconPicker" class="modal fade">
@@ -108,54 +88,7 @@
         array_pop($urls);
     ?>
 
-
- 	$('.icon-picker-list').html(html);
-
-    $(document).ready(function(){
-    	get_roles();
-    });
-
-
-	$('.s').html(html);
-
-	menu_id = "<?=$this->uri->segment('4')?>";
-	menu_group = "<?=$this->uri->segment('5')?>";
-	var menu_level = ( menu_id != 0 ) ? menu_level = "2" : menu_level = "1";
-
-	$(document).on('change', '.menu_type', function(e){
-		var selected = $(this).val();
-		if(selected  == "Module"){
-			//display template
-			var html = '';
-			html += '<div class="form-group hidden div_template">';
-			html += '	<label class="col-sm-2  hidden control-label">Template</label>';
-			html += '	<div class="col-sm-5">';
-			html += '		<select id="menu_template" class="form-control menu_template">';
-			html += '			<option selected disabled>Select..</option>';
-			// html += '			<option value="article_list">Article - Listing</option>';
-			// html += '			<option value="article_date">Article - Listing with Date Filter</option>';
-			// html += '			<option value="article_single">Article - Single</option>';
-			// html += '			<option value="article_single_banner">Article - Single w/ Banner</option>';
-			// html += '			<option value="simple_crud">CRUD List</option>';
-			html += '			<option value="blank" selected>Blank</option>';
-			html += '		</select>';
-			html += '	</div>';
-			html += '</div>';
-			html += '<div class="template_div"></div>';
-		} else {
-			$('.div_template').remove();
-		}
-
-		$(html).insertAfter('.div_type');
-	});
-
-	$(document).on('change', '#menu_template', function(e){
-		var url = "<?= base_url("content_management/preference/navigation/template");?>";
-		var data = { template : $(this).val() };
-		aJax.post(url,data,function(data){
-			$('.template_div').html(data);
-		})
-	});
+    $('.icon-picker-list').html(html);
 
 	$(document).on('click', '#icon', function(e){
 		modal.custom("#iconPicker","show");
@@ -168,241 +101,54 @@
 		$('.icon_preview').html('<i class="' +font_value + ' fa-lg"></i>');
 	});
 
-	var counter = 0;
-	function get_roles(){
-		var url = "<?= base_url('content_management/global_controller')?>";
-		var data = {
-			event : 'list',
-			select : 'id,name,status',
-			table: 'cms_user_roles',
-			query: 'status = 1'
-		}
-
-		aJax.post(url,data,function(result){
-			var obj = is_json(result);
-			var htm = '';
-
-
-			$.each(obj, function(x, y) {
-				htm += "<tr>";
-				htm += "   <td><input type='hidden' class='role_id_"+counter+"' data-id="+y.id+">" +y.name+ "</td>";
-				htm += "   <td class='chckbx_td'><input class='chckbx_role read_role_"+counter+"' type=checkbox name='menu_role_read' data-id="+y.id+" value='0'></td>";
-				htm += "   <td class='chckbx_td'><input class='chckbx_role write_role_"+counter+"' type=checkbox name='menu_role_write' data-id="+y.id+" value='0' onchange='chckboxfunction("+counter+")'></td>";
-				htm += "   <td class='chckbx_td'><input class='chckbx_role delete_role_"+counter+"' type=checkbox name='menu_role_delete'  data-id="+y.id+" value='0' onchange='chckboxfunction("+counter+")'></td>";
-				htm += "</tr>";
-
-				counter++;
-			});
-
-			$('.table_body').html(htm);
-
-
-		});
-
-	}
-
-
-	$(document).on('change', '.chckbx_role', function(){
-		if (this.checked==true) { 
-		 	$(this).val(1);
-		} else {
-			$(this).val(0);
-		}
-
-	});
-
-
-
-	function chckboxfunction(count_id) {
-		if (($('input.delete_role_'+count_id+'').is(':checked')) || ($('input.write_role_'+count_id+'').is(':checked'))) {
-		  	  $('.read_role_'+count_id+'').prop("checked", true);
-		   	  $('.read_role_'+count_id+'').attr('disabled',true);
-		   	  $('.read_role_'+count_id+'').val(1);		
-		  } else {
- 			 $('.read_role_'+count_id+'').attr('disabled',false);
-		  }
-	}
-
-
-
 	$(document).on('click', '#btn_save', function(e){
 
-		if(validate.standard('menu')){
-			if(is_exists('cms_menu', 'menu_name', $('#menu_name').val().toLowerCase(), 'menu_status') != 0)
-			{
-                var error_message = "<span class='validate_error_message' style='color: red;'>The information already exists.<br></span>";
-                $('#menu_name').css('border-color','red');
-                $(error_message).insertAfter($('#menu_name'));
-            }
-            else
-            {
+		if(validate.all()){
+			// if(is_exists('cms_menu', 'menu_name', $('#menu_name').val().toLowerCase(), 'menu_status') != 0)
+			// {
+   //              var error_message = "<span class='validate_error_message' style='color: red;'>The information already exists.<br></span>";
+   //              $('#menu_name').css('border-color','red');
+   //              $(error_message).insertAfter($('#menu_name'));
+   //          }
+   //          else
+   //          {
             	modal.confirm("Are you sure you want to save this record?", function(result){
 					if(result)
 					{
-						var template = $('#menu_template').val();
-						if(template){
-							switch(template.trim()) {
-							    case "article_list":
-							    case "article_single":
-							    case "article_single_banner":
-							    case "article_date":
-							    	articles();	        	
-							        break;
-							   	case "blank":
-							   		blank();
-							   		break;
-							   	case "simple_crud":
-							   		crud();
-							   		break;
-
-							    default:
-							        // code block
-							}
-						} else {
-							group();
-						}
+                        modal.loading(true);
+                        var form = $('#submit_form')[0]; // You need to use standard javascript object here
+                        var formData = new FormData(form);
+                        $.ajax({
+                              url:"<?= base_url('content_management/site_badges/insert');?>",
+                              type:"POST",
+                              dataType:"json",
+                              processData: false,
+                              contentType: false,
+                              data:formData,
+                              beforeSend: function() {
+                              modal.loading(true);
+                              },
+                              success: function(data) {
+                              },
+                              complete: function(data) {
+                                modal.loading(false);
+                                modal.alert("<?= $this->standard->dialog("add_success"); ?>", function(){
+                                    location.href = '<?=base_url("content_management/site_badges") ?>';
+                                });
+                              },
+                        }); 
 					}
 				})
-			}
+			// }
 		}
 	});
 
-
-
-
-
-
-	function group()
-	{
-		var url = "<?= base_url("content_management/preference/navigation/save");?>";	
-		var data = {
-			menu : $('#menu_name').val().toLowerCase(),
-			icon : $('#icon').val(),
-			template : "group",
-			parent_id : menu_id,
-			menu_level : menu_level,
-		}
-		aJax.post(url,data,function(result){
-			var obj = is_json(result);
-			menu_roles(obj);
-			modal.alert("Successfully Created",function(){
-				location.href = '<?=base_url("content_management/cms_menu/menu/");?>'+menu_id;
-			})
-		})
-	}
-	function crud()
-	{
-        var details = [];
-
-		$('.crud_table tr').each(function() {
-			var obj = {};
-		    $.each(this.cells, function(){
-		        var data_class = $(this).attr("data-class");
-		        obj[data_class] = $(this).find(".data-value").val();
-		    });
-		    details.push(obj);
-		});
-
-		var url = "<?= base_url("content_management/preference/navigation/save");?>";	
-		var data = {
-			menu : $('#menu_name').val().toLowerCase(),
-			icon : $('#icon').val(),
-			template : $('#menu_template').val(),
-			table : $('#sql_table').val(),
-			role : $('#role').val(),
-			status : $('#status').val(),
-			form_data : details,
-			parent_id : menu_id
-		}
-		aJax.post(url,data,function(result){
-			modal.alert("Successfully Created",function(){
-                location.href = '<?=base_url("content_management/cms_menu/menu/");?>'+menu_id;
-			})
-		})
-	}
-
-	function blank()
-	{		
-		
-		var url = "<?= base_url("content_management/preference/navigation/save");?>";	
-		var data = {
-			menu : $('#menu_name').val().toLowerCase(),
-			icon : $('#icon').val(),
-			template : $('#menu_template').val(),
-			parent_id : menu_id,
-			menu_level : menu_level,
-		}
-		aJax.post(url,data,function(result){
-			var obj = is_json(result);
-			menu_roles(obj);
-			modal.alert("Successfully Created",function(){
-				location.href = '<?=base_url("content_management/cms_menu/menu/");?>'+menu_id;
-			})
-		})
-	}
-
-
-
-
-
-	function articles()
-	{
-		var url = "<?= base_url("content_management/preference/navigation/save");?>";	
-		var data = {
-			menu : $('#menu_name').val(),
-			icon : $('#icon').val(),
-			template : $('#menu_template').val(),
-			table : $('#sql_table').val(),
-			role : $('#role').val(),
-			status : $('#status').val(),
-		}
-		aJax.post(url,data,function(result){
-			modal.alert("Successfully Created",function(){
-				location.reload();
-			})
-		})
-	}
-
-
-
-	function menu_roles(menu_id){
-		console.log(menu_id);
-		var url = "<?= base_url('content_management/global_controller');?>";
-		for (var i = 0; i < counter; i++) {
-		    var data = {
-		    	event : 'insert',
-		    	table : 'cms_menu_roles',
-		    	data : {
-		   			role_id : $('.role_id_'+i+'').attr('data-id'),
-		         	menu_id : menu_id,
-					menu_role_read: $('.read_role_'+i+'').val(),
-					menu_role_write: $('.write_role_'+i+'').val(),
-					menu_role_delete: $('.delete_role_'+i+'').val(),
-					menu_role_updated_date: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
-					menu_role_created_date: moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
-		    	}
-
-			 }
-		 	aJax.post(url ,data ,function(result){
-		 		var obj = is_json(result);
-		 	});
-		}
-
-	}
-
-$(document).on('click', '#btn_close', function(e){
-    location.href = '<?=base_url("content_management/cms_menu/menu"); ?>';
-});
+	$(document).on('click', '#btn_close', function(e){
+	    location.href = '<?=base_url("content_management/site_badges"); ?>';
+	});
 
 </script>
 
 
 <style type="text/css">
-	.chckbx_td{
-		text-align:center;
-	}
-
-
-
-
 </style>

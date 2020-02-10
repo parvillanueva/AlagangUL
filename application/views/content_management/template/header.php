@@ -51,6 +51,8 @@
 		<script type="text/javascript" src="<?= base_url();?>/cms/js/bootstrap.min.js" ></script>
 		<script type="text/javascript" src="<?= base_url();?>/cms/js/placeholder.js" ></script>
 		<script type="text/javascript" src="<?= base_url();?>/cms/js/bootstrap-material-datetimepicker.js" ></script>
+		<script type="text/javascript" src="<?= base_url();?>/cms/js/jscolor.js" ></script>
+
 		<!-- For Export -->
 		<script type="text/javascript" src="<?= base_url();?>/cms/js/FileSaver.js" ></script>
 		<script type="text/javascript" src="<?= base_url();?>/cms/js/xlsx.core.min.js" ></script>
