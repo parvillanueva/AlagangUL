@@ -63,7 +63,11 @@
 								<div class="au-dropdown dropdown-menu">
 									<a class="dropdown-item" href="profile"><i class="fas fa-user"></i> Visit Profile</a>
 									<a class="dropdown-item" href="#"><i class="fas fa-user-cog"></i> Account Settings</a>
+<<<<<<< HEAD
 									<a class="dropdown-item" href="<?= base_url("log-out");?>"><i class="fas fa-sign-out-alt"></i> Logout</a>
+=======
+									<a class="dropdown-item" href="#" id="logout" ><i class="fas fa-sign-out-alt"></i> Logout</a>
+>>>>>>> master_doms
 								</div>
 							</div>
 							<!-- end -->
@@ -75,5 +79,8 @@
 		</div>
 	</header>
 	<script type="text/javascript">
-		$("#<?= $active_menu;?>").addClass("active")
+		$("#<?= $active_menu;?>").addClass("active");
+		$(document).on('click', '#logout', function(){
+			window.location.href = "<?php echo base_url('site/logout') ?>";
+		});
 	</script>
