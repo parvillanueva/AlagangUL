@@ -144,6 +144,42 @@ class Gcontroller extends CI_Controller {
 
 				echo json_encode($result_return);
 				break;
+			case 'batch_update':
+				try { 
+					$table = $_POST['table'];
+					$field = $_POST['field'];
+					$where_in = $_POST['where_in'];
+					$data = $_POST['data'];
+					$where = implode(",",$where_in);
+					//get old data for audit trail
+					
+					$query = $field . " IN (".$where.")";
+					$old_data = $this->Gmodel->get_data_list($table, $query, count($where_in), 0, "*" ,null,null,null);
+
+					//update new data
+					$status = $this->Gmodel->batch_update($table,$data,$field,$where_in);
+					
+					$result_return = array(
+						"message"=> $status 
+					);
+
+					echo json_encode($result_return);	
+
+					if(isset($data['status'])){
+						if($data['status'] == -2){
+								$this->audit_trail_controller("Delete", $data, $old_data);    
+						} else {
+								$this->audit_trail_controller("Update", $data, $old_data);
+						}
+					} else {
+						$this->audit_trail_controller("Update", $data, $old_data);
+					}
+					
+				} catch (Exception $e) {
+					echo json_encode("Error updating data: " . $e->getMessage());
+				}
+				break;
+
 
 		}
 	}
