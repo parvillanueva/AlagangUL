@@ -46,6 +46,7 @@ class Login_otp extends CI_Controller {
 			'token' => $token
 		);
 		$result = $this->Gmodel->get_query('tbl_otp_record', $arr);
+<<<<<<< Updated upstream
 		$arr_user = array(
 			'email_address' => $result[0]->email_address
 		);
@@ -54,7 +55,22 @@ class Login_otp extends CI_Controller {
 			return 'not_empty';
 		} else{
 			return 'empty';
+=======
+		if(count($result) > 0 ){
+			$arr_user = array(
+				'email_address' => @$result[0]->email_address
+			);
+			$result_user = $this->Gmodel->get_query('tbl_users', $arr_user);
+			if(!empty($result_user)){
+				return 'not_empty';
+			} else{
+				return 'empty';
+			}
+		} else {
+			return "not_empty";
+>>>>>>> Stashed changes
 		}
+		
 	}
 	
 	public function create_user($email){

@@ -13,11 +13,12 @@
 </div>
 <div class="col-md-6">
 	<div class="row au-fullheight">
-		<div class="col-12 au-padding au-flexcenter">
+		<div class="col-12 au-padding au-flexcenter"> 
 			<div class="au-form-wrapper au-inner">
 				<div class="au-form" id="signup">
 					<div class="form-row">
-						<span class="au-h4" id="failed_label"><font color="red">Email Address is already exist!!!</font></span>
+						<!-- <span class="au-h2">Thank you!</span> -->
+						<span class="au-h4">The requested URL was not found. <a href="<?= base_url("login") ;?>" class="au-lnk">click here</a> to go back to Login page.</span>
 					</div>
 				</div>
 			</div>
