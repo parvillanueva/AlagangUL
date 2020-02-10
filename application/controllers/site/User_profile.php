@@ -2,6 +2,12 @@
 defined("BASEPATH") OR exit("No direct script access allowed");
 
 class User extends GS_Controller {
+	public function index(){
+		//$data["title"] = "Content Management";
+		//$data["PageName"] = ("User");
+		$data["content"] = "site/user_profile/page";
+		$this->load->view("site/layout/template2",$data);	
+	}
 	
 	public function view($user_id){
 		$arrWhere = array(
@@ -11,7 +17,7 @@ class User extends GS_Controller {
 		$data['data_set'] = $result;
 		$data["title"] = "Content Management";
 		$data["PageName"] = ("User");
-		$data["content"] = "site/user/user";
+		$data["content"] = "site/user_profile/page";
 		$this->load->view("layout/layout", $data);	
 	}
 	
