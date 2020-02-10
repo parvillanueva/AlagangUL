@@ -8,7 +8,7 @@
 							<img src="assets/img/au-menu.svg" width="28px" height="28px">
 						</button> -->
 					</div>
-					<a href="index.html" class="au-navbar-brand navbar-brand">
+					<a href="<?= base_url();?>" class="au-navbar-brand navbar-brand">
 						<img src="<?php echo base_url().'assets/img/au-logo.png'?>" alt="Alagang Unilab Logo" class="au-logo">
 					</a>
 					<div class="d-lg-none">

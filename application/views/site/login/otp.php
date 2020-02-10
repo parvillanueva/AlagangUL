@@ -18,7 +18,7 @@
 				<div class="au-form" id="otp">
 					<span class="au-h4">Input One-Time Password</span>
 					<div class="alert alert_failed alert-warning">Incorrect OTP!</div>
-					<span class="au-p2">Please input the one-time-password that has been sent to your email address. If you arrived here by mistake, <a href="login.html" class="au-lnk">click here</a> to go back to Login page.</span>
+					<span class="au-p2">Please input the one-time-password that has been sent to your email address. If you arrived here by mistake, <a href="<?= base_url("log-in") ;?>" class="au-lnk">click here</a> to go back to Login page.</span>
 					<div class="form-row">
 						<div class="col">
 							<input type="text" class="form-control au-otp" id="otp1" name="otp" required pattern="[0-9]{1}" maxlength="1" 

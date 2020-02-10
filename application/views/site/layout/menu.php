@@ -13,7 +13,7 @@
 				<button type="button" class="au-navbar-toggler navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
 					<img src="<?=base_url()?>assets/site/img/au-menu.svg" width="28px" height="28px">
 				</button>
-				<a href="home" class="au-navbar-brand navbar-brand">
+				<a href="<?= base_url();?>" class="au-navbar-brand navbar-brand">
 					<img src="<?=base_url()?>assets/site/img/au-logo.png" alt="Alagang Unilab Logo" class="au-logo">
 				</a>
 				<div class="d-lg-none">
