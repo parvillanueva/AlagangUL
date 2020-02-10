@@ -10,9 +10,13 @@
 		<meta name="robots" content="no-cache" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge;" />
 
+		<link rel="stylesheet" href="<?= base_url();?>cms/font-awesome2/css/all.css">
+		<link rel="stylesheet" href="<?= base_url();?>cms/font-awesome2/css/fontawesome.min.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 		<link rel="stylesheet" href="<?= base_url();?>cms/font-awesome/css/font-awesome.min.css">
+
+
 		<link href="<?= base_url();?>cms/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<link href="<?= base_url();?>cms/css/bootstrap.css" rel="stylesheet" type="text/css" />
 		<link href="<?= base_url();?>cms/css/cms.css" rel="stylesheet" type="text/css" />
