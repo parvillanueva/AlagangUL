@@ -15,7 +15,7 @@
 	<div class="row au-fullheight">
 		<div class="col-12 au-padding au-flexcenter">
 			<div class="au-form-wrapper au-inner">
-				<form action="<?= base_url('site/user_profile/submit'); ?>" method="post" enctype="multipart/form-data" class="au-form" id="signups">
+				<form action="<?= base_url('user_profile/submit'); ?>" method="post" enctype="multipart/form-data" class="au-form" id="signups">
 					<span class="au-h4">Sign Up</span>
 					<span class="au-p2">Create your account by filling out the form below.</span>
 
