@@ -26,6 +26,10 @@ class Programs extends GS_Controller {
 	public function view()
 	{
 
+		$program_id = $this->uri->segment(2);
+		$program_alias = $this->uri->segment(3);
+		$user_details = $this->Gmodel->get_query('tbl_programs',"id = " . $program_id . " AND url_alias ='" . $program_alias . "'");
+		$data['details'] = $user_details;
 		$data['content'] = "site/programs/view";
 		$data['meta'] = array(
 			"title"         =>  "Program",
