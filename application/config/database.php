@@ -1,6 +1,7 @@
 <?php defined("BASEPATH") OR exit("No direct script access allowed");
 		$whitelist = array(
 		    "127.0.0.1",
+		    "172.29.70.126",
 		    "::1"
 		);
 
