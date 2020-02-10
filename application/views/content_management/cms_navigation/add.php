@@ -109,12 +109,14 @@
     ?>
 
 
+ 	$('.icon-picker-list').html(html);
+
     $(document).ready(function(){
     	get_roles();
     });
 
 
-	$('.icon-picker-list').html(html);
+	$('.s').html(html);
 
 	menu_id = "<?=$this->uri->segment('4')?>";
 	menu_group = "<?=$this->uri->segment('5')?>";

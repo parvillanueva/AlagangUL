@@ -1887,6 +1887,19 @@ $config['category_name']      = array(
                                 'label'         => 'Category Name'
                             );
 
+
+$config['division_name']      = array(
+                                'type'          => 'text',
+                                'name'          => 'name',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control',
+                                'id'            => 'name',
+                                'maxlength'     => 250,
+                                'required'      => true,
+                                // 'accept'        => '/[^a-zA-Z0-9\u00f1\u00d1 .,-\/\']/g',
+                                'placeholder'   => 'Division Name',
+                                'label'         => 'Division Name'
+                            );
 $config['user_otp'] = array(
                             'type'          => 'text',
                             'name'          => 'user_otp',

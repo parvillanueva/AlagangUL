@@ -74,6 +74,30 @@
         location.href = ('<?= base_url()."content_management/"?>site_category/add');
     })
 
+    $(document).on('click','.status_action',function(e){
+        var status = $(this).attr("data-status");
+        var id = "";
+        var name = "";
+
+        modal.confirm("Are you sure you want to Update this record?",function(result){
+            if(result){
+                $('.selectall_user').prop('checked', false);
+                $('.select:checked').each(function(index) {
+                    id = $(this).attr('data-id');
+                    // name = $(this).attr('data-name');
+
+                    AJAX.update.table("tbl_category");
+                    AJAX.update.where("id",id);
+
+                    AJAX.update.params("status",status);
+
+                    AJAX.update.exec(function(result){
+                        get_data(keyword);
+                    });
+                });
+            }
+        })
+    });
     
 </script>
 
