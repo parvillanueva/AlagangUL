@@ -1,8 +1,3 @@
-<?php 
-	// echo "<pre>";
-	// print_r($details);
-	// echo "</pre>";
-?>
 
 <div class="container-fluid au-heading">
 	<div class="au-container au-padding">
@@ -15,6 +10,10 @@
 				<div class="au-phstats">
 					<span class="au-members"><i class="fas fa-user-friends"></i><?= $details['members_count'];?> <?= ($details['members_count'] > 1 ) ? 'Members' : 'Member';?></span>
 					<a href="#" class="au-lnk"><span class="au-share"><i class="fas fa-share-alt"></i> Share on <img src="<?= base_url();?>assets/site/img/au-workplace.svg" alt="Workplace"></span></a>
+					
+					<?php if($details['is_admin']) { ?>
+						<a href="#" class="au-lnk" data-toggle="modal" data-target="#editPrgoramDetails"><span class="au-share"><i class="fas fa-pen"></i> Edit Details</a>
+					<?php } ?>
 				</div>
 			</div>
 		</div>
@@ -204,3 +203,79 @@
 
 	</div>
 </div>
+
+<!-- Edit Details Modal -->
+<div class="modal fade" id="editPrgoramDetails" tabindex="-1" role="dialog" aria-labelledby="editPrgoramDetails" aria-hidden="true">
+  	<div class="modal-dialog modal-lg" role="document">
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<h5 class="modal-title" id="editPrgoramDetails">Edit Details</h5>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          			<span aria-hidden="true">&times;</span>
+        		</button>
+      		</div>
+      		<div class="modal-body">
+      			<form action="<?= base_url("programs/") . $details['details'][0]->id . "/" . $details['details'][0]->url_alias . "/update";?>" method="post" enctype="multipart/form-data" class="au-form" id="editprogramform">
+	        		<div class="form-row">
+						<div class="col">
+							<div class="custom-file">
+								<input type="file" class="custom-file-input" name="programImage" id="customFile" onchange="readURLImgStandardPreview(this);" accept="image/x-png,image/gif,image/jpeg" />
+								<label class="custom-file-label" for="customFile">Choose file</label>
+							</div>
+							<img  style="width: 50%;" src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" id="previewImage"/>
+						</div>
+					</div>
+					<br>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Program Name" name="programName" value="<?= $details['details'][0]->name;?>">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+					<br>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Areas Covered" name="areaCovered" value="<?= $details['details'][0]->area_covered;?>">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+					<br>
+	        		<div class="form-row">
+						<div class="col">											
+							<textarea type="text" class="form-control required_input no_html" id="lname" placeholder="Program Overview" name="overview" rows=5><?= $details['details'][0]->overview;?></textarea>
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+				</form>
+      		</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary" id="btnSubmit">Save changes</button>
+     		</div>
+    	</div>
+  	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).on('click', '#btnSubmit', function(e){
+		e.preventDefault();
+		if(validate.standard("editprogramform")){
+			$("#editprogramform").submit();
+		}
+	});
+
+	function readURLImgStandardPreview(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var extension = input.files[0].name.split('.').pop().toLowerCase();
+                var base64 = e.target.result;
+               	$("#previewImage").attr("src",base64);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
