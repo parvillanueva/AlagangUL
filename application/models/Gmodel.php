@@ -82,5 +82,5 @@ date_default_timezone_set('Asia/Taipei');
 			$q = $this->db->get();
 			// return $this->db->last_query();
 			return $q->result();
-		}
+		}		
 	}
