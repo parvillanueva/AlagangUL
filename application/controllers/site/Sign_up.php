@@ -36,8 +36,9 @@ class Sign_up extends CI_Controller {
 	function send_sgrid($from, $fr_name, $to, $subject){
 		$otp = mt_rand(100000, 999999);
 		$token = md5(uniqid(rand(), true));
-		$link = base_url().'login_otp?token='.$token;
-		$content = '<p>link = '.$link.' <br> otp = '.$otp.'</p>';
+		$this->session_set($token);
+		//$link = base_url().'login_otp?token='.$token;
+		$content = '<p> otp = '.$otp.'</p>';
 		$this->otp_save($otp, $from, $token);
 		$arr = array(
 			'from' => $from,
@@ -49,6 +50,13 @@ class Sign_up extends CI_Controller {
 		echo $this->sndgrd->send($arr);
 	}
 	
+	public function session_set($token){
+		$arr_token = array(
+			'token' => $token,
+		);
+		$this->session->set_userdata($arr_token);
+	}
+	
 	function otp_save($otp, $email, $token){
 	date_default_timezone_set('Asia/Manila'); 
 		$arrInsert = array(
@@ -58,6 +66,51 @@ class Sign_up extends CI_Controller {
 			'create_date' => date('Y-m-d H:i:s'),
 		);
 		$this->Gmodel->save_data('tbl_otp_record', $arrInsert);
+	}
+	
+	function email_check_fpw(){
+		$email = $_POST['email'];
+		$email_check = $this->email_check($email);
+		if($email_check == 'not_empty'){
+			echo $this->email_send_fpw($email);
+		} else{
+			echo 404;
+		}
+	}
+	
+	function email_send_fpw(){
+		$from = $_POST['email'];
+		$fr_name = 'Guest';
+		$subject = 'Link Registration and OTP';
+		$this->send_sgrid_fpw($from, $fr_name, $from, $subject);
+	}
+	
+	function send_sgrid_fpw($from, $fr_name, $to, $subject){
+		$otp = mt_rand(100000, 999999);
+		$token = md5(uniqid(rand(), true));
+		$this->session_set($token);
+		//$link = base_url().'login_otp_fpw?token='.$token;
+		$content = '<p>otp = '.$otp.'</p>';
+		$this->otp_save_fpw($otp, $from, $token);
+		$arr = array(
+			'from' => $from,
+			'from_name' => $fr_name,
+			'to' => $to,
+			'subject' => $subject,
+			'content' => $content,
+		);
+		echo $this->sndgrd->send($arr);
+	}
+	
+	function otp_save_fpw($otp, $email, $token){
+	date_default_timezone_set('Asia/Manila'); 
+		$arrInsert = array(
+			'otp_code' => $otp,
+			'email_address' => $email,
+			'token' => $token,
+			'create_date' => date('Y-m-d H:i:s'),
+		);
+		$this->Gmodel->save_data('tbl_otp_record_fpw', $arrInsert);
 	}
 	
 	function thankyou_message(){

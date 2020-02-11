@@ -67,7 +67,7 @@
 				} else{
 					if(result == 202){
 						modal.loading(false);
-						location.href = '<?=base_url("site/sign_up/thankyou_message");?>';
+						location.href = '<?=base_url("login_otp");?>';
 					}
 				}
 			});

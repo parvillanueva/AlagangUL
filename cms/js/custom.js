@@ -611,6 +611,7 @@ var modal = {
 		});
 	},
 	alert : function(message, cb){
+		console.log(message);
 		bootbox.alert({
 		    message: message,
 		    callback: cb,
