@@ -85,7 +85,27 @@ class Login_otp extends CI_Controller {
 			'imagepath' => '',
 		);
 		$sql_result = $this->Gmodel->save_data('tbl_users', $arrInsert);
+		$user_id = $this->get_user_data($email);
+		$this->create_points($user_id);
 		return $sql_result;
+	}
+	
+	public function get_user_data($email){
+		$arr = array(
+			'email_address' => $email
+		);
+		$result = $this->Gmodel->get_query('tbl_users', $arr);
+		return $result[0]->id;
+	}
+	
+	public function create_points($user_id){
+		$arrInsert = array(
+			'user_id' => $user_id,
+			'current_points' => 0,
+			'total_points' => 0,
+			'update_date' => date('Y-m-d H:i:s'),
+		);
+		$sql_result = $this->Gmodel->save_data('tbl_users_points', $arrInsert);
 	}
 	
 	public function email_exist($email){

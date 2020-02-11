@@ -1,5 +1,5 @@
 <?php
-	$user_id = $this->session->userdata('sess_id');
+	$user_id = $this->session->userdata('user_sess_id');
 	$arr_where = array(
 		'id' => $user_id
 	);

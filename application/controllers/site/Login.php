@@ -10,10 +10,10 @@ class Login extends CI_Controller {
 	
 	public function session_set($data){
 		$arr_session = array(
-			'sess_email' => $data[0]->email_address,
-			'sess_id'  => $data[0]->id,
-			'sess_pass'  => $data[0]->password,
-			'sess_role'  => 1 
+			'user_sess_email' => $data[0]->email_address,
+			'user_sess_id'  => $data[0]->id,
+			'user_sess_pass'  => $data[0]->password,
+			'user_sess_role'  => 1 
 		);
 		$this->session->set_userdata($arr_session);
         echo json_encode(array("status"=>TRUE));

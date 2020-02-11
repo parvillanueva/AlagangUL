@@ -13,10 +13,29 @@ class Sign_up extends CI_Controller {
 		if($email_result == 'not_empty'){
 			echo json_encode(array('responce'=>'exist'));
 		} else{
-			$from = $_POST['email'];
-			$fr_name = 'Guest';
-			$subject = 'Link Registration and OTP';
-			$this->send_sgrid($from, $fr_name, $from, $subject);
+			$explode_email = explode("@",$_POST['email']);
+			$white_test = $this->white_list_check($explode_email[1]);
+			if($white_test == 'empty'){
+				echo json_encode(array('responce'=>'no_list'));
+			} else{
+				$from = $_POST['email'];
+				$fr_name = 'Guest';
+				$subject = 'Link Registration and OTP';
+				$this->send_sgrid($from, $fr_name, $from, $subject);
+			}
+		}
+	}
+	
+	public function white_list_check($data){
+		$arrWhere = array(
+			'domain' => $data
+		);
+		
+		$sql = $this->Global_model->get_list_query('tbl_email_domain_whitelist', $arrWhere);
+		if(!empty($sql)){
+			return 'not_empty';
+		} else{
+			return 'empty';
 		}
 	}
 	
