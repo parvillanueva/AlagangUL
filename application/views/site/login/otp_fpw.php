@@ -75,7 +75,7 @@
 		var otp5 = $('#otp5').val();
 		var otp6 = $('#otp6').val();
 		if(otp1 != '' && otp2 != '' && otp3 != '' && otp4 != '' && otp5 != '' && otp6 != ''){
-			var url = "<?php echo base_url('site/login_otp/otp_check') ?>"; 
+			var url = "<?php echo base_url('site/login_otp/otp_check_fpw') ?>"; 
 			var data = {
 				otp_code : otp1+otp2+otp3+otp4+otp5+otp6,
 				token : "<?php echo $_SESSION['token']?>"
@@ -84,7 +84,7 @@
 				var obj = is_json(result);
 				if(obj.responce == 'success'){
 					modal.loading(false);
-					window.location.href = "<?php echo base_url().'user_profile/' ?>"+obj.user_id;
+					window.location.href = "<?php echo base_url().'reset_password/' ?>"+obj.user_id;
 				} else{
 					$(".alert_failed").show();
 					modal.loading(false);

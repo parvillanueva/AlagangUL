@@ -4,14 +4,23 @@ defined("BASEPATH") OR exit("No direct script access allowed");
 class Login_otp extends CI_Controller {
 	
 	public function index(){
-		$token = $_GET['token'];
-		$check_email = $this->check_email($token);
-		if($check_email == 'not_empty'){
+		$token = $_SESSION['token'];
+		$arr = array(
+			'token' => $token
+		);
+		$result = $this->Gmodel->get_query('tbl_otp_record', $arr);
+		if(!empty($result)){
+			$check_email = $this->check_email($token);
+			if($check_email == 'not_empty'){
+				header("Location: ".base_url('already-xist').""); 
+				exit();	
+			} else{
+				$data["content"] = "site/login/otp";
+				$this->load->view("site/layout/template2",$data);
+			}
+		} else{
 			header("Location: ".base_url('already-xist').""); 
 			exit();	
-		} else{
-			$data["content"] = "site/login/otp";
-			$this->load->view("site/layout/template2",$data);
 		}
 	}
 	
@@ -38,7 +47,7 @@ class Login_otp extends CI_Controller {
 			$arr = array('responce'=>'failed');
 			echo json_encode($arr);
 		}
-		
+		$this->session->sess_destroy();
 	}
 	
 	public function check_email($token){
@@ -46,16 +55,6 @@ class Login_otp extends CI_Controller {
 			'token' => $token
 		);
 		$result = $this->Gmodel->get_query('tbl_otp_record', $arr);
-<<<<<<< Updated upstream
-		$arr_user = array(
-			'email_address' => $result[0]->email_address
-		);
-		$result_user = $this->Gmodel->get_query('tbl_users', $arr_user);
-		if(!empty($result_user)){
-			return 'not_empty';
-		} else{
-			return 'empty';
-=======
 		if(count($result) > 0 ){
 			$arr_user = array(
 				'email_address' => @$result[0]->email_address
@@ -68,7 +67,6 @@ class Login_otp extends CI_Controller {
 			}
 		} else {
 			return "not_empty";
->>>>>>> Stashed changes
 		}
 		
 	}
@@ -102,5 +100,40 @@ class Login_otp extends CI_Controller {
 			$arr = array('result'=> 'empty');
 			return $arr;
 		}
+	}
+	
+	public function otp_fpw(){
+		$token = $_SESSION['token'];
+		$arr = array(
+			'token' => $token
+		);
+		$result = $this->Gmodel->get_query('tbl_otp_record_fpw', $arr);
+		if(!empty($result)){
+			$data["content"] = "site/login/otp_fpw";
+			$this->load->view("site/layout/template2",$data);
+		} else{
+			header("Location: ".base_url('already-xist').""); 
+			exit();	
+		}
+	}
+	
+	public function otp_check_fpw(){
+		$otp = $_POST['otp_code'];
+		$token = $_POST['token'];
+		$arr = array(
+			'otp_code' => $otp,
+			'token' => $token
+		);
+		$result = $this->Gmodel->get_query('tbl_otp_record_fpw', $arr);
+		if(!empty($result)){
+			$email_data = $result[0]->email_address;
+			$email_check = $this->email_exist($email_data);
+			$arr = array('responce'=>'success', 'user_id'=>$email_check['user_id']);
+			echo json_encode($arr);
+		} else{
+			$arr = array('responce'=>'failed');
+			echo json_encode($arr);
+		}
+		$this->session->sess_destroy();
 	}
 }	

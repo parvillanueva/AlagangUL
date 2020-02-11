@@ -83,7 +83,7 @@
 											<div class="col-md-6">					
 												<div class="form-row">
 													<div class="col text-right">
-														<a href="forgotpassword.html" class="au-lnk">Forgot your password?</a>
+														<a href="#" class="au-lnk" id="forgot_password">Forgot your password?</a>
 													</div>
 												</div>
 											</div>
@@ -146,6 +146,10 @@
 			
 			$(document).on('click', '#not_register', function(){
 				location.href = '<?=base_url("signup");?>';
+			});
+			
+			$(document).on('click', '#forgot_password', function(){
+				location.href = '<?=base_url("forgot_password");?>';
 			});
 			
 			$("#password, #email").on('keyup', function (e) {

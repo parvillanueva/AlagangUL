@@ -23,6 +23,7 @@ class User extends CI_Controller {
 	}
 	
 	public function submit(){
+		date_default_timezone_set('Asia/Manila');
 		$this->upload_file($_FILES, $_POST['email']);
 		$arrData = array(
 			'last_name' => $_POST['lname'],

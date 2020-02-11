@@ -34,4 +34,25 @@ class Login extends CI_Controller {
 			echo json_encode($result);
 		}
 	}
+	
+	public function forgot_password(){
+		$data["content"] = "site/login/forgot_password";
+		$this->load->view("site/layout/template2",$data);
+	}
+	
+	public function reset_password($user_id){
+		$data["user_id"] = $user_id;
+		$data["content"] = "site/login/reset_password";
+		$this->load->view("site/layout/template2",$data);
+	}
+	
+	public function update_password(){
+		date_default_timezone_set('Asia/Manila');
+		$arr = array(
+			'password' => md5($_POST['password']),
+			'update_date' => date('Y-m-d H:i:s'),
+		);
+		$sql_result = $this->Gmodel->update_data('tbl_users', $arr, 'id', $_POST['user_id']);
+		echo json_encode(array('responce' => $sql_result));
+	}
 }

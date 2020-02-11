@@ -7,7 +7,10 @@
 		$route["login_otp"] = "site/login_otp";
 		$route["user_profile/(:any)"] = "site/user/view/$1";
         $route["home"] = "site/home";
-        $route["about"] = "site/about";
+        $route["forgot_password"] = "site/login/forgot_password";
+		$route["login_otp_fpw"] = "site/login_otp/otp_fpw";
+		$route["reset_password/(:any)"] = "site/login/reset_password/$1";
+		$route["about"] = "site/about";
         $route["programs"] = "site/programs";
         $route["events"] = "site/events";
         $route["get-rewards"] = "site/get_rewards";
