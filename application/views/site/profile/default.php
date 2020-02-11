@@ -29,8 +29,9 @@
         }
 
     }
-
+    
     $(document).ready(function() {
+        $('#calendar').fullCalendar('addEventSource', events); 
 		progressBar('#progress1', <?=$profile->total_points?>);
 	});
 </script>
