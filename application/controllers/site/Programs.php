@@ -52,7 +52,7 @@ class Programs extends GS_Controller {
 		$event_list = $this->Gmodel->get_query('tbl_program_events',"program_id = " . $program_id . " AND status = 1 AND when >= '" . date("Y-m-d H:i:s") . "'");
 
 		$is_admin = 0;
-		if($program_details[0]->created_by == $this->session->userdata('sess_id')){
+		if($program_details[0]->created_by == $this->session->userdata('user_sess_id')){
 			$is_admin = 1;
 		}
 
@@ -69,7 +69,7 @@ class Programs extends GS_Controller {
 
 
 			$is_joined = false;
-			$query_is_joined = "SELECT * FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('sess_id') . " AND event_id = " . $value->id;
+			$query_is_joined = "SELECT * FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id') . " AND event_id = " . $value->id;
 			$result_is_joined = $this->db->query($query_is_joined)->result();
 			if(count($result_is_joined) > 0){
 				$is_joined = true;
@@ -86,7 +86,7 @@ class Programs extends GS_Controller {
 				"when"				=> $value->when,
 				"where"				=> $value->where,
 				"volunteer_points"	=> $value->volunteer_points,
-				"is_admin"			=> ($value->user_id == $this->session->userdata('sess_id')) ? true : false,
+				"is_admin"			=> ($value->user_id == $this->session->userdata('user_sess_id')) ? true : false,
 				"is_joined"			=> $is_joined,
 				"required_volunteer"=> ($needed_volunteer[0]->count != "") ? $needed_volunteer[0]->count : 0,
 				"joined_volunteers"	=> ($joined_volunteer[0]->count != "") ? $joined_volunteer[0]->count : 0,
