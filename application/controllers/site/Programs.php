@@ -117,8 +117,10 @@ class Programs extends GS_Controller {
 		$post = $_POST;
 
 		$data['name'] = $post['programName'];
+		$data['url_alias'] = $this->format_slug($post['programName']);
 		$data['overview'] = $post['overview'];
 		$data['area_covered'] = $post['areaCovered'];
+		$data['update_date'] = date("Y-m-d H:i:s");
 
 
 		$storeFolder = "uploads/programs/" . $program_id ;
@@ -140,8 +142,15 @@ class Programs extends GS_Controller {
 
 		$this->Gmodel->update_data("tbl_programs",$data,"id",$program_id);
 
-		 redirect(base_url("programs") . "/" . $program_id . "/" . $program_alias);
+		 redirect(base_url("programs") . "/" . $program_id . "/" . $data['url_alias']);
 
+	}
+
+	function format_slug($title)
+	{
+	    $title = trim(strtolower($title));
+	    $title = preg_replace('#[^a-z0-9\\/]#i', '-', $title);
+	    return trim(preg_replace('/-+/', '-', $title), '-/');
 	}
 
 }
