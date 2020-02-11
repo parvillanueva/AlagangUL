@@ -28,7 +28,7 @@
 
 <script type="text/javascript">
 var base_url = '<?=base_url();?>';
-var table_id = "<?=  $this->uri->segment(4);?>"
+var table_id = 1;
 AJAX.config.base_url(base_url);
 
 $(document).on('click', '#btn_update', function(){
@@ -81,26 +81,26 @@ $(document).on('click','#btn_close',function(e){
     location.href = '<?=base_url("content_management/site_about_us") ?>';
 });
 
-function is_exist(table, field, value,table_id){
-    var query = ""+ field +" = '" + value + "' AND status >=0 AND id != "+table_id+"" ;
-    var exists = 0;
-    var url = base_url+"content_management/global_controller";
-    var data = {
-        event : "list", 
-        select : ""+field+"",
-        query : query, 
-        table : table
-    }
-    aJax.post(url,data,function(result){
-        var obj = is_json(result);
-        if(obj.length != 0){
-            exists = 1;
-        }
-        else{
-            exists = 0;
-        }
+// function is_exist(table, field, value,table_id){
+//     var query = ""+ field +" = '" + value + "' AND status >=0 AND id != "+table_id+"" ;
+//     var exists = 0;
+//     var url = base_url+"content_management/global_controller";
+//     var data = {
+//         event : "list", 
+//         select : ""+field+"",
+//         query : query, 
+//         table : table
+//     }
+//     aJax.post(url,data,function(result){
+//         var obj = is_json(result);
+//         if(obj.length != 0){
+//             exists = 1;
+//         }
+//         else{
+//             exists = 0;
+//         }
         
-    });
-    return exists;
-}
+//     });
+//     return exists;
+// }
 </script>
