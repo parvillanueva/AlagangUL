@@ -62,6 +62,15 @@
         <link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/site/css/main-style.css">
         <link rel="stylesheet" type="text/css" href="https://use.typekit.net/scj2ogv.css">
         <link rel="icon" href="<?= base_url();?>assets/site/img/favicon.png" type="image/png" sizes="16x16">
+
+
+        <link href="<?= base_url();?>assets/site/css/dropzone.css" type="text/css" rel="stylesheet" />
+        <script src="<?= base_url();?>assets/site/js/dropzone.js"></script>
+
+        <link rel="stylesheet" href="<?= base_url();?>assets/site/slick/slick.css">
+        <link rel="stylesheet" href="<?= base_url();?>assets/site/slick/slick-theme.css">
+        <script src="<?= base_url();?>assets/site/slick/slick.js"></script>
+ 
         
 
 
