@@ -38,17 +38,18 @@ date_default_timezone_set('Asia/Taipei');
 		//MEMBER PROFILE PAGE
 		function get_member_details($id)
 		{
-			$this->db->select("id, email_address, imagepath, CONCAT(first_name, ' ', last_name) as full_name");
-			$this->db->from("tbl_users");
-			$this->db->where("id", $id);
-
+			$this->db->select("u.id, u.email_address, u.imagepath, CONCAT(u.first_name, ' ', u.last_name) as full_name, u.first_name, u.last_name, u.mobile_number, up.total_points");
+			$this->db->from("tbl_users u");
+			$this->db->join("tbl_users_points up", "up.user_id = u.id", "LEFT");
+			$this->db->where("u.id", $id);
+			
 			$query = $this->db->get();
 			return $query->row();
 		}
 
 		function get_created_programs($id)
 		{
-			$this->db->select("id, name, image_thumbnail");
+			$this->db->select("id, name, image_thumbnail, url_alias");
 			$this->db->from("tbl_programs");
 			$this->db->where("created_by", $id);
 
@@ -57,10 +58,40 @@ date_default_timezone_set('Asia/Taipei');
 
 		function get_joined_programs($id)
 		{
-			$this->db->select("p.id, p.name, p.image_thumbnail");
+			$this->db->select("p.id, p.name, p.image_thumbnail, p.url_alias");
 			$this->db->from("tbl_programs p");
 			$this->db->join("tbl_program_members pm", "pm.program_id = p.id", "LEFT");
 			$this->db->where("pm.user_id", $id);
+
+			return $this->db->get()->result_array();
+		}
+
+		function get_member_badges($id)
+		{
+			$this->db->select("b.name, b.icon, b.color");
+			$this->db->from("tbl_badges b");
+			$this->db->join("tbl_program_event_task_badge etb", "etb.badge_id = b.id", "LEFT");
+			$this->db->join("tbl_program_event_task et", "etb.event_task_id = et.id", "LEFT");
+			$this->db->join("tbl_program_event_task_volunteers etv", "etv.event_task_id = et.id", "LEFT");
+			$this->db->where("etv.user_id", $id);
+			$this->db->where("b.status", 1);
+			$this->db->group_by("b.id");
+
+			return $this->db->get()->result_array();
+		}
+
+		function get_joined_events($id)
+		{
+			$this->db->select("p.image_thumbnail, p.id, pe.title, p.url_alias, pe.title, pe.`when`, pe.`where`, b.name as badge, b.icon, b.color");
+			$this->db->from("tbl_program_events pe");
+			$this->db->join("tbl_programs p", "p.id = pe.program_id", "LEFT");
+			$this->db->join("tbl_program_event_task pet", "pet.event_id = pe.id", "LEFT");
+			$this->db->join("tbl_program_event_task_volunteers etv", "etv.event_task_id = pet.id", "LEFT");
+			$this->db->join("tbl_program_event_task_badge petb", "petb.event_task_id = pet.id", "LEFT");
+			$this->db->join("tbl_badges b", "b.id = petb.badge_id", "LEFT");
+					
+		
+			$this->db->where("etv.user_id", $id);
 
 			return $this->db->get()->result_array();
 		}

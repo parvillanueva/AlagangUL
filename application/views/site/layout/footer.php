@@ -16,11 +16,17 @@
         </div>
     </div>
 </footer>
-<script src="<?= base_url();?>assets/site/js/jquery-3.4.1.min.js" type="text/javascript"></script>
-<script src="<?= base_url();?>assets/site/js/popper.min.js" text="type/javascript"></script>
-<script src="<?= base_url();?>assets/site/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="<?= base_url();?>assets/site/js/script.js" type="text/javascript"></script>
-<script src="<?= base_url();?>assets/site/js/moment.min.js" type="text/javascript" ></script>
-<script src="<?= base_url();?>assets/site/js/daterangepicker.js" type="text/javascript" ></script>
-<script src="<?= base_url();?>assets/site/js/events.js" type="text/javascript" ></script>
-<script src="<?= base_url();?>assets/site/js/ekko-lightbox.js" type="text/javascript" ></script>
+
+<script src="<?=base_url()?>assets/site/js/jquery-3.4.1.min.js" type="text/javascript"></script>
+<script src="<?=base_url()?>assets/site/js/popper.min.js" text="type/javascript"></script>
+<script src="<?=base_url()?>assets/site/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="<?=base_url()?>assets/site/js/script.js"></script>
+<script src="<?=base_url()?>assets/site/js/moment.min.js" type="text/javascript" ></script>
+<script src="<?=base_url()?>assets/site/js/daterangepicker.js" type="text/javascript" ></script>
+<script src="<?=base_url()?>assets/site/slick/slick.js"></script>
+
+<?php if(!empty($js)) : ?>
+    <?php foreach($js as $path) : ?>
+        <script type="text/javascript" src="<?= base_url() . $path; ?>"></script>
+    <?php endforeach; ?>
+<?php endif; ?>
