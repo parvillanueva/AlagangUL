@@ -1,14 +1,13 @@
 <?php
 defined("BASEPATH") OR exit("No direct script access allowed");
 
-class User extends CI_Controller {
+class User_profile extends CI_Controller {
 	public function index(){
 		//$data["title"] = "Content Management";
 		//$data["PageName"] = ("User");
 		$data["content"] = "site/user_profile/page";
 		$this->load->view("site/layout/template2",$data);	
 	}
-	
 	public function view($user_id){
 		$arrWhere = array(
 			'id' => $user_id

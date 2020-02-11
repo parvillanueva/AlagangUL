@@ -15,7 +15,7 @@
 						<img src="assets/img/au-menu.svg" width="28px" height="28px">
 					</button> -->
 				</div>
-				<a href="index.html" class="au-navbar-brand navbar-brand">
+				<a href="<?= base_url();?>" class="au-navbar-brand navbar-brand">
 					<img src="<?php echo base_url().'assets/img/au-logo.png'?>" alt="Alagang Unilab Logo" class="au-logo">
 				</a>
 				<div class="d-lg-none">
@@ -52,8 +52,8 @@
 							<div class="col-12 au-padding au-flexcenter">
 								<div class="au-form-wrapper au-inner">
 									<form action="index.html" class="au-form" id="login">
-										<span class="au-h4" id="failed_label"><font color="red">Incorrect username and Password!</font></span>
 										<span class="au-h4">Login</span>
+										<span class="au-h4" id="failed_label"><font color="red"><small>Incorrect username and password. Please try again.</small></font></span>
 										<div class="form-row">
 											<div class="col au-iconned">
 												<i class="fas fa-envelope"></i>

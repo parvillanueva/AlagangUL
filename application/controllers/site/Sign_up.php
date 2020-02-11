@@ -9,10 +9,28 @@ class Sign_up extends CI_Controller {
 	}
 	
 	function email_send(){
-		$from = $_POST['email'];
-		$fr_name = 'Guest';
-		$subject = 'Link Registration and OTP';
-		$this->send_sgrid($from, $fr_name, $from, $subject);
+		$email_result = $this->email_check($_POST['email']);
+		if($email_result == 'not_empty'){
+			echo json_encode(array('responce'=>'exist'));
+		} else{
+			$from = $_POST['email'];
+			$fr_name = 'Guest';
+			$subject = 'Link Registration and OTP';
+			$this->send_sgrid($from, $fr_name, $from, $subject);
+		}
+	}
+	
+	function email_check($email){
+		$arrWhere = array(
+			'email_address' => $email
+		);
+		
+		$sql = $this->Global_model->get_list_query('tbl_users', $arrWhere);
+		if(!empty($sql)){
+			return 'not_empty';
+		} else{
+			return 'empty';
+		}
 	}
 	
 	function send_sgrid($from, $fr_name, $to, $subject){
