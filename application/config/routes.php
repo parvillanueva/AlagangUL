@@ -9,15 +9,28 @@
         $route["home"] = "site/home";
         $route["about"] = "site/about";
         $route["programs"] = "site/programs";
+
+        $route["events/upload"] = "site/events/upload";
+        $route["events/get_gallery"] = "site/events/get_gallery";
+
         $route["events"] = "site/events";
         $route["get-rewards"] = "site/get_rewards";
         $route["profile"]  = "site/profile";
+<<<<<<< Updated upstream
+=======
+	$route["submit"]  = "site/user/submit";
+>>>>>>> Stashed changes
         $route["terms-and-conditions"] = "site/terms_and_condition";
         $route["privacy-statement"] = "site/privacy_policy";
         $route["log-out"] = "site/logout";
 	$route["already-xist"] = "site/logout/already_exist";
         $route["create-program"] = "site/create_program";
+
         $route["programs/(:any)/(:any)"] = "site/programs/view/$1/$2";
+        $route["programs/(:any)/(:any)/event/(:any)/(:any)"] = "site/events/view/$1/$3/$4";
+
+
+
 
         $route["content_management"] = "content_management/home";
         $route["404_override"] = "";
