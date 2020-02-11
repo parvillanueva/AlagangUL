@@ -68,13 +68,13 @@
 				aJax.post(url, data, function(result){
 					var obj = is_json(result);
 					if(obj.responce == 'success'){
-						//modal.alert('Successfully Updated', function(){
+						modal.alert('Successfully Updated', function(){
 							location.href = '<?=base_url("login");?>';
-						//});
+						});
 					} else{
-						//modal.alert('Failed to update', function(){
+						modal.alert('Failed to update', function(){
 							location.href = '<?=base_url("login");?>';
-						//});
+						});
 					}
 				});
 			}
