@@ -32,7 +32,7 @@ class Programs extends GS_Controller {
 		$data['details'] = $program_details;
 		$data['content'] = "site/programs/view";
 		$data['meta'] = array(
-			"title"         =>  "Program",
+			"title"         =>  $program_details['details'][0]->name,
 			"description"   =>  "",
 			"keyword"       =>  ""
 		);
@@ -108,8 +108,40 @@ class Programs extends GS_Controller {
 		return $details;
 	}
 
-	public function upload(){
-		
+
+	public function update()
+	{
+		$program_id = $this->uri->segment(2);
+		$program_alias = $this->uri->segment(3);
+
+		$post = $_POST;
+
+		$data['name'] = $post['programName'];
+		$data['overview'] = $post['overview'];
+		$data['area_covered'] = $post['areaCovered'];
+
+
+		$storeFolder = "uploads/programs/" . $program_id ;
+
+		if (!file_exists($storeFolder)) {
+		    mkdir($storeFolder, 0777, true);
+		}
+		if (!empty($_FILES)) {
+			if($_FILES['programImage']['size'] > 0) { //10 MB (size is also in bytes)
+		        $tempFile = $_FILES['programImage']['tmp_name'];                   
+			    $targetPath =  $storeFolder . "/";  
+			    $targetFile =  $targetPath. str_replace(" ", "_", strtolower($_FILES['programImage']['name'])); 
+			    move_uploaded_file($tempFile,$targetFile);
+			    $data['image_thumbnail'] = $targetFile;
+		    }
+		   
+		}
+
+
+		$this->Gmodel->update_data("tbl_programs",$data,"id",$program_id);
+
+		 redirect(base_url("programs") . "/" . $program_id . "/" . $program_alias);
+
 	}
 
 }
