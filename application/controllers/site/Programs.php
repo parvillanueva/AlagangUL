@@ -49,7 +49,7 @@ class Programs extends GS_Controller {
 
 	public function get_details($program_id, $program_alias){
 		$program_details = $this->Gmodel->get_query('tbl_programs',"id = " . $program_id . " AND url_alias ='" . $program_alias . "'");
-		$event_list = $this->Gmodel->get_query('tbl_program_events',"program_id = " . $program_id . " AND status = 1");
+		$event_list = $this->Gmodel->get_query('tbl_program_events',"program_id = " . $program_id . " AND status = 1 AND when >= '" . date("Y-m-d H:i:s") . "'");
 
 		$is_admin = 0;
 		if($program_details[0]->created_by == $this->session->userdata('sess_id')){
@@ -93,10 +93,16 @@ class Programs extends GS_Controller {
 			);
 		}
 
+
+		$query_members = "SELECT tbl_program_event_task_volunteers.*, CONCAT('" . base_url() . "','/',tbl_users.imagepath) as profile_image , CONCAT(tbl_users.first_name, ' ', tbl_users.last_name) as user FROM tbl_program_event_task_volunteers LEFT JOIN tbl_users ON tbl_users.id = tbl_program_event_task_volunteers.user_id WHERE program_id = " . $program_id . " GROUP BY user_id";
+		$result_members = $this->db->query($query_members)->result();
+
 		$details = array(
-			"details"	=> $program_details,
-			"is_admin"	=> $is_admin,
-			"events"	=> $events,
+			"details"		=> $program_details,
+			"members_count"	=> count($result_members),
+			"members"		=> $result_members,
+			"is_admin"		=> $is_admin,
+			"events"		=> $events,
 		);
 
 		return $details;
