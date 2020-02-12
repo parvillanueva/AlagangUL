@@ -14,10 +14,11 @@ date_default_timezone_set('Asia/Taipei');
 		// HOME PAGE
 		function get_featured_programs()
 		{
-			$this->db->select("p.id, p.url_alias, p.image_thumbnail, p.name, p.overview, COUNT(pm.program_id) AS member_count");
+			$this->db->select("p.id, p.url_alias, p.image_thumbnail, p.name, p.overview, COUNT(DISTINCT(pm.user_id)) AS member_count");
 			$this->db->from("tbl_programs p");
-			$this->db->join("tbl_program_members pm", "pm.program_id = p.id", "LEFT");
+			$this->db->join("tbl_program_event_task_volunteers pm", "pm.program_id = p.id", "LEFT");
 			$this->db->group_by("p.id");
+			$this->db->order_by("p.create_date", "DESC");
 			$this->db->limit(6);
 
 			$query = $this->db->get();
@@ -60,9 +61,9 @@ date_default_timezone_set('Asia/Taipei');
 		{
 			$this->db->select("p.id, p.name, p.image_thumbnail, p.url_alias");
 			$this->db->from("tbl_programs p");
-			$this->db->join("tbl_program_members pm", "pm.program_id = p.id", "LEFT");
+			$this->db->join("tbl_program_event_task_volunteers pm", "pm.program_id = p.id", "LEFT");
 			$this->db->where("pm.user_id", $id);
-
+			$this->db->group_by("p.id");
 			return $this->db->get()->result_array();
 		}
 		function get_member_badges($id)
