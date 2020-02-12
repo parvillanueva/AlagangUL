@@ -38,7 +38,7 @@ date_default_timezone_set('Asia/Taipei');
 		//MEMBER PROFILE PAGE
 		function get_member_details($id)
 		{
-			$this->db->select("u.id, u.email_address, u.imagepath, CONCAT(u.first_name, ' ', u.last_name) as full_name, u.first_name, u.last_name, u.mobile_number, up.total_points");
+			$this->db->select("u.id, u.email_address, u.imagepath, CONCAT(u.first_name, ' ', u.last_name) as full_name, u.first_name, u.last_name, u.mobile_number, up.total_points, up.current_points");
 			$this->db->from("tbl_users u");
 			$this->db->join("tbl_users_points up", "up.user_id = u.id", "LEFT");
 			$this->db->where("u.id", $id);

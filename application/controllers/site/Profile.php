@@ -25,18 +25,6 @@ class Profile extends GS_Controller
 		$data['c_programs'] = count($joined_programs);
 		$data['c_events']   = count($joined_events);
 
-
-		// $calendar 			= array();
-		// foreach($joined_events as $i => $event)
-		// {
-		// 	$calendar[$i]	= array(
-		// 		'allDay'	=> true,
-		// 		'start'		=> $event['when'],
-		// 		'className' => 'info',
-		// 		'url'		=> '#activity'.$event['id'],
-		// 		'className' => 'activity-date'
-		// 	);
-		// }
 		$data['content'] 	= "site/profile/default";
 		$data['meta'] 	 	= array(
 			 "title"        =>  "Profile"
@@ -63,7 +51,34 @@ class Profile extends GS_Controller
 
 	public function update()
 	{
-		die($_REQUEST);
+		date_default_timezone_set('Asia/Manila');
+		
+		$id = $_POST['id'];
+
+		$arrData = array(
+			'last_name' => $_POST['last_name'],
+			'first_name' => $_POST['first_name'],
+			'mobile_number' => $_POST['mobile'],
+			'update_date' => date('Y-m-d H:i:s')
+		);
+
+		if(count($_FILES) > 0)
+		{
+			$this->upload_file($_FILES, $_POST['email']);
+			$arrData['imagepath'] = "upload_file/" . $_POST['email']. "/". $_FILES['file']['name'];
+		}
+		
+		$this->Gmodel->update_data('tbl_users', $arrData, 'id', $id);
+		$arr = array('response'=>'success');
+		echo json_encode($arr);
+	}
+
+	public function upload_file($file, $email){
+		if (!file_exists(FCPATH  . "upload_file/" . $email)) {
+			mkdir(FCPATH  . "upload_file/" . $email, 0777, true);
+		}
+		$target_dir = FCPATH .'upload_file\\'.$email.'\\'. $file['file']['name'];
+		$move_file = move_uploaded_file($_FILES["file"]["tmp_name"], $target_dir);
 	}
 
 }

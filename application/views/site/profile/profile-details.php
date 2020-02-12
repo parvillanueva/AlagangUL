@@ -4,7 +4,11 @@
         <div class="row">        
             <div class="col-lg-3 col-md-4">
                 <div class="au-userpicture d-none d-lg-block">
-                    <img src="<?=base_url() . $profile->imagepath?>" class="au-useravatar">
+                    <?php if(empty($profile->imagepath)) : ?>
+                        <img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-useravatar">
+                    <?php else: ?>
+                        <img src="<?=base_url() . $profile->imagepath ?>" class="au-useravatar">
+                    <?php endif; ?>
                 </div>
 
                 <div id='calendar'></div>
@@ -69,7 +73,7 @@
                                 <div class="au-inner">
                                     <div class="au-p2">
                                         <span>Points Earned</span>
-                                        <span class="au-pfaccpoints"><div class="au-heart"><i class="fas fa-heart"></i></div><?=$profile->total_points?></span>
+                                        <span class="au-pfaccpoints"><div class="au-heart"><i class="fas fa-heart"></i></div><?=$profile->current_points?></span>
                                     </div>
                                     <div class="au-p2">
                                         <?php if(!empty($badges)) : ?>

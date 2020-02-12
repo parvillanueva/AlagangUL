@@ -4,7 +4,7 @@
             <div class="modal-body">
                 <span class="au-h4">Edit Profile</span>
                     <form class="au-form" id="editprofile">
-                        <div class="form-row">
+                        <div class="au-form form-row">
                             <div class="col">
                                 <input type="text" class="form-control" id="fname" placeholder="First Name" value="<?= @$profile->first_name ?>" name="fname" required>
                                 <div class="valid-feedback"></div>
@@ -17,14 +17,6 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <!-- <div class="col">
-                                <select class="form-control custom-select">
-                                    <option value="" selected disabled>Division / Business Unit</option>
-                                    <option value="sample">Sample</option>
-                                </select>
-                                <div class="valid-feedback"></div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
-                            </div> -->
                             <div class="col">
                                 <input type="email" class="form-control" id="email" placeholder="Work Email" name="email" required value="<?= @$profile->email_address ?>" disabled>
                                 <div class="valid-feedback"></div>
@@ -35,7 +27,7 @@
                             <div class="col">
                                 <input type="tel" class="form-control" id="phone" placeholder="Mobile Number" value="<?= @$profile->mobile_number ?>" name="phone" required pattern="[0-9]{10}">
                                 <div class="valid-feedback"></div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
+                                <div class="invalid-feedback">Invalid Mobile Number.</div>
                             </div>
                         </div>
                         <div class="form-row text-left">
@@ -48,7 +40,7 @@
                         </div>
                         <div class="au-modalbtn text-center">
                             <button type="button" class="au-btn au-btnyellow" data-dismiss="modal">Close</button>
-                            <button type="submit" class="au-btn" id="btnsubmit">Submit</button>
+                            <button type="button" class="au-btn" id="btnsubmit">Submit</button>
                         </div>
                     </form>	
             </div>
@@ -57,35 +49,53 @@
 </div>
 
 <script type="text/javascript">
-	
-	$(document).on('click', '#btnsubmit', function(){
-        alert("hi");
-		modal.loading(true);
-        var email = $('#email').val();
-		var fname  = $('#fname').val();
-        var lname = $('#lname').val();
-        var user_id = <?=$this->session->userdata('user_sess_id')?>;
+	$(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
 
-		if(email_address != ''){
-			var data = {
-                email_address : email_address,
-				first_name : fname,
-                last_name : lname,
-                id: user_id
-                
-			};
-			var url = "<?php echo base_url('site/profile/update') ?>";
-			aJax.post(url, data, function(result){
-				var obj = is_json(result);
-				if(obj.responce == 'exist'){
-					$('#failed_label').show();
-				} else{
-					if(result == 202){
-						modal.loading(false);
-						location.href = '<?=base_url("site/profile");?>';
-					}
-				}
-			});
-		}
-	});
+	$(document).on('click', '#btnsubmit', function(){
+
+        var email = $('#email').val() ? strip_tags($('#email').val()) : '';
+		var fname = $('#fname').val() ? strip_tags($('#fname').val()) : '';
+        var lname = $('#lname').val() ? strip_tags($('#lname').val()) : '';
+        var phone = $('#phone').val() ? strip_tags($('#phone').val()) : '';
+        var user_id = <?=$this->session->userdata('user_sess_id')?>;
+        var file_data = $('#customFile').prop('files')[0]; 
+
+        if(email != '')
+        {
+            var form_data = new FormData();                  
+            form_data.append('file', file_data);
+            form_data.append('last_name', lname);
+            form_data.append('first_name', fname);
+            form_data.append('mobile', phone);
+            form_data.append('id', user_id);
+            form_data.append('email', email);
+
+            var url = "<?php echo base_url('site/profile/update') ?>";
+            
+            $.ajax({
+                url: url,
+                dataType: 'text',  
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,                         
+                type: 'post',
+            }).done(function(response) {
+                var obj = is_json(response);
+                if(obj.response == 'success'){
+                    location.href = '<?=base_url("site/profile");?>';
+                }
+            });
+        }
+        
+
+    });
+    
+    function validate()
+    {
+
+    }
 </script>

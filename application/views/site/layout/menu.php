@@ -17,7 +17,12 @@
 					<img src="<?=base_url()?>assets/site/img/au-logo.png" alt="Alagang Unilab Logo" class="au-logo">
 				</a>
 				<div class="d-lg-none">
-					<img src="<?=base_url()?>assets/site/img/au-avatar.svg" class="au-avatar">
+					<?php if(empty($user_details[0]->imagepath)) : ?>
+						<img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-avatar">
+					<?php else: ?>
+						<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar">
+					<?php endif; ?>
+					
 				</div>
 
 				<div class="collapse navbar-collapse" id="navbarCollapse">
@@ -41,7 +46,11 @@
 							<div class="au-acc">
 								<button type="button" class="au-accbtn dropdown-toggle d-none d-lg-block" data-toggle="dropdown">
 									<div class="au-inner">
-										<img src="<?=base_url()?>assets/site/img/au-avatar.svg" class="au-avatar">
+										<?php if(empty($user_details[0]->imagepath)) : ?>
+											<img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-avatar">
+										<?php else: ?>
+											<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar">
+										<?php endif; ?>
 									</div>
 									<div class="au-inner">
 										<span class="au-accname"><?= $user_details[0]->first_name . " " . $user_details[0]->last_name;?></span>

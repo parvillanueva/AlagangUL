@@ -2,7 +2,11 @@
     <div class="au-container au-padding">
         <div class="au-programheading">
             <div class="au-evthumbnail d-lg-none" >
-                <img src="<?=base_url() . $profile->imagepath?>" class="au-fp-thumbnailimg">
+                <?php if(empty($profile->imagepath)) : ?>
+                    <img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-fp-thumbnailimg">
+                <?php else: ?>
+                    <img src="<?=base_url() . $profile->imagepath ?>" class="au-fp-thumbnailimg">
+                <?php endif; ?>
             </div>
             <div class="col-lg-3 col-md-4 d-none d-lg-block">
             </div>
