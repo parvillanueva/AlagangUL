@@ -70,7 +70,16 @@
         <script src="<?= base_url();?>assets/site/js/dropzone.js"></script>
 
         <script src="<?= base_url();?>assets/site/slick/slick.js"></script>
- 
+        
+        <link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/site/css/daterangepicker.css" />
+        <script src="<?= base_url();?>assets/site/js/daterangepicker.js" type="text/javascript" ></script>
+
+        
+        <!-- <script type="text/javascript" src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
+        <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.1/jquery-ui-sliderAccess.js"></script> 
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.1/jquery-ui-timepicker-addon.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.1/jquery-ui-timepicker-addon.js"></script>
         
         <?php if(!empty($css)) : ?>
         <?php foreach($css as $path) : ?>

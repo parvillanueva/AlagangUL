@@ -13,7 +13,7 @@
 					
 					<?php if($details['is_admin']) { ?>
 						<a href="#" class="au-lnk" data-toggle="modal" data-target="#editPrgoramDetails"><span class="au-share"><i class="fas fa-pen"></i> Edit Details</a>
-						<a href="#" class="au-lnk" data-toggle="modal" data-target="#editPrgoramDetails"><span class="au-share"><i class="fas fa-calendar"></i> Add Events</a>
+						<a href="#" class="au-lnk" data-toggle="modal" data-target="#addEvent"><span class="au-share"><i class="fas fa-calendar"></i> Add Events</a>
 						
 						<?php if($details['details'][0]->status == 0) { ?>
 							<a href="<?= base_url("programs/") . $details['details'][0]->id . "/" . $details['details'][0]->url_alias . "/publish";?>" class="au-lnk pub-program"><span class="au-share"><i class="fas fa-check"></i> Publish Program</span></a>
@@ -205,11 +205,96 @@
   	</div>
 </div>
 
+
+<!-- Add Event Modal -->
+<div class="modal fade text-center" id="addEvent" data-backdrop="static">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-body">
+            <span class="au-h4">Add Event</span>
+      			<form action="<?= base_url("programs/") . $details['details'][0]->id . "/" . $details['details'][0]->url_alias . "/add_event";?>" method="post" enctype="multipart/form-data" class="au-form" id="addEventForm">
+	        		<div class="form-row">
+						<div class="col">
+							<div class="custom-file">
+								<input type="file" class="custom-file-input required_input" name="eventImage" id="customFile" onchange="readURLImgStandardPreviewEvent(this);" accept="image/x-png,image/gif,image/jpeg" />
+								<label class="custom-file-label" for="customFile">Choose file</label>
+							</div>
+							<img  style="width: 100%;" src="" id="previewImageEvent"/>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Event Title" name="eventTitle" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" id="whenpicker" placeholder="When" name="eventWhen" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Where" name="eventWhere" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="number" class="form-control required_input no_html" id="lname" placeholder="Add Points" name="eventPoints" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<textarea type="text" class="form-control required_input no_html" id="lname" placeholder="Event Overview" name="overview" rows=5></textarea>
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+					<div class="au-modalbtn text-center">
+	                    <button type="button" class="au-btn au-btnyellow" data-dismiss="modal">Close</button>
+	                    <button type="button" class="au-btn" id="btnSubmitEvent">Submit</button>
+	                </div>
+				</form>
+      		</div>
+      		<!-- <div class="modal-footer">
+        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary" id="btnSubmit">Save changes</button>
+     		</div> -->
+    	</div>
+  	</div>
+</div>
+
 <script type="text/javascript">
+	var datatoday = new Date();
+	var datatodays = datatoday.setDate(new Date(datatoday).getDate() + 1);
+
+
+	$('#whenpicker').datetimepicker({
+	    controlType: 'select',
+	    minDate: datatoday,
+	    oneLine: true,
+	    timeFormat: 'hh:mm tt'
+	});
+
 	$(document).on('click', '#btnSubmit', function(e){
 		e.preventDefault();
 		if(validate.standard("editprogramform")){
 			$("#editprogramform").submit();
+		}
+	});
+
+
+	$(document).on('click', '#btnSubmitEvent', function(e){
+		e.preventDefault();
+		if(validate.standard("addEventForm")){
+			$("#addEventForm").submit();
 		}
 	});
 
@@ -220,6 +305,17 @@
                 var extension = input.files[0].name.split('.').pop().toLowerCase();
                 var base64 = e.target.result;
                	$("#previewImage").attr("src",base64);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+	function readURLImgStandardPreviewEvent(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var extension = input.files[0].name.split('.').pop().toLowerCase();
+                var base64 = e.target.result;
+               	$("#previewImageEvent").attr("src",base64);
             }
             reader.readAsDataURL(input.files[0]);
         }

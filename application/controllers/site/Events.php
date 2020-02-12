@@ -95,7 +95,7 @@ class Events extends GS_Controller {
 	}
 
 	public function get_event_details($event_id){
-		$event_details = $this->Gmodel->get_query('tbl_program_events',"id = " . $event_id . " AND status = 1");
+		$event_details = $this->Gmodel->get_query('tbl_program_events',"id = " . $event_id);
 		$events = array();
 		foreach ($event_details as $key => $value) {
 
@@ -163,4 +163,52 @@ class Events extends GS_Controller {
 		$gallery_result = $this->db->query($gallery_query)->result();
 		echo json_encode($gallery_result);
 	}
+
+	public function add_event(){
+		$program_id = $this->uri->segment(2);
+		$program_alias = $this->uri->segment(3);
+		$post = $_POST;
+		$data['program_id'] = $program_id;
+		$data['title'] = $post['eventTitle'];
+		$data['url_alias'] = $this->format_slug($post['eventTitle']);
+		$data['description'] = $post['overview'];
+		$data['when'] = date("Y-m-d H:i:s", strtotime($post['eventWhen']));
+		$data['where'] = $post['eventWhere'];
+		$data['volunteer_points'] = $post['eventPoints'];
+		$data['create_date'] = date("Y-m-d H:i:s");
+		$data['update_date'] = date("Y-m-d H:i:s");
+		$data['status'] = 0;
+		$data['user_id'] = $this->session->userdata('user_sess_id');
+
+		$storeFolder2 = "uploads/events/";
+		$tempFile = $_FILES['eventImage']['tmp_name'];                   
+		$targetPath =  $storeFolder2 . "/";  
+		$targetFile =  $targetPath. str_replace(" ", "_", strtolower($_FILES['eventImage']['name'])); 
+		$data['image'] = $targetFile;
+
+		$event_id = $this->Gmodel->save_data("tbl_program_events",$data);
+
+		if (!empty($_FILES)) {
+			if($_FILES['eventImage']['size'] > 0) { //10 MB (size is also in bytes)		        
+			    move_uploaded_file($tempFile,$targetFile);			    
+		    }
+		   
+		}
+
+		if($event_id){
+			$data['image'] = $targetFile;
+		}
+
+		$this->Gmodel->update_data("tbl_program_events",$data,"id",$event_id);
+
+		redirect(base_url("programs") . "/" . $program_id . "/" . $program_alias . "/event/" . $event_id . "/" . $data['url_alias']);
+	}
+
+	function format_slug($title)
+	{
+	    $title = trim(strtolower($title));
+	    $title = preg_replace('#[^a-z0-9\\/]#i', '-', $title);
+	    return trim(preg_replace('/-+/', '-', $title), '-/');
+	}
+
 }

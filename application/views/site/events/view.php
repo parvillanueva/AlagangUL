@@ -17,10 +17,10 @@
 		<div class="au-container au-padding">
 			<div class="au-programheading">
 				<div class="au-evthumbnail">
-					<img src="<?= $program_details[0]['image_thumbnail'];?>" class="au-fp-thumbnailimg">
+					<img src="<?= $event_details[0]['image'];?>" class="au-fp-thumbnailimg">
 				</div>
 				<div class="au-phdetails">
-					<span class="au-h5"><?= $program_details[0]['name'];?></span>
+					<span class="au-h5"><?= $event_details[0]['title'];?></span>
 					<div class="au-phstats">
 						<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> <?= $event_details[0]['volunteer_points'];?> Join to receive points</span>
 						<span class="au-members"><i class="fas fa-walking"></i><?= $event_details[0]['joined_volunteers'];?> <?= ($event_details[0]['joined_volunteers'] > 1 ) ? 'Volunteers' : 'Volunteer';?> </span>
@@ -75,7 +75,7 @@
 						<div class="au-inner">
 							<a href="program.html" class="au-lnk">
 								<div class="au-phthumbnail">
-									<img src="<?= $event_details[0]['image'];?>" class="au-fp-thumbnailimg">
+									<img src="<?= $program_details[0]['image_thumbnail'];?>" class="au-fp-thumbnailimg">
 								</div>
 							</a>
 						</div>
