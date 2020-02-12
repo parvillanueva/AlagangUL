@@ -21,7 +21,7 @@ class Programs extends GS_Controller {
 		);
 		$data['active_menu'] = "programs";
 		//featured programs
-		$data['programs'] = $this->Site_model->get_featured_programs();
+		$data['programs'] = $this->Site_model->get_featured_programs_module();
 		$this->parser->parse("site/layout/template",$data);
 	}
 
@@ -46,6 +46,7 @@ class Programs extends GS_Controller {
 			// "image"         =>  base_url().$this->Global_model->site_meta_og(38, 'site_menu', 'og_image'),
 		);
 		$data['active_menu'] = "programs";
+		$data['programs'] = $this->Site_model->get_other_programs();
 		$this->parser->parse("site/layout/template",$data);
 	}
 
@@ -189,6 +190,28 @@ class Programs extends GS_Controller {
 		
 		redirect(base_url("programs") . "/" . $program_id . "/" . $data['url_alias']);
 
+	}
+
+	public function publish()
+	{
+		$program_id = $this->uri->segment(2);
+		$program_alias = $this->uri->segment(3);
+		$post = $_POST;
+		$data['update_date'] = date("Y-m-d H:i:s");
+		$data['status'] = 1;
+		$this->Gmodel->update_data("tbl_programs",$data,"id",$program_id);
+		redirect(base_url("programs") . "/" . $program_id . "/" . $program_alias);
+	}
+
+	public function unpublish()
+	{
+		$program_id = $this->uri->segment(2);
+		$program_alias = $this->uri->segment(3);
+		$post = $_POST;
+		$data['update_date'] = date("Y-m-d H:i:s");
+		$data['status'] = 0;
+		$this->Gmodel->update_data("tbl_programs",$data,"id",$program_id);
+		redirect(base_url("programs") . "/" . $program_id . "/" . $program_alias);
 	}
 
 	function format_slug($title)

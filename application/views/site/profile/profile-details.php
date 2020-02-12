@@ -115,7 +115,7 @@
                                 <?php if(!empty($created)) : ?>
                                     <?php foreach($created as $program) : ?>
                                         <div class="au-slprograms">
-                                            <a href="<?= @$program['url_alias']?>" class="au-lnk">
+                                            <a href="programs/<?= @$program['id']?>/<?= @$program['url_alias']?>" class="au-lnk">
                                                 <div class="au-opthumbnail">
                                                     <img src="<?=base_url().@$program['image_thumbnail']?>" class="au-fp-thumbnailimg">
                                                 </div>
