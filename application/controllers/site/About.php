@@ -6,6 +6,10 @@ class About extends GS_Controller {
 	public function index()
 	{
 
+		//banner data
+		$about_list      = $this->Site_model->get_about_us();	
+		$data['details']  = $about_list;
+
 		$data['content'] = "site/about/default";
 		$data['meta'] = array(
 			"title"         =>  "About",

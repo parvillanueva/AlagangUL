@@ -45,7 +45,7 @@
         ?>
         
         <!-- Scripts -->
-        <script type="text/javascript" src="<?= base_url();?>/assets/js/jquery.min.js" ></script>
+         <script type="text/javascript" src="<?= base_url();?>/assets/js/jquery.min.js" ></script>
         <script type="text/javascript" src="<?= base_url();?>/assets/js/bootstrap.min.js" ></script>
         <script type="text/javascript" src="<?= base_url();?>/assets/js/masking.js" ></script>
         <script type="text/javascript" src="<?= base_url();?>/assets/js/numeral.min.js" ></script>
@@ -53,25 +53,30 @@
         <script type="text/javascript" src="<?= base_url();?>/cms/js/bootbox.min.js" ></script>
         <script type="text/javascript" src="<?= base_url();?>/cms/js/moment.js" ></script>
         <script type="text/javascript" src="<?= base_url();?>/cms/js/custom.js" ></script>
-        <script type="text/javascript" src="<?= base_url();?>/cms/js/placeholder.js" ></script>
+        <script type="text/javascript" src="<?= base_url();?>/cms/js/placeholder.js" ></script> 
         <script src='https://www.google.com/recaptcha/api.js'></script>
         <script type="text/javascript" src="<?= base_url();?>/cms/js/gcontroller.js" ></script>
 
         <!-- bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/site/css/main-style.css">
         <link rel="stylesheet" type="text/css" href="https://use.typekit.net/scj2ogv.css">
+        <link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/site/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/site/slick/slick.css">
+        <link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/site/slick/slick-theme.css">
+        <link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/site/css/main-style.css">
         <link rel="icon" href="<?= base_url();?>assets/site/img/favicon.png" type="image/png" sizes="16x16">
 
 
         <link href="<?= base_url();?>assets/site/css/dropzone.css" type="text/css" rel="stylesheet" />
         <script src="<?= base_url();?>assets/site/js/dropzone.js"></script>
 
-        <link rel="stylesheet" href="<?= base_url();?>assets/site/slick/slick.css">
-        <link rel="stylesheet" href="<?= base_url();?>assets/site/slick/slick-theme.css">
         <script src="<?= base_url();?>assets/site/slick/slick.js"></script>
  
         
+        <?php if(!empty($css)) : ?>
+        <?php foreach($css as $path) : ?>
+                <link rel="stylesheet" type="text/css" href="<?= base_url() . $path; ?>">
+            <?php endforeach; ?>
+        <?php endif; ?>
 
 
 

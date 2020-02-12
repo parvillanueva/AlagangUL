@@ -19,6 +19,8 @@
 		$route["events"] = "site/events";
 		$route["get-rewards"] = "site/get_rewards";
 		$route["profile"]  = "site/profile";
+		$route["profile/(:any)"]  = "site/profile/view/$1";
+
 		$route["submit"]  = "site/user/submit";
 		$route["terms-and-conditions"] = "site/terms_and_condition";
 		$route["privacy-statement"] = "site/privacy_policy";
@@ -28,8 +30,8 @@
 
 		$route["programs/(:any)/(:any)"] = "site/programs/view/$1/$2";
 		$route["programs/(:any)/(:any)/update"] = "site/programs/update/$1/$2";
+		$route["programs/add"] = "site/programs/add";
 		$route["programs/(:any)/(:any)/event/(:any)/(:any)"] = "site/events/view/$1/$3/$4";
-
 
 
 
