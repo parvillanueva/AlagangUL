@@ -2,7 +2,7 @@
 <?php
 defined("BASEPATH") OR exit("No direct script access allowed");
 
-class Site_terms_and_condition extends CI_Controller {
+class Site_privacy_policy extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
@@ -14,13 +14,12 @@ class Site_terms_and_condition extends CI_Controller {
 	public function index()
 	{
 		$data["title"] = "Content Management";
-		$data["PageName"] = ("terms and condition");
+		$data["PageName"] = ("privacy policy");
 		$data['edit_title'] = true;
-		$data["content"] = "content_management/module/terms_and_condition/page";
-		$data['breadcrumb'] = array('Terms and Condition' => '');
+		$data["content"] = "content_management/module/privacy_policy/page";
+		$data['breadcrumb'] = array('privacy policy' => '');
 		$this->load->view("content_management/template/layout", $data);	
 	}
-
 
 
 	//controller_config

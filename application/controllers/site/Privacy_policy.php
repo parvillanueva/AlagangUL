@@ -21,7 +21,13 @@ class Privacy_policy extends GS_Controller {
 		);
 		
 		$data['active_menu'] = "about";
+		$data['privacy_policy'] = (array)$this->getPrivacyPolicy();
 		$this->parser->parse("site/layout/template",$data);
 	}
 
+	public function getPrivacyPolicy(){
+		// $this->session->userdata("sess_email")
+		$result = $this->Global_model->get_list_query_sort('tbl_privacy_policy','id = 1','title','asc');
+		return $result[0];
+	}
 }
