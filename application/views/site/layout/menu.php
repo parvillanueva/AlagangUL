@@ -70,7 +70,7 @@
 									</a>
 								</div>
 								<div class="au-dropdown dropdown-menu">
-									<a class="dropdown-item" href="profile"><i class="fas fa-user"></i> Visit Profile</a>
+									<a class="dropdown-item" href="<?= base_url('profile') ?>"><i class="fas fa-user"></i> Visit Profile</a>
 									<a class="dropdown-item" href="#"><i class="fas fa-user-cog"></i> Account Settings</a>
 									<a class="dropdown-item" href="<?= base_url("log-out");?>"><i class="fas fa-sign-out-alt"></i> Logout</a>
 								</div>

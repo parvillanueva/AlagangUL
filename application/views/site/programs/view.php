@@ -167,7 +167,7 @@
 								<input type="file" class="custom-file-input" name="programImage" id="customFile" onchange="readURLImgStandardPreview(this);" accept="image/x-png,image/gif,image/jpeg" />
 								<label class="custom-file-label" for="customFile">Choose file</label>
 							</div>
-							<img  style="width: 50%;" src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" id="previewImage"/>
+							<img  style="width: 100%;" src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" id="previewImage"/>
 						</div>
 					</div>
 	        		<div class="form-row">
