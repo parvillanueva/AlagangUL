@@ -43,8 +43,7 @@ class Profile extends GS_Controller
 			$user_id 		  	= $id;
 			$profile_details  	= $this->Site_model->get_member_details($user_id);
 
-			if(count($profile_details) > 0)
-			{
+			
 				$created_programs 	= $this->Site_model->get_created_programs($user_id);
 				$joined_programs  	= $this->Site_model->get_joined_programs($user_id);
 	
@@ -70,11 +69,7 @@ class Profile extends GS_Controller
 				$data['js']			= array("assets/site/js/calendar.js", "assets/site/js/profile.js");
 	
 				$this->load->view("site/layout/template",$data);
-			}
-			else
-			{
-				header("Location: " . base_url()); 
-			}
+			
 			
 		}
 		else

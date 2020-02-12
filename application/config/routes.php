@@ -29,9 +29,12 @@
 		$route["create-program"] = "site/create_program";
 
 		$route["programs/(:any)/(:any)"] = "site/programs/view/$1/$2";
+		$route["programs/(:any)/(:any)/add_event"] = "site/events/add_event/$1/$2";
 		$route["programs/(:any)/(:any)/update"] = "site/programs/update/$1/$2";
+		$route["programs/add"] = "site/programs/add";
+		$route["programs/(:any)/(:any)/publish"] = "site/programs/publish/$1/$2";
+		$route["programs/(:any)/(:any)/unpublish"] = "site/programs/unpublish/$1/$2";
 		$route["programs/(:any)/(:any)/event/(:any)/(:any)"] = "site/events/view/$1/$3/$4";
-
 
 
 

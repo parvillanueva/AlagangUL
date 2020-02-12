@@ -32,7 +32,7 @@
 							<a id="about" href="<?= base_url("about");?>" class="nav-item nav-link">About</a>
 							<a id="programs"  href="<?= base_url("programs");?>" class="nav-item nav-link">Programs</a>
 							<a id="events"  href="<?= base_url("events");?>" class="nav-item nav-link">Events</a>
-							<a id="get_rewards"  href="<?= base_url("get-rewards");?>" class="nav-item nav-link">Get Rewards</a>
+							<!-- <a id="get_rewards"  href="<?= base_url("get-rewards");?>" class="nav-item nav-link">Get Rewards</a> -->
 						</div>
 						<div class="au-user">
 							<!-- show this when logged out -->
@@ -70,7 +70,7 @@
 									</a>
 								</div>
 								<div class="au-dropdown dropdown-menu">
-									<a class="dropdown-item" href="profile"><i class="fas fa-user"></i> Visit Profile</a>
+									<a class="dropdown-item" href="<?= base_url('profile') ?>"><i class="fas fa-user"></i> Visit Profile</a>
 									<a class="dropdown-item" href="#"><i class="fas fa-user-cog"></i> Account Settings</a>
 									<a class="dropdown-item" href="<?= base_url("log-out");?>"><i class="fas fa-sign-out-alt"></i> Logout</a>
 								</div>

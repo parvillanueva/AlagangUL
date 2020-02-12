@@ -13,9 +13,14 @@
 					
 					<?php if($details['is_admin']) { ?>
 						<a href="#" class="au-lnk" data-toggle="modal" data-target="#editPrgoramDetails"><span class="au-share"><i class="fas fa-pen"></i> Edit Details</a>
-						<a href="#" class="au-lnk" data-toggle="modal" data-target="#editPrgoramDetails"><span class="au-share"><i class="fas fa-calendar"></i> Add Events</a>
-						<a href="#" class="au-lnk" data-toggle="modal" data-target="#editPrgoramDetails"><span class="au-share"><i class="fas fa-check"></i> Publish Program</a>
-						<a href="#" class="au-lnk" data-toggle="modal" data-target="#editPrgoramDetails"><span class="au-share"><i class="fas fa-minus"></i> Unpublish Program</a>
+						<a href="#" class="au-lnk" data-toggle="modal" data-target="#addEvent"><span class="au-share"><i class="fas fa-calendar"></i> Add Events</a>
+						
+						<?php if($details['details'][0]->status == 0) { ?>
+							<a href="<?= base_url("programs/") . $details['details'][0]->id . "/" . $details['details'][0]->url_alias . "/publish";?>" class="au-lnk pub-program"><span class="au-share"><i class="fas fa-check"></i> Publish Program</span></a>
+						<?php }else{ ?>
+							<a href="<?= base_url("programs/") . $details['details'][0]->id . "/" . $details['details'][0]->url_alias . "/unpublish";?>" class="au-lnk pub-program"><span class="au-share"><i class="fas fa-minus"></i> Unpublish Program</span></a>
+						<?php } ?>						
+						
 					<?php } ?>
 				</div>
 			</div>
@@ -36,13 +41,13 @@
 						<div class="au-inner au-cscroll">
 							<?php foreach ($details['members'] as $key => $value) { ?>
 								<div class="au-userentry">
-									<a href="profile.html" class="au-userentry">
+									<a href="<?= base_url('profile') ?>/<?= $value->used_id;?>" class="au-userentry">
 										<div class="au-inner">
 											<img src="<?= $value->profile_image;?>" class="au-avatar-lg">
 										</div>
 										<div class="au-inner">
 											<span class="au-accname"><?= $value->user;?></span>
-											<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> 1234 points</span>	
+											<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> <?= $value->current_pt;?> points</span>	
 										</div>
 									</a>
 								</div>
@@ -78,7 +83,6 @@
 								<div class="row">
 									<div class="col-sm-4 au-eventthumbnail">
 										<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> 10 points</span>
-										<span class="au-accpoints au-accpointsv"><div class="au-heart"><i class="fas fa-heart"></i></div>Volunteered</span>
 										<img src="<?= $value['image'];?>" class="au-eventimg">
 									</div>
 									<div class="col-sm-8 au-eventdetails">
@@ -108,8 +112,16 @@
 											<div class="row">
 												<div class="col"><span class="au-needed"><?= $value['required_volunteer'] ;?> volunteers needed</span></div>
 												<div class="col">
-													<a href="eventdetails.html" class="au-lnk"><button type="button" class="au-volunteer au-btnyellow float-right">Volunteer</button></a>
-													<button type="button" class="au-volunteered au-btnyellow float-right">Volunteered</button>
+													<?php if($details['is_admin']) { ?>
+														<?php if($value['status'] == 1) { ?>
+															<button type="button" class="au-volunteered au-btnyellow float-right" style="background-color: #00b513;">Published</button>
+														<?php } else { ?>
+															<button type="button" class="au-volunteered au-btnyellow float-right">Unpublished</button>
+														<?php } ?>
+													<?php } else { ?>
+														<button type="button" class="au-volunteer au-btnyellow float-right" style="display: block">Volunteer</button>
+														<button type="button" class="au-volunteered au-btnyellow float-right">Volunteered</button>
+													<?php } ?>
 												</div>
 											</div>
 										</div>
@@ -129,95 +141,32 @@
 				<div class="au-programwrapper d-none d-md-block">
 					<div class="row">
 
+						{programs}
 						<div class="col-lg-3 col-6">
-							<a href="programdetails.html" class="au-lnk au-plink">
+							<a href="<?= base_url(); ?>programs/{id}/{url_alias}" class="au-lnk au-plink">
 								<div class="au-opthumbnail">
-									<img src="assets/img/au-batang1000.jpg" class="au-fp-thumbnailimg">
+									<img src="<?=base_url()?>{image_thumbnail}" class="au-fp-thumbnailimg" alt="{name}">
 								</div>
 							</a>
 						</div>
-						<div class="col-lg-3 col-6">
-							<a href="programdetails.html" class="au-lnk au-plink">
-								<div class="au-opthumbnail">
-									<img src="assets/img/au-lingapdiwa.jpg" class="au-fp-thumbnailimg">
-								</div>
-							</a>
-						</div>
-						<div class="col-lg-3 col-6">
-							<a href="programdetails.html" class="au-lnk au-plink">
-								<div class="au-opthumbnail">
-									<img src="assets/img/au-huwagkangsusuko.jpg" class="au-fp-thumbnailimg">
-								</div>
-							</a>
-						</div>
-						<div class="col-lg-3 col-6">
-							<a href="programdetails.html" class="au-lnk au-plink">
-								<div class="au-opthumbnail">
-									<img src="assets/img/au-brostate.jpg" class="au-fp-thumbnailimg">
-								</div>
-							</a>
-						</div>
+				        {/programs}
 
 					</div>
 				</div>
 
 			</div>
 		</div>				
-		<div class="row d-md-none">
-			<div class="col-12">
-				<span class="au-h4">Other Programs</span>
-
-				<div class="au-programwrapper">
-					<div class="row">
-						<div class="col-lg-3 col-6">
-							<a href="programdetails.html" class="au-lnk au-plink">
-								<div class="au-opthumbnail">
-									<img src="assets/img/au-batang1000.jpg" class="au-fp-thumbnailimg">
-								</div>
-							</a>
-						</div>
-						<div class="col-lg-3 col-6">
-							<a href="programdetails.html" class="au-lnk au-plink">
-								<div class="au-opthumbnail">
-									<img src="assets/img/au-lingapdiwa.jpg" class="au-fp-thumbnailimg">
-								</div>
-							</a>
-						</div>
-						<div class="col-lg-3 col-6">
-							<a href="programdetails.html" class="au-lnk au-plink">
-								<div class="au-opthumbnail">
-									<img src="assets/img/au-huwagkangsusuko.jpg" class="au-fp-thumbnailimg">
-								</div>
-							</a>
-						</div>
-						<div class="col-lg-3 col-6">
-							<a href="programdetails.html" class="au-lnk au-plink">
-								<div class="au-opthumbnail">
-									<img src="assets/img/au-brostate.jpg" class="au-fp-thumbnailimg">
-								</div>
-							</a>
-						</div>
-
-					</div>
-				</div>
-
-			</div>
-		</div>
+		
 
 	</div>
 </div>
 
 <!-- Edit Details Modal -->
-<div class="modal fade" id="editPrgoramDetails" tabindex="-1" role="dialog" aria-labelledby="editPrgoramDetails" aria-hidden="true">
-  	<div class="modal-dialog modal-lg" role="document">
-    	<div class="modal-content">
-      		<div class="modal-header">
-        		<h5 class="modal-title" id="editPrgoramDetails">Edit Details</h5>
-        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          			<span aria-hidden="true">&times;</span>
-        		</button>
-      		</div>
-      		<div class="modal-body">
+<div class="modal fade text-center" id="editPrgoramDetails" data-backdrop="static">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-body">
+            <span class="au-h4">Edit Program</span>
       			<form action="<?= base_url("programs/") . $details['details'][0]->id . "/" . $details['details'][0]->url_alias . "/update";?>" method="post" enctype="multipart/form-data" class="au-form" id="editprogramform">
 	        		<div class="form-row">
 						<div class="col">
@@ -225,10 +174,9 @@
 								<input type="file" class="custom-file-input" name="programImage" id="customFile" onchange="readURLImgStandardPreview(this);" accept="image/x-png,image/gif,image/jpeg" />
 								<label class="custom-file-label" for="customFile">Choose file</label>
 							</div>
-							<img  style="width: 50%;" src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" id="previewImage"/>
+							<img  style="width: 100%;" src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" id="previewImage"/>
 						</div>
 					</div>
-					<br>
 	        		<div class="form-row">
 						<div class="col">											
 							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Program Name" name="programName" value="<?= $details['details'][0]->name;?>">
@@ -236,7 +184,6 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
-					<br>
 	        		<div class="form-row">
 						<div class="col">											
 							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Areas Covered" name="areaCovered" value="<?= $details['details'][0]->area_covered;?>">
@@ -244,7 +191,6 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
-					<br>
 	        		<div class="form-row">
 						<div class="col">											
 							<textarea type="text" class="form-control required_input no_html" id="lname" placeholder="Program Overview" name="overview" rows=5><?= $details['details'][0]->overview;?></textarea>
@@ -252,21 +198,110 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
+					<div class="au-modalbtn text-center">
+	                    <button type="button" class="au-btn au-btnyellow" data-dismiss="modal">Close</button>
+	                    <button type="button" class="au-btn" id="btnSubmit">Submit</button>
+	                </div>
 				</form>
       		</div>
-      		<div class="modal-footer">
+      		<!-- <div class="modal-footer">
         		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         		<button type="button" class="btn btn-primary" id="btnSubmit">Save changes</button>
-     		</div>
+     		</div> -->
+    	</div>
+  	</div>
+</div>
+
+
+<!-- Add Event Modal -->
+<div class="modal fade text-center" id="addEvent" data-backdrop="static">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-body">
+            <span class="au-h4">Add Event</span>
+      			<form action="<?= base_url("programs/") . $details['details'][0]->id . "/" . $details['details'][0]->url_alias . "/add_event";?>" method="post" enctype="multipart/form-data" class="au-form" id="addEventForm">
+	        		<div class="form-row">
+						<div class="col">
+							<div class="custom-file">
+								<input type="file" class="custom-file-input required_input" name="eventImage" id="customFile" onchange="readURLImgStandardPreviewEvent(this);" accept="image/x-png,image/gif,image/jpeg" />
+								<label class="custom-file-label" for="customFile">Choose file</label>
+							</div>
+							<img  style="width: 100%;" src="" id="previewImageEvent"/>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Event Title" name="eventTitle" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" id="whenpicker" placeholder="When" name="eventWhen" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Where" name="eventWhere" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="number" class="form-control required_input no_html" id="lname" placeholder="Add Points" name="eventPoints" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<textarea type="text" class="form-control required_input no_html" id="lname" placeholder="Event Overview" name="overview" rows=5></textarea>
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+					<div class="au-modalbtn text-center">
+	                    <button type="button" class="au-btn au-btnyellow" data-dismiss="modal">Close</button>
+	                    <button type="button" class="au-btn" id="btnSubmitEvent">Submit</button>
+	                </div>
+				</form>
+      		</div>
+      		<!-- <div class="modal-footer">
+        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary" id="btnSubmit">Save changes</button>
+     		</div> -->
     	</div>
   	</div>
 </div>
 
 <script type="text/javascript">
+	var datatoday = new Date();
+	var datatodays = datatoday.setDate(new Date(datatoday).getDate() + 1);
+
+
+	$('#whenpicker').datetimepicker({
+	    controlType: 'select',
+	    minDate: datatoday,
+	    oneLine: true,
+	    timeFormat: 'hh:mm tt'
+	});
+
 	$(document).on('click', '#btnSubmit', function(e){
 		e.preventDefault();
 		if(validate.standard("editprogramform")){
 			$("#editprogramform").submit();
+		}
+	});
+
+
+	$(document).on('click', '#btnSubmitEvent', function(e){
+		e.preventDefault();
+		if(validate.standard("addEventForm")){
+			$("#addEventForm").submit();
 		}
 	});
 
@@ -277,6 +312,17 @@
                 var extension = input.files[0].name.split('.').pop().toLowerCase();
                 var base64 = e.target.result;
                	$("#previewImage").attr("src",base64);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+	function readURLImgStandardPreviewEvent(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var extension = input.files[0].name.split('.').pop().toLowerCase();
+                var base64 = e.target.result;
+               	$("#previewImageEvent").attr("src",base64);
             }
             reader.readAsDataURL(input.files[0]);
         }

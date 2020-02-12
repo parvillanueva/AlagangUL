@@ -154,6 +154,6 @@ class Login_otp extends CI_Controller {
 			$arr = array('responce'=>'failed');
 			echo json_encode($arr);
 		}
-		$this->session->sess_destroy();
+		//$this->session->sess_destroy();
 	}
 }	

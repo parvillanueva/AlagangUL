@@ -17,6 +17,19 @@
     </div>
 </footer>
 
+<div class="modal fade text-center" id="defaultModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="au-modalbtn text-center">
+                    <button type="button" class="au-btn au-btnyellow" data-dismiss="modal">Close</button>
+                    <button type="button" class="au-btn" id="btnsubmit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="<?=base_url()?>assets/site/js/jquery-3.4.1.min.js" type="text/javascript"></script>
 <script src="<?=base_url()?>assets/site/js/popper.min.js" text="type/javascript"></script>
 <script src="<?=base_url()?>assets/site/js/bootstrap.min.js" type="text/javascript"></script>

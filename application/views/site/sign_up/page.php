@@ -68,6 +68,8 @@
 					$('#failed_label').show();
 				} else if(obj.responce == 'no_list'){
 					$('#failed_list').show();
+				} else if(obj.responce == 'pass_empty'){
+					location.href = '<?=base_url("user_profile");?>';
 				} else{
 					if(result == 202){
 						modal.loading(false);
