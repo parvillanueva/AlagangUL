@@ -20,7 +20,7 @@ class Privacy_policy extends GS_Controller {
 			// "image"         =>  base_url().$this->Global_model->site_meta_og(38, 'site_menu', 'og_image'),
 		);
 		
-		$data['active_menu'] = "about";
+		$data['active_menu'] = "";
 		$this->parser->parse("site/layout/template",$data);
 	}
 

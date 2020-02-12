@@ -94,6 +94,7 @@ class Events extends GS_Controller {
 		foreach ($program_details as $key => $value) {
 			$program[] = array(
 				"name"					=> $value->name,
+				"url_alias"				=> $value->url_alias,
 				"image_thumbnail"		=> base_url() . $value->image_thumbnail,
 				"id"					=> $value->id
 			);
@@ -128,6 +129,8 @@ class Events extends GS_Controller {
 				"description"		=> $value->description,
 				"when"				=> $value->when,
 				"where"				=> $value->where,
+				"status"			=> $value->status,
+				"url_alias"			=> $value->url_alias,
 				"volunteer_points"	=> $value->volunteer_points,
 				"is_admin"			=> ($value->user_id == $this->session->userdata('user_sess_id')) ? 1 : 0,
 				"is_joined"			=> $is_joined,

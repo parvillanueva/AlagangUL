@@ -32,6 +32,11 @@
 							if($data_date == $current_date || $data_date > $current_date){ ?>
 							<a href="#" class="au-lnk" id="addTask_button"><span class="au-share"><i class="fas fa-plus"></i>Add Task</span></a>
 							<a href="#" class="au-lnk"><span class="au-share"><i class="fas fa-pen"></i> Edit Event</a>
+							<?php if($event_details[0]['status'] == 0) { ?>
+								<a href="<?= base_url("programs/") . $event_details[0]['id'] . "/" . $event_details[0]['url_alias'] . "/publish";?>" class="au-lnk pub-program"><span class="au-share"><i class="fas fa-check"></i> Publish Event</span></a>
+							<?php }else{ ?>
+								<a href="<?= base_url("programs/") . $event_details[0]['id'] . "/" . $event_details[0]['url_alias'] . "/unpublish";?>" class="au-lnk pub-program"><span class="au-share"><i class="fas fa-minus"></i> Unpublish Event</span></a>
+							<?php } ?>	
 						<?php } }?>
 					</div>
 					<div class="au-badges">
@@ -81,7 +86,7 @@
 				<div class="col-lg-9 col-md-8">
 					<div class="au-programdetailsinside">
 						<div class="au-inner">
-							<a href="program.html" class="au-lnk">
+							<a href="<?= base_url("programs") . "/" . $program_details[0]['id'] . "/" . $program_details[0]['url_alias'];?>" class="au-lnk">
 								<div class="au-phthumbnail">
 									<img src="<?= $program_details[0]['image_thumbnail'];?>" class="au-fp-thumbnailimg">
 								</div>
