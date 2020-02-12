@@ -25,9 +25,14 @@
 						<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> <?= $event_details[0]['volunteer_points'];?> Join to receive points</span>
 						<span class="au-members"><i class="fas fa-walking"></i><?= $event_details[0]['joined_volunteers'];?> <?= ($event_details[0]['joined_volunteers'] > 1 ) ? 'Volunteers' : 'Volunteer';?> </span>
 						<a href="#" class="au-lnk"><span class="au-share"><i class="fas fa-share-alt"></i> Share on <img src="<?= base_url();?>assets/site/img/au-workplace.svg" alt="Workplace"></span></a>
-						<a href="#" class="au-lnk" id="addTask_button"><span class="au-share"><i class="fas fa-plus"></i>Add Task</span></a>
-						<a href="#" class="au-lnk"><span class="au-share"><i class="fas fa-pen"></i> Edit Event</a>
-
+						<?php if($event_details[0]['is_admin'] == 1){ ?>
+							<?php
+							$current_date = date('Y-m-d');
+							$data_date = date("Y-m-d", strtotime($event_details[0]['when']));
+							if($data_date == $current_date || $data_date > $current_date){ ?>
+							<a href="#" class="au-lnk" id="addTask_button"><span class="au-share"><i class="fas fa-plus"></i>Add Task</span></a>
+							<a href="#" class="au-lnk"><span class="au-share"><i class="fas fa-pen"></i> Edit Event</a>
+						<?php } }?>
 					</div>
 					<div class="au-badges">
 						<span class="au-pb">Badges you can earn</span>
