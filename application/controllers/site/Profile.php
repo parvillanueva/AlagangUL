@@ -42,31 +42,40 @@ class Profile extends GS_Controller
 			//get basic details 
 			$user_id 		  	= $id;
 			$profile_details  	= $this->Site_model->get_member_details($user_id);
-			$created_programs 	= $this->Site_model->get_created_programs($user_id);
-			$joined_programs  	= $this->Site_model->get_joined_programs($user_id);
 
-			//get achievements
-			$member_badges		= $this->Site_model->get_member_badges($user_id);
-
-			//get joined activities and events
-			$joined_events		= $this->Site_model->get_joined_events($user_id);
-
-			$data['profile']	= $profile_details;
-			$data['created']	= $created_programs;
-			$data['badges']		= $member_badges;
-			$data['programs']	= $joined_programs;
-			$data['events']		= $joined_events;
-			$data['c_programs'] = count($joined_programs);
-			$data['c_events']   = count($joined_events);
-
-			$data['content'] 	= "site/profile/default";
-			$data['meta'] 	 	= array(
-				"title"        =>  "Profile"
-			);
-			$data['css']		= array("assets/site/css/calendar.css");
-			$data['js']			= array("assets/site/js/calendar.js", "assets/site/js/profile.js");
-
-			$this->load->view("site/layout/template",$data);
+			if(count($profile_details) > 0)
+			{
+				$created_programs 	= $this->Site_model->get_created_programs($user_id);
+				$joined_programs  	= $this->Site_model->get_joined_programs($user_id);
+	
+				//get achievements
+				$member_badges		= $this->Site_model->get_member_badges($user_id);
+	
+				//get joined activities and events
+				$joined_events		= $this->Site_model->get_joined_events($user_id);
+	
+				$data['profile']	= $profile_details;
+				$data['created']	= $created_programs;
+				$data['badges']		= $member_badges;
+				$data['programs']	= $joined_programs;
+				$data['events']		= $joined_events;
+				$data['c_programs'] = count($joined_programs);
+				$data['c_events']   = count($joined_events);
+	
+				$data['content'] 	= "site/profile/default";
+				$data['meta'] 	 	= array(
+					"title"        =>  "Profile"
+				);
+				$data['css']		= array("assets/site/css/calendar.css");
+				$data['js']			= array("assets/site/js/calendar.js", "assets/site/js/profile.js");
+	
+				$this->load->view("site/layout/template",$data);
+			}
+			else
+			{
+				header("Location: " . base_url()); 
+			}
+			
 		}
 		else
 		{
