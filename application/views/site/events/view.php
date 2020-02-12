@@ -25,7 +25,7 @@
 						<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> <?= $event_details[0]['volunteer_points'];?> Join to receive points</span>
 						<span class="au-members"><i class="fas fa-walking"></i><?= $event_details[0]['joined_volunteers'];?> <?= ($event_details[0]['joined_volunteers'] > 1 ) ? 'Volunteers' : 'Volunteer';?> </span>
 						<a href="#" class="au-lnk"><span class="au-share"><i class="fas fa-share-alt"></i> Share on <img src="<?= base_url();?>assets/site/img/au-workplace.svg" alt="Workplace"></span></a>
-						<?php //if($event_details[0]['is_admin'] == 1){ ?>
+						<?php if($event_details[0]['is_admin'] == 1){ ?>
 							<?php
 							$current_date = date('Y-m-d');
 							$data_date = date("Y-m-d", strtotime($event_details[0]['when']));
@@ -37,7 +37,7 @@
 							<?php }else{ ?>
 								<a href="<?= base_url("programs/") . $event_details[0]['id'] . "/" . $event_details[0]['url_alias'] . "/unpublish";?>" class="au-lnk pub-program"><span class="au-share"><i class="fas fa-minus"></i> Unpublish Event</span></a>
 							<?php } ?>	
-						<?php } //}?>
+						<?php } }?>
 					</div>
 					<div class="au-badges">
 						<span class="au-pb">Badges you can earn</span>
