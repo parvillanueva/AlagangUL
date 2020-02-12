@@ -41,13 +41,13 @@
 						<div class="au-inner au-cscroll">
 							<?php foreach ($details['members'] as $key => $value) { ?>
 								<div class="au-userentry">
-									<a href="profile.html" class="au-userentry">
+									<a href="<?= base_url('profile') ?>/<?= $value->used_id;?>" class="au-userentry">
 										<div class="au-inner">
 											<img src="<?= $value->profile_image;?>" class="au-avatar-lg">
 										</div>
 										<div class="au-inner">
 											<span class="au-accname"><?= $value->user;?></span>
-											<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> 1234 points</span>	
+											<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> <?= $value->current_pt;?> points</span>	
 										</div>
 									</a>
 								</div>

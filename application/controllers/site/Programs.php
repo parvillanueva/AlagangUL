@@ -102,7 +102,7 @@ class Programs extends GS_Controller {
 		}
 
 
-		$query_members = "SELECT tbl_program_event_task_volunteers.*, CONCAT('" . base_url() . "','/',tbl_users.imagepath) as profile_image , CONCAT(tbl_users.first_name, ' ', tbl_users.last_name) as user FROM tbl_program_event_task_volunteers LEFT JOIN tbl_users ON tbl_users.id = tbl_program_event_task_volunteers.user_id WHERE program_id = " . $program_id . " GROUP BY user_id";
+		$query_members = "SELECT tbl_program_event_task_volunteers.*, CONCAT('" . base_url() . "','/',tbl_users.imagepath) as profile_image , CONCAT(tbl_users.first_name, ' ', tbl_users.last_name) as user, tbl_users.id as used_id, tbl_users_points.current_points as current_pt FROM tbl_program_event_task_volunteers LEFT JOIN tbl_users ON tbl_users.id = tbl_program_event_task_volunteers.user_id LEFT JOIN tbl_users_points ON tbl_users.id = tbl_users_points.user_id WHERE program_id = " . $program_id . " GROUP BY user_id";
 		$result_members = $this->db->query($query_members)->result();
 
 		$details = array(
