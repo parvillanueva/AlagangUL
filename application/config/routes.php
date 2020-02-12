@@ -19,6 +19,8 @@
 		$route["events"] = "site/events";
 		$route["get-rewards"] = "site/get_rewards";
 		$route["profile"]  = "site/profile";
+		$route["profile/(:any)"]  = "site/profile/view/$1";
+
 		$route["submit"]  = "site/user/submit";
 		$route["terms-and-conditions"] = "site/terms_and_condition";
 		$route["privacy-statement"] = "site/privacy_policy";
