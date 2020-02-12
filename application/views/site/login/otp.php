@@ -78,7 +78,7 @@
 			var url = "<?php echo base_url('site/login_otp/otp_check') ?>"; 
 			var data = {
 				otp_code : otp1+otp2+otp3+otp4+otp5+otp6,
-				token : "<?php echo $_GET['token']?>"
+				token : "<?php echo $_SESSION['token']?>"
 			};
 			aJax.post(url, data, function(result){
 				var obj = is_json(result);

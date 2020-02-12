@@ -12,10 +12,10 @@
     <!-- ANIMATION -->
 
     <!-- Bootstrap core CSS -->
-    <link href="<?= base_url();?>assets/css/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/css/css/main-style.css">
 	<link rel="stylesheet" type="text/css" href="https://use.typekit.net/scj2ogv.css">
 	<link rel="icon" type="image/png" href="<?= base_url();?>assets/img/favicon.png" sizes="16x16">
+	<link href="<?= base_url();?>assets/css/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> 	
     <!-- Custom styles for this template -->
 	<script src="https://kit.fontawesome.com/47b29f79cf.js" crossorigin="anonymous"></script>
     <script src="<?= base_url();?>assets/js/jquery.min.js"></script>
@@ -23,8 +23,8 @@
     <script src="<?= base_url();?>assets/js/bootstrap.min.js"></script>
     <script src="<?= base_url();?>assets/js/ie10-viewport-bug-workaround.js"></script>
     <script src="<?= base_url();?>assets/js/footer.js"></script>
+	<script src="<?= base_url();?>cms/js/bootbox.min.js"></script>
     <script src="<?= base_url();?>cms/js/custom.js"></script>
-    <script src="<?= base_url();?>cms/js/bootbox.min.js"></script>
     <script type="text/javascript">
         var base_url = "<?= base_url();?>";
         var form_empty_error = "<?= $this->standard->dialog("form_empty");?>";

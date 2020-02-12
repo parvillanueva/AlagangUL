@@ -30,5 +30,17 @@ class Site_banner extends CI_Controller {
 		$data['breadcrumb'] = array('Banner List' => '');
 		$this->load->view("content_management/template/layout", $data);	
 	}
+
+	public function edit($id)
+	{
+		$data["title"] = "Content Management";
+		$data["PageName"] = ("Banner List");
+		$data['edit_title'] = true;
+		$data["content"] = "content_management/module/banner/edit";
+		$data['breadcrumb'] = array('Banner List' => '');
+		$data['buttons'] = ['save','close'];
+		$data['id'] = $id;
+		$this->load->view("content_management/template/layout", $data);	
+	}
 }
 	    

@@ -75,4 +75,16 @@ date_default_timezone_set('Asia/Taipei');
 			$q = $this->db->get();
 			return $q->result();
 		}
+
+		function batch_update($table,$data,$field,$where_in)
+		{
+			$this->db->where_in($field, $where_in);
+			$this->db->update($table, $data);
+			$updated_status = $this->db->affected_rows();
+			if($updated_status):
+			    return "success";
+			else:
+			    return "failed";
+			endif;
+		}
 	}

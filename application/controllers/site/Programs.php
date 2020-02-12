@@ -28,11 +28,11 @@ class Programs extends GS_Controller {
 
 		$program_id = $this->uri->segment(2);
 		$program_alias = $this->uri->segment(3);
-		$user_details = $this->Gmodel->get_query('tbl_programs',"id = " . $program_id . " AND url_alias ='" . $program_alias . "'");
-		$data['details'] = $user_details;
+		$program_details = $this->get_details($program_id, $program_alias);
+		$data['details'] = $program_details;
 		$data['content'] = "site/programs/view";
 		$data['meta'] = array(
-			"title"         =>  "Program",
+			"title"         =>  $program_details['details'][0]->name,
 			"description"   =>  "",
 			"keyword"       =>  ""
 		);
@@ -45,6 +45,112 @@ class Programs extends GS_Controller {
 		);
 		$data['active_menu'] = "programs";
 		$this->parser->parse("site/layout/template",$data);
+	}
+
+	public function get_details($program_id, $program_alias){
+		$program_details = $this->Gmodel->get_query('tbl_programs',"id = " . $program_id . " AND url_alias ='" . $program_alias . "'");
+		$event_list = $this->Gmodel->get_query('tbl_program_events',"program_id = " . $program_id . " AND status = 1 AND when >= '" . date("Y-m-d H:i:s") . "'");
+
+		$is_admin = 0;
+		if($program_details[0]->created_by == $this->session->userdata('user_sess_id')){
+			$is_admin = 1;
+		}
+
+
+
+		$events = array();
+		foreach ($event_list as $key => $value) {
+
+			$query_needed_volunteer = "SELECT SUM(required_volunteers) as count FROM tbl_program_event_task WHERE event_id = " . $value->id;
+			$needed_volunteer = $this->db->query($query_needed_volunteer)->result();
+
+			$query_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $value->id;
+			$joined_volunteer = $this->db->query($query_joined_volunteer)->result();
+
+
+			$is_joined = false;
+			$query_is_joined = "SELECT * FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id') . " AND event_id = " . $value->id;
+			$result_is_joined = $this->db->query($query_is_joined)->result();
+			if(count($result_is_joined) > 0){
+				$is_joined = true;
+			}
+
+
+			$event_page_url = base_url("programs") . "/" . $program_id . "/" . $program_alias . "/event/" . $value->id . "/" . $value->url_alias;
+			$events[] = array(
+				"id"				=> $value->id,
+				"link"				=> $event_page_url,
+				"title"				=> $value->title,
+				"image"				=> base_url() . $value->image,
+				"description"		=> $value->description,
+				"when"				=> $value->when,
+				"where"				=> $value->where,
+				"volunteer_points"	=> $value->volunteer_points,
+				"is_admin"			=> ($value->user_id == $this->session->userdata('user_sess_id')) ? true : false,
+				"is_joined"			=> $is_joined,
+				"required_volunteer"=> ($needed_volunteer[0]->count != "") ? $needed_volunteer[0]->count : 0,
+				"joined_volunteers"	=> ($joined_volunteer[0]->count != "") ? $joined_volunteer[0]->count : 0,
+			);
+		}
+
+
+		$query_members = "SELECT tbl_program_event_task_volunteers.*, CONCAT('" . base_url() . "','/',tbl_users.imagepath) as profile_image , CONCAT(tbl_users.first_name, ' ', tbl_users.last_name) as user FROM tbl_program_event_task_volunteers LEFT JOIN tbl_users ON tbl_users.id = tbl_program_event_task_volunteers.user_id WHERE program_id = " . $program_id . " GROUP BY user_id";
+		$result_members = $this->db->query($query_members)->result();
+
+		$details = array(
+			"details"		=> $program_details,
+			"members_count"	=> count($result_members),
+			"members"		=> $result_members,
+			"is_admin"		=> $is_admin,
+			"events"		=> $events,
+		);
+
+		return $details;
+	}
+
+
+	public function update()
+	{
+		$program_id = $this->uri->segment(2);
+		$program_alias = $this->uri->segment(3);
+
+		$post = $_POST;
+
+		$data['name'] = $post['programName'];
+		$data['url_alias'] = $this->format_slug($post['programName']);
+		$data['overview'] = $post['overview'];
+		$data['area_covered'] = $post['areaCovered'];
+		$data['update_date'] = date("Y-m-d H:i:s");
+
+
+		$storeFolder = "uploads/programs/" . $program_id ;
+
+		if (!file_exists($storeFolder)) {
+		    mkdir($storeFolder, 0777, true);
+		}
+		if (!empty($_FILES)) {
+			if($_FILES['programImage']['size'] > 0) { //10 MB (size is also in bytes)
+		        $tempFile = $_FILES['programImage']['tmp_name'];                   
+			    $targetPath =  $storeFolder . "/";  
+			    $targetFile =  $targetPath. str_replace(" ", "_", strtolower($_FILES['programImage']['name'])); 
+			    move_uploaded_file($tempFile,$targetFile);
+			    $data['image_thumbnail'] = $targetFile;
+		    }
+		   
+		}
+
+
+		$this->Gmodel->update_data("tbl_programs",$data,"id",$program_id);
+
+		 redirect(base_url("programs") . "/" . $program_id . "/" . $data['url_alias']);
+
+	}
+
+	function format_slug($title)
+	{
+	    $title = trim(strtolower($title));
+	    $title = preg_replace('#[^a-z0-9\\/]#i', '-', $title);
+	    return trim(preg_replace('/-+/', '-', $title), '-/');
 	}
 
 }

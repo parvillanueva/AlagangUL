@@ -694,6 +694,67 @@ AJAX = {
 			}
 		    
 	    }
+	},
+	batch_update : {
+		url: function (url) {
+    		UpdateData_url = url;
+	    }, 
+		table: function (table) {
+    		UpdateData_table = table;
+	    }, 
+		params: function (key, val) {
+			UpdateData_data[key] = val;
+		},
+		field: function (key) {
+			UpdateData_key = key;
+		},
+		where_in: function(where_in){
+			Select_query_where_in = where_in;
+		},
+	    exec: function(cb){
+
+	    	var url = Globalurl;
+			if(UpdateData_url != ""){
+				url = UpdateData_url;
+			}
+
+	    	var data = {
+	            event 	: "batch_update", 
+	            table 	: UpdateData_table, 
+	            data 	: UpdateData_data,
+	            field 	: UpdateData_key,
+	            where_in : Select_query_where_in,
+	        }
+
+	        $.ajax({
+		      	async	: false,
+		      	cache	: false,
+		      	type	: 'POST',
+		      	url 	: url,
+		      	data 	: data,
+		      	beforeSend: function() {
+		      		fn.loading(true);
+			    },
+			    complete: function() {
+			    	UpdateData_url = "";
+					UpdateData_table = "";
+					UpdateData_data = {};
+					UpdateData_key = "";
+					UpdateData_val = "";
+			        fn.loading(false);
+			    },
+			    error: function(xhr) { 
+			    	fn.loading(false);
+			    	UpdateData_url = "";
+					UpdateData_table = "";
+					UpdateData_data = {};
+					UpdateData_key = "";
+					UpdateData_val = "";
+			    },
+			    success	: cb
+		    });
+
+	    }
 	}
 }
 

@@ -6,7 +6,14 @@ class Home extends GS_Controller {
 	public function index()
 	{
 		//banner data
-		$data['banners']  = $this->Site_model->get_banners();	
+		$banner_list      = $this->Site_model->get_banners();	
+		$data['banners']  = $banner_list;
+
+		if(count($banner_list) > 1)
+		{
+			$data['is_slider'] = true;
+		}
+		
 		//featured programs
 		$data['programs'] = $this->Site_model->get_featured_programs();
 		//get rewards

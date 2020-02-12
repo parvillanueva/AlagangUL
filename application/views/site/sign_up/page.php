@@ -19,7 +19,8 @@
 			<div class="au-form-wrapper au-inner">
 				<div class="au-form" id="signup">
 					<span class="au-h4">Sign up for an Alagang Unilab Account</span>
-					<span class="au-h4" id="failed_label"><font color="red"><small>Email Address is already exist. </small></font></span>
+					<div class="alert alert_failed alert-warning" id="failed_label">Email Address is already exist! </div>
+					<div class="alert alert_failed alert-warning" id="failed_list"><small>Please use unilab email address! </div>
 					<span class="au-p2">You may be missing out a world of opportunity by not being a member. Please provide your email address to register.</span>
 					<div class="form-row">
 						<div class="col au-iconned">
@@ -48,6 +49,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#failed_label').hide();
+		$('#failed_list').hide();
 	});
 	function recaptcha_callback(){
 		$('#btnSend').show();
@@ -64,10 +66,12 @@
 				var obj = is_json(result);
 				if(obj.responce == 'exist'){
 					$('#failed_label').show();
+				} else if(obj.responce == 'no_list'){
+					$('#failed_list').show();
 				} else{
 					if(result == 202){
 						modal.loading(false);
-						location.href = '<?=base_url("site/sign_up/thankyou_message");?>';
+						location.href = '<?=base_url("login_otp");?>';
 					}
 				}
 			});
