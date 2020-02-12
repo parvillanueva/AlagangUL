@@ -26,6 +26,8 @@
 						<span class="au-members"><i class="fas fa-walking"></i><?= $event_details[0]['joined_volunteers'];?> <?= ($event_details[0]['joined_volunteers'] > 1 ) ? 'Volunteers' : 'Volunteer';?> </span>
 						<a href="#" class="au-lnk"><span class="au-share"><i class="fas fa-share-alt"></i> Share on <img src="<?= base_url();?>assets/site/img/au-workplace.svg" alt="Workplace"></span></a>
 						<a href="#" class="au-lnk" id="addTask_button"><span class="au-share"><i class="fas fa-plus"></i>Add Task</span></a>
+						<a href="#" class="au-lnk"><span class="au-share"><i class="fas fa-pen"></i> Edit Event</a>
+
 					</div>
 					<div class="au-badges">
 						<span class="au-pb">Badges you can earn</span>
