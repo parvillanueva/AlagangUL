@@ -56,7 +56,7 @@
                 html += '<tr>';
                 html+="      <td class='text-center'><input class = 'select'  data-id = '"+y.id+"' data-name='"+y.title+"' type ='checkbox'></td>";
                 html += '   <td>'+y.title+'</td>';
-                html += '   <td style="background-color:'+y.description+'"></td>';
+                html += '   <td>'+y.description+'</td>';
                 html += '   <td>'+status+'</td>';
                 html += '   <td><a  href="<?= base_url()."content_management/"?>site_about_us/update/'+y.id+'" data-id ="'+y.id+'" class="app_class">Edit</a></td>'
                 html += '</tr>'
