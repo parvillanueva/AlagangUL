@@ -9,7 +9,7 @@
 				<span class="au-h5"><?= $details['details'][0]->name;?></span>
 				<div class="au-phstats">
 					<span class="au-members"><i class="fas fa-user-friends"></i><?= $details['members_count'];?> <?= ($details['members_count'] > 1 ) ? 'Members' : 'Member';?></span>
-					<a href="#" class="au-lnk"><span class="au-share"><i class="fas fa-share-alt"></i> Share on <img src="<?= base_url();?>assets/site/img/au-workplace.svg" alt="Workplace"></span></a>
+					<a href="#" class="au-lnk"><span class="au-share workplace-share"><i class="fas fa-share-alt"></i> Share on <img src="<?= base_url();?>assets/site/img/au-workplace.svg" alt="Workplace"></span></a>
 					
 					<?php if($details['is_admin']) { ?>
 						<a href="#" class="au-lnk" data-toggle="modal" data-target="#editPrgoramDetails"><span class="au-share"><i class="fas fa-pen"></i> Edit Details</a>
@@ -38,7 +38,13 @@
 								<div class="au-userentry">
 									<a href="profile.html" class="au-userentry">
 										<div class="au-inner">
-											<img src="<?= $value->profile_image;?>" class="au-avatar-lg">
+											<?php
+												$profile_image = $value->profile_image;
+												if($profile_image==null || $profile_image=='' || !file_exists($profile_image)){
+													$profile_image = base_url().'assets/site/img/au-avatar.svg';
+												}
+											?>
+											<img src="<?= $profile_image;?>" class="au-avatar-lg">
 										</div>
 										<div class="au-inner">
 											<span class="au-accname"><?= $value->user;?></span>

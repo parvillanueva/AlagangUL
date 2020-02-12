@@ -6,6 +6,7 @@
 		$route["signup"] = "site/sign_up";
 		$route["login_otp"] = "site/login_otp";
 		$route["user_profile/(:any)"] = "site/user/view/$1";
+		$route["user_profile"] = "site/user/view";
 		$route["home"] = "site/home";
 		$route["forgot_password"] = "site/login/forgot_password";
 		$route["login_otp_fpw"] = "site/login_otp/otp_fpw";
@@ -15,6 +16,7 @@
 
 		$route["events/upload"] = "site/events/upload";
 		$route["events/get_gallery"] = "site/events/get_gallery";
+		$route["events/volunteer"] = "site/events/volunteer";
 
 		$route["events"] = "site/events";
 		$route["get-rewards"] = "site/get_rewards";

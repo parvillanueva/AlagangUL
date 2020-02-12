@@ -9,13 +9,13 @@ class User extends CI_Controller {
 		$this->load->view("site/layout/template2",$data);	
 	}
 	
-	public function view($user_id){
+	public function view(){
 		$data['division'] = $this->Global_model->get_list_all('tbl_division');
-		$arrWhere = array(
+		/*$arrWhere = array(
 			'id' => $user_id
 		);
 		$result = $this->Gmodel->get_query('tbl_users', $arrWhere);
-		$data['data_set'] = $result;
+		$data['data_set'] = $result;*/
 		$data["title"] = "Content Management";
 		$data["PageName"] = ("User");
 		$data["content"] = "site/user_profile/page";
@@ -24,7 +24,7 @@ class User extends CI_Controller {
 	
 	public function submit(){
 		date_default_timezone_set('Asia/Manila');
-		$this->upload_file($_FILES, $_POST['email']);
+		$this->upload_file($_FILES, $this->session->userdata('email_address'));
 		$arrData = array(
 			'last_name' => $_POST['lname'],
 			'first_name' => $_POST['fname'],
@@ -34,7 +34,7 @@ class User extends CI_Controller {
 			'update_date' => date('Y-m-d H:i:s'),
 			'imagepath' => $_FILES['file_set']['name'],
 		);
-		$this->Gmodel->update_data('tbl_users', $arrData, 'email_address', $_POST['email']);
+		$this->Gmodel->update_data('tbl_users', $arrData, 'email_address', $this->session->userdata('email_address'));
 		header("Location: ".base_url('login').""); 
 		exit();		
 	}

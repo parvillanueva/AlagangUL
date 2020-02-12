@@ -72,6 +72,7 @@ class Sign_up extends CI_Controller {
 	public function session_set($token){
 		$arr_token = array(
 			'token' => $token,
+			'email_address' => $_POST['email']
 		);
 		$this->session->set_userdata($arr_token);
 	}

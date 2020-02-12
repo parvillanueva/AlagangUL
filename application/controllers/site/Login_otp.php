@@ -4,7 +4,7 @@ defined("BASEPATH") OR exit("No direct script access allowed");
 class Login_otp extends CI_Controller {
 	
 	public function index(){
-		$token = $_SESSION['token'];
+		$token = $this->session->userdata('token');
 		$arr = array(
 			'token' => $token
 		);
@@ -47,7 +47,7 @@ class Login_otp extends CI_Controller {
 			$arr = array('responce'=>'failed');
 			echo json_encode($arr);
 		}
-		$this->session->sess_destroy();
+		//$this->session->sess_destroy();
 	}
 	
 	public function check_email($token){
