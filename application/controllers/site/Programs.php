@@ -20,6 +20,8 @@ class Programs extends GS_Controller {
 			// "image"         =>  base_url().$this->Global_model->site_meta_og(38, 'site_menu', 'og_image'),
 		);
 		$data['active_menu'] = "programs";
+		//featured programs
+		$data['programs'] = $this->Site_model->get_featured_programs();
 		$this->parser->parse("site/layout/template",$data);
 	}
 
