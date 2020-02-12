@@ -3,7 +3,7 @@
 		<span class="au-h5 no-margin">Explore Programs</span>
 		<button class="au-btn" id="btn_addProgram" style="position: absolute;
     right: 0px;
-    top: 13px;"><i class="fas fa-user-edit"></i>Add Program</button>
+    top: 13px;"><i class="fa fa-plus"></i>Add Program</button>
 	</div>
 </div>
 

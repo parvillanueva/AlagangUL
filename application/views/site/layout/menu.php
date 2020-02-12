@@ -32,7 +32,7 @@
 							<a id="about" href="<?= base_url("about");?>" class="nav-item nav-link">About</a>
 							<a id="programs"  href="<?= base_url("programs");?>" class="nav-item nav-link">Programs</a>
 							<a id="events"  href="<?= base_url("events");?>" class="nav-item nav-link">Events</a>
-							<a id="get_rewards"  href="<?= base_url("get-rewards");?>" class="nav-item nav-link">Get Rewards</a>
+							<!-- <a id="get_rewards"  href="<?= base_url("get-rewards");?>" class="nav-item nav-link">Get Rewards</a> -->
 						</div>
 						<div class="au-user">
 							<!-- show this when logged out -->
