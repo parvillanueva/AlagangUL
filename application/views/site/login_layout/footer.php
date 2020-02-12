@@ -7,8 +7,8 @@
                 </div>
                 <div class="col-md-6 au-footer-details">
                     <div class="au-footer-links">
-                        <!-- <span class="au-pf"><a href="<?= base_url("terms-and-conditions");?>">Terms and Conditions</a></span> -->
-                        <!-- <span class="au-pf"><a href="<?= base_url("privacy-statement");?>">Privacy Statement</a></span> -->
+                         <!-- <span class="au-pf"><a href="<?= base_url("terms-and-conditions");?>">Terms and Conditions</a></span> 
+                         <span class="au-pf"><a href="<?= base_url("privacy-statement");?>">Privacy Statement</a></span> --> 
                     </div>
                     <span class="au-pf">2020 All Rights Reserved © Unilab, Inc.</span>
                 </div>
