@@ -30,8 +30,8 @@
 
 		$route["programs/(:any)/(:any)"] = "site/programs/view/$1/$2";
 		$route["programs/(:any)/(:any)/update"] = "site/programs/update/$1/$2";
+		$route["programs/add"] = "site/programs/add";
 		$route["programs/(:any)/(:any)/event/(:any)/(:any)"] = "site/events/view/$1/$3/$4";
-
 
 
 

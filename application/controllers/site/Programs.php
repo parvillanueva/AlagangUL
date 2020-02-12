@@ -148,6 +148,49 @@ class Programs extends GS_Controller {
 
 	}
 
+	public function add()
+	{
+		$post = $_POST;
+
+		$data['name'] = $post['programName'];
+		$data['url_alias'] = $this->format_slug($post['programName']);
+		$data['overview'] = $post['overview'];
+		$data['area_covered'] = $post['areaCovered'];
+		$data['created_by'] = $this->session->userdata('user_sess_id');
+		$data['create_date'] = date("Y-m-d H:i:s");
+		$data['update_date'] = date("Y-m-d H:i:s");
+		$data['status'] = 0;
+
+		$storeFolder2 = "uploads/programs/";
+		$tempFile = $_FILES['programImage']['tmp_name'];                   
+		$targetPath =  $storeFolder2 . "/";  
+		$targetFile =  $targetPath. str_replace(" ", "_", strtolower($_FILES['programImage']['name'])); 
+		$data['image_thumbnail'] = $targetFile;
+
+		$program_id = $this->Gmodel->save_data("tbl_programs",$data);
+
+		$storeFolder = "uploads/programs/" . $program_id ;
+
+		if (!file_exists($storeFolder)) {
+		    mkdir($storeFolder, 0777, true);
+		}
+		if (!empty($_FILES)) {
+			if($_FILES['programImage']['size'] > 0) { //10 MB (size is also in bytes)		        
+			    move_uploaded_file($tempFile,$targetFile);			    
+		    }
+		   
+		}
+
+		if($program_id){
+			$data['image_thumbnail'] = $targetFile;
+		}
+
+		$this->Gmodel->update_data("tbl_programs",$data,"id",$program_id);
+		
+		redirect(base_url("programs") . "/" . $program_id . "/" . $data['url_alias']);
+
+	}
+
 	function format_slug($title)
 	{
 	    $title = trim(strtolower($title));
