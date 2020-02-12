@@ -12,6 +12,8 @@ class Sign_up extends CI_Controller {
 		$email_result = $this->email_check($_POST['email']);
 		if($email_result == 'not_empty'){
 			echo json_encode(array('responce'=>'exist'));
+		} else if($email_result == 'pass_empty'){
+			echo json_encode(array('responce'=>'pass_empty'));
 		} else{
 			$explode_email = explode("@",$_POST['email']);
 			$white_test = $this->white_list_check($explode_email[1]);
@@ -46,7 +48,12 @@ class Sign_up extends CI_Controller {
 		
 		$sql = $this->Global_model->get_list_query('tbl_users', $arrWhere);
 		if(!empty($sql)){
-			return 'not_empty';
+			$password = $sql[0]->password;
+			if($password != ''){
+				return 'not_empty';
+			} else{
+				return 'pass_empty';
+			}
 		} else{
 			return 'empty';
 		}

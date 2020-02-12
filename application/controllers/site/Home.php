@@ -6,6 +6,7 @@ class Home extends GS_Controller {
 	public function index()
 	{
 		//banner data
+		
 		$banner_list      = $this->Site_model->get_banners();	
 		$data['banners']  = $banner_list;
 
@@ -16,6 +17,7 @@ class Home extends GS_Controller {
 		
 		//featured programs
 		$data['programs'] = $this->Site_model->get_featured_programs();
+
 		//get rewards
 
 		$data['content'] = "site/home/default";
