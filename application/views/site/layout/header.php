@@ -68,6 +68,7 @@
 
         <link href="<?= base_url();?>assets/site/css/dropzone.css" type="text/css" rel="stylesheet" />
         <script src="<?= base_url();?>assets/site/js/dropzone.js"></script>
+        <script src="<?= base_url();?>assets/site/js/event.js"></script>
 
         <script src="<?= base_url();?>assets/site/slick/slick.js"></script>
         

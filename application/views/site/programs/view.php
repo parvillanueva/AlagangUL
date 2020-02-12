@@ -83,7 +83,6 @@
 								<div class="row">
 									<div class="col-sm-4 au-eventthumbnail">
 										<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> 10 points</span>
-										<span class="au-accpoints au-accpointsv"><div class="au-heart"><i class="fas fa-heart"></i></div>Volunteered</span>
 										<img src="<?= $value['image'];?>" class="au-eventimg">
 									</div>
 									<div class="col-sm-8 au-eventdetails">
@@ -113,8 +112,16 @@
 											<div class="row">
 												<div class="col"><span class="au-needed"><?= $value['required_volunteer'] ;?> volunteers needed</span></div>
 												<div class="col">
-													<a href="eventdetails.html" class="au-lnk"><button type="button" class="au-volunteer au-btnyellow float-right">Volunteer</button></a>
-													<button type="button" class="au-volunteered au-btnyellow float-right">Volunteered</button>
+													<?php if($details['is_admin']) { ?>
+														<?php if($value['status'] == 1) { ?>
+															<button type="button" class="au-volunteered au-btnyellow float-right" style="background-color: #00b513;">Published</button>
+														<?php } else { ?>
+															<button type="button" class="au-volunteered au-btnyellow float-right">Unpublished</button>
+														<?php } ?>
+	}												<?php } else { ?>
+														<button type="button" class="au-volunteer au-btnyellow float-right" style="display: block">Volunteer</button>
+														<button type="button" class="au-volunteered au-btnyellow float-right">Volunteered</button>
+													<?php } ?>
 												</div>
 											</div>
 										</div>

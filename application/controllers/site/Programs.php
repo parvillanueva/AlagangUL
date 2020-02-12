@@ -52,7 +52,6 @@ class Programs extends GS_Controller {
 
 	public function get_details($program_id, $program_alias){
 		$program_details = $this->Gmodel->get_query('tbl_programs',"id = " . $program_id . " AND url_alias ='" . $program_alias . "'");
-		$event_list = $this->Gmodel->get_query('tbl_program_events',"program_id = " . $program_id . " AND status = 1 AND when >= '" . date("Y-m-d H:i:s") . "'");
 
 		$is_admin = 0;
 		if($program_details[0]->created_by == $this->session->userdata('user_sess_id')){
@@ -60,6 +59,11 @@ class Programs extends GS_Controller {
 		}
 
 
+		if($is_admin == 1){
+			$event_list = $this->Gmodel->get_query('tbl_program_events',"program_id = " . $program_id . " AND when >= '" . date("Y-m-d H:i:s") . "'");
+		} else 	{
+			$event_list = $this->Gmodel->get_query('tbl_program_events',"program_id = " . $program_id . " AND status = 1 AND when >= '" . date("Y-m-d H:i:s") . "'");
+		}
 
 		$events = array();
 		foreach ($event_list as $key => $value) {
@@ -88,6 +92,7 @@ class Programs extends GS_Controller {
 				"description"		=> $value->description,
 				"when"				=> $value->when,
 				"where"				=> $value->where,
+				"status"				=> $value->status,
 				"volunteer_points"	=> $value->volunteer_points,
 				"is_admin"			=> ($value->user_id == $this->session->userdata('user_sess_id')) ? true : false,
 				"is_joined"			=> $is_joined,
