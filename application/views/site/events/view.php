@@ -303,6 +303,7 @@
 
     function get_gallery(){
     	var url = "<?= base_url("events/get_gallery");?>?event_id=<?= $event_details[0]['id']; ?>&limit=" + limit;
+		var is_admin = "<?= $event_details[0]['is_admin'] ?>";
     	$.get(url, function(data) {
     		var html = "";
     		$.each(data.result, function(x, y){
@@ -311,7 +312,9 @@
 				html += '		<a href="<?= base_url();?>'+y.path+'" data-toggle="lightbox" data-gallery="gallery" class="">';
 				html += '			<img src="<?= base_url();?>'+y.path+'" class="au-gl-thumbnailimg">';
 				html += '		</a>';
-				html += '		<div class="au-gltitle" style="text-align:right; cursor:pointer"><font color="red"><span class="fa fa-trash" path-url= "'+y.path+'" path-id="'+y.id+'" id="delete_image"></span></font></div>';
+				if(is_admin == 1){
+					html += '		<div class="au-gltitle" style="text-align:right; cursor:pointer"><font color="red"><span class="fa fa-trash" path-url= "'+y.path+'" path-id="'+y.id+'" id="delete_image"></span></font></div>';
+				}
 				html += '	</div>';
 				html += '</div>';
     		});
@@ -400,6 +403,7 @@
 				$('#qualification').val('');
 				$('.badges_input').prop('checked', false); 
 				$("#addtask").modal('hide');
+				location.reload();
 			}
 		});
 	});
