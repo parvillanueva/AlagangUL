@@ -8,7 +8,7 @@
 			$inputs = [
                 'title',
                 'description',
-                'banner',
+                // 'banner',
                 'status'
             ];
             $top_content = $this->standard->inputs($inputs);
