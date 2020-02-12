@@ -30,7 +30,7 @@ date_default_timezone_set('Asia/Taipei');
 		{
 			$this->db->select("p.id, p.url_alias, p.image_thumbnail, p.name, p.overview, COUNT(pm.program_id) AS member_count");
 			$this->db->from("tbl_programs p");
-			$this->db->join("tbl_program_members pm", "pm.program_id = p.id", "LEFT");
+			$this->db->join("tbl_program_event_task_volunteers pm", "pm.program_id = p.id", "LEFT");
 			$this->db->where("p.status", 1);
 			$this->db->group_by("p.id");
 			$this->db->order_by("p.update_date","desc");
@@ -43,7 +43,7 @@ date_default_timezone_set('Asia/Taipei');
 		{
 			$this->db->select("p.id, p.url_alias, p.image_thumbnail, p.name, p.overview, COUNT(pm.program_id) AS member_count");
 			$this->db->from("tbl_programs p");
-			$this->db->join("tbl_program_members pm", "pm.program_id = p.id", "LEFT");
+			$this->db->join("tbl_program_event_task_volunteers pm", "pm.program_id = p.id", "LEFT");
 			$this->db->where("p.status", 1);
 			$this->db->where('p.id !=', $program_id);
 			$this->db->group_by("p.id");
