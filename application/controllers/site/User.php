@@ -32,7 +32,7 @@ class User extends CI_Controller {
 			'password' => md5($_POST['password']),
 			'status' => $_POST['password'],
 			'update_date' => date('Y-m-d H:i:s'),
-			'imagepath' => $_FILES['file_set']['name'],
+			'imagepath' => 'upload_file/'.$_POST['email'].'/'.$_FILES['file_set']['name'],
 		);
 		$this->Gmodel->update_data('tbl_users', $arrData, 'email_address', $_POST['email']);
 		header("Location: ".base_url('login').""); 

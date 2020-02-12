@@ -168,7 +168,10 @@
 						<div class="col">
 							<span class="au-h4">Testimonials</span>
 						</div>
-						<div class="col"><button class="au-btn float-right" id="addtestimonial_button"><i class="fas fa-plus"></i>Add Testimonial</button></div>
+						<?php if($validate_testimonial == 'not_empty'){ ?>
+							<div class="col"><button class="au-btn float-right" id="addtestimonial_button"><i class="fas fa-plus"></i>Add Testimonial</button></div>	
+						<?php } ?>
+						
 					</div>
 					<div class="row">
 						<div class="col au-testimonialwrapper">
@@ -339,7 +342,7 @@
 				html += '		<div class="au-userentry">';
 				html += '			<a href="profile.html" class="au-userentry">';
 				html += '				<div class="au-inner">';
-				html += '					<img src="<?php echo base_url("upload_file/'+y['picture']['email']+'/'+y['picture']['image_path']+'") ?>" class="au-avatar-lg">';
+				html += '					<img src="<?php echo base_url("'+y['picture']['image_path']+'") ?>" class="au-avatar-lg">';
 				html += '				</div>';
 				html += '				<div class="au-inner">';
 				html += '					<span class="au-accname">'+y['picture']['name']+'</span>';
