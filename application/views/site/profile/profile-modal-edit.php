@@ -64,7 +64,7 @@
         var email = $('#email').val();
 		var fname  = $('#fname').val();
         var lname = $('#lname').val();
-        var user_id = <?=$this->session->userdata('sess_id')?>;
+        var user_id = <?=$this->session->userdata('user_sess_id')?>;
 
 		if(email_address != ''){
 			var data = {

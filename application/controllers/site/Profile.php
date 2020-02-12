@@ -6,7 +6,7 @@ class Profile extends GS_Controller
 	public function index()
 	{
 		//get basic details 
-		$user_id 		  	= $this->session->userdata('sess_id');
+		$user_id 		  	= $this->session->userdata('user_sess_id');
 		$profile_details  	= $this->Site_model->get_member_details($user_id);
 		$created_programs 	= $this->Site_model->get_created_programs($user_id);
 		$joined_programs  	= $this->Site_model->get_joined_programs($user_id);
