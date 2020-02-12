@@ -65,7 +65,6 @@ date_default_timezone_set('Asia/Taipei');
 
 			return $this->db->get()->result_array();
 		}
-
 		function get_member_badges($id)
 		{
 			$this->db->select("b.name, b.icon, b.color");
@@ -94,6 +93,18 @@ date_default_timezone_set('Asia/Taipei');
 			$this->db->where("etv.user_id", $id);
 
 			return $this->db->get()->result_array();
+
+		}
+		//ABOUT US
+
+		function get_about_us()
+		{
+			$this->db->select("title,description");
+			$this->db->from("tbl_about_us");
+			$this->db->where("status", 1);
+
+			$query = $this->db->get();
+			return $query->result_array();
 		}
 
 	}

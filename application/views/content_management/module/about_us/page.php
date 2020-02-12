@@ -10,7 +10,6 @@
                         <th style="width: 50px"><center><input class="selectall" type = "checkbox"></center></th>
                         <th>Title</th>
                         <th>Description</th>
-                        <!-- <th>Banner</th> -->
                         <th>Status</th>
                         <th style="width: 100px;">Action</th>
                     </tr>
@@ -39,15 +38,14 @@
         AJAX.select.offset(offset); //offset or Start
         AJAX.select.limit(limit); //limit result
         AJAX.select.table('tbl_about_us'); //selecting table
-        AJAX.select.select('id,title,description,banner,status'); //selecting result : not accepting *
-
+        AJAX.select.select('id,title,description,status'); //selecting result : not accepting *
         if(keyword) {
-            AJAX.select.query(" (title like '%"+keyword+"%' OR description like '%"+keyword+"%') and status >= 0");
+            AJAX.select.query(" (title like '%"+keyword+"%') and status >= 0");
         }else{
             AJAX.select.where.greater_equal("status",0); 
         }
 
-        AJAX.select.order.asc("title"); 
+        AJAX.select.order.asc("update_date"); 
         AJAX.select.exec(function(result){
            var obj = result;
            var html = '';
@@ -58,13 +56,6 @@
                 html+="      <td class='text-center'><input class = 'select'  data-id = '"+y.id+"' data-name='"+y.title+"' type ='checkbox'></td>";
                 html += '   <td>'+y.title+'</td>';
                 html += '   <td>'+y.description+'</td>';
-                // html += '   <td>';
-                //     if (y.banner != '' ) {
-                //         // alert(1);
-                // html += "<img style='max-width:200px;' src='<?= base_url()."/"?>"+y.banner+"'>";
-                //         // status_action = 1;
-                //     }
-                // html += '   </td>';
                 html += '   <td>'+status+'</td>';
                 html += '   <td><a  href="<?= base_url()."content_management/"?>site_about_us/update/'+y.id+'" data-id ="'+y.id+'" class="app_class">Edit</a></td>'
                 html += '</tr>'
@@ -74,7 +65,7 @@
            }
 
         }, function(obj){
-            pagination.generate(obj.total_page, ".list_pagination",10, 'table_body', 5);
+            pagination.generate(obj.total_page, ".list_pagination",10, 'table_body', 4);
             // console.log(result);
         }); 
         
@@ -87,7 +78,6 @@
     $(document).on('click','.status_action',function(e){
         var status = $(this).attr("data-status");
         var id = "";
-        var name = "";
 
         modal.confirm("Are you sure you want to Update this record?",function(result){
             if(result){
@@ -107,6 +97,5 @@
             }
         })
     });
-    
 </script>
 

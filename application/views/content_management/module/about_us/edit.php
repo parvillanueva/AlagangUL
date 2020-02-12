@@ -1,106 +1,110 @@
 <div class="box">
-	<?php
-		$data['buttons'] = ['update','close'];
-		$this->load->view("content_management/template/buttons",$data);
-	?>
-	<div class="box-body">
-		<?php
-			$id = $this->uri->segment(4);
-            $top_details = $this->load->details("tbl_about_us", $id);
-			$inputs = [
-                'title',
-                'description',
-                // 'banner',
-                'status'
-            ];
+    <?php   
+        $data['buttons'] = ['update','close']; // add, save, update
+        $this->load->view("content_management/template/buttons", $data);
+        $badge_id = $this->uri->segment(4);
+    ?>  
 
-            $values = [
-                $top_details[0]->title,
-                $top_details[0]->description,
-                // $top_details[0]->banner,
-                $top_details[0]->status,
-            ];
-
-            $top_content = $this->standard->inputs($inputs, $values);
-		?>
-	</div>
+    <form id="submit_form">
+        <div class="box-body">   
+            <div id = "badge" class="form-horizontal">
+                <input id="id" name="id" value="<?=$details[0]->id?>" type="hidden">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Title</label>
+                    <div class="col-sm-5">
+                        <input id="title" name="title" class="form-control required_input" placeholder="Title">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-5">
+                            <textarea class="form-control" rows="5" name="description" id="description"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Status</label>
+                    <div class="col-sm-5">
+                        <select id="status" name="status" class="form-control">
+                            <option value=1>Active</option>
+                            <option value=0>Inactive</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
 <script type="text/javascript">
-var base_url = '<?=base_url();?>';
-var table_id = "<?=  $this->uri->segment(4);?>"
-AJAX.config.base_url(base_url);
 
-$(document).on('click', '#btn_update', function(){
-        var form_data = {};
-        $(':input[class*="_input"]').each(function() {
-            var input_id = $(this).attr('id');
-            var db_field = $(this).attr('name');
+    $(document).ready(function(){
+        get_data();
+    })
 
-            if ($(this).attr('type') === 'ckeditor') {
-                form_data[db_field] = eval("CKEDITOR.instances."+input_id+".getData()");
-            } else {
-                form_data[db_field] = eval("$('#"+input_id+"').val()");
-            }
+
+    // get data
+    function get_data() {
+        var url = "<?= base_url('content_management/global_controller');?>";
+        var data = {
+            event : "list",
+            select : "id,title,description,status",
+            query : "id = <?= $this->uri->segment(4);?>", 
+            table : "tbl_about_us"
+        }
+
+        aJax.post(url,data,function(result){
+            var obj = is_json(result); 
+            $.each(obj,function(x,y){
+                $('#title').val(y.title);
+                $('#description').val(y.description);
+                $('#status').val(y.status);
+            })
+
+            // get_roles();
         });
-        
-        // form_data["update_date"] = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
 
-        if(validate.all()){;    
-                // if((!is_exist('tbl_program_teams', 'team_name', $('#team_name').val(),table_id) != 0)){
-                    var modal_obj = '<?= $this->standard->confirm("confirm_update"); ?>'; 
-                    modal.standard(modal_obj, function(result){
-                        if(result){
-                            modal.loading(true);
+    }
 
-                            AJAX.update.table("tbl_about_us");
-                            AJAX.update.where("id",table_id);
-                            $.each(form_data, function(a,b) {
-                                AJAX.update.params(a, b);
-                            });
-                            
-                            AJAX.update.exec(function(result){
+
+    $(document).on('click','#btn_update', function(){   
+        if(validate.all()){
+                modal.confirm("Are you sure you want to update this record?", function(result){
+                    if(result)
+                    {
+                        modal.loading(true);
+                        var form = $('#submit_form')[0]; // You need to use standard javascript object here
+                        var formData = new FormData(form);
+                        $.ajax({
+                              url:"<?= base_url('content_management/site_about_us/update_data');?>",
+                              type:"POST",
+                              dataType:"json",
+                              processData: false,
+                              contentType: false,
+                              data:formData,
+                              beforeSend: function() {
+                              modal.loading(true);
+                              },
+                              success: function(data) {
+                              },
+                              complete: function(data) {
                                 modal.loading(false);
-                                modal.alert("<?= $this->standard->dialog("update_success"); ?>", function(){
+                                modal.alert("<?= $this->standard->dialog("add_success"); ?>", function(){
                                     location.href = '<?=base_url("content_management/site_about_us") ?>';
                                 });
-                            })
-                        }
-                    });          
-                // }
-                // else{
-                //     var error_message1 = "<span class='validate_error_message' style='color: red;'>Team Name Exists<br></span>"
-                //     $('#team_name').css('border-color','red');
-                //     $(error_message1).insertAfter($('#team_name'));
-                // }
+                              },
+                        }); 
+                    }
+                })
         }
-});
+    }); 
 
 
-$(document).on('click','#btn_close',function(e){
-    location.href = '<?=base_url("content_management/site_about_us") ?>';
-});
 
-function is_exist(table, field, value,table_id){
-    var query = ""+ field +" = '" + value + "' AND status >=0 AND id != "+table_id+"" ;
-    var exists = 0;
-    var url = base_url+"content_management/global_controller";
-    var data = {
-        event : "list", 
-        select : ""+field+"",
-        query : query, 
-        table : table
-    }
-    aJax.post(url,data,function(result){
-        var obj = is_json(result);
-        if(obj.length != 0){
-            exists = 1;
-        }
-        else{
-            exists = 0;
-        }
-        
+
+
+    $(document).on('click', '#btn_close', function(e){
+        location.href = '<?=base_url("content_management/site_about_us"); ?>';
     });
-    return exists;
-}
+
+
 </script>
