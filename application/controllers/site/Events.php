@@ -29,13 +29,14 @@ class Events extends GS_Controller {
 
 		$program_id = $this->uri->segment(2);
 		$event_id = $this->uri->segment(5);
-		
+
 		$data['program_details'] = $this->get_program_details($program_id);
 
 		$data['event_details'] = $this->get_event_details($event_id);
 		$data['event_task'] = $this->get_event_tasks($event_id);
 		$data['event_volunteers'] = $this->get_volunteers($event_id);
 		$data['badges'] = $this->get_badges();
+		$data['validate_testimonial'] = $this->validate_testimonial($event_id, $_SESSION['user_sess_id']);
 
 		$data['content'] = "site/events/view";
 		$data['meta'] = array(
@@ -54,6 +55,19 @@ class Events extends GS_Controller {
 		$data['active_menu'] = "events";
 		
 		$this->parser->parse("site/layout/template",$data);
+	}
+	
+	public function validate_testimonial($event_id, $user_id){
+		$arr = array(
+			'event_id' => $event_id,
+			'user_id' => $user_id
+		);
+		$result = $this->Gmodel->get_query('tbl_program_event_task_volunteers', $arr);
+		if(empty($result)){
+			return 'empty';
+		} else{
+			return 'not_empty';
+		}
 	}
 	
 	public function get_badges(){
@@ -155,9 +169,10 @@ class Events extends GS_Controller {
 		    $data = array(
 		    	"event_id"		=> $_GET['event_id'],
 		    	"path"			=> $targetFile,
+				"status"		=> 1,
 		    	"create_date"	=> date("Y-m-d H:i:s")
 		    );
-		    $this->Gmodel->save_data('tbl_program_event_gallery', $data);
+		    echo $this->Gmodel->save_data('tbl_program_event_gallery', $data);
 		}
 	}
 
