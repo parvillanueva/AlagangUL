@@ -33,7 +33,11 @@
 					<div class="au-phstats">
 						<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> <?= $event_details[0]['volunteer_points'];?> Join to receive points</span>
 						<span class="au-members"><i class="fas fa-walking"></i><?= $event_details[0]['joined_volunteers'];?> <?= ($event_details[0]['joined_volunteers'] > 1 ) ? 'Volunteers' : 'Volunteer';?> </span>
-						<a href="#" class="au-lnk"><span class="au-share"><i class="fas fa-share-alt"></i> Share on <img src="<?= base_url();?>assets/site/img/au-workplace.svg" alt="Workplace"></span></a>
+						<?php
+							if($_SESSION['user_impersonate_token']!=''){
+						?>
+						<a href="#" class="au-lnk workplace-share"><span class="au-share"><i class="fas fa-share-alt"></i> Share on <img src="<?= base_url();?>assets/site/img/au-workplace.svg" alt="Workplace"></span></a>
+						<?php } ?>
 					</div>
 					<div class="au-badges">
 						<span class="au-pb">Badges you can earn</span>
@@ -246,7 +250,7 @@
 										<span class="au-date">January 1, 2020 2:00PM</span>
 										<span class="au-p5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</span>
 										<div class="text-right">
-											<a href="#" class="au-lnk"><span class="au-share"><i class="fas fa-share-alt"></i> Share on <img src="assets/img/au-workplace2.svg" alt="Workplace"></span></a>
+											<a href="#" class="au-lnk"><span class="au-share"><i class="fas fa-share-alt"></i> Share on <img src="assets/img/au-workplace.svg" alt="Workplace"></span></a>
 										</div>
 									</div>
 								</div>
