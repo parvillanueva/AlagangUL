@@ -10,14 +10,14 @@
 			$inputs = [
                 'title',
                 'description',
-                'banner',
+                // 'banner',
                 'status'
             ];
 
             $values = [
                 $top_details[0]->title,
                 $top_details[0]->description,
-                $top_details[0]->banner,
+                // $top_details[0]->banner,
                 $top_details[0]->status,
             ];
 
