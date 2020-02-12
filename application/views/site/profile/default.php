@@ -9,7 +9,6 @@
         $this->load->view("site/profile/profile-modal-edit.php"); 
 ?>
 
-
 <script>
     var calendar_data = '<?= json_encode($events)?>';
     

@@ -56,7 +56,7 @@
 							<div class="au-inner au-cscroll">
 								<?php foreach ($event_volunteers as $key => $value) { ?>
 									<div class="au-userentry">
-										<a href="profile.html" class="au-userentry">
+										<a href="<?= base_url('profile') ?>/<?= $value->user_id;?>" class="au-userentry">
 											<div class="au-inner">
 												<img src="<?= $value->profile_image;?>" class="au-avatar-lg">
 											</div>
