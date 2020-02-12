@@ -76,12 +76,75 @@ class Events extends GS_Controller {
 		return $result;
 	}
 
+
+	public function manage()
+	{
+
+		$program_id = $this->uri->segment(2);
+		$event_id = $this->uri->segment(5);
+
+		// $arra
+		$data['program_details'] = $this->get_program_details($program_id);
+		$data['event_details'] = $this->get_event_details($event_id);
+		$data['event_task'] = $this->get_event_tasks($event_id);
+		$data['event_volunteers'] = $this->get_volunteers($event_id);
+		$data['users_approval'] = $this->get_approval_volunteers($event_id);
+		$data['content'] = "site/events/manage";
+		$data['meta'] = array(
+			"title"         => $data['event_details'][0]['title'],
+			"description"   =>  "",
+			"keyword"       =>  ""
+		);
+		
+		$data['fb_og'] = array(
+			// "type"          =>  $this->Global_model->site_meta_og(38, 'site_menu', 'og_type'),
+			// "title"         =>  $this->Global_model->site_meta_og(38, 'site_menu', 'og_title'),
+			// "description"         =>  $this->Global_model->site_meta_og(38, 'site_menu', 'og_description'),
+			// "image"         =>  base_url().$this->Global_model->site_meta_og(38, 'site_menu', 'og_image'),
+		);
+
+		$data['active_menu'] = "events";
+		
+		$this->parser->parse("site/layout/template",$data);
+	}
+
+	public function data_volunteers(){
+		// $event_id = $this->uri->segment(5);
+		$event_id = $this->input->post('event_id');
+		$result = $this->get_approval_volunteers($event_id);
+		echo json_encode($result);
+	}
 	public function get_volunteers($event_id){
 		$query_joined_volunteer = "SELECT tbl_program_event_task_volunteers.*, CONCAT('" . base_url() . "','/',tbl_users.imagepath) as profile_image , CONCAT(tbl_users.first_name, ' ', tbl_users.last_name) as user FROM tbl_program_event_task_volunteers LEFT JOIN tbl_users ON tbl_users.id = tbl_program_event_task_volunteers.user_id WHERE event_id = " . $event_id . " GROUP BY tbl_users.id";
 		$joined_volunteer = $this->db->query($query_joined_volunteer)->result();
 		return $joined_volunteer;
 	}
 
+
+	public function get_approval_volunteers($event_id){
+		$arr = array();
+		$query_joined_volunteer = "	SELECT tbl_users_points_approved.*, 
+										CONCAT('" . base_url() . "','/',tbl_users.imagepath) as profile_image , CONCAT(tbl_users.first_name, ' ', tbl_users.last_name) as user 
+										FROM tbl_users_points_approved 
+										LEFT JOIN tbl_users ON tbl_users.id = tbl_users_points_approved.user_id 
+										WHERE event_id = " . $event_id . " GROUP BY tbl_users.id";
+
+		$joined_volunteer = $this->db->query($query_joined_volunteer)->result();
+			foreach($joined_volunteer as $key => $value){
+				$query_task = "SELECT * from tbl_program_event_task where id = $value->event_task_id";
+				$query_task = $this->db->query($query_task)->result();
+				$volunteer_arr = [];
+				$volunteer_arr['approval_id'] 		= $joined_volunteer[$key]->id;
+				$volunteer_arr['volunteer_name'] 	= $joined_volunteer[$key]->user;
+				$volunteer_arr['volunteer_id'] 		= $joined_volunteer[$key]->user_id;
+				$volunteer_arr['task_name'] 		= $query_task[0]->task;
+				$volunteer_arr['points'] 			= $joined_volunteer[$key]->points;
+				$volunteer_arr['status'] 			= $joined_volunteer[$key]->status;
+				$volunteer_arr['event_task_id']		= $joined_volunteer[$key]->event_task_id;
+				array_push($arr,$volunteer_arr);
+			}
+		return $arr;
+	}
 
 	public function get_event_tasks($event_id){
 		$get_event_tasks = $this->Gmodel->get_query('tbl_program_event_task',"event_id = " . $event_id);
@@ -247,6 +310,7 @@ class Events extends GS_Controller {
 		$sql_result = $this->Gmodel->update_data('tbl_program_event_gallery', $arr, 'id', $_POST['id']);
 		echo json_encode(array('responce' => $sql_result));
 	}
+<<<<<<< Updated upstream
 	
 	public function add_event_task(){
 		$arr = array(
@@ -326,4 +390,23 @@ class Events extends GS_Controller {
 	    return trim(preg_replace('/-+/', '-', $title), '-/');
 	}
 
+=======
+
+
+	public function update_points(){
+
+		$approval_id = $this->input->post('approval_id');
+		$user_id 	 = $this->input->post('user_id');
+		$points 	 = $this->input->post('points');
+		$event_task_id 	 = $this->input->post('event_task_id');
+		
+		$update_status = "UPDATE tbl_users_points_approved SET status = 1 WHERE id = $approval_id";
+		$update_status_result = $this->db->query($update_status);
+		$update_status2 = "UPDATE tbl_users_points SET current_points = current_points + $points , total_points = total_points + $points  WHERE user_id = $user_id";
+		$update_status_result2 = $this->db->query($update_status2);
+		$update_status3 = "UPDATE tbl_users_badge SET  points = $points  WHERE user_id = $user_id AND event_task_id = $event_task_id";
+		$update_status_result3 = $this->db->query($update_status3);
+		return $update_status_result3;
+	}
+>>>>>>> Stashed changes
 }
