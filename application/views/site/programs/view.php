@@ -118,7 +118,7 @@
 														<?php } else { ?>
 															<button type="button" class="au-volunteered au-btnyellow float-right">Unpublished</button>
 														<?php } ?>
-	}												<?php } else { ?>
+													<?php } else { ?>
 														<button type="button" class="au-volunteer au-btnyellow float-right" style="display: block">Volunteer</button>
 														<button type="button" class="au-volunteered au-btnyellow float-right">Volunteered</button>
 													<?php } ?>
