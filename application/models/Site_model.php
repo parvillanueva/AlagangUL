@@ -20,6 +20,7 @@ date_default_timezone_set('Asia/Taipei');
 			$this->db->join("tbl_program_event_task_volunteers pm", "pm.program_id = p.id", "LEFT");
 			$this->db->group_by("p.id");
 			$this->db->order_by("p.create_date", "DESC");
+			$this->db->limit(6);
 
 			$query = $this->db->get();
 			return $query->result_array();
