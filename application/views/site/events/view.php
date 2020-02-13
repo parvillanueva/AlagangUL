@@ -572,9 +572,9 @@
 				html += '					<span class="au-accname">'+y['picture']['name']+'</span>';
 				html += '					<span class="au-accvolunteer">';
 				html += '						<div class="au-accvicon">';
-				html += '							<i class="fas fa-hourglass au-time au-icon" title="Time"></i>';
-				html += '							<i class="fas fa-hands-helping au-talent au-icon" title="Talent"></i>';
-				html += '							<i class="fas fa-gem au-treasure au-icon" title="Treasure"></i>';
+					$.each(y['badge'], function(a, b){
+						html += '					<i stylr="color: '+b.color+';" class="'+b.icon+' au-time au-icon" title="'+b.name+'"></i>';
+					});
 				html += '						</div>';
 				html += '					</span>';
 				html += '				</div>';

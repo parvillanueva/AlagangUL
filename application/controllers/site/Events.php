@@ -387,8 +387,9 @@ class Events extends GS_Controller {
 		$arr_testi = array();
 		foreach($testimonial_result as $tes_loop){
 			$array_data[] = array(
-				'testimonial' => $tes_loop->testimonial,
-				'picture' => $this->profile_image($tes_loop->user_id),
+				'testimonial' 	=> $tes_loop->testimonial,
+				'badge'			=> $this->get_volunteer_badge($event_id, $tes_loop->user_id),
+				'picture' 		=> $this->profile_image($tes_loop->user_id),
 			);
 		}
 		echo json_encode($array_data);
