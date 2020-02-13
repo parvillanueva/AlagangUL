@@ -1,4 +1,3 @@
-<script src="https://kit.fontawesome.com/47b29f79cf.js" crossorigin="anonymous"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script> <!--CAPCHA SAMPLE ONLY-->
 <div class="col-md-6 au-padding au-bg">
 	<div class="au-bgtrans">

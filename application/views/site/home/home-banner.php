@@ -1,13 +1,3 @@
-<style type="text/css">
-  body {
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-    background-color: #F5F5F5;
-    color: #222;
-        margin: 0;
-}
-
-</style>
-
 <div id="auCarousel" class="au-carousel carousel slide" data-ride="carousel" data-interval="10000">
     <div class="carousel-inner">
         <?php foreach($banners as $i => $banner) { ?>
