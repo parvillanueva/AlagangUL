@@ -31,6 +31,7 @@
 		$route["create-program"] = "site/create_program";
 
 		$route["programs/(:any)/(:any)"] = "site/programs/view/$1/$2";
+		$route["events/(:any)/(:any)/(:any)/(:any)"] = "site/events/$1/$2/$3/$4";
 		$route["programs/(:any)/(:any)/add_event"] = "site/events/add_event/$1/$2";
 		$route["programs/(:any)/(:any)/update"] = "site/programs/update/$1/$2";
 		$route["programs/add"] = "site/programs/add";
