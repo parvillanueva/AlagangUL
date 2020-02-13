@@ -1610,7 +1610,29 @@ p{
      display: flex;
      flex-wrap: wrap;
 }
-
+.au-workplace > .row {
+    background-color: #fff;
+    padding: 0.5em;
+    border: 1px solid rgba(0,0,0,0.1) !important;
+    margin: 0.5em;
+    border-radius: 3px;
+}
+.au-workplace > .row > .col-md-12 {
+    padding: 0px;
+    border-bottom: 0px !important;
+    margin-bottom: 0px !important;
+}
+.au-workplace a {
+    font-size: 12px;
+    overflow-wrap: break-word;
+}
+.au-workplace > .row > .col-md-12 > .col-md-10 img {
+    margin-top: 10px;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+.au-workplace > .row > .col-md-12 > .col-md-10 {
+    padding: 0px 0.5em;
+}
 /*Extra small devices (portrait phones, less than 576px)*/
  @media (max-width: 575px) {
      .au-logo {
