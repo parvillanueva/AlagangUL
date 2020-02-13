@@ -25,6 +25,17 @@ class Events extends GS_Controller {
 		$data['get_volunteer_type'] = $this->get_volunteer_type();
 		$this->parser->parse("site/layout/template",$data);
 	}
+	public function publish()
+	{
+		$program_id = $this->uri->segment(2);
+		$program_alias = $this->uri->segment(3);
+		$event_id = $this->uri->segment(5);
+		$event_alias = $this->uri->segment(6);
+		$data['update_date'] = date("Y-m-d H:i:s");
+		$data['status'] = $this->uri->segment(8);;
+		$this->Gmodel->update_data("tbl_program_events",$data,"id",$event_id);
+		redirect(base_url("programs") . "/" . $program_id . "/" . $program_alias. "/event/" . $event_id . "/" . $event_alias);
+	}
 
 	function volunteer() {
 		$user_id = $this->session->userdata('user_sess_id');
