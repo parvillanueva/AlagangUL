@@ -35,6 +35,16 @@ class Profile extends GS_Controller
 		$this->load->view("site/layout/template",$data);
 	}
 
+	public function reset()
+	{
+		$data['content'] 	= "site/profile/profile-reset-password";
+		$data['meta'] 	 	= array(
+			 "title"        =>  "Reset Password"
+		);
+
+		$this->load->view("site/layout/template",$data);
+	}
+
 	public function view($id)
 	{
 		if(isset($id))

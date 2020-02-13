@@ -21,6 +21,8 @@
 		$route["events"] = "site/events";
 		$route["get-rewards"] = "site/get_rewards";
 		$route["profile"]  = "site/profile";
+		$route["profile/reset"]  = "site/profile/reset";
+
 		$route["profile/(:any)"]  = "site/profile/view/$1";
 
 		$route["submit"]  = "site/user/submit";
@@ -31,7 +33,6 @@
 		$route["create-program"] = "site/create_program";
 
 		$route["programs/(:any)/(:any)"] = "site/programs/view/$1/$2";
-		$route["events/(:any)/(:any)/(:any)/(:any)"] = "site/events/$1/$2/$3/$4";
 		$route["programs/(:any)/(:any)/add_event"] = "site/events/add_event/$1/$2";
 		$route["programs/(:any)/(:any)/update"] = "site/programs/update/$1/$2";
 		$route["programs/add"] = "site/programs/add";
@@ -40,7 +41,6 @@
 		$route["programs/(:any)/(:any)/event/(:any)/(:any)"] = "site/events/view/$1/$3/$4";
 		$route["programs/(:any)/(:any)/event/(:any)/(:any)/update"] = "site/events/update/$1/$2/$3/$4";
 		$route["programs/(:any)/(:any)/event/(:any)/(:any)/manage"] = "site/events/manage/$1/$3/$4";
-		$route["programs/(:any)/(:any)/event/(:any)/(:any)/publish/(:any)"] = "site/events/publish/$1/$2/$3/$4/$5";
 
 		$route["content_management"] = "content_management/home";
 		$route["404_override"] = "";
