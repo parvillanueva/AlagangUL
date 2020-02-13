@@ -16,7 +16,23 @@ class Profile extends GS_Controller
 
 		//get joined activities and events
 		$joined_events		= $this->Site_model->get_joined_events($user_id);
+		$arr_badge = array();
+		foreach($joined_events as $i => $event)
+		{
+			$arr_badge[$i] = explode(",", $event['badges']);
+			$event['badges'] = $arr_badge[$i];
+			$temp = array();
 
+			foreach($event['badges'] as $badge)
+			{
+				$temp[] = explode("|", $badge);
+			}
+
+			$joined_events[$i]['badges'] = $temp;
+			
+			
+		}
+		
 		$data['profile']	= $profile_details;
 		$data['created']	= $created_programs;
 		$data['badges']		= $member_badges;
@@ -84,9 +100,7 @@ class Profile extends GS_Controller
 					
 					
 				}
-				// echo '<pre>';
-				// print_r($joined_events);
-				// exit;
+				
 				$data['profile']	= $profile_details;
 				$data['created']	= $created_programs;
 				$data['badges']		= $member_badges;
