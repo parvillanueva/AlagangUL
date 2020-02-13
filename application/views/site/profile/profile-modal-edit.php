@@ -25,7 +25,7 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <input type="tel" class="form-control" id="phone" placeholder="Mobile Number" value="<?= @$profile->mobile_number ?>" name="phone" required pattern="[0-9]{11}|{10}">
+                                <input type="tel" class="form-control" id="phone" placeholder="Mobile Number" value="<?= @$profile->mobile_number ?>" name="phone" required pattern="[0-9]">
                                 <div class="valid-feedback"></div>
                                 <div class="invalid-feedback">Invalid Mobile Number.</div>
                             </div>
@@ -33,7 +33,7 @@
                         <div class="form-row text-left">
                             <div class="col">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="customFile">
+                                    <input type="file" class="custom-file-input" id="customFile" accept='image/*'>
                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                 </div>
                             </div>
