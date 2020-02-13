@@ -189,11 +189,11 @@
 		<div class="modal-content">
 			<div class="modal-body">
 				<span class="au-h4">Write a testimonial</span>
-				<form action="eventdetail.html" class="au-form text-left" id="testimonial">		
+				<form class="au-form text-left" id="testimonial_form">		
 					<div class="form-row">
 						<div class="col">
 							<label for="comment" class="au-p3">Content</label>
-							<textarea class="form-control" rows="5" id="testimonial_comment" placeholder="" required=""></textarea>
+							<textarea class="form-control required_input" rows="5" id="testimonial_comment" placeholder="" required=""></textarea>
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -214,11 +214,11 @@
 		<div class="modal-content">
 			<div class="modal-body">
 				<span class="au-h4">Opportunities for volunteers to help</span>
-				<form action="eventdetail.html" class="au-form text-left" id="testimonial">		
+				<form class="au-form text-left" id="volunteer_form">		
 					<div class="form-row">
 						<div class="col">
 							<label for="comment" class="au-p4">Possible task for volunteers</label>
-							<input class="form-control" rows="5" id="possible_volunteer" placeholder="" required="" />
+							<input class="form-control required_input" rows="5" id="possible_volunteer" placeholder="" required="" />
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -226,7 +226,7 @@
 					<div class="form-row">
 						<div class="col">
 							<label for="comment" class="au-p4">Qualifications</label>
-							<input class="form-control" rows="5" id="qualification" placeholder="" required="" />
+							<input class="form-control required_input" rows="5" id="qualification" placeholder="" required="" />
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -234,7 +234,7 @@
 					<div class="form-row">
 						<div class="col">
 							<label for="comment" class="au-p4">Needed Volunteer</label>
-							<input type="number" class="form-control" rows="5" id="needed" placeholder="" required="" />
+							<input type="number" class="form-control required_input" rows="5" id="needed" placeholder="" required="" />
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -445,7 +445,7 @@
 				html += '		<span class="au-date">January 1, 2020 2:00PM</span>';
 				html += '		<span class="au-p5">'+y['testimonial']+'</span>';
 				html += '		<div class="text-right">';
-				html += '			<a href="#" class="au-lnk"><span class="au-share"><i class="fas fa-share-alt"></i> Share on <img src="assets/img/au-workplace2.svg" alt="Workplace"></span></a>';
+				html += '			<a href="#" class="au-lnk"><span class="au-share"><i class="fas fa-share-alt"></i> Share on <img src="<?php echo base_url("assets/img/au-workplace2.svg")?>" alt="Workplace"></span></a>';
 				html += '		</div>';
 				html += '	</div>';
 				html += '</div>';
@@ -463,14 +463,16 @@
 			event_id : event_id,
 			testimonial : testimonial
 		};
-		aJax.post(url, data, function(result){
-			var obj = is_json(result);
-			if(obj.responce == 'success'){
-				$("#addtestimonial").modal('hide');
-				$('#testimonial_comment').val('');
-				get_testimonial();
-			}
-		});
+		if(validate.standard("testimonial_form")){
+			aJax.post(url, data, function(result){
+				var obj = is_json(result);
+				if(obj.responce == 'success'){
+					$("#addtestimonial").modal('hide');
+					$('#testimonial_comment').val('');
+					get_testimonial();
+				}
+			});
+		}
 	});
 	
 	$(document).on('click', '#btnBadges', function(result){
@@ -489,17 +491,19 @@
 			badges : val_badges
 		};
 		var url = "<?php echo base_urL('site/events/add_event_task') ?>";
-		aJax.post(url, data, function(result){
-			var obj = is_json(result);
-			if(obj.responce == 'success'){
-				$('#possible_volunteer').val('');
-				$('#needed').val('');
-				$('#qualification').val('');
-				$('.badges_input').prop('checked', false); 
-				$("#addtask").modal('hide');
-				location.reload();
-			}
-		});
+		if(validate.standard("volunteer_form")){
+			aJax.post(url, data, function(result){
+				var obj = is_json(result);
+				if(obj.responce == 'success'){
+					$('#possible_volunteer').val('');
+					$('#needed').val('');
+					$('#qualification').val('');
+					$('.badges_input').prop('checked', false); 
+					$("#addtask").modal('hide');
+					location.reload();
+				}
+			});
+		}
 	});
 	
 	function count_image(total){
