@@ -21,7 +21,7 @@
 							<div class="au-program">
 								<a href="<?= base_url('programs/'.$eloop['program_details']->id.'/'.$eloop['program_details']->url_alias); ?>" class="au-lnk">
 									<div class="au-pthumbnail">
-										<img src="<?= base_url($eloop['program_details']->image_thumbnail); ?>" class="au-fp-thumbnailimg">
+										<img src="<?= base_url($eloop['program_details']->image_thumbnail); ?>" class="au-fp-thumbnailimg" onerror="imgError(this);">
 									</div>
 									<span class="au-ptitle"><?= $eloop['title'] ?></span>
 									<span class="au-pdetails"><?= $eloop['description'] ?></span>
@@ -60,3 +60,12 @@
 		<?php } ?>
 	</div>
 </div>
+<script type="text/javascript">
+	var base_url = '<?=base_url();?>';
+    function imgError(image) {
+        image.onerror = "";
+        image.src = base_url+"/assets/img/broken_img1.jpg";
+        return true;
+    }
+
+</script>
