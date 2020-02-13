@@ -14,17 +14,18 @@ class Sign_up extends CI_Controller {
 			echo json_encode(array('responce'=>'exist'));
 		} else if($email_result == 'pass_empty'){
 			echo json_encode(array('responce'=>'pass_empty'));
+			$this->session_set('');
 		} else{
-/* 			$explode_email = explode("@",$_POST['email']);
+			$explode_email = explode("@",$_POST['email']);
 			$white_test = $this->white_list_check($explode_email[1]);
 			if($white_test == 'empty'){
 				echo json_encode(array('responce'=>'no_list'));
-			} else{ */
+			} else{ 
 				$from = $_POST['email'];
 				$fr_name = 'Guest';
 				$subject = 'Link Registration and OTP';
 				$this->send_sgrid($from, $fr_name, $from, $subject);
-			//}
+			}
 		}
 	}
 	
