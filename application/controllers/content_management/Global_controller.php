@@ -599,4 +599,37 @@ class Global_controller extends CI_Controller {
 	    
 	}
 
+	public function get_program_events()
+	{
+		header('Content-Type: application/json');
+		$keyword = $this->input->get("keyword");
+		$schedule = $this->input->get("schedule");
+		$task = $this->input->get("task");
+		$session_id = $this->session->userdata('user_sess_id');
+
+		if($keyword == ""){
+			$query = "SELECT tbl_program_events.`title`, tbl_program_events.`description`, tbl_program_events.`when`, tbl_program_events.`where`, tbl_program_events.`image`, tbl_program_event_task.`required_volunteers`, tbl_program_event_task_volunteers.`user_id`, tbl_badges.`name`, tbl_program_event_task.`task` FROM tbl_program_events LEFT JOIN tbl_program_event_task_volunteers ON tbl_program_events.`program_id` = tbl_program_event_task_volunteers.`program_id` LEFT JOIN tbl_program_event_task ON tbl_program_events.`id` = tbl_program_event_task.`event_id` , tbl_program_event_task_badge LEFT JOIN tbl_badges ON tbl_program_event_task_badge.`badge_id` = tbl_badges.`id` WHERE tbl_program_events.`status` = 1 AND tbl_program_event_task.`status` = 1 GROUP BY tbl_program_events.`id`";
+		}else{
+			$query = "SELECT tbl_program_events.`title`, tbl_program_events.`description`, tbl_program_events.`when`, tbl_program_events.`where`, tbl_program_events.`image`, tbl_program_event_task.`required_volunteers`, tbl_program_event_task_volunteers.`user_id`, tbl_badges.`name`, tbl_program_event_task.`task` FROM tbl_program_events LEFT JOIN tbl_program_event_task_volunteers ON tbl_program_events.`program_id` = tbl_program_event_task_volunteers.`program_id` LEFT JOIN tbl_program_event_task ON tbl_program_events.`id` = tbl_program_event_task.`event_id` , tbl_program_event_task_badge LEFT JOIN tbl_badges ON tbl_program_event_task_badge.`badge_id` = tbl_badges.`id` WHERE tbl_program_events.`status` = 1 AND tbl_program_event_task.`status` = 1 AND (tbl_program_events.`title` LIKE '%".$keyword."%' OR tbl_program_events.`description` LIKE '%".$keyword."%') GROUP BY tbl_program_events.`id`";
+		}
+
+		$result_events= $this->db->query($query)->result();
+		// echo "<pre>";
+		// var_dump($session_id);
+		// var_dump($result_events);
+		// echo "<pre>";
+		// echo $this->db->last_query();
+		// die();
+		echo json_encode($result_events);
+	}
+
+	// public function get_task()
+	// {
+	// 	header('Content-Type: application/json');
+
+	// 	$query = "SELECT tbl_program_events.`title`, tbl_program_events.`description`, tbl_program_events.`when`, tbl_program_events.`where`, tbl_program_events.`image`, tbl_program_event_task.`required_volunteers`, tbl_program_event_task_volunteers.`user_id`, tbl_badges.`name`, tbl_program_event_task.`task` FROM tbl_program_events LEFT JOIN tbl_program_event_task_volunteers ON tbl_program_events.`program_id` = tbl_program_event_task_volunteers.`program_id` LEFT JOIN tbl_program_event_task ON tbl_program_events.`id` = tbl_program_event_task.`event_id` , tbl_program_event_task_badge LEFT JOIN tbl_badges ON tbl_program_event_task_badge.`badge_id` = tbl_badges.`id` WHERE tbl_program_events.`status` = 1 AND tbl_program_event_task.`status` = 1 AND tbl_program_events.`title` LIKE '%".$keyword."%' OR tbl_program_events.`description` LIKE '%".$keyword."%' GROUP BY tbl_program_events.`id`";
+	// 	$result_events= $this->db->query($query)->result();
+	// }
+
+
 }

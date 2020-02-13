@@ -32,6 +32,7 @@ class Programs extends GS_Controller {
 		$program_alias = $this->uri->segment(3);
 		$program_details = $this->get_details($program_id, $program_alias);
 		$data['details'] = $program_details;
+		$data['workplace_feed'] = $this->get_workplace_feed();
 		$data['content'] = "site/programs/view";
 		$data['meta'] = array(
 			"title"         =>  $program_details['details'][0]->name,
@@ -48,6 +49,12 @@ class Programs extends GS_Controller {
 		$data['active_menu'] = "programs";
 		$data['programs'] = $this->Site_model->get_other_programs($program_id);
 		$this->parser->parse("site/layout/template",$data);
+	}
+
+	function get_workplace_feed(){
+		$query = "SELECT post_by, post_by_img, likes, date_posted, post_message, post_image, post_link FROM tbl_workplace_feed";
+		$result = $this->db->query($query)->result();
+		return $result;
 	}
 
 	public function get_details($program_id, $program_alias){
@@ -96,6 +103,7 @@ class Programs extends GS_Controller {
 				"volunteer_points"	=> $value->volunteer_points,
 				"is_admin"			=> ($value->user_id == $this->session->userdata('user_sess_id')) ? true : false,
 				"is_joined"			=> $is_joined,
+				"get_earn_badge"	=> $this->get_earn_badge($value->id),
 				"required_volunteer"=> ($needed_volunteer[0]->count != "") ? $needed_volunteer[0]->count : 0,
 				"joined_volunteers"	=> ($joined_volunteer[0]->count != "") ? $joined_volunteer[0]->count : 0,
 			);
@@ -114,6 +122,25 @@ class Programs extends GS_Controller {
 		);
 
 		return $details;
+	}
+
+	public function get_earn_badge($event_id){
+		$query = 'SELECT
+			tbl_program_events.id,
+			tbl_badges.`name`,
+			tbl_badges.icon,
+			tbl_badges.color
+			FROM
+			tbl_program_events
+			INNER JOIN tbl_program_event_task ON tbl_program_events.id = tbl_program_event_task.event_id
+			INNER JOIN tbl_program_event_task_badge ON tbl_program_event_task.id = tbl_program_event_task_badge.event_task_id
+			INNER JOIN tbl_badges ON tbl_program_event_task_badge.badge_id = tbl_badges.id
+			WHERE
+			tbl_program_events.id = '.$event_id.'
+			GROUP BY
+			tbl_badges.id';
+		return $this->db->query($query)->result();
+
 	}
 
 
