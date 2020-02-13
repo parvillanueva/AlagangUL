@@ -27,6 +27,17 @@ class Events extends GS_Controller {
 		$data['get_volunteer_type'] = $this->get_volunteer_type();
 		$this->parser->parse("site/layout/template",$data);
 	}
+	public function publish()
+	{
+		$program_id = $this->uri->segment(2);
+		$program_alias = $this->uri->segment(3);
+		$event_id = $this->uri->segment(5);
+		$event_alias = $this->uri->segment(6);
+		$data['update_date'] = date("Y-m-d H:i:s");
+		$data['status'] = $this->uri->segment(8);;
+		$this->Gmodel->update_data("tbl_program_events",$data,"id",$event_id);
+		redirect(base_url("programs") . "/" . $program_id . "/" . $program_alias. "/event/" . $event_id . "/" . $event_alias);
+	}
 
 	function volunteer_list_email($event_id){
 		$event_details = $this->db->query("SELECT * FROM tbl_program_events WHERE id = " . $event_id)->result();
@@ -164,7 +175,9 @@ class Events extends GS_Controller {
 		$user_id = $this->session->userdata('user_sess_id');
 		$data['is_allowed_to_volunteer'] = $this->check_is_allowed($event_id,date('Y-m-d',strtotime($data['event_details'][0]['when'])));
 		//$data['is_volunteered'] = array_search($user_id, array_column($data['event_volunteers'], 'user_id'));
-
+		/*echo "<pre>";
+		print_r($data);
+		die();*/
 		$data['content'] = "site/events/view";
 		$data['meta'] = array(
 			"title"         => $data['event_details'][0]['title'],
