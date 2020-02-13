@@ -437,7 +437,7 @@ class Events extends GS_Controller {
 										CONCAT('" . base_url() . "','/',tbl_users.imagepath) as profile_image , CONCAT(tbl_users.first_name, ' ', tbl_users.last_name) as user 
 										FROM tbl_users_points_approved 
 										LEFT JOIN tbl_users ON tbl_users.id = tbl_users_points_approved.user_id 
-										WHERE event_id = " . $event_id . " GROUP BY tbl_users.id";
+										WHERE tbl_users_points_approved.status >= 0 and event_id = " . $event_id . " GROUP BY tbl_users.id";
 
 		$joined_volunteer = $this->db->query($query_joined_volunteer)->result();
 			foreach($joined_volunteer as $key => $value){
@@ -807,14 +807,33 @@ class Events extends GS_Controller {
 		$update_status_result = $this->db->query($update_status);
 		$update_status2 = "UPDATE tbl_users_points SET current_points = current_points + $points , total_points = total_points + $points, update_date = '$datetoday' WHERE user_id = $user_id";
 		$update_status_result2 = $this->db->query($update_status2);
-		echo $this->db->last_query();
-		die;
 		$update_status3 = "UPDATE tbl_users_badge SET  points = $points, update_date = '$datetoday'   WHERE user_id = $user_id AND event_task_id = $event_task_id";
 		$update_status_result3 = $this->db->query($update_status3);
 		$update_status4 = "UPDATE tbl_program_event_task_volunteers SET  status = 1  WHERE user_id = $user_id AND event_task_id = $event_task_id";
 				$update_status_result4 = $this->db->query($update_status4);
-		return $update_status_resulty;
+		return $update_status_result4;
 	}
+
+
+	public function disqualify_task_user(){
+
+		$approval_id = $this->input->post('approval_id');
+		$user_id 	 = $this->input->post('user_id');
+		$points 	 = $this->input->post('points');
+		$event_task_id 	 = $this->input->post('event_task_id');
+		$datetoday 		= date("Y-m-d H:i:s");
+		
+		$update_status = "UPDATE tbl_users_points_approved SET status = '-2' WHERE id = $approval_id";
+		$update_status_result = $this->db->query($update_status);
+		$update_status2 = "UPDATE tbl_users_points SET current_points = current_points - $points , total_points = total_points - $points, update_date = '$datetoday' WHERE user_id = $user_id";
+		$update_status_result2 = $this->db->query($update_status2);
+		$update_status3 = "UPDATE tbl_users_badge SET  points = $points, update_date = '$datetoday'   WHERE user_id = $user_id AND event_task_id = $event_task_id";
+		$update_status_result3 = $this->db->query($update_status3);
+		$update_status4 = "UPDATE tbl_program_event_task_volunteers SET  status = '-2'  WHERE user_id = $user_id AND event_task_id = $event_task_id";
+				$update_status_result4 = $this->db->query($update_status4);
+		return $update_status_result4;
+	}
+
 
 	public function get_task()
 	{
