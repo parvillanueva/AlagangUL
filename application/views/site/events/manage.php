@@ -198,13 +198,18 @@
 							html += '		<td data-header="Volunteer Name">'+y["volunteer_name"]+'</td>'
 								 if(y['status'] == 0){ 
 							html += '			<td data-header="Status" class="au-actions">'
-							html += '				<center><a href="javascript:void(0)"  class="au-btnvolunteer au-btnvolunteertype au-time primary btn_approve" data-user_id = "'+y["volunteer_id"]+'" data-event_task_id = "'+y["event_task_id"]+'" data-id = "'+y["approval_id"]+'"  data-points = "'+y["points"]+'" style="background-color:#1894e7;"><center><i class="fas fa-check" title="Time"></i>Approve</center></a><a href="javascript:void(0)"  class="au-btnvolunteer au-btnvolunteertype au-time primary btn_disqualify" data-user_id = "'+y["volunteer_id"]+'" data-event_task_id = "'+y["event_task_id"]+'" data-id = "'+y["approval_id"]+'"  data-points = "'+y["points"]+'" style="background-color:red; width:125px;"><center><i class="fas fa-check" title="Time"></i>Disqualify</center></a></center>'
+							html += '				<center><a href="javascript:void(0)"  class="au-btnvolunteer au-btnvolunteertype au-time primary btn_approve" data-user_id = "'+y["volunteer_id"]+'" data-event_task_id = "'+y["event_task_id"]+'" data-id = "'+y["approval_id"]+'"  data-points = "'+y["points"]+'" style="background-color:#1894e7;"><center><i class="fas fa-check" title="Time"></i>Qualify</center></a><a href="javascript:void(0)"  class="au-btnvolunteer au-btnvolunteertype au-time primary btn_disqualify" data-user_id = "'+y["volunteer_id"]+'" data-event_task_id = "'+y["event_task_id"]+'" data-id = "'+y["approval_id"]+'"  data-points = "'+y["points"]+'" style="background-color:red; width:125px;"><center><i class="fas fa-check" title="Time"></i>Disqualify</center></a></center>'
 							html += '			</td>'
 								}
+								else if(y['status'] == 1){
+									html += '			<td data-header="Status" class="au-actions">'
+									html += '				<center><a href="javascript:void(0)"  class="au-btnvolunteer au-btnvolunteertype au-time primary btn_disqualify" data-user_id = "'+y["volunteer_id"]+'" data-event_task_id = "'+y["event_task_id"]+'" data-id = "'+y["approval_id"]+'"  data-points = "'+y["points"]+'" style="background-color:red; width:125px;"><center><i class="fas fa-check" title="Time"></i>Disqualify</center></a></center>'
+									html += '			</td>'								
+								}
 								else{				
-								html += '			<td data-header="Status" class="au-actions">'
-								html += '				<center><a href="javascript:void(0)"  class="au-btnvolunteer au-btnvolunteertype au-time primary btn_disqualify" data-user_id = "'+y["volunteer_id"]+'" data-event_task_id = "'+y["event_task_id"]+'" data-id = "'+y["approval_id"]+'"  data-points = "'+y["points"]+'" style="background-color:red; width:125px;"><center><i class="fas fa-check" title="Time"></i>Disqualify</center></a></center>'
-								html += '			</td>'
+									html += '			<td data-header="Status" class="au-actions">'
+									html += '				<center><a href="javascript:void(0)"  class="au-btnvolunteer au-btnvolunteertype au-time primary btn_approve" data-user_id = "'+y["volunteer_id"]+'" data-event_task_id = "'+y["event_task_id"]+'" data-id = "'+y["approval_id"]+'"  data-points = "'+y["points"]+'" style="background-color:#1894e7;"><center><i class="fas fa-check" title="Time"></i>Qualify</center></a></center>'
+									html += '			</td>'
 								}
 							html += '	</tr>'
                    	});

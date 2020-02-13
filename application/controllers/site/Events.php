@@ -437,7 +437,9 @@ class Events extends GS_Controller {
 										CONCAT('" . base_url() . "','/',tbl_users.imagepath) as profile_image , CONCAT(tbl_users.first_name, ' ', tbl_users.last_name) as user 
 										FROM tbl_users_points_approved 
 										LEFT JOIN tbl_users ON tbl_users.id = tbl_users_points_approved.user_id 
-										WHERE tbl_users_points_approved.status >= 0 and event_id = " . $event_id . " GROUP BY tbl_users.id";
+										WHERE tbl_users_points_approved.status >= -2 and event_id = " . $event_id . " 
+										GROUP BY tbl_users.id
+										ORDER BY  date_volunteer";
 
 		$joined_volunteer = $this->db->query($query_joined_volunteer)->result();
 			foreach($joined_volunteer as $key => $value){
