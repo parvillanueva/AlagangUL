@@ -31,7 +31,7 @@
 							$data_date = date("Y-m-d", strtotime($event_details[0]['when']));
 							if($data_date == $current_date || $data_date > $current_date){ ?>
 							<a href="#" class="au-lnk" id="addTask_button"><span class="au-share"><i class="fas fa-plus"></i>Add Task</span></a>
-							<a href="#" class="au-lnk"><span class="au-share"><i class="fas fa-pen"></i> Edit Event</a>
+							<a href="#" class="au-lnk" data-toggle="modal" data-target="#editEvent"><span class="au-share"><i class="fas fa-pen"></i> Edit Event</a>
 							<?php if($event_details[0]['status'] == 0) { ?>
 								<a href="<?= base_url("programs/") . $event_details[0]['id'] . "/" . $event_details[0]['url_alias'] . "/publish";?>" class="au-lnk pub-program"><span class="au-share"><i class="fas fa-check"></i> Publish Event</span></a>
 							<?php }else{ ?>
@@ -260,10 +260,96 @@
 	</div>
 </div>
 
+
+<!-- Add Event Modal -->
+<div class="modal fade text-center" id="editEvent" data-backdrop="static">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-body">
+            <span class="au-h4">Add Event</span>
+      			<form action="<?= base_url("programs/") . $program_details[0]['id'] . "/" . $program_details[0]['url_alias'] . "/event/" . $event_details[0]['id'] . "/" . $event_details[0]['url_alias'] . "/update";?>" method="post" enctype="multipart/form-data" class="au-form" id="addEventForm">
+	        		<div class="form-row">
+						<div class="col">
+							<div class="custom-file">
+								<input type="file" class="custom-file-input" name="eventImage" id="customFile" onchange="readURLImgStandardPreviewEvent(this);" accept="image/x-png,image/gif,image/jpeg" />
+								<label class="custom-file-label" for="customFile">Choose file</label>
+							</div>
+							<img  style="width: 100%;" src="<?= $event_details[0]['image'];?>" id="previewImageEvent"/>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" id="lname" value="<?= $event_details[0]['title'];?>" placeholder="Event Title" name="eventTitle" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" id="whenpicker" value="<?= date("m/d/Y h:i a", strtotime($event_details[0]['when']));?>"  placeholder="When" name="eventWhen" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" id="lname" value="<?= $event_details[0]['where'];?>" placeholder="Where" name="eventWhere" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="number" class="form-control required_input no_html" id="lname" value="<?= $event_details[0]['volunteer_points'];?>" placeholder="Add Points" name="eventPoints" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<textarea type="text" class="form-control required_input no_html" id="lname" placeholder="Event Overview" name="overview" rows=5><?= $event_details[0]['description'];?></textarea>
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+					<div class="au-modalbtn text-center">
+	                    <button type="button" class="au-btn au-btnyellow" data-dismiss="modal">Close</button>
+	                    <button type="button" class="au-btn" id="btnSubmitEvent">Submit</button>
+	                </div>
+				</form>
+      		</div>
+      		<!-- <div class="modal-footer">
+        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary" id="btnSubmit">Save changes</button>
+     		</div> -->
+    	</div>
+  	</div>
+</div>
+
+
 <script type="text/javascript">
 	//$('input[name="date"]').daterangepicker();
 </script>
 <script type="text/javascript">
+
+	var datatoday = new Date();
+	var datatodays = datatoday.setDate(new Date(datatoday).getDate() + 1);
+
+
+	$('#whenpicker').datetimepicker({
+	    controlType: 'select',
+	    setDate: '<?= $event_details[0]['when'];?>',
+	    minDate: datatoday,
+	    oneLine: true,
+	    timeFormat: 'hh:mm tt'
+	});
+
+	$(document).on('click', '#btnSubmitEvent', function(e){
+		e.preventDefault();
+		if(validate.standard("addEventForm")){
+			$("#addEventForm").submit();
+		}
+	});
 
 	$(document).on("click", "#addtestimonial_button", function(){
 		$("#addtestimonial").modal("show");
@@ -454,5 +540,18 @@
 			}
 		});
 	});
+
+
+	function readURLImgStandardPreviewEvent(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var extension = input.files[0].name.split('.').pop().toLowerCase();
+                var base64 = e.target.result;
+               	$("#previewImageEvent").attr("src",base64);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
 </script>

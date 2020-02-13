@@ -319,6 +319,44 @@ class Events extends GS_Controller {
 		redirect(base_url("programs") . "/" . $program_id . "/" . $program_alias . "/event/" . $event_id . "/" . $data['url_alias']);
 	}
 
+	public function update(){
+		$program_id = $this->uri->segment(2);
+		$program_alias = $this->uri->segment(3);
+		$event_id = $this->uri->segment(5);
+		$event_alias = $this->uri->segment(6);
+
+		$post = $_POST;
+
+		$data['title'] = $post['eventTitle'];
+		$data['url_alias'] = $this->format_slug($post['eventTitle']);
+		$data['description'] = $post['overview'];
+		$data['when'] = date("Y-m-d H:i:s", strtotime($post['eventWhen']));
+		$data['where'] = $post['eventWhere'];
+		$data['volunteer_points'] = $post['eventPoints'];
+		$data['update_date'] = date("Y-m-d H:i:s");
+
+		$storeFolder = "uploads/events/" ;
+
+		if (!file_exists($storeFolder)) {
+		    mkdir($storeFolder, 0777, true);
+		}
+		if (!empty($_FILES)) {
+			if($_FILES['eventImage']['size'] > 0) { //10 MB (size is also in bytes)
+		        $tempFile = $_FILES['eventImage']['tmp_name'];                   
+			    $targetPath =  $storeFolder . "/";  
+			    $targetFile =  $targetPath. str_replace(" ", "_", strtolower($_FILES['eventImage']['name'])); 
+			    move_uploaded_file($tempFile,$targetFile);
+			    $data['image'] = $targetFile;
+		    }
+		   
+		}
+
+
+		$this->Gmodel->update_data("tbl_program_events",$data,"id",$event_id);
+
+		 redirect(base_url("programs") . "/" . $program_id . "/" . $program_alias . "/event/" . $event_id . "/" . $event_alias);
+	}
+
 	function format_slug($title)
 	{
 	    $title = trim(strtolower($title));
