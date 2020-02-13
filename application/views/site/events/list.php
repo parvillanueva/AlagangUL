@@ -83,8 +83,10 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#date_input').daterangepicker({
-			 "showDropdowns": true,
-			 "linkedCalendars": false,
+			"showDropdowns": true,
+			"linkedCalendars": false,
+			"startDate": "01/01/<?= date('Y') ?>",
+			"endDate": "12/31/<?= date('Y') ?>"
 		  }, function(start, end, label) {
 			var start = start.format('YYYY-MM-DD');
 			var end = end.format('YYYY-MM-DD');
@@ -107,7 +109,7 @@
 			date : date
 		};
 		aJax.post(url, data, function(result){
-			console.log(result);
+			$('#event_view').html(result);
 		});
 	});
 </script>

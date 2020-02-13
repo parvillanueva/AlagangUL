@@ -32,6 +32,8 @@ class User extends CI_Controller {
 			'last_name' => $_POST['lname'],
 			'first_name' => $_POST['fname'],
 			'mobile_number' => $_POST['phone'],
+			'division' => $_POST['division'],
+			'work_number' => $_POST['work_number'],
 			'password' => md5($_POST['password']),
 			'status' => $_POST['password'],
 			'update_date' => date('Y-m-d H:i:s'),
@@ -44,10 +46,10 @@ class User extends CI_Controller {
 	}
 	
 	public function upload_file($file, $email){
-		if (!file_exists(FCPATH  . "upload_file/" . $email)) {
-			mkdir(FCPATH  . "upload_file/" . $email, 0777, true);
+		if (!file_exists("./upload_file/" . $email)) {
+			mkdir("./upload_file/" . $email, 0777, true);
 		}
-		$target_dir = FCPATH .'upload_file\\'.$email.'\\'. $file['file_set']['name'];
+		$target_dir = './upload_file/'.$email.'/'. $file['file_set']['name'];
 		$move_file = move_uploaded_file($_FILES["file_set"]["tmp_name"], $target_dir);
 	}
 	function request_impersonate_token($email) {

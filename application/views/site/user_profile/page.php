@@ -33,7 +33,7 @@
 					</div>
 					<div class="form-row">
 						<div class="col">
-							<select class="form-control custom-select required_input" >
+							<select class="form-control custom-select required_input" id="division" name="division" required="required" />
 									<option value="" selected disabled>Division / Business Unit</option>
 								<?php foreach($division as $div_lop){ ?>
 									<option value="<?php echo $div_lop->id; ?>"><?php echo $div_lop->name; ?></option>
@@ -55,7 +55,7 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 						<div class="col">											
-							<input type="text" class="form-control" id="local" placeholder="Work Number" name="local" pattern="[0-9]{9}">
+							<input type="text" class="form-control" id="work_number" placeholder="Work Number" name="work_number" pattern="[0-9]{9}">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -86,9 +86,8 @@
 					<div class="form-row">
 						<div class="col">
 							<label class="form-check-label">
-								<input class="form-check-input required_input" type="checkbox" name="terms"> I have read and understood the <a href="#" class="au-lnk">Terms of Use</a> and <a href="#" class="au-lnk">Privacy Statement</a>.
-								<div class="valid-feedback"></div>
-								<div class="invalid-feedback"></div>
+								<input class="form-check-input required_input" required="required" id="understood_details" type="checkbox" name="terms"> I have read and understood the <a href="#" class="au-lnk">Terms of Use</a> and <a href="#" class="au-lnk">Privacy Statement</a>.
+								<div class="alert_understood"><font color="red">This field is required.</font></div>
 							</label>
 						</div>
 					</div>    								
@@ -107,6 +106,7 @@
 	$(document).ready(function() {
 		responsive();
 		$('#email').attr('readonly', true);
+		$('.alert_understood').hide();
 	});
 	
 	$(".custom-file-input").on("change", function() {
@@ -120,7 +120,15 @@
 			var password = $('#password').val();
 			var pass_check = checkPasswordStrength(password);
 			if(pass_check){
-				$("#signups").submit();
+				var division = $('#division').val();
+				console.log(division);
+				if(division != null){
+					if($('#understood_details').is(":checked")){
+						$("#signups").submit();
+					} else{
+						$('.alert_understood').show();
+					}
+				}
 			}
 		}
 	});
