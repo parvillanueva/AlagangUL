@@ -20,6 +20,9 @@
 	.au-yourvolunteer .au-btnvolunteertype {
 		width: auto;
 	}
+	.share-wp {
+		display: <?=($_SESSION['user_impersonate_token']=='') ? 'hidden' : 'block' ?>;
+	}
 </style>
 <div class="au-wrapper">
 	<div class="container-fluid au-heading">
@@ -588,10 +591,10 @@
 				html += '				</div>';
 				html += '			</a>';
 				html += '		</div>';
-				html += '		<span class="au-date">January 1, 2020 2:00PM</span>';
+				html += '		<span class="au-date">'+y.date_posted+'</span>';
 				html += '		<span class="au-p5">'+y['testimonial']+'</span>';
 				html += '		<div class="text-right">';
-				html += '			<a href="#" class="au-lnk"><span class="au-share"><i class="fas fa-share-alt"></i> Share on <img src="<?php echo base_url("assets/img/au-workplace2.svg")?>" alt="Workplace"></span></a>';
+				html += '			<a href="#" class="au-lnk"><span class="au-share share-wp"><i class="fas fa-share-alt"></i> Share on <img src="<?php echo base_url("assets/img/au-workplace2.svg")?>" alt="Workplace"></span></a>';
 				html += '		</div>';
 				html += '	</div>';
 				html += '</div>';

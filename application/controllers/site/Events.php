@@ -391,6 +391,7 @@ class Events extends GS_Controller {
 				'testimonial' 	=> $tes_loop->testimonial,
 				'badge'			=> $this->get_volunteer_badge($event_id, $tes_loop->user_id),
 				'picture' 		=> $this->profile_image($tes_loop->user_id),
+				'date_posted'	=> date('F d, Y h:s A', strtotime($tes_loop->create_date))
 			);
 		}
 		echo json_encode($array_data);
