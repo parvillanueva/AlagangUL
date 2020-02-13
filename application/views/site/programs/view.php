@@ -68,9 +68,39 @@
 
 				<div class="au-boxed">
 					<a href="#" class="au-lnk"><div class="au-titlebox"><img src="<?= base_url();?>assets/site/img/au-workplace.svg" height="30px;"></div></a>
-					<div class="au-content">
+					<div class="au-content" style="max-height: 400px;overflow: hidden;overflow-y: auto;padding: 5px;">
 						<!-- insert facebook feed here -->
-						<iframe src="" class="au-frame"></iframe>
+						<?php
+							foreach ($workplace_feed as $key => $value) {
+						?>
+						<div class="row">
+							
+						
+						<div class="col-md-12" style="margin-bottom:12px;border-bottom: 1px solid #9B9B9B;">
+							<div class="col-md-2" style="float: left;padding: 0px;">
+								<img src="<?=$value->post_by_img?>" style="width:92%;margin-right:2px;">
+							</div>
+							<div class="col-md-10" style="float: left;">
+								<label><?=$value->post_by?></label>
+								<p><?=date('F d, Y h:i A',strtotime($value->date_posted))?></p>
+								<div class="row">
+									<div class="col-md-12" style="padding-bottom:10px;">
+										<a href="<?=$value->post_link?>">
+											<?=$value->post_message?>
+											<img src="<?=$value->post_image?>" style="width:100%;">
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						</div>
+						<?php } ?>
+
+						<?php
+							echo "<pre>";
+							print_r($workplace_feed);
+						?>
+						<!-- <iframe src="" class="au-frame"></iframe> -->
 					</div>
 				</div>
 			</div>
