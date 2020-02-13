@@ -65,7 +65,7 @@ class Sign_up extends CI_Controller {
 		$token = md5(uniqid(rand(), true));
 		$this->session_set($token);
 		//$link = base_url().'login_otp?token='.$token;
-		$content = '<p> otp = '.$otp.'</p>';
+		$content = $this->email_template_otp($otp); //'<p> otp = '.$otp.'</p>';
 		$this->otp_save($otp, $from, $token);
 		$arr = array(
 			'from' => $from,
@@ -118,7 +118,7 @@ class Sign_up extends CI_Controller {
 		$token = md5(uniqid(rand(), true));
 		$this->session_set($token);
 		//$link = base_url().'login_otp_fpw?token='.$token;
-		$content = '<p>otp = '.$otp.'</p>';
+		$content = $this->email_template_otp($otp);//'<p>otp = '.$otp.'</p>';
 		$this->otp_save_fpw($otp, $from, $token);
 		$arr = array(
 			'from' => $from,
@@ -144,5 +144,38 @@ class Sign_up extends CI_Controller {
 	function thankyou_message(){
 		$data['content'] = "site/sign_up/thankyou_message";
 		$this->load->view("site/layout/template2",$data);
+	}
+	
+	function email_template_otp($otp){
+		$html = '<!DOCTYPE html>
+				<html lang="en">
+				<head>
+					<title>Alagang Unilab | OTP email template</title>
+					<meta charset="utf-8">
+					<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+				</head>
+				<body style="background-color:#092e6e; margin:0; padding:0;">
+					<div style="background-color:#092e6e; text-align: center; font-family: montserrat, sans-serif; padding: 15px 15px 45px;">
+						<img src="http://172.29.70.126/alagang_unilab/uploads/au-alagangunilab.png" style="width: 400px; height: auto; margin: auto;">
+						<!-- otp sent message -->
+						<div style="max-width: 500px; border: 1px solid #ccc; background-color: #fff; margin: auto;">
+							<div style="padding:20px;">
+								<h4 style="font-family: "myriad-pro", sans-serif; color: #092e6e;">One-time password for Alagang Unilab signup</h4>
+								<p>
+									Hello Guest;<br>
+									Thank you for your interest in joining the Alagang Unilab program. In order to continue with your Sign up, please enter the One-Time Password provided below:
+								</p>
+								<div style="border: 1px solid #eee; padding: 15px 0 15px 25px; display: inline-block; margin-bottom: 20px; font-size: 2.2em; font-weight: bold; letter-spacing: .75em;">
+									'.$otp.'
+								</div>
+							</div>
+						</div>
+						<div style="color: #fff; max-width: 500px; font-size: .75em; margin: 15px auto 15px;">
+							If you received this email by mistake, send us a report. Lorem ipsum dolor sit amet conserctetuer adipiscing nomnumny di dalam hati nay.
+						</div>				
+					</div>
+				</body>
+				</html>';
+		return 	$html;	
 	}
 }
