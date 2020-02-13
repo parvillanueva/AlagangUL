@@ -265,7 +265,7 @@
 <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
         <div class="modal-body">
-            <span class="au-h4">Add Event</span>
+            <span class="au-h4">Edit Event</span>
       			<form action="<?= base_url("programs/") . $program_details[0]['id'] . "/" . $program_details[0]['url_alias'] . "/event/" . $event_details[0]['id'] . "/" . $event_details[0]['url_alias'] . "/update";?>" method="post" enctype="multipart/form-data" class="au-form" id="addEventForm">
 	        		<div class="form-row">
 						<div class="col">
@@ -323,6 +323,24 @@
      		</div> -->
     	</div>
   	</div>
+</div>
+
+<div class="modal fade text-center" id="events_edit_event_modal" data-backdrop="static">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-body">
+        		<div class="form-row">
+					<div class="col">
+							<label class="file-label" >Are you sure you want to Update this record?</label>
+					</div>
+				</div>
+				<div class="au-modalbtn text-center">
+                    <button type="button" class="au-btn au-btnyellow" id="btn_events_edit_dismiss" data-dismiss="modal">No</button>
+                    <button type="button" class="au-btn" id="btn_events_edit_confirm">Yes</button>
+                </div>
+        </div>
+    </div>
+</div>
 </div>
 
 <div class="modal fade text-center" id="volunteermodal">
@@ -454,9 +472,32 @@
 
 	$(document).on('click', '#btnSubmitEvent', function(e){
 		e.preventDefault();
-		if(validate.standard("addEventForm")){
-			$("#addEventForm").submit();
+		if(validate.standard('addEventForm')){
+			$("#editEvent").css('opacity',0.5);
+			$("#events_edit_event_modal").modal("show");
+		}else{
+			$('.required_input').each(function(){
+				if($(this).val() == null || $(this).val() == ""){
+					$('.au-form .custom-file-label').css('border-color','');
+					$(this).css('border-color','red');
+				}
+			});
 		}
+	});
+
+	$(document).on('click', '#btn_events_edit_confirm', function(e){
+		e.preventDefault();
+			$("#addEventForm").submit();
+			$("#editEvent").css('opacity',1);
+			$("#events_edit_event_modal").modal("hide");
+	});
+
+
+	$(document).on('click', '#btn_events_edit_dismiss', function(e){
+		e.preventDefault();
+			$("#editEvent").css('opacity',1);
+			$("#editEvent").css('overflow','scroll');
+			$("#events_edit_event_modal").modal("hide");
 	});
 
 	$(document).on("click", "#addtestimonial_button", function(){
