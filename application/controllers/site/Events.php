@@ -75,6 +75,7 @@ class Events extends GS_Controller {
 		$data['event_task'] = $this->get_event_tasks($event_id);
 		$data['event_volunteers'] = $this->get_volunteers($event_id);
 		$data['badges'] = $this->get_badges();
+		$data['earn_badge'] = $this->get_earn_badge($event_id);
 		$data['validate_testimonial'] = $this->validate_testimonial($event_id, $_SESSION['user_sess_id']);
 		$data['program_id'] = $program_id;
 		$data['event_id'] = $event_id;
@@ -139,6 +140,7 @@ class Events extends GS_Controller {
 		$data['event_task'] = $this->get_event_tasks($event_id);
 		$data['event_volunteers'] = $this->get_volunteers($event_id);
 		$data['users_approval'] = $this->get_approval_volunteers($event_id);
+		
 		$data['content'] = "site/events/manage";
 		$data['meta'] = array(
 			"title"         => $data['event_details'][0]['title'],
@@ -158,6 +160,48 @@ class Events extends GS_Controller {
 		$this->parser->parse("site/layout/template",$data);
 	}
 
+	public function get_earn_badge($event_id){
+		$query = 'SELECT
+			tbl_program_events.id,
+			tbl_badges.`name`,
+			tbl_badges.icon,
+			tbl_badges.color
+			FROM
+			tbl_program_events
+			INNER JOIN tbl_program_event_task ON tbl_program_events.id = tbl_program_event_task.event_id
+			INNER JOIN tbl_program_event_task_badge ON tbl_program_event_task.id = tbl_program_event_task_badge.event_task_id
+			INNER JOIN tbl_badges ON tbl_program_event_task_badge.badge_id = tbl_badges.id
+			WHERE
+			tbl_program_events.id = '.$event_id.'
+			GROUP BY
+			tbl_badges.id';
+		return $this->db->query($query)->result();
+
+	}
+
+	public function get_volunteer_badge($event_id, $user_id){
+		$query = 'SELECT
+			tbl_program_events.id,
+			tbl_badges.`name`,
+			tbl_badges.icon,
+			tbl_badges.color
+			FROM
+			tbl_program_events
+			INNER JOIN tbl_program_event_task ON tbl_program_events.id = tbl_program_event_task.event_id
+			INNER JOIN tbl_program_event_task_badge ON tbl_program_event_task.id = tbl_program_event_task_badge.event_task_id
+			INNER JOIN tbl_badges ON tbl_program_event_task_badge.badge_id = tbl_badges.id
+			INNER JOIN tbl_program_event_task_volunteers ON tbl_program_event_task_volunteers.event_task_id = tbl_program_event_task.id
+			WHERE
+			tbl_program_events.id = '.$event_id.' AND
+			tbl_program_event_task_volunteers.user_id = '.$user_id.'
+			GROUP BY
+			tbl_badges.id
+';
+		return $this->db->query($query)->result();
+
+	}
+
+
 	public function data_volunteers(){
 		// $event_id = $this->uri->segment(5);
 		$event_id = $this->input->post('event_id');
@@ -168,7 +212,18 @@ class Events extends GS_Controller {
 	public function get_volunteers($event_id){
 		$query_joined_volunteer = "SELECT tbl_program_event_task_volunteers.*, CONCAT('" . base_url() . "','/',tbl_users.imagepath) as profile_image , CONCAT(tbl_users.first_name, ' ', tbl_users.last_name) as user FROM tbl_program_event_task_volunteers LEFT JOIN tbl_users ON tbl_users.id = tbl_program_event_task_volunteers.user_id WHERE event_id = " . $event_id . " GROUP BY tbl_users.id";
 		$joined_volunteer = $this->db->query($query_joined_volunteer)->result();
-		return $joined_volunteer;
+
+		$data = array();
+		foreach ($joined_volunteer as $key => $value) {
+			$data[] = array(
+				"user_id"			=> $value->user_id,
+				"profile_image"		=> $value->profile_image,
+				"user"				=> $value->user,
+				"badge"				=> $this->get_volunteer_badge($event_id, $value->user_id),
+			);
+
+		}
+		return $data;
 	}
 
 
@@ -506,5 +561,5 @@ class Events extends GS_Controller {
 		$update_status_result3 = $this->db->query($update_status3);
 		return $update_status_result3;
 	}
-	
+
 }

@@ -96,6 +96,7 @@ class Programs extends GS_Controller {
 				"volunteer_points"	=> $value->volunteer_points,
 				"is_admin"			=> ($value->user_id == $this->session->userdata('user_sess_id')) ? true : false,
 				"is_joined"			=> $is_joined,
+				"get_earn_badge"	=> $this->get_earn_badge($value->id),
 				"required_volunteer"=> ($needed_volunteer[0]->count != "") ? $needed_volunteer[0]->count : 0,
 				"joined_volunteers"	=> ($joined_volunteer[0]->count != "") ? $joined_volunteer[0]->count : 0,
 			);
@@ -114,6 +115,25 @@ class Programs extends GS_Controller {
 		);
 
 		return $details;
+	}
+
+	public function get_earn_badge($event_id){
+		$query = 'SELECT
+			tbl_program_events.id,
+			tbl_badges.`name`,
+			tbl_badges.icon,
+			tbl_badges.color
+			FROM
+			tbl_program_events
+			INNER JOIN tbl_program_event_task ON tbl_program_events.id = tbl_program_event_task.event_id
+			INNER JOIN tbl_program_event_task_badge ON tbl_program_event_task.id = tbl_program_event_task_badge.event_task_id
+			INNER JOIN tbl_badges ON tbl_program_event_task_badge.badge_id = tbl_badges.id
+			WHERE
+			tbl_program_events.id = '.$event_id.'
+			GROUP BY
+			tbl_badges.id';
+		return $this->db->query($query)->result();
+
 	}
 
 
