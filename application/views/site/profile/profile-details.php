@@ -161,7 +161,7 @@
                                                 </div>
                                                 <div class="col-sm-9 au-eventdetails">
                                                     <div class="au-program">
-                                                        <a href="<?= @$event['url_alias']?>" class="au-lnk">
+                                                        <a href="programs/<?= $event['id'] ."/" .$event['url_alias']?>" class="au-lnk">
                                                             <div class="au-pthumbnail">
                                                                 <img src="<?=base_url(). @$event['image_thumbnail']?>" class="au-fp-thumbnailimg">
                                                             </div>
