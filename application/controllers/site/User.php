@@ -32,6 +32,8 @@ class User extends CI_Controller {
 			'last_name' => $_POST['lname'],
 			'first_name' => $_POST['fname'],
 			'mobile_number' => $_POST['phone'],
+			'division' => $_POST['division'],
+			'work_number' => $_POST['work_number'],
 			'password' => md5($_POST['password']),
 			'status' => $_POST['password'],
 			'update_date' => date('Y-m-d H:i:s'),
