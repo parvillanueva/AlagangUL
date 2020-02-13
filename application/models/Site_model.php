@@ -113,7 +113,7 @@ date_default_timezone_set('Asia/Taipei');
 
 		function get_joined_events($id)
 		{
-			$this->db->select("p.image_thumbnail, p.id, pe.title, p.url_alias, pe.title, pe.`when`, pe.`where`, b.name as badge, b.icon, b.color");
+			$this->db->select("p.image_thumbnail, p.id, pe.title, p.url_alias, pe.title, pe.when, pe.where, b.name as badge, b.icon, b.color, GROUP_CONCAT(b.name, '|', b.icon, '|', b.color) AS badges");
 			$this->db->from("tbl_program_events pe");
 			$this->db->join("tbl_programs p", "p.id = pe.program_id", "LEFT");
 			$this->db->join("tbl_program_event_task pet", "pet.event_id = pe.id", "LEFT");
@@ -123,6 +123,8 @@ date_default_timezone_set('Asia/Taipei');
 					
 		
 			$this->db->where("etv.user_id", $id);
+			$this->db->group_by("etv.event_id");
+
 
 			return $this->db->get()->result_array();
 
