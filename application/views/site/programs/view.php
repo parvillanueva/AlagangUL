@@ -9,8 +9,11 @@
 				<span class="au-h5"><?= $details['details'][0]->name;?></span>
 				<div class="au-phstats">
 					<span class="au-members"><i class="fas fa-user-friends"></i><?= $details['members_count'];?> <?= ($details['members_count'] > 1 ) ? 'Members' : 'Member';?></span>
-					<a href="#" class="au-lnk"><span class="au-share"><i class="fas fa-share-alt"></i> Share on <img src="<?= base_url();?>assets/site/img/au-workplace.svg" alt="Workplace"></span></a>
-					
+					<?php
+						if($_SESSION['user_impersonate_token']!=''){
+					?>
+					<a href="#" class="au-lnk workplace-share"><span class="au-share"><i class="fas fa-share-alt"></i> Share on <img src="<?= base_url();?>assets/site/img/au-workplace.svg" alt="Workplace"></span></a>
+					<?php } ?>
 					<?php if($details['is_admin']) { ?>
 						<a href="#" class="au-lnk" data-toggle="modal" data-target="#editPrgoramDetails"><span class="au-share"><i class="fas fa-pen"></i> Edit Details</a>
 						<a href="#" class="au-lnk" data-toggle="modal" data-target="#addEvent"><span class="au-share"><i class="fas fa-calendar"></i> Add Events</a>
@@ -43,7 +46,13 @@
 								<div class="au-userentry">
 									<a href="<?= base_url('profile') ?>/<?= $value->used_id;?>" class="au-userentry">
 										<div class="au-inner">
-											<img src="<?= $value->profile_image;?>" class="au-avatar-lg">
+											<?php
+												$profile_image = $value->profile_image;
+												if($profile_image==null || $profile_image=='' || !file_exists($profile_image)){
+													$profile_image = base_url().'assets/site/img/au-avatar.svg';
+												}
+											?>
+											<img src="<?= $profile_image;?>" class="au-avatar-lg">
 										</div>
 										<div class="au-inner">
 											<span class="au-accname"><?= $value->user;?></span>
@@ -288,6 +297,26 @@
 	    minDate: datatoday,
 	    oneLine: true,
 	    timeFormat: 'hh:mm tt'
+
+	});
+
+	$(document).on('click', '.workplace-share', function() {
+		var user_fb_id = "<?=$_SESSION['user_impersonate_token']?>";
+		var url_root = document.location.host;
+		var uri = window.location.href;
+		var url = url_root;
+		var base_url = "<?=base_url()?>";
+		var photo = "<?=$details['details'][0]->image_thumbnail;?>";
+		var desc = "<?= $details['details'][0]->overview;?>";
+		var message = "<?= $details['details'][0]->overview;?>";
+		var title = "<?= $details['details'][0]->name;?>";
+
+		$.get('https://graph.facebook.com/'+user_fb_id+'?fields=impersonate_token&access_token=DQVJ1X3JxZAlRfM2pWN2I5eFVmVUJBYmhORENMSXM1bjZArbW4yOU13ZAmNYdFlqZA2hITWpQcnJEblg4UzB4bWYtV1BMcngxUE8xR2Q3SEI1WWk2bEdDX0toV0xFNVg5LXBnazV1Q1lmRHFNRHl1d1ZATeW9MaVMtdTBKckoyejQtX1lDTVRVc3poOWNTamx0d2RQRGtGeGtmVExRUDRTRi1ybl9Ub0liZAXlORU9VZAjVjaUlZAa1VvRDJMSWxQSUtkdjRWQ2xVWWNn', function(data) {
+			var impersonate_token = data.impersonate_token;
+			$.post('https://graph.facebook.com/355003108168230/feed?access_token='+impersonate_token+'&link='+uri+'&picture='+base_url+photo+'&name='+title+'&caption='+url+'&description='+desc+'&message='+message, function(data) {
+			}, 'json');
+		}, 'json');
+
 	});
 
 	$(document).on('click', '#btnSubmit', function(e){
