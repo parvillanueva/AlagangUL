@@ -95,7 +95,9 @@ class Events extends GS_Controller {
 		$user_id = $this->session->userdata('user_sess_id');
 		$data['is_allowed_to_volunteer'] = $this->check_is_allowed($event_id,date('Y-m-d',strtotime($data['event_details'][0]['when'])));
 		//$data['is_volunteered'] = array_search($user_id, array_column($data['event_volunteers'], 'user_id'));
-
+		/*echo "<pre>";
+		print_r($data);
+		die();*/
 		$data['content'] = "site/events/view";
 		$data['meta'] = array(
 			"title"         => $data['event_details'][0]['title'],
