@@ -32,6 +32,12 @@
 		              	</div>
 		            </div>
 		            <div class="form-group">
+		              	<label class="col-sm-2 control-label">Required Points</label>
+		              	<div class="col-sm-5">
+		                	<input type="number" id="minimum_points" name="minimum_points" class="form-control required_input" placeholder="Required Points">
+		              	</div>
+		            </div>
+		            <div class="form-group">
 		              	<label class="col-sm-2 control-label">Status</label>
 		              	<div class="col-sm-5">
 		              		<select id="status" name="status" class="form-control">
@@ -120,7 +126,7 @@
 		var url = "<?= base_url('content_management/global_controller');?>";
 	    var data = {
 	    	event : "list",
-	        select : "id,name,icon,color,status",
+	        select : "id,name,icon,color,minimum_points,status",
 	        query : "id = <?= $this->uri->segment(4);?>", 
 	        table : "tbl_badges"
 	    }
@@ -135,6 +141,7 @@
 	    		$('#color').val(color.replace('#',''));	
 	    		$('#color').css("background-color", color);
 	    		$('.icon_preview').html('<i class="' +y.icon + ' fa-lg"></i>');
+	    		$('#minimum_points').val(y.minimum_points);
 	    		$('#status').val(y.status);
 	    	})
 

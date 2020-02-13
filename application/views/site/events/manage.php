@@ -98,7 +98,7 @@
 					</div>
 					<hr>
 					<div class="au-programdescription">
-						<span class="au-title">Opportunities for volunteers to help</span>
+						<span class="au-title">Volunteers</span>
 						<div class="au-opptable">
 							<table>
 								<thead>

@@ -28,6 +28,12 @@
 		              	</div>
 		            </div>
 		            <div class="form-group">
+		              	<label class="col-sm-2 control-label">Required Points</label>
+		              	<div class="col-sm-5">
+		                	<input type="number" id="minimum_points" name="minimum_points" class="form-control required_input" placeholder="Required Points">
+		              	</div>
+		            </div>
+		            <div class="form-group">
 		              	<label class="col-sm-2 control-label">Status</label>
 		              	<div class="col-sm-5">
 		              		<select id="status" name="status" class="form-control">

@@ -92,9 +92,17 @@
 									</div>
 								<?php } ?>
 							</div>
-							<div class="au-inner au-cscroll">
-							<a href="<?= $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>/manage"   class="au-btnvolunteer au-btnvolunteertype au-time primary btn_approve"  style="background-color:#1894e7;">Manage</a>
-							</div>
+								<div class="au-inner au-cscroll">
+								<?php 	if(count($event_volunteers) > 0) { 
+										 	if($event_details[0]['is_admin'] == 1){
+								?>php
+										<a href="<?= $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>/manage"   class="au-btnvolunteer au-btnvolunteertype au-time primary btn_approve"  style="background-color:#1894e7; width:100%; text-align:center;">Manage</a>
+								<?php		 		
+										 	}
+										}
+								?>		
+								</div>
+							
 						</div>
 					</div>
 
