@@ -503,24 +503,24 @@
 			var event_id = '<?=$event_id?>';	
 			var is_joined = $(this).attr('attr-isjoined');
 
-			if( is_submit==1 || (is_submit==0 && is_joined==1)){
-				var url = "<?= base_url("events/volunteer");?>?program_id="+program_id+"&event_id="+event_id+"&event_task_id="+event_task_id+"&is_submit="+is_submit;
-		    	$.get(url, function(data) {
-		    		var vol_id = $('.volunteer').attr('attr-id');
-		    		$('tr.forvolunteer').removeClass('volunteer'); 
-		    		$('.event-volunteer').attr('attr-isjoined',0);
-		    		$('.joined-'+vol_id).html(parseInt($('.joined-'+vol_id).html())-1);
-		    		if(is_submit==1){
-		    			$(".vol-id"+event_task_id).addClass('volunteer');
-		    			$('.event-volunteer[attr-id="'+event_task_id+'"]').attr('attr-isjoined',1);
-		    			$('.joined-'+event_task_id).html(parseInt($('.joined-'+event_task_id).html())+1);
-		    			$('#volunteerthankyou').modal('show');
-		    		}
-		    		else{
-		    			location.reload();
-		    		}		    		
-				});
-			}
+			
+			var url = "<?= base_url("events/volunteer");?>?program_id="+program_id+"&event_id="+event_id+"&event_task_id="+event_task_id+"&is_submit="+is_submit;
+	    	$.get(url, function(data) {
+	    		var vol_id = $('.volunteer').attr('attr-id');
+	    		$('tr.forvolunteer').removeClass('volunteer'); 
+	    		$('.event-volunteer').attr('attr-isjoined',0);
+	    		$('.joined-'+vol_id).html(parseInt($('.joined-'+vol_id).html())-1);
+	    		if(is_submit==1){
+	    			$(".vol-id"+event_task_id).addClass('volunteer');
+	    			$('.event-volunteer[attr-id="'+event_task_id+'"]').attr('attr-isjoined',1);
+	    			$('.joined-'+event_task_id).html(parseInt($('.joined-'+event_task_id).html())+1);
+	    			$('#volunteerthankyou').modal('show');
+	    		}
+	    		else{
+	    			location.reload();
+	    		}		    		
+			});
+			
 
 		});
 
