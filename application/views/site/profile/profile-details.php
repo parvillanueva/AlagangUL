@@ -180,7 +180,22 @@
                                                     </div>
                                                     
                                                     <div class="au-volunteers">
-                                                        <span class="au-volunteeredmes"><i class="<?=@$event['icon']?>" style="color:<?=@$event['color']?>" title="<?=@$event['badge']?>"></i>Volunteered <?=@$event['badge']?></span>
+                                                        <span class="au-volunteeredmes">
+                                                        <?php if(!empty($event['badges'])) : ?>
+                                                            
+                                                            <?php foreach($event['badges'] as $badges) : ?>
+                                                                <span>
+                                                                
+                                                                    <i 
+                                                                        class="<?=$badges[1]; ?>" 
+                                                                        style="color:<?=$badges[2]?>" 
+                                                                        title="<?=$badges[0]?>">
+                                                                    </i>Volunteered <?=$badges[0]?>
+                                                                </span>
+                                                        
+                                                            <?php endforeach; ?>
+                                                        <?php endif; ?>
+                                                        
                                                         <!-- <span class="au-volunteeredmes"><i class="fas fa-hands-helping au-talent" title="Talent"></i>Volunteered Talent</span> -->
                                                         <!-- <span class="au-volunteeredmes"><i class="fas fa-gem au-treasure" title="Treasure"></i>Volunteered Treasure</span> -->
                                                         <!-- <span class="au-volunteeredmes"><i class="fas fa-hourglass au-time" title="Time"></i><i class="fas fa-hands-helping au-talent" title="Talent"></i>Volunteered Time & Talent</span> -->
