@@ -402,7 +402,7 @@
 	</div>
 </div>
 
-<div class="modal fade text-center" id="addtask">
+<div class="modal fade text-center" id="addtask" data-backdrop="static">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-body">
@@ -451,6 +451,24 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<div class="modal fade text-center" id="addtask_confirm_modal" data-backdrop="static">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-body">
+        		<div class="form-row">
+					<div class="col">
+							<label class="file-label" >Are you sure you want to Add this record?</label>
+					</div>
+				</div>
+				<div class="au-modalbtn text-center">
+                    <button type="button" class="au-btn au-btnyellow" id="btn_addtask_dismiss" data-dismiss="modal">No</button>
+                    <button type="button" class="au-btn" id="btn_addtask_confirm">Yes</button>
+                </div>
+        </div>
+    </div>
+</div>
 </div>
 
 <script type="text/javascript">
@@ -668,6 +686,43 @@
 	});
 	
 	$(document).on('click', '#btnBadges', function(result){
+
+		if(validate.standard('volunteer_form')){
+			$("#addtask").css('opacity',0.5);
+			$("#addtask_confirm_modal").modal("show");
+
+		}else{
+			$('.required_input').each(function(){
+				if($(this).val() == null || $(this).val() == ""){
+					$(this).css('border-color','red');
+				}
+			});
+
+		}
+	});
+
+	$(document).on('click', '#btn_addtask_confirm', function(e){
+		e.preventDefault();
+			add_task();
+			$("#addtask").css('opacity',1);
+			$("#addtask_confirm_modal").modal("hide");
+	});
+
+	$(document).on('click', '#btn_addtask_dismiss', function(e){
+		e.preventDefault();
+			$("#addtask").css('opacity',1);
+			$("#addtask").css('overflow','scroll');
+			$("#addtask_confirm_modal").modal("hide");
+	});
+	
+	function count_image(total){
+		var div_count = $('.au-opthumbnail').length;
+		if(div_count == total){
+			$('#loadMore').hide();
+		}
+	}
+
+	function add_task(){
 		var possible_volunteer = $('#possible_volunteer').val();
 		var qualification = $('#qualification').val();
 		var needed = $('#needed').val();
@@ -683,26 +738,18 @@
 			badges : val_badges
 		};
 		var url = "<?php echo base_urL('site/events/add_event_task') ?>";
-		if(validate.standard("volunteer_form")){
-			aJax.post(url, data, function(result){
-				var obj = is_json(result);
-				if(obj.responce == 'success'){
-					$('#possible_volunteer').val('');
-					$('#needed').val('');
-					$('#qualification').val('');
-					$('.badges_input').prop('checked', false); 
-					$("#addtask").modal('hide');
-					location.reload();
-				}
-			});
-		}
-	});
-	
-	function count_image(total){
-		var div_count = $('.au-opthumbnail').length;
-		if(div_count == total){
-			$('#loadMore').hide();
-		}
+
+		aJax.post(url, data, function(result){
+			var obj = is_json(result);
+			if(obj.responce == 'success'){
+				$('#possible_volunteer').val('');
+				$('#needed').val('');
+				$('#qualification').val('');
+				$('.badges_input').prop('checked', false); 
+				$("#addtask").modal('hide');
+				location.reload();
+			}
+		});
 	}
 
     $(document).on("click", '[data-toggle="lightbox"]', function(event) {

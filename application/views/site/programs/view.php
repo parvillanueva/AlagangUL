@@ -403,8 +403,14 @@
 			$("#program_confirm_modal").modal("show");
 		}
 		else{
-			$('.required_input').each(function(){
+			$('#editprogramform .required_input').each(function(){
 				if($(this).val() == null || $(this).val() == ""){
+					var img_border = $('#previewImage').attr("src");
+						if(img_border == ''){
+							$('#editprogramform .custom-file-label').css('border-color','red');
+						}else{
+							$('#editprogramform .custom-file-label').css('border-color','');
+						}
 					$('.au-form .custom-file-label').css('border-color','');
 					$(this).css('border-color','red');
 				}
@@ -428,26 +434,31 @@
 			$("#program_confirm_modal").modal("hide");
 	});
 
-
 	$(document).on('click', '#btnSubmitEvent', function(e){
 		e.preventDefault();
 		if(validate.standard('addEventForm')){
 			$("#addEvent").css('opacity',0.5);
 			$("#program_add_event_modal").modal("show");
 		}else{
-			$('.required_input').each(function(){
+			$('#addEventForm .required_input').each(function(){
 				if($(this).val() == null || $(this).val() == ""){
 					var img_border = $('#previewImageEvent').attr("src");
 						if(img_border == ''){
-								$('.custom-file-label').css("border-color","red");
+								$('#addEventForm .custom-file-label').css("border-color","red");
 						}else{
-							$('.custom-file-label').css("border-color",'');
+							$('#addEventForm .custom-file-label').css("border-color",'');
 						}
 					$(this).css('border-color','red');
 				}
 			});
 
 		}
+	});
+
+	$(document).on('click', '.au-btnyellow', function(e){
+		$('.validate_error_message').remove();
+		$('.required_input').css('border-color','');
+		$('.custom-file-label').css('border-color','');
 	});
 
 	$(document).on('click', '#btn_add_event_confirm', function(e){
