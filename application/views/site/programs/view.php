@@ -95,11 +95,6 @@
 						</div>
 						</div>
 						<?php } ?>
-
-						<?php
-							echo "<pre>";
-							print_r($workplace_feed);
-						?>
 						<!-- <iframe src="" class="au-frame"></iframe> -->
 					</div>
 				</div>
