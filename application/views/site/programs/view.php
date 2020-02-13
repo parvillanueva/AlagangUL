@@ -253,21 +253,20 @@
     	</div>
   	</div>
 </div>
+
 <div class="modal fade text-center" id="program_confirm_modal" data-backdrop="static">
 <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
         <div class="modal-body">
-            <form action="<?= base_url("programs/add")?>" method="post" enctype="multipart/form-data" class="au-form" id="add_confirm">
         		<div class="form-row">
 					<div class="col">
 							<label class="file-label" >Are you sure you want to Update this record?</label>
 					</div>
 				</div>
 				<div class="au-modalbtn text-center">
-                    <button type="button" class="au-btn au-btnyellow" id="dismiss_modal" data-dismiss="modal">No</button>
-                    <button type="button" class="au-btn" id="btnSubmit2">Yes</button>
+                    <button type="button" class="au-btn au-btnyellow" id="btn_edit_dismiss" data-dismiss="modal">No</button>
+                    <button type="button" class="au-btn" id="btn_edit_confirm">Yes</button>
                 </div>
-			</form>	
         </div>
     </div>
 </div>
@@ -279,7 +278,7 @@
     <div class="modal-content">
         <div class="modal-body">
             <span class="au-h4">Add Event</span>
-      			<form action="<?= base_url("programs/") . $details['details'][0]->id . "/" . $details['details'][0]->url_alias . "/add_event";?>" method="post" enctype="multipart/form-data" class="au-form" id="addEventForm">
+      			<form action="<?= base_url("programs/") . $details['details'][0]->id . "/" . $details['details'][0]->url_alias . "/add_event";?>" method="post" enctype="multipart/form-data" class="au-formm" id="addEventForm">
 	        		<div class="form-row">
 						<div class="col">
 							<div class="custom-file">
@@ -288,6 +287,13 @@
 							</div>
 							<img  style="width: 100%;" src="" id="previewImageEvent"/>
 						</div>
+<!-- 						<div class="col">
+							<div class="custom-file">
+								<input type="file" class="custom-file-input required_input" name="eventImage" id="customFile" onchange="readURLImgStandardPreviewEvent(this);" accept="image/x-png,image/gif,image/jpeg" />
+								<label class="custom-file-label" for="customFile">Choose file</label>
+							</div>
+							<img  style="width: 100%;" src="" id="previewImageEvent"/>
+						</div> -->
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
@@ -336,6 +342,24 @@
      		</div> -->
     	</div>
   	</div>
+</div>
+
+<div class="modal fade text-center" id="program_add_event_modal" data-backdrop="static">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-body">
+        		<div class="form-row">
+					<div class="col">
+							<label class="file-label" >Are you sure you want to Add this record?</label>
+					</div>
+				</div>
+				<div class="au-modalbtn text-center">
+                    <button type="button" class="au-btn au-btnyellow" id="btn_add_event_dismiss" data-dismiss="modal">No</button>
+                    <button type="button" class="au-btn" id="btn_add_event_confirm">Yes</button>
+                </div>
+        </div>
+    </div>
+</div>
 </div>
 
 <script type="text/javascript">
@@ -389,7 +413,7 @@
 		}
 	});
 
-	$(document).on('click', '#btnSubmit2', function(e){
+	$(document).on('click', '#btn_edit_confirm', function(e){
 		e.preventDefault();
 			$("#editprogramform").submit();
 			$("#editPrgoramDetails").css('opacity',1);
@@ -397,7 +421,7 @@
 	});
 
 
-	$(document).on('click', '#dismiss_modal', function(e){
+	$(document).on('click', '#btn_edit_dismiss', function(e){
 		e.preventDefault();
 			$("#editPrgoramDetails").css('opacity',1);
 			$("#editPrgoramDetails").css('overflow','scroll');
@@ -407,9 +431,38 @@
 
 	$(document).on('click', '#btnSubmitEvent', function(e){
 		e.preventDefault();
-		if(validate.standard("addEventForm")){
-			$("#addEventForm").submit();
+		if(validate.standard('addEventForm')){
+			$("#addEvent").css('opacity',0.5);
+			$("#program_add_event_modal").modal("show");
+		}else{
+			$('.required_input').each(function(){
+				if($(this).val() == null || $(this).val() == ""){
+					var img_border = $('#previewImageEvent').attr("src");
+						if(img_border == ''){
+								$('.custom-file-label').css("border-color","red");
+						}else{
+							$('.custom-file-label').css("border-color",'');
+						}
+					$(this).css('border-color','red');
+				}
+			});
+
 		}
+	});
+
+	$(document).on('click', '#btn_add_event_confirm', function(e){
+		e.preventDefault();
+			$("#addEventForm").submit();
+			$("#addEvent").css('opacity',1);
+			$("#program_add_event_modal").modal("hide");
+	});
+
+
+	$(document).on('click', '#btn_add_event_dismiss', function(e){
+		e.preventDefault();
+			$("#addEvent").css('opacity',1);
+			$("#addEvent").css('overflow','scroll');
+			$("#program_add_event_modal").modal("hide");
 	});
 
 	function readURLImgStandardPreview(input) {
