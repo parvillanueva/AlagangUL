@@ -81,10 +81,10 @@
 								<img src="<?=$value->post_by_img?>" style="width:92%;margin-right:2px;">
 							</div>
 							<div class="col-md-10" style="float: left;">
-								<label><?=$value->post_by?></label>
-								<p><?=date('F d, Y h:i A',strtotime($value->date_posted))?></p>
+								<label style="font-weight:bold;"><?=$value->post_by?></label>
+								<p style="font-size: 10px;"><?=date('F d, Y h:i A',strtotime($value->date_posted))?></p>
 								<div class="row">
-									<div class="col-md-12" style="padding-bottom:10px;">
+									<div class="col-md-12" style="padding-bottom:10px;margin-top:10px;">
 										<a href="<?=$value->post_link?>">
 											<?=$value->post_message?>
 											<img src="<?=$value->post_image?>" style="width:100%;">

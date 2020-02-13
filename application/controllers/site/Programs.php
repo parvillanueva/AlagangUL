@@ -52,7 +52,7 @@ class Programs extends GS_Controller {
 	}
 
 	function get_workplace_feed(){
-		$query = "SELECT post_by, post_by_img, likes, date_posted, post_message, post_image, post_link FROM tbl_workplace_feed";
+		$query = "SELECT post_by, post_by_img, likes, date_posted, post_message, post_image, post_link FROM tbl_workplace_feed ORDER BY date_posted DESC";
 		$result = $this->db->query($query)->result();
 		return $result;
 	}
