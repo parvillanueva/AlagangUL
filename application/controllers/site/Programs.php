@@ -32,6 +32,7 @@ class Programs extends GS_Controller {
 		$program_alias = $this->uri->segment(3);
 		$program_details = $this->get_details($program_id, $program_alias);
 		$data['details'] = $program_details;
+		$data['workplace_feed'] = $this->get_workplace_feed();
 		$data['content'] = "site/programs/view";
 		$data['meta'] = array(
 			"title"         =>  $program_details['details'][0]->name,
@@ -48,6 +49,12 @@ class Programs extends GS_Controller {
 		$data['active_menu'] = "programs";
 		$data['programs'] = $this->Site_model->get_other_programs($program_id);
 		$this->parser->parse("site/layout/template",$data);
+	}
+
+	function get_workplace_feed(){
+		$query = "SELECT post_by, post_by_img, likes, date_posted, post_message, post_image, post_link FROM tbl_workplace_feed";
+		$result = $this->db->query($query)->result();
+		return $result;
 	}
 
 	public function get_details($program_id, $program_alias){
