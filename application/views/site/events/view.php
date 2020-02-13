@@ -37,7 +37,8 @@
 							if($_SESSION['user_impersonate_token']!=''){
 						?>
 						<a href="#" class="au-lnk workplace-share"><span class="au-share"><i class="fas fa-share-alt"></i> Share on <img src="<?= base_url();?>assets/site/img/au-workplace.svg" alt="Workplace"></span></a>
-						<?php } ?>						<?php if($event_details[0]['is_admin'] == 1){ ?>
+						<?php } ?>						
+						<?php if($event_details[0]['is_admin'] == 1){ ?>
 							<?php
 							$current_date = date('Y-m-d');
 							$data_date = date("Y-m-d", strtotime($event_details[0]['when']));
@@ -237,7 +238,6 @@
 					</div>
 					<div class="row">
 						<div class="col au-testimonialwrapper">
-<<<<<<< HEAD
 							<div class="row" id="testimonial_div"></div>
 						</div>
 					</div>
@@ -246,63 +246,105 @@
 		</div>
 	</div>
 </div>
-=======
-							<div class="row">
 
-								<div class="col-lg-6 au-fullheight au-testimonialentry">
-									<div class="au-testimonial au-fullheight">
-										<div class="au-userentry">
-											<a href="profile.html" class="au-userentry">
-												<div class="au-inner">
-													<img src="assets/img/au-avatar.svg" class="au-avatar-lg">
-												</div>
-												<div class="au-inner">
-													<span class="au-accname">John Michael Doe</span>
-													<span class="au-accvolunteer">
-														<div class="au-accvicon">
-															<i class="fas fa-hourglass au-time au-icon" title="Time"></i>
-															<i class="fas fa-hands-helping au-talent au-icon" title="Talent"></i>
-															<i class="fas fa-gem au-treasure au-icon" title="Treasure"></i>
-														</div>
-													</span>	
-												</div>
-											</a>
-										</div>
-										<span class="au-date">January 1, 2020 2:00PM</span>
-										<span class="au-p5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</span>
-										<div class="text-right">
-											<a href="#" class="au-lnk"><span class="au-share"><i class="fas fa-share-alt"></i> Share on <img src="assets/img/au-workplace.svg" alt="Workplace"></span></a>
-										</div>
-									</div>
-								</div>
+<!-- Add Event Modal -->
+<div class="modal fade text-center" id="editEvent" data-backdrop="static">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-body">
+            <span class="au-h4">Add Event</span>
+      			<form action="<?= base_url("programs/") . $program_details[0]['id'] . "/" . $program_details[0]['url_alias'] . "/event/" . $event_details[0]['id'] . "/" . $event_details[0]['url_alias'] . "/update";?>" method="post" enctype="multipart/form-data" class="au-form" id="addEventForm">
+	        		<div class="form-row">
+						<div class="col">
+							<div class="custom-file">
+								<input type="file" class="custom-file-input" name="eventImage" id="customFile" onchange="readURLImgStandardPreviewEvent(this);" accept="image/x-png,image/gif,image/jpeg" />
+								<label class="custom-file-label" for="customFile">Choose file</label>
+							</div>
+							<img  style="width: 100%;" src="<?= $event_details[0]['image'];?>" id="previewImageEvent"/>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" id="lname" value="<?= $event_details[0]['title'];?>" placeholder="Event Title" name="eventTitle" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" id="whenpicker" value="<?= date("m/d/Y h:i a", strtotime($event_details[0]['when']));?>"  placeholder="When" name="eventWhen" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" id="lname" value="<?= $event_details[0]['where'];?>" placeholder="Where" name="eventWhere" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="number" class="form-control required_input no_html" id="lname" value="<?= $event_details[0]['volunteer_points'];?>" placeholder="Add Points" name="eventPoints" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<textarea type="text" class="form-control required_input no_html" id="lname" placeholder="Event Overview" name="overview" rows=5><?= $event_details[0]['description'];?></textarea>
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+					<div class="au-modalbtn text-center">
+	                    <button type="button" class="au-btn au-btnyellow" data-dismiss="modal">Close</button>
+	                    <button type="button" class="au-btn" id="btnSubmitEvent">Submit</button>
+	                </div>
+				</form>
+      		</div>
+      		<!-- <div class="modal-footer">
+        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary" id="btnSubmit">Save changes</button>
+     		</div> -->
+    	</div>
+  	</div>
+</div>
 
-								<div class="col-lg-6 au-fullheight au-testimonialentry">
-									<div class="au-testimonial au-fullheight">
-										<div class="au-userentry">
-											<a href="profile.html" class="au-userentry">
-												<div class="au-inner">
-													<img src="assets/img/au-avatar.svg" class="au-avatar-lg">
-												</div>
-												<div class="au-inner">
-													<span class="au-accname">John Michael Doe</span>
-													<span class="au-accvolunteer">
-														<div class="au-accvicon">
-															<i class="fas fa-hourglass au-time au-icon" title="Time"></i>
-															<i class="fas fa-hands-helping au-talent au-icon" title="Talent"></i>
-															<i class="fas fa-gem au-treasure au-icon" title="Treasure"></i>
-														</div>
-													</span>	
-												</div>
-											</a>
-										</div>
-										<span class="au-date">January 1, 2020 2:00PM</span>
-										<span class="au-p5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</span>
-										<div class="text-right">
-											<a href="#" class="au-lnk"><span class="au-share"><i class="fas fa-share-alt"></i> Share on <img src="assets/img/au-workplace2.svg" alt="Workplace"></span></a>
-										</div>
-									</div>
-								</div>
->>>>>>> master_jmz
+<div class="modal fade text-center" id="volunteermodal">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-body">
+				<span class="au-h4">We have a volunteer!</span>
+				<span class="au-p6">Thank you for your intent to volunteer your:</span>
+				<div class="au-yourvolunteer">
+					
+				</div>
+				<span class="au-p6">as a:</span>
+				<span class="au-p4 volunter-task"></span>
+				<span class="au-p6">is this correct?</span>
+				<div class="au-modalbtn text-center">
+					<button type="button" class="au-btn au-btnyellow volunteer-as" data-dismiss="modal" attr-submit="0" >No, I made a mistake</button>
+					<button type="button" class="au-btn volunteer-as" data-dismiss="modal" attr-submit="1">Yes, sign me up!</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade text-center" id="volunteerthankyou" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-body">
+				<span class="au-h4">Thank you!</span>
+				<span class="au-p6">Your help is greatly appreciated. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+				<div class="au-modalbtn text-center">
+					<button type="button" class="au-btn close-btn" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <div class="modal fade text-center" id="addtestimonial">
 	<div class="modal-dialog modal-dialog-centered">
@@ -379,109 +421,6 @@
 		</div>
 	</div>
 </div>
-
-<<<<<<< HEAD
-
-<!-- Add Event Modal -->
-<div class="modal fade text-center" id="editEvent" data-backdrop="static">
-<div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-        <div class="modal-body">
-            <span class="au-h4">Add Event</span>
-      			<form action="<?= base_url("programs/") . $program_details[0]['id'] . "/" . $program_details[0]['url_alias'] . "/event/" . $event_details[0]['id'] . "/" . $event_details[0]['url_alias'] . "/update";?>" method="post" enctype="multipart/form-data" class="au-form" id="addEventForm">
-	        		<div class="form-row">
-						<div class="col">
-							<div class="custom-file">
-								<input type="file" class="custom-file-input" name="eventImage" id="customFile" onchange="readURLImgStandardPreviewEvent(this);" accept="image/x-png,image/gif,image/jpeg" />
-								<label class="custom-file-label" for="customFile">Choose file</label>
-							</div>
-							<img  style="width: 100%;" src="<?= $event_details[0]['image'];?>" id="previewImageEvent"/>
-						</div>
-					</div>
-	        		<div class="form-row">
-						<div class="col">											
-							<input type="text" class="form-control required_input no_html" id="lname" value="<?= $event_details[0]['title'];?>" placeholder="Event Title" name="eventTitle" value="">
-							<div class="valid-feedback"></div>
-							<div class="invalid-feedback">Please fill out this field.</div>
-						</div>
-					</div>
-	        		<div class="form-row">
-						<div class="col">											
-							<input type="text" class="form-control required_input no_html" id="whenpicker" value="<?= date("m/d/Y h:i a", strtotime($event_details[0]['when']));?>"  placeholder="When" name="eventWhen" value="">
-							<div class="valid-feedback"></div>
-							<div class="invalid-feedback">Please fill out this field.</div>
-						</div>
-					</div>
-	        		<div class="form-row">
-						<div class="col">											
-							<input type="text" class="form-control required_input no_html" id="lname" value="<?= $event_details[0]['where'];?>" placeholder="Where" name="eventWhere" value="">
-							<div class="valid-feedback"></div>
-							<div class="invalid-feedback">Please fill out this field.</div>
-						</div>
-					</div>
-	        		<div class="form-row">
-						<div class="col">											
-							<input type="number" class="form-control required_input no_html" id="lname" value="<?= $event_details[0]['volunteer_points'];?>" placeholder="Add Points" name="eventPoints" value="">
-							<div class="valid-feedback"></div>
-							<div class="invalid-feedback">Please fill out this field.</div>
-						</div>
-					</div>
-	        		<div class="form-row">
-						<div class="col">											
-							<textarea type="text" class="form-control required_input no_html" id="lname" placeholder="Event Overview" name="overview" rows=5><?= $event_details[0]['description'];?></textarea>
-							<div class="valid-feedback"></div>
-							<div class="invalid-feedback">Please fill out this field.</div>
-						</div>
-					</div>
-					<div class="au-modalbtn text-center">
-	                    <button type="button" class="au-btn au-btnyellow" data-dismiss="modal">Close</button>
-	                    <button type="button" class="au-btn" id="btnSubmitEvent">Submit</button>
-	                </div>
-				</form>
-      		</div>
-      		<!-- <div class="modal-footer">
-        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        		<button type="button" class="btn btn-primary" id="btnSubmit">Save changes</button>
-     		</div> -->
-    	</div>
-  	</div>
-</div>
-
-=======
-<div class="modal fade text-center" id="volunteermodal">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-body">
-				<span class="au-h4">We have a volunteer!</span>
-				<span class="au-p6">Thank you for your intent to volunteer your:</span>
-				<div class="au-yourvolunteer">
-					
-				</div>
-				<span class="au-p6">as a:</span>
-				<span class="au-p4 volunter-task"></span>
-				<span class="au-p6">is this correct?</span>
-				<div class="au-modalbtn text-center">
-					<button type="button" class="au-btn au-btnyellow volunteer-as" data-dismiss="modal" attr-submit="0" >No, I made a mistake</button>
-					<button type="button" class="au-btn volunteer-as" data-dismiss="modal" attr-submit="1">Yes, sign me up!</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="modal fade text-center" id="volunteerthankyou" data-backdrop="static" data-keyboard="false">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-body">
-					<span class="au-h4">Thank you!</span>
-					<span class="au-p6">Your help is greatly appreciated. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-					<div class="au-modalbtn text-center">
-						<button type="button" class="au-btn close-btn" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
->>>>>>> master_jmz
 
 <script type="text/javascript">
 	//$('input[name="date"]').daterangepicker();
