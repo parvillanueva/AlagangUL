@@ -591,7 +591,7 @@
 				html += '				</div>';
 				html += '			</a>';
 				html += '		</div>';
-				html += '		<span class="au-date">January 1, 2020 2:00PM</span>';
+				html += '		<span class="au-date">'+y.date_posted+'</span>';
 				html += '		<span class="au-p5">'+y['testimonial']+'</span>';
 				html += '		<div class="text-right">';
 				html += '			<a href="#" class="au-lnk"><span class="au-share share-wp"><i class="fas fa-share-alt"></i> Share on <img src="<?php echo base_url("assets/img/au-workplace2.svg")?>" alt="Workplace"></span></a>';
