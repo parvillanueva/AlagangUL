@@ -1600,435 +1600,102 @@ p{
 .au-userpicture{
      margin-bottom: 30px;
 
-}
-.au-userpicture .au-useravatar{
-     width: 100%;
-     height: auto;
-     margin-top: -90px;
-}
-.data{
-     display: flex;
-     flex-wrap: wrap;
-}
-.au-workplace > .row {
-    background-color: #fff;
-    padding: 0.5em;
-    border: 1px solid rgba(0,0,0,0.1) !important;
-    margin: 0.5em;
-    border-radius: 3px;
-}
-.au-workplace > .row > .col-md-12 {
-    padding: 0px;
-    border-bottom: 0px !important;
-    margin-bottom: 0px !important;
-}
-.au-workplace a {
-    font-size: 12px;
-    overflow-wrap: break-word;
-}
-.au-workplace > .row > .col-md-12 > .col-md-10 img {
-    margin-top: 10px;
-    border: 1px solid rgba(0,0,0,0.1);
-}
-.au-workplace > .row > .col-md-12 > .col-md-10 {
-    padding: 0px 0.5em;
-}
-/*Extra small devices (portrait phones, less than 576px)*/
- @media (max-width: 575px) {
-     .au-logo {
-         width: 170px;
-    }
-     .au-avatar {
-         height: 36px;
-         width: 36px;
-    }
-     .au-navbar .navbar-nav .nav-link {
-         margin: 0 0;
-         padding: 10px 0;
-    }
-     .au-user {
-         margin: 0 0;
-         width: 100%;
-    }
-     .au-acc {
-         width: 100%;
-    }
-     .au-user .au-btn {
-         width: calc(50% - 12px);
-    }
-     .au-menu {
-         display: block;
-    }
-     .au-h1 {
-         font-size: 18px;
-         text-align: center;
-    }
-     .au-h2 {
-         font-size: 16px;
-         text-align: center;
-    }
-     .au-h3 {
-         font-size: 18px;
-         text-align: center;
-    }
-     .au-carousel .au-btnblue {
-         width: 100%;
-    }
-     .au-fp-thumbnail {
-         height: 200px;
-    }
-     .au-getrewards {
-         height: auto;
-         text-align: center;
-    }
-     .au-pf {
-         margin: 3px 5px 3px 5px;
-    }
-     .au-footer-details {
-         text-align: center;
-    }
-     .au-footerimg {
-         display: block;
-         text-align: center;
-         margin: 20px auto 0 auto;
-    }
-     .au-group {
-         margin: 0 auto;
-    }
-     .au-getrewards {
-         background: transparent;
-    }
-     #aurewards {
-         background: rgb(10, 35, 63);
-         background: -moz-linear-gradient(45deg, rgba(10, 35, 63, 1) 0%, rgba(9, 46, 110, 1) 100%);
-         background: -webkit-linear-gradient(45deg, rgba(10, 35, 63, 1) 0%, rgba(9, 46, 110, 1) 100%);
-         background: linear-gradient(45deg, rgba(10, 35, 63, 1) 0%, rgba(9, 46, 110, 1) 100%);
-         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0a233f", endColorstr="#092e6e", GradientType=1);
-    }
-     .au-signupimg {
-         margin: 0 auto;
-    }
-     .au-form .au-btnblue {
-         width: 100%;
-    }
-     .au-eventthumbnail{
-         height: 200px;
-    }
-     .au-eventdetails {
-         padding: 1em 2em 0 2em;
-    }
-     .au-phthumbnail{
-         min-width: 100px;
-         width: 100px;
-         height: 100px;
-         margin: 0 auto;
-    }
-     .au-evthumbnail, .au-evthumbnail .au-fp-thumbnailimg{
-         min-width: 100px;
-         width: 100px;
-         height: 100px;
-         margin: 0 auto;
-    }
-     .au-h5 {
-         font-size: 20px;
-    }
-     .au-h4 {
-         font-size: 20px;
-    }
-     .au-title{
-         font-size: 14px;
-    }
-     .au-programheading{
-         display: block;
-         text-align: center;
-    }
-     .au-phdetails{
-         padding: 1em 0 0 0;
-    }
-     .au-plink{
-         height: 150px;
-    }
-     .au-opthumbnail{
-         height: 150px;
-    }
-     .au-titlebox{
-         font-size: 14px;
-    }
-     .au-programdetailsinside{
-         display: block;
-    }
-     .au-programdetailsinside .au-phthumbnail{
-         margin: 10px auto;
-    }
-     .au-searchbtn{
-         display: block;
-         width: 100%;
-    }
-     .au-searchbtn .au-stitle{
-         display: none;
-    }
-    .au-phstats > *{
-          display: block;
-          margin: 5px 0px;
-    }
-     .au-opptable {
-         margin: 0 auto;
-         width: 100%;
-         border-spacing: 0;
-    }
-    .au-opptable table{
-          box-shadow: unset;
-          background: transparent;
-    }
-     .au-opptable thead {
-         position: absolute;
-         clip: rect(1px, 1px, 1px, 1px);
-         padding: 0;
-         border: 0;
-         height: 1px;
-         width: 1px;
-         overflow: hidden;
-    }
-     .au-opptable tbody, .au-opptable tr, .au-opptable th, .au-opptable td {
-         display: block;
-         padding: 0;
-         text-align: left;
-         white-space: normal;
-    }
-     .au-opptable tr td, .au-opptable tr th {
-         vertical-align: middle;
-         overflow: hidden;
-         position: relative;
-         vertical-align: top;
-         border: none;
-         border-top: none;
-         width: 100%;
-         white-space: normal;
-         display: inline-block;
-         padding: 5px 0px 5px 0px;
-    }
-     .au-opptable th[scope="row"] {
-         width: 100%;
-         text-align: center;
-         display: block;
-         background-color: #B3BFC6;
-         margin: 0 auto;
-         padding: .5em 0;
-    }
-     .au-opptable td[data-header]:before {
-         content: attr(data-header);
-         display: block;
-         width: 100%;
-         margin-left: 0;
-         margin-bottom: 5px;
-         color: #092E6E;
-         font-weight: 700;
-         text-align: left;
-    }
-      .au-opptable table tr{
-          padding: 1em;
-          margin: 20px 0px;
-          box-shadow: 0 2px 8px 0 rgba(50,50,50,.05);
-          background: rgb(238, 238, 238);
-          background: -moz-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
-          background: -webkit-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
-          background: linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
-          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#eee", endColorstr="#fff", GradientType=1);
-     }
-     .au-modalbtn .au-btn{
-          width: 100%;
-          margin: 5px 0px;
-     }
-}
 /*Small devices (landscape phones, 576px and up)*/
- @media (min-width: 576px) and (max-width: 767px) {
-     .au-navbar .navbar-nav .nav-link {
-         margin: 0 0;
-         padding: 10px 0;
-    }
-     .au-acc {
-         width: 100%;
-    }
-     .au-user {
-         margin: 0 0;
-         width: 100%;
-    }
-     .au-user .au-btn {
-         width: calc(50% - 12px);
-    }
-     .au-menu {
-         display: block;
-    }
-     .au-h1 {
-         font-size: 24px;
-         text-align: center;
-    }
-     .au-h2 {
-         font-size: 20px;
-         text-align: center;
-    }
-     .au-h3 {
-         font-size: 24px;
-         text-align: center;
-    }
-     .au-carousel .au-btnblue {
-         width: 100%;
-    }
-     .au-fp-thumbnail {
-         height: 200px;
-    }
-     .au-getrewards {
-         height: auto;
-    }
-     .au-pf {
-         margin: 3px 5px 3px 5px;
-    }
-     .au-footer-details {
-         text-align: center;
-    }
-     .au-footerimg {
-         display: block;
-         text-align: center;
-         margin: 20px auto 0 auto;
-    }
-     .au-getrewards {
-         background: transparent;
-    }
-     #aurewards {
-         background: rgb(10, 35, 63);
-         background: -moz-linear-gradient(45deg, rgba(10, 35, 63, 1) 0%, rgba(9, 46, 110, 1) 100%);
-         background: -webkit-linear-gradient(45deg, rgba(10, 35, 63, 1) 0%, rgba(9, 46, 110, 1) 100%);
-         background: linear-gradient(45deg, rgba(10, 35, 63, 1) 0%, rgba(9, 46, 110, 1) 100%);
-         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0a233f", endColorstr="#092e6e", GradientType=1);
-    }
-     .au-signupimg {
-         margin: 0 auto;
-    }
-     .au-form .au-btnblue {
-         width: 100%;
-    }
-     .au-phthumbnail{
-         min-width: 100px;
-         width: 100px;
-         height: 100px;
-         margin: 0 auto;
-    }
-     .au-evthumbnail, .au-evthumbnail .au-fp-thumbnailimg{
-         min-width: 100px;
-         width: 100px;
-         height: 100px;
-         margin: 0 auto;
-    }
-     .au-h5 {
-         font-size: 20px;
-    }
-     .au-h4 {
-         font-size: 20px;
-    }
-     .au-title{
-         font-size: 14px;
-    }
-     .au-programheading{
-         display: block;
-         text-align: center;
-    }
-     .au-phdetails{
-         padding: 1em 0 0 0;
-    }
-     .au-titlebox{
-         font-size: 14px;
-    }
-     .au-programdetailsinside{
-         display: block;
-    }
-     .au-programdetailsinside .au-phthumbnail{
-         margin: 10px auto;
-    }
-     .au-searchbtn{
-         display: block;
-         width: 100%;
-    }
-     .au-searchbtn .au-stitle{
-         display: none;
-    }
-    .au-phstats > *{
-          display: block;
-          margin: 5px 0px;
-    }
-     .au-opptable {
-         margin: 0 auto;
-         width: 100%;
-         border-spacing: 0;
-    }
-    .au-opptable table{
-          box-shadow: unset;
-          background: transparent;
-    }
-     .au-opptable thead {
-         position: absolute;
-         clip: rect(1px, 1px, 1px, 1px);
-         padding: 0;
-         border: 0;
-         height: 1px;
-         width: 1px;
-         overflow: hidden;
-    }
-     .au-opptable tbody, .au-opptable tr, .au-opptable th, .au-opptable td {
-         display: block;
-         padding: 0;
-         text-align: left;
-         white-space: normal;
-    }
-     .au-opptable tr td, .au-opptable tr th {
-         vertical-align: middle;
-         overflow: hidden;
-         position: relative;
-         vertical-align: top;
-         border: none;
-         border-top: none;
-         width: 100%;
-         white-space: normal;
-         display: inline-block;
-         padding: 5px 0px 5px 130px;
-    }
-     .au-opptable th[scope="row"] {
-         width: 100%;
-         text-align: center;
-         display: block;
-         background-color: #B3BFC6;
-         margin: 0 auto;
-         padding: .5em 0;
-    }
-     .au-opptable td[data-header]:before {
-         content: attr(data-header);
-         display: inline-block;
-         width: 130px;
-         margin-left: -130px;
-         color: #092E6E;
-         font-weight: 700;
-         text-align: left;
-    }
-     .au-opptable td[data-header]:after {
-         content: "";
-         position: absolute;
-         left: 0;
-         top: 0;
-         width: 115px;
-         padding-bottom: 200%;
-         display: block;
-         border-right: 1px solid rgba(0,0,0,0.05);
-    }    
-      .au-opptable table tr{
-          padding: 1em;
-          margin: 20px 0px;
-          box-shadow: 0 2px 8px 0 rgba(50,50,50,.05);
-          background: rgb(238, 238, 238);
-          background: -moz-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
-          background: -webkit-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
-          background: linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
-          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#eee", endColorstr="#fff", GradientType=1);
-     }
+
+@media (min-width: 576px) and (max-width: 767px) {
+	.au-navbar .navbar-nav .nav-link {
+		margin: 0px 0px;
+		padding: 10px 0px;
+	}
+	.au-acc {
+		width: 100%;
+	}
+	.au-user {
+		margin: 0px 0px;
+		width: 100%;
+	}
+	.au-user .au-btn {
+		width: calc(50% - 12px);
+	}
+	.au-menu {
+		display: block;
+	}
+	.au-h1 {
+		font-size: 24px;
+		text-align: center;
+	}
+	.au-h2 {
+		font-size: 20px;
+		text-align: center;
+	}
+	.au-h3 {
+		font-size: 24px;
+		text-align: center;
+	}
+	.au-carousel .au-btnblue {
+		width: 100%;
+	}
+	.au-fp-thumbnail {
+		height: 200px;
+	}
+	.au-getrewards {
+		height: auto;
+	}
+	.au-pf {
+		margin: 3px 5px 3px 5px;
+	}
+	.au-footer-details {
+		text-align: center;
+	}
+	.au-footerimg {
+		display: block;
+		text-align: center;
+		margin: 20px auto 0px auto;
+	}
+	.au-getrewards {
+		background: transparent;
+	}
+	#aurewards {
+		background: rgb(10, 35, 63);
+		background: -moz-linear-gradient(45deg, rgba(10, 35, 63, 1) 0%, rgba(9, 46, 110, 1) 100%);
+		background: -webkit-linear-gradient(45deg, rgba(10, 35, 63, 1) 0%, rgba(9, 46, 110, 1) 100%);
+		background: linear-gradient(45deg, rgba(10, 35, 63, 1) 0%, rgba(9, 46, 110, 1) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0a233f", endColorstr="#092e6e", GradientType=1);
+	}
+	.au-signupimg {
+		margin: 0 auto;
+	}
+	.au-form .au-btnblue {
+		width: 100%;
+	}
+	.au-phthumbnail{
+		min-width: 100px;
+		width: 100px;
+		height: 100px;
+		margin: 0 auto;
+	}
+	.au-h5 {
+		font-size: 20px;
+	}
+	.au-h4 {
+		font-size: 20px;		
+	}
+	.au-title{
+		font-size: 14px;
+	}
+	.au-programheading{
+		display: block;
+		text-align: center;
+	}
+	.au-phdetails{
+		padding: 1em 0px 0px 0px;
+	}
+	.au-titlebox{
+		font-size: 14px;
+	}
 }
+
+
 /*Medium devices (tablets, 768px and up)*/
  @media (min-width: 768px) and (max-width: 991px) {
      .au-navbar .navbar-nav .nav-link {

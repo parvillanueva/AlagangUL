@@ -69,7 +69,7 @@
 					</div>
 				</div>
 				<div class="au-modalbtn text-center">
-                    <button type="button" class="au-btn au-btnyellow" data-dismiss="modal">No</button>
+                    <button type="button" class="au-btn au-btnyellow" id="dismiss_modal" data-dismiss="modal">No</button>
                     <button type="button" class="au-btn" id="btnSubmit2">Yes</button>
                 </div>
 			</form>	
@@ -129,6 +129,7 @@
 
     });
 	$(document).on("click", "#btn_addProgram", function(){
+
 		$("#previewImage").attr("src","");
 		$("#addprogramform").trigger("reset");
 		$("#program_settings").modal("show");
@@ -136,16 +137,35 @@
 
 	$(document).on('click', '#btnSubmit', function(e){
 		e.preventDefault();
-		if(validate.standard("addprogramform")){
+		$('.au-form .custom-file-label').css('border-color','#ced4da');
+		if(validate.all()){
 			$("#program_confirm_modal").modal("show");
+			$("#program_settings").css('opacity',0.5);
+		}
+		else{
 
-			
+			if($('#customFile').val() != ''){
+				$('.au-form .custom-file-label').css('border-color','#ced4da');
+			}
+			else{
+				$('.au-form .custom-file-label').css('border-color','');
+				$('.custom-file-label ').css('border-color','red');
+			}
 		}
 	});
 
 	$(document).on('click', '#btnSubmit2', function(e){
 		e.preventDefault();
 			$("#addprogramform").submit();
+			$("#program_settings").css('opacity',1);
+			$("#program_confirm_modal").modal("hide");
+	});
+
+	$(document).on('click', '#dismiss_modal', function(e){
+		e.preventDefault();
+			$("#program_settings").css('opacity',1);
+			$("#program_settings").css('overflow','scroll');
+			$("#program_confirm_modal").modal("hide");
 	});
 
 	function readURLImgStandardPreview(input) {
