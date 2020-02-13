@@ -144,7 +144,7 @@
 									 $is_disabled = '';
 									 $is_disabled_css = '';
 									 $x = 0;
-									 if($is_allowed_to_volunteer==1){
+									 if($is_allowed_to_volunteer==1 || $event_details[0]['is_admin']){
 									 	$x =1;
 									 	$is_disabled = 'disabled';
 									 	$is_disabled_css = 'disabled_css';
@@ -322,7 +322,7 @@
 					
 				</div>
 				<span class="au-p6">as a:</span>
-				<span class="au-p4 volunter-task"></span>
+				<span class="au-p4 volunteer-task"></span>
 				<span class="au-p6">is this correct?</span>
 				<div class="au-modalbtn text-center">
 					<button type="button" class="au-btn au-btnyellow volunteer-as" data-dismiss="modal" attr-submit="0" >No, I made a mistake</button>

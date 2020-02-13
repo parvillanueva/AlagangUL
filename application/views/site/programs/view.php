@@ -85,7 +85,10 @@
 				<hr>
 				<span class="au-h4">Upcoming Events</span>
 				<div class="au-eventswrapper">
-					
+					<?php
+						//echo "<pre>";
+						//print_r($details['events']);
+					?>
 					<?php foreach ($details['events'] as $key => $value) { ?>
 						<div class="au-event-entry vol-time vol-treasure vol-talent volunteered" id="progress1">
 							<div class="au-event">
@@ -127,10 +130,15 @@
 														<?php } else { ?>
 															<button type="button" class="au-volunteered au-btnyellow float-right">Unpublished</button>
 														<?php } ?>
-													<?php } else { ?>
-														<button type="button" class="au-volunteer au-btnyellow float-right" style="display: block">Volunteer</button>
-														<button type="button" class="au-volunteered au-btnyellow float-right">Volunteered</button>
-													<?php } ?>
+													<?php } else {
+														if($value['required_volunteer']!=0){
+															if(!$value['is_joined']){
+													?>	
+														<a href="<?= $value['link'];?>" class="au-volunteer au-btnyellow float-right" style="display: block">Volunteer</a>
+														<?php } else { ?>
+
+														<a href="<?= $value['link'];?>" class="au-volunteered au-btnyellow float-right">Volunteered</a>
+													<?php } } } ?>
 												</div>
 											</div>
 										</div>
