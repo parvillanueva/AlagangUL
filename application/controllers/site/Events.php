@@ -70,21 +70,59 @@ class Events extends GS_Controller {
 			'date_from' => $date_from,
 			'date_to' => $date_to
 		);
-		$result_arr = $this->get_details($arr);
+		$data['events'] = $this->get_details($arr);
 		echo '<pre>';
-		print_r($result_arr);
+		print_r($data);
+		echo '</pre>';
+		die();
+		$this->load->view('site/events/event_list', $data);
+	
+	}
+	
+	public function filter_where($arr){
+			$where_date = '';
+		if($arr['date_from'] != '' && $arr['date_to'] != ''){
+			$where_date = 'AND "'.$arr['date_from'].'" <= when AND when <= "'.$arr['date_to'].'"';
+		}
+			$where_search = '';
+		if($arr['search_box'] != ''){
+			$where_search = 'AND (title like "%'.$arr['search_box'].'%" OR url_alias like "%'.$arr['search_box'].'%" OR description like "%'.$arr['search_box'].'%" OR where like "%'.$arr['search_box'].'%")';
+		}
+			$where_task = '';
+		if($arr['task'] != ''){
+			$where_task = 'AND id = "'.$arr['task'].'"';
+		}
+		
+			$where_type = '';
+		if($arr['types'] != ''){
+			$where_type = 'AND id = "'.$arr['task'].'"';
+		}
+		
+		$result = array(
+			'search_date' => $where_date .' '. $where_search,
+			'task' => $where_task,
+			'type' => $where_type
+			
+		);
+		return $result;
 	}
 	
 	public function get_details($dat_arr = null){
+			$filter_where = "AND when like '%" . date("Y") . "%'";
+			$task_where = '';
+			$type_where = '';
 		if(!empty($dat_arr)){
-			
+			$result_where = $this->filter_where($dat_arr);
+			$filter_where = $result_where['search_date'];
+			$task_where = $result_where['task'];
+			$type_where = $result_where['type'];
 		}
-		$event_list = $this->Gmodel->get_query('tbl_program_events',"status = 1 AND when like '%" . date("Y") . "%'");
+		$event_list = $this->Gmodel->get_query('tbl_program_events',"status = 1 ".$filter_where."");
 
 		$events = array();
 		foreach ($event_list as $key => $value) {
 
-			$query_needed_volunteer = "SELECT SUM(required_volunteers) as count FROM tbl_program_event_task WHERE event_id = " . $value->id;
+			$query_needed_volunteer = "SELECT SUM(required_volunteers) as count FROM tbl_program_event_task WHERE event_id = " . $value->id ." ".$task_where."";
 			$needed_volunteer = $this->db->query($query_needed_volunteer)->result();
 
 			$query_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $value->id;
@@ -92,7 +130,7 @@ class Events extends GS_Controller {
 
 
 			$is_joined = false;
-			$query_is_joined = "SELECT * FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id') . " AND event_id = " . $value->id;
+			$query_is_joined = "SELECT * FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id') . " AND event_id = " . $value->id ." ".$type_where."";
 			$result_is_joined = $this->db->query($query_is_joined)->result();
 			if(count($result_is_joined) > 0){
 				$is_joined = true;
