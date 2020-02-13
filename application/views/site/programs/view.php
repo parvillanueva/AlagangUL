@@ -141,9 +141,9 @@
 											</div>
 										</div>
 										<div class="au-volunteers">
-											<i class="fas fa-hourglass au-time au-icon" title="Time"></i>
-											<i class="fas fa-hands-helping au-talent au-icon" title="Talent"></i>
-											<i class="fas fa-gem au-treasure au-icon" title="Treasure"></i>
+											<?php foreach ($value['get_earn_badge'] as $a => $b) { ?>
+												<i style="color: <?= $b->color;?>" class="<?= $b->icon;?> au-time au-icon" title="<?= $b->name;?>"></i>
+											<?php } ?>
 										</div>
 										<div class="au-action">
 											<div class="row">
