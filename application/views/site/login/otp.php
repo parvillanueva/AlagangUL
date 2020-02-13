@@ -87,6 +87,12 @@
 					window.location.href = "<?php echo base_url().'user_profile' ?>";
 				} else{
 					$(".alert_failed").show();
+					$('#otp1').val('');
+					$('#otp2').val('');
+					$('#otp3').val('');
+					$('#otp4').val('');
+					$('#otp5').val('');
+					$('#otp6').val('');
 					modal.loading(false);
 				}
 			});

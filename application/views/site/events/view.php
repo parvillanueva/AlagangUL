@@ -20,6 +20,9 @@
 	.au-yourvolunteer .au-btnvolunteertype {
 		width: auto;
 	}
+	.share-wp {
+		display: <?=($_SESSION['user_impersonate_token']=='') ? 'hidden' : 'block' ?>;
+	}
 </style>
 <div class="au-wrapper">
 	<div class="container-fluid au-heading">
@@ -45,11 +48,13 @@
 							if($data_date == $current_date || $data_date > $current_date){ ?>
 							<a href="#" class="au-lnk" id="addTask_button"><span class="au-share"><i class="fas fa-plus"></i>Add Task</span></a>
 							<a href="#" class="au-lnk" data-toggle="modal" data-target="#editEvent"><span class="au-share"><i class="fas fa-pen"></i> Edit Event</a>
-							<?php if($event_details[0]['status'] == 0) { ?>
-								<a href="<?= base_url("programs/") . $event_details[0]['id'] . "/" . $event_details[0]['url_alias'] . "/publish";?>" class="au-lnk pub-program"><span class="au-share"><i class="fas fa-check"></i> Publish Event</span></a>
+							<?php
+								if(count($event_task)>0){
+							 	if($event_details[0]['status'] == 0) { ?>
+								<a href="<?= base_url("programs/").$program_details[0]['id']."/".$program_details[0]['url_alias']."/event/" . $event_details[0]['id'] . "/" . $event_details[0]['url_alias'] . "/publish/1";?>" class="au-lnk pub-program"><span class="au-share"><i class="fas fa-check"></i> Publish Event</span></a>
 							<?php }else{ ?>
-								<a href="<?= base_url("programs/") . $event_details[0]['id'] . "/" . $event_details[0]['url_alias'] . "/unpublish";?>" class="au-lnk pub-program"><span class="au-share"><i class="fas fa-minus"></i> Unpublish Event</span></a>
-							<?php } ?>	
+								<a href="<?= base_url("programs/").$program_details[0]['id']."/".$program_details[0]['url_alias']."/event/" . $event_details[0]['id'] . "/" . $event_details[0]['url_alias']. "/publish/0";?>" class="au-lnk pub-program"><span class="au-share"><i class="fas fa-minus"></i> Unpublish Event</span></a>
+							<?php } }?>	
 						<?php } }?>
 					</div>
 					<div class="au-badges">
@@ -152,15 +157,15 @@
 									<?php
 									 $is_disabled = '';
 									 $is_disabled_css = '';
-									 $x = 0;
+									/* $x = 0;
 									 if($is_allowed_to_volunteer==1 || $event_details[0]['is_admin']){
 									 	$x =1;
 									 	$is_disabled = 'disabled';
 									 	$is_disabled_css = 'disabled_css';
-									 }
+									 }*/
 									 foreach ($event_task as $key => $value) { ?>
 									 	<?php
-									 		if($value['required_volunteers']<=$value['joined_volunteers'] && $value['user_id_joined']!=1){
+									 		/*if($value['required_volunteers']<=$value['joined_volunteers'] && $value['user_id_joined']!=1){
 									 			$is_disabled = 'disabled';
 									 			$is_disabled_css = 'disabled_css';
 									 		}
@@ -173,9 +178,13 @@
 									 				$is_disabled = 'disabled';
 									 				$is_disabled_css = 'disabled_css';
 									 			}
+									 		}*/
+									 		if($value['required_volunteers']<=$value['joined_volunteers'] || $event_details[0]['is_joined']==1 || $event_details[0]['is_not_joined']==1){
+									 			$is_disabled = 'disabled';
+									 			$is_disabled_css = 'disabled_css';
 									 		}
 									 	?>
-										<tr class="forvolunteer <?=($value['user_id_joined']==1) ? 'volunteer' : ''?> vol-id<?=$value['id']?>" attr-id="<?=$value['id']?>">
+										<tr class="forvolunteer <?=($value['user_id_joined']==1 ) ? 'volunteer' : ''?> vol-id<?=$value['id']?>" attr-id="<?=$value['id']?>">
 											<td data-header="Task"><?= $value['task'];?></td>
 											<td data-header="Qualifications"><?= $value['qualification'];?></td>
 											<td data-header="Needed"><?= $value['required_volunteers'];?></td>
@@ -185,7 +194,7 @@
 													$badge_count = count($value['task_badge']);
 													if($badge_count>0){
 												?>
-												<button class="event-volunteer au-btnvolunteer au-btnvolunteer-<?=$badge_count?> <?=$is_disabled_css?>" attr-id="<?=$value['id']?>" attr-isjoined="<?=$value['user_id_joined']?>" <?=$is_disabled?>>
+												<button class="event-volunteer au-btnvolunteer au-btnvolunteer-<?=$badge_count?> <?=$is_disabled_css?>" attr-id="<?=$value['id']?>" attr-isjoined="<?=$value['user_id_joined']?> <?=$is_disabled?>" <?=$is_disabled?>>
 												<?php $htm = ''; ?>
 												<?php foreach ($value['task_badge'] as $key => $badge) {
 												?>
@@ -690,10 +699,10 @@
 				html += '				</div>';
 				html += '			</a>';
 				html += '		</div>';
-				html += '		<span class="au-date">January 1, 2020 2:00PM</span>';
+				html += '		<span class="au-date">'+y.date_posted+'</span>';
 				html += '		<span class="au-p5">'+y['testimonial']+'</span>';
 				html += '		<div class="text-right">';
-				html += '			<a href="#" class="au-lnk"><span class="au-share"><i class="fas fa-share-alt"></i> Share on <img src="<?php echo base_url("assets/img/au-workplace2.svg")?>" alt="Workplace"></span></a>';
+				html += '			<a href="#" class="au-lnk"><span class="au-share share-wp"><i class="fas fa-share-alt"></i> Share on <img src="<?php echo base_url("assets/img/au-workplace2.svg")?>" alt="Workplace"></span></a>';
 				html += '		</div>';
 				html += '	</div>';
 				html += '</div>';

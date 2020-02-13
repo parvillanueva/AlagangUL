@@ -16,7 +16,23 @@ class Profile extends GS_Controller
 
 		//get joined activities and events
 		$joined_events		= $this->Site_model->get_joined_events($user_id);
+		$arr_badge = array();
+		foreach($joined_events as $i => $event)
+		{
+			$arr_badge[$i] = explode(",", $event['badges']);
+			$event['badges'] = $arr_badge[$i];
+			$temp = array();
 
+			foreach($event['badges'] as $badge)
+			{
+				$temp[] = explode("|", $badge);
+			}
+
+			$joined_events[$i]['badges'] = $temp;
+			
+			
+		}
+		
 		$data['profile']	= $profile_details;
 		$data['created']	= $created_programs;
 		$data['badges']		= $member_badges;
@@ -35,6 +51,16 @@ class Profile extends GS_Controller
 		$this->load->view("site/layout/template",$data);
 	}
 
+	public function reset()
+	{
+		$data['content'] 	= "site/profile/profile-reset-password";
+		$data['meta'] 	 	= array(
+			 "title"        =>  "Reset Password"
+		);
+
+		$this->load->view("site/layout/template",$data);
+	}
+
 	public function view($id)
 	{
 		if(isset($id))
@@ -47,12 +73,34 @@ class Profile extends GS_Controller
 				$created_programs 	= $this->Site_model->get_created_programs($user_id);
 				$joined_programs  	= $this->Site_model->get_joined_programs($user_id);
 	
+				
+
+
+
+
 				//get achievements
 				$member_badges		= $this->Site_model->get_member_badges($user_id);
 	
 				//get joined activities and events
 				$joined_events		= $this->Site_model->get_joined_events($user_id);
-	
+
+				$arr_badge = array();
+				foreach($joined_events as $i => $event)
+				{
+					$arr_badge[$i] = explode(",", $event['badges']);
+					$event['badges'] = $arr_badge[$i];
+					$temp = array();
+
+					foreach($event['badges'] as $badge)
+					{
+						$temp[] = explode("|", $badge);
+					}
+
+					$joined_events[$i]['badges'] = $temp;
+					
+					
+				}
+				
 				$data['profile']	= $profile_details;
 				$data['created']	= $created_programs;
 				$data['badges']		= $member_badges;

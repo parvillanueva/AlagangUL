@@ -48,17 +48,17 @@
 							<div class="au-inner au-cscroll">
 								<?php foreach ($event_volunteers as $key => $value) { ?>
 									<div class="au-userentry">
-										<a href="profile.html" class="au-userentry">
+										<a href="<?= base_url('profile') ?>/<?= $value['user_id'];?>" class="au-userentry">
 											<div class="au-inner">
-												<img src="<?= $value->profile_image;?>" class="au-avatar-lg">
+												<img src="<?= $value['profile_image'];?>" class="au-avatar-lg">
 											</div>
 											<div class="au-inner">
-												<span class="au-accname"><?= $value->user; ?></span>
+												<span class="au-accname"><?= $value['user']; ?></span>
 												<span class="au-accvolunteer">
 													<div class="au-accvicon">
-														<i class="fas fa-hourglass au-time au-icon" title="Time"></i>
-														<i class="fas fa-hands-helping au-talent au-icon" title="Talent"></i>
-														<i class="fas fa-gem au-treasure au-icon" title="Treasure"></i>
+														<?php foreach ($value['badge'] as $a => $b) { ?>
+															<i style="color: <?= $b->color;?>" class="<?= $b->icon;?> au-time au-icon" title="<?= $b->name;?>"></i>
+														<?php } ?>
 													</div>
 												</span>	
 											</div>

@@ -5,7 +5,9 @@ class Events extends GS_Controller {
 
 	public function index()
 	{
-
+		$data['events'] = $this->get_details();
+		$data['badges'] = $this->get_badges();
+		$data['event_task'] = $this->get_event_tasks_all();
 		$data['content'] = "site/events/list";
 		$data['meta'] = array(
 			"title"         =>  "Event List",
@@ -25,6 +27,96 @@ class Events extends GS_Controller {
 		$data['get_volunteer_type'] = $this->get_volunteer_type();
 		$this->parser->parse("site/layout/template",$data);
 	}
+	public function publish()
+	{
+		$program_id = $this->uri->segment(2);
+		$program_alias = $this->uri->segment(3);
+		$event_id = $this->uri->segment(5);
+		$event_alias = $this->uri->segment(6);
+		$data['update_date'] = date("Y-m-d H:i:s");
+		$data['status'] = $this->uri->segment(8);;
+		$this->Gmodel->update_data("tbl_program_events",$data,"id",$event_id);
+		redirect(base_url("programs") . "/" . $program_id . "/" . $program_alias. "/event/" . $event_id . "/" . $event_alias);
+	}
+
+	function volunteer_list_email($event_id){
+		$event_details = $this->db->query("SELECT * FROM tbl_program_events WHERE id = " . $event_id)->result();
+		$program_details = $this->db->query("SELECT tbl_programs.*, tbl_users.first_name, tbl_users.email_address FROM tbl_programs LEFT JOIN tbl_users ON tbl_users.id = tbl_programs.created_by WHERE tbl_programs.id =" . $event_details[0]->program_id)->result();
+		$event_task_volunteers = $this->db->query("SELECT
+			tbl_program_event_task.event_id,
+			tbl_program_event_task.task,
+			CONCAT(tbl_users.first_name, ' ', tbl_users.last_name) as Volunteer,
+			tbl_program_event_task_volunteers.date_volunteer
+			FROM
+			tbl_program_event_task
+			INNER JOIN tbl_program_event_task_volunteers ON tbl_program_event_task_volunteers.event_task_id = tbl_program_event_task.id
+			INNER JOIN tbl_users ON tbl_users.id = tbl_program_event_task_volunteers.user_id
+			WHERE tbl_program_event_task.event_id = ".$event_id."
+			ORDER BY
+			tbl_program_event_task_volunteers.date_volunteer ASC")->result();
+		$count = 1;
+
+		$html = "";
+		$html .= "Hi " . $program_details[0]->first_name . ", <br><br>";
+		$html .= "<table>";
+		$html .= "	<tbody>";
+		$html .= "		<tr>";
+		$html .= "			<td style='padding: 5px;'><strong>Program :</strong></td>";
+		$html .= "			<td style='padding: 5px;'>".$program_details[0]->name."</td>";
+		$html .= "		</tr>";
+		$html .= "		<tr style=''>";
+		$html .= "			<td style='padding: 5px;'><strong>Event Name :</strong></td>";
+		$html .= "			<td style='padding: 5px;'>".$event_details[0]->title."</td>";
+		$html .= "		</tr>";
+		$html .= "		<tr style=''>";
+		$html .= "			<td style='padding: 5px;'><strong>Covered Area :</strong></td>";
+		$html .= "			<td style='padding: 5px;'>".$event_details[0]->where."</td>";
+		$html .= "		</tr>";
+		$html .= "		<tr style=''>";
+		$html .= "			<td style='padding: 5px;'><strong>When :</strong></td>";
+		$html .= "			<td style='padding: 5px;'>".date("F d, Y h:i a",strtotime($event_details[0]->when))."</td>";
+		$html .= "		</tr>";
+		$html .= "	</tbody>";
+		$html .= "</table>";
+
+		$html .= "<br><strong>List of Volunteers as of : " . date("F d, Y h:i a") . "</strong>";
+
+		$html .= "<table style='border: 1px solid #000;'>";
+		$html .= "	<thead style='border: 1px solid #000;'>";
+		$html .= "		<tr style='border: 1px solid #000;'>";
+		$html .= "			<th style='border: 1px solid #000; padding: 5px;'>#</th>";
+		$html .= "			<th style='border: 1px solid #000; padding: 5px;'>Volunteer</th>";
+		$html .= "			<th style='border: 1px solid #000; padding: 5px;'>Task</th>";
+		$html .= "			<th style='border: 1px solid #000; padding: 5px;'>Date</th>";
+		$html .= "		</tr>";
+		$html .= "	</thead>";
+		$html .= "	<tbody>";
+		foreach ($event_task_volunteers as $key => $value) {
+			$html .= "<tr style='border: 1px solid #000;'>";
+			$html .= "	<td style='border: 1px solid #000; padding: 5px;'>" . $count . "</td>";
+			$html .= "	<td style='border: 1px solid #000; padding: 5px;'>" . $value->Volunteer . "</td>";
+			$html .= "	<td style='border: 1px solid #000; padding: 5px;'>" . $value->task . "</td>";
+			$html .= "	<td style='border: 1px solid #000; padding: 5px;'>" . date("F d, Y h:i a",strtotime($value->date_volunteer)) . "</td>";
+			$html .= "</tr>";
+			$count++;
+		}
+		$html .= "	</tbody>";
+		$html .= "</table>";
+		$html .= "<br>Thank you.";
+		
+
+		$to = $program_details[0]->email_address;
+		$data = array(
+			'from' 		=> "phpdev.unilab@gmail.com",
+			'from_name' => "ALAGANG UNILAB",
+			'to' 		=> $to,
+			'subject' 	=> "VOLUNTEER LIST : " . $event_details[0]->title,
+			'content' 	=> $html,
+		);
+
+		// print_r($data);
+		$this->sndgrd->send($data);
+	}
 
 	function volunteer() {
 		$user_id = $this->session->userdata('user_sess_id');
@@ -37,7 +129,7 @@ class Events extends GS_Controller {
 			);
 		$data_array2 = $data_array;
 
-		$this->db->query("DELETE FROM tbl_program_event_task_volunteers WHERE event_id = '".$_GET['event_id']."' AND user_id ='".$user_id."'");
+		//$this->db->query("DELETE FROM tbl_program_event_task_volunteers WHERE event_id = '".$_GET['event_id']."' AND user_id ='".$user_id."'");
 		$this->db->query("DELETE FROM tbl_users_points_approved WHERE event_id = '".$_GET['event_id']."' AND user_id ='".$user_id."'");
 		$this->db->query("DELETE FROM tbl_users_badge WHERE event_id = '".$_GET['event_id']."' AND user_id ='".$user_id."'");
 		if($_GET['is_submit']==0){
@@ -61,7 +153,7 @@ class Events extends GS_Controller {
 				unset($data_array2['date_volunteer']);
 				$this->Gmodel->save_data('tbl_users_badge', $data_array2);
 			}
-			
+			$this->volunteer_list_email($_GET['event_id']);
 		}
 	}
 	public function view()
@@ -71,7 +163,6 @@ class Events extends GS_Controller {
 		$event_id = $this->uri->segment(5);
 
 		$data['program_details'] = $this->get_program_details($program_id);
-
 		$data['event_details'] = $this->get_event_details($event_id);
 		$data['event_task'] = $this->get_event_tasks($event_id);
 
@@ -85,7 +176,9 @@ class Events extends GS_Controller {
 		$user_id = $this->session->userdata('user_sess_id');
 		$data['is_allowed_to_volunteer'] = $this->check_is_allowed($event_id,date('Y-m-d',strtotime($data['event_details'][0]['when'])));
 		//$data['is_volunteered'] = array_search($user_id, array_column($data['event_volunteers'], 'user_id'));
-
+		/*echo "<pre>";
+		print_r($data);
+		die();*/
 		$data['content'] = "site/events/view";
 		$data['meta'] = array(
 			"title"         => $data['event_details'][0]['title'],
@@ -104,6 +197,109 @@ class Events extends GS_Controller {
 		
 		$this->parser->parse("site/layout/template",$data);
 	}
+	
+	public function submit_filter(){
+		$date = $_POST['date']; 
+		$date_explode = explode('-',$date);
+		$date_from = date('Y-m-d', strtotime($date_explode[0]));
+		$date_to = date('Y-m-d', strtotime($date_explode[1]));
+		$arr = array(
+			'search_box' => $_POST['search_box'],
+			'types' => $_POST['types'],
+			'task' => $_POST['task'],
+			'date_from' => $date_from,
+			'date_to' => $date_to
+		);
+		$data['events'] = $this->get_details($arr);
+		echo '<pre>';
+		print_r($data);
+		echo '</pre>';
+		die();
+		$this->load->view('site/events/event_list', $data);
+	
+	}
+	
+	public function filter_where($arr){
+			$where_date = '';
+		if($arr['date_from'] != '' && $arr['date_to'] != ''){
+			$where_date = 'AND "'.$arr['date_from'].'" <= when AND when <= "'.$arr['date_to'].'"';
+		}
+			$where_search = '';
+		if($arr['search_box'] != ''){
+			$where_search = 'AND (title like "%'.$arr['search_box'].'%" OR url_alias like "%'.$arr['search_box'].'%" OR description like "%'.$arr['search_box'].'%" OR where like "%'.$arr['search_box'].'%")';
+		}
+			$where_task = '';
+		if($arr['task'] != ''){
+			$where_task = 'AND id = "'.$arr['task'].'"';
+		}
+		
+			$where_type = '';
+		if($arr['types'] != ''){
+			$where_type = 'AND id = "'.$arr['task'].'"';
+		}
+		
+		$result = array(
+			'search_date' => $where_date .' '. $where_search,
+			'task' => $where_task,
+			'type' => $where_type
+			
+		);
+		return $result;
+	}
+	
+	public function get_details($dat_arr = null){
+			$filter_where = "AND when like '%" . date("Y") . "%'";
+			$task_where = '';
+			$type_where = '';
+		if(!empty($dat_arr)){
+			$result_where = $this->filter_where($dat_arr);
+			$filter_where = $result_where['search_date'];
+			$task_where = $result_where['task'];
+			$type_where = $result_where['type'];
+		}
+		$event_list = $this->Gmodel->get_query('tbl_program_events',"status = 1 ".$filter_where."");
+
+		$events = array();
+		foreach ($event_list as $key => $value) {
+
+			$query_needed_volunteer = "SELECT SUM(required_volunteers) as count FROM tbl_program_event_task WHERE event_id = " . $value->id ." ".$task_where."";
+			$needed_volunteer = $this->db->query($query_needed_volunteer)->result();
+
+			$query_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $value->id;
+			$joined_volunteer = $this->db->query($query_joined_volunteer)->result();
+
+
+			$is_joined = false;
+			$query_is_joined = "SELECT * FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id') . " AND event_id = " . $value->id ." ".$type_where."";
+			$result_is_joined = $this->db->query($query_is_joined)->result();
+			if(count($result_is_joined) > 0){
+				$is_joined = true;
+			}
+			
+			$query_program_details = "SELECT id, image_thumbnail, url_alias FROM tbl_programs WHERE id = " . $value->program_id;
+			$program_details = $this->db->query($query_program_details)->result();
+			
+			$events[] = array(
+				"id"				=> $value->id,
+				"program_details"   => $program_details[0],
+				//"link"				=> $event_page_url,
+				"title"				=> $value->title,
+				"image"				=> base_url() . $value->image,
+				"description"		=> $value->description,
+				"when"				=> $value->when,
+				"where"				=> $value->where,
+				"status"				=> $value->status,
+				"volunteer_points"	=> $value->volunteer_points,
+				"is_admin"			=> ($value->user_id == $this->session->userdata('user_sess_id')) ? true : false,
+				"is_joined"			=> $is_joined,
+				"required_volunteer"=> ($needed_volunteer[0]->count != "") ? $needed_volunteer[0]->count : 0,
+				"joined_volunteers"	=> ($joined_volunteer[0]->count != "") ? $joined_volunteer[0]->count : 0,
+			);
+		}
+
+		return $events;
+	}
+	
 	public function validate_testimonial($event_id, $user_id){
 		$arr = array(
 			'event_id' => $event_id,
@@ -119,6 +315,12 @@ class Events extends GS_Controller {
 	
 	public function get_badges(){
 		$sql = "Select * From tbl_badges";
+		$result = $this->db->query($sql)->result();
+		return $result;
+	}
+	
+	public function get_event_tasks_all(){
+		$sql = "Select * From tbl_program_event_task";
 		$result = $this->db->query($sql)->result();
 		return $result;
 	}
@@ -270,7 +472,7 @@ class Events extends GS_Controller {
 				$task_badge[] = $badge;
 			}
 			$user_id = $this->session->userdata('user_sess_id');
-			$query_user_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $event_id . " AND event_task_id = " . $value->id. " AND user_id = ". $user_id;
+			$query_user_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $event_id . " AND event_task_id = " . $value->id. " AND user_id = ". $user_id." AND status >=0";
 			$is_joined = $this->db->query($query_user_joined_volunteer)->result();
 
 			$event_task[] = array(
@@ -313,11 +515,12 @@ class Events extends GS_Controller {
 
 
 			$is_joined = false;
-			$query_is_joined = "SELECT * FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id') . " AND event_id = " . $value->id;
+			$query_is_joined = "SELECT * FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id') . " AND event_id = " . $value->id ." AND status >=0";
 			$result_is_joined = $this->db->query($query_is_joined)->result();
 			if(count($result_is_joined) > 0){
 				$is_joined = true;
 			}
+			$is_not_joined = $this->db->query("SELECT count(id) as count FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id') . " AND event_id = " . $value->id)->result();
 
 
 			$events[] = array(
@@ -332,6 +535,7 @@ class Events extends GS_Controller {
 				"volunteer_points"	=> $value->volunteer_points,
 				"is_admin"			=> ($value->user_id == $this->session->userdata('user_sess_id')) ? 1 : 0,
 				"is_joined"			=> $is_joined,
+				"is_not_joined"		=> ($is_not_joined[0]->count>=2) ? 1 : 0,
 				"required_volunteer"=> ($needed_volunteer[0]->count != "") ? $needed_volunteer[0]->count : 0,
 				"joined_volunteers"	=> ($joined_volunteer[0]->count != "") ? $joined_volunteer[0]->count : 0,
 			);
@@ -392,6 +596,7 @@ class Events extends GS_Controller {
 				'testimonial' 	=> $tes_loop->testimonial,
 				'badge'			=> $this->get_volunteer_badge($event_id, $tes_loop->user_id),
 				'picture' 		=> $this->profile_image($tes_loop->user_id),
+				'date_posted'	=> date('F d, Y h:s A', strtotime($tes_loop->create_date))
 			);
 		}
 		echo json_encode($array_data);
