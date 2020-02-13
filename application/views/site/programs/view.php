@@ -68,7 +68,7 @@
 
 				<div class="au-boxed">
 					<a href="#" class="au-lnk"><div class="au-titlebox"><img src="<?= base_url();?>assets/site/img/au-workplace.svg" height="30px;"></div></a>
-					<div class="au-content" style="max-height: 400px;overflow: hidden;overflow-y: auto;padding: 5px;">
+					<div class="au-content au-workplace" style="max-height: 400px;overflow: hidden;overflow-y: auto;padding: 5px;">
 						<!-- insert facebook feed here -->
 						<?php
 							foreach ($workplace_feed as $key => $value) {

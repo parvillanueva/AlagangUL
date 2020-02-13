@@ -20,7 +20,6 @@
 	<link rel="icon" type="image/png" href="<?= base_url();?>assets/img/favicon.png" sizes="16x16">
 
     <!-- Custom styles for this template -->
-	<script src="https://kit.fontawesome.com/47b29f79cf.js" crossorigin="anonymous"></script>
     <script src="<?= base_url();?>assets/js/jquery.min.js"></script>
 	<script src="<?= base_url();?>assets/js/js/popper.min.js" text="type/javascript"></script>
     <script src="<?= base_url();?>assets/js/bootstrap.min.js"></script>
