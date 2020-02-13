@@ -581,7 +581,7 @@
 				html += '					<span class="au-accvolunteer">';
 				html += '						<div class="au-accvicon">';
 					$.each(y['badge'], function(a, b){
-						html += '					<i stylr="color: '+b.color+';" class="'+b.icon+' au-time au-icon" title="'+b.name+'"></i>';
+						html += '					<i style="color: '+b.color+';" class="'+b.icon+' au-time au-icon" title="'+b.name+'"></i>';
 					});
 				html += '						</div>';
 				html += '					</span>';
