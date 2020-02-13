@@ -1,3 +1,9 @@
+<style type="text/css">
+#program_confirm_modal{
+	z-index: 1051;
+}
+</style>
+
 <div class="container-fluid au-heading">
 	<div class="au-container au-padding">
 		<span class="au-h5 no-margin">Explore Programs</span>
@@ -52,6 +58,26 @@
 	</div>
 </div>
 
+<div class="modal fade text-center" id="program_confirm_modal" data-backdrop="static">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-body">
+            <form action="<?= base_url("programs/add")?>" method="post" enctype="multipart/form-data" class="au-form" id="add_confirm">
+        		<div class="form-row">
+					<div class="col">
+							<label class="file-label" >Are you sure you want to add this record?</label>
+					</div>
+				</div>
+				<div class="au-modalbtn text-center">
+                    <button type="button" class="au-btn au-btnyellow" data-dismiss="modal">No</button>
+                    <button type="button" class="au-btn" id="btnSubmit2">Yes</button>
+                </div>
+			</form>	
+        </div>
+    </div>
+</div>
+</div>
+
 <div class="modal fade text-center" id="program_settings" data-backdrop="static">
 <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -61,7 +87,7 @@
         		<div class="form-row">
 					<div class="col">
 						<div class="custom-file">
-							<input type="file" class="custom-file-input" name="programImage" id="customFile" onchange="readURLImgStandardPreview(this);" accept="image/x-png,image/gif,image/jpeg" />
+							<input type="file" class="custom-file-input required_input" name="programImage" id="customFile" onchange="readURLImgStandardPreview(this);" accept="image/x-png,image/gif,image/jpeg" />
 							<label class="custom-file-label" for="customFile">Choose file</label>
 						</div>
 						<img  style="width: 50%;" src="" id="previewImage"/>
@@ -99,7 +125,9 @@
 </div>
 
 <script type="text/javascript">
+    $(document).ready(function(result){
 
+    });
 	$(document).on("click", "#btn_addProgram", function(){
 		$("#previewImage").attr("src","");
 		$("#addprogramform").trigger("reset");
@@ -109,8 +137,15 @@
 	$(document).on('click', '#btnSubmit', function(e){
 		e.preventDefault();
 		if(validate.standard("addprogramform")){
-			$("#addprogramform").submit();
+			$("#program_confirm_modal").modal("show");
+
+			
 		}
+	});
+
+	$(document).on('click', '#btnSubmit2', function(e){
+		e.preventDefault();
+			$("#addprogramform").submit();
 	});
 
 	function readURLImgStandardPreview(input) {
