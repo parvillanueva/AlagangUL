@@ -140,11 +140,12 @@
 							<table>
 								<thead>
 									<tr>
-										<th scope="col">Possible task for volunteers</th>
-										<th scope="col">Qualifications</th>
-										<th scope="col">Needed</th>
-										<th scope="col">Joined</th>
-										<th scope="col">Volunteer your:</th>
+										<th scope="col" style="width:20%;">Possible task for volunteers</th>
+										<th scope="col" style="width:20%;">Qualifications</th>
+										<th scope="col" style="width:17%;">Needed</th>
+										<th scope="col" style="width:17%;">Joined</th>
+										<th scope="col" style="width:25%;">Volunteer your:</th>
+										<th scope="col" style="width:15%;">Action:</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -206,6 +207,7 @@
 													<?=$htm?>
 												</div>
 											</td>
+											<td data-header="Action" class=""><a href="#" class="au-lnk" data-toggle="modal" data-id = "<?=$value['id']?>" data-target="#editTask" id="btn_edit_task" ><span class="au-share"><i style="color:blue"  class="fas fa-pen"></i></a>&nbsp&nbsp|&nbsp&nbsp<a href="#" id="btn_delete" data-id = "<?=$value['id']?>" class="au-lnk" data-toggle="modal" data-target="#delete" ><span class="au-share"><i style="color:red"  class="fas fa-trash"></i></a></td>
 										</tr>
 									<?php } ?>
 								</tbody>
@@ -430,6 +432,59 @@
 	</div>
 </div>
 
+<div class="modal fade text-center" id="editTask">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-body">
+				<span class="au-h4">Opportunities for volunteers to help</span>
+				<form class="au-form text-left" id="edit_volunteer_form">		
+					<input type="hidden" id="table_id" value=""/>
+					<div class="form-row">
+						<div class="col">
+							<label for="comment" class="au-p4">Possible task for volunteers</label>
+							<input class="form-control required_input" rows="5" id="edit_possible_volunteer" placeholder="" required="" />
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col">
+							<label for="comment" class="au-p4">Qualifications</label>
+							<input class="form-control required_input" rows="5" id="edit_qualification" placeholder="" required="" />
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col">
+							<label for="comment" class="au-p4">Needed Volunteer</label>
+							<input type="number" class="form-control required_input" rows="5" id="edit_needed" placeholder="" required="" />
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col">
+							<label for="comment" class="au-p4">Badges</label>
+							<?php foreach($badges as $bloop){ ?>
+								<input type="checkbox" style="margin-left:50px;" class="badges_input" id="edit_<?php echo $bloop->name; ?>" value="<?php echo $bloop->id; ?>" name="badges[]" required="" /> <span class="au-btnvolunteertype" style="background-color:<?php echo $bloop->color; ?>" ><i class="<?php echo $bloop->icon; ?>" title="<?php echo $bloop->name; ?>"></i> <?php echo $bloop->name; ?></span><br/><br/>
+							<?php } ?>
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+
+					<div class="au-modalbtn text-center">
+						<button type="button" class="au-btn au-btnyellow" id="btneditBadges_close" data-dismiss="modal">Close</button>
+						<button type="button" class="au-btn" id="btn_editBadges">Submit</button>
+					</div>
+				</form>		
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <script type="text/javascript">
 	//$('input[name="date"]').daterangepicker();
 </script>
@@ -463,6 +518,53 @@
 	});
 
 
+	$(document).on("click", "#btn_delete", function(){
+		id = $(this).attr('data-id');
+            $.ajax({
+                type : "POST",
+                url  :  "<?= base_url('site/events/delete_task_data');?>",
+                dataType : "JSON",
+                data : {id:id},
+                  beforeSend: function() {
+                  },
+                  success: function(data) {
+                  },
+                  complete: function(data){
+                    var obj = data.responseJSON;
+                    if(obj == true){
+                    	location.reload();
+                    }
+                  }
+            });
+	});
+
+	$(document).on("click", "#btn_edit_task", function(){
+		$("#editTask").trigger("reset");
+		id = $(this).attr('data-id');
+            $.ajax({
+                type : "POST",
+                url  :  "<?= base_url('site/events/get_task_data');?>",
+                dataType : "JSON",
+                data : {id:id},
+                  beforeSend: function() {
+                  },
+                  success: function(data) {
+                  },
+                  complete: function(data){
+                    var obj = data.responseJSON;
+                   	$.each(obj, function(x,y){
+                   		$('#table_id').val(y['id']);
+                   		$('#edit_possible_volunteer').val(y['task']);
+                   		$('#edit_qualification').val(y['qualification']);
+                   		$('#edit_needed').val(y['required_volunteers']);
+                   		$.each(y[0],function(a,b){
+                   			name = '#edit_'+b["name"];
+                   			$(name).attr("checked", true);
+                   		});
+                   	});
+                  }
+            });
+	});
 	var limit  = 4;
 	$(document).ready(function() {
 		var required_volunteer = <?= $event_details[0]['required_volunteer'];?>;
@@ -651,7 +753,34 @@
 			});
 		}
 	});
-	
+
+	$(document).on('click', '#btn_editBadges', function(result){
+		var possible_volunteer = $('#edit_possible_volunteer').val();
+		var qualification = $('#edit_qualification').val();
+		var needed = $('#edit_needed').val();
+		var id = $('#table_id').val();
+		var val_badges = [];
+        $('.badges_input:checkbox:checked').each(function(i){
+          val_badges[i] = $(this).val();
+        });
+		var data = {
+			event_id : "<?= $event_details[0]['id']; ?>",
+			possible_volunteer : possible_volunteer,
+			qualification : qualification,
+			needed : needed,
+			badges : val_badges,
+			task_id	: id
+		};
+		var url = "<?php echo base_urL('site/events/update_event_task') ?>";
+		if(validate.standard("edit_volunteer_form")){
+			aJax.post(url, data, function(result){
+				var obj = is_json(result);
+				if(obj.responce == 'success'){
+					location.reload();
+				}
+			});
+		}
+	});
 	function count_image(total){
 		var div_count = $('.au-opthumbnail').length;
 		if(div_count == total){
