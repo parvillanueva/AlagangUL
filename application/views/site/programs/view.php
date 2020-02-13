@@ -258,7 +258,25 @@
     	</div>
   	</div>
 </div>
-
+<div class="modal fade text-center" id="program_confirm_modal" data-backdrop="static">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-body">
+            <form action="<?= base_url("programs/add")?>" method="post" enctype="multipart/form-data" class="au-form" id="add_confirm">
+        		<div class="form-row">
+					<div class="col">
+							<label class="file-label" >Are you sure you want to Update this record?</label>
+					</div>
+				</div>
+				<div class="au-modalbtn text-center">
+                    <button type="button" class="au-btn au-btnyellow" id="dismiss_modal" data-dismiss="modal">No</button>
+                    <button type="button" class="au-btn" id="btnSubmit2">Yes</button>
+                </div>
+			</form>	
+        </div>
+    </div>
+</div>
+</div>
 
 <!-- Add Event Modal -->
 <div class="modal fade text-center" id="addEvent" data-backdrop="static">
@@ -359,9 +377,36 @@
 
 	$(document).on('click', '#btnSubmit', function(e){
 		e.preventDefault();
-		if(validate.standard("editprogramform")){
-			$("#editprogramform").submit();
+		$('.au-form .custom-file-label').css('border-color','#ced4da');
+		if(validate.standard('editprogramform')){
+			// $("#editprogramform").trigger("reset");
+			$("#editPrgoramDetails").css('opacity',0.5);
+			$("#program_confirm_modal").modal("show");
 		}
+		else{
+			$('.required_input').each(function(){
+				if($(this).val() == null || $(this).val() == ""){
+					$('.au-form .custom-file-label').css('border-color','');
+					$(this).css('border-color','red');
+				}
+			});
+
+		}
+	});
+
+	$(document).on('click', '#btnSubmit2', function(e){
+		e.preventDefault();
+			$("#editprogramform").submit();
+			$("#editPrgoramDetails").css('opacity',1);
+			$("#program_confirm_modal").modal("hide");
+	});
+
+
+	$(document).on('click', '#dismiss_modal', function(e){
+		e.preventDefault();
+			$("#editPrgoramDetails").css('opacity',1);
+			$("#editPrgoramDetails").css('overflow','scroll');
+			$("#program_confirm_modal").modal("hide");
 	});
 
 
