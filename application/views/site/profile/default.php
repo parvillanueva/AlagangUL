@@ -28,6 +28,8 @@
         }
 
     }
+
+   
     
     $(document).ready(function() {
         var total_points = <?=$profile->total_points?>;

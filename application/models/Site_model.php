@@ -97,15 +97,17 @@ date_default_timezone_set('Asia/Taipei');
 		}
 		function get_member_badges($id)
 		{
-			$this->db->select("b.name, b.icon, b.color");
+			$this->db->select("b.name, b.icon, b.color, SUM(ub.points) AS current_points, b.minimum_points");
 			$this->db->from("tbl_badges b");
-			$this->db->join("tbl_program_event_task_badge etb", "etb.badge_id = b.id", "LEFT");
-			$this->db->join("tbl_program_event_task et", "etb.event_task_id = et.id", "LEFT");
-			$this->db->join("tbl_program_event_task_volunteers etv", "etv.event_task_id = et.id", "LEFT");
-			$this->db->where("etv.user_id", $id);
+			// $this->db->join("tbl_program_event_task_badge etb", "etb.badge_id = b.id", "LEFT");
+			// $this->db->join("tbl_program_event_task et", "etb.event_task_id = et.id", "LEFT");
+			// $this->db->join("tbl_program_event_task_volunteers etv", "etv.event_task_id = et.id", "LEFT");
+			// $this->db->where("etv.user_id", $id);
+			$this->db->join("tbl_users_badge ub", "ub.badge_id = b.id", "LEFT");
+			$this->db->where("ub.user_id", $id);
 			$this->db->where("b.status", 1);
-			$this->db->group_by("b.id");
-
+			$this->db->group_by("ub.badge_id");
+			$this->db->having("SUM(ub.points) >= b.minimum_points");
 			return $this->db->get()->result_array();
 		}
 
