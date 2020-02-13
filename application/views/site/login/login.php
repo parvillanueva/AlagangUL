@@ -90,7 +90,7 @@
 										</div>	
 										<div class="form-row">
 											<div class="col text">	
-				      							<button type="submit" class="btn btn-primary au-btnblue mx-auto" id="btnSubmit">Login</button>
+				      							<button type="button" class="btn btn-primary au-btnblue mx-auto" id="btnSubmit">Login</button>
 				      						</div>
 			    						</div>								
 									</form>
