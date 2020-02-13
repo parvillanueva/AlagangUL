@@ -17,3 +17,5 @@ application/logs/*
 
 captcha_images/*
 .vscode/launch.json
+
+uploads/*
