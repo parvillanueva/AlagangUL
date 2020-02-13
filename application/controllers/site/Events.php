@@ -26,6 +26,85 @@ class Events extends GS_Controller {
 		$this->parser->parse("site/layout/template",$data);
 	}
 
+	function volunteer_list_email($event_id){
+		$event_details = $this->db->query("SELECT * FROM tbl_program_events WHERE id = " . $event_id)->result();
+		$program_details = $this->db->query("SELECT tbl_programs.*, tbl_users.first_name, tbl_users.email_address FROM tbl_programs LEFT JOIN tbl_users ON tbl_users.id = tbl_programs.created_by WHERE tbl_programs.id =" . $event_details[0]->program_id)->result();
+		$event_task_volunteers = $this->db->query("SELECT
+			tbl_program_event_task.event_id,
+			tbl_program_event_task.task,
+			CONCAT(tbl_users.first_name, ' ', tbl_users.last_name) as Volunteer,
+			tbl_program_event_task_volunteers.date_volunteer
+			FROM
+			tbl_program_event_task
+			INNER JOIN tbl_program_event_task_volunteers ON tbl_program_event_task_volunteers.event_task_id = tbl_program_event_task.id
+			INNER JOIN tbl_users ON tbl_users.id = tbl_program_event_task_volunteers.user_id
+			WHERE tbl_program_event_task.event_id = ".$event_id."
+			ORDER BY
+			tbl_program_event_task_volunteers.date_volunteer ASC")->result();
+		$count = 1;
+
+		$html = "";
+		$html .= "Hi " . $program_details[0]->first_name . ", <br><br>";
+		$html .= "<table>";
+		$html .= "	<tbody>";
+		$html .= "		<tr>";
+		$html .= "			<td style='padding: 5px;'><strong>Program :</strong></td>";
+		$html .= "			<td style='padding: 5px;'>".$program_details[0]->name."</td>";
+		$html .= "		</tr>";
+		$html .= "		<tr style=''>";
+		$html .= "			<td style='padding: 5px;'><strong>Event Name :</strong></td>";
+		$html .= "			<td style='padding: 5px;'>".$event_details[0]->title."</td>";
+		$html .= "		</tr>";
+		$html .= "		<tr style=''>";
+		$html .= "			<td style='padding: 5px;'><strong>Covered Area :</strong></td>";
+		$html .= "			<td style='padding: 5px;'>".$event_details[0]->where."</td>";
+		$html .= "		</tr>";
+		$html .= "		<tr style=''>";
+		$html .= "			<td style='padding: 5px;'><strong>When :</strong></td>";
+		$html .= "			<td style='padding: 5px;'>".date("F d, Y h:i a",strtotime($event_details[0]->when))."</td>";
+		$html .= "		</tr>";
+		$html .= "	</tbody>";
+		$html .= "</table>";
+
+		$html .= "<br><strong>List of Volunteers as of : " . date("F d, Y h:i a") . "</strong>";
+
+		$html .= "<table style='border: 1px solid #000;'>";
+		$html .= "	<thead style='border: 1px solid #000;'>";
+		$html .= "		<tr style='border: 1px solid #000;'>";
+		$html .= "			<th style='border: 1px solid #000; padding: 5px;'>#</th>";
+		$html .= "			<th style='border: 1px solid #000; padding: 5px;'>Volunteer</th>";
+		$html .= "			<th style='border: 1px solid #000; padding: 5px;'>Task</th>";
+		$html .= "			<th style='border: 1px solid #000; padding: 5px;'>Date</th>";
+		$html .= "		</tr>";
+		$html .= "	</thead>";
+		$html .= "	<tbody>";
+		foreach ($event_task_volunteers as $key => $value) {
+			$html .= "<tr style='border: 1px solid #000;'>";
+			$html .= "	<td style='border: 1px solid #000; padding: 5px;'>" . $count . "</td>";
+			$html .= "	<td style='border: 1px solid #000; padding: 5px;'>" . $value->Volunteer . "</td>";
+			$html .= "	<td style='border: 1px solid #000; padding: 5px;'>" . $value->task . "</td>";
+			$html .= "	<td style='border: 1px solid #000; padding: 5px;'>" . date("F d, Y h:i a",strtotime($value->date_volunteer)) . "</td>";
+			$html .= "</tr>";
+			$count++;
+		}
+		$html .= "	</tbody>";
+		$html .= "</table>";
+		$html .= "<br>Thank you.";
+		
+
+		$to = $program_details[0]->email_address;
+		$data = array(
+			'from' 		=> "phpdev.unilab@gmail.com",
+			'from_name' => "ALAGANG UNILAB",
+			'to' 		=> $to,
+			'subject' 	=> "VOLUNTEER LIST : " . $event_details[0]->title,
+			'content' 	=> $html,
+		);
+
+		// print_r($data);
+		$this->sndgrd->send($data);
+	}
+
 	function volunteer() {
 		$user_id = $this->session->userdata('user_sess_id');
 		$data_array = array(
@@ -61,7 +140,7 @@ class Events extends GS_Controller {
 				unset($data_array2['date_volunteer']);
 				$this->Gmodel->save_data('tbl_users_badge', $data_array2);
 			}
-			
+			$this->volunteer_list_email($_GET['event_id']);
 		}
 	}
 	public function view()
