@@ -1,6 +1,6 @@
-@import url("../fontawesome/css/fontawesome.css");
- @import url("../fontawesome/css/solid.css");
- @import url("../fontawesome/css/brands.css");
+@import url("../../fontawesome/css/fontawesome.css");
+ @import url("../../fontawesome/css/solid.css");
+ @import url("../../fontawesome/css/brands.css");
  html {
      scroll-behavior: smooth;
      min-width: 320px;
@@ -701,7 +701,7 @@ p{
      height: 44px;
      line-height: 44px;
      border: 0;
-     background-color: #CFD8DC;
+     background-color: #a6adb0;
      color: #fff;
 }
  .au-form-wrapper {
@@ -1331,7 +1331,7 @@ p{
 .au-volunteeredmes{
      font-size: 12px;
      font-style: italic;
-     margin-right: 5px;
+     margin-right: 15px;
      color: #222;
 }
 .au-volunteeredmes i{
@@ -1407,7 +1407,7 @@ p{
      background-color: #dce2e5 !important;    
 }
 .volunteer .au-btnvolunteertype:last-child{
-     background-color: #cfd8dc !important;    
+     background-color: #a6adb0 !important;    
 }
 .au-volmessage{
      display: inline-block;
@@ -1421,7 +1421,7 @@ p{
      margin: 5px 5px;
      font-weight: bold;
      font-size: 12px;
-     width: 125px;
+     width: auto;
 }
 .au-yourvolunteer{
      margin: 1em 0;
@@ -1632,6 +1632,14 @@ p{
 }
 .au-workplace > .row > .col-md-12 > .col-md-10 {
     padding: 0px 0.5em;
+}
+.au-powner{
+     margin-bottom: 20px;
+     font-size: 14px;
+}
+.au-powner i{
+     margin-left: 5px;
+     font-size: 12px;
 }
 /*Extra small devices (portrait phones, less than 576px)*/
  @media (max-width: 575px) {
