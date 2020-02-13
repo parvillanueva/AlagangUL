@@ -181,18 +181,20 @@
                                                     
                                                     <div class="au-volunteers">
                                                         <span class="au-volunteeredmes">
-                                                           
-                                                            <?php foreach($event['badges'] as $i => $badges) : ?>
+                                                        <?php if(!empty($event['badges'])) : ?>
+                                                            
+                                                            <?php foreach($event['badges'] as $badges) : ?>
                                                                 <span>
+                                                                
                                                                     <i 
-                                                                        class="<?=@$badges[1]; ?>" 
-                                                                        style="color:<?=@$badges[2]?>" 
-                                                                        title="<?=@$badges[0]?>">
-                                                                    </i>Volunteered <?=@$badges[0]?>
+                                                                        class="<?=$badges[1]; ?>" 
+                                                                        style="color:<?=$badges[2]?>" 
+                                                                        title="<?=$badges[0]?>">
+                                                                    </i>Volunteered <?=$badges[0]?>
                                                                 </span>
                                                         
                                                             <?php endforeach; ?>
-                                                        
+                                                        <?php endif; ?>
                                                         
                                                         <!-- <span class="au-volunteeredmes"><i class="fas fa-hands-helping au-talent" title="Talent"></i>Volunteered Talent</span> -->
                                                         <!-- <span class="au-volunteeredmes"><i class="fas fa-gem au-treasure" title="Treasure"></i>Volunteered Treasure</span> -->
