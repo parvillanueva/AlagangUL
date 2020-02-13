@@ -91,6 +91,9 @@
 									</div>
 								<?php } ?>
 							</div>
+							<div class="au-inner au-cscroll">
+							<a href="<?= $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>/manage"   class="au-btnvolunteer au-btnvolunteertype au-time primary btn_approve"  style="background-color:#1894e7;">Manage</a>
+							</div>
 						</div>
 					</div>
 

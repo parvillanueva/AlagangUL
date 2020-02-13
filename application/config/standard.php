@@ -1910,4 +1910,19 @@ $config['user_otp'] = array(
                             'maxlength'     => 6,
                             'label'         => 'OTP'
                         );	
+
+
+$config['content']      = array(
+                                'type'          => 'ckeditor',
+                                'name'          => 'content',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control',
+                                'id'            => 'content',
+                                'required'      => true,
+                                'no_html'      => false,
+                                'filemanager'   => false,
+                                'youtube'       => false,
+                                'placeholder'   => 'Content',
+                                'label'         => 'Content',
+                            );
 ?>

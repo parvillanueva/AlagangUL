@@ -38,8 +38,7 @@
 		$route["programs/(:any)/(:any)/unpublish"] = "site/programs/unpublish/$1/$2";
 		$route["programs/(:any)/(:any)/event/(:any)/(:any)"] = "site/events/view/$1/$3/$4";
 		$route["programs/(:any)/(:any)/event/(:any)/(:any)/update"] = "site/events/update/$1/$2/$3/$4";
-
-
+		$route["programs/(:any)/(:any)/event/(:any)/(:any)/manage"] = "site/events/manage/$1/$3/$4";
 
 		$route["content_management"] = "content_management/home";
 		$route["404_override"] = "";
