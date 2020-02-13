@@ -590,20 +590,25 @@ class Events extends GS_Controller {
 	    return trim(preg_replace('/-+/', '-', $title), '-/');
 	}
 
-	public function update_points(){
+	public function update_task_user(){
 
 		$approval_id = $this->input->post('approval_id');
 		$user_id 	 = $this->input->post('user_id');
 		$points 	 = $this->input->post('points');
 		$event_task_id 	 = $this->input->post('event_task_id');
+		$datetoday 		= date("Y-m-d H:i:s");
 		
 		$update_status = "UPDATE tbl_users_points_approved SET status = 1 WHERE id = $approval_id";
 		$update_status_result = $this->db->query($update_status);
-		$update_status2 = "UPDATE tbl_users_points SET current_points = current_points + $points , total_points = total_points + $points  WHERE user_id = $user_id";
+		$update_status2 = "UPDATE tbl_users_points SET current_points = current_points + $points , total_points = total_points + $points, update_date = '$datetoday' WHERE user_id = $user_id";
 		$update_status_result2 = $this->db->query($update_status2);
-		$update_status3 = "UPDATE tbl_users_badge SET  points = $points  WHERE user_id = $user_id AND event_task_id = $event_task_id";
+		echo $this->db->last_query();
+		die;
+		$update_status3 = "UPDATE tbl_users_badge SET  points = $points, update_date = '$datetoday'   WHERE user_id = $user_id AND event_task_id = $event_task_id";
 		$update_status_result3 = $this->db->query($update_status3);
-		return $update_status_result3;
+		$update_status4 = "UPDATE tbl_program_event_task_volunteers SET  status = 1  WHERE user_id = $user_id AND event_task_id = $event_task_id";
+				$update_status_result4 = $this->db->query($update_status4);
+		return $update_status_resulty;
 	}
 
 	public function get_task()

@@ -143,7 +143,7 @@
 
             $.ajax({
                 type : "POST",
-                url  :  "<?= base_url('site/events/update_points');?>",
+                url  :  "<?= base_url('site/events/update_task_user');?>",
                 dataType : "JSON",
                 data : {approval_id:approval_id,points:points,user_id:user_id,event_task_id:event_task_id},
                   beforeSend: function() {
