@@ -21,7 +21,8 @@ class Events extends GS_Controller {
 		);
 
 		$data['active_menu'] = "events";
-		
+		$data['task'] = $this->get_task();
+		$data['get_volunteer_type'] = $this->get_volunteer_type();
 		$this->parser->parse("site/layout/template",$data);
 	}
 
@@ -561,6 +562,27 @@ class Events extends GS_Controller {
 		$update_status3 = "UPDATE tbl_users_badge SET  points = $points  WHERE user_id = $user_id AND event_task_id = $event_task_id";
 		$update_status_result3 = $this->db->query($update_status3);
 		return $update_status_result3;
+	}
+
+	public function get_task()
+	{
+		$query = "SELECT task, id FROM tbl_program_event_task WHERE status = 1";
+		$result_events= $this->db->query($query)->result_array();
+		return $result_events;
+	}
+
+	public function get_volunteer_type()
+	{
+		$query = "SELECT name, id FROM tbl_badges WHERE status = 1";
+		$result_events= $this->db->query($query)->result_array();
+		return $result_events;
+	}
+
+	public function get_date()
+	{
+		// $query = "SELECT task,id FROM tbl_program_event_task WHERE status = 1";
+		// $result_events= $this->db->query($query)->result_array();
+		// return $result_events;
 	}
 
 }
