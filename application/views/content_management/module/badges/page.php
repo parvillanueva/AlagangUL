@@ -10,8 +10,9 @@
                         <th style="width: 50px"><center><input class="selectall" type = "checkbox"></center></th>
                         <th>Name</th>
                         <th>Color</th>
+                        <th>Required Points</th>
                         <th>Status</th>
-                        <th style="width: 100px;">Action</th>
+                        <th style="width: 10%;">Action</th>
                     </tr>
                 </thead>
                 <tbody class="table_body"></tbody>
@@ -38,10 +39,10 @@
         AJAX.select.offset(offset); //offset or Start
         AJAX.select.limit(limit); //limit result
         AJAX.select.table('tbl_badges'); //selecting table
-        AJAX.select.select('id,name,color,status'); //selecting result : not accepting *
+        AJAX.select.select('id,name,color,minimum_points,,status'); //selecting result : not accepting *
 
         if(keyword) {
-            AJAX.select.query(" (name like '%"+keyword+"%') and status >= 0");
+            AJAX.select.query(" (name like '%"+keyword+"%' OR minimum_points like '%"+keyword+"%') and status >= 0");
         }else{
             AJAX.select.where.greater_equal("status",0); 
         }
@@ -57,6 +58,7 @@
                 html+="      <td class='text-center'><input class = 'select'  data-id = '"+y.id+"' data-name='"+y.name+"' type ='checkbox'></td>";
                 html += '   <td>'+y.name+'</td>';
                 html += '   <td style="background-color:'+y.color+'"></td>';
+                 html += '   <td>'+y.minimum_points+'</td>';
                 html += '   <td>'+status+'</td>';
                 html += '   <td><a  href="<?= base_url()."content_management/"?>site_badges/update/'+y.id+'" data-id ="'+y.id+'" class="app_class">Edit</a></td>'
                 html += '</tr>'

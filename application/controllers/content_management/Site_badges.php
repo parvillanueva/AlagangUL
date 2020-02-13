@@ -47,15 +47,17 @@ class Site_badges extends CI_Controller {
 		$icon 	= $this->input->post('icon');
 		$color 	= '#'.$this->input->post('color');
 		$status = $this->input->post('status');
+		$minimum_points = $this->input->post('minimum_points');
 		$data   = array(
-					'name' 		  	=> $name,
-					'icon' 			=> $icon,
-					'color'			=> $color,
-					'create_date' 	=> date('Y-m-d'),
-					'create_by'		=> $this->session->userdata('sess_uid'),
-					'update_date'	=> date('Y-m-d'),
-					'update_by'		=> $this->session->userdata('sess_uid'),
-					'status'		=> $status
+					'name' 		  			=> $name,
+					'icon' 					=> $icon,
+					'color'					=> $color,
+					'create_date' 			=> date('Y-m-d'),
+					'create_by'				=> $this->session->userdata('sess_uid'),
+					'update_date'			=> date('Y-m-d'),
+					'update_by'				=> $this->session->userdata('sess_uid'),
+					'status'				=> $status,
+					'minimum_points' 		=> $minimum_points
 				  );
 
 		$result_id = $this->Global_model->save_data('tbl_badges',$data);
@@ -69,15 +71,17 @@ class Site_badges extends CI_Controller {
 		$icon 	= $this->input->post('icon');
 		$color 	= '#'.$this->input->post('color');
 		$status = $this->input->post('status');
+		$minimum_points = $this->input->post('minimum_points');
 		$data   = array(
-					'name' 		  	=> $name,
-					'icon' 			=> $icon,
-					'color'			=> $color,
-					'create_date' 	=> date('Y-m-d'),
-					'create_by'		=> $this->session->userdata('sess_uid'),
-					'update_date'	=> date('Y-m-d'),
-					'update_by'		=> $this->session->userdata('sess_uid'),
-					'status'		=> $status
+					'name' 		  			=> $name,
+					'icon' 					=> $icon,
+					'color'					=> $color,
+					'create_date' 			=> date('Y-m-d'),
+					'create_by'				=> $this->session->userdata('sess_uid'),
+					'update_date'			=> date('Y-m-d'),
+					'update_by'				=> $this->session->userdata('sess_uid'),
+					'status'				=> $status,
+					'minimum_points' 		=> $minimum_points
 				  );
 
 
