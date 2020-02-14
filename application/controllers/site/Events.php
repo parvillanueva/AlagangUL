@@ -129,17 +129,23 @@ class Events extends GS_Controller {
 			);
 		$data_array2 = $data_array;
 
-		$this->db->query("DELETE FROM tbl_program_event_task_volunteers WHERE event_id = '".$_GET['event_id']."' AND user_id ='".$user_id."'");
+		//$this->db->query("DELETE FROM tbl_program_event_task_volunteers WHERE event_id = '".$_GET['event_id']."' AND user_id ='".$user_id."'");
 		$this->db->query("DELETE FROM tbl_users_points_approved WHERE event_id = '".$_GET['event_id']."' AND user_id ='".$user_id."'");
 		$this->db->query("DELETE FROM tbl_users_badge WHERE event_id = '".$_GET['event_id']."' AND user_id ='".$user_id."'");
 		if($_GET['is_submit']==0){
 			
 		}
 		else{
+			$this->db->query("UPDATE tbl_program_event_task_volunteers SET status = -3 WHERE event_id = '".$_GET['event_id']."' AND user_id ='".$user_id."'");
+
+			$this->Gmodel->save_data('tbl_program_event_task_volunteers', $data_array);
+
+
+
 			$data = "SELECT volunteer_points FROM tbl_program_events WHERE id = ".$_GET['event_id'];
 			$result = $this->db->query($data)->result();
 
-			$this->Gmodel->save_data('tbl_program_event_task_volunteers', $data_array);
+			
 			$data_array['points'] = $result[0]->volunteer_points;
 			$this->Gmodel->save_data('tbl_users_points_approved', $data_array);
 
@@ -506,16 +512,17 @@ class Events extends GS_Controller {
 			$query_needed_volunteer = "SELECT SUM(required_volunteers) as count FROM tbl_program_event_task WHERE event_id = " . $value->id;
 			$needed_volunteer = $this->db->query($query_needed_volunteer)->result();
 
-			$query_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $value->id . " AND status >= 0";
+			$query_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $value->id;
 			$joined_volunteer = $this->db->query($query_joined_volunteer)->result();
 
 
 			$is_joined = false;
-			$query_is_joined = "SELECT * FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id') . " AND event_id = " . $value->id;
+			$query_is_joined = "SELECT * FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id') . " AND event_id = " . $value->id ." AND status >=0"; 
 			$result_is_joined = $this->db->query($query_is_joined)->result();
 			if(count($result_is_joined) > 0){
 				$is_joined = true;
 			}
+			$is_not_joined = $this->db->query("SELECT count(id) as count FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id') . " AND event_id = " . $value->id)->result(); 
 
 
 			$events[] = array(
