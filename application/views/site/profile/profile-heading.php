@@ -5,7 +5,7 @@
                 <?php if(empty($profile->imagepath)) : ?>
                     <img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-fp-thumbnailimg">
                 <?php else: ?>
-                    <img src="<?=base_url() . $profile->imagepath ?>" class="au-fp-thumbnailimg" onerror="imgError(this);">
+                    <img src="<?=base_url() . $profile->imagepath ?>" class="au-fp-thumbnailimg" onerror="imgErrorProfile(this);">
                 <?php endif; ?>
             </div>
             <div class="col-lg-3 col-md-4 d-none d-lg-block">
@@ -23,7 +23,7 @@
 </div>
 <script type="text/javascript">
     var base_url = '<?=base_url();?>';
-    function imgError(image) {
+    function imgErrorProfile(image) {
         image.onerror = "";
         image.src = base_url+"/assets/img/au-avatar.svg";
         return true;

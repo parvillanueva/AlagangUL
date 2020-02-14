@@ -5,9 +5,9 @@
             <div class="col-lg-3 col-md-4">
                 <div class="au-userpicture d-none d-lg-block">
                     <?php if(empty($profile->imagepath)) : ?>
-                        <img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-useravatar" onerror="imgError(this);">
+                        <img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-useravatar" onerror="imgErrorProfile(this);">
                     <?php else: ?>
-                        <img src="<?=base_url() . $profile->imagepath ?>" class="au-useravatar" onerror="imgError(this);">
+                        <img src="<?=base_url() . $profile->imagepath ?>" class="au-useravatar" onerror="imgErrorProfile(this);">
                     <?php endif; ?>
                 </div>
 
@@ -117,7 +117,7 @@
                                         <div class="au-slprograms">
                                             <a href="programs/<?= @$program['id']?>/<?= @$program['url_alias']?>" class="au-lnk">
                                                 <div class="au-opthumbnail">
-                                                    <img src="<?=base_url().@$program['image_thumbnail']?>" class="au-fp-thumbnailimg" onerror="imgErrorProfile(this);">
+                                                    <img src="<?=base_url().@$program['image_thumbnail']?>" class="au-fp-thumbnailimg" onerror="imgErrorProfileDetails(this);">
                                                 </div>
                                             </a>
                                         </div>
@@ -205,13 +205,13 @@
 </div>
 <script type="text/javascript">
     var base_url = '<?=base_url();?>';
-    function imgError(image) {
+    function imgErrorProfile(image) {
         image.onerror = "";
         image.src = base_url+"/assets/img/au-avatar.svg";
         return true;
     }
 
-    function imgErrorProfile(image) {
+    function imgErrorProfileDetails(image) {
         image.onerror = "";
         image.src = base_url+"/assets/img/broken_img1.jpg";
         return true;
