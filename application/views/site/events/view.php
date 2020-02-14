@@ -150,7 +150,9 @@
 										<th scope="col" style="width:17%;">Needed</th>
 										<th scope="col" style="width:17%;">Joined</th>
 										<th scope="col" style="width:25%;">Volunteer your:</th>
+										<?php if($event_details[0]['is_admin'] == 1) { ?>
 										<th scope="col" style="width:15%;">Action:</th>
+										<?php } ?>
 									</tr>
 								</thead>
 								<tbody>
@@ -216,7 +218,9 @@
 													<?=$htm?>
 												</div>
 											</td>
-											<td data-header="Action" class=""><a href="#" class="au-lnk" data-toggle="modal" data-id = "<?=$value['id']?>" data-target="#editTask" id="btn_edit_task" ><span class="au-share"><i style="color:blue"  class="fas fa-pen"></i></a>&nbsp&nbsp|&nbsp&nbsp<a href="#" id="btn_delete" data-id = "<?=$value['id']?>" class="au-lnk" data-toggle="modal" data-target="#delete" ><span class="au-share"><i style="color:red"  class="fas fa-trash"></i></a></td>
+											<?php if($event_details[0]['is_admin'] == 1) { ?>
+											<td data-header="Action" class=""><a href="#" class="au-lnk" data-toggle="modal" data-id = "<?=$value['id']?>" data-target="#editTask" id="btn_edit_task" ><span class="au-share"><i style="color:blue"  class="fas fa-pen"></i></a>&nbsp&nbsp&nbsp&nbsp<a href="#" id="btn_delete" data-id = "<?=$value['id']?>" class="au-lnk" data-toggle="modal" data-target="#delete" ><span class="au-share"><i style="color:red"  class="fas fa-trash"></i></a></td>
+											<?php } ?>
 										</tr>
 									<?php } ?>
 								</tbody>
