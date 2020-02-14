@@ -83,11 +83,13 @@ class Programs extends GS_Controller {
 
 
 			$is_joined = false;
-			$query_is_joined = "SELECT * FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id') . " AND event_id = " . $value->id;
+			$query_is_joined = "SELECT * FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id') . " AND event_id = " . $value->id." AND status >=0";
 			$result_is_joined = $this->db->query($query_is_joined)->result();
 			if(count($result_is_joined) > 0){
 				$is_joined = true;
 			}
+
+			$is_not_joined = $this->db->query("SELECT count(id) as count FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id') . " AND event_id = " . $value->id)->result();
 
 
 			$event_page_url = base_url("programs") . "/" . $program_id . "/" . $program_alias . "/event/" . $value->id . "/" . $value->url_alias;
@@ -103,6 +105,7 @@ class Programs extends GS_Controller {
 				"volunteer_points"	=> $value->volunteer_points,
 				"is_admin"			=> ($value->user_id == $this->session->userdata('user_sess_id')) ? true : false,
 				"is_joined"			=> $is_joined,
+				"is_not_joined"		=> ($is_not_joined[0]->count>=2) ? 1 : 0,
 				"get_earn_badge"	=> $this->get_earn_badge($value->id),
 				"required_volunteer"=> ($needed_volunteer[0]->count != "") ? $needed_volunteer[0]->count : 0,
 				"joined_volunteers"	=> ($joined_volunteer[0]->count != "") ? $joined_volunteer[0]->count : 0,

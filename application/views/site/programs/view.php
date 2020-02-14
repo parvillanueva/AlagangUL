@@ -155,7 +155,7 @@
 															<button type="button" class="au-volunteered au-btnyellow float-right">Unpublished</button>
 														<?php } ?>
 													<?php } else {
-														if($value['required_volunteer']!=0){
+														if($value['required_volunteer']!=0 && $value['is_not_joined'] !=1){
 															if(!$value['is_joined']){
 													?>	
 														<a href="<?= $value['link'];?>" class="au-volunteer au-btnyellow float-right" style="display: block">Volunteer</a>
@@ -386,7 +386,7 @@
 
 	});
 
-	$(document).on('click', '.workplace-share', function() {
+	/*$(document).on('click', '.workplace-share', function() {
 		var user_fb_id = "<?=$_SESSION['user_impersonate_token']?>";
 		var url_root = document.location.host;
 		var uri = window.location.href;
@@ -403,7 +403,7 @@
 			}, 'json');
 		}, 'json');
 
-	});
+	});*/
 
 	$(document).on('click', '#btnSubmit', function(e){
 		e.preventDefault();
