@@ -26,7 +26,7 @@
 							<i class="fas fa-lock"></i>		
 							<input type="email" class="form-control" id="email" placeholder="Email Address" name="email" required>
 							<div class="valid-feedback" id="html_element"></div>
-							<div class="invalid-feedback">Please fill out this field.</div>
+							<div class="invalid-feedback error_message">Please fill out this field.</div>
 						</div>
 					</div>
 					<div class="form-row">
@@ -76,6 +76,8 @@
 					}
 				}
 			});
+		} else{
+			$('.error_message').show();
 		}
 	});
 </script>

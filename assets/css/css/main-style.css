@@ -61,10 +61,13 @@ p{
      font-size: 10px;
      display: inline-block;
      color: rgba(255, 255, 255, 0.7);
-     margin: 3px 0 3px 10px;
+     margin: 13px 0 3px 10px;
 }
  .au-pf a {
      color: #ffffff;
+}
+.au-footer img{
+     max-width: 150px;
 }
  .au-pf a:hover {
      opacity: 0.7;
@@ -260,6 +263,7 @@ p{
      background-repeat: no-repeat;
      background-size: cover;
      padding: 1.5em;
+     min-height: 350px;
 }
  .au-scroll {
      position: absolute;
@@ -428,14 +432,14 @@ p{
 }
  .au-p1 {
      display: block;
-     font-size: 16px;
+     font-size: 14px;
      font-weight: 700;
      color: #fff;
      margin-bottom: 10px;
 }
  .au-p2 {
      display: block;
-     font-size: 12px;
+     font-size: 10px;
      font-weight: 400;
      color: #fff;
      margin-bottom: 10px;
@@ -471,7 +475,7 @@ p{
      margin-top: 5px;
 }
  .au-fp-details>.au-p2 {
-     height: 54px;
+     height: 44px;
      margin-bottom: 20px;
      overflow: hidden;
      text-overflow: ellipsis;
@@ -480,18 +484,21 @@ p{
      -webkit-line-clamp: 3;
 }
  .au-fp-details>.au-p1 {
-     height: 48px;
+     height: 20px;
      overflow: hidden;
      text-overflow: ellipsis;
      display: -webkit-box;
      -webkit-box-orient: vertical;
-     -webkit-line-clamp: 2;
+     -webkit-line-clamp: 1;
 }
  .au-fp-fdetails .au-btnyellow {
      float: right;
 }
+.au-fp-fdetails .au-p2{
+     margin-bottom: 0px;
+}
  .au-memcounter {
-     font-size: 12px;
+     font-size: 11px;
      height: 30px;
      display: inline-block;
 }
@@ -545,8 +552,8 @@ p{
      padding: 1em 0;
 }
  .au-rtitle {
-     font-size: 16px;
-     height: 48px;
+     font-size: 14px;
+     height: 41px;
      margin-bottom: 10px;
      font-weight: 700;
      color: #092E6E;
@@ -2203,4 +2210,15 @@ p{
          height: 35px;
          margin-top: 13px;
     }
+}
+
+@media (max-width:991px){
+     .au-hero-container .au-img-responsive{
+          width:75%;
+          margin-left:auto;
+          margin-right: auto;
+     }
+     .au-hero-bg{
+          min-height:520px;
+     }
 }
