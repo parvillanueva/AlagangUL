@@ -147,34 +147,88 @@ class Sign_up extends CI_Controller {
 	}
 	
 	function email_template_otp($otp){
-		$html = '<!DOCTYPE html>
-				<html lang="en">
-				<head>
-					<title>Alagang Unilab | OTP email template</title>
-					<meta charset="utf-8">
-					<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-				</head>
-				<body style="background-color:#092e6e; margin:0; padding:0;">
-					<div style="background-color:#092e6e; text-align: center; font-family: montserrat, sans-serif; padding: 15px 15px 45px;">
-						<img src="http://172.29.70.126/alagang_unilab/uploads/au-alagangunilab.png" style="width: 400px; height: auto; margin: auto;">
-						<!-- otp sent message -->
-						<div style="max-width: 500px; border: 1px solid #ccc; background-color: #fff; margin: auto;">
-							<div style="padding:20px;">
-								<h4 style="font-family: "myriad-pro", sans-serif; color: #092e6e;">One-time password for Alagang Unilab signup</h4>
-								<p>
-									Hello Guest;<br>
-									Thank you for your interest in joining the Alagang Unilab program. In order to continue with your Sign up, please enter the One-Time Password provided below:
-								</p>
-								<div style="border: 1px solid #eee; padding: 15px 0 15px 25px; display: inline-block; margin-bottom: 20px; font-size: 2.2em; font-weight: bold; letter-spacing: .75em;">
-									'.$otp.'
-								</div>
-							</div>
-						</div>
-						<div style="color: #fff; max-width: 500px; font-size: .75em; margin: 15px auto 15px;">
-							If you received this email by mistake, send us a report. Lorem ipsum dolor sit amet conserctetuer adipiscing nomnumny di dalam hati nay.
-						</div>				
-					</div>
-				</body>
+		$html = '<html>
+					<head>
+					</head>
+
+					<body style="background: #092E6E;width:100%;height: 100%;font-family: Arial, Helvetica, sans-serif;">
+					<table style="width:100%;">
+						<tbody>
+							<tr>
+								<td>
+									<center>
+										<img width="330" height="150px" src="http://172.29.70.126/alagang_unilab/uploads/au-alagangunilab.png"
+											style="margin-bottom:15px;">
+									</center>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<table width="500" align="center" bgcolor="white" style="border:1px solid #dedede;padding:25px; margin-right:auto;margin-left:auto">
+										<tr>
+											<td>
+												<center>
+													<b style="padding-bottom:35px;color: #092e6e;font-weight:700;font-size:18px;">One-time password for Alagang Unilab signup</b>
+													<p style="font-size:15px;font-weight:300;color: #4b4d4d;line-height: 24px;">
+														Hello Juan dela Cruz;<br>
+														Thank you for your interest in joining the Alagang Unilab program. In order to continue with your Sign up,
+														please
+														enter the One-Time Password provided below:
+													</p>
+													<br><br>
+													<table width="340" align="center" style="border: 1px solid #eee;" >
+														<tr>
+															<td>
+																<center>
+																	<p align="center"
+																		style="text-align:center;padding: 15px 0 15px 25px; display: inline-block; font-size:40px; font-weight: bold; letter-spacing: .75em;margin:0px auto;">
+																		'.$otp.'
+																	</p>
+																</center>
+															</td>
+														</tr>
+													</table>
+													<br><br>    
+													<p width="375" align="center" style="width:75%; font-size: 12px; color: #bbb; margin:0px auto;margin-bottom:25px;">
+														Please note that this One-time password will expire if not used in 6 hours. If the expiration period has passed, you may just request for another OTP by clicking <a href="#">here</a>.
+													</p>
+													<table role="presentation" cellspacing="0" cellpadding="0" border="0">
+														<tr>
+															<td width="125" height="50" style="background: #1AA3F9; text-align: center;">
+																<a href="javascript:void(0);"
+																	style="background: #1AA3F9; padding: 15px;  font-size: 16px; line-height: 1.1; text-align: center; text-decoration: none; display: block; text-transform: uppercase;">
+																	<span style="color:#ffffff;">Verify OTP</span>
+																</a>
+															</td>
+														</tr>
+													</table>
+													<!-- <a align="center" width="125" height="50" href="javascript:void(0);" bgcolor="#1AA3F9" color="white" style="text-decoration: none; background-color:#1AA3F9 ;color:#fff; margin-top: 15px; border: 0; padding: 15px; text-transform: uppercase;">Verify OTP</a> -->
+												</center>
+											</td>
+										</tr>
+									</table>
+									
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<table width="500" align="center">
+										<tr>
+											<td>
+												<center style="width:500px;margin-left:auto;margin-right:auto;">
+													<p align="center" style="color: #fff; width: 500px; font-size: 14px; margin: 15px auto 15px;">
+														If you received this email by mistake, send us a report. Lorem ipsum dolor sit amet conserctetuer adipiscing
+														nomnumny di dalam hati nay.
+													</p>
+												</center>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					</body>
 				</html>';
 		return 	$html;	
 	}
