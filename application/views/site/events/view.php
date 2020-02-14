@@ -179,7 +179,7 @@
 									 				$is_disabled_css = 'disabled_css';
 									 			}
 									 		}*/
-									 		if($value['required_volunteers']<=$value['joined_volunteers'] || $event_details[0]['is_joined']==1 || $event_details[0]['is_not_joined']==1){
+									 		if($value['required_volunteers']<=$value['joined_volunteers'] || $event_details[0]['is_joined']==1 || $event_details[0]['is_not_joined']==1){ 
 									 			$is_disabled = 'disabled';
 									 			$is_disabled_css = 'disabled_css';
 									 		}
