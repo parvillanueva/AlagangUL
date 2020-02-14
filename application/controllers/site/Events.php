@@ -271,17 +271,19 @@ class Events extends GS_Controller {
 
 
 			$is_joined = false;
-			$query_is_joined = "SELECT * FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id') . " AND event_id = " . $value->id ." ".$type_where."";
+			$query_is_joined = "SELECT * FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id')." AND status >=0" . " AND event_id = " . $value->id ." ".$type_where."";
 			$result_is_joined = $this->db->query($query_is_joined)->result();
 			if(count($result_is_joined) > 0){
 				$is_joined = true;
 			}
+			$is_not_joined = $this->db->query("SELECT count(id) as count FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id') . " AND event_id = " . $value->id)->result(); 
 			
 			$query_program_details = "SELECT id, image_thumbnail, url_alias FROM tbl_programs WHERE id = " . $value->program_id;
 			$program_details = $this->db->query($query_program_details)->result();
 			
 			$events[] = array(
 				"id"				=> $value->id,
+				"url_alias"			=> $value->url_alias,
 				"program_details"   => $program_details[0],
 				//"link"				=> $event_page_url,
 				"title"				=> $value->title,
@@ -293,6 +295,7 @@ class Events extends GS_Controller {
 				"volunteer_points"	=> $value->volunteer_points,
 				"is_admin"			=> ($value->user_id == $this->session->userdata('user_sess_id')) ? true : false,
 				"is_joined"			=> $is_joined,
+				"is_not_joined"		=> ($is_not_joined[0]->count>=2) ? 1 : 0, 
 				"required_volunteer"=> ($needed_volunteer[0]->count != "") ? $needed_volunteer[0]->count : 0,
 				"joined_volunteers"	=> ($joined_volunteer[0]->count != "") ? $joined_volunteer[0]->count : 0,
 			);
