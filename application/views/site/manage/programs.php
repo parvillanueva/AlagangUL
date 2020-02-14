@@ -173,7 +173,7 @@
 		  			html += "	<td>" ;
 		  			html += "		<button data-image='"+b.image_thumbnail+"' data-id='"+b.id+"' data-urlalias='"+b.url_alias+"' data-name='"+b.name+"' data-overview='"+b.overview+"'  data-area='"+b.area_covered+"' type='button' class='au-btnyellow editProgramBtn' style='background-color: #ff5722; float: left;'>Edit</button>";
 		  			html += "		<a href='<?= base_url("programs");?>/"+b.id+"/"+b.url_alias+"' target='_blank' type='button' class='au-btnyellow' style='background-color: #2196f3; float: left;'>Manage Page</a>";
-		  			html += "		<a href='<?= base_url("manage");?>/"+b.id+"' type='button' class='au-btnyellow' style='background-color: #132b62; float: left;'>Events <span class='badge badge-pill  badge-light'>"+b.event_count+"</span></a>";
+		  			html += "		<a href='<?= base_url("manage");?>/"+b.id+"/"+b.url_alias+"' type='button' class='au-btnyellow' style='background-color: #132b62; float: left;'>Events <span class='badge badge-pill  badge-light'>"+b.event_count+"</span></a>";
 		  			html += "	</td>";
 		  			html += "</tr>";
 		  		});

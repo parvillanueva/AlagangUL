@@ -274,10 +274,10 @@
 <!-- Add Event Modal -->
 <div class="modal fade text-center" id="addEvent" data-backdrop="static">
 <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-        <div class="modal-body">
-            <span class="au-h4">Add Event</span>
-      			<form action="<?= base_url("programs/") . $details['details'][0]->id . "/" . $details['details'][0]->url_alias . "/add_event";?>" method="post" enctype="multipart/form-data" class="au-formm" id="addEventForm">
+	    <div class="modal-content">
+	        <div class="modal-body">
+	            <span class="au-h4">Add Event</span>
+	  			<form action="<?= base_url("programs/") . $details['details'][0]->id . "/" . $details['details'][0]->url_alias . "/add_event";?>" method="post" enctype="multipart/form-data" class="au-formm" id="addEventForm">
 	        		<div class="form-row">
 						<div class="col">
 							<div class="custom-file">
@@ -286,13 +286,6 @@
 							</div>
 							<img  style="width: 100%;" src="" id="previewImageEvent"/>
 						</div>
-<!-- 						<div class="col">
-							<div class="custom-file">
-								<input type="file" class="custom-file-input required_input" name="eventImage" id="customFile" onchange="readURLImgStandardPreviewEvent(this);" accept="image/x-png,image/gif,image/jpeg" />
-								<label class="custom-file-label" for="customFile">Choose file</label>
-							</div>
-							<img  style="width: 100%;" src="" id="previewImageEvent"/>
-						</div> -->
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
@@ -334,13 +327,9 @@
 	                    <button type="button" class="au-btn" id="btnSubmitEvent">Submit</button>
 	                </div>
 				</form>
-      		</div> 
-      		<!-- <div class="modal-footer">
-        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        		<button type="button" class="btn btn-primary" id="btnSubmit">Save changes</button>
-     		</div> -->
-    	</div>
-  	</div>
+	  		</div> 
+		</div>
+	</div>
 </div>
 
 <div class="modal fade text-center" id="program_add_event_modal" data-backdrop="static">

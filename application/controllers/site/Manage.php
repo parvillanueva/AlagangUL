@@ -28,9 +28,11 @@ class Manage extends GS_Controller {
 	{
 
 		$program_id = $this->uri->segment(2);
+		$program_url = $this->uri->segment(3);
 
 		//banner data	
 		$data['program_id'] = $program_id;
+		$data['program_url'] = $program_url;
 		$data['content'] = "site/manage/events";
 		$data['meta'] = array(
 			"title"         =>  "Manage",
