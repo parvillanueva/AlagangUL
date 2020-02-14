@@ -210,10 +210,6 @@ class Events extends GS_Controller {
 			'date_to' => $date_to
 		);
 		$data['events'] = $this->get_details($arr);
-		echo '<pre>';
-		print_r($data);
-		echo '</pre>';
-		die();
 		$this->load->view('site/events/event_list', $data);
 	
 	}
@@ -247,7 +243,7 @@ class Events extends GS_Controller {
 	}
 	
 	public function get_details($dat_arr = null){
-			$filter_where = "AND when like '%" . date("Y") . "%'";
+			$filter_where = "AND when like '%" . date("Y") . "%' ORDER BY month(`when`)";
 			$task_where = '';
 			$type_where = '';
 		if(!empty($dat_arr)){
