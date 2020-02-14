@@ -27,7 +27,9 @@ class User extends CI_Controller {
 		date_default_timezone_set('Asia/Manila');
 		$this->upload_file($_FILES, $this->session->userdata('email_address'));
 		$impersonate_token = $this->request_impersonate_token($this->session->userdata('email_address'));
-
+		if($impersonate_token==0){
+			$impersonate_token = '';
+		}
 		$arrData = array(
 			'last_name' => $_POST['lname'],
 			'first_name' => $_POST['fname'],
