@@ -103,9 +103,9 @@
 							<table>
 								<thead>
 									<tr>
-										<th scope="col">Possible task for volunteers</th>
+										<th scope="col" >Possible task for volunteers</th>
 										<th scope="col">Volunteer Name</th>
-										<th scope="col">Action</th>
+										<th scope="col" style="width:20%;">Action</th>
 
 									</tr>
 								</thead>
@@ -143,7 +143,7 @@
 
             $.ajax({
                 type : "POST",
-                url  :  "<?= base_url('site/events/update_points');?>",
+                url  :  "<?= base_url('site/events/update_task_user');?>",
                 dataType : "JSON",
                 data : {approval_id:approval_id,points:points,user_id:user_id,event_task_id:event_task_id},
                   beforeSend: function() {
@@ -156,7 +156,28 @@
             });
 	});
 
+    $(document).on("click", '.btn_disqualify', function(event) {
+    	var user_id = $(this).attr('data-user_id');
+    	var points = $(this).attr('data-points');
+    	var approval_id = $(this).attr('data-id');
+    	var event_task_id = $(this).attr('data-event_task_id');
 
+    	console.log(event_task_id);
+
+            $.ajax({
+                type : "POST",
+                url  :  "<?= base_url('site/events/disqualify_task_user');?>",
+                dataType : "JSON",
+                data : {approval_id:approval_id,points:points,user_id:user_id,event_task_id:event_task_id},
+                  beforeSend: function() {
+                  },
+                  success: function(data) {
+                  },
+                  complete: function(data){
+                    getlist();
+                  }
+            });
+	});
 
     function getlist(){
             $.ajax({
@@ -177,11 +198,18 @@
 							html += '		<td data-header="Volunteer Name">'+y["volunteer_name"]+'</td>'
 								 if(y['status'] == 0){ 
 							html += '			<td data-header="Status" class="au-actions">'
-							html += '				<a href="javascript:void(0)"   class="au-btnvolunteer au-btnvolunteertype au-time primary btn_approve" data-user_id = "'+y["volunteer_id"]+'" data-event_task_id = "'+y["event_task_id"]+'" data-id = "'+y["approval_id"]+'"  data-points = "'+y["points"]+'" style="background-color:#1894e7;"><i class="fas fa-check" title="Time"></i>Approve</a>'
+							html += '				<center><a href="javascript:void(0)"  class="au-btnvolunteer au-btnvolunteertype au-time primary btn_approve" data-user_id = "'+y["volunteer_id"]+'" data-event_task_id = "'+y["event_task_id"]+'" data-id = "'+y["approval_id"]+'"  data-points = "'+y["points"]+'" style="background-color:#1894e7;"><center><i class="fas fa-check" title="Time"></i>Qualify</center></a><a href="javascript:void(0)"  class="au-btnvolunteer au-btnvolunteertype au-time primary btn_disqualify" data-user_id = "'+y["volunteer_id"]+'" data-event_task_id = "'+y["event_task_id"]+'" data-id = "'+y["approval_id"]+'"  data-points = "'+y["points"]+'" style="background-color:red; width:125px;"><center><i class="fas fa-check" title="Time"></i>Disqualify</center></a></center>'
 							html += '			</td>'
 								}
+								else if(y['status'] == 1){
+									html += '			<td data-header="Status" class="au-actions">'
+									html += '				<center><a href="javascript:void(0)"  class="au-btnvolunteer au-btnvolunteertype au-time primary btn_disqualify" data-user_id = "'+y["volunteer_id"]+'" data-event_task_id = "'+y["event_task_id"]+'" data-id = "'+y["approval_id"]+'"  data-points = "'+y["points"]+'" style="background-color:red; width:125px;"><center><i class="fas fa-check" title="Time"></i>Disqualify</center></a></center>'
+									html += '			</td>'								
+								}
 								else{				
-							html += '		<td data-header="Status">Approved</td>'		
+									html += '			<td data-header="Status" class="au-actions">'
+									html += '				<center><a href="javascript:void(0)"  class="au-btnvolunteer au-btnvolunteertype au-time primary btn_approve" data-user_id = "'+y["volunteer_id"]+'" data-event_task_id = "'+y["event_task_id"]+'" data-id = "'+y["approval_id"]+'"  data-points = "'+y["points"]+'" style="background-color:#1894e7;"><center><i class="fas fa-check" title="Time"></i>Qualify</center></a></center>'
+									html += '			</td>'
 								}
 							html += '	</tr>'
                    	});

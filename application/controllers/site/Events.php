@@ -171,6 +171,7 @@ class Events extends GS_Controller {
 		$data['program_details'] = $this->get_program_details($program_id);
 		$data['event_details'] = $this->get_event_details($event_id);
 		$data['event_task'] = $this->get_event_tasks($event_id);
+
 		$data['event_volunteers'] = $this->get_volunteers($event_id);
 		$data['badges'] = $this->get_badges();
 		$data['earn_badge'] = $this->get_earn_badge($event_id);
@@ -442,7 +443,9 @@ class Events extends GS_Controller {
 										CONCAT('" . base_url() . "','/',tbl_users.imagepath) as profile_image , CONCAT(tbl_users.first_name, ' ', tbl_users.last_name) as user 
 										FROM tbl_users_points_approved 
 										LEFT JOIN tbl_users ON tbl_users.id = tbl_users_points_approved.user_id 
-										WHERE event_id = " . $event_id . " GROUP BY tbl_users.id";
+										WHERE tbl_users_points_approved.status >= -2 and event_id = " . $event_id . " 
+										GROUP BY tbl_users.id
+										ORDER BY  date_volunteer";
 
 		$joined_volunteer = $this->db->query($query_joined_volunteer)->result();
 			foreach($joined_volunteer as $key => $value){
@@ -462,7 +465,7 @@ class Events extends GS_Controller {
 	}
 
 	public function get_event_tasks($event_id){
-		$get_event_tasks = $this->Gmodel->get_query('tbl_program_event_task',"event_id = " . $event_id);
+		$get_event_tasks = $this->Gmodel->get_query('tbl_program_event_task',"event_id = " . $event_id." AND status >= 0");
 		$event_task = array();
 		
 		foreach ($get_event_tasks as $key => $value) {
@@ -663,6 +666,31 @@ class Events extends GS_Controller {
 			echo json_encode(array('responce' => 'failed'));
 		}
 	}
+
+
+	public function update_event_task(){
+
+		$id = $_POST['task_id'];
+		$arr = array(
+			'event_id' => $_POST['event_id'],
+			'task'=> $_POST['possible_volunteer'],
+			'qualification' => $_POST['qualification'],
+			'required_volunteers' => $_POST['needed'],
+			'create_date' => date('Y-m-d H:i:s'),
+			'update_date' => date('Y-m-d H:i:s'),
+			'status' => 1,
+		);
+
+		$sql_result = $this->Gmodel->update_data('tbl_program_event_task',$arr,'id',$id);
+		// $task_query = "SELECT max(id) as task_id FROM tbl_program_event_task" ;
+		// $task_result = $this->db->query($task_query)->result();
+		$result = $this->update_badges_details($id,$_POST['badges']);
+		if($result > 0 ){
+			echo json_encode(array('responce' => 'success'));
+		} else{
+			echo json_encode(array('responce' => 'failed'));
+		}
+	}
 	
 	public function add_badges_details($task_id, $badges){
 		foreach($badges as $bloop){
@@ -672,6 +700,22 @@ class Events extends GS_Controller {
 			);
 			$sql_result = $this->Gmodel->save_data('tbl_program_event_task_badge', $arr);
 		}
+	}
+
+	public function update_badges_details($task_id, $badges){
+		$count = 0;
+		$query = "DELETE FROM tbl_program_event_task_badge WHERE event_task_id = $task_id";
+		$result = $this->db->query($query);
+		foreach($badges as $bloop){
+			$arr = array(
+				'event_task_id' => $task_id,
+				'badge_id' => $bloop
+			);
+			$sql_result = $this->Gmodel->save_data('tbl_program_event_task_badge', $arr);
+			$count++;
+			// $this->Gmodel->update_data('tbl_program_event_task_badge',$arr,'id',$result[0]['id']);
+		}
+		return $count;
 	}
 	
 	public function add_event(){
@@ -759,21 +803,45 @@ class Events extends GS_Controller {
 	    return trim(preg_replace('/-+/', '-', $title), '-/');
 	}
 
-	public function update_points(){
+	public function update_task_user(){
 
 		$approval_id = $this->input->post('approval_id');
 		$user_id 	 = $this->input->post('user_id');
 		$points 	 = $this->input->post('points');
 		$event_task_id 	 = $this->input->post('event_task_id');
+		$datetoday 		= date("Y-m-d H:i:s");
 		
 		$update_status = "UPDATE tbl_users_points_approved SET status = 1 WHERE id = $approval_id";
 		$update_status_result = $this->db->query($update_status);
-		$update_status2 = "UPDATE tbl_users_points SET current_points = current_points + $points , total_points = total_points + $points  WHERE user_id = $user_id";
+		$update_status2 = "UPDATE tbl_users_points SET current_points = current_points + $points , total_points = total_points + $points, update_date = '$datetoday' WHERE user_id = $user_id";
 		$update_status_result2 = $this->db->query($update_status2);
-		$update_status3 = "UPDATE tbl_users_badge SET  points = $points  WHERE user_id = $user_id AND event_task_id = $event_task_id";
+		$update_status3 = "UPDATE tbl_users_badge SET  points = $points, update_date = '$datetoday'   WHERE user_id = $user_id AND event_task_id = $event_task_id";
 		$update_status_result3 = $this->db->query($update_status3);
-		return $update_status_result3;
+		$update_status4 = "UPDATE tbl_program_event_task_volunteers SET  status = 1  WHERE user_id = $user_id AND event_task_id = $event_task_id";
+				$update_status_result4 = $this->db->query($update_status4);
+		return $update_status_result4;
 	}
+
+
+	public function disqualify_task_user(){
+
+		$approval_id = $this->input->post('approval_id');
+		$user_id 	 = $this->input->post('user_id');
+		$points 	 = $this->input->post('points');
+		$event_task_id 	 = $this->input->post('event_task_id');
+		$datetoday 		= date("Y-m-d H:i:s");
+		
+		$update_status = "UPDATE tbl_users_points_approved SET status = '-2' WHERE id = $approval_id";
+		$update_status_result = $this->db->query($update_status);
+		$update_status2 = "UPDATE tbl_users_points SET current_points = current_points - $points , total_points = total_points - $points, update_date = '$datetoday' WHERE user_id = $user_id";
+		$update_status_result2 = $this->db->query($update_status2);
+		$update_status3 = "UPDATE tbl_users_badge SET  points = $points, update_date = '$datetoday'   WHERE user_id = $user_id AND event_task_id = $event_task_id";
+		$update_status_result3 = $this->db->query($update_status3);
+		$update_status4 = "UPDATE tbl_program_event_task_volunteers SET  status = '-2'  WHERE user_id = $user_id AND event_task_id = $event_task_id";
+				$update_status_result4 = $this->db->query($update_status4);
+		return $update_status_result4;
+	}
+
 
 	public function get_task()
 	{
@@ -794,6 +862,24 @@ class Events extends GS_Controller {
 		// $query = "SELECT task,id FROM tbl_program_event_task WHERE status = 1";
 		// $result_events= $this->db->query($query)->result_array();
 		// return $result_events;
+	}
+
+
+	public function get_task_data(){
+		$id = $this->input->post('id');
+		$query = "SELECT * FROM tbl_program_event_task WHERE id = $id";
+		$result = $this->db->query($query)->result_array();
+		$arr = array();
+		$selected_badge = "SELECT name FROM tbl_program_event_task_badge LEFT JOIN tbl_badges ON tbl_badges.id = tbl_program_event_task_badge.badge_id WHERE event_task_id = ".$result[0]['id'];
+		$selected_badge_result = $this->db->query($selected_badge)->result_array();
+		array_push($result[0],$selected_badge_result);
+		echo json_encode($result);
+	}
+	public function delete_task_data(){
+		$id = $this->input->post('id');
+		$query = "UPDATE tbl_program_event_task SET status = '-2' WHERE id = $id";
+		$result = $this->db->query($query);
+		echo json_encode($result);
 	}
 
 }
