@@ -10,9 +10,11 @@
 <header class="au-header">
 		<div class="au-navigation au-container">
 			<nav class="au-navbar navbar navbar-expand-lg">
-				<button type="button" class="au-navbar-toggler navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-					<img src="<?=base_url()?>assets/site/img/au-menu.svg" width="28px" height="28px">
-				</button>
+				<div>
+					<button type="button" class="au-navbar-toggler navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+						<img src="<?=base_url()?>assets/site/img/au-menu.svg" width="28px" height="28px">
+					</button>
+				</div>
 				<a href="<?= base_url();?>" class="au-navbar-brand navbar-brand">
 					<img src="<?=base_url()?>assets/site/img/au-logo.png" alt="Alagang Unilab Logo" class="au-logo">
 				</a>
@@ -33,6 +35,10 @@
 							<a id="programs"  href="<?= base_url("programs");?>" class="nav-item nav-link">Programs</a>
 							<a id="events"  href="<?= base_url("events");?>" class="nav-item nav-link">Events</a>
 							<!-- <a id="get_rewards"  href="<?= base_url("get-rewards");?>" class="nav-item nav-link">Get Rewards</a> -->
+							<div class="d-lg-none">								
+								<!--<a href="accountsettings.html" class="nav-item nav-link">Account Settings</a>-->
+								<a href="<?= base_url("log-out");?>" class="nav-item nav-link">Logout</a>
+							</div>
 						</div>
 						<div class="au-user">
 							<!-- show this when logged out -->
