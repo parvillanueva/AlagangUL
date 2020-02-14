@@ -18,9 +18,9 @@
 				</a>
 				<div class="d-lg-none">
 					<?php if(empty($user_details[0]->imagepath)) : ?>
-						<img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-avatar">
+						<img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-avatar" onerror="imgError(this);">
 					<?php else: ?>
-						<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar">
+						<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar" onerror="imgError(this);">
 					<?php endif; ?>
 					
 				</div>
@@ -49,7 +49,7 @@
 										<?php if(empty($user_details[0]->imagepath)) : ?>
 											<img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-avatar">
 										<?php else: ?>
-											<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar">
+											<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar" onerror="imgError(this);">
 										<?php endif; ?>
 									</div>
 									<div class="au-inner">
@@ -85,6 +85,12 @@
 	</header>
 	<script type="text/javascript">
 		var base_url = '<?=base_url();?>';
+	    function imgError(image) {
+	        image.onerror = "";
+	        image.src = base_url+"/assets/img/au-avatar.svg";
+	        return true;
+	    }
+	    		var base_url = '<?=base_url();?>';
 	    $('img').on("error", function() {
 	        $(this).attr('src', base_url+'/assets/img/au-avatar.svg');
 	    });

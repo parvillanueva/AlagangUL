@@ -3,7 +3,7 @@
 	<div class="au-container au-padding">
 		<div class="au-programheading">
 			<div class="au-phthumbnail">
-				<img src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" class="au-fp-thumbnailimg">
+				<img src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" class="au-fp-thumbnailimg" onerror="imgErrorProgram(this);">
 			</div>
 			<div class="au-phdetails">
 				<span class="au-h5"><?= $details['details'][0]->name;?></span>
@@ -126,7 +126,7 @@
 										<div class="au-program">
 											<a href="<?= $value['link'];?>" class="au-lnk">
 												<div class="au-pthumbnail">
-													<img src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" class="au-fp-thumbnailimg">
+													<img src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" class="au-fp-thumbnailimg" onerror="imgErrorProgram(this);">
 												</div>
 												<span class="au-ptitle"><?= $value['title'];?></span>
 												<span class="au-pdetails"><?= $value['description'];?></span>
@@ -187,7 +187,7 @@
 						<div class="col-lg-3 col-6">
 							<a href="<?= base_url(); ?>programs/{id}/{url_alias}" class="au-lnk au-plink">
 								<div class="au-opthumbnail">
-									<img src="<?=base_url()?>{image_thumbnail}" class="au-fp-thumbnailimg" alt="{name}">
+									<img src="<?=base_url()?>{image_thumbnail}" class="au-fp-thumbnailimg" onerror="imgErrorProgram(this);" alt="{name}">
 								</div>
 							</a>
 						</div>
@@ -216,7 +216,7 @@
 								<input type="file" class="custom-file-input" name="programImage" id="customFile" onchange="readURLImgStandardPreview(this);" accept="image/x-png,image/gif,image/jpeg" />
 								<label class="custom-file-label" for="customFile">Choose file</label>
 							</div>
-							<img  style="width: 100%;" src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" id="previewImage"/>
+							<img  style="width: 100%;" src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" id="previewImage" onerror="imgErrorEditProgram(this);"/>
 						</div>
 					</div>
 	        		<div class="form-row">
@@ -363,9 +363,21 @@
 </div>
 
 <script type="text/javascript">
+	var base_url = '<?=base_url();?>';
 	var datatoday = new Date();
 	var datatodays = datatoday.setDate(new Date(datatoday).getDate() + 1);
 
+    function imgErrorProgram(image) {
+        image.onerror = "";
+        image.src = base_url+"/assets/img/broken_img2.jpg";
+        return true;
+    }
+
+    function imgErrorEditProgram(image) {
+        image.onerror = "";
+        image.src = base_url+"/assets/img/broken_img2.jpg";
+        return true;
+    }
 
 	$('#whenpicker').datetimepicker({
 	    controlType: 'select',

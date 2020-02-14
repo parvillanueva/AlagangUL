@@ -35,7 +35,8 @@
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" name="programImage" id="customFile" onchange="readURLImgStandardPreview(this);" accept="image/x-png,image/gif,image/jpeg" />
                                     <label class="custom-file-label" for="customFile">Choose file</label>
-                                    <img  style="width: 100%;" src="<?= base_url() . $profile->imagepath;?>" id="previewImage"/>
+                                    <img  style="width: 100%;" src="<?= base_url() . $profile->imagepath;?>" 
+onerror="imgErrorProfile(this);" id="previewImage" />
                                 </div>
                             </div>
                         </div>
@@ -68,6 +69,13 @@
 </div>
 
 <script type="text/javascript">
+    var base_url = '<?=base_url();?>';
+    function imgErrorProfile(image) {
+        image.onerror = "";
+        image.src = base_url+"/assets/img/au-avatar.svg";
+        return true;
+    }
+
 	$(".custom-file-input").on("change", function() {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
