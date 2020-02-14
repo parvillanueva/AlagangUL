@@ -86,7 +86,7 @@
 					<div class="form-row">
 						<div class="col">
 							<label class="form-check-label">
-								<input class="form-check-input required_input" required="required" id="understood_details" type="checkbox" name="terms"> I have read and understood the <a href="#" class="au-lnk">Terms of Use</a> and <a href="#" class="au-lnk">Privacy Statement</a>.
+								<input class="form-check-input required_input" required="required" id="understood_details" type="checkbox" name="terms"> I have read and understood the <a href="<?= base_url("terms-and-conditions");?>" class="au-lnk">Terms of Use</a> and <a href="<?= base_url("privacy-statement");?>" class="au-lnk">Privacy Statement</a>.
 								<div class="alert_understood"><font color="red">This field is required.</font></div>
 							</label>
 						</div>

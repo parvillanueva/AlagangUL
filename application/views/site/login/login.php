@@ -83,7 +83,7 @@
 											<div class="col-md-6">					
 												<div class="form-row">
 													<div class="col text-right">
-														<a href="#" class="au-lnk" id="forgot_password">Forgot your password?</a>
+														<a href="#" class="au-lnk" id="forgot_password">Forgot password?</a>
 													</div>
 												</div>
 											</div>

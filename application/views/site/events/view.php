@@ -610,6 +610,20 @@
 		});
 	}
 	
+	$(document).on('click', '.badges_input', function(){
+		if($(this).is(':checked')){
+			var count_checked = $('.badges_input:checked').length;
+			if(count_checked == 2){
+				$(".badges_input:not(:checked)").attr('disabled', true);
+			}
+		} else{
+			var count_checked_un = $('.badges_input:checked').length;
+			if(count_checked_un < 2){
+				$(".badges_input:not(:checked)").attr('disabled', false);
+			}
+		}
+	});
+	
 	$(document).on('click', '#btnTestimonial', function(result){
 		var event_id = "<?php echo $event_details[0]['id'] ?>";
 		var testimonial = $('#testimonial_comment').val();
