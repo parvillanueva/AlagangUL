@@ -99,7 +99,7 @@ class Manage extends GS_Controller {
 			tbl_program_events.`where`,
 			tbl_program_events.`url_alias`,
 			tbl_program_events.volunteer_points,
-			CONCAT('programs/',tbl_programs.id, '/', tbl_programs.url_alias, '/' , tbl_program_events.id , '/' , tbl_program_events.url_alias ) AS Url
+			CONCAT('programs/',tbl_programs.id, '/', tbl_programs.url_alias, '/event/' , tbl_program_events.id , '/' , tbl_program_events.url_alias ) AS Url
 			FROM
 			tbl_program_events
 			INNER JOIN tbl_programs ON tbl_programs.id = tbl_program_events.program_id
