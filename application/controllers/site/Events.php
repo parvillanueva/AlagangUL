@@ -136,10 +136,16 @@ class Events extends GS_Controller {
 			
 		}
 		else{
+			$this->db->query("UPDATE tbl_program_event_task_volunteers SET status = -3 WHERE event_id = '".$_GET['event_id']."' AND user_id ='".$user_id."'");
+
+			$this->Gmodel->save_data('tbl_program_event_task_volunteers', $data_array);
+
+
+
 			$data = "SELECT volunteer_points FROM tbl_program_events WHERE id = ".$_GET['event_id'];
 			$result = $this->db->query($data)->result();
 
-			$this->Gmodel->save_data('tbl_program_event_task_volunteers', $data_array);
+			
 			$data_array['points'] = $result[0]->volunteer_points;
 			$this->Gmodel->save_data('tbl_users_points_approved', $data_array);
 
