@@ -76,7 +76,7 @@
 		  			html += "	<td>" ;
 		  			html += "		<button type='button' class='au-btnyellow editProgramBtn' style='background-color: #ff5722; float: left;'>Edit</button>";
 		  			html += "		<a href='"+b.Url+"' target='_blank' type='button' class='au-btnyellow' style='background-color: #2196f3; float: left;'>Manage Page</a>";
-		  			html += "		<a href='<?= base_url("manage");?>/"+b.id+"' type='button' class='au-btnyellow' style='background-color: #132b62; float: left;'>Volunteers <span class='badge badge-pill  badge-light'>"+b.volunteers+"</span></a>";
+		  			html += "		<a href='<?= base_url("volunteers");?>/"+b.id+"' type='button' class='au-btnyellow' style='background-color: #132b62; float: left;'>Volunteers <span class='badge badge-pill  badge-light'>"+b.volunteers+"</span></a>";
 		  			html += "	</td>";
 		  			html += "</tr>";
 		  		});

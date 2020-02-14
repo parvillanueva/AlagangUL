@@ -46,9 +46,11 @@
 
 
 		$route["manage"] = "site/manage";
+		$route["manage/(:any)"] = "site/manage/events/$1";
+		$route["volunteers/(:any)"] = "site/manage/volunteers/$1";
+
 		$route["manage/program_list"] = "site/manage/program_list";
 		$route["manage/event_list"] = "site/manage/get_event_list";
-		$route["manage/(:any)"] = "site/manage/events/$1";
 
 		$route["content_management"] = "content_management/home";
 		$route["404_override"] = "";

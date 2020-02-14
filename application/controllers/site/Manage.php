@@ -48,6 +48,30 @@ class Manage extends GS_Controller {
 		$data['active_menu'] = "events";
 		$this->parser->parse("site/layout/template",$data);
 	}
+	public function volunteers()
+	{
+
+		$program_id = $this->uri->segment(2);
+
+		//banner data	
+		$data['program_id'] = $program_id;
+		$data['content'] = "site/manage/volunteers";
+		$data['meta'] = array(
+			"title"         =>  "Manage",
+			"description"   =>  "",
+			"keyword"       =>  ""
+		);
+		
+		$data['fb_og'] = array(
+			// "type"          =>  $this->Global_model->site_meta_og(38, 'site_menu', 'og_type'),
+			// "title"         =>  $this->Global_model->site_meta_og(38, 'site_menu', 'og_title'),
+			// "description"         =>  $this->Global_model->site_meta_og(38, 'site_menu', 'og_description'),
+			// "image"         =>  base_url().$this->Global_model->site_meta_og(38, 'site_menu', 'og_image'),
+		);
+		
+		$data['active_menu'] = "events";
+		$this->parser->parse("site/layout/template",$data);
+	}
 
 	public function program_list()
 	{
