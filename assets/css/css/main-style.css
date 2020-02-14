@@ -1,6 +1,6 @@
-@import url("../../fontawesome/css/fontawesome.css");
- @import url("../../fontawesome/css/solid.css");
- @import url("../../fontawesome/css/brands.css");
+@import url("../fontawesome/css/fontawesome.css");
+ @import url("../fontawesome/css/solid.css");
+ @import url("../fontawesome/css/brands.css");
  html {
      scroll-behavior: smooth;
      min-width: 320px;
@@ -37,14 +37,14 @@ p{
      width: 100%;
 }
  .au-container {
-     max-width: 1366px;
+     max-width: 1000px;
      margin: 0 auto;
      font-weight: 400;
      font-size: 13px;
      position: relative;
 }
  .au-footer {
-     padding: 1.5em 1em;
+     padding: 1em 1em;
      -webkit-box-shadow: inset 0 15px 40px -15px rgba(0, 0, 0, 0.5);
      box-shadow: inset 0 15px 40px -15px rgba(0, 0, 0, 0.5);
      background: rgb(10, 35, 63);
@@ -58,13 +58,13 @@ p{
      text-align: right;
 }
  .au-pf {
-     font-size: 12px;
+     font-size: 10px;
      display: inline-block;
      color: rgba(255, 255, 255, 0.7);
      margin: 3px 0 3px 10px;
 }
  .au-pf a {
-     color: #1AA3F9;
+     color: #ffffff;
 }
  .au-pf a:hover {
      opacity: 0.7;
@@ -85,6 +85,7 @@ p{
      padding-top: 5px;
      padding-bottom: 5px;
      margin: 0 25px;
+     font-size: 11px;
 }
  .au-navbar .navbar-nav .nav-link:hover {
      color: #F9C417;
@@ -93,7 +94,7 @@ p{
      border-color: #F9C417;
 }
  .au-logo {
-     width: 280px;
+     width: 230px;
 }
  .au-user {
      margin: 0 -5px;
@@ -144,7 +145,7 @@ p{
      vertical-align: middle;
 }
  .au-accname {
-     font-size: 13px;
+     font-size: 11px;
      margin-left: 10px;
      font-weight: 700;
      color: #fff;
@@ -152,7 +153,7 @@ p{
      vertical-align: middle;
 }
  .au-accpoints {
-     font-size: 13px;
+     font-size: 11px;
      margin-left: 10px;
      font-weight: 400;
      color: #F9C417;
@@ -220,7 +221,7 @@ p{
      display: block;
 }
  .au-dropdown .dropdown-item {
-     font-size: 13px;
+     font-size: 12px;
      padding: 10px;
      background: #fff;
      border-bottom: 1px solid transparent;
@@ -247,7 +248,7 @@ p{
  .navbar-expand-lg .navbar-nav .au-dropdown {
      position: absolute;
      right: 0;
-     top: 63px;
+     top: 54px;
      max-width: 250px;
      width: 100%;
      padding: 10px 5px;
@@ -258,7 +259,7 @@ p{
      background-position: center;
      background-repeat: no-repeat;
      background-size: cover;
-     padding: 1em;
+     padding: 1.5em;
 }
  .au-scroll {
      position: absolute;
@@ -306,14 +307,14 @@ p{
      width: 100%;
 }
  .carousel-control-next, .carousel-control-prev {
-     width: 4em;
+     width: 5.5em;
 }
  .au-flexcenter>div {
      display: block;
 }
  .au-h1 {
      font-family: montserrat, sans-serif;
-     font-size: 38px;
+     font-size: 22px;
      display: block;
      line-height: 1.25em;
      margin-bottom: 20px;
@@ -321,7 +322,7 @@ p{
 }
  .au-h2 {
      font-family: montserrat, sans-serif;
-     font-size: 24px;
+     font-size: 16px;
      display: block;
      font-weight: 400;
      line-height: 1.5em;
@@ -330,7 +331,7 @@ p{
 }
  .au-h3 {
      font-family: myriad-pro, sans-serif;
-     font-size: 38px;
+     font-size: 24px;
      display: block;
      font-weight: 700;
      font-style: italic;
@@ -340,7 +341,7 @@ p{
 }
  .au-h4 {
      font-family: myriad-pro, sans-serif;
-     font-size: 24px;
+     font-size: 22px;
      display: block;
      font-weight: 700;
      font-style: italic;
@@ -369,7 +370,7 @@ p{
      display: inline-block;
 }
  .au-btnblue {
-     font-size: 16px;
+     font-size: 12px;
      font-weight: 700;
      color: #fff;
      background-color: #1AA3F9;
@@ -396,7 +397,7 @@ p{
      align-items: center;
 }
  .au-padding {
-     padding: 1em;
+     padding: 1.5em;
 }
  .au-featured-program {
      margin-bottom: 30px;
@@ -629,16 +630,16 @@ p{
      color: #fff;
 }
  .au-bgtrans .au-h1 {
-     font-size: 18px;
+     font-size: 16px;
 }
  .au-bgtrans .au-h2 {
-     font-size: 16px;
+     font-size: 14px;
 }
  .au-bgtrans .au-inner {
      padding: 2em 0em;
 }
  .au-signupimg {
-     max-width: 400px;
+     max-width: 300px;
 }
  .au-form {
      width: 100%;
@@ -652,9 +653,9 @@ p{
  .au-form .form-control {
      border-radius: 0;
      border: 1px solid rgba(0, 0, 0, 0.3);
-     font-size: 14px;
+     font-size: 12px;
      padding: 0 1em;
-     height: 44px;
+     height: 42px;
 }
  .au-form textarea.form-control {
      padding: 1em 1em;
@@ -672,9 +673,9 @@ p{
  .au-form .btn {
      border-radius: 0;
      color: #fff !important;
-     height: 44px;
+     height: 42px;
      padding: 0em 2.5em;
-     font-size: 14px;
+     font-size: 12px;
 }
  .au-form .custom-file {
      height: 44px;
@@ -745,7 +746,7 @@ p{
 }
  .au-form .au-iconned i {
      position: absolute;
-     top: 15px;
+     top: 14px;
      left: 1.5em;
      font-size: 13px;
      color: #092E6E;
@@ -1055,7 +1056,7 @@ p{
      padding: 1em;
      color: #fff;
      font-weight: 700;
-     font-size: 16px;
+     font-size: 14px;
      background: rgb(9, 46, 110);
      background: -moz-linear-gradient(45deg, rgba(9, 46, 110, 1) 0%, rgba(26, 163, 249, 1) 100%);
      background: -webkit-linear-gradient(45deg, rgba(9, 46, 110, 1) 0%, rgba(26, 163, 249, 1) 100%);
@@ -1641,6 +1642,9 @@ p{
      margin-left: 5px;
      font-size: 12px;
 }
+.au-userbox .au-form-wrapper{
+     padding: 2em 1em;
+}
 /*Extra small devices (portrait phones, less than 576px)*/
  @media (max-width: 575px) {
      .au-logo {
@@ -1868,15 +1872,15 @@ p{
          display: block;
     }
      .au-h1 {
-         font-size: 24px;
+         font-size: 22px;
          text-align: center;
     }
      .au-h2 {
-         font-size: 20px;
+         font-size: 16px;
          text-align: center;
     }
      .au-h3 {
-         font-size: 24px;
+         font-size: 22px;
          text-align: center;
     }
      .au-carousel .au-btnblue {
@@ -2060,15 +2064,15 @@ p{
          display: block;
     }
      .au-h1 {
-         font-size: 33px;
+         font-size: 22px;
          text-align: center;
     }
      .au-h2 {
-         font-size: 23px;
+         font-size: 16px;
          text-align: center;
     }
      .au-h3 {
-         font-size: 33px;
+         font-size: 24px;
          text-align: center;
     }
      .au-carousel .au-btnblue {

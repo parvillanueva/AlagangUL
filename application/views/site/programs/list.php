@@ -65,7 +65,7 @@
             <form action="<?= base_url("programs/add")?>" method="post" enctype="multipart/form-data" class="au-form" id="add_confirm">
         		<div class="form-row">
 					<div class="col">
-							<label class="file-label" >Are you sure you want to add this record?</label>
+							<label class="file-label" >Are you sure you want to add this program?</label>
 					</div>
 				</div>
 				<div class="au-modalbtn text-center">
