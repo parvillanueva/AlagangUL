@@ -52,6 +52,12 @@
     </div>
 </div>
 <script type="text/javascript">
+var base_url = '<?=base_url();?>';
+    function imgErrorProfile(image) {
+        image.onerror = "";
+        image.src = base_url+"/assets/img/au-avatar.svg";
+        return true;
+    }
 	$(document).ready(function() {
 		responsive();
 		$('#email').attr('readonly', true);

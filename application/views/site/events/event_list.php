@@ -15,13 +15,13 @@
 						<div class="col-sm-4 au-eventthumbnail">
 							<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> 10 points</span>
 							<span class="au-accpoints au-accpointsv"><div class="au-heart"><i class="fas fa-heart"></i></div>Volunteered</span>
-							<img src="<?= $eloop['image']; ?>" class="au-eventimg">
+							<img src="<?= $eloop['image']; ?>" class="au-eventimg" onerror="imgErrorEvent(this);">
 						</div>
 						<div class="col-sm-8 au-eventdetails">
 							<div class="au-program">
 								<a href="<?= base_url('programs/'.$eloop['program_details']->id.'/'.$eloop['program_details']->url_alias); ?>" class="au-lnk">
 									<div class="au-pthumbnail">
-										<img src="<?= base_url($eloop['program_details']->image_thumbnail); ?>" class="au-fp-thumbnailimg">
+										<img src="<?= base_url($eloop['program_details']->image_thumbnail); ?>" class="au-fp-thumbnailimg" onerror="imgErrorEvent(this);">
 									</div>
 									<span class="au-ptitle"><?= $eloop['title'] ?></span>
 									<span class="au-pdetails"><?= $eloop['description'] ?></span>
@@ -60,3 +60,11 @@
 		<?php } ?>
 	</div>
 </div>
+<script type="text/javascript">
+	var base_url = '<?=base_url();?>';
+    function imgErrorEvent(image) {
+        image.onerror = "";
+        image.src = base_url+"/assets/img/broken_img1.jpg";
+        return true;
+    }
+</script>
