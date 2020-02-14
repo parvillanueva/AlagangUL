@@ -1,6 +1,7 @@
 <div class="col">
 	<div class="row">
 		<?php $month = '';
+
 		foreach($events as $key => $eloop){ ?>
 			<?php 
 			$when = date('F', strtotime($eloop['when']));
@@ -19,7 +20,10 @@
 						</div>
 						<div class="col-sm-8 au-eventdetails">
 							<div class="au-program">
-								<a href="<?= base_url('programs/'.$eloop['program_details']->id.'/'.$eloop['program_details']->url_alias); ?>" class="au-lnk">
+								<?php
+									$link = base_url('programs/'.$eloop['program_details']->id.'/'.$eloop['program_details']->url_alias.'/event/'.$eloop['id'].'/'.$eloop['url_alias']);
+								?>
+								<a href="<?=$link?>" class="au-lnk">
 									<div class="au-pthumbnail">
 										<img src="<?= base_url($eloop['program_details']->image_thumbnail); ?>" class="au-fp-thumbnailimg">
 									</div>
@@ -44,8 +48,15 @@
 								<div class="row">
 									<div class="col"><span class="au-needed"><?= $eloop['required_volunteer'] ?> volunteers needed</span></div>
 									<div class="col">
-										<a href="eventdetails.html"><button type="button" class="au-volunteer au-btnyellow float-right">Volunteer</button></a>
-										<button type="button" class="au-volunteered au-btnyellow float-right">Volunteered</button>
+										<?php 
+										if($eloop['required_volunteer']!=0 && $eloop['is_not_joined'] !=1){
+											if(!$eloop['is_joined']){
+										?>	
+										<a href="<?=$link?>" class="au-volunteer au-btnyellow float-right" style="display: block">Volunteer</a>
+										<?php } else { ?>
+
+										<a href="<?=$link?>" class="au-volunteered au-btnyellow float-right">Volunteered</a>
+									<?php } }  ?>
 									</div>
 								</div>
 							</div>
