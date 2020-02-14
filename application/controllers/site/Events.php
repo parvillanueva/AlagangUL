@@ -540,7 +540,7 @@ class Events extends GS_Controller {
 				"volunteer_points"	=> $value->volunteer_points,
 				"is_admin"			=> ($value->user_id == $this->session->userdata('user_sess_id')) ? 1 : 0,
 				"is_joined"			=> $is_joined,
-				"is_not_joined"		=> ($is_not_joined[0]->count>=2) ? 1 : 0,
+				"is_not_joined"		=> ($is_not_joined[0]->count>=2) ? 1 : 0, 
 				"required_volunteer"=> ($needed_volunteer[0]->count != "") ? $needed_volunteer[0]->count : 0,
 				"joined_volunteers"	=> ($joined_volunteer[0]->count != "") ? $joined_volunteer[0]->count : 0,
 			);
