@@ -54,10 +54,11 @@ class Manage extends GS_Controller {
 	public function volunteers()
 	{
 
-		$program_id = $this->uri->segment(2);
+		$event_id = $this->uri->segment(2);
+
 
 		//banner data	
-		$data['program_id'] = $program_id;
+		$data['event_id'] = $event_id;
 		$data['content'] = "site/manage/volunteers";
 		$data['meta'] = array(
 			"title"         =>  "Manage",
@@ -167,6 +168,73 @@ class Manage extends GS_Controller {
 			);
 		}
 		echo json_encode($data);
+	}
+
+
+	public function volunteers_list(){;
+		$arr = array();
+		$event_id = $this->input->post('event_id');
+		$query_joined_volunteer = "	SELECT tbl_users_points_approved.*, 
+										CONCAT('" . base_url() . "','/',tbl_users.imagepath) as profile_image , CONCAT(tbl_users.first_name, ' ', tbl_users.last_name) as user 
+										FROM tbl_users_points_approved 
+										LEFT JOIN tbl_users ON tbl_users.id = tbl_users_points_approved.user_id 
+										WHERE event_id = " . $event_id . " GROUP BY tbl_users.id";
+
+		$joined_volunteer = $this->db->query($query_joined_volunteer)->result();
+			foreach($joined_volunteer as $key => $value){
+				$query_task = "SELECT * from tbl_program_event_task where id = $value->event_task_id";
+				$query_task = $this->db->query($query_task)->result();
+				$volunteer_arr = [];
+				$volunteer_arr['approval_id'] 		= $joined_volunteer[$key]->id;
+				$volunteer_arr['volunteer_name'] 	= $joined_volunteer[$key]->user;
+				$volunteer_arr['volunteer_id'] 		= $joined_volunteer[$key]->user_id;
+				$volunteer_arr['task_name'] 		= $query_task[0]->task;
+				$volunteer_arr['points'] 			= $joined_volunteer[$key]->points;
+				$volunteer_arr['status'] 			= $joined_volunteer[$key]->status;
+				$volunteer_arr['event_task_id']		= $joined_volunteer[$key]->event_task_id;
+				array_push($arr,$volunteer_arr);
+			}
+		echo json_encode($arr);
+	}
+
+
+	public function update_task_user(){
+
+		$approval_id = $this->input->post('approval_id');
+		$user_id 	 = $this->input->post('user_id');
+		$points 	 = $this->input->post('points');
+		$event_task_id 	 = $this->input->post('event_task_id');
+		$datetoday 		= date("Y-m-d H:i:s");
+		
+		$update_status = "UPDATE tbl_users_points_approved SET status = 1 WHERE id = $approval_id";
+		$update_status_result = $this->db->query($update_status);
+		$update_status2 = "UPDATE tbl_users_points SET current_points = current_points + $points , total_points = total_points + $points, update_date = '$datetoday' WHERE user_id = $user_id";
+		$update_status_result2 = $this->db->query($update_status2);
+		$update_status3 = "UPDATE tbl_users_badge SET  points = $points, update_date = '$datetoday'   WHERE user_id = $user_id AND event_task_id = $event_task_id";
+		$update_status_result3 = $this->db->query($update_status3);
+		$update_status4 = "UPDATE tbl_program_event_task_volunteers SET  status = 1  WHERE user_id = $user_id AND event_task_id = $event_task_id";
+				$update_status_result4 = $this->db->query($update_status4);
+		return $update_status_result4;
+	}
+
+
+	public function disqualify_task_user(){
+
+		$approval_id = $this->input->post('approval_id');
+		$user_id 	 = $this->input->post('user_id');
+		$points 	 = $this->input->post('points');
+		$event_task_id 	 = $this->input->post('event_task_id');
+		$datetoday 		= date("Y-m-d H:i:s");
+		
+		$update_status = "UPDATE tbl_users_points_approved SET status = '-2' WHERE id = $approval_id";
+		$update_status_result = $this->db->query($update_status);
+		$update_status2 = "UPDATE tbl_users_points SET current_points = current_points - $points , total_points = total_points - $points, update_date = '$datetoday' WHERE user_id = $user_id";
+		$update_status_result2 = $this->db->query($update_status2);
+		$update_status3 = "UPDATE tbl_users_badge SET  points = $points, update_date = '$datetoday'   WHERE user_id = $user_id AND event_task_id = $event_task_id";
+		$update_status_result3 = $this->db->query($update_status3);
+		$update_status4 = "UPDATE tbl_program_event_task_volunteers SET  status = '-2'  WHERE user_id = $user_id AND event_task_id = $event_task_id";
+				$update_status_result4 = $this->db->query($update_status4);
+		return $update_status_result4;
 	}
 
 }
