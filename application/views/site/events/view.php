@@ -145,13 +145,13 @@
 							<table>
 								<thead>
 									<tr>
+										<th scope="col" style="width:30px;"></th>
 										<th scope="col" style="width:20%;">Possible task for volunteers</th>
 										<th scope="col" style="width:20%;">Qualifications</th>
 										<th scope="col" style="width:17%;">Needed</th>
 										<th scope="col" style="width:17%;">Joined</th>
 										<th scope="col" style="width:25%;">Volunteer your:</th>
 										<?php if($event_details[0]['is_admin'] == 1) { ?>
-										<th scope="col" style="width:15%;">Action:</th>
 										<?php } ?>
 									</tr>
 								</thead>
@@ -181,13 +181,16 @@
 									 				$is_disabled_css = 'disabled_css';
 									 			}
 									 		}*/
-									 		if($value['required_volunteers']<=$value['joined_volunteers'] || $event_details[0]['is_joined']==1 || $event_details[0]['is_not_joined']==1){ 
+									 		if($value['required_volunteers']<=$value['joined_volunteers'] || $event_details[0]['is_joined']==1 || $event_details[0]['is_not_joined']==1 || $event_details[0]['is_admin']==1){ 
 									 			$is_disabled = 'disabled';
 									 			$is_disabled_css = 'disabled_css';
 									 		}
 									 	?>
 										<tr class="forvolunteer <?=($value['user_id_joined']==1 ) ? 'volunteer' : ''?> vol-id<?=$value['id']?>" attr-id="<?=$value['id']?>">
-											<td data-header="Task"><?= $value['task'];?></td>
+											<?php if($event_details[0]['is_admin'] == 1) { ?>
+											<td data-header="Action" class=""><a href="#" id="btn_delete" data-id = "<?=$value['id']?>" class="au-lnk" data-toggle="modal" data-target="#delete" ><span class="au-share"><i style="color:red"  class="fas fa-times"></i></a></td>
+											<?php } ?>
+											<td data-header="Task"><?= $value['task'];?> <a href="#" class="au-lnk" data-toggle="modal" data-id = "<?=$value['id']?>" data-target="#editTask" id="btn_edit_task" ><span class="au-share"><i style="color:blue; font-size: 12px;"  class="fas fa-pen"></i></a></td>
 											<td data-header="Qualifications"><?= $value['qualification'];?></td>
 											<td data-header="Needed"><?= $value['required_volunteers'];?></td>
 											<td data-header="Joined" class="joined-<?=$value['id']?>"><?= $value['joined_volunteers'];?></td>
@@ -218,9 +221,7 @@
 													<?=$htm?>
 												</div>
 											</td>
-											<?php if($event_details[0]['is_admin'] == 1) { ?>
-											<td data-header="Action" class=""><a href="#" class="au-lnk" data-toggle="modal" data-id = "<?=$value['id']?>" data-target="#editTask" id="btn_edit_task" ><span class="au-share"><i style="color:blue"  class="fas fa-pen"></i></a>&nbsp&nbsp&nbsp&nbsp<a href="#" id="btn_delete" data-id = "<?=$value['id']?>" class="au-lnk" data-toggle="modal" data-target="#delete" ><span class="au-share"><i style="color:red"  class="fas fa-trash"></i></a></td>
-											<?php } ?>
+											
 										</tr>
 									<?php } ?>
 								</tbody>
@@ -532,6 +533,7 @@
     </div>
 </div>
 </div>
+<script type="text/javascript" src="<?= base_url();?>/assets/site/js/bootstrap-show-modal.js"></script>
 
 <script type="text/javascript">
 	//$('input[name="date"]').daterangepicker();
