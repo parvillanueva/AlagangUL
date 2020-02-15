@@ -1,10 +1,11 @@
 <div class="container-fluid au-heading">
 	<div class="au-container au-padding">
-		<span class="au-h5 no-margin">Programs Events</span>
+		<strong class="au-h5 no-margin"><?= $details[0]->name;?></strong>
 
-		<button class="au-btn float-right" id="btn_addEvent" style="background-color: #11295b;"><i class="fa fa-plus"></i>Add Event</button>
-		<button class="au-btn float-right" id="btn_unpublishEvent" style="background-color: #ffc107; display: none;"><i class="fa fa-minus"></i>Unpublish Event</button>
-		<button class="au-btn float-right" id="btn_publishEvent" style="background-color: #8bc34a; display: none;"><i class="fa fa-check"></i>Publish Event</button>
+		<button class="au-btn" id="btn_Closebtn" style="background-color: #f44336;"><i class="fa fa-times"></i>Close</button>
+		<button class="au-btn" id="btn_addEvent" style="background-color: #11295b;"><i class="fa fa-plus"></i>Add Event</button>
+		<button class="au-btn" id="btn_publishEvent" style="background-color: #8bc34a; display: none;"><i class="fa fa-check"></i>Publish Event</button>
+		<button class="au-btn" id="btn_unpublishEvent" style="background-color: #ffc107; display: none;"><i class="fa fa-minus"></i>Unpublish Event</button>
 		<div class="clearfix"></div>
 	</div>
 </div>
@@ -40,8 +41,13 @@
 <div class="modal fade text-center" id="AddEventModal" data-backdrop="static">
 	<div class="modal-dialog modal-dialog-centered">
 	    <div class="modal-content">
+	    	<div class="modal-header">
+	        	<h5 class="modal-title" id="exampleModalLabel">Add Event</h5>
+	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          		<span aria-hidden="true">&times;</span>
+	        	</button>
+	      	</div>
 	        <div class="modal-body">
-	            <span class="au-h4">Add Event</span>
 	  			<form action="<?= base_url("programs/") . $program_id . "/" . $program_url . "/add_event";?>" method="post" enctype="multipart/form-data" class="au-form" id="addEventForm">
 	        		<div class="form-row">
 						<div class="col">
@@ -87,12 +93,12 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
-					<div class="au-modalbtn text-center">
-	                    <button type="button" class="au-btn au-btnyellow" data-dismiss="modal">Close</button>
-	                    <button type="button" class="au-btn" id="btnSubmitEvent">Submit</button>
-	                </div>
 				</form>
 	  		</div> 
+	  		<div class="modal-footer">
+	  			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary" id="btnSubmitEvent">Save</button>
+     		</div>
 		</div>
 	</div>
 </div>
@@ -101,14 +107,106 @@
 <script type="text/javascript">
 
 	var keyword = "";
+	var datatoday = new Date();
+	var datatodays = datatoday.setDate(new Date(datatoday).getDate() + 1);
 
 	$(document).ready(function(){
 		get_list();
 	});
 
+	$(document).on('click', '#btn_Closebtn', function(){
+		location.href = '<?= base_url("manage");?>';
+	});
+
+
 	$(document).on('click', '#btn_addEvent', function(){
 		BM.show("#AddEventModal");
 	});
+
+	$(document).on('click', '#btnSubmitEvent', function(){
+		if(validate.standard("addEventForm")) {
+			BM.confirm("Are you sure you want to Add this Event?", function(result){
+				if(result){
+					$("#addEventForm").submit();
+				}
+			});
+		}
+	});
+
+	$(document).on('change', '#select_all', function(){
+		var del = 0;
+		if(this.checked) { 
+			$('.select').each(function() { 
+				this.checked = true;  
+				$("#btn_unpublishEvent").show();        
+				$("#btn_publishEvent").show();        
+			});
+		}else{
+			$('.select').each(function() { 
+				this.checked = false;     
+				$("#btn_unpublishEvent").hide();        
+				$("#btn_publishEvent").hide();            
+			});         
+		}
+	});
+
+	$(document).on('change', '.select', function(){
+		var check_count = 0;
+	    $('.select').each(function(){
+	        if(this.checked){
+	        	check_count++;
+	        } else {
+	        }
+	    });
+
+	    if(check_count > 0){
+            $("#btn_unpublishEvent").show();        
+			$("#btn_publishEvent").show();  
+        } else {
+        	$("#btn_unpublishEvent").hide();        
+			$("#btn_publishEvent").hide();   
+        }
+	});
+
+
+	$(document).on('click', '#btn_publishEvent', function(){
+		BM.confirm("Are you sure you want to Publish selected Event?", function(result){
+			if(result){
+				change_status(1);	
+			}
+		});
+	});
+	
+	$(document).on('click', '#btn_unpublishEvent', function(){
+		BM.confirm("Are you sure you want to Unpublish selected Event?", function(result){
+			if(result){
+				change_status(0);	
+			}
+		});
+	});
+
+	function change_status(status){
+		BM.loading(true);
+		var total = $('.select:checked').length;
+		var count = 1;
+		$('.select:checked').each(function(index) { 
+            var id = $(this).attr('data-id');
+            var alias = $(this).attr('data-alias');
+            if(status == 1){
+            	var url = "<?= base_url("programs");?>/<?= $details[0]->id;?>/<?= $details[0]->url_alias;?>/event/" + id + "/" + alias + "/publish/1";
+            } else {
+            	var url = "<?= base_url("programs");?>/<?= $details[0]->id;?>/<?= $details[0]->url_alias;?>/event/" + id + "/" + alias + "/publish/0";
+            }
+            $.get(url, function( data ) {
+            	if(count == total){
+            		BM.loading(false);
+            		location.reload();
+            	} else {
+					count ++;
+            	}
+			});
+        });
+	}
 
 	function get_list(){
 		var url = "<?= base_url("manage/event_list");?>";
@@ -149,5 +247,25 @@
 		  	}
 		});
 	}
+
+
+	function readURLImgStandardPreviewEvent(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var extension = input.files[0].name.split('.').pop().toLowerCase();
+                var base64 = e.target.result;
+               	$("#previewImageEvent").attr("src",base64);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('#whenpicker').datetimepicker({
+	    controlType: 'select',
+	    minDate: datatoday,
+	    oneLine: true,
+	    timeFormat: 'hh:mm tt'
+	});
 
 </script>

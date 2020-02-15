@@ -710,8 +710,8 @@ class Events extends GS_Controller {
 		}
 
 		$this->Gmodel->update_data("tbl_program_events",$data,"id",$event_id);
-
-		redirect(base_url("programs") . "/" . $program_id . "/" . $program_alias . "/event/" . $event_id . "/" . $data['url_alias']);
+ 
+		redirect($_SERVER['HTTP_REFERER']);
 	}
 
 	public function update(){

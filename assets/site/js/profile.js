@@ -102,11 +102,35 @@ $(document).ready(function() {
                 $(this).remove();
             }
         },
+        events: [{
+                title: '',
+                allDay: true,
+                start: new Date(y, m, 19, 14, 0),
+                className: 'info',
+                url: '#activity1',
+                className: 'activity-date'
+            },            
+            {
+                title: '',
+                allDay: true,
+                start: new Date(y, m, 19, 14, 0),
+                url: '#activity2',
+                className: 'activity-date'
+            },            
+            {
+                title: '',
+                allDay: true,
+                start: new Date(y, m, 26, 15, 0),
+                // end: new Date(y, m, 26),
+                url: '#activity3',
+                className: 'activity-date'
+            }
+        ],
     });
 });
 
 $(document).ready(function() {
-    $('#calendar').fullCalendar('addEventSource', events); 
+
     $(".activity-date").click(function () {
         $('.au-event-entry').removeClass('date-selected');
         var addressValue = $(this).attr("href");

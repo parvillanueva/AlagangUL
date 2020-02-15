@@ -33,6 +33,7 @@ class Manage extends GS_Controller {
 		//banner data	
 		$data['program_id'] = $program_id;
 		$data['program_url'] = $program_url;
+		$data['details'] = $this->db->query("SELECT * FROM tbl_programs WHERE id = " . $program_id)->result();
 		$data['content'] = "site/manage/events";
 		$data['meta'] = array(
 			"title"         =>  "Manage",
