@@ -47,7 +47,7 @@ class Login extends CI_Controller {
 
 		$this->Gmodel->save_data('tbl_signup_login_logs', $data_array);
 		echo json_encode($result);
-		if(isset($_POST['is_remember_me'])=='on'){
+		if($_POST['is_remember_me']=='on'){
 			setcookie('alagangunilabemail', $_POST['email_address'], time() + (86400 * 10), "/");
 		}
 		else{
