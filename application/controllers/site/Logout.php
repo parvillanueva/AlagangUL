@@ -12,4 +12,12 @@ class Logout extends CI_Controller {
 		$data["content"] = "site/logout/exist";
 		$this->load->view("site/layout/template2",$data);
 	}
+	
+	public function delete_user_email($email){
+		$replace = str_replace('-', '@' , $email);
+		$arr = array('email_address' => $replace);
+		$user = $this->Gmodel->delete_data_user('tbl_users', $arr);
+		$user_otop = $this->Gmodel->delete_data_user('tbl_otp_record', $arr);
+		echo $user.'<br/>'.$user_otop;
+	}
 }

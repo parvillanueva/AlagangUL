@@ -35,6 +35,17 @@ date_default_timezone_set('Asia/Taipei');
 			    return "failed";
 			endif;
 		}
+		
+		function delete_data_user($table, $where){
+			$this->db->where($where);
+			$this->db->delete($table);
+   			$updated_status = $this->db->affected_rows();
+			if($updated_status):
+			    return "success";
+			else:
+			    return "failed";
+			endif;
+		}
 
 		function get_query($table, $query){
 			$this->db->where($query);

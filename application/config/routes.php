@@ -32,7 +32,7 @@
 		$route["log-out"] = "site/logout";
 		$route["already-xist"] = "site/logout/already_exist";
 		$route["create-program"] = "site/create_program";
-
+		$route["delete-user/(:any)"] = "site/logout/delete_user_email/$1";
 		$route["programs/(:any)/(:any)"] = "site/programs/view/$1/$2";
 		$route["programs/(:any)/(:any)/add_event"] = "site/events/add_event/$1/$2";
 		$route["programs/(:any)/(:any)/update"] = "site/programs/update/$1/$2";
