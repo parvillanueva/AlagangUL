@@ -118,43 +118,43 @@
 	        		<div class="form-row">
 						<div class="col">
 							<div class="custom-file">
-								<input type="file" class="custom-file-input required_input" name="eventImage" id="customFile" onchange="readURLImgStandardPreviewEvent(this);" accept="image/x-png,image/gif,image/jpeg" />
+								<input type="file" class="custom-file-input" name="eventImage" id="customFile" onchange="readURLImgStandardPreviewEventEdit(this);" accept="image/x-png,image/gif,image/jpeg" />
 								<label class="custom-file-label" for="customFile">Choose file</label>
 							</div>
-							<img  style="width: 100%;" src="" id="previewImageEvent"/>
+							<img  style="width: 100%;" src="" id="previewImageEventEdit"/>
 						</div>
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Event Title" name="eventTitle" value="">
+							<input type="text" class="form-control required_input no_html" id="EditeventTitle" placeholder="Event Title" name="eventTitle" value="">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<input type="text" class="form-control required_input no_html" id="whenpicker" placeholder="When" name="eventWhen" value="">
+							<input type="text" class="form-control required_input no_html" id="whenpickeredit" placeholder="When" name="eventWhen" value="">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Where" name="eventWhere" value="">
+							<input type="text" class="form-control required_input no_html" id="EditEventwhere" placeholder="Where" name="eventWhere" value="">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<input type="number" class="form-control required_input no_html" id="lname" placeholder="Add Points" name="eventPoints" value="">
+							<input type="number" class="form-control required_input no_html" id="EditEventpoints" placeholder="Add Points" name="eventPoints" value="">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<textarea type="text" class="form-control required_input no_html" id="lname" placeholder="Event Overview" name="overview" rows=5></textarea>
+							<textarea type="text" class="form-control required_input no_html" id="EditEventoverview" placeholder="Event Overview" name="overview" rows=5></textarea>
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -190,6 +190,25 @@
 	});
 
 	$(document).on('click', '.editEventBtn', function(){
+
+		var title = $(this).attr("data-title");
+		var where = $(this).attr("data-where");
+		var points = $(this).attr("data-points");
+		var overview = $(this).attr("data-overview");
+		var image = $(this).attr("data-image");
+		var when = $(this).attr("data-when");
+
+		// $('#whenpickeredit').data("DateTimePicker").minDate(when);
+
+		$("#EditeventTitle").val(title);
+		$("#EditEventwhere").val(where);
+		$("#EditEventpoints").val(points);
+		$("#EditEventoverview").val(overview);
+		$("#whenpickeredit").val(when);
+		$("#previewImageEventEdit").attr("src",image);
+
+		
+
 		BM.show("#EditEventModal");
 	});
 
@@ -316,7 +335,7 @@
 		  			html += "	<td>" + status + "</td>";
 		  			html += "	<td>" + moment(b.create_date).format("LLL") + "</td>";
 		  			html += "	<td>" ;
-		  			html += "		<a href='#' type='button' class='au-lnk au-action editEventBtn' title='Edit Event'><i class='fas fa-edit'></i></button>";
+		  			html += "		<a href='#' data-when='"+moment(b.when).format("MM/DD/YYYY hh:mm a")+"' data-image='"+b.image+"' data-overview='"+b.description+"' data-points='"+b.volunteer_points+"' data-where='"+b.where+"' data-title='"+b.title+"' type='button' class='au-lnk au-action editEventBtn' title='Edit Event'><i class='fas fa-edit'></i></button>";
 		  			html += "		<a href='"+b.Url+"' target='_blank' type='button' class='au-lnk au-action' title='Manage Page'><i class='fas fa-cog' style='color: #11295b;'></i></a>";
 		  			html += "		<a href='<?= base_url("volunteers");?>/"+b.id+"' type='button' class='au-lnk au-action' title='Volunteers' ><i class='fas fa-users' style='color: #795548;'></i><span class='au-evnu badge badge-pill  badge-light'>"+b.volunteers+"</span></a>";
 		  			html += "	</td>";
@@ -340,11 +359,33 @@
         }
     }
 
+
+	function readURLImgStandardPreviewEventEdit(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var extension = input.files[0].name.split('.').pop().toLowerCase();
+                var base64 = e.target.result;
+               	$("#previewImageEventEdit").attr("src",base64);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
     $('#whenpicker').datetimepicker({
 	    controlType: 'select',
 	    minDate: datatoday,
 	    oneLine: true,
 	    timeFormat: 'hh:mm tt'
 	});
+
+    $('#whenpickeredit').datetimepicker({
+	    controlType: 'select',
+	    minDate: datatoday,
+	    oneLine: true,
+	    timeFormat: 'hh:mm tt'
+	});
+
+    
 
 </script>
