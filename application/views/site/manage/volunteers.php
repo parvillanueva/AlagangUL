@@ -28,6 +28,7 @@
 								<!-- <th scope="col" style="width: 30px;"><input type="checkbox" id="select_all"></th> -->
 								<th scope="col">Possible task for volunteers</th>
 								<th scope="col">Volunteer Name</th>
+								<th scope="col">Status</th>
 								<th scope="col">Action</th>
 							</tr>
 						</thead>
@@ -48,6 +49,12 @@
 		get_list();
 	});
 
+ 
+	
+	$(document).on('click', '#btn_Closebtn', function(){
+		location.href = "<?= $_SERVER['HTTP_REFERER']; ?>";
+	});
+
    function get_list(){
             $.ajax({
                 type : "POST",
@@ -63,28 +70,32 @@
                     // console.log(obj);
                     var html = '';
                    	$.each(obj, function(x,y){
-                   		console.log(y)
+                   		var status = "Not Qualified";
+                   		if(y['status'] == 0){
+                   			status = "Not Qualified";
+                   		} else if(y['status'] == 1){
+                   			status = "Qualified";
+                   		}
+
 							html += '	<tr class="forvolunteer">'
 							html += '		<td data-header="Task">'+y["task_name"]+'</td>'
 							html += '		<td data-header="Volunteer Name">'+y["volunteer_name"]+'</td>'
-								 if(y['status'] == 0){ 
+							html += '		<td data-header="Volunteer Status">'+status+'</td>'
+								if(y['status'] == 0){ 
 
 						  			html += "	<td>" ;
-						  			html += "		<a href='javascript:void(0)'  class='au-btnyellow btn_approve' data-user_id = '"+y["volunteer_id"]+"' data-event_task_id = '"+y["event_task_id"]+"' data-id = '"+y["approval_id"]+"'  data-points = '"+y["points"]+"' style='background-color: #1894e7; float: left;'>Qualify</a>";
-						  			html += "		<a href='javascript:void(0)'   class='au-btnyellow btn_disqualify ' data-user_id = '"+y["volunteer_id"]+"' data-event_task_id = '"+y["event_task_id"]+"' data-id = '"+y["approval_id"]+"'  data-points = '"+y["points"]+"' style='background-color: red; float: left;'>Disqualify</a>";
-						  			// html += "		<a href=''  class='au-btnyellow' style='background-color: #132b62; float: left;'>></a>";
+						  			html += "		<a href='javascript:void(0)'  class='au-lnk au-action btn_approve' data-user_id = '"+y["volunteer_id"]+"' data-event_task_id = '"+y["event_task_id"]+"' data-id = '"+y["approval_id"]+"'  data-points = '"+y["points"]+"' style='color: #1894e7;' title='Volunteer Qualified'><i class='fas fa-check'></i></a>";
+						  			html += "		<a href='javascript:void(0)'   class='au-lnk au-action btn_disqualify ' data-user_id = '"+y["volunteer_id"]+"' data-event_task_id = '"+y["event_task_id"]+"' data-id = '"+y["approval_id"]+"'  data-points = '"+y["points"]+"' style='color: red !important;' title='Volunteer Not Qualified'><i class='fas fa-times'></i></a>";
 						  			html += "	</td>";
 								}
 								else if(y['status'] == 1){
 						  			html += "	<td>" ;
-						  			html += "		<a href='javascript:void(0)'   class='au-btnyellow btn_disqualify ' data-user_id = '"+y["volunteer_id"]+"' data-event_task_id = '"+y["event_task_id"]+"' data-id = '"+y["approval_id"]+"'  data-points = '"+y["points"]+"' style='background-color: red; float: left;'>Disqualify</a>";
-						  			// html += "		<a href=''  class='au-btnyellow' style='background-color: #132b62; float: left;'>></a>";
+						  			html += "		<a href='javascript:void(0)'   class='au-lnk au-action btn_disqualify ' data-user_id = '"+y["volunteer_id"]+"' data-event_task_id = '"+y["event_task_id"]+"' data-id = '"+y["approval_id"]+"'  data-points = '"+y["points"]+"' style='color: red !important;' title='Volunteer Not Qualified'><i class='fas fa-times'></i></a>";
 						  			html += "	</td>";						
 								}
 								else{				
 						  			html += "	<td>" ;
-						  			html += "		<a href='javascript:void(0)'   class='au-btnyellow btn_approve' data-user_id = '"+y["volunteer_id"]+"' data-event_task_id = '"+y["event_task_id"]+"' data-id = '"+y["approval_id"]+"'  data-points = '"+y["points"]+"' style='background-color: #1894e7; float: left;'>Qualify</a>";
-						  			// html += "		<a href=''  class='au-btnyellow' style='background-color: #132b62; float: left;'>></a>";
+						  			html += "		<a href='javascript:void(0)'   class='au-lnk au-action btn_approve' data-user_id = '"+y["volunteer_id"]+"' data-event_task_id = '"+y["event_task_id"]+"' data-id = '"+y["approval_id"]+"'  data-points = '"+y["points"]+"' style='color: #1894e7;' title='Volunteer Qualified'><i class='fas fa-check'></i></a>";
 						  			html += "	</td>";
 								}
 							html += '	</tr>'

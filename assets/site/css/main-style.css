@@ -454,8 +454,8 @@ p{
 }
  .au-p4 {
      display: block;
-     font-size: 14px;
-     line-height: 2em;
+     font-size: 12px;
+     line-height: 1.5em;
      font-weight: 400;
      color: #222;
      margin-top: 5px;
@@ -469,7 +469,7 @@ p{
 }
  .au-p6 {
      display: block;
-     font-size: 18px;
+     font-size: 14px;
      font-weight: 400;
      color: #222;
      margin-top: 5px;
@@ -1239,7 +1239,7 @@ p{
      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#eee", endColorstr="#fff", GradientType=1);
 }
 .au-opptable table th:nth-child(1){
-     width: 35%;
+     width: 20%;
 }
 .au-opptable table th:nth-child(2){
      width: 20%;
@@ -1253,11 +1253,17 @@ p{
 .au-opptable table th:nth-child(5){
      width: 220px;
 }
+.au-opptable table th:nth-child(6){
+     width: 75px;
+}
 .au-opptable table tr:nth-child(5){
      overflow: visible !important;
 }
  .au-opptable table tr{
      font-size: 12px;
+}
+.fa-times{
+     color: #EA1126;
 }
  .au-opptable table th{
      color: #092E6E;
@@ -1705,6 +1711,7 @@ p{
 }
 .au-action{
      font-size: 16px;
+     margin-right: 10px;
 }
 /*Extra small devices (portrait phones, less than 576px)*/
  @media (max-width: 575px) {

@@ -145,13 +145,13 @@
 							<table>
 								<thead>
 									<tr>
-										<th scope="col" style="width:30px;"></th>
-										<th scope="col" style="width:20%;">Possible task for volunteers</th>
-										<th scope="col" style="width:20%;">Qualifications</th>
-										<th scope="col" style="width:17%;">Needed</th>
-										<th scope="col" style="width:17%;">Joined</th>
-										<th scope="col" style="width:25%;">Volunteer your:</th>
+										<th scope="col">Possible task for volunteers</th>
+										<th scope="col">Qualifications</th>
+										<th scope="col">Needed</th>
+										<th scope="col">Joined</th>
+										<th scope="col">Volunteer your:</th>
 										<?php if($event_details[0]['is_admin'] == 1) { ?>
+											<th scope="col">Actions</th>
 										<?php } ?>
 									</tr>
 								</thead>
@@ -187,10 +187,8 @@
 									 		}
 									 	?>
 										<tr class="forvolunteer <?=($value['user_id_joined']==1 ) ? 'volunteer' : ''?> vol-id<?=$value['id']?>" attr-id="<?=$value['id']?>">
-											<?php if($event_details[0]['is_admin'] == 1) { ?>
-											<td data-header="Action" class=""><a href="#" id="btn_delete" data-id = "<?=$value['id']?>" class="au-lnk" data-toggle="modal" data-target="#delete" ><span class="au-share"><i style="color:red"  class="fas fa-times"></i></a></td>
-											<?php } ?>
-											<td data-header="Task"><?= $value['task'];?> <a href="#" class="au-lnk" data-toggle="modal" data-id = "<?=$value['id']?>" data-target="#editTask" id="btn_edit_task" ><span class="au-share"><i style="color:blue; font-size: 12px;"  class="fas fa-pen"></i></a></td>
+											
+											<td data-header="Task"><?= $value['task'];?></td>
 											<td data-header="Qualifications"><?= $value['qualification'];?></td>
 											<td data-header="Needed"><?= $value['required_volunteers'];?></td>
 											<td data-header="Joined" class="joined-<?=$value['id']?>"><?= $value['joined_volunteers'];?></td>
@@ -221,7 +219,12 @@
 													<?=$htm?>
 												</div>
 											</td>
-											
+											<?php if($event_details[0]['is_admin'] == 1) { ?>
+											<td data-header="Actions:" class="au-actions">
+												<a href="#"  data-toggle="modal" data-id = "<?=$value['id']?>" data-target="#editTask" id="btn_edit_task" class="au-lnk au-action" title="Edit Details"><i class="fas fa-edit"></i></a>
+												<a href="#" class="au-lnk au-action" title="Delete"><i class="fas fa-times"></i></a>
+											</td>
+											<?php } ?>
 										</tr>
 									<?php } ?>
 								</tbody>
