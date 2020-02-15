@@ -188,21 +188,6 @@ class Sign_up extends CI_Controller {
 															</td>
 														</tr>
 													</table>
-													<br><br>    
-													<p width="375" align="center" style="width:75%; font-size: 12px; color: #bbb; margin:0px auto;margin-bottom:25px;">
-														Please note that this One-time password will expire if not used in 6 hours. If the expiration period has passed, you may just request for another OTP by clicking <a href="#">here</a>.
-													</p>
-													<table role="presentation" cellspacing="0" cellpadding="0" border="0">
-														<tr>
-															<td width="125" height="50" style="background: #1AA3F9; text-align: center;">
-																<a href="javascript:void(0);"
-																	style="background: #1AA3F9; padding: 15px;  font-size: 16px; line-height: 1.1; text-align: center; text-decoration: none; display: block; text-transform: uppercase;">
-																	<span style="color:#ffffff;">Verify OTP</span>
-																</a>
-															</td>
-														</tr>
-													</table>
-													<!-- <a align="center" width="125" height="50" href="javascript:void(0);" bgcolor="#1AA3F9" color="white" style="text-decoration: none; background-color:#1AA3F9 ;color:#fff; margin-top: 15px; border: 0; padding: 15px; text-transform: uppercase;">Verify OTP</a> -->
 												</center>
 											</td>
 										</tr>

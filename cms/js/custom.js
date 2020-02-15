@@ -209,7 +209,7 @@ var validate = {
 					if(!pattern.test(email)){
 						counter++;
 						$(this).css('border-color','red');
-	          $("<span class='validate_error_message' style='color: red;'>"+form_invalid_email+"<br></span>").insertAfter(this);
+					$("<span class='validate_error_message' style='color: red;'>"+form_invalid_email+"<br></span>").insertAfter(this);
 					
 					}
 				});
