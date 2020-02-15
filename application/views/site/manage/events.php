@@ -335,12 +335,14 @@
 		  			}
 
 		  			var disabled = "disabled";
+		  			var tooltip = "No task available.";
 		  			if(b.task_count > 0){
 		  				disabled = "";
+		  				tooltip = "";
 		  			}
 
 		  			html += "<tr>";
-		  			html += "	<td><input "+disabled+" type='checkbox' class='select' data-alias='"+b.url_alias+"' data-id="+b.id+"/></td>";
+		  			html += "	<td><input title='"+tooltip+"' "+disabled+" type='checkbox' class='select' data-alias='"+b.url_alias+"' data-id="+b.id+"/></td>";
 		  			html += "	<td>" + b.title + "</td>";
 		  			html += "	<td>" + moment(b.when).format("LLL") + "</td>";
 		  			html += "	<td>" + b.where + "</td>";
