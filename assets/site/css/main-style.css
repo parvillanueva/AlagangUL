@@ -1656,10 +1656,6 @@ p{
     margin-bottom: 5px;
     margin-right: 5px;
     white-space: nowrap;
-    display: block;
-}
-#program_list a:hover  {
-    color: #ffffff;
 }
 .au-manageprogramtable.au-opptable table th:nth-child(1){
      text-align: right;
@@ -1684,6 +1680,24 @@ p{
 #btn_publishProgram{
      margin-right: 10px;
      margin-top: 10px;
+}
+.au-evnu{color: #fff;
+    height: 18px;
+    width: 18px;
+    background-color: #11295b;
+    border-radius: 50%;
+    text-align: center;
+    padding: 0px;
+    line-height: 18px;
+    font-weight: 400;
+    display: inline-block;
+    margin-left: -5px;
+    margin-top: -2px;
+    vertical-align: top;
+    font-size: 8px;
+}
+.au-action{
+     font-size: 16px;
 }
 /*Extra small devices (portrait phones, less than 576px)*/
  @media (max-width: 575px) {
@@ -1891,6 +1905,23 @@ p{
           width: 100%;
           margin: 5px 0px;
      }
+
+     .au-userbox .au-form-wrapper{
+          padding: 0px;
+     }
+     .au-bgtrans .au-inner{
+          padding: 1em 0px;
+     }
+     .au-signupimg{
+          max-width: 200px;
+     }
+     .au-bgtrans .au-h1{
+          font-size: 14px;
+     }
+     .au-bgtrans .au-h2{
+          font-size: 12px;
+     }
+
 }
 /*Small devices (landscape phones, 576px and up)*/
  @media (min-width: 576px) and (max-width: 767px) {

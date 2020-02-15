@@ -22,8 +22,8 @@
 								<th scope="col">Title</th>
 								<th scope="col" style="width: 200px;">When</th>
 								<th scope="col">Where</th>
-								<th scope="col" style="width: 100px;">Status</th>
-								<th scope="col" style="width: 300px;">Created Date</th>
+								<th scope="col">Status</th>
+								<th scope="col">Created Date</th>
 								<th scope="col">Action</th>
 							</tr>
 						</thead>
@@ -103,6 +103,72 @@
 	</div>
 </div>
 
+<!-- Edit Event Modal -->
+<div class="modal fade text-center" id="EditEventModal" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	    	<div class="modal-header">
+	        	<h5 class="modal-title" id="exampleModalLabel">Edit Event</h5>
+	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          		<span aria-hidden="true">&times;</span>
+	        	</button>
+	      	</div>
+	        <div class="modal-body">
+	  			<form action="<?= base_url("programs/") . $program_id . "/" . $program_url . "/add_event";?>" method="post" enctype="multipart/form-data" class="au-form" id="editEventForm">
+	        		<div class="form-row">
+						<div class="col">
+							<div class="custom-file">
+								<input type="file" class="custom-file-input required_input" name="eventImage" id="customFile" onchange="readURLImgStandardPreviewEvent(this);" accept="image/x-png,image/gif,image/jpeg" />
+								<label class="custom-file-label" for="customFile">Choose file</label>
+							</div>
+							<img  style="width: 100%;" src="" id="previewImageEvent"/>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Event Title" name="eventTitle" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" id="whenpicker" placeholder="When" name="eventWhen" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Where" name="eventWhere" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="number" class="form-control required_input no_html" id="lname" placeholder="Add Points" name="eventPoints" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<textarea type="text" class="form-control required_input no_html" id="lname" placeholder="Event Overview" name="overview" rows=5></textarea>
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+				</form>
+	  		</div> 
+	  		<div class="modal-footer">
+	  			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary" id="btnSubmitEditEvent">Save</button>
+     		</div>
+		</div>
+	</div>
+</div>
+
 <script type="text/javascript" src="<?= base_url();?>/assets/site/js/bootstrap-show-modal.js"></script>
 <script type="text/javascript">
 
@@ -123,6 +189,19 @@
 		BM.show("#AddEventModal");
 	});
 
+	$(document).on('click', '.editEventBtn', function(){
+		BM.show("#EditEventModal");
+	});
+
+	$(document).on('click', '#btnSubmitEditEvent', function(){
+		if(validate.standard("editEventForm")) {
+			BM.confirm("Are you sure you want to Edit this Event?", function(result){
+				if(result){
+					$("#editEventForm").submit();
+				}
+			});
+		}
+	});
 	$(document).on('click', '#btnSubmitEvent', function(){
 		if(validate.standard("addEventForm")) {
 			BM.confirm("Are you sure you want to Add this Event?", function(result){
@@ -237,9 +316,9 @@
 		  			html += "	<td>" + status + "</td>";
 		  			html += "	<td>" + moment(b.create_date).format("LLL") + "</td>";
 		  			html += "	<td>" ;
-		  			html += "		<button type='button' class='au-btnyellow editProgramBtn' style='background-color: #ff5722; float: left;'>Edit</button>";
-		  			html += "		<a href='"+b.Url+"' target='_blank' type='button' class='au-btnyellow' style='background-color: #2196f3; float: left;'>Manage Page</a>";
-		  			html += "		<a href='<?= base_url("volunteers");?>/"+b.id+"' type='button' class='au-btnyellow' style='background-color: #132b62; float: left;'>Volunteers <span class='badge badge-pill  badge-light'>"+b.volunteers+"</span></a>";
+		  			html += "		<a href='#' type='button' class='au-lnk au-action editEventBtn' title='Edit Event'><i class='fas fa-edit'></i></button>";
+		  			html += "		<a href='"+b.Url+"' target='_blank' type='button' class='au-lnk au-action' title='Manage Page'><i class='fas fa-cog' style='color: #11295b;'></i></a>";
+		  			html += "		<a href='<?= base_url("volunteers");?>/"+b.id+"' type='button' class='au-lnk au-action' title='Volunteers' ><i class='fas fa-users' style='color: #795548;'></i><span class='au-evnu badge badge-pill  badge-light'>"+b.volunteers+"</span></a>";
 		  			html += "	</td>";
 		  			html += "</tr>";
 		  		});

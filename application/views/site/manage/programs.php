@@ -173,9 +173,9 @@
 		  			html += "	<td>" + moment(b.create_date).format("LLL") + "</td>";
 		  			html += "	<td>" + status + "</td>";
 		  			html += "	<td>" ;
-		  			html += "		<button data-image='"+b.image_thumbnail+"' data-id='"+b.id+"' data-urlalias='"+b.url_alias+"' data-name='"+b.name+"' data-overview='"+b.overview+"'  data-area='"+b.area_covered+"' type='button' class='au-btnyellow editProgramBtn' style='background-color: #ff5722; float: left;'>Edit</button>";
-		  			html += "		<a href='<?= base_url("programs");?>/"+b.id+"/"+b.url_alias+"' target='_blank' type='button' class='au-btnyellow' style='background-color: #2196f3; float: left;'>Manage Page</a>";
-		  			html += "		<a href='<?= base_url("manage");?>/"+b.id+"/"+b.url_alias+"' type='button' class='au-btnyellow' style='background-color: #132b62; float: left;'>Events <span class='badge badge-pill  badge-light'>"+b.event_count+"</span></a>";
+		  			html += "		<a href='#' data-image='"+b.image_thumbnail+"' data-id='"+b.id+"' data-urlalias='"+b.url_alias+"' data-name='"+b.name+"' data-overview='"+b.overview+"'  data-area='"+b.area_covered+"' class='au-lnk au-action editProgramBtn' title='Edit Details'><i class='fas fa-edit'></i></a>" ;
+		  			html += "		<a href='<?= base_url("programs");?>/"+b.id+"/"+b.url_alias+"' target='_blank' type='button' class='au-lnk au-action'  title='Manage Page'><i class='fas fa-cog' style='color: #11295b;'></i></a>";
+		  			html += "		<a href='<?= base_url("manage");?>/"+b.id+"/"+b.url_alias+"' type='button' class='au-lnk au-action'><i class='fas fa-calendar-day'  title='Events' style='color: #FF5722;'></i><span class='au-evnu badge badge-pill  badge-light'>"+b.event_count+"</span></a>";
 		  			html += "	</td>";
 		  			html += "</tr>";
 		  		});
