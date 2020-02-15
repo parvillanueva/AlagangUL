@@ -10,6 +10,7 @@ class Sign_up extends CI_Controller {
 	
 	function email_send(){
 		$email_result = $this->email_check($_POST['email']);
+		$status = 0;
 		if($email_result == 'not_empty'){
 			echo json_encode(array('responce'=>'exist'));
 		} else if($email_result == 'pass_empty'){
@@ -20,13 +21,22 @@ class Sign_up extends CI_Controller {
 			$white_test = $this->white_list_check($explode_email[1]);
 			if($white_test == 'empty'){
 				echo json_encode(array('responce'=>'no_list'));
-			} else{ 
+			} else{
+				$status = 1;
 				$from = $_POST['email'];
 				$fr_name = 'Guest';
 				$subject = 'Link Registration and OTP';
 				$this->send_sgrid($from, $fr_name, $from, $subject);
 			}
 		}
+		$data_array = array(
+			'email_address' 	=> $_POST['email'],
+			'action' 			=> 'signup',
+			'status' 			=> $status,
+			'create_date' 		=> date('Y-m-d H:i:s')
+			);
+
+		$this->Gmodel->save_data('tbl_signup_login_logs', $data_array);
 	}
 	
 	public function white_list_check($data){

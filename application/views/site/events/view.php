@@ -21,7 +21,7 @@
 		width: auto;
 	}
 	.share-wp {
-		display: <?=($_SESSION['user_impersonate_token']=='') ? 'hidden' : 'block' ?>;
+		display: <?=($_SESSION['user_impersonate_token']=='') ? 'none;' : 'block;' ?>;
 	}
 </style>
 <div class="au-wrapper">

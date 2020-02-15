@@ -57,7 +57,7 @@
 										<div class="form-row">
 											<div class="col au-iconned">
 												<i class="fas fa-envelope"></i>
-												<input type="email" class="form-control" id="email" placeholder="Email Address" name="email" required>
+												<input type="email" class="form-control" id="email" placeholder="Email Address" name="email" required value="<?=(isset($_COOKIE['alagangunilabemail'])) ? $_COOKIE['alagangunilabemail'] : '' ?>">
 												<div class="valid-feedback"></div>
 	    										<div class="invalid-feedback">Please fill out this field.</div>
 											</div>
@@ -75,7 +75,7 @@
 												<div class="form-row">
 													<div class="col">
 														<label class="form-check-label">
-						        							<input class="form-check-input" type="checkbox" name="remember"> Remember me
+						        							<input class="form-check-input" id="remember_me" type="checkbox" name="remember"> Remember me
 						      							</label>
 													</div>
 												</div>
@@ -117,12 +117,17 @@
         		x.preventDefault();	
 				var user_name = $("#email").val();
 				var password = $("#password").val();
+				var is_remember_me='off';
+				if($('#remember_me').is(':checked')){
+					is_remember_me= 'on';
+				}
         		if(user_name != '' && password != ''){
         			modal.loading(true);
         			var url = '<?php echo base_url()."site/login/login_register" ?>';
         			var data = {
         				email_address : user_name,
-        				password : password
+        				password : password,
+        				is_remember_me : is_remember_me
         			}
         			aJax.post(url, data, function(result){
 						var obj = is_json(result);
