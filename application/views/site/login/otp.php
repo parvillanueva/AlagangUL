@@ -21,28 +21,7 @@
 					<span class="au-p2">Please input the one-time-password that has been sent to your email address. If you arrived here by mistake, <a href="<?= base_url("log-in") ;?>" class="au-lnk">click here</a> to go back to Login page.</span>
 					<div class="form-row">
 						<div class="col">
-							<input type="text" class="form-control au-otp" id="otp1" name="otp" required pattern="[0-9]{1}" maxlength="1" 
-							onkeyup="onKeyUpEvent(1, event)" onfocus="onFocusEvent(1)">
-						</div>
-						<div class="col">
-							<input type="text" class="form-control au-otp" id="otp2" name="otp" required pattern="[0-9]{1}" maxlength="1"
-							onkeyup="onKeyUpEvent(2, event)" onfocus="onFocusEvent(2)">
-						</div>
-						<div class="col">
-							<input type="text" class="form-control au-otp" id="otp3" name="otp" required pattern="[0-9]{1}" maxlength="1"
-							onkeyup="onKeyUpEvent(3, event)" onfocus="onFocusEvent(3)">
-						</div>
-						<div class="col">
-							<input type="text" class="form-control au-otp" id="otp4" name="otp" required pattern="[0-9]{1}" maxlength="1"
-							onkeyup="onKeyUpEvent(4, event)" onfocus="onFocusEvent(4)">
-						</div>
-						<div class="col">
-							<input type="text" class="form-control au-otp" id="otp5" name="otp" required pattern="[0-9]{1}" maxlength="1"
-							onkeyup="onKeyUpEvent(5, event)" onfocus="onFocusEvent(5)">
-						</div>
-						<div class="col">
-							<input type="text" class="form-control au-otp" id="otp6" name="otp" required pattern="[0-9]{1}" maxlength="1"
-							onkeyup="onKeyUpEvent(6, event)" onfocus="onFocusEvent(6)">
+							<input type="text" class="form-control au-otp" id="otp_data" name="otp" required pattern="[0-9]{1}" />
 						</div>
 						<div class="valid-feedback"></div>
 						<div class="invalid-feedback">Please fill out this field.</div>
@@ -68,32 +47,22 @@
 	});
 	
 	$(document).on('click', '#btnSubmit', function(){
-		var otp1 = $('#otp1').val();
-		var otp2 = $('#otp2').val();
-		var otp3 = $('#otp3').val();
-		var otp4 = $('#otp4').val();
-		var otp5 = $('#otp5').val();
-		var otp6 = $('#otp6').val();
-		if(otp1 != '' && otp2 != '' && otp3 != '' && otp4 != '' && otp5 != '' && otp6 != ''){
+		var otp = $('#otp_data').val();
+		if(otp != ''){
 			var url = "<?php echo base_url('site/login_otp/otp_check') ?>"; 
 			var data = {
-				otp_code : otp1+otp2+otp3+otp4+otp5+otp6,
+				otp_code : otp,
 				token : "<?php echo $_SESSION['token']?>"
 			};
 			aJax.post(url, data, function(result){
 				var obj = is_json(result);
 				if(obj.responce == 'success'){
-					modal.loading(false);
+					//modal.loading(false);
 					window.location.href = "<?php echo base_url().'user_profile' ?>";
 				} else{
 					$(".alert_failed").show();
-					$('#otp1').val('');
-					$('#otp2').val('');
-					$('#otp3').val('');
-					$('#otp4').val('');
-					$('#otp5').val('');
-					$('#otp6').val('');
-					modal.loading(false);
+					$('#otp1').val(otp);
+					//modal.loading(false);
 				}
 			});
 		} else{
