@@ -114,7 +114,7 @@
 	        	</button>
 	      	</div>
 	        <div class="modal-body">
-	  			<form action="<?= base_url("programs/") . $program_id . "/" . $program_url . "/add_event";?>" method="post" enctype="multipart/form-data" class="au-form" id="editEventForm">
+	  			<form action="" method="post" enctype="multipart/form-data" class="au-form" id="editEventForm">
 	        		<div class="form-row">
 						<div class="col">
 							<div class="custom-file">
@@ -197,6 +197,10 @@
 		var overview = $(this).attr("data-overview");
 		var image = $(this).attr("data-image");
 		var when = $(this).attr("data-when");
+		var id = $(this).attr("data-id");
+		var alis = $(this).attr("data-alias");
+
+		var url = "<?= base_url("programs/") . $program_id . "/" . $program_url . "/event/";?>" + id + "/" + alis + "/update";
 
 		// $('#whenpickeredit').data("DateTimePicker").minDate(when);
 
@@ -206,6 +210,7 @@
 		$("#EditEventoverview").val(overview);
 		$("#whenpickeredit").val(when);
 		$("#previewImageEventEdit").attr("src",image);
+		$("#editEventForm").attr("action",url);
 
 		
 
@@ -342,7 +347,7 @@
 		  			html += "	<td>" + status + "</td>";
 		  			html += "	<td>" + moment(b.create_date).format("LLL") + "</td>";
 		  			html += "	<td>" ;
-		  			html += "		<a href='#' data-when='"+moment(b.when).format("MM/DD/YYYY hh:mm a")+"' data-image='"+b.image+"' data-overview='"+b.description+"' data-points='"+b.volunteer_points+"' data-where='"+b.where+"' data-title='"+b.title+"' type='button' class='au-lnk au-action editEventBtn' title='Edit Event'><i class='fas fa-edit'></i></button>";
+		  			html += "		<a href='#' data-id="+b.id+" data-alias='"+b.url_alias+"' data-when='"+moment(b.when).format("MM/DD/YYYY hh:mm a")+"' data-image='"+b.image+"' data-overview='"+b.description+"' data-points='"+b.volunteer_points+"' data-where='"+b.where+"' data-title='"+b.title+"' type='button' class='au-lnk au-action editEventBtn' title='Edit Event'><i class='fas fa-edit'></i></button>";
 		  			html += "		<a href='"+b.Url+"' target='_blank' type='button' class='au-lnk au-action' title='Manage Page'><i class='fas fa-cog' style='color: #11295b;'></i></a>";
 		  			html += "		<a href='<?= base_url("volunteers");?>/"+b.id+"' type='button' class='au-lnk au-action' title='Volunteers' ><i class='fas fa-users' style='color: #795548;'></i><span class='au-evnu badge badge-pill  badge-light'>"+b.volunteers+"</span></a>";
 		  			html += "	</td>";
