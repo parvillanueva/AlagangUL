@@ -284,7 +284,7 @@
 	        		<div class="form-row">
 						<div class="col">
 							<div class="custom-file">
-								<input type="file" class="custom-file-input" name="eventImage" id="customFile" onchange="readURLImgStandardPreviewEvent(this);" accept="image/x-png,image/gif,image/jpeg" />
+								<input type="file" class="custom-file-input" name="eventImage" id="customFile" onchange="readURLImgStandardPreviewEvent(this);" accept="image/x-png,image/jpeg" />
 								<label class="custom-file-label" for="customFile">Choose file</label>
 							</div>
 							<img  style="width: 100%;" src="<?= $event_details[0]['image'];?>" id="previewImageEvent"/>
