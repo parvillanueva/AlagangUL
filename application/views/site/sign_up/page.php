@@ -54,7 +54,7 @@
 		$('#btnSend').show();
 	}
 	$(document).on('click', '#btnSend', function(){
-		modal.loading(true);
+		//modal.loading(true);
 		var email_address = $('#email').val();
 		if(email_address != ''){
 			var data = {
