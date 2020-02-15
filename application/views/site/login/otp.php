@@ -61,7 +61,7 @@
 					window.location.href = "<?php echo base_url().'user_profile' ?>";
 				} else{
 					$(".alert_failed").show();
-					$('#otp1').val(otp);
+					$('#otp_data').val(otp);
 					//modal.loading(false);
 				}
 			});

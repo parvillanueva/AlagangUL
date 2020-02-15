@@ -180,7 +180,7 @@ class Sign_up extends CI_Controller {
 												<center>
 													<b style="padding-bottom:35px;color: #092e6e;font-weight:700;font-size:18px;">One-time password for Alagang Unilab signup</b>
 													<p style="font-size:15px;font-weight:300;color: #4b4d4d;line-height: 24px;">
-														Hello Juan dela Cruz;<br>
+														Hello Guest;<br>
 														Thank you for your interest in joining the Alagang Unilab program. In order to continue with your Sign up,
 														please
 														enter the One-Time Password provided below:
