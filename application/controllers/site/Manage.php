@@ -127,10 +127,12 @@ class Manage extends GS_Controller {
 			tbl_program_events.`where`,
 			tbl_program_events.`url_alias`,
 			tbl_program_events.volunteer_points,
-			CONCAT('programs/',tbl_programs.id, '/', tbl_programs.url_alias, '/event/' , tbl_program_events.id , '/' , tbl_program_events.url_alias ) AS Url
+			CONCAT('programs/',tbl_programs.id, '/', tbl_programs.url_alias, '/event/' , tbl_program_events.id , '/' , tbl_program_events.url_alias ) AS Url,
+			COUNT(tbl_program_event_task.id) as task_count
 			FROM
 			tbl_program_events
-			INNER JOIN tbl_programs ON tbl_programs.id = tbl_program_events.program_id
+			LEFT JOIN tbl_programs ON tbl_programs.id = tbl_program_events.program_id
+			LEFT JOIN tbl_program_event_task ON tbl_program_event_task.event_id = tbl_program_events.id
 			WHERE tbl_program_events.program_id = ".$program_id."
 			GROUP BY
 			tbl_program_events.title,
@@ -155,6 +157,7 @@ class Manage extends GS_Controller {
 			$data[] = array(
 				"id"				=> $value->id,
 				"title"				=> $value->title,
+				"task_count"		=> $value->task_count,
 				"url_alias"			=> $value->url_alias,
 				"image"				=> base_url() . $value->image,
 				"description"		=> $value->description,

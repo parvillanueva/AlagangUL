@@ -235,7 +235,9 @@
 		var del = 0;
 		if(this.checked) { 
 			$('.select').each(function() { 
-				this.checked = true;  
+				if($(this).is(':disabled') === false){
+					this.checked = true; 
+				}
 				$("#btn_unpublishEvent").show();        
 				$("#btn_publishEvent").show();        
 			});
@@ -327,8 +329,13 @@
 		  				status = "Published";
 		  			}
 
+		  			var disabled = "disabled";
+		  			if(b.task_count > 0){
+		  				disabled = "";
+		  			}
+
 		  			html += "<tr>";
-		  			html += "	<td><input type='checkbox' class='select' data-alias='"+b.url_alias+"' data-id="+b.id+"/></td>";
+		  			html += "	<td><input "+disabled+" type='checkbox' class='select' data-alias='"+b.url_alias+"' data-id="+b.id+"/></td>";
 		  			html += "	<td>" + b.title + "</td>";
 		  			html += "	<td>" + moment(b.when).format("LLL") + "</td>";
 		  			html += "	<td>" + b.where + "</td>";
