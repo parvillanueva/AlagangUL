@@ -107,7 +107,11 @@
 					<span class="au-title">Areas covered: <?= $details['details'][0]->area_covered;?></span>
 				</div>
 				<hr>
-				<span class="au-h4">Upcoming Events</span>
+				<?php if(count($details['events']) == 0) { ?>
+					<span class="au-h4">No Upcoming Events</span>
+				<?php } else { ?>
+					<span class="au-h4">Upcoming Events</span>
+				<?php } ?>
 				<div class="au-eventswrapper">
 					<?php
 						//echo "<pre>";
@@ -149,11 +153,11 @@
 												<div class="col"><span class="au-needed"><?= $value['required_volunteer'] ;?> volunteers needed</span></div>
 												<div class="col">
 													<?php if($details['is_admin']) { ?>
-														<?php if($value['status'] == 1) { ?>
+														<!-- <?php if($value['status'] == 1) { ?>
 															<button type="button" class="au-volunteered au-btnyellow float-right" style="background-color: #00b513;">Published</button>
 														<?php } else { ?>
 															<button type="button" class="au-volunteered au-btnyellow float-right">Unpublished</button>
-														<?php } ?>
+														<?php } ?> -->
 													<?php } else {
 														if($value['required_volunteer']!=0 && $value['is_not_joined'] !=1){
 															if(!$value['is_joined']){

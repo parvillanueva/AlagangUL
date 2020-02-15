@@ -66,11 +66,11 @@ class Programs extends GS_Controller {
 		}
 
 
-		if($is_admin == 1){
-			$event_list = $this->Gmodel->get_query('tbl_program_events',"program_id = " . $program_id . " AND when >= '" . date("Y-m-d H:i:s") . "'");
-		} else 	{
+		// if($is_admin == 1){
+		// 	$event_list = $this->Gmodel->get_query('tbl_program_events',"program_id = " . $program_id . " AND when >= '" . date("Y-m-d H:i:s") . "'");
+		// } else 	{
 			$event_list = $this->Gmodel->get_query('tbl_program_events',"program_id = " . $program_id . " AND status = 1 AND when >= '" . date("Y-m-d H:i:s") . "'");
-		}
+		// }
 
 		$events = array();
 		foreach ($event_list as $key => $value) {
