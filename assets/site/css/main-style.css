@@ -1622,7 +1622,7 @@ p{
     background-color: #fff;
     padding: 0.5em;
     border: 1px solid rgba(0,0,0,0.1) !important;
-    margin: 0.5em;
+     margin: 0 0 0.5em 0em;
     border-radius: 3px;
 }
 .au-workplace > .row > .col-md-12 {
@@ -1631,8 +1631,15 @@ p{
     margin-bottom: 0px !important;
 }
 .au-workplace a {
-    font-size: 12px;
+    font-size: 9px;
     overflow-wrap: break-word;
+}
+.au-workplace label{
+     font-size: 10px;
+     margin-bottom: 0px;
+}
+.au-workplace p{
+     font-size: 8px !important;
 }
 .au-workplace > .row > .col-md-12 > .col-md-10 img {
     margin-top: 10px;

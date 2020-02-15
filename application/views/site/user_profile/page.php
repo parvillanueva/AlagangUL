@@ -50,7 +50,7 @@
 					</div>
 					<div class="form-row">
 						<div class="col">
-							<input type="text" class="form-control required_input mobile_number" id="phone" placeholder="Mobile Number" name="phone"">
+							<input type="text" class="form-control" id="phone" placeholder="Mobile Number" name="phone"">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -116,12 +116,17 @@
 	
 	$(document).on('click', '#btnSubmit', function(e){
 		e.preventDefault();
+		var phone_val = $("#phone").val();
+		if(phone_val == ''){
+			$("#phone").addClass('required_input');
+		} else{
+			$("#phone").addClass('mobile_number');
+		}
 		if(validate.standard("signups")){
 			var password = $('#password').val();
 			var pass_check = checkPasswordStrength(password);
 			if(pass_check){
 				var division = $('#division').val();
-				console.log(division);
 				if(division != null){
 					if($('#understood_details').is(":checked")){
 						$("#signups").submit();
