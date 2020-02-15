@@ -400,12 +400,11 @@
 					<div class="form-row">
 						<div class="col">
 							<label for="comment" class="au-p3">Content</label>
-							<textarea class="form-control required_input" rows="5" id="testimonial_comment" placeholder="" required=""></textarea>
+							<textarea class="form-control required_input no_html" rows="5" id="testimonial_comment" placeholder="" required=""></textarea>
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>	
-
 					<div class="au-modalbtn text-center">
 						<button type="button" class="au-btn au-btnyellow" id="btnTestimonial_close" data-dismiss="modal">Close</button>
 						<button type="button" class="au-btn" id="btnTestimonial">Submit</button>
