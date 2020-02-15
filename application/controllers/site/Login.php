@@ -43,6 +43,11 @@ class Login extends CI_Controller {
 		$this->load->view("site/layout/template2",$data);
 	}
 	
+	public function fpw_message_success(){
+		$data["content"] = "site/login/forgot_pass_message";
+		$this->load->view("site/layout/template2",$data);
+	}
+	
 	public function reset_password($user_id){
 		$data["user_id"] = $user_id;
 		$data["content"] = "site/login/reset_password";

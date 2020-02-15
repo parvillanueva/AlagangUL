@@ -22,6 +22,7 @@
 		$route["get-rewards"] = "site/get_rewards";
 		$route["profile"]  = "site/profile";
 		$route["profile/reset"]  = "site/profile/reset";
+		$route["change_pfw_message"]  = "site/login/fpw_message_success";
 
 		$route["profile/(:any)"]  = "site/profile/view/$1";
 
