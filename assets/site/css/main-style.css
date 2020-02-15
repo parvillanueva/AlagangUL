@@ -1670,23 +1670,11 @@ p{
     margin-right: 5px;
     white-space: nowrap;
 }
-.au-manageprogramtable.au-opptable table th:nth-child(1){
-     text-align: right;
+.au-manageprogramtable.au-opptable table{
+     table-layout: unset;
 }
-.au-manageprogramtable.au-opptable table th:nth-child(2){
-     width: 20%;
-}
-.au-manageprogramtable.au-opptable table th:nth-child(3){
-     width: 20%;
-}
-.au-manageprogramtable.au-opptable table th:nth-child(4){
-     width: 25%  
-}
-.au-manageprogramtable.au-opptable table th:nth-child(5){
-     width: 20%;
-}
-.au-manageprogramtable.au-opptable table th:nth-child(6){
-     width: 15%;    
+.au-manageprogramtable.au-opptable table th{
+     width: auto;
 }
 #btn_addProgram,
 #btn_unpublishProgram,

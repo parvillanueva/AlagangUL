@@ -21,7 +21,7 @@
 	<div class="au-container au-padding">
 		<div class="au-eventswrapper row">
 			<div class="col">
-				<div class="au-opptable">
+				<div class="au-manageprogramtable au-opptable">
 					<table>
 						<thead>
 							<tr>
