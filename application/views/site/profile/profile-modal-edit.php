@@ -33,7 +33,7 @@
                         <div class="form-row">
                             <div class="col" style="overflow: scroll;">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="programImage" id="customFile" onchange="readURLImgStandardPreview(this);" accept="image/x-png,image/gif,image/jpeg" />
+                                    <input type="file" class="custom-file-input" name="programImage" id="customFile" onchange="readURLImgStandardPreview(this);" accept="image/x-png,image/jpeg" />
                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                     <img  style="width: 100%;" src="<?= base_url() . $profile->imagepath;?>" 
 onerror="imgErrorProfile(this);" id="previewImage" />
