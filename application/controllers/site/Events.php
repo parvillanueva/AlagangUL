@@ -294,8 +294,9 @@ class Events extends GS_Controller {
 			$query_program_details = "SELECT id, image_thumbnail, url_alias FROM tbl_programs WHERE id = " . $value->program_id;
 			$program_details = $this->db->query($query_program_details)->result();
 			
-			$events[] = array(
+			$events[] = array( 
 				"id"				=> $value->id,
+				"get_earn_badge"	=> $this->get_earn_badge($value->id),
 				"url_alias"			=> $value->url_alias,
 				"program_details"   => $program_details[0],
 				//"link"				=> $event_page_url,
