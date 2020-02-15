@@ -18,7 +18,7 @@
 			<div class="au-form-wrapper au-inner">
 				<div class="au-form" id="signup">
 					<span class="au-h4">Sign up for an Alagang Unilab Account</span>
-					<div class="alert alert_failed alert-warning" id="failed_label">Email Address is already exist! </div>
+					<div class="alert alert_failed alert-warning" id="failed_label">Email Address already exists! </div>
 					<div class="alert alert_failed alert-warning" id="failed_valid">Valid Email Address must be Entered! </div>
 					<div class="alert alert_failed alert-warning" id="failed_list"><small>Please use unilab email address! </div>
 					<span class="au-p2">You may be missing out a world of opportunity by not being a member. Please provide your email address to register.</span>
