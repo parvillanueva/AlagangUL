@@ -23,7 +23,7 @@ modal += '  <div class="modal-dialog" role="document">';
 modal += '      <div class="modal-content">';
 modal += '          <div class="modal-body"  id="alert_message"></div><br>';
 modal += '          <div class="modal-footer">';
-modal += '              <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>';
+modal += '              <button type="button" class="btn btn-secondary" id="not_support" data-dismiss="modal">OK</button>';
 // modal += '              <button type="button" class="btn btn-primary" id="bootstrapShowModalConfirm">Yes</button>'
 modal += '          </div>';
 modal += '      </div>';
