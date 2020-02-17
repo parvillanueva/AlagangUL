@@ -147,11 +147,11 @@
 							<table>
 								<thead>
 									<tr>
+										<th scope="col">Volunteer your:</th>
 										<th scope="col">Possible task for volunteers</th>
 										<th scope="col">Qualifications</th>
 										<th scope="col">Needed</th>
 										<th scope="col">Joined</th>
-										<th scope="col">Volunteer your:</th>
 										<?php if($event_details[0]['is_admin'] == 1) { ?>
 											<th scope="col">Actions</th>
 										<?php } ?>
@@ -193,11 +193,6 @@
 									 		}
 									 	?>
 										<tr class="forvolunteer <?=($value['user_id_joined']==1 ) ? 'volunteer' : ''?> vol-id<?=$value['id']?>" attr-id="<?=$value['id']?>">
-											
-											<td data-header="Task"><?= $value['task'];?></td>
-											<td data-header="Qualifications"><?= $value['qualification'];?></td>
-											<td data-header="Needed"><?= $value['required_volunteers'];?></td>
-											<td data-header="Joined" class="joined-<?=$value['id']?>"><?= $value['joined_volunteers'];?></td>
 											<td data-header="Volunteer your:" class="au-actions">
 												<?php
 													$badge_count = count($value['task_badge']);
@@ -225,6 +220,11 @@
 													<?=$htm?>
 												</div>
 											</td>
+											<td data-header="Task"><?= $value['task'];?></td>
+											<td data-header="Qualifications"><?= $value['qualification'];?></td>
+											<td data-header="Needed"><?= $value['required_volunteers'];?></td>
+											<td data-header="Joined" class="joined-<?=$value['id']?>"><?= $value['joined_volunteers'];?></td>
+											
 											<?php if($event_details[0]['is_admin'] == 1) { ?>
 											<td data-header="Actions:" class="au-actions">
 												<a href="#"  data-toggle="modal" data-id = "<?=$value['id']?>" data-target="#editTask" id="btn_edit_task" class="au-lnk au-action" title="Edit Details"><i class="fas fa-edit"></i></a>
@@ -375,14 +375,44 @@
 				<span class="au-p6">as a:</span>
 				<span class="au-p4 volunteer-task"></span>
 				<span class="au-p6">is this correct?</span>
-				<div class="au-modalbtn text-center">
-					<button type="button" class="au-btn au-btnyellow volunteer-as" data-dismiss="modal" attr-submit="0" >No, I made a mistake</button>
-					<button type="button" class="au-btn volunteer-as" data-dismiss="modal" attr-submit="1">Yes, sign me up!</button>
-				</div>
+				<hr>
+				<form>
+					<div class="form-row au-terms">
+						<div class="col">
+		      				<label class="form-check-label">
+		        				<input class="form-check-input is_agree_checkbox" type="checkbox" name="terms" required=""> I have read and understood the <a href="#" class="au-lnk event-guidelines" data-toggle="modal" data-target="#eventdetails">Guidelines</a>.
+			        			<div class="valid-feedback"></div>
+			        			<div class="invalid-feedback"></div>
+		      				</label>
+		      				
+		      			</div>
+		      			<span class="au-p6 au-errormessage"><i class="fas fa-exclamation-triangle"></i> Please read and agree to the event guidelines above.</span>
+	    			</div>
+					<div class="au-modalbtn text-center">
+						<button type="button" class="au-btn au-btnyellow" data-dismiss="modal" attr-submit="0">No, I made a mistake</button>
+						<button type="button" class="au-btn volunteer-as" attr-submit="1">Yes, sign me up!</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
 </div>
+<div class="modal fade text-center" id="eventdetails">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-body">
+					<span class="au-h4"><?=$guidelines[0]->title?></span>
+					<div class="au-inner au-cscroll au-guidelines text-left">
+						<?=$guidelines[0]->description?>
+					</div>
+					<div class="au-modalbtn text-center">
+						<button type="button" class="au-btn au-btnyellow au-guidlinebtn guidelinebtn" data-dismiss="modal" attr-data="0">I disagree</button>
+						<button type="button" class="au-btn au-guidlinebtn guidelinebtn" data-dismiss="modal" attr-data="1">I agree</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 <div class="modal fade text-center" id="volunteerthankyou" data-backdrop="static" data-keyboard="false">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
@@ -685,15 +715,37 @@
 		get_gallery();
 		get_testimonial();
 
+		$(document).on('click', '.event-guidelines', function() {
+			$('#volunteermodal').modal('hide');
+		});	
+
+		$(document).on('click', '.is_agree_checkbox', function() {
+			if($(this).is(':checked')){
+				$('.au-errormessage').hide();
+			}
+		});
+
+		$(document).on('click', '.guidelinebtn', function() {
+			var is_agree = $(this).attr('attr-data');
+			if(is_agree==1){
+				$('.is_agree_checkbox').attr('checked',true);
+			}
+			else{
+				$('.is_agree_checkbox').attr('checked',false);
+			}
+			$('#volunteermodal').modal('show');
+		});
+
 		$(document).on('click', '.event-volunteer', function() {
-			var volunterr_type = $(this).siblings('.badge-hid').html();
-			var task = $(this).closest('tr').children(':first-child').html();
+			var volunteer_type = $(this).siblings('.badge-hid').html();
+			var task = $(this).closest('tr').children(':nth-child(2)').html();
 			var event_task_id = $(this).attr('attr-id');
 			var is_joined = $(this).attr('attr-isjoined');
 			$('.volunteer-as').attr('attr-id',event_task_id).attr('attr-isjoined',is_joined);
-			$('.au-yourvolunteer').html(volunterr_type);
+			$('.au-yourvolunteer').html(volunteer_type);
 			$('.volunteer-task').html(task);
 			$('#volunteermodal').modal('show');
+			$('.au-errormessage').hide();
 		});
 
 		$(document).on('click', '.close-btn', function() {
@@ -707,23 +759,28 @@
 			var event_id = '<?=$event_id?>';	
 			var is_joined = $(this).attr('attr-isjoined');
 
-			
-			var url = "<?= base_url("events/volunteer");?>?program_id="+program_id+"&event_id="+event_id+"&event_task_id="+event_task_id+"&is_submit="+is_submit;
-	    	$.get(url, function(data) {
-	    		var vol_id = $('.volunteer').attr('attr-id');
-	    		$('tr.forvolunteer').removeClass('volunteer'); 
-	    		$('.event-volunteer').attr('attr-isjoined',0);
-	    		$('.joined-'+vol_id).html(parseInt($('.joined-'+vol_id).html())-1);
-	    		if(is_submit==1){
-	    			$(".vol-id"+event_task_id).addClass('volunteer');
-	    			$('.event-volunteer[attr-id="'+event_task_id+'"]').attr('attr-isjoined',1);
-	    			$('.joined-'+event_task_id).html(parseInt($('.joined-'+event_task_id).html())+1);
-	    			$('#volunteerthankyou').modal('show');
-	    		}
-	    		else{
-	    			location.reload();
-	    		}		    		
-			});
+			if($('.is_agree_checkbox').is(':checked')){
+				var url = "<?= base_url("events/volunteer");?>?program_id="+program_id+"&event_id="+event_id+"&event_task_id="+event_task_id+"&is_submit="+is_submit;
+		    	$.get(url, function(data) {
+		    		$('#volunteermodal').modal('hide');
+		    		var vol_id = $('.volunteer').attr('attr-id');
+		    		$('tr.forvolunteer').removeClass('volunteer'); 
+		    		$('.event-volunteer').attr('attr-isjoined',0);
+		    		$('.joined-'+vol_id).html(parseInt($('.joined-'+vol_id).html())-1);
+		    		if(is_submit==1){
+		    			$(".vol-id"+event_task_id).addClass('volunteer');
+		    			$('.event-volunteer[attr-id="'+event_task_id+'"]').attr('attr-isjoined',1);
+		    			$('.joined-'+event_task_id).html(parseInt($('.joined-'+event_task_id).html())+1);
+		    			$('#volunteerthankyou').modal('show');
+		    		}
+		    		else{
+		    			location.reload();
+		    		}		    		
+				});
+			}
+			else{
+				$('.au-errormessage').show();
+			}
 			
 
 		});
