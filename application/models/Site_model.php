@@ -145,5 +145,15 @@ date_default_timezone_set('Asia/Taipei');
 			return $query->result_array();
 		}
 
+		function get_guidelines()
+		{
+			$this->db->select("title,description");
+			$this->db->from("tbl_guidelines");
+			$this->db->where("status", 1);
+
+			$query = $this->db->get();
+			return $query->result_array();
+		}
+
 	}
 ?>

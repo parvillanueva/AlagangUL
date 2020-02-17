@@ -14,7 +14,7 @@
 		$route["forgot_password"] = "site/login/forgot_password";
 		$route["login_otp_fpw"] = "site/login_otp/otp_fpw";
 		$route["reset_password/(:any)"] = "site/login/reset_password/$1";
-		$route["about"] = "site/about";
+		$route["guidelines"] = "site/guidelines";
 		$route["programs"] = "site/programs";
 
 		$route["events/upload"] = "site/events/upload";
