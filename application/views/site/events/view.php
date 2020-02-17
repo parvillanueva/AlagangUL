@@ -100,8 +100,10 @@
 								<div class="au-inner au-cscroll">
 								<?php 	if(count($event_volunteers) > 0) { 
 										 	if($event_details[0]['is_admin'] == 1){
+										 		// print_r($event_details[0]['id']);
+										 		// die
 								?>
-										<a href="<?= $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>/manage"   class="au-btnvolunteer au-btnvolunteertype au-time primary btn_approve"  style="background-color:#1894e7; width:100%; text-align:center;">Manage</a>
+										<a href="<?= base_url(""). "volunteers/" .$event_details[0]['id'];?>"  class="au-btnvolunteer au-btnvolunteertype au-time primary btn_approve"  style="background-color:#1894e7; width:100%; text-align:center;">Manage</a>
 								<?php		 		
 										 	}
 										}
