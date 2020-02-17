@@ -18,7 +18,7 @@
 				<a href="<?= base_url();?>" class="au-navbar-brand navbar-brand">
 					<img src="<?=base_url()?>assets/site/img/au-logo.png" alt="Alagang Unilab Logo" class="au-logo">
 				</a>
-				<div class="d-lg-none asd">
+				<div class="d-lg-none">
 					<?php if(empty($user_details[0]->imagepath)) : ?>
 						<img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-avatar">
 					<?php else: ?>
@@ -98,12 +98,6 @@
 	<script type="text/javascript">
 		var base_url = '<?=base_url();?>';
 
-		$(document).ready(function(){
-			$("<img/>")
-		    .on('load', function() { console.log("image loaded correctly"); })
-		    .on('error', function() { console.log("error loading image"); })
-		    .attr("src", $(originalImage).attr("src"));
-		});
 	    function imgErrorProfile(image) {
 	        image.onerror = "";
 	        image.src = base_url+"/assets/img/au-avatar.svg";
