@@ -3,12 +3,18 @@ defined("BASEPATH") OR exit("No direct script access allowed");
 
 class Login extends CI_Controller {
 	
+	public function __construct() 
+	{
+	 	parent::__construct();
+		if($this->session->userdata('user_sess_email')!='' ) { 
+	 		redirect(base_url("home"));
+	 	} 
+	} 
+	
 	public function index(){
 		$data['token'] = '214379c94ea72a85f638ca88292248c6';
 		$this->load->view("site/login/login", $data);	
-	}
-
-	
+	}	
 	
 	public function session_set($data){
 		$arr_session = array(
