@@ -282,6 +282,8 @@ p{
      color: rgba(0, 0, 0, 0.7);
      position: relative;
      font-size: 25px;
+     display: block;
+     margin-bottom: -1px;
 }
  .au-scroll a i {
      margin-left: -10px;
@@ -318,7 +320,7 @@ p{
 }
  .au-h1 {
      font-family: montserrat, sans-serif;
-     font-size: 22px;
+     font-size: 24px;
      display: block;
      line-height: 1.25em;
      margin-bottom: 20px;
@@ -326,7 +328,7 @@ p{
 }
  .au-h2 {
      font-family: montserrat, sans-serif;
-     font-size: 16px;
+     font-size: 18px;
      display: block;
      font-weight: 400;
      line-height: 1.5em;
@@ -408,7 +410,7 @@ p{
 }
  .au-featured-program {
      margin-bottom: 30px;
-     box-shadow: 0 2px 8px 0 rgba(50,50,50,.05);
+     box-shadow: 0 2px 8px 0 rgba(50,50,50,.15);
      background: rgb(9, 46, 110);
      background: -moz-linear-gradient(45deg, rgba(9, 46, 110, 1) 0%, rgba(26, 163, 249, 1) 100%);
      background: -webkit-linear-gradient(45deg, rgba(9, 46, 110, 1) 0%, rgba(26, 163, 249, 1) 100%);
@@ -457,7 +459,7 @@ p{
 }
  .au-p4 {
      display: block;
-     font-size: 12px;
+     font-size: 14px;
      line-height: 1.5em;
      font-weight: 400;
      color: #222;
@@ -539,7 +541,7 @@ p{
 }
  .au-reward {
      margin-bottom: 30px;
-     box-shadow: 0 2px 8px 0 rgba(50,50,50,.05);
+     box-shadow: 0 2px 8px 0 rgba(50,50,50,.15);
      background: rgb(238, 238, 238);
      background: -moz-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
      background: -webkit-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
@@ -620,7 +622,7 @@ p{
      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#092e6e", endColorstr="#1aa3f9", GradientType=1);
 }
  .au-userbox {
-     box-shadow: 0 2px 8px 0 rgba(50,50,50,.05);
+     box-shadow: 0 2px 8px 0 rgba(50,50,50,.15);
      background: rgb(238, 238, 238);
      background: -moz-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
      background: -webkit-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
@@ -802,7 +804,7 @@ p{
  .au-event{
      overflow: hidden;
      margin-bottom: 30px;
-     box-shadow: 0 2px 8px 0 rgba(50,50,50,.05);
+     box-shadow: 0 2px 8px 0 rgba(50,50,50,.15);
      background: rgb(238, 238, 238);
      background: -moz-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
      background: -webkit-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
@@ -813,20 +815,20 @@ p{
      padding: 1em 2em 0 1em;
 }
  .au-program{
-     padding-left: 83px;
+     padding-left: 56px;
      position: relative;
 }
  .au-pthumbnail{
      position: absolute;
      top: 0;
      left: 0;
-     width: 70px;
-     height: 70px;
+     width: 42px;
+     height: 42px;
      background: #fff;
 }
  .au-ptitle {
-     font-size: 14px;
-     height: 20px;
+     font-size: 16px;
+     height: 48px;
      margin-bottom: 10px;
      font-weight: 700;
      color: #092E6E;
@@ -834,7 +836,7 @@ p{
      text-overflow: ellipsis;
      display: -webkit-box;
      -webkit-box-orient: vertical;
-     -webkit-line-clamp: 1;
+     -webkit-line-clamp: 2;
 }
  .au-pdetails {
      height: 29px;
@@ -859,7 +861,7 @@ p{
      width: 63px;
 }
  .au-pans{
-     font-size: 10px;
+     font-size: 12px;
      font-weight: 700;
      color: #222;
      overflow: hidden;
@@ -1076,7 +1078,7 @@ p{
 }
  .au-content{
      margin-bottom: 30px;
-     box-shadow: 0 2px 8px 0 rgba(50,50,50,.05);
+     box-shadow: 0 2px 8px 0 rgba(50,50,50,.15);
      background: rgb(238, 238, 238);
      background: -moz-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
      background: -webkit-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
@@ -1233,35 +1235,13 @@ p{
 }
 
  .au-opptable table{
-     table-layout:fixed;
      width: 100%;
-     box-shadow: 0 2px 8px 0 rgba(50,50,50,.05);
+     box-shadow: 0 2px 8px 0 rgba(50,50,50,.15);
      background: rgb(238, 238, 238);
      background: -moz-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
      background: -webkit-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
      background: linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#eee", endColorstr="#fff", GradientType=1);
-}
-.au-opptable table th:nth-child(1){
-     width: 20%;
-}
-.au-opptable table th:nth-child(2){
-     width: 20%;
-}
-.au-opptable table th:nth-child(3){
-     width: 10%;
-}
-.au-opptable table th:nth-child(4){
-     width: 10%;
-}
-.au-opptable table th:nth-child(5){
-     width: 220px;
-}
-.au-opptable table th:nth-child(6){
-     width: 75px;
-}
-.au-opptable table tr:nth-child(5){
-     overflow: visible !important;
 }
  .au-opptable table tr{
      font-size: 12px;
@@ -1284,7 +1264,8 @@ p{
      width: 100px;
 }
 .au-btnvolunteer-2{
-     width: 200px;
+     /*width: 200px;*/
+     width: auto;
 }
 .au-btnvolunteer:hover{
      opacity: 0.7;
@@ -1312,6 +1293,9 @@ p{
 }
 .au-actions::before{
      font-size: 12px;
+}
+.au-opptable .au-actions{
+     white-space: nowrap;
 }
 .au-btnvolunteertype.au-time{
      background-color: #EA1126;
@@ -1377,7 +1361,7 @@ p{
      position: relative;
      padding: 1em;   
      padding-bottom: 4em;  
-     box-shadow: 0 2px 8px 0 rgba(50,50,50,.05);
+     box-shadow: 0 2px 8px 0 rgba(50,50,50,.15);
      background: rgb(238, 238, 238);
      background: -moz-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
      background: -webkit-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
@@ -1783,6 +1767,45 @@ button.btn:hover{
      display: block;
      background-color: #1AA3F9;
 }
+.au-terms{
+     font-size: 14px;
+     padding: 0px 20px 20px 20px;
+}
+.au-guidelines{
+     font-size: 12px;
+     border-top: 1px solid rgba(0,0,0,.1);
+     border-bottom: 1px solid rgba(0,0,0,.1);
+     margin-bottom: 1em;
+     margin-left: -1em;
+     margin-right: -1em;
+     max-height: calc(100vh - 250px);
+}
+.au-guidelines{
+     padding-inline-start: 0px;
+}
+.modal-open .modal{
+     padding-right: 11px;
+}
+.au-errormessage{
+    color: #ea1126;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 12px;
+    background-color: rgba(255, 0, 0, 0.1);
+    padding: 10px;
+    margin: 10px auto -10px auto;
+    display: none;
+}
+.au-errormessage i{
+     margin-right: 5px;
+}
+.au-btnicon{
+     max-width: 100px;
+}
+.disabled .au-btnicon{
+     filter: grayscale(100%);
+     opacity: 0.5;
+}
 /*Extra small devices (portrait phones, less than 576px)*/
  @media (max-width: 575px) {
      .au-logo {
@@ -1978,7 +2001,7 @@ button.btn:hover{
       .au-opptable table tr{
           padding: 1em;
           margin: 20px 0px;
-          box-shadow: 0 2px 8px 0 rgba(50,50,50,.05);
+          box-shadow: 0 2px 8px 0 rgba(50,50,50,.15);
           background: rgb(238, 238, 238);
           background: -moz-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
           background: -webkit-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
@@ -2004,6 +2027,9 @@ button.btn:hover{
      }
      .au-bgtrans .au-h2{
           font-size: 12px;
+     }
+     .modal-open .modal{
+          padding-right: 0px !important;
      }
 
 }
@@ -2110,8 +2136,8 @@ button.btn:hover{
     }
      .au-programdetailsinside .au-phthumbnail{
          margin: 10px auto;
-    }
-     .au-searchbtn{
+    } !important
+     .au-searchbtn{ !important
          display: block;
          width: 100%;
     }
@@ -2188,7 +2214,7 @@ button.btn:hover{
       .au-opptable table tr{
           padding: 1em;
           margin: 20px 0px;
-          box-shadow: 0 2px 8px 0 rgba(50,50,50,.05);
+          box-shadow: 0 2px 8px 0 rgba(50,50,50,.15);
           background: rgb(238, 238, 238);
           background: -moz-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
           background: -webkit-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
@@ -2197,6 +2223,9 @@ button.btn:hover{
      }
       .au-h5 {
           max-width: unset;
+     }
+     .modal-open .modal{
+          padding-right: 0px;
      }
 }
 /*Medium devices (tablets, 768px and up)*/
@@ -2331,7 +2360,7 @@ button.btn:hover{
       .au-opptable table tr{
           padding: 1em;
           margin: 20px 0px;
-          box-shadow: 0 2px 8px 0 rgba(50,50,50,.05);
+          box-shadow: 0 2px 8px 0 rgba(50,50,50,.15);
           background: rgb(238, 238, 238);
           background: -moz-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
           background: -webkit-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
