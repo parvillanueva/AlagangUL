@@ -21,12 +21,12 @@
 
 					<div class="form-row">
 						<div class="col">
-							<input type="text" class="form-control required_input no_html" id="fname" placeholder="First Name" name="fname">
+							<input type="text" class="form-control required_input no_html alphaonly" id="fname" placeholder="First Name" name="fname">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 						<div class="col">											
-							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Last Name" name="lname">
+							<input type="text" class="form-control required_input no_html alphaonly" id="lname" placeholder="Last Name" name="lname">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -43,7 +43,7 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 						<div class="col">											
-							<input type="text" class="form-control required_input email" id="email" placeholder="Work Email" name="email" value="<?=$this->session->userdata('email_address');?>">
+							<input type="text" class="form-control required_input email" id="email" placeholder="Work Email" name="email_add" value="<?=$this->session->userdata('email_address');?>">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>

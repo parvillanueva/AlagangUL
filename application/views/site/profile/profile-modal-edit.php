@@ -3,16 +3,15 @@
         <div class="modal-content">
             <div class="modal-body">
                 <span class="au-h4">Edit Profile</span>
-                <div class="alert alert_failed alert-warning" id="failed_label">Invalid File! Only accepts .jpeg or .png </div>
-                    <form class="au-form" id="editprofile">
+                    <form action="<?= base_url('update-profile'); ?>" method="post" enctype="multipart/form-data" class="au-form" id="editprofile">
                         <div class="au-form form-row">
                             <div class="col">
-                                <input type="text" class="form-control" id="fname" pattern="[a-zA-Z0-9\s]+" placeholder="First Name" value="<?= @$profile->first_name ?>" name="fname" required>
+                                <input type="text" class="form-control required_input no_html alphaonly" id="fname" placeholder="First Name" value="<?= @$profile->first_name ?>" name="fname" required>
                                 <div class="valid-feedback"></div>
                                 <div class="invalid-feedback">Invalid Entry.</div>
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control" id="lname" pattern="[a-zA-Z0-9\s]+"  placeholder="Last Name" value="<?= @$profile->last_name ?>" name="lname" required>
+                                <input type="text" class="form-control required_input no_html alphaonly" id="lname" placeholder="Last Name" value="<?= @$profile->last_name ?>" name="lname" required>
                                 <div class="valid-feedback"></div>
                                 <div class="invalid-feedback">Invalid Entry.</div>
                             </div>
@@ -31,7 +30,7 @@
                                 <div class="invalid-feedback">Invalid Entry.</div>
                             </div>
                             <div class="col">
-                                <input type="email" class="form-control" id="email" placeholder="Work Email" name="email" required value="<?= @$profile->email_address ?>" disabled>
+                                <input type="email" class="form-control required_input" id="email" placeholder="Work Email" name="email" required value="<?= @$profile->email_address ?>" disabled>
                                 <div class="valid-feedback"></div>
                                 <div class="invalid-feedback">Invalid Entry.</div>
                             </div>
@@ -49,18 +48,18 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="col" style="overflow: scroll;">
+                            <div class="col" style="">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="programImage" id="customFile" onchange="readURLImgStandardPreview(this);" accept="image/x-png,image/jpeg" />
+									<input type="hidden" name="image_file" class="required_input" value="<?= $profile->imagepath;?>">
+                                    <input type="file" class="custom-file-input" name="programImage" id="customFile"  onchange="readURLImgStandardPreview(this);" accept="image/x-png,image/jpeg" />
                                     <label class="custom-file-label" for="customFile">Choose file</label>
-                                    <img  style="width: 100%;" src="<?= base_url() . $profile->imagepath;?>" 
-onerror="imgErrorProfile(this);" id="previewImage" />
+                                    <img  style="width: 100%;vertical-align: baseline;" src="<?= base_url() . $profile->imagepath;?>" onerror="imgErrorProfile(this);" id="previewImage" />
                                 </div>
                             </div>
                         </div>
                         <div class="au-modalbtn text-center">
-                            <button type="button" class="au-btn au-btnyellow" data-dismiss="modal">Close</button>
-                            <button type="button" class="au-btn" id="btnsubmit">Submit</button>
+                            <button type="button" class="au-btn au-btnyellow" id="btnsubmit_data_close" data-dismiss="modal">Close</button>
+                            <button type="button" class="au-btn" id="btnsubmit_data">Submit</button>
                         </div>
                     </form>	
             </div>
@@ -117,15 +116,29 @@ onerror="imgErrorProfile(this);" id="previewImage" />
         }
     });
 
-	$(document).on('click', '#btnsubmit', function(){
-        
-        var email = $('#email').val() ? strip_tags($('#email').val()) : '';
-        if(email != '' && validFile)
+ 	$(document).on('click', '#btnsubmit_data', function(){
+        /* var email = $('#email').val() ? strip_tags($('#email').val()) : '';
+        if(email != '')
         {
             update();
-        }
+        } */
+		//alert();
+		var phone_val = $("#phone").val();
+		if(phone_val == ''){
+			$("#phone").addClass('required_input');
+		} else{
+			$("#phone").addClass('mobile_number');
+		}
+		if(validate.standard("editprofile")){
+			update();
+		}
     });
-
+	
+	$(document).on('click', '#btnsubmit_data_close', function(){
+		$('.validate_error_message').hide();
+		$('input').css('border-color', 'rgb(204, 204, 204)');
+	});
+ 
     function update(){
         $("#profilesettings").css('opacity',0.5);
         $("#profile_confirm_modal").modal("show");
@@ -133,7 +146,7 @@ onerror="imgErrorProfile(this);" id="previewImage" />
 
     $(document).on('click', '#btnSubmit2', function(e){
         e.preventDefault();
-        var fname = $('#fname').val() ? strip_tags($('#fname').val()) : '';
+        /* var fname = $('#fname').val() ? strip_tags($('#fname').val()) : '';
         var lname = $('#lname').val() ? strip_tags($('#lname').val()) : '';
         var phone = $('#phone').val() ? strip_tags($('#phone').val()) : '';
         var division = $('#division').val() ? strip_tags($('#division').val()) : '';
@@ -171,7 +184,9 @@ onerror="imgErrorProfile(this);" id="previewImage" />
                 }
             });
             $("#profilesettings").css('opacity',1);
-            $("#profile_confirm_modal").modal("hide");
+            $("#profile_confirm_modal").modal("hide"); */
+			$("#editprofile").submit();
+
     });
 
 
@@ -187,8 +202,15 @@ onerror="imgErrorProfile(this);" id="previewImage" />
             var reader = new FileReader();
             reader.onload = function(e) {
                 var extension = input.files[0].name.split('.').pop().toLowerCase();
-                var base64 = e.target.result;
-                $("#previewImage").attr("src",base64);
+
+                if (!input.files[0].name.match(/.(jpg|jpeg|png)$/i)){
+                    input.val = "";
+                    BM.alert("This file type is not supported.","text");
+                } else {
+                    var base64 = e.target.result;
+                    $("#previewImage").attr("src",base64);
+                }
+
             }
             reader.readAsDataURL(input.files[0]);
         }

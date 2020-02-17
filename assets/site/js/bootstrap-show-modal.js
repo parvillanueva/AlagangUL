@@ -18,7 +18,7 @@ modal += '      </div>';
 modal += '  </div>';
 modal += '</div>';
 
-modal += '<div class="modal fade" id="bootstrapShowModalAlert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+modal += '<div class="modal fade" id="bootstrapShowModalAlert" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">';
 modal += '  <div class="modal-dialog" role="document">';
 modal += '      <div class="modal-content">';
 modal += '          <div class="modal-body"  id="alert_message"></div><br>';
