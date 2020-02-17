@@ -72,7 +72,7 @@
                    	$.each(obj, function(x,y){
                    		var status = "Not Qualified";
                    		if(y['status'] == 0){
-                   			status = "Not Qualified";
+                   			status = "Pending";
                    		} else if(y['status'] == 1){
                    			status = "Qualified";
                    		}
