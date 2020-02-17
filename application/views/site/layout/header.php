@@ -75,6 +75,7 @@
         
         <link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/site/css/daterangepicker.css" />
         <script src="<?= base_url();?>assets/site/js/daterangepicker.js" type="text/javascript" ></script>
+        <script src="<?= base_url();?>assets/site/js/bootstrap-show-modal.js"></script>
 
         
         <!-- <script type="text/javascript" src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
@@ -152,6 +153,58 @@
         })(window,document,'script','dataLayer','GTM-N9VJ329');
         </script>
         <!-- End Google Tag Manager -->
+
+        <script type="text/javascript">
+            var click_return = true;
+            $(document).on('click','a',function(event){
+                checkConnections();
+                // alert(click_return);
+                if(click_return == false){  
+                    event.stopImmediatePropagation();
+                }
+                // alert(1);
+            });
+
+            $(document).on('click','button',function(event){
+                // return click_return;
+                // alert(1);
+                checkConnections();
+                if(click_return == false){  
+                    event.stopImmediatePropagation();
+                }
+            });
+
+            
+            function checkConnections(callback){
+                // BM.alert("asdasd");
+                $("#loading_div_standard").show();
+                $.ajax(
+                    {
+                        url: "<?= base_url();?>", 
+                        async: false,
+                        success: function(data, textStatus, jqXHR){
+                            $("#loading_div_standard").hide();
+                            click_return = true;
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            $("#loading_div_standard").hide();
+                            if (XMLHttpRequest.readyState == 4) {
+                                // HTTP error (can be checked by XMLHttpRequest.status and XMLHttpRequest.statusText)
+                                 BM.alert('<h4><center><i class="fa fa-wifi "></i><br><br>Cannot connect, Please check your internet connection.</center></h4>','html');
+                                click_return = false;
+                            }
+                            else if (XMLHttpRequest.readyState == 0) {
+                                // Network error (i.e. connection refused, access denied due to CORS, etc.)
+                                BM.alert('<h4><center><i class="fa fa-wifi"></i><br><br>Cannot connect, Please check your internet connection.</center></h4>','html');
+                                click_return = false;
+                            } else {
+                                return false;
+                            }
+                        }
+                    }
+                );
+            };
+        </script>
     </head>
     
     <p id="loading_div_standard"><i class="fa fa-spinner fa-spin" style="font-size:54px"></i></p>
