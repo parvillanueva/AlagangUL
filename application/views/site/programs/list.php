@@ -34,7 +34,7 @@
 			            <div class="col-lg-4 col-sm-6">
 			                <div class="au-featured-program">
 			                    <div class="au-fp-thumbnail">
-			                        <img src="<?=base_url()?>{image_thumbnail}" class="au-fp-thumbnailimg">
+			                        <img src="<?=base_url()?>{image_thumbnail}" class="au-fp-thumbnailimg" onerror="imgError(this);">
 			                    </div>
 			                    <div class="au-fp-details">
 			                        <span class="au-p1">{name}</span>
@@ -122,9 +122,16 @@
 </div>
 
 <script type="text/javascript">
+	var base_url = '<?=base_url();?>';
     $(document).ready(function(result){
 
     });
+
+    function imgErrorProgram(image) {
+        image.onerror = "";
+        image.src = base_url+"/assets/img/broken_img2.jpg";
+        return true;
+    }
 	$(document).on("click", "#btn_addProgram", function(){
 
 		$("#previewImage").attr("src","");
