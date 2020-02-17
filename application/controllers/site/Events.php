@@ -200,8 +200,6 @@ class Events extends GS_Controller {
 			show_404();
 		}
 
-
-		echo $data['event_details'][0]['status'];
 		$data['event_task'] = $this->get_event_tasks($event_id);
 		$data['event_volunteers'] = $this->get_volunteers($event_id);
 		$data['badges'] = $this->get_badges();
@@ -314,12 +312,12 @@ class Events extends GS_Controller {
 			$query_needed_volunteer = "SELECT SUM(required_volunteers) as count FROM tbl_program_event_task WHERE event_id = " . $value->id;
 			$needed_volunteer = $this->db->query($query_needed_volunteer)->result();
 
-			$query_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $value->id;
+			$query_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $value->id . " AND status >= 0";
 			$joined_volunteer = $this->db->query($query_joined_volunteer)->result();
 
 
 			$is_joined = false;
-			$query_is_joined = "SELECT * FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id')." AND status >=0" . " AND event_id = " . $value->id ."";
+			$query_is_joined = "SELECT * FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id')." AND status >=0 " . " AND event_id = " . $value->id ."";
 			$result_is_joined = $this->db->query($query_is_joined)->result();
 			if(count($result_is_joined) > 0){
 				$is_joined = true;
