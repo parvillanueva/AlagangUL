@@ -108,7 +108,11 @@
 	        image.src = base_url+"/assets/img/broken_img1.jpg";
 	        return true;
 	    }
-		$("#<?= @$active_menu;?>").addClass("active");
+	    // alert("<?= $active_menu;?>");
+	    if("<?= $active_menu;?>" != ''){
+			$("#<?= $active_menu;?>").addClass("active");
+	    }
+	    
 		$(document).on('click', '#logout', function(){
 			window.location.href = "<?php echo base_url('site/logout') ?>";
 		});
