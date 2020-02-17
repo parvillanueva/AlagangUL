@@ -79,20 +79,20 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
-	        		<div class="form-row">
+	        		<div class="form-row" hidden>
 						<div class="col">											
-							<input type="number" class="form-control required_input no_html" id="add_point" placeholder="Add Points" name="eventPoints" value="">
+							<input type="number" class="form-control required_input no_html" id="add_point" placeholder="Add Points" name="eventPoints" value="0">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
-	        		<div class="form-row">
+	        		<!-- <div class="form-row">
 						<div class="col">											
 							<textarea type="text" class="form-control required_input no_html" id="event_overview" placeholder="Event Overview" name="overview" rows=5></textarea>
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
-					</div>
+					</div> -->
 				</form>
 	  		</div> 
 	  		<div class="modal-footer">
@@ -145,20 +145,20 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
-	        		<div class="form-row">
+	        		<div class="form-row" hidden>
 						<div class="col">											
-							<input type="number" class="form-control required_input no_html" id="EditEventpoints" placeholder="Add Points" name="eventPoints" value="">
+							<input type="number" class="form-control required_input no_html" id="EditEventpoints" placeholder="Add Points" name="eventPoints" value="0">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
-	        		<div class="form-row">
+	        		<!-- <div class="form-row">
 						<div class="col">											
 							<textarea type="text" class="form-control required_input no_html" id="EditEventoverview" placeholder="Event Overview" name="overview" rows=5></textarea>
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
-					</div>
+					</div> -->
 				</form>
 	  		</div> 
 	  		<div class="modal-footer">

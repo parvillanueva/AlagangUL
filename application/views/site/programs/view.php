@@ -312,20 +312,20 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
-	        		<div class="form-row">
+	        		<div class="form-row" hidden>
 						<div class="col">											
-							<input type="number" class="form-control required_input no_html" id="lname" placeholder="Add Points" name="eventPoints" value="">
+							<input type="number" class="form-control required_input no_html" id="lname" placeholder="Add Points" name="eventPoints" value="0">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
-	        		<div class="form-row">
+	        		<!-- <div class="form-row">
 						<div class="col">											
 							<textarea type="text" class="form-control required_input no_html" id="lname" placeholder="Event Overview" name="overview" rows=5></textarea>
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
-					</div>
+					</div> -->
 					<div class="au-modalbtn text-center">
 	                    <button type="button" class="au-btn au-btnyellow" data-dismiss="modal">Close</button>
 	                    <button type="button" class="au-btn" id="btnSubmitEvent">Submit</button>
