@@ -110,8 +110,16 @@
 <?php $this->load->view("site/login_layout/footer"); ?>
     <script type="text/javascript">
 			$(document).ready(function() {
+				var cookie_set = "<?= $this->input->cookie('alagangunilabemail', TRUE);?>";
 				responsive();
 				$('#failed_label').hide();
+				if(cookie_set == ''){
+					$('#email').val('');
+					$("#remember_me").prop('checked', false);
+				} else{
+					$('#email').val(cookie_set);
+					$("#remember_me").prop('checked', true);
+				}
 			});
         	$(document).on("click","#btnSubmit", function(x){
         		x.preventDefault();	
