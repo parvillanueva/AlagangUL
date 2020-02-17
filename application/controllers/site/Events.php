@@ -333,7 +333,8 @@ class Events extends GS_Controller {
 	public function validate_testimonial($event_id, $user_id){
 		$arr = array(
 			'event_id' => $event_id,
-			'user_id' => $user_id
+			'user_id' => $user_id,
+			'status >=' => 0
 		);
 		$result = $this->Gmodel->get_query('tbl_program_event_task_volunteers', $arr);
 		if(empty($result)){
@@ -493,7 +494,7 @@ class Events extends GS_Controller {
 		
 		foreach ($get_event_tasks as $key => $value) {
 			$task_badge = array();
-			$query_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $event_id . " AND event_task_id = " . $value->id;
+			$query_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $event_id . " AND event_task_id = " . $value->id." AND status >=0";
 			$joined_volunteer = $this->db->query($query_joined_volunteer)->result();
 
 			$query_event_task_badge = "SELECT b.id, b.name, b.icon, b.color, petb.event_task_id FROM tbl_program_event_task_badge petb LEFT JOIN tbl_badges b ON petb.badge_id = b.id WHERE petb.event_task_id = ".$value->id." ";
@@ -503,7 +504,7 @@ class Events extends GS_Controller {
 				$task_badge[] = $badge;
 			}
 			$user_id = $this->session->userdata('user_sess_id');
-			$query_user_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $event_id . " AND event_task_id = " . $value->id. " AND user_id = ". $user_id;
+			$query_user_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $event_id . " AND event_task_id = " . $value->id. " AND user_id = ". $user_id." AND status >=0";
 			$is_joined = $this->db->query($query_user_joined_volunteer)->result();
 
 			$event_task[] = array(
@@ -541,7 +542,7 @@ class Events extends GS_Controller {
 			$query_needed_volunteer = "SELECT SUM(required_volunteers) as count FROM tbl_program_event_task WHERE event_id = " . $value->id;
 			$needed_volunteer = $this->db->query($query_needed_volunteer)->result();
 
-			$query_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $value->id;
+			$query_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $value->id. " AND status >=0";
 			$joined_volunteer = $this->db->query($query_joined_volunteer)->result();
 
 

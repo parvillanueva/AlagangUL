@@ -1421,12 +1421,12 @@ p{
      text-align: center;
      padding: 3px 5px;
 }
-.volunteer .au-btnvolunteertype:first-child{
+/*.volunteer .au-btnvolunteertype:first-child{
      background-color: #dce2e5 !important;    
 }
 .volunteer .au-btnvolunteertype:last-child{
      background-color: #a6adb0 !important;    
-}
+}*/
 .au-volmessage{
      display: inline-block;
      margin: 0px 5px;
