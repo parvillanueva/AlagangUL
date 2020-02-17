@@ -146,36 +146,49 @@ class Profile extends GS_Controller
 
 	public function update()
 	{
-		date_default_timezone_set('Asia/Manila');
-		
-		$id = $_POST['id'];
 
-		$arrData = array(
+		date_default_timezone_set('Asia/Manila');
+		$id = $this->session->userdata('user_sess_id');
+		$email = $this->session->userdata('email_address');
+		/* $arrData = array(
 			'last_name' => $_POST['last_name'],
 			'first_name' => $_POST['first_name'],
 			'mobile_number' => $_POST['mobile'],
 			'work_number' => $_POST['work_number'],
 			'division' => $_POST['division'],
 			'update_date' => date('Y-m-d H:i:s')
+		); */
+
+		$arrData = array(
+			'last_name' => $_POST['lname'],
+			'first_name' => $_POST['fname'],
+			'mobile_number' => $_POST['phone'],
+			'work_number' => $_POST['work_number'],
+			'division' => $_POST['division'],
+			//'imagepath' => $_POST['image_file'],
+			'update_date' => date('Y-m-d H:i:s')
 		);
 
-		if(count($_FILES) > 0)
-		{
-			$this->upload_file($_FILES, $_POST['email']);
-			$arrData['imagepath'] = "upload_file/" . $_POST['email']. "/". $_FILES['file']['name'];
+		if(!empty($_FILES['programImage']['tmp_name'])){
+			$this->upload_file($_FILES, $email);
+			$arrData['imagepath'] = "upload_file/" . $email. "/". $_FILES['programImage']['name'];
+		} else{
+			$arrData['imagepath'] = $_POST['image_file'];
 		}
 		
 		$this->Gmodel->update_data('tbl_users', $arrData, 'id', $id);
-		$arr = array('response'=>'success');
-		echo json_encode($arr);
+		//$arr = array('response'=>'success');
+		//echo json_encode($arr);
+		header("Location: ".base_url('profile').""); 
+		exit();
 	}
 
 	public function upload_file($file, $email){
 		if (!file_exists("./upload_file/" . $email)) {
 			mkdir("./upload_file/" . $email, 0777, true);
 		}
-		$target_dir = './upload_file/'.$email.'/'. $file['file']['name'];
-		$move_file = move_uploaded_file($_FILES["file"]["tmp_name"], $target_dir);
+		$target_dir = './upload_file/'.$email.'/'. $file['programImage']['name'];
+		$move_file = move_uploaded_file($_FILES["programImage"]["tmp_name"], $target_dir);
 	}
 
 }

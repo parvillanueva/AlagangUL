@@ -339,7 +339,7 @@ var validate = {
 		    if ($(this).hasClass("alphaonly")) {
 				$(".alphaonly").each(function(){
 					var str = $(this).val();
-					if(/^[a-zA-Z -]*$/.test(str) == false) {
+					if(/^[a-zA-Z-.']*$/.test(str) == false) {
 						counter++;
 						$(this).css('border-color','red');
 		  				$("<span class='validate_error_message' style='color: red;'>This field only required only Letters.<br></span>").insertAfter(this);

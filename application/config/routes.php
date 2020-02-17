@@ -25,7 +25,7 @@
 		$route["change_pfw_message"]  = "site/login/fpw_message_success";
 
 		$route["profile/(:any)"]  = "site/profile/view/$1";
-
+		$route["update-profile"]  = "site/profile/update";
 		$route["submit"]  = "site/user/submit";
 		$route["terms-and-conditions"] = "site/terms_and_condition";
 		$route["privacy-statement"] = "site/privacy_policy";
