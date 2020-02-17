@@ -157,8 +157,6 @@
 								</thead>
 								<tbody>
 									<?php
-									 $is_disabled = '';
-									 $is_disabled_css = '';
 									/* $x = 0;
 									 if($is_allowed_to_volunteer==1 || $event_details[0]['is_admin']){
 									 	$x =1;
@@ -167,6 +165,8 @@
 									 }*/
 									 foreach ($event_task as $key => $value) { ?>
 									 	<?php
+									 		$is_disabled = '';
+									 		$is_disabled_css = '';
 									 		/*if($value['required_volunteers']<=$value['joined_volunteers'] && $value['user_id_joined']!=1){
 									 			$is_disabled = 'disabled';
 									 			$is_disabled_css = 'disabled_css';
@@ -184,6 +184,10 @@
 									 		if($value['required_volunteers']<=$value['joined_volunteers'] || $event_details[0]['is_joined']==1 || $event_details[0]['is_not_joined']==1 || $event_details[0]['is_admin']==1){ 
 									 			$is_disabled = 'disabled';
 									 			$is_disabled_css = 'disabled_css';
+									 			if($event_details[0]['is_joined']==1 && $value['user_id_joined']==1){
+									 				$is_disabled_css = '';
+									 			}
+									 			
 									 		}
 									 	?>
 										<tr class="forvolunteer <?=($value['user_id_joined']==1 ) ? 'volunteer' : ''?> vol-id<?=$value['id']?>" attr-id="<?=$value['id']?>">
