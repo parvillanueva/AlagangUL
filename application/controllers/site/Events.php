@@ -215,10 +215,13 @@ class Events extends GS_Controller {
 			'date_from' => $date_from,
 			'date_to' => $date_to
 		);
-		
-		$data['events'] = $this->get_details($arr);
-		$this->load->view('site/events/event_list', $data);
-	
+		$data_arry = $this->get_details($arr);
+		if(!empty($data_arry)){
+			$data['events'] = $data_arry;
+			$this->load->view('site/events/event_list', $data);
+		} else{
+			$this->load->view('site/events/event_no_data');
+		}
 	}
 	
 	public function filter_where($arr){

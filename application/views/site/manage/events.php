@@ -60,7 +60,7 @@
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Event Title" name="eventTitle" value="">
+							<input type="text" class="form-control required_input no_html" id="event_title" placeholder="Event Title" name="eventTitle" value="">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -74,21 +74,21 @@
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Where" name="eventWhere" value="">
+							<input type="text" class="form-control required_input no_html" id="where" placeholder="Where" name="eventWhere" value="">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<input type="number" class="form-control required_input no_html" id="lname" placeholder="Add Points" name="eventPoints" value="">
+							<input type="number" class="form-control required_input no_html" id="add_point" placeholder="Add Points" name="eventPoints" value="">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<textarea type="text" class="form-control required_input no_html" id="lname" placeholder="Event Overview" name="overview" rows=5></textarea>
+							<textarea type="text" class="form-control required_input no_html" id="event_overview" placeholder="Event Overview" name="overview" rows=5></textarea>
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -96,7 +96,7 @@
 				</form>
 	  		</div> 
 	  		<div class="modal-footer">
-	  			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	  			<button type="button" class="btn btn-secondary" id="SubmitEventAdd_close" data-dismiss="modal">Close</button>
         		<button type="button" class="btn btn-primary" id="btnSubmitEvent">Save</button>
      		</div>
 		</div>
@@ -178,6 +178,11 @@
 
 	$(document).ready(function(){
 		get_list();
+		$("#EditEventpoints, #add_point").keypress(function (e) {
+			 if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+				return false;
+			}
+		});
 	});
 
 	$(document).on('click', '#btn_Closebtn', function(){
@@ -234,6 +239,10 @@
 				}
 			});
 		}
+	});
+	
+	$(document).on('click', '#SubmitEventAdd_close', function(){
+		$('.validate_error_message').hide();
 	});
 
 	$(document).on('change', '#select_all', function(){
