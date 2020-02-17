@@ -11,7 +11,7 @@
 
 <script>
     var calendar_data = '<?= json_encode($events)?>';
-    
+   
     if(calendar_data != null || calendar_data != '')
     {
         var obj = JSON.parse(calendar_data);
@@ -21,7 +21,7 @@
         {
             events[i] = {
                 allDay : true,
-                url: '#activity' + obj[i].id,
+                url: '#activity' + obj[i].program_id,
                 start: new Date(obj[i].when),
                 className: 'activity-date'
             };

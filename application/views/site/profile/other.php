@@ -21,7 +21,7 @@
         {
             events[i] = {
                 allDay : true,
-                url: '#activity' + obj[i].id,
+                url: '#activity' + obj[i].program_id,
                 start: new Date(obj[i].when),
                 className: 'activity-date'
             };

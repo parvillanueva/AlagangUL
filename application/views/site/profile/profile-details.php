@@ -153,7 +153,7 @@
                         <div class="au-eventswrapper au-volunteeredwrapper">
                             <?php if(!empty($events)) : ?>
                                 <?php foreach($events as $event) : ?>
-                                    <div class="au-event-entry" id="activity<?=@$event['id']?>">
+                                    <div class="au-event-entry" id="activity<?=@$event['program_id']?>">
                                         <div class="au-event">
                                             <div class="row">
                                                 <div class="col-sm-3 au-eventthumbnail">
