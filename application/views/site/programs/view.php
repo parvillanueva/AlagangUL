@@ -5,7 +5,17 @@
 				<img src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" class="au-fp-thumbnailimg" onerror="imgErrorProgram(this);">
 			</div>
 			<div class="au-phdetails">
-				<span class="au-h5"><?= $details['details'][0]->name;?></span>
+				<span class="au-h5" title="<?= $details['details'][0]->name; ?>">
+					<?php 
+						$str = $details['details'][0]->name;
+						if (strlen($str) > 50){
+							$str_out = substr($str, 0, 50) . '...';
+							echo $str_out;
+						} else{
+							echo $str;
+						}	
+					?>
+				</span>
 				<div class="au-phstats">
 					<span class="au-members"><i class="fas fa-user-friends"></i><?= $details['members_count'];?> <?= ($details['members_count'] > 1 ) ? 'Members' : 'Member';?></span>
 					<?php
