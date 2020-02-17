@@ -222,7 +222,7 @@
 											<?php if($event_details[0]['is_admin'] == 1) { ?>
 											<td data-header="Actions:" class="au-actions">
 												<a href="#"  data-toggle="modal" data-id = "<?=$value['id']?>" data-target="#editTask" id="btn_edit_task" class="au-lnk au-action" title="Edit Details"><i class="fas fa-edit"></i></a>
-												<a href="#" class="au-lnk au-action" title="Delete"><i class="fas fa-times"></i></a>
+												<a href="#" id="btn_delete"  data-id = "<?=$value['id']?>"  class="au-lnk au-action" title="Delete"><i class="fas fa-times"></i></a>
 											</td>
 											<?php } ?>
 										</tr>
@@ -501,7 +501,7 @@
 						<div class="col">
 							<label for="comment" class="au-p4">Badges</label>
 							<?php foreach($badges as $bloop){ ?>
-								<input type="checkbox" style="margin-left:50px;" class="badges_input" id="edit_<?php echo $bloop->name; ?>" value="<?php echo $bloop->id; ?>" name="badges[]" required="" /> <span class="au-btnvolunteertype" style="background-color:<?php echo $bloop->color; ?>" ><i class="<?php echo $bloop->icon; ?>" title="<?php echo $bloop->name; ?>"></i> <?php echo $bloop->name; ?></span><br/><br/>
+								<input type="checkbox" style="margin-left:50px;" class="badges_input edit_<?php echo $bloop->id; ?>" id="edit_<?php echo $bloop->name; ?>" value="<?php echo $bloop->id; ?>" name="badges[]" required="" /> <span class="au-btnvolunteertype" style="background-color:<?php echo $bloop->color; ?>" ><i class="<?php echo $bloop->icon; ?>" title="<?php echo $bloop->name; ?>"></i> <?php echo $bloop->name; ?></span><br/><br/>
 							<?php } ?>
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
@@ -509,7 +509,7 @@
 					</div>
 
 					<div class="au-modalbtn text-center">
-						<button type="button" class="au-btn au-btnyellow" id="btneditBadges_close" data-dismiss="modal">Close</button>
+						<button type="button" class="au-btn au-btnyellow" id="tbtneditBadges_close" data-dismiss="modal">Close</button>
 						<button type="button" class="au-btn" id="btn_editBadges">Submit</button>
 					</div>
 				</form>		
@@ -544,7 +544,7 @@
 
 	var datatoday = new Date();
 	var datatodays = datatoday.setDate(new Date(datatoday).getDate() + 1);
-
+	var count_checked = 0;
 
 	$('#whenpicker').datetimepicker({
 	    controlType: 'select',
@@ -590,6 +590,8 @@
 	
 	$(document).on("click", "#addTask_button", function(){
 		$("#addtask").modal("show");
+		// $("#addtask").reload();
+
 	});
 
 
@@ -633,9 +635,18 @@
                    		$('#edit_qualification').val(y['qualification']);
                    		$('#edit_needed').val(y['required_volunteers']);
                    		$.each(y[0],function(a,b){
-                   			name = '#edit_'+b["name"];
+                   			console.log(b)
+                   			name = '.edit_'+b["id"];
                    			$(name).attr("checked", true);
                    		});
+                   		count_checked = y[0].length
+                   		if(count_checked == 2){
+                   			$(".badges_input:not(:checked)").attr('disabled', true);
+                   		}
+                   		else{
+                   			$(".badges_input:not(:checked)").attr('disabled', true);
+
+                   		}
                    	});
                   }
             });
@@ -780,7 +791,7 @@
 	
 	$(document).on('click', '.badges_input', function(){
 		if($(this).is(':checked')){
-			var count_checked = $('.badges_input:checked').length;
+			 count_checked = $('.badges_input:checked').length;
 			if(count_checked == 2){
 				$(".badges_input:not(:checked)").attr('disabled', true);
 			}
@@ -813,6 +824,7 @@
 	});
 	
 	$(document).on('click', '#btnBadges', function(result){
+
 
 		if(validate.standard('volunteer_form')){
 			$("#addtask").css('opacity',0.5);
@@ -971,4 +983,7 @@
         }
     }
 
+    $(document).on('click','#btnBadges_close',function(){
+    		alert(1);
+    });
 </script>
