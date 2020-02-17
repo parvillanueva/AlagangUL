@@ -43,7 +43,7 @@ class Profile extends GS_Controller
 		$data['events']		= $joined_events;
 		$data['c_programs'] = count($joined_programs);
 		$data['c_events']   = count($joined_events);
-		$data['active_menu']= '';
+		$data['active_menu']= 'profile';
 		$data['content'] 	= "site/profile/default";
 		$data['meta'] 	 	= array(
 			 "title"        =>  "Profile"
