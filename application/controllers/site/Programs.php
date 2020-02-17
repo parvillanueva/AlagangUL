@@ -31,6 +31,7 @@ class Programs extends GS_Controller {
 		$program_id = $this->uri->segment(2);
 		$program_alias = $this->uri->segment(3);
 		$program_details = $this->get_details($program_id, $program_alias);
+
 		$data['details'] = $program_details;
 		$data['workplace_feed'] = $this->get_workplace_feed();
 		$data['content'] = "site/programs/view";
@@ -59,6 +60,20 @@ class Programs extends GS_Controller {
 
 	public function get_details($program_id, $program_alias){
 		$program_details = $this->Gmodel->get_query('tbl_programs',"id = " . $program_id . " AND url_alias ='" . $program_alias . "'");
+
+
+		//check programs
+		$page_Status = @$program_details[0]->status;
+		$is_admin = @$program_details[0]->created_by == $_SESSION['user_sess_id'];
+		if($page_Status){
+			if($page_Status == 0){
+				if($is_admin === false){
+					show_404();
+				}
+			}
+		} else {
+			show_404();
+		}
 
 		$is_admin = 0;
 		if($program_details[0]->created_by == $this->session->userdata('user_sess_id')){

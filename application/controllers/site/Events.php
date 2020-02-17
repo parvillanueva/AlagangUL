@@ -166,10 +166,42 @@ class Events extends GS_Controller {
 	{
 
 		$program_id = $this->uri->segment(2);
+		$program_alias = $this->uri->segment(3);
 		$event_id = $this->uri->segment(5);
+		$event_alias = $this->uri->segment(6);
 
-		$data['program_details'] = $this->get_program_details($program_id);
-		$data['event_details'] = $this->get_event_details($event_id);
+		$data['program_details'] = $this->get_program_details($program_id, $program_alias);
+		$data['event_details'] = $this->get_event_details($event_id, $event_alias);
+		
+
+		//check programs
+		$page_Status = @$data['program_details'][0]['status'];
+		$is_admin = @$data['program_details'][0]['created_by'] == $_SESSION['user_sess_id'];
+		if($page_Status){
+			if($page_Status == 0){
+				if($is_admin === false){
+					show_404();
+				}
+			}
+		} else {
+			show_404();
+		}
+
+		//check event
+		$page_Status = @$data['event_details'][0]['status'];
+		$is_admin = @$data['event_details'][0]['user_id'] == $_SESSION['user_sess_id'];
+		if($page_Status){
+			if($page_Status == 0){
+				if($is_admin === false){
+					show_404();
+				}
+			}
+		} else {
+			show_404();
+		}
+
+
+		echo $data['event_details'][0]['status'];
 		$data['event_task'] = $this->get_event_tasks($event_id);
 		$data['event_volunteers'] = $this->get_volunteers($event_id);
 		$data['badges'] = $this->get_badges();
@@ -366,11 +398,13 @@ class Events extends GS_Controller {
 	{
 
 		$program_id = $this->uri->segment(2);
+		$program_alias = $this->uri->segment(3);
 		$event_id = $this->uri->segment(5);
+		$event_alias = $this->uri->segment(6);
 
 		// $arra
-		$data['program_details'] = $this->get_program_details($program_id);
-		$data['event_details'] = $this->get_event_details($event_id);
+		$data['program_details'] = $this->get_program_details($program_id, $program_alias);
+		$data['event_details'] = $this->get_event_details($event_id, $event_alias);
 		$data['event_task'] = $this->get_event_tasks($event_id);
 		$data['event_volunteers'] = $this->get_volunteers($event_id);
 		$data['users_approval'] = $this->get_approval_volunteers($event_id);
@@ -519,22 +553,23 @@ class Events extends GS_Controller {
 		return $event_task;
 	}
 
-	public function get_program_details($program_id){
-		$program_details = $this->Gmodel->get_query('tbl_programs',"id = " . $program_id);
+	public function get_program_details($program_id, $program_alias){
+		$program_details = $this->Gmodel->get_query('tbl_programs',"id = " . $program_id . " AND url_alias ='" . $program_alias . "'");
 		$program = array();
 		foreach ($program_details as $key => $value) {
 			$program[] = array(
 				"name"					=> $value->name,
 				"url_alias"				=> $value->url_alias,
 				"image_thumbnail"		=> base_url() . $value->image_thumbnail,
-				"id"					=> $value->id
+				"id"					=> $value->id,
+				"status"					=> $value->status,
 			);
 		}
 		return $program;
 	}
 
-	public function get_event_details($event_id){
-		$event_details = $this->Gmodel->get_query('tbl_program_events',"id = " . $event_id);
+	public function get_event_details($event_id, $event_alias){
+		$event_details = $this->Gmodel->get_query('tbl_program_events',"id = " . $event_id . " AND url_alias ='" . $event_alias . "'");
 		$events = array();
 		foreach ($event_details as $key => $value) {
 

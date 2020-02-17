@@ -2195,6 +2195,9 @@ button.btn:hover{
           background: linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
           filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#eee", endColorstr="#fff", GradientType=1);
      }
+      .au-h5 {
+          max-width: unset;
+     }
 }
 /*Medium devices (tablets, 768px and up)*/
  @media (min-width: 768px) and (max-width: 991px) {

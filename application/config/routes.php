@@ -1,6 +1,9 @@
 <?php defined("BASEPATH") OR exit("No direct script access allowed");
 		
 
+		$route['404_override'] = 'welcome/_404';
+
+
 		$route["default_controller"] = "homeindex";
 		$route["login"] = "site/login";
 		$route["signup"] = "site/sign_up";
