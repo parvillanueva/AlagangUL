@@ -157,13 +157,13 @@
                                         <div class="au-event">
                                             <div class="row">
                                                 <div class="col-sm-3 au-eventthumbnail">
-                                                    <img src="<?=base_url(). @$event['image_thumbnail']?>" class="au-eventimg">
+                                                    <img src="<?=base_url(). @$event['image']?>" class="au-eventimg">
                                                 </div>
                                                 <div class="col-sm-9 au-eventdetails">
                                                     <div class="au-program">
                                                         <a href="<?= base_url("programs") . "/" . $event['program_id'] . "/" . $event['program_alias'] . "/event/" . $event['event_id'] .  "/" . $event['event_alias']; ?>" class="au-lnk">
                                                             <div class="au-pthumbnail">
-                                                                <img src="<?=base_url(). @$event['image_thumbnail']?>" class="au-fp-thumbnailimg" onerror="imgErrorProfileDetails2(this);">
+                                                                <img src="<?=base_url(). @$event['image']?>" class="au-fp-thumbnailimg" onerror="imgErrorProfileDetails2(this);">
                                                             </div>
                                                             <span class="au-ptitle"><?= @$event['title']?></span>
                                                             <span class="au-pdetails">
