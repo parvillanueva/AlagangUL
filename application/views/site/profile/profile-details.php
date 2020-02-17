@@ -16,7 +16,7 @@
             </div>
 
             <div class="col-lg-9 col-md-8">
-                <span class="au-h4">Points Level</span>
+                <span class="au-h4 au-fpoints">Points Level</span>
                 <div class="au-pointslevel">
                     <div class="au-ptscol">
                         <span class="au-pts">0</span>
@@ -72,7 +72,7 @@
                             <div class="au-titlebox">Achivements
                                 <div class="au-inner">
                                     <div class="au-p2">
-                                        <span>Points Earned</span>
+                                        <span class="au-fpoints">Points Earned</span>
                                         <span class="au-pfaccpoints"><div class="au-heart"><i class="fas fa-heart"></i></div><?=$profile->current_points?></span>
                                     </div>
                                     <div class="au-p2">

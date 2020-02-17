@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+	<title>Alagang Unilab</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,6 +18,7 @@
     <link href="<?= base_url();?>assets/css/css/bootstrap.min.css" rel="stylesheet" type="text/css" />  
 
 	<link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/css/css/main-style.css">
+	<link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/css/css/temp-style.css">
 	<link rel="icon" type="image/png" href="<?= base_url();?>assets/img/favicon.png" sizes="16x16">
 
     <!-- Custom styles for this template -->

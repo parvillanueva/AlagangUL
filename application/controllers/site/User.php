@@ -26,11 +26,11 @@ class User extends CI_Controller {
 	public function submit(){
 		date_default_timezone_set('Asia/Manila');
 			$image_path = 'assets/img/broken_img1.jpg';
-		if(!empty(_FILES)){
+		if(!empty($_FILES)){
 			$this->upload_file($_FILES, $this->session->userdata('email_address'));
 			$image_path = $this->upload_file($_FILES, $this->session->userdata('email_address'));
 		}
-		
+
 		$impersonate_token = $this->request_impersonate_token($this->session->userdata('email_address'));
 		if($impersonate_token==0){
 			$impersonate_token = '';
@@ -44,9 +44,10 @@ class User extends CI_Controller {
 			'password' => md5($_POST['password']),
 			'status' => $_POST['password'],
 			'update_date' => date('Y-m-d H:i:s'),
-			'imagepath' => $image_path, //'upload_file/'.$_POST['email'].'/'.$_FILES['file_set']['name'],
+			'imagepath' => 'upload_file/'.$_POST['email'].'/'.$_FILES['file_set']['name'],
 			'impersonate_token' => $impersonate_token
 		);
+		
 		$this->Gmodel->update_data('tbl_users', $arrData, 'email_address', $this->session->userdata('email_address'));
 		header("Location: ".base_url('login').""); 
 		exit();		
