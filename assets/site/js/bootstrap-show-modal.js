@@ -4,7 +4,7 @@ modal += '  <div class="modal-dialog" role="document">';
 modal += '      <div class="modal-content">';
 modal += '          <div class="modal-body" id="confirmmessage"></div>';
 modal += '          <div class="modal-footer">';
-modal += '              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>';
+modal += '              <button type="button" class="btn btn-secondary"  id="dismiss_modal" data-dismiss="modal">No</button>';
 modal += '              <button type="button" class="btn btn-primary" id="bootstrapShowModalConfirm">Yes</button>';
 modal += '          </div>';
 modal += '      </div>';
@@ -41,6 +41,10 @@ var BM = {
         $("#bootstrapShowModalConfirm").on('click', function(){
             $("#bootstrapShowModal").modal("hide");
             cb(true);
+        });
+        $("#dismiss_modal").on('click', function(){
+            $("#bootstrapShowModal").modal("hide");
+            cb(false);
         });
     },
     loading : function(show){

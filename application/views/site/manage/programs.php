@@ -59,21 +59,21 @@
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<input type="text" class="form-control required_input no_html" id="program_name" placeholder="Program Name" name="programName" value="">
+							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Program Name" name="programName" value="">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<input type="text" class="form-control required_input no_html" id="areas_convered" placeholder="Areas Covered" name="areaCovered" value="">
+							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Areas Covered" name="areaCovered" value="">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<textarea type="text" class="form-control required_input no_html" id="program_convered" placeholder="Program Overview" name="overview" rows=5></textarea>
+							<textarea type="text" class="form-control required_input no_html" id="lname" placeholder="Program Overview" name="overview" rows=5></textarea>
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -144,7 +144,6 @@
 <script type="text/javascript">
 
 	var keyword = "";
-	var base_url = '<?=base_url();?>';
 
 	$(document).ready(function(){
 		get_list();
@@ -259,16 +258,22 @@
 		$("#overview").val(overview);
 
 		BM.show("#editPrgoramDetails");
-        $('img').on("error", function() {
-          $(this).attr('src', base_url+"/assets/img/broken_img2.jpg");
-        });
+
 	});
 
 	$(document).on('click', '#btnSubmit', function(){
 		if(validate.standard("addprogramform")) {
+			$('#AddProgramModal').css("opacity","0.5");
 			BM.confirm("Are you sure you want to Add this Programs?", function(result){
+				// alert(result);
 				if(result){
 					$("#addprogramform").submit();
+					$('#AddProgramModal').css("opacity","1");
+				}
+				else{
+					// alert(1);
+					$('#AddProgramModal').css('overflow','auto')
+					$('#AddProgramModal').css("opacity","1");				
 				}
 			});
 		}
@@ -276,9 +281,16 @@
 
 	$(document).on('click', '#btnSubmitUpdate', function(){
 		if(validate.standard("editprogramform")) {
+			$('#editPrgoramDetails').css("opacity","0.5");
 			BM.confirm("Are you sure you want to Update this Programs?", function(result){
 				if(result){
 					$("#editprogramform").submit();
+					$('#editPrgoramDetails').css("opacity","1");
+				}
+				else{
+					// alert(1);
+					$('#editPrgoramDetails').css('overflow','auto');
+					$('#editPrgoramDetails').css("opacity","1");				
 				}
 			});
 		}
@@ -311,11 +323,11 @@
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                var extension = input.files[0].name.split('.').pop().toLowerCase();
+               	var extension = input.files[0].name.split('.').pop().toLowerCase();
                 if (!input.files[0].name.match(/.(jpg|jpeg|png)$/i)){
                 	input.val = "";
-               		$("#previewImage").attr("src","");
                		BM.alert("This file type is not supported.","text");
+               		$('#AddProgramModal').css('overflow','auto')	
                 } else {
                 	var base64 = e.target.result;
                		$("#previewImage").attr("src",base64);
@@ -325,19 +337,19 @@
         }
     }
 
-	function readURLImgStandardPreviewEdit(input, default_image = "") {
+
+	function readURLImgStandardPreviewEdit(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                var extension = input.files[0].name.split('.').pop().toLowerCase();
-                if (!input.files[0].name.match(/.(jpg|jpeg|png)$/i)){
+               	if (!input.files[0].name.match(/.(jpg|jpeg|png)$/i)){
                 	input.val = "";
                		BM.alert("This file type is not supported.","text");
+               		$('#editPrgoramDetails').css('overflow','auto')	
                 } else {
                 	var base64 = e.target.result;
                		$("#previewImageEdit").attr("src",base64);
                 }
-                
             }
             reader.readAsDataURL(input.files[0]);
         }

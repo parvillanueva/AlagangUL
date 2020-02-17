@@ -224,18 +224,31 @@
 
 	$(document).on('click', '#btnSubmitEditEvent', function(){
 		if(validate.standard("editEventForm")) {
+			$('#EditEventModal').css("opacity","0.5");
 			BM.confirm("Are you sure you want to Edit this Event?", function(result){
 				if(result){
 					$("#editEventForm").submit();
+					$('#EditEventModal').css("opacity","1");
+				}
+				else{
+					$("#EditEventModal").css('overflow','auto');
+					$('#EditEventModal').css("opacity","1");
 				}
 			});
 		}
 	});
 	$(document).on('click', '#btnSubmitEvent', function(){
 		if(validate.standard("addEventForm")) {
+			$('#AddEventModal').css("opacity","0.5");
 			BM.confirm("Are you sure you want to Add this Event?", function(result){
+				// alert(result)
 				if(result){
 					$("#addEventForm").submit();
+					$("#AddEventModal").css("opacity","1");
+				}
+				else{
+					$("#AddEventModal").css('overflow','auto');
+					$("#AddEventModal").css("opacity","1");
 				}
 			});
 		}
@@ -243,6 +256,7 @@
 	
 	$(document).on('click', '#SubmitEventAdd_close', function(){
 		$('.validate_error_message').hide();
+		("#AddEventModal").css("opacity","1");
 	});
 
 	$(document).on('change', '#select_all', function(){
@@ -378,6 +392,8 @@
                 if (!input.files[0].name.match(/.(jpg|jpeg|png)$/i)){
                 	input.val = "";
                		BM.alert("This file type is not supported.","text");
+               		$('#AddEventModal').css('overflow','auto');
+
                 } else {
                 	var base64 = e.target.result;
                		$("#previewImageEvent").attr("src",base64);
@@ -395,6 +411,7 @@
                	if (!input.files[0].name.match(/.(jpg|jpeg|png)$/i)){
                 	input.val = "";
                		BM.alert("This file type is not supported.","text");
+               		$('#EditEventModal').css('overflow','auto');
                 } else {
                 	var base64 = e.target.result;
                		$("#previewImageEventEdit").attr("src",base64);
