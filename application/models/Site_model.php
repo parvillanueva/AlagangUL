@@ -68,7 +68,7 @@ date_default_timezone_set('Asia/Taipei');
 		//MEMBER PROFILE PAGE
 		function get_member_details($id)
 		{
-			$this->db->select("u.id, u.email_address, u.imagepath, CONCAT(u.first_name, ' ', u.last_name) as full_name, u.first_name, u.last_name, u.mobile_number, up.total_points, up.current_points");
+			$this->db->select("u.id, u.email_address, u.imagepath, u.work_number, u.division,CONCAT(u.first_name, ' ', u.last_name) as full_name, u.first_name, u.last_name, u.mobile_number, up.total_points, up.current_points");
 			$this->db->from("tbl_users u");
 			$this->db->join("tbl_users_points up", "up.user_id = u.id", "LEFT");
 			$this->db->where("u.id", $id);
@@ -99,10 +99,6 @@ date_default_timezone_set('Asia/Taipei');
 		{
 			$this->db->select("b.name, b.icon, b.color, SUM(ub.points) AS current_points, b.minimum_points");
 			$this->db->from("tbl_badges b");
-			// $this->db->join("tbl_program_event_task_badge etb", "etb.badge_id = b.id", "LEFT");
-			// $this->db->join("tbl_program_event_task et", "etb.event_task_id = et.id", "LEFT");
-			// $this->db->join("tbl_program_event_task_volunteers etv", "etv.event_task_id = et.id", "LEFT");
-			// $this->db->where("etv.user_id", $id);
 			$this->db->join("tbl_users_badge ub", "ub.badge_id = b.id", "LEFT");
 			$this->db->where("ub.user_id", $id);
 			$this->db->where("b.status", 1);
@@ -128,6 +124,14 @@ date_default_timezone_set('Asia/Taipei');
 
 			return $this->db->get()->result_array();
 
+		}
+
+		function get_divisions()
+		{
+			$this->db->select("id, name");
+			$this->db->from("tbl_division");
+			$this->db->where("status", 1);
+			return $this->db->get()->result_array();
 		}
 		//ABOUT US
 

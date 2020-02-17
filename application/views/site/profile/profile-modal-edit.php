@@ -17,6 +17,18 @@
                             </div>
                         </div>
                         <div class="form-row">
+
+                            <div class="col">
+                                <select class="form-control custom-select required_input" id="division" name="division" required="required" />
+                                        <option value="" selected disabled>Division / Business Unit</option>
+                                        <?php foreach($division as $div_lop){ ?>
+                                            <option value="<?php echo $div_lop['id']; ?>" <?php if($profile->division == $div_lop['id']) echo ' selected'?>><?php echo $div_lop['name']; ?></option>
+                                        <?php } ?>
+                                
+                                </select>
+                                <div class="valid-feedback"></div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
                             <div class="col">
                                 <input type="email" class="form-control" id="email" placeholder="Work Email" name="email" required value="<?= @$profile->email_address ?>" disabled>
                                 <div class="valid-feedback"></div>
@@ -28,6 +40,11 @@
                                 <input type="tel" class="form-control" id="phone" placeholder="Mobile Number" value="<?= @$profile->mobile_number ?>" name="phone" required pattern="[0-9]{11}">
                                 <div class="valid-feedback"></div>
                                 <div class="invalid-feedback">Invalid Mobile Number.</div>
+                            </div>
+                            <div class="col">											
+                                <input type="text" class="form-control" id="work_number" placeholder="Work Number" value="<?= @$profile->work_number ?>" name="work_number" pattern="[0-9]{11}">
+                                <div class="valid-feedback"></div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -99,6 +116,9 @@ onerror="imgErrorProfile(this);" id="previewImage" />
         var fname = $('#fname').val() ? strip_tags($('#fname').val()) : '';
         var lname = $('#lname').val() ? strip_tags($('#lname').val()) : '';
         var phone = $('#phone').val() ? strip_tags($('#phone').val()) : '';
+        var division = $('#division').val() ? strip_tags($('#division').val()) : '';
+        var work = $('#work_number').val() ? strip_tags($('#work_number').val()) : '';
+
         var user_id = <?=$this->session->userdata('user_sess_id')?>;
         var email = $('#email').val() ? strip_tags($('#email').val()) : '';    
         var file_data = $('#customFile').prop('files')[0]; 
@@ -110,6 +130,9 @@ onerror="imgErrorProfile(this);" id="previewImage" />
             form_data.append('mobile', phone);
             form_data.append('id', user_id);
             form_data.append('email', email);
+            form_data.append('division', division);
+            form_data.append('work_number', work);
+
 
             var url = "<?php echo base_url('site/profile/update') ?>";
             

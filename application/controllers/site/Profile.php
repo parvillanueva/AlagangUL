@@ -16,6 +16,9 @@ class Profile extends GS_Controller
 
 		//get joined activities and events
 		$joined_events		= $this->Site_model->get_joined_events($user_id);
+
+		$divisions 			= $this->Site_model->get_divisions();
+
 		$arr_badge = array();
 		foreach($joined_events as $i => $event)
 		{
@@ -32,7 +35,7 @@ class Profile extends GS_Controller
 			
 			
 		}
-		
+		$data['division']	= $divisions;
 		$data['profile']	= $profile_details;
 		$data['created']	= $created_programs;
 		$data['badges']		= $member_badges;
@@ -151,6 +154,8 @@ class Profile extends GS_Controller
 			'last_name' => $_POST['last_name'],
 			'first_name' => $_POST['first_name'],
 			'mobile_number' => $_POST['mobile'],
+			'work_number' => $_POST['work_number'],
+			'division' => $_POST['division'],
 			'update_date' => date('Y-m-d H:i:s')
 		);
 
