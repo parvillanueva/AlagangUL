@@ -3,6 +3,10 @@
      	margin-bottom: 0px !important; 
 	}
 
+	.modal-dialog{
+		margin-left: 33% !important;
+	}
+
 </style>
 
 <?php $this->load->view("site/login_layout/header"); ?>    
@@ -31,7 +35,7 @@
 	</header>
 
 	<div class="au-wrapper">
-		<div class="container-fluid au-heading au-wrapper au-flexcenter">
+		<div class="container-fluid au-heading  au-flexcenter">
 			<div class="au-container au-padding">
 				<div class="row au-userbox au-fullheight">					
 					<div class="col-md-6 au-padding au-bg">
@@ -107,6 +111,17 @@
 		</div>
 	</div>
 
+	<div class="modal fade" id="bootstrapShowModalAlert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		      <div class="modal-content">
+		          <div class="modal-body"  id="alert_message"><h4><center><i class="fa fa-wifi "></i><br><br>Cannot connect, Please check your internet connection.</center></h4></div><br>
+		          <div class="modal-footer">
+		              <!-- <button type="button" id = "removeModal" class="btn btn-secondary" data-dismiss="modal">OK</button> -->
+		          </div>
+		      </div>
+		  </div>
+	</div>
+
 <?php $this->load->view("site/login_layout/footer"); ?>
     <script type="text/javascript">
 			$(document).ready(function() {
@@ -130,7 +145,7 @@
 					is_remember_me= 'on';
 				}
         		if(user_name != '' && password != ''){
-        			modal.loading(true);
+        			BM.loading(true);
         			var url = '<?php echo base_url()."site/login/login_register" ?>';
         			var data = {
         				email_address : user_name,
@@ -141,9 +156,9 @@
 						var obj = is_json(result);
 						if(obj.responce == 'failed'){
 							$('#failed_label').show();
-							modal.loading(false);
+							BM.loading(false);
 						} else{
-							modal.loading(false);
+							BM.loading(false);
 							location.href = '<?=base_url();?>';	
 						}
         			});
@@ -209,6 +224,71 @@
 				$(".au-hero-bg").css("height", "calc(100vh - " + headerheight + "px)");
 				$(".au-wrapper").css("min-height", "calc(100vh - " + (headerheight + footerheight) + "px)");
 			}
-        </script>
+
+            var click_return = true;
+            $(document).on('click','a',function(event){
+                checkConnections();
+                if(click_return == false){  
+                    event.stopImmediatePropagation();
+                }
+                // alert(1);
+            });
+
+
+            $(document).on('click','button',function(event){
+                // return click_return;
+                // alert(1);
+                checkConnections();
+                if(click_return == false){  
+                    event.stopImmediatePropagation();
+                }
+            });
+
+
+            $(document).on('click','#removeModal',function(event){
+            });
+
+            XMLHttpRequest  
+            function checkConnections(callback){
+                // BM.alert("asdasd","html");
+                $("#loading_div_standard").show();
+                $.ajax(
+                    {
+                        url: "<?= base_url();?>", 
+                        async: false,
+                        success: function(data, textStatus, jqXHR){
+                            $("#loading_div_standard").hide();
+                            click_return = true;
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            $("#loading_div_standard").hide();
+                            if (XMLHttpRequest.readyState == 4) {
+                                // HTTP error (can be checked by XMLHttpRequest.status and XMLHttpRequest.statusText)
+						             $("#bootstrapShowModalAlert").modal("show");
+						             $("#bootstrapShowModalAlert").removeClass('in');
+						             $("#bootstrapShowModalAlert").addClass('show');
+						             $(".modal-backdrop ").removeClass('in');
+						             $(".modal-backdrop ").addClass('show');
+                                	click_return = false;
+
+                            }
+                            else if (XMLHttpRequest.readyState == 0) {
+                                // Network error (i.e. connection refused, access denied due to CORS, etc.)
+						             $("#bootstrapShowModalAlert").modal("show");
+ 									 $("#bootstrapShowModalAlert").removeClass('in');
+						             $("#bootstrapShowModalAlert").addClass('show');
+						             $(".modal-backdrop ").removeClass('in');
+						             $(".modal-backdrop ").addClass('show');
+                                click_return = false;
+                            } else {
+                                return false;
+                            }
+                        }
+                    }
+                );
+            };
+    </script>
     </body>
+
+
 </html>
