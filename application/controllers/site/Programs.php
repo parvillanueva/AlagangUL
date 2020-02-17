@@ -65,7 +65,7 @@ class Programs extends GS_Controller {
 		//check programs
 		$page_Status = @$program_details[0]->status;
 		$is_admin = @$program_details[0]->created_by == $_SESSION['user_sess_id'];
-		if($page_Status){
+		if(count($program_details) > 0){
 			if($page_Status == 0){
 				if($is_admin === false){
 					show_404();

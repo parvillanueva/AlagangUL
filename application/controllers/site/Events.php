@@ -174,19 +174,6 @@ class Events extends GS_Controller {
 		$data['event_details'] = $this->get_event_details($event_id, $event_alias);
 		
 
-		//check programs
-		$page_Status = @$data['program_details'][0]['status'];
-		$is_admin = @$data['program_details'][0]['created_by'] == $_SESSION['user_sess_id'];
-		if($page_Status){
-			if($page_Status == 0){
-				if($is_admin === false){
-					show_404();
-				}
-			}
-		} else {
-			show_404();
-		}
-
 		//check event
 		$page_Status = @$data['event_details'][0]['status'];
 		$is_admin = @$data['event_details'][0]['user_id'] == $_SESSION['user_sess_id'];
@@ -557,6 +544,19 @@ class Events extends GS_Controller {
 
 	public function get_program_details($program_id, $program_alias){
 		$program_details = $this->Gmodel->get_query('tbl_programs',"id = " . $program_id . " AND url_alias ='" . $program_alias . "'");
+
+
+		$page_Status = @$program_details[0]->status;
+		$is_admin = @$program_details[0]->created_by == $_SESSION['user_sess_id'];
+		if(count($program_details) > 0){
+			if($page_Status == 0){
+				if($is_admin === false){
+					show_404();
+				}
+			}
+		} else {
+			show_404();
+		}
 		$program = array();
 		foreach ($program_details as $key => $value) {
 			$program[] = array(
