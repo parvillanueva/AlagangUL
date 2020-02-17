@@ -67,7 +67,7 @@
 								<div class="au-accmobile d-lg-none">
 									<a href="#">
 										<div class="au-inner">
-											<img src="<?=base_url()?>assets/site/img/au-avatar.svg" class="au-avatar-lg">
+											<img src="<?=base_url()?>assets/site/img/au-avatar.svg" class="au-avatar-lg" onerror="imgErrorProfile(this);">
 										</div>
 										<div class="au-inner">
 											<span class="au-accname"><?= $user_details[0]->first_name . " " . $user_details[0]->last_name;?></span>
@@ -92,6 +92,8 @@
 	</header>
 	<script type="text/javascript">
 		var base_url = '<?=base_url();?>';
+        
+
 	    function imgErrorProfile(image) {
 	        image.onerror = "";
 	        image.src = base_url+"/assets/img/au-avatar.svg";
@@ -102,7 +104,6 @@
 	        image.src = base_url+"/assets/img/broken_img1.jpg";
 	        return true;
 	    }
-	    
 		$("#<?= @$active_menu;?>").addClass("active");
 		$(document).on('click', '#logout', function(){
 			window.location.href = "<?php echo base_url('site/logout') ?>";

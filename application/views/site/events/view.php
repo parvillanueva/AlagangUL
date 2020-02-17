@@ -29,7 +29,7 @@
 		<div class="au-container au-padding">
 			<div class="au-programheading">
 				<div class="au-evthumbnail">
-					<img src="<?= $event_details[0]['image'];?>" class="au-fp-thumbnailimg">
+					<img src="<?= $event_details[0]['image'];?>" class="au-fp-thumbnailimg" onerror="imgErrorEvent(this);">
 				</div>
 				<div class="au-phdetails">
 					<span class="au-h5"><?= $event_details[0]['title'];?></span>
@@ -81,7 +81,7 @@
 									<div class="au-userentry">
 										<a href="<?= base_url('profile') ?>/<?= $value['user_id'];?>" class="au-userentry">
 											<div class="au-inner">
-												<img src="<?= $value['profile_image'];?>" class="au-avatar-lg">
+												<img src="<?= $value['profile_image'];?>" class="au-avatar-lg" onerror="imgErrorProfile(this);">
 											</div>
 											<div class="au-inner">
 												<span class="au-accname"><?= $value['user']; ?></span>
@@ -117,7 +117,7 @@
 						<div class="au-inner">
 							<a href="<?= base_url("programs") . "/" . $program_details[0]['id'] . "/" . $program_details[0]['url_alias'];?>" class="au-lnk">
 								<div class="au-phthumbnail">
-									<img src="<?= $program_details[0]['image_thumbnail'];?>" class="au-fp-thumbnailimg">
+									<img src="<?= $program_details[0]['image_thumbnail'];?>" class="au-fp-thumbnailimg" onerror="imgErrorEvent(this);">
 								</div>
 							</a>
 						</div>
@@ -541,10 +541,22 @@
 	//$('input[name="date"]').daterangepicker();
 </script>
 <script type="text/javascript">
-
+	var base_url = '<?=base_url();?>';
 	var datatoday = new Date();
 	var datatodays = datatoday.setDate(new Date(datatoday).getDate() + 1);
 	var count_checked = 0;
+
+    function imgErrorEvent(image) {
+        image.onerror = "";
+        image.src = base_url+"/assets/img/broken_img2.jpg";
+        return true;
+    }
+
+    function imgErrorProfile(image) {
+        image.onerror = "";
+        image.src = base_url+"/assets/img/au-avatar.svg";
+        return true;
+    }
 
 	$('#whenpicker').datetimepicker({
 	    controlType: 'select',
@@ -739,7 +751,7 @@
     			html += '<div class="col-lg-3 col-md-6 col-6">';
 				html += '	<div class="au-opthumbnail au-lnk au-plink">';
 				html += '		<a href="<?= base_url();?>'+y.path+'" data-toggle="lightbox" data-gallery="gallery" class="">';
-				html += '			<img src="<?= base_url();?>'+y.path+'" class="au-gl-thumbnailimg">';
+				html += '			<img src="<?= base_url();?>'+y.path+'" class="au-gl-thumbnailimg" onerror="imgErrorEvent(this);">';
 				html += '		</a>';
 				if(is_admin == 1){
 					html += '		<div class="au-gltitle" style="text-align:right; cursor:pointer"><font color="red"><span class="fa fa-trash" path-url= "'+y.path+'" path-id="'+y.id+'" id="delete_image"></span></font></div>';
@@ -763,7 +775,7 @@
 				html += '		<div class="au-userentry">';
 				html += '			<a href="profile.html" class="au-userentry">';
 				html += '				<div class="au-inner">';
-				html += '					<img src="<?php echo base_url("'+y['picture']['image_path']+'") ?>" class="au-avatar-lg">';
+				html += '					<img src="<?php echo base_url("'+y['picture']['image_path']+'") ?>" class="au-avatar-lg" onerror="imgErrorProfile(this);">';
 				html += '				</div>';
 				html += '				<div class="au-inner">';
 				html += '					<span class="au-accname">'+y['picture']['name']+'</span>';
