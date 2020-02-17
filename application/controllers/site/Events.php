@@ -541,7 +541,7 @@ class Events extends GS_Controller {
 			$query_needed_volunteer = "SELECT SUM(required_volunteers) as count FROM tbl_program_event_task WHERE event_id = " . $value->id;
 			$needed_volunteer = $this->db->query($query_needed_volunteer)->result();
 
-			$query_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $value->id;
+			$query_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $value->id . " AND status >= 0";
 			$joined_volunteer = $this->db->query($query_joined_volunteer)->result();
 
 
