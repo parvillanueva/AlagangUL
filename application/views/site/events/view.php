@@ -415,7 +415,7 @@
 	</div>
 </div>
 
-<div class="modal fade text-center" id="addtask" data-backdrop="static">
+<div class="modal fade text-center modal2" id="addtask" data-backdrop="static">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-body">
@@ -424,7 +424,7 @@
 					<div class="form-row">
 						<div class="col">
 							<label for="comment" class="au-p4">Possible task for volunteers</label>
-							<input class="form-control required_input" rows="5" id="possible_volunteer" placeholder="" required="" />
+							<input class="form-control required_input reset_data" rows="5" id="possible_volunteer" placeholder="" required="" />
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -432,7 +432,7 @@
 					<div class="form-row">
 						<div class="col">
 							<label for="comment" class="au-p4">Qualifications</label>
-							<input class="form-control required_input" rows="5" id="qualification" placeholder="" required="" />
+							<input class="form-control required_input reset_data" rows="5" id="qualification" placeholder="" required="" />
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -440,7 +440,7 @@
 					<div class="form-row">
 						<div class="col">
 							<label for="comment" class="au-p4">Needed Volunteer</label>
-							<input type="number" class="form-control required_input" rows="5" id="needed" placeholder="" required="" />
+							<input type="number" class="form-control required_input reset_data" rows="5" id="needed" placeholder="" required="" />
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -449,7 +449,7 @@
 						<div class="col">
 							<label for="comment" class="au-p4">Badges</label>
 							<?php foreach($badges as $bloop){ ?>
-								<input type="checkbox" style="margin-left:50px;" class="badges_input" id="<?php echo $bloop->name; ?>" value="<?php echo $bloop->id; ?>" name="badges[]" required="" /> <span class="au-btnvolunteertype" style="background-color:<?php echo $bloop->color; ?>" ><i class="<?php echo $bloop->icon; ?>" title="<?php echo $bloop->name; ?>"></i> <?php echo $bloop->name; ?></span><br/><br/>
+								<input type="checkbox" style="margin-left:50px;" class="badges_input reset_badge" id="<?php echo $bloop->name; ?>" value="<?php echo $bloop->id; ?>" name="badges[]" required="" /> <span class="au-btnvolunteertype" style="background-color:<?php echo $bloop->color; ?>" ><i class="<?php echo $bloop->icon; ?>" title="<?php echo $bloop->name; ?>"></i> <?php echo $bloop->name; ?></span><br/><br/>
 							<?php } ?>
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
@@ -589,6 +589,7 @@
 	});
 	
 	$(document).on("click", "#addTask_button", function(){
+		count_checked = 0;
 		$("#addtask").modal("show");
 		// $("#addtask").reload();
 
@@ -984,6 +985,13 @@
     }
 
     $(document).on('click','#btnBadges_close',function(){
-    		alert(1);
+    		$('.reset_data').css('border-color','');
+    		$('.validate_error_message').remove();
+	        $('.reset_badge').each(function(i){
+	           $(this).attr("disabled",false)
+	           $(this).prop("checked", false);
+	        });
+    		
+    		count_checked = 0;
     });
 </script>
