@@ -76,7 +76,7 @@
 									</a>
 								</div>
 								<div class="au-dropdown dropdown-menu">
-									<a class="dropdown-item" href="<?= base_url('profile') ?>"><i class="fas fa-user"></i> Visit Profile</a>
+									<a class="dropdown-item" href="<?= base_url('profile') ?>"><i class="fas fa-user"></i> My Profile</a>
 									<a class="dropdown-item" href="<?= base_url('manage')?>"><i class="fas fa-cog"></i> Manage Programs</a>
 									<a class="dropdown-item" href="<?= base_url('profile/reset')?>"><i class="fas fa-user-cog"></i> Change Password</a>
 									<a class="dropdown-item" href="<?= base_url("log-out");?>"><i class="fas fa-sign-out-alt"></i> Logout</a>
