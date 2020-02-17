@@ -75,7 +75,7 @@
 							<span class="au-p3">Use 8 or more characters with a mix of letters, numbers & symbols for a strong password.</span>
 						</div>
 					</div>
-					<!--<div class="form-row">
+					<div class="form-row">
 						<div class="col-12">
 							<span class="au-p3">Upload profile picture</span>
 						</div>
@@ -85,7 +85,7 @@
 								<label class="custom-file-label" for="customFile">Choose file</label>
 							</div>
 						</div>
-					</div>-->
+					</div>
 					<div class="form-row">
 						<div class="col">
 							<label class="form-check-label">
