@@ -100,8 +100,10 @@
 								<div class="au-inner au-cscroll">
 								<?php 	if(count($event_volunteers) > 0) { 
 										 	if($event_details[0]['is_admin'] == 1){
+										 		// print_r($event_details[0]['id']);
+										 		// die
 								?>
-										<a href="<?= $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>/manage"   class="au-btnvolunteer au-btnvolunteertype au-time primary btn_approve"  style="background-color:#1894e7; width:100%; text-align:center;">Manage</a>
+										<a href="<?= base_url(""). "volunteers/" .$event_details[0]['id'];?>"  class="au-btnvolunteer au-btnvolunteertype au-time primary btn_approve"  style="background-color:#1894e7; width:100%; text-align:center;">Manage</a>
 								<?php		 		
 										 	}
 										}
@@ -157,8 +159,6 @@
 								</thead>
 								<tbody>
 									<?php
-									 $is_disabled = '';
-									 $is_disabled_css = '';
 									/* $x = 0;
 									 if($is_allowed_to_volunteer==1 || $event_details[0]['is_admin']){
 									 	$x =1;
@@ -167,6 +167,8 @@
 									 }*/
 									 foreach ($event_task as $key => $value) { ?>
 									 	<?php
+									 		$is_disabled = '';
+									 		$is_disabled_css = '';
 									 		/*if($value['required_volunteers']<=$value['joined_volunteers'] && $value['user_id_joined']!=1){
 									 			$is_disabled = 'disabled';
 									 			$is_disabled_css = 'disabled_css';
@@ -184,6 +186,10 @@
 									 		if($value['required_volunteers']<=$value['joined_volunteers'] || $event_details[0]['is_joined']==1 || $event_details[0]['is_not_joined']==1 || $event_details[0]['is_admin']==1){ 
 									 			$is_disabled = 'disabled';
 									 			$is_disabled_css = 'disabled_css';
+									 			if($event_details[0]['is_joined']==1 && $value['user_id_joined']==1){
+									 				$is_disabled_css = '';
+									 			}
+									 			
 									 		}
 									 	?>
 										<tr class="forvolunteer <?=($value['user_id_joined']==1 ) ? 'volunteer' : ''?> vol-id<?=$value['id']?>" attr-id="<?=$value['id']?>">
@@ -605,6 +611,12 @@
 		$("#addtask").modal("show");
 		// $("#addtask").reload();
 
+	});
+	
+	$(document).on('click','#btnTestimonial_close',function(){
+		$('.validate_error_message').hide();
+		$('#testimonial_comment').val('');
+		$('#testimonial_comment').css('border-color','#ced4da');
 	});
 
 

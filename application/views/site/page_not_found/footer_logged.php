@@ -37,8 +37,6 @@
 <script src="<?=base_url()?>assets/site/js/moment.min.js" type="text/javascript" ></script>
 <script src="<?=base_url()?>assets/site/js/daterangepicker.js" type="text/javascript" ></script>
 <script src="<?=base_url()?>assets/site/slick/slick.js"></script>
-<script src="<?= base_url();?>assets/site/js/bootstrap-show-modal.js"></script>
-
 
 <?php if(!empty($js)) : ?>
     <?php foreach($js as $path) : ?>

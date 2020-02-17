@@ -1,10 +1,12 @@
 <?php
-	$user_id = $this->session->userdata('user_sess_id');
+	$ci =& get_instance();
+
+	$user_id = $ci->session->userdata('user_sess_id');
 	$arr_where = array(
 		'id' => $user_id
 	);
-	$user_details = $this->Gmodel->get_query('tbl_users',"id = " . $user_id);
-	$points_details = $this->Gmodel->get_query('tbl_users_points',"user_id = " . $user_id);
+	$user_details = $ci->Gmodel->get_query('tbl_users',"id = " . $user_id);
+	$points_details = $ci->Gmodel->get_query('tbl_users_points',"user_id = " . $user_id);
 ?>
 
 <header class="au-header">
@@ -18,18 +20,13 @@
 				<a href="<?= base_url();?>" class="au-navbar-brand navbar-brand">
 					<img src="<?=base_url()?>assets/site/img/au-logo.png" alt="Alagang Unilab Logo" class="au-logo">
 				</a>
-				<div class="d-lg-none asd">
+				<div class="d-lg-none">
 					<?php if(empty($user_details[0]->imagepath)) : ?>
-						<img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-avatar">
+						<img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-avatar" onerror="imgErrorProfile(ci);">
 					<?php else: ?>
-						<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar">
+						<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar" onerror="imgErrorProfile(ci);">
 					<?php endif; ?>
-					<script type="text/javascript">
-						var base_url = '<?=base_url();?>';
-						$('img').on("error", function() {
-				          $(this).attr('src', base_url+"/assets/img/au-avatar.svg");
-				        });
-					</script>
+					
 				</div>
 
 				<div class="collapse navbar-collapse" id="navbarCollapse">
@@ -46,21 +43,21 @@
 							</div>
 						</div>
 						<div class="au-user">
-							<!-- show this when logged out -->
+							<!-- show ci when logged out -->
 							<!-- <div class="d-none d-lg-block au-login">
 								<a href="#"><button class="au-btn">Login</button></a>
 								<a href="#"><button class="au-btn">Sign Up</button></a>
 							</div> -->
 							<!-- end -->
 
-							<!-- show this when logged in -->
+							<!-- show ci when logged in -->
 							<div class="au-acc">
 								<button type="button" class="au-accbtn dropdown-toggle d-none d-lg-block" data-toggle="dropdown">
 									<div class="au-inner">
 										<?php if(empty($user_details[0]->imagepath)) : ?>
 											<img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-avatar">
 										<?php else: ?>
-											<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar" onerror="imgErrorProfile(this);">
+											<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar" onerror="imgErrorProfile(ci);">
 										<?php endif; ?>
 									</div>
 									<div class="au-inner">
@@ -72,7 +69,7 @@
 								<div class="au-accmobile d-lg-none">
 									<a href="#">
 										<div class="au-inner">
-											<img src="<?=base_url()?>assets/site/img/au-avatar.svg" class="au-avatar-lg" onerror="imgErrorProfile(this);">
+											<img src="<?=base_url()?>assets/site/img/au-avatar.svg" class="au-avatar-lg">
 										</div>
 										<div class="au-inner">
 											<span class="au-accname"><?= $user_details[0]->first_name . " " . $user_details[0]->last_name;?></span>
@@ -97,13 +94,6 @@
 	</header>
 	<script type="text/javascript">
 		var base_url = '<?=base_url();?>';
-
-		$(document).ready(function(){
-			$("<img/>")
-		    .on('load', function() { console.log("image loaded correctly"); })
-		    .on('error', function() { console.log("error loading image"); })
-		    .attr("src", $(originalImage).attr("src"));
-		});
 	    function imgErrorProfile(image) {
 	        image.onerror = "";
 	        image.src = base_url+"/assets/img/au-avatar.svg";
@@ -114,7 +104,8 @@
 	        image.src = base_url+"/assets/img/broken_img1.jpg";
 	        return true;
 	    }
-		$("#<?= @$active_menu;?>").addClass("active");
+	    
+		$("#<?= $active_menu;?>").addClass("active");
 		$(document).on('click', '#logout', function(){
 			window.location.href = "<?php echo base_url('site/logout') ?>";
 		});

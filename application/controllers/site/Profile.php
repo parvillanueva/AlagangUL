@@ -43,7 +43,7 @@ class Profile extends GS_Controller
 		$data['events']		= $joined_events;
 		$data['c_programs'] = count($joined_programs);
 		$data['c_events']   = count($joined_events);
-
+		$data['active_menu']= '';
 		$data['content'] 	= "site/profile/default";
 		$data['meta'] 	 	= array(
 			 "title"        =>  "Profile"
@@ -76,11 +76,6 @@ class Profile extends GS_Controller
 				$created_programs 	= $this->Site_model->get_created_programs($user_id);
 				$joined_programs  	= $this->Site_model->get_joined_programs($user_id);
 	
-				
-
-
-
-
 				//get achievements
 				$member_badges		= $this->Site_model->get_member_badges($user_id);
 	
@@ -111,7 +106,7 @@ class Profile extends GS_Controller
 				$data['events']		= $joined_events;
 				$data['c_programs'] = count($joined_programs);
 				$data['c_events']   = count($joined_events);
-	
+				$data['active_menu']= '';
 				$data['content'] 	= "site/profile/other";
 				$data['meta'] 	 	= array(
 					"title"        =>  "Profile"

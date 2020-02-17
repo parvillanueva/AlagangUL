@@ -10,7 +10,7 @@
 ?>
 
 <script>
-    var calendar_data = '<?= json_encode($events)?>';
+    var calendar_data = '<?= json_encode($events, JSON_HEX_QUOT | JSON_HEX_APOS)?>';
    
     if(calendar_data != null || calendar_data != '')
     {

@@ -29,6 +29,9 @@
     <script src="<?= base_url();?>assets/js/footer.js"></script>
 	<script src="<?= base_url();?>cms/js/bootbox.min.js"></script>
     <script src="<?= base_url();?>cms/js/custom.js"></script>
+    <script src="<?= base_url();?>assets/site/js/bootstrap-show-modal.js"></script>
+
+
     <script type="text/javascript">
         var base_url = "<?= base_url();?>";
         var form_empty_error = "<?= $this->standard->dialog("form_empty");?>";
@@ -41,6 +44,8 @@
         var form_invalid_captcha = "<?= $this->standard->dialog("form_invalid_captcha");?>";
 
     </script>
+
+    <script src="<?= base_url();?>assets/site/js/bootstrap-show-modal.js"></script>
 
 <style type="text/css">
 	.page-wrapper {

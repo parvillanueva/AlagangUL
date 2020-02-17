@@ -115,7 +115,7 @@
                                 <?php if(!empty($created)) : ?>
                                     <?php foreach($created as $program) : ?>
                                         <div class="au-slprograms">
-                                            <a href="programs/<?= @$program['id']?>/<?= @$program['url_alias']?>" class="au-lnk">
+                                            <a href="<?= base_url()?>programs/<?= @$program['id']?>/<?= @$program['url_alias']?>" class="au-lnk">
                                                 <div class="au-opthumbnail">
                                                     <img src="<?=base_url().@$program['image_thumbnail']?>" class="au-fp-thumbnailimg" onerror="imgErrorProfileDetails(this);">
                                                 </div>
@@ -131,7 +131,7 @@
                                 <?php if(!empty($programs)) : ?>
                                     <?php foreach($programs as $program) : ?>
                                         <div class="au-slprograms">
-                                            <a href="<?=@$program['url_alias']?>" class="au-lnk">
+                                            <a href="<?= base_url()?>programs/<?= @$program['id']?>/<?= @$program['url_alias']?>" class="au-lnk">
                                                 <div class="au-opthumbnail">
                                                     <img src="<?=base_url().@$program['image_thumbnail']?>"class="au-fp-thumbnailimg" onerror="imgErrorProfileDetails(this);">
                                                 </div>

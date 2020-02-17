@@ -166,10 +166,42 @@ class Events extends GS_Controller {
 	{
 
 		$program_id = $this->uri->segment(2);
+		$program_alias = $this->uri->segment(3);
 		$event_id = $this->uri->segment(5);
+		$event_alias = $this->uri->segment(6);
 
-		$data['program_details'] = $this->get_program_details($program_id);
-		$data['event_details'] = $this->get_event_details($event_id);
+		$data['program_details'] = $this->get_program_details($program_id, $program_alias);
+		$data['event_details'] = $this->get_event_details($event_id, $event_alias);
+		
+
+		//check programs
+		$page_Status = @$data['program_details'][0]['status'];
+		$is_admin = @$data['program_details'][0]['created_by'] == $_SESSION['user_sess_id'];
+		if($page_Status){
+			if($page_Status == 0){
+				if($is_admin === false){
+					show_404();
+				}
+			}
+		} else {
+			show_404();
+		}
+
+		//check event
+		$page_Status = @$data['event_details'][0]['status'];
+		$is_admin = @$data['event_details'][0]['user_id'] == $_SESSION['user_sess_id'];
+		if($page_Status){
+			if($page_Status == 0){
+				if($is_admin === false){
+					show_404();
+				}
+			}
+		} else {
+			show_404();
+		}
+
+
+		echo $data['event_details'][0]['status'];
 		$data['event_task'] = $this->get_event_tasks($event_id);
 		$data['event_volunteers'] = $this->get_volunteers($event_id);
 		$data['badges'] = $this->get_badges();
@@ -215,10 +247,13 @@ class Events extends GS_Controller {
 			'date_from' => $date_from,
 			'date_to' => $date_to
 		);
-		
-		$data['events'] = $this->get_details($arr);
-		$this->load->view('site/events/event_list', $data);
-	
+		$data_arry = $this->get_details($arr);
+		if(!empty($data_arry)){
+			$data['events'] = $data_arry;
+			$this->load->view('site/events/event_list', $data);
+		} else{
+			$this->load->view('site/events/event_no_data');
+		}
 	}
 	
 	public function filter_where($arr){
@@ -333,7 +368,8 @@ class Events extends GS_Controller {
 	public function validate_testimonial($event_id, $user_id){
 		$arr = array(
 			'event_id' => $event_id,
-			'user_id' => $user_id
+			'user_id' => $user_id,
+			'status >=' => 0
 		);
 		$result = $this->Gmodel->get_query('tbl_program_event_task_volunteers', $arr);
 		if(empty($result)){
@@ -366,11 +402,13 @@ class Events extends GS_Controller {
 	{
 
 		$program_id = $this->uri->segment(2);
+		$program_alias = $this->uri->segment(3);
 		$event_id = $this->uri->segment(5);
+		$event_alias = $this->uri->segment(6);
 
 		// $arra
-		$data['program_details'] = $this->get_program_details($program_id);
-		$data['event_details'] = $this->get_event_details($event_id);
+		$data['program_details'] = $this->get_program_details($program_id, $program_alias);
+		$data['event_details'] = $this->get_event_details($event_id, $event_alias);
 		$data['event_task'] = $this->get_event_tasks($event_id);
 		$data['event_volunteers'] = $this->get_volunteers($event_id);
 		$data['users_approval'] = $this->get_approval_volunteers($event_id);
@@ -493,7 +531,7 @@ class Events extends GS_Controller {
 		
 		foreach ($get_event_tasks as $key => $value) {
 			$task_badge = array();
-			$query_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $event_id . " AND event_task_id = " . $value->id;
+			$query_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $event_id . " AND event_task_id = " . $value->id." AND status >=0";
 			$joined_volunteer = $this->db->query($query_joined_volunteer)->result();
 
 			$query_event_task_badge = "SELECT b.id, b.name, b.icon, b.color, petb.event_task_id FROM tbl_program_event_task_badge petb LEFT JOIN tbl_badges b ON petb.badge_id = b.id WHERE petb.event_task_id = ".$value->id." ";
@@ -503,7 +541,7 @@ class Events extends GS_Controller {
 				$task_badge[] = $badge;
 			}
 			$user_id = $this->session->userdata('user_sess_id');
-			$query_user_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $event_id . " AND event_task_id = " . $value->id. " AND user_id = ". $user_id;
+			$query_user_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $event_id . " AND event_task_id = " . $value->id. " AND user_id = ". $user_id." AND status >=0";
 			$is_joined = $this->db->query($query_user_joined_volunteer)->result();
 
 			$event_task[] = array(
@@ -519,29 +557,30 @@ class Events extends GS_Controller {
 		return $event_task;
 	}
 
-	public function get_program_details($program_id){
-		$program_details = $this->Gmodel->get_query('tbl_programs',"id = " . $program_id);
+	public function get_program_details($program_id, $program_alias){
+		$program_details = $this->Gmodel->get_query('tbl_programs',"id = " . $program_id . " AND url_alias ='" . $program_alias . "'");
 		$program = array();
 		foreach ($program_details as $key => $value) {
 			$program[] = array(
 				"name"					=> $value->name,
 				"url_alias"				=> $value->url_alias,
 				"image_thumbnail"		=> base_url() . $value->image_thumbnail,
-				"id"					=> $value->id
+				"id"					=> $value->id,
+				"status"					=> $value->status,
 			);
 		}
 		return $program;
 	}
 
-	public function get_event_details($event_id){
-		$event_details = $this->Gmodel->get_query('tbl_program_events',"id = " . $event_id);
+	public function get_event_details($event_id, $event_alias){
+		$event_details = $this->Gmodel->get_query('tbl_program_events',"id = " . $event_id . " AND url_alias ='" . $event_alias . "'");
 		$events = array();
 		foreach ($event_details as $key => $value) {
 
 			$query_needed_volunteer = "SELECT SUM(required_volunteers) as count FROM tbl_program_event_task WHERE event_id = " . $value->id;
 			$needed_volunteer = $this->db->query($query_needed_volunteer)->result();
 
-			$query_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $value->id;
+			$query_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $value->id. " AND status >=0";
 			$joined_volunteer = $this->db->query($query_joined_volunteer)->result();
 
 
@@ -822,6 +861,7 @@ class Events extends GS_Controller {
 	{
 	    $title = trim(strtolower($title));
 	    $title = preg_replace('#[^a-z0-9\\/]#i', '-', $title);
+	   	$title = str_replace('/', '-', $title);
 	    return trim(preg_replace('/-+/', '-', $title), '-/');
 	}
 

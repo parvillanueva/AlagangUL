@@ -15,7 +15,7 @@
 					<?php } ?>
 					<?php if($details['is_admin']) { ?>
 						<a href="#" class="au-lnk" data-toggle="modal" data-target="#editPrgoramDetails"><span class="au-share"><i class="fas fa-pen"></i> Edit Details</a>
-						<a href="#" class="au-lnk" data-toggle="modal" data-target="#addEvent"><span class="au-share"><i class="fas fa-calendar"></i> Add Events</a>
+						<!-- <a href="#" class="au-lnk" data-toggle="modal" data-target="#addEvent"><span class="au-share"><i class="fas fa-calendar"></i> Add Events</a> -->
 						
 						<?php if($details['details'][0]->status == 0) { ?>
 							<a href="<?= base_url("programs/") . $details['details'][0]->id . "/" . $details['details'][0]->url_alias . "/publish";?>" class="au-lnk pub-program"><span class="au-share"><i class="fas fa-check"></i> Publish Program</span></a>

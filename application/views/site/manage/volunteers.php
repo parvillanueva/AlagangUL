@@ -72,7 +72,7 @@
                    	$.each(obj, function(x,y){
                    		var status = "Not Qualified";
                    		if(y['status'] == 0){
-                   			status = "Not Qualified";
+                   			status = "Pending";
                    		} else if(y['status'] == 1){
                    			status = "Qualified";
                    		}
@@ -141,7 +141,7 @@
     	var approval_id = $(this).attr('data-id');
     	var event_task_id = $(this).attr('data-event_task_id');
 
-    	BM.confirm("Are you sure you want to Disqualify selected Volunteer?", function(result){
+    	BM.confirm("Are you sure you want to Unqualify selected Volunteer?", function(result){
             $.ajax({
                 type : "POST",
                 url  :  "<?= base_url('site/manage/disqualify_task_user');?>",
