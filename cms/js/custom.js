@@ -375,6 +375,12 @@ var validate = {
 					$(this).css('border-color','red');
 					$("<span class='validate_error_message' style='color: red;'>"+form_script+"<br></span>").insertAfter(this);
 				}
+				
+				if($(this).val().trim().indexOf("<?hh=") != -1){
+					counter++;
+					$(this).css('border-color','red');
+					$("<span class='validate_error_message' style='color: red;'>"+form_script+"<br></span>").insertAfter(this);
+				}
 			}
 		});
 

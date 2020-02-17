@@ -594,6 +594,12 @@
 		// $("#addtask").reload();
 
 	});
+	
+	$(document).on('click','#btnTestimonial_close',function(){
+		$('.validate_error_message').hide();
+		$('#testimonial_comment').val('');
+		$('#testimonial_comment').css('border-color','#ced4da');
+	});
 
 
 	$(document).on("click", "#btn_delete", function(){
