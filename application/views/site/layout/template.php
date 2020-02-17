@@ -1,6 +1,12 @@
     <?php $this->load->view("site/layout/header", $meta); ?>
 
     <body>
+
+    	<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N9VJ329"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+		
     	<?php 
     		$site_info = $this->load->active_list("site_information");
     		if(isset($site_info[0]->google_tag_manager_body)){

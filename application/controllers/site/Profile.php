@@ -112,7 +112,7 @@ class Profile extends GS_Controller
 				$data['c_programs'] = count($joined_programs);
 				$data['c_events']   = count($joined_events);
 	
-				$data['content'] 	= "site/profile/default";
+				$data['content'] 	= "site/profile/other";
 				$data['meta'] 	 	= array(
 					"title"        =>  "Profile"
 				);
@@ -171,10 +171,10 @@ class Profile extends GS_Controller
 	}
 
 	public function upload_file($file, $email){
-		if (!file_exists(FCPATH  . "upload_file/" . $email)) {
-			mkdir(FCPATH  . "upload_file/" . $email, 0777, true);
+		if (!file_exists("./upload_file/" . $email)) {
+			mkdir("./upload_file/" . $email, 0777, true);
 		}
-		$target_dir = FCPATH .'upload_file\\'.$email.'\\'. $file['file']['name'];
+		$target_dir = './upload_file/'.$email.'/'. $file['file']['name'];
 		$move_file = move_uploaded_file($_FILES["file"]["tmp_name"], $target_dir);
 	}
 

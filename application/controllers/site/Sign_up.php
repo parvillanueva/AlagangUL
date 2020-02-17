@@ -10,6 +10,7 @@ class Sign_up extends CI_Controller {
 	
 	function email_send(){
 		$email_result = $this->email_check($_POST['email']);
+		$status = 0;
 		if($email_result == 'not_empty'){
 			echo json_encode(array('responce'=>'exist'));
 		} else if($email_result == 'pass_empty'){
@@ -20,13 +21,22 @@ class Sign_up extends CI_Controller {
 			$white_test = $this->white_list_check($explode_email[1]);
 			if($white_test == 'empty'){
 				echo json_encode(array('responce'=>'no_list'));
-			} else{ 
+			} else{
+				$status = 1;
 				$from = $_POST['email'];
 				$fr_name = 'Guest';
 				$subject = 'Link Registration and OTP';
 				$this->send_sgrid($from, $fr_name, $from, $subject);
 			}
 		}
+		$data_array = array(
+			'email_address' 	=> $_POST['email'],
+			'action' 			=> 'signup',
+			'status' 			=> $status,
+			'create_date' 		=> date('Y-m-d H:i:s')
+			);
+
+		$this->Gmodel->save_data('tbl_signup_login_logs', $data_array);
 	}
 	
 	public function white_list_check($data){
@@ -65,7 +75,7 @@ class Sign_up extends CI_Controller {
 		$token = md5(uniqid(rand(), true));
 		$this->session_set($token);
 		//$link = base_url().'login_otp?token='.$token;
-		$content = '<p> otp = '.$otp.'</p>';
+		$content = $this->email_template_otp($otp); //'<p> otp = '.$otp.'</p>';
 		$this->otp_save($otp, $from, $token);
 		$arr = array(
 			'from' => $from,
@@ -118,7 +128,7 @@ class Sign_up extends CI_Controller {
 		$token = md5(uniqid(rand(), true));
 		$this->session_set($token);
 		//$link = base_url().'login_otp_fpw?token='.$token;
-		$content = '<p>otp = '.$otp.'</p>';
+		$content = $this->email_template_otp($otp);//'<p>otp = '.$otp.'</p>';
 		$this->otp_save_fpw($otp, $from, $token);
 		$arr = array(
 			'from' => $from,
@@ -144,5 +154,77 @@ class Sign_up extends CI_Controller {
 	function thankyou_message(){
 		$data['content'] = "site/sign_up/thankyou_message";
 		$this->load->view("site/layout/template2",$data);
+	}
+	
+	function email_template_otp($otp){
+		$html = '<html>
+					<head>
+					</head>
+
+					<body style="background: #092E6E;width:100%;height: 100%;font-family: Arial, Helvetica, sans-serif;">
+					<table style="width:100%;">
+						<tbody>
+							<tr>
+								<td>
+									<center>
+										<img width="330" height="150px" src="http://172.29.70.126/alagang_unilab/uploads/au-alagangunilab.png"
+											style="margin-bottom:15px;">
+									</center>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<table width="500" align="center" bgcolor="white" style="border:1px solid #dedede;padding:25px; margin-right:auto;margin-left:auto">
+										<tr>
+											<td>
+												<center>
+													<b style="padding-bottom:35px;color: #092e6e;font-weight:700;font-size:18px;">One-time password for Alagang Unilab signup</b>
+													<p style="font-size:15px;font-weight:300;color: #4b4d4d;line-height: 24px;">
+														Hello Guest;<br>
+														Thank you for your interest in joining the Alagang Unilab program. In order to continue with your Sign up,
+														please
+														enter the One-Time Password provided below:
+													</p>
+													<br><br>
+													<table width="340" align="center" style="border: 1px solid #eee;" >
+														<tr>
+															<td>
+																<center>
+																	<p align="center"
+																		style="text-align:center;padding: 15px 0 15px 25px; display: inline-block; font-size:40px; font-weight: bold; letter-spacing: .75em;margin:0px auto;">
+																		'.$otp.'
+																	</p>
+																</center>
+															</td>
+														</tr>
+													</table>
+												</center>
+											</td>
+										</tr>
+									</table>
+									
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<table width="500" align="center">
+										<tr>
+											<td>
+												<center style="width:500px;margin-left:auto;margin-right:auto;">
+													<p align="center" style="color: #fff; width: 500px; font-size: 14px; margin: 15px auto 15px;">
+														If you received this email by mistake, send us a report. Lorem ipsum dolor sit amet conserctetuer adipiscing
+														nomnumny di dalam hati nay.
+													</p>
+												</center>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					</body>
+				</html>';
+		return 	$html;	
 	}
 }

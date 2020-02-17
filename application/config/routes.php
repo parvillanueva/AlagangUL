@@ -22,6 +22,7 @@
 		$route["get-rewards"] = "site/get_rewards";
 		$route["profile"]  = "site/profile";
 		$route["profile/reset"]  = "site/profile/reset";
+		$route["change_pfw_message"]  = "site/login/fpw_message_success";
 
 		$route["profile/(:any)"]  = "site/profile/view/$1";
 
@@ -31,7 +32,7 @@
 		$route["log-out"] = "site/logout";
 		$route["already-xist"] = "site/logout/already_exist";
 		$route["create-program"] = "site/create_program";
-
+		$route["delete-user/(:any)"] = "site/logout/delete_user_email/$1";
 		$route["programs/(:any)/(:any)"] = "site/programs/view/$1/$2";
 		$route["programs/(:any)/(:any)/add_event"] = "site/events/add_event/$1/$2";
 		$route["programs/(:any)/(:any)/update"] = "site/programs/update/$1/$2";
@@ -42,6 +43,15 @@
 		$route["programs/(:any)/(:any)/event/(:any)/(:any)/update"] = "site/events/update/$1/$2/$3/$4";
 		$route["programs/(:any)/(:any)/event/(:any)/(:any)/manage"] = "site/events/manage/$1/$3/$4";
 		$route["programs/(:any)/(:any)/event/(:any)/(:any)/publish/(:any)"] = "site/events/publish/$1/$2/$3/$4/$5";
+
+
+
+		$route["manage"] = "site/manage";
+		$route["manage/program_list"] = "site/manage/program_list";
+		$route["manage/event_list"] = "site/manage/get_event_list";
+		$route["manage/(:any)/(:any)"] = "site/manage/events/$1/$2";
+		$route["volunteers/(:any)"] = "site/manage/volunteers/$1";
+
 
 		$route["content_management"] = "content_management/home";
 		$route["404_override"] = "";

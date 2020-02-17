@@ -1,9 +1,8 @@
-
 <div class="container-fluid au-heading">
 	<div class="au-container au-padding">
 		<div class="au-programheading">
 			<div class="au-phthumbnail">
-				<img src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" class="au-fp-thumbnailimg">
+				<img src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" class="au-fp-thumbnailimg" onerror="imgErrorProgram(this);">
 			</div>
 			<div class="au-phdetails">
 				<span class="au-h5"><?= $details['details'][0]->name;?></span>
@@ -108,7 +107,11 @@
 					<span class="au-title">Areas covered: <?= $details['details'][0]->area_covered;?></span>
 				</div>
 				<hr>
-				<span class="au-h4">Upcoming Events</span>
+				<?php if(count($details['events']) == 0) { ?>
+					<span class="au-h4">No Upcoming Events</span>
+				<?php } else { ?>
+					<span class="au-h4">Upcoming Events</span>
+				<?php } ?>
 				<div class="au-eventswrapper">
 					<?php
 						//echo "<pre>";
@@ -126,7 +129,7 @@
 										<div class="au-program">
 											<a href="<?= $value['link'];?>" class="au-lnk">
 												<div class="au-pthumbnail">
-													<img src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" class="au-fp-thumbnailimg">
+													<img src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" class="au-fp-thumbnailimg" onerror="imgErrorProgram(this);">
 												</div>
 												<span class="au-ptitle"><?= $value['title'];?></span>
 												<span class="au-pdetails"><?= $value['description'];?></span>
@@ -150,13 +153,13 @@
 												<div class="col"><span class="au-needed"><?= $value['required_volunteer'] ;?> volunteers needed</span></div>
 												<div class="col">
 													<?php if($details['is_admin']) { ?>
-														<?php if($value['status'] == 1) { ?>
+														<!-- <?php if($value['status'] == 1) { ?>
 															<button type="button" class="au-volunteered au-btnyellow float-right" style="background-color: #00b513;">Published</button>
 														<?php } else { ?>
 															<button type="button" class="au-volunteered au-btnyellow float-right">Unpublished</button>
-														<?php } ?>
+														<?php } ?> -->
 													<?php } else {
-														if($value['required_volunteer']!=0){
+														if($value['required_volunteer']!=0 && $value['is_not_joined'] !=1){
 															if(!$value['is_joined']){
 													?>	
 														<a href="<?= $value['link'];?>" class="au-volunteer au-btnyellow float-right" style="display: block">Volunteer</a>
@@ -187,7 +190,7 @@
 						<div class="col-lg-3 col-6">
 							<a href="<?= base_url(); ?>programs/{id}/{url_alias}" class="au-lnk au-plink">
 								<div class="au-opthumbnail">
-									<img src="<?=base_url()?>{image_thumbnail}" class="au-fp-thumbnailimg" alt="{name}">
+									<img src="<?=base_url()?>{image_thumbnail}" class="au-fp-thumbnailimg" onerror="imgErrorProgram(this);" alt="{name}">
 								</div>
 							</a>
 						</div>
@@ -213,10 +216,10 @@
 	        		<div class="form-row">
 						<div class="col">
 							<div class="custom-file">
-								<input type="file" class="custom-file-input" name="programImage" id="customFile" onchange="readURLImgStandardPreview(this);" accept="image/x-png,image/gif,image/jpeg" />
+								<input type="file" class="custom-file-input" name="programImage" id="customFile" onchange="readURLImgStandardPreview(this);" accept="image/x-png,image/jpeg" />
 								<label class="custom-file-label" for="customFile">Choose file</label>
 							</div>
-							<img  style="width: 100%;" src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" id="previewImage"/>
+							<img  style="width: 100%;" src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" id="previewImage" onerror="imgErrorEditProgram(this);"/>
 						</div>
 					</div>
 	        		<div class="form-row">
@@ -253,21 +256,20 @@
     	</div>
   	</div>
 </div>
+
 <div class="modal fade text-center" id="program_confirm_modal" data-backdrop="static">
 <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
         <div class="modal-body">
-            <form action="<?= base_url("programs/add")?>" method="post" enctype="multipart/form-data" class="au-form" id="add_confirm">
         		<div class="form-row">
 					<div class="col">
 							<label class="file-label" >Are you sure you want to Update this record?</label>
 					</div>
 				</div>
 				<div class="au-modalbtn text-center">
-                    <button type="button" class="au-btn au-btnyellow" id="dismiss_modal" data-dismiss="modal">No</button>
-                    <button type="button" class="au-btn" id="btnSubmit2">Yes</button>
+                    <button type="button" class="au-btn au-btnyellow" id="btn_edit_dismiss" data-dismiss="modal">No</button>
+                    <button type="button" class="au-btn" id="btn_edit_confirm">Yes</button>
                 </div>
-			</form>	
         </div>
     </div>
 </div>
@@ -276,14 +278,14 @@
 <!-- Add Event Modal -->
 <div class="modal fade text-center" id="addEvent" data-backdrop="static">
 <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-        <div class="modal-body">
-            <span class="au-h4">Add Event</span>
-      			<form action="<?= base_url("programs/") . $details['details'][0]->id . "/" . $details['details'][0]->url_alias . "/add_event";?>" method="post" enctype="multipart/form-data" class="au-form" id="addEventForm">
+	    <div class="modal-content">
+	        <div class="modal-body">
+	            <span class="au-h4">Add Event</span>
+	  			<form action="<?= base_url("programs/") . $details['details'][0]->id . "/" . $details['details'][0]->url_alias . "/add_event";?>" method="post" enctype="multipart/form-data" class="au-formm" id="addEventForm">
 	        		<div class="form-row">
 						<div class="col">
 							<div class="custom-file">
-								<input type="file" class="custom-file-input required_input" name="eventImage" id="customFile" onchange="readURLImgStandardPreviewEvent(this);" accept="image/x-png,image/gif,image/jpeg" />
+								<input type="file" class="custom-file-input required_input" name="eventImage" id="customFile" onchange="readURLImgStandardPreviewEvent(this);" accept="image/x-png,image/jpeg" />
 								<label class="custom-file-label" for="customFile">Choose file</label>
 							</div>
 							<img  style="width: 100%;" src="" id="previewImageEvent"/>
@@ -329,19 +331,45 @@
 	                    <button type="button" class="au-btn" id="btnSubmitEvent">Submit</button>
 	                </div>
 				</form>
-      		</div> 
-      		<!-- <div class="modal-footer">
-        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        		<button type="button" class="btn btn-primary" id="btnSubmit">Save changes</button>
-     		</div> -->
-    	</div>
-  	</div>
+	  		</div> 
+		</div>
+	</div>
+</div>
+
+<div class="modal fade text-center" id="program_add_event_modal" data-backdrop="static">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-body">
+        		<div class="form-row">
+					<div class="col">
+							<label class="file-label" >Are you sure you want to Add this record?</label>
+					</div>
+				</div>
+				<div class="au-modalbtn text-center">
+                    <button type="button" class="au-btn au-btnyellow" id="btn_add_event_dismiss" data-dismiss="modal">No</button>
+                    <button type="button" class="au-btn" id="btn_add_event_confirm">Yes</button>
+                </div>
+        </div>
+    </div>
+</div>
 </div>
 
 <script type="text/javascript">
+	var base_url = '<?=base_url();?>';
 	var datatoday = new Date();
 	var datatodays = datatoday.setDate(new Date(datatoday).getDate() + 1);
 
+    function imgErrorProgram(image) {
+        image.onerror = "";
+        image.src = base_url+"/assets/img/broken_img2.jpg";
+        return true;
+    }
+
+    function imgErrorEditProgram(image) {
+        image.onerror = "";
+        image.src = base_url+"/assets/img/broken_img2.jpg";
+        return true;
+    }
 
 	$('#whenpicker').datetimepicker({
 	    controlType: 'select',
@@ -351,7 +379,7 @@
 
 	});
 
-	$(document).on('click', '.workplace-share', function() {
+	/*$(document).on('click', '.workplace-share', function() {
 		var user_fb_id = "<?=$_SESSION['user_impersonate_token']?>";
 		var url_root = document.location.host;
 		var uri = window.location.href;
@@ -368,7 +396,7 @@
 			}, 'json');
 		}, 'json');
 
-	});
+	});*/
 
 	$(document).on('click', '#btnSubmit', function(e){
 		e.preventDefault();
@@ -379,8 +407,14 @@
 			$("#program_confirm_modal").modal("show");
 		}
 		else{
-			$('.required_input').each(function(){
+			$('#editprogramform .required_input').each(function(){
 				if($(this).val() == null || $(this).val() == ""){
+					var img_border = $('#previewImage').attr("src");
+						if(img_border == ''){
+							$('#editprogramform .custom-file-label').css('border-color','red');
+						}else{
+							$('#editprogramform .custom-file-label').css('border-color','');
+						}
 					$('.au-form .custom-file-label').css('border-color','');
 					$(this).css('border-color','red');
 				}
@@ -389,7 +423,7 @@
 		}
 	});
 
-	$(document).on('click', '#btnSubmit2', function(e){
+	$(document).on('click', '#btn_edit_confirm', function(e){
 		e.preventDefault();
 			$("#editprogramform").submit();
 			$("#editPrgoramDetails").css('opacity',1);
@@ -397,19 +431,53 @@
 	});
 
 
-	$(document).on('click', '#dismiss_modal', function(e){
+	$(document).on('click', '#btn_edit_dismiss', function(e){
 		e.preventDefault();
 			$("#editPrgoramDetails").css('opacity',1);
 			$("#editPrgoramDetails").css('overflow','scroll');
 			$("#program_confirm_modal").modal("hide");
 	});
 
-
 	$(document).on('click', '#btnSubmitEvent', function(e){
 		e.preventDefault();
-		if(validate.standard("addEventForm")){
-			$("#addEventForm").submit();
+		if(validate.standard('addEventForm')){
+			$("#addEvent").css('opacity',0.5);
+			$("#program_add_event_modal").modal("show");
+		}else{
+			$('#addEventForm .required_input').each(function(){
+				if($(this).val() == null || $(this).val() == ""){
+					var img_border = $('#previewImageEvent').attr("src");
+						if(img_border == ''){
+								$('#addEventForm .custom-file-label').css("border-color","red");
+						}else{
+							$('#addEventForm .custom-file-label').css("border-color",'');
+						}
+					$(this).css('border-color','red');
+				}
+			});
+
 		}
+	});
+
+	$(document).on('click', '.au-btnyellow', function(e){
+		$('.validate_error_message').remove();
+		$('.required_input').css('border-color','');
+		$('.custom-file-label').css('border-color','');
+	});
+
+	$(document).on('click', '#btn_add_event_confirm', function(e){
+		e.preventDefault();
+			$("#addEventForm").submit();
+			$("#addEvent").css('opacity',1);
+			$("#program_add_event_modal").modal("hide");
+	});
+
+
+	$(document).on('click', '#btn_add_event_dismiss', function(e){
+		e.preventDefault();
+			$("#addEvent").css('opacity',1);
+			$("#addEvent").css('overflow','scroll');
+			$("#program_add_event_modal").modal("hide");
 	});
 
 	function readURLImgStandardPreview(input) {

@@ -37,7 +37,7 @@
 				<div class="input-group user_profile_image" style="">   
 					<input id="user_image_input" class="form-control" readonly="" value="" accept="" name="meta_keyword" max_size="">     
 					<form id="first_form" method="post" enctype="multipart/form-data">
-						<input type="file" id="user_image" accept="image/png,image/gif,image/jpg">
+						<input type="file" id="user_image" accept="image/png,image/jpg">
 					</form>
 					<span class="input-group-btn" style="vertical-align: top;">          
 						<button type="button" data-id="user_image" class="user_image_button btn btn-info btn-flat">Open File Manager</button>

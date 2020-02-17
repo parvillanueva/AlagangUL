@@ -27,19 +27,41 @@ class Login extends CI_Controller {
 			'email_address' => $_POST['email_address'],
 			'password' => md5($_POST['password'])
 		);
+
 		$sql_result = $this->Gmodel->get_query('tbl_users',$arr_where);
 		if(empty($sql_result)){
 			$result = array('responce'=>'failed');
-			echo json_encode($result);
+			$status = 0;
 		} else{
 			$this->session_set($sql_result);
 			$result = array('responce'=>'success');
-			echo json_encode($result);
+			$status = 1;
+		}
+
+		$data_array = array(
+			'email_address' 	=> $_POST['email_address'],
+			'action' 			=> 'login',
+			'status' 			=> $status,
+			'create_date' 		=> date('Y-m-d H:i:s')
+			);
+
+		$this->Gmodel->save_data('tbl_signup_login_logs', $data_array);
+		echo json_encode($result);
+		if(isset($_POST['is_remember_me'])=='on'){
+			setcookie('alagangunilabemail', $_POST['email_address'], time() + (86400 * 10), "/");
+		}
+		else{
+			delete_cookie("alagangunilabemail");
 		}
 	}
 	
 	public function forgot_password(){
 		$data["content"] = "site/login/forgot_password";
+		$this->load->view("site/layout/template2",$data);
+	}
+	
+	public function fpw_message_success(){
+		$data["content"] = "site/login/forgot_pass_message";
 		$this->load->view("site/layout/template2",$data);
 	}
 	

@@ -45,7 +45,7 @@
 								<select class="form-control custom-select" id="task_select">
 									<option value="" selected>All Tasks</option>
 									<?php foreach($event_task as $etloop){ ?>
-										<option value="<?= $etloop->id;?>"><?= $etloop->task;?></option>
+										<option value="<?= $etloop->task;?>"><?= $etloop->task;?></option>
 									<?php } ?>
 				  				</select>
 			  				</div>

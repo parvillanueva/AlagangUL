@@ -6,7 +6,7 @@
      min-width: 320px;
 }
  body {
-     font-family: montserrat, sans-serif;
+     font-family: montserrat, sans-serif !important;
      background-color: #F5F5F5;
      color: #222;
 }
@@ -37,14 +37,14 @@ p{
      width: 100%;
 }
  .au-container {
-     max-width: 1366px;
+     max-width: 1000px;
      margin: 0 auto;
      font-weight: 400;
      font-size: 13px;
      position: relative;
 }
  .au-footer {
-     padding: 1.5em 1em;
+     padding: 1em 1em;
      -webkit-box-shadow: inset 0 15px 40px -15px rgba(0, 0, 0, 0.5);
      box-shadow: inset 0 15px 40px -15px rgba(0, 0, 0, 0.5);
      background: rgb(10, 35, 63);
@@ -58,13 +58,16 @@ p{
      text-align: right;
 }
  .au-pf {
-     font-size: 12px;
+     font-size: 10px;
      display: inline-block;
      color: rgba(255, 255, 255, 0.7);
      margin: 3px 0 3px 10px;
 }
  .au-pf a {
-     color: #1AA3F9;
+     color: #ffffff;
+}
+.au-footer img{
+     max-width: 150px;
 }
  .au-pf a:hover {
      opacity: 0.7;
@@ -85,6 +88,7 @@ p{
      padding-top: 5px;
      padding-bottom: 5px;
      margin: 0 25px;
+     font-size: 11px;
 }
  .au-navbar .navbar-nav .nav-link:hover {
      color: #F9C417;
@@ -93,7 +97,7 @@ p{
      border-color: #F9C417;
 }
  .au-logo {
-     width: 280px;
+     width: 230px;
 }
  .au-user {
      margin: 0 -5px;
@@ -103,7 +107,7 @@ p{
 }
  .au-btn {
      border: 0;
-     background-color: #1AA3F9;
+     background-color: #092E6E;
      color: #fff;
      padding: 0.5em 0.9em;
      font-size: 12px;
@@ -144,7 +148,7 @@ p{
      vertical-align: middle;
 }
  .au-accname {
-     font-size: 13px;
+     font-size: 11px;
      margin-left: 10px;
      font-weight: 700;
      color: #fff;
@@ -152,7 +156,7 @@ p{
      vertical-align: middle;
 }
  .au-accpoints {
-     font-size: 13px;
+     font-size: 11px;
      margin-left: 10px;
      font-weight: 400;
      color: #F9C417;
@@ -220,7 +224,7 @@ p{
      display: block;
 }
  .au-dropdown .dropdown-item {
-     font-size: 13px;
+     font-size: 12px;
      padding: 10px;
      background: #fff;
      border-bottom: 1px solid transparent;
@@ -247,9 +251,9 @@ p{
  .navbar-expand-lg .navbar-nav .au-dropdown {
      position: absolute;
      right: 0;
-     top: 63px;
-     max-width: 250px;
-     width: 100%;
+     top: 54px;
+     width: 180px !important;
+     margin-left: -20px;
      padding: 10px 5px;
 }
  .au-hero-bg {
@@ -258,7 +262,8 @@ p{
      background-position: center;
      background-repeat: no-repeat;
      background-size: cover;
-     padding: 1em;
+     padding: 1.5em;
+     min-height: 350px;
 }
  .au-scroll {
      position: absolute;
@@ -306,14 +311,14 @@ p{
      width: 100%;
 }
  .carousel-control-next, .carousel-control-prev {
-     width: 4em;
+     width: 5.5em;
 }
  .au-flexcenter>div {
      display: block;
 }
  .au-h1 {
      font-family: montserrat, sans-serif;
-     font-size: 38px;
+     font-size: 22px;
      display: block;
      line-height: 1.25em;
      margin-bottom: 20px;
@@ -321,7 +326,7 @@ p{
 }
  .au-h2 {
      font-family: montserrat, sans-serif;
-     font-size: 24px;
+     font-size: 16px;
      display: block;
      font-weight: 400;
      line-height: 1.5em;
@@ -330,7 +335,7 @@ p{
 }
  .au-h3 {
      font-family: myriad-pro, sans-serif;
-     font-size: 38px;
+     font-size: 24px;
      display: block;
      font-weight: 700;
      font-style: italic;
@@ -340,7 +345,7 @@ p{
 }
  .au-h4 {
      font-family: myriad-pro, sans-serif;
-     font-size: 24px;
+     font-size: 22px;
      display: block;
      font-weight: 700;
      font-style: italic;
@@ -350,12 +355,14 @@ p{
 }
  .au-h5 {
      font-family: myriad-pro, sans-serif;
-     font-size: 28px;
+     font-size: 24px;
      display: block;
      font-weight: 700;
      font-style: italic;
      color: #fff;
      line-height: 1.25em;
+    max-width: 500px;
+    overflow-wrap: break-word;
 }
  .no-margin {
      margin: 0;
@@ -369,7 +376,7 @@ p{
      display: inline-block;
 }
  .au-btnblue {
-     font-size: 16px;
+     font-size: 12px;
      font-weight: 700;
      color: #fff;
      background-color: #1AA3F9;
@@ -380,6 +387,7 @@ p{
 }
  .au-btnblue:hover {
      opacity: 0.7;
+     color: #fff;
 }
  .au-btnyellow {
      font-size: 16px;
@@ -396,7 +404,7 @@ p{
      align-items: center;
 }
  .au-padding {
-     padding: 1em;
+     padding: 1.5em;
 }
  .au-featured-program {
      margin-bottom: 30px;
@@ -411,7 +419,7 @@ p{
      width: 100%;
      background-color: #fff;
      height: 250px;
-     padding: 2em;
+     padding: 0px;
 }
  .au-fp-thumbnailimg {
      height: 100%;
@@ -427,14 +435,14 @@ p{
 }
  .au-p1 {
      display: block;
-     font-size: 16px;
+     font-size: 14px;
      font-weight: 700;
      color: #fff;
      margin-bottom: 10px;
 }
  .au-p2 {
      display: block;
-     font-size: 12px;
+     font-size: 10px;
      font-weight: 400;
      color: #fff;
      margin-bottom: 10px;
@@ -449,8 +457,8 @@ p{
 }
  .au-p4 {
      display: block;
-     font-size: 14px;
-     line-height: 2em;
+     font-size: 12px;
+     line-height: 1.5em;
      font-weight: 400;
      color: #222;
      margin-top: 5px;
@@ -464,13 +472,13 @@ p{
 }
  .au-p6 {
      display: block;
-     font-size: 18px;
+     font-size: 14px;
      font-weight: 400;
      color: #222;
      margin-top: 5px;
 }
  .au-fp-details>.au-p2 {
-     height: 54px;
+     height: 44px;
      margin-bottom: 20px;
      overflow: hidden;
      text-overflow: ellipsis;
@@ -479,23 +487,26 @@ p{
      -webkit-line-clamp: 3;
 }
  .au-fp-details>.au-p1 {
-     height: 48px;
+     height: 20px;
      overflow: hidden;
      text-overflow: ellipsis;
      display: -webkit-box;
      -webkit-box-orient: vertical;
-     -webkit-line-clamp: 2;
+     -webkit-line-clamp: 1;
 }
  .au-fp-fdetails .au-btnyellow {
      float: right;
 }
+.au-fp-fdetails .au-p2{
+     margin-bottom: 0px;
+}
  .au-memcounter {
-     font-size: 12px;
+     font-size: 11px;
      height: 30px;
      display: inline-block;
 }
  .au-btnyellow {
-     font-size: 12px;
+     font-size: 10px;
      font-weight: 700;
      color: #fff;
      background-color: #F9C417;
@@ -505,9 +516,10 @@ p{
 }
  .au-btnyellow:hover {
      opacity: 0.7;
+     color: #fff;
 }
  .au-getrewards {
-     height: 594px;
+     height: 530px;
      margin-bottom: 30px;
      background: rgb(10, 35, 63);
      background: -moz-linear-gradient(45deg, rgba(10, 35, 63, 1) 0%, rgba(9, 46, 110, 1) 100%);
@@ -544,8 +556,8 @@ p{
      padding: 1em 0;
 }
  .au-rtitle {
-     font-size: 16px;
-     height: 48px;
+     font-size: 14px;
+     height: 41px;
      margin-bottom: 10px;
      font-weight: 700;
      color: #092E6E;
@@ -556,16 +568,16 @@ p{
      -webkit-line-clamp: 2;
 }
  .au-details {
-     font-size: 12px;
-     height: 90px;
-     margin-bottom: 20px;
-     font-weight: 400;
-     color: #222;
-     overflow: hidden;
-     text-overflow: ellipsis;
-     display: -webkit-box;
-     -webkit-box-orient: vertical;
-     -webkit-line-clamp: 5;
+     font-size: 10px;
+    height: 73px;
+    margin-bottom: 20px;
+    font-weight: 400;
+    color: #222;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
 }
  .au-reward .au-accpoints {
      margin-left: 0;
@@ -576,7 +588,7 @@ p{
  .au-stars {
      display: inline-block;
      height: 30px;
-     font-size: 16px;
+     font-size: 14px;
      font-weight: 700;
      color: #222;
 }
@@ -585,7 +597,7 @@ p{
 }
  .au-r-thumbnail {
      background-color: #fff;
-     height: 282px;
+     height: 250px;
      width: 100%;
 }
  .au-r-thumbnailimg {
@@ -629,16 +641,16 @@ p{
      color: #fff;
 }
  .au-bgtrans .au-h1 {
-     font-size: 18px;
+     font-size: 16px;
 }
  .au-bgtrans .au-h2 {
-     font-size: 16px;
+     font-size: 14px;
 }
  .au-bgtrans .au-inner {
      padding: 2em 0em;
 }
  .au-signupimg {
-     max-width: 400px;
+     max-width: 300px;
 }
  .au-form {
      width: 100%;
@@ -651,10 +663,10 @@ p{
 }
  .au-form .form-control {
      border-radius: 0;
-     border: 1px solid rgba(0, 0, 0, 0.1);
-     font-size: 14px;
+     border: 1px solid rgba(0, 0, 0, 0.3);
+     font-size: 12px;
      padding: 0 1em;
-     height: 44px;
+     height: 42px;
 }
  .au-form textarea.form-control {
      padding: 1em 1em;
@@ -672,16 +684,16 @@ p{
  .au-form .btn {
      border-radius: 0;
      color: #fff !important;
-     height: 44px;
+     height: 42px;
      padding: 0em 2.5em;
-     font-size: 14px;
+     font-size: 12px;
 }
  .au-form .custom-file {
      height: 44px;
 }
  .au-form .custom-file-label {
      border-radius: 0;
-     border: 1px solid rgba(0, 0, 0, 0.1);
+     border: 1px solid rgba(0, 0, 0, 0.3);
      font-size: 14px;
      padding: 0 1em;
      height: 44px;
@@ -701,7 +713,7 @@ p{
      height: 44px;
      line-height: 44px;
      border: 0;
-     background-color: #CFD8DC;
+     background-color: #a6adb0;
      color: #fff;
 }
  .au-form-wrapper {
@@ -710,7 +722,7 @@ p{
 }
  .au-form-box {
      padding: 1em;
-     border: 1px solid rgba(0, 0, 0, 0.1);
+     border: 1px solid rgba(0, 0, 0, 0.3);
      background-color: #fff;
      height: inherit;
 }
@@ -745,7 +757,7 @@ p{
 }
  .au-form .au-iconned i {
      position: absolute;
-     top: 15px;
+     top: 14px;
      left: 1.5em;
      font-size: 13px;
      color: #092E6E;
@@ -761,7 +773,7 @@ p{
      color: #092E6E;
 }
  .au-stitle {
-     font-size: 12px;
+     font-size: 10px;
      font-weight: 700;
      margin-bottom: 5px;
      color: #092E6E;
@@ -813,8 +825,8 @@ p{
      background: #fff;
 }
  .au-ptitle {
-     font-size: 16px;
-     height: 24px;
+     font-size: 14px;
+     height: 20px;
      margin-bottom: 10px;
      font-weight: 700;
      color: #092E6E;
@@ -825,8 +837,8 @@ p{
      -webkit-line-clamp: 1;
 }
  .au-pdetails {
-     height: 36px;
-     font-size: 12px;
+     height: 29px;
+     font-size: 10px;
      margin-bottom: 20px;
      font-weight: 400;
      color: #222;
@@ -840,14 +852,14 @@ p{
      margin-bottom: 10px;
 }
  .au-pques{
-     font-size: 12px;
+     font-size: 10px;
      font-weight: 700;
      color: #092E6E;
      display: inline-block;
      width: 63px;
 }
  .au-pans{
-     font-size: 12px;
+     font-size: 10px;
      font-weight: 700;
      color: #222;
      overflow: hidden;
@@ -863,7 +875,6 @@ p{
 }
  .au-volunteers .au-icon{
      margin-right: 10px;
-     display: none;
 }
  .au-time{
      color: #EA1126;
@@ -884,17 +895,18 @@ p{
      display: inline-block;
 }
  .au-needed{
-     font-size: 12px;
+     font-size: 10px;
      font-weight: 400;
      color: #092E6E;
      font-style: italic;
 }
  .au-volunteered{
      display: none;
-     background-color: #CFD8DC;
+     background-color: #a6adb0;
 }
  .au-volunteered:hover{
-     background-color: #CFD8DC;
+     background-color: #a6adb0;
+     color: #fff;
 }
  .volunteered .au-volunteer{
      display: none;
@@ -913,18 +925,18 @@ p{
 }
  .au-numbers{
      position: relative;
-     font-size: 12px;
+     font-size: 10px;
      font-weight: 400;
      color: #fff;
      text-align: right;
      display: block;
      width: 100%;
      padding: .5em 1em;
-     height: 33px;
+     height: 26px;
      z-index: 2;
 }
  .au-numbers i{
-     font-size: 18px;
+     font-size: 14px;
      margin-right: 5px;
 }
  .au-bar{
@@ -932,7 +944,7 @@ p{
      position: absolute;
      left: 0;
      top: 0;
-     height: 33px;
+     height: 26px;
      width: 0;
      -webkit-transition: all 0.3s ease-in-out;
      -moz-transition: all 0.3s ease-in-out;
@@ -993,7 +1005,7 @@ p{
      width: 150px;
      height: 150px;
      background-color: #fff;
-     padding: 10px;
+     padding: 0px;
 }
  .au-phdetails{
      padding: 0 1em;
@@ -1005,17 +1017,17 @@ p{
 }
  .au-members i{
      color: #1AA3F9;
-     font-size: 18px;
+     font-size: 16px;
      margin-right: 5px;
 }
  .au-phstats{
-     margin-top: 10px;
+     margin-top: 5px;
 }
  .au-phstats > *{
      margin-right: 30px;
      display: inline-block;
      margin-left: 0;
-     font-size: 14px;
+     font-size: 12px;
 }
  .au-phstats > *:last-child{
      margin-right: 0;
@@ -1025,7 +1037,7 @@ p{
      font-weight: 400;
 }
  .au-share i{
-     font-size: 18px;
+     font-size: 16px;
      color: #fff;
      margin-right: 5px;
 }
@@ -1048,14 +1060,14 @@ p{
      margin-bottom: 30px;
 }
  .au-opthumbnail{
-     height: 200px;
+     height: 150px;
      background-color: #fff;
 }
  .au-titlebox{
      padding: 1em;
      color: #fff;
      font-weight: 700;
-     font-size: 16px;
+     font-size: 14px;
      background: rgb(9, 46, 110);
      background: -moz-linear-gradient(45deg, rgba(9, 46, 110, 1) 0%, rgba(26, 163, 249, 1) 100%);
      background: -webkit-linear-gradient(45deg, rgba(9, 46, 110, 1) 0%, rgba(26, 163, 249, 1) 100%);
@@ -1231,7 +1243,7 @@ p{
      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#eee", endColorstr="#fff", GradientType=1);
 }
 .au-opptable table th:nth-child(1){
-     width: 35%;
+     width: 20%;
 }
 .au-opptable table th:nth-child(2){
      width: 20%;
@@ -1245,11 +1257,17 @@ p{
 .au-opptable table th:nth-child(5){
      width: 220px;
 }
+.au-opptable table th:nth-child(6){
+     width: 75px;
+}
 .au-opptable table tr:nth-child(5){
      overflow: visible !important;
 }
  .au-opptable table tr{
      font-size: 12px;
+}
+.fa-times{
+     color: #EA1126;
 }
  .au-opptable table th{
      color: #092E6E;
@@ -1331,7 +1349,7 @@ p{
 .au-volunteeredmes{
      font-size: 12px;
      font-style: italic;
-     margin-right: 5px;
+     margin-right: 15px;
      color: #222;
 }
 .au-volunteeredmes i{
@@ -1407,21 +1425,21 @@ p{
      background-color: #dce2e5 !important;    
 }
 .volunteer .au-btnvolunteertype:last-child{
-     background-color: #cfd8dc !important;    
+     background-color: #a6adb0 !important;    
 }
 .au-volmessage{
      display: inline-block;
      margin: 0px 5px;
 }
 .au-modalbtn{
-     margin-top: 20px;
+     margin-top: 0px;
 }
 .au-modalbtn .au-btn{
      display: inline-block;
      margin: 5px 5px;
      font-weight: bold;
      font-size: 12px;
-     width: 125px;
+     width: auto;
 }
 .au-yourvolunteer{
      margin: 1em 0;
@@ -1567,6 +1585,10 @@ p{
 .au-jprogramswrapper{
      margin-bottom: 30px;
 }
+.au-jprogramswrapper .slick-track{
+     margin-left: 0;
+     margin-right: 0;
+}
 .slick-prev, .slick-next{     
     height: 100% !important;
 }
@@ -1604,7 +1626,155 @@ p{
 .au-userpicture .au-useravatar{
      width: 100%;
      height: auto;
-     margin-top: -90px;
+     margin-top: -100px;
+}
+.data{
+     display: flex;
+     flex-wrap: wrap;
+}
+.au-workplace > .row {
+    background-color: #fff;
+    padding: 0.5em;
+    border: 1px solid rgba(0,0,0,0.1) !important;
+     margin: 0 0 0.5em 0em;
+    border-radius: 3px;
+}
+.au-workplace > .row > .col-md-12 {
+    padding: 0px;
+    border-bottom: 0px !important;
+    margin-bottom: 0px !important;
+}
+.au-workplace a {
+    font-size: 9px;
+    overflow-wrap: break-word;
+}
+.au-workplace label{
+     font-size: 10px;
+     margin-bottom: 0px;
+}
+.au-workplace p{
+     font-size: 8px !important;
+}
+.au-workplace > .row > .col-md-12 > .col-md-10 img {
+    margin-top: 10px;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+.au-workplace > .row > .col-md-12 > .col-md-10 {
+    padding: 0px 0.5em;
+}
+.au-powner{
+     margin-bottom: 20px;
+     font-size: 12px;
+}
+.au-powner i{
+     margin-left: 5px;
+     font-size: 12px;
+}
+.au-userbox .au-form-wrapper{
+     padding: 2em 1em;
+}
+#program_list button, #program_list a  {
+    margin-bottom: 5px;
+    margin-right: 5px;
+    white-space: nowrap;
+}
+.au-manageprogramtable.au-opptable table{
+     table-layout: unset;
+}
+.au-manageprogramtable.au-opptable table th{
+     width: auto;
+}
+#btn_addProgram,
+#btn_unpublishProgram,
+#btn_publishProgram{
+     margin-right: 10px;
+     margin-top: 10px;
+}
+.au-evnu{color: #fff;
+    height: 18px;
+    width: 18px;
+    background-color: #11295b;
+    border-radius: 50%;
+    text-align: center;
+    padding: 0px;
+    line-height: 18px;
+    font-weight: 400;
+    display: inline-block;
+    margin-left: -5px;
+    margin-top: -2px;
+    vertical-align: top;
+    font-size: 8px;
+}
+.au-action{
+     font-size: 16px;
+     margin-right: 10px;
+}
+.au-eventdetails .au-action{
+     margin-right: 0px;
+}
+.file-label{
+     font-size: 14px;
+}
+button.close{
+     display: none;
+}
+.modal-header{
+     border-bottom: 0px;
+     padding: 1em 1em 0em 1em;
+}
+.modal-body{
+     padding: 1em 1em 1em 1em;
+}
+.modal-footer{     
+     border-top: 0px;
+     margin-top: -1em;
+     padding: 0em 1em 1em 1em;
+    display: flex;
+    justify-content: center;
+}
+.modal-title {
+    text-align: center;
+    width: 100%;
+    display: block;
+    font-family: myriad-pro, sans-serif;
+    font-size: 22px;
+    display: block;
+    font-weight: 700;
+    font-style: italic;
+    color: #092E6E;
+    line-height: 1.25em;
+}
+button.btn.btn-secondary{
+     border: 0;
+    background-color: #F9C417;
+    color: #fff;
+    padding: 0.5em 0.9em;
+    height: 35px;
+    display: inline-block;
+    margin: 5px 5px;
+    font-weight: bold;
+    font-size: 12px;
+    width: auto;
+    white-space: nowrap;
+    border-radius: 0px;     
+}
+button.btn-primary{
+     border: 0;
+    background-color: #092E6E;
+    color: #fff;
+    padding: 0.5em 0.9em;
+    height: 35px;
+    display: inline-block;
+    margin: 5px 5px;
+    font-weight: bold;
+    font-size: 12px;
+    width: auto;
+    white-space: nowrap;
+    border-radius: 0px;
+}
+button.btn:hover{
+     opacity: 0.7;
+     color: #fff;
 }
 /*Extra small devices (portrait phones, less than 576px)*/
  @media (max-width: 575px) {
@@ -1812,6 +1982,23 @@ p{
           width: 100%;
           margin: 5px 0px;
      }
+
+     .au-userbox .au-form-wrapper{
+          padding: 0px;
+     }
+     .au-bgtrans .au-inner{
+          padding: 1em 0px;
+     }
+     .au-signupimg{
+          max-width: 200px;
+     }
+     .au-bgtrans .au-h1{
+          font-size: 14px;
+     }
+     .au-bgtrans .au-h2{
+          font-size: 12px;
+     }
+
 }
 /*Small devices (landscape phones, 576px and up)*/
  @media (min-width: 576px) and (max-width: 767px) {
@@ -1833,15 +2020,15 @@ p{
          display: block;
     }
      .au-h1 {
-         font-size: 24px;
+         font-size: 22px;
          text-align: center;
     }
      .au-h2 {
-         font-size: 20px;
+         font-size: 16px;
          text-align: center;
     }
      .au-h3 {
-         font-size: 24px;
+         font-size: 22px;
          text-align: center;
     }
      .au-carousel .au-btnblue {
@@ -2025,15 +2212,15 @@ p{
          display: block;
     }
      .au-h1 {
-         font-size: 33px;
+         font-size: 22px;
          text-align: center;
     }
      .au-h2 {
-         font-size: 23px;
+         font-size: 16px;
          text-align: center;
     }
      .au-h3 {
-         font-size: 33px;
+         font-size: 24px;
          text-align: center;
     }
      .au-carousel .au-btnblue {
@@ -2164,4 +2351,15 @@ p{
          height: 35px;
          margin-top: 13px;
     }
+}
+
+@media (max-width:991px){
+     .au-hero-container .au-img-responsive{
+          width:75%;
+          margin-left:auto;
+          margin-right: auto;
+     }
+     .au-hero-bg{
+          min-height:520px;
+     }
 }

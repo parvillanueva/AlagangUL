@@ -18,15 +18,16 @@
 			<div class="au-form-wrapper au-inner">
 				<div class="au-form" id="signup">
 					<span class="au-h4">Sign up for an Alagang Unilab Account</span>
-					<div class="alert alert_failed alert-warning" id="failed_label">Email Address is already exist! </div>
+					<div class="alert alert_failed alert-warning" id="failed_label">Email Address already exists! </div>
+					<div class="alert alert_failed alert-warning" id="failed_valid">Valid Email Address must be Entered! </div>
 					<div class="alert alert_failed alert-warning" id="failed_list"><small>Please use unilab email address! </div>
 					<span class="au-p2">You may be missing out a world of opportunity by not being a member. Please provide your email address to register.</span>
 					<div class="form-row">
 						<div class="col au-iconned">
 							<i class="fas fa-lock"></i>		
-							<input type="email" class="form-control" id="email" placeholder="Email Address" name="email" required>
+							<input type="email" class="form-control email" id="email" placeholder="Email Address" name="email" required>
 							<div class="valid-feedback" id="html_element"></div>
-							<div class="invalid-feedback">Please fill out this field.</div>
+							<div class="invalid-feedback error_message">Please fill out this field.</div>
 						</div>
 					</div>
 					<div class="form-row">
@@ -49,33 +50,53 @@
 	$(document).ready(function(){
 		$('#failed_label').hide();
 		$('#failed_list').hide();
+		$('#failed_valid').hide();
 	});
 	function recaptcha_callback(){
 		$('#btnSend').show();
 	}
 	$(document).on('click', '#btnSend', function(){
-		modal.loading(true);
+		//modal.loading(true);
 		var email_address = $('#email').val();
-		if(email_address != ''){
-			var data = {
-				email : email_address
-			};
-			var url = "<?php echo base_url('site/sign_up/email_send') ?>";
-			aJax.post(url, data, function(result){
-				var obj = is_json(result);
-				if(obj.responce == 'exist'){
-					$('#failed_label').show();
-				} else if(obj.responce == 'no_list'){
-					$('#failed_list').show();
-				} else if(obj.responce == 'pass_empty'){
-					location.href = '<?=base_url("user_profile");?>';
-				} else{
-					if(result == 202){
-						modal.loading(false);
-						location.href = '<?=base_url("login_otp");?>';
+		var email_validate = email_validates(email_address);
+		if(email_validate){
+			$('#failed_valid').hide();
+			if(email_address != ''){
+				var data = {
+					email : email_address
+				};
+				var url = "<?php echo base_url('site/sign_up/email_send') ?>";
+				aJax.post(url, data, function(result){
+					var obj = is_json(result);
+					if(obj.responce == 'exist'){
+						$('#failed_label').show();
+					} else if(obj.responce == 'no_list'){
+						$('#failed_list').show();
+					} else if(obj.responce == 'pass_empty'){
+						location.href = '<?=base_url("user_profile");?>';
+					} else{
+						if(result == 202){
+							modal.loading(false);
+							location.href = '<?=base_url("login_otp");?>';
+						}
 					}
-				}
-			});
+				});
+			} else{
+				$('.error_message').show();
+			}
 		}
 	});
+	
+	function email_validates(email){
+		var counter = 0;
+		var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+		console.log(pattern.test(email));
+		if(!pattern.test(email)){
+		counter++;
+			$('#failed_valid').show();
+			return false;
+		} else{
+			return true;
+		}
+	}	
 </script>

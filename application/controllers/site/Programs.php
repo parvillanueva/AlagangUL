@@ -66,11 +66,11 @@ class Programs extends GS_Controller {
 		}
 
 
-		if($is_admin == 1){
-			$event_list = $this->Gmodel->get_query('tbl_program_events',"program_id = " . $program_id . " AND when >= '" . date("Y-m-d H:i:s") . "'");
-		} else 	{
+		// if($is_admin == 1){
+		// 	$event_list = $this->Gmodel->get_query('tbl_program_events',"program_id = " . $program_id . " AND when >= '" . date("Y-m-d H:i:s") . "'");
+		// } else 	{
 			$event_list = $this->Gmodel->get_query('tbl_program_events',"program_id = " . $program_id . " AND status = 1 AND when >= '" . date("Y-m-d H:i:s") . "'");
-		}
+		// }
 
 		$events = array();
 		foreach ($event_list as $key => $value) {
@@ -78,16 +78,18 @@ class Programs extends GS_Controller {
 			$query_needed_volunteer = "SELECT SUM(required_volunteers) as count FROM tbl_program_event_task WHERE event_id = " . $value->id;
 			$needed_volunteer = $this->db->query($query_needed_volunteer)->result();
 
-			$query_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $value->id;
+			$query_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $value->id . " AND status >= 0";
 			$joined_volunteer = $this->db->query($query_joined_volunteer)->result();
 
 
 			$is_joined = false;
-			$query_is_joined = "SELECT * FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id') . " AND event_id = " . $value->id;
+			$query_is_joined = "SELECT * FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id') . " AND event_id = " . $value->id." AND status >=0";
 			$result_is_joined = $this->db->query($query_is_joined)->result();
 			if(count($result_is_joined) > 0){
 				$is_joined = true;
 			}
+
+			$is_not_joined = $this->db->query("SELECT count(id) as count FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id') . " AND event_id = " . $value->id)->result();
 
 
 			$event_page_url = base_url("programs") . "/" . $program_id . "/" . $program_alias . "/event/" . $value->id . "/" . $value->url_alias;
@@ -103,6 +105,7 @@ class Programs extends GS_Controller {
 				"volunteer_points"	=> $value->volunteer_points,
 				"is_admin"			=> ($value->user_id == $this->session->userdata('user_sess_id')) ? true : false,
 				"is_joined"			=> $is_joined,
+				"is_not_joined"		=> ($is_not_joined[0]->count>=2) ? 1 : 0,
 				"get_earn_badge"	=> $this->get_earn_badge($value->id),
 				"required_volunteer"=> ($needed_volunteer[0]->count != "") ? $needed_volunteer[0]->count : 0,
 				"joined_volunteers"	=> ($joined_volunteer[0]->count != "") ? $joined_volunteer[0]->count : 0,
@@ -110,7 +113,7 @@ class Programs extends GS_Controller {
 		}
 
 
-		$query_members = "SELECT tbl_program_event_task_volunteers.*, CONCAT('" . base_url() . "','/',tbl_users.imagepath) as profile_image , CONCAT(tbl_users.first_name, ' ', tbl_users.last_name) as user, tbl_users.id as used_id, tbl_users_points.current_points as current_pt FROM tbl_program_event_task_volunteers LEFT JOIN tbl_users ON tbl_users.id = tbl_program_event_task_volunteers.user_id LEFT JOIN tbl_users_points ON tbl_users.id = tbl_users_points.user_id WHERE program_id = " . $program_id . " GROUP BY user_id";
+		$query_members = "SELECT tbl_program_event_task_volunteers.*, CONCAT('" . base_url() . "','/',tbl_users.imagepath) as profile_image , CONCAT(tbl_users.first_name, ' ', tbl_users.last_name) as user, tbl_users.id as used_id, tbl_users_points.current_points as current_pt FROM tbl_program_event_task_volunteers LEFT JOIN tbl_users ON tbl_users.id = tbl_program_event_task_volunteers.user_id LEFT JOIN tbl_users_points ON tbl_users.id = tbl_users_points.user_id WHERE program_id = " . $program_id . " AND tbl_program_event_task_volunteers.status >= 0 GROUP BY user_id";
 		$result_members = $this->db->query($query_members)->result();
 
 		$details = array(
@@ -177,7 +180,7 @@ class Programs extends GS_Controller {
 
 		$this->Gmodel->update_data("tbl_programs",$data,"id",$program_id);
 
-		 redirect(base_url("programs") . "/" . $program_id . "/" . $data['url_alias']);
+		redirect($_SERVER['HTTP_REFERER']);
 
 	}
 
@@ -220,7 +223,7 @@ class Programs extends GS_Controller {
 
 		$this->Gmodel->update_data("tbl_programs",$data,"id",$program_id);
 		
-		redirect(base_url("programs") . "/" . $program_id . "/" . $data['url_alias']);
+		redirect($_SERVER['HTTP_REFERER']);
 
 	}
 

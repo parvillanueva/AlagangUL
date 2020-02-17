@@ -50,7 +50,7 @@
 					</div>
 					<div class="form-row">
 						<div class="col">
-							<input type="text" class="form-control required_input mobile_number" id="phone" placeholder="Mobile Number" name="phone"">
+							<input type="text" class="form-control" id="phone" placeholder="Mobile Number" name="phone"">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -76,9 +76,12 @@
 						</div>
 					</div>
 					<div class="form-row">
+						<div class="col-12">
+							<span class="au-p3">Upload profile picture</span>
+						</div>
 						<div class="col">
 							<div class="custom-file">
-								<input type="file" class="custom-file-input required_input" name="file_set" id="customFile" accept="image/x-png,image/gif,image/jpeg" />
+								<input type="file" class="custom-file-input" name="file_set" id="customFile" accept="image/x-png,image/jpeg" />
 								<label class="custom-file-label" for="customFile">Choose file</label>
 							</div>
 						</div>
@@ -86,7 +89,7 @@
 					<div class="form-row">
 						<div class="col">
 							<label class="form-check-label">
-								<input class="form-check-input required_input" required="required" id="understood_details" type="checkbox" name="terms"> I have read and understood the <a href="#" class="au-lnk">Terms of Use</a> and <a href="#" class="au-lnk">Privacy Statement</a>.
+								<input class="form-check-input required_input" required="required" id="understood_details" type="checkbox" name="terms"> I have read and understood the <a href="<?= base_url("terms-and-conditions");?>" class="au-lnk">Terms of Use</a> and <a href="<?= base_url("privacy-statement");?>" class="au-lnk">Privacy Statement</a>.
 								<div class="alert_understood"><font color="red">This field is required.</font></div>
 							</label>
 						</div>
@@ -116,12 +119,17 @@
 	
 	$(document).on('click', '#btnSubmit', function(e){
 		e.preventDefault();
+		var phone_val = $("#phone").val();
+		if(phone_val == ''){
+			$("#phone").addClass('required_input');
+		} else{
+			$("#phone").addClass('mobile_number');
+		}
 		if(validate.standard("signups")){
 			var password = $('#password').val();
 			var pass_check = checkPasswordStrength(password);
 			if(pass_check){
 				var division = $('#division').val();
-				console.log(division);
 				if(division != null){
 					if($('#understood_details').is(":checked")){
 						$("#signups").submit();
