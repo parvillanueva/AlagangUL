@@ -1,0 +1,21 @@
+.au-accpoints{
+     display: none !important;
+}
+ .volunteered .au-accpoints{
+     display: none !important;
+}
+ .volunteered .au-accpointsv{
+     display: none !important;
+}
+.au-pointslevel{
+     display: none !important;
+}
+.au-pfaccpoints{
+     display: none !important;
+}
+.au-fpoints{
+     display: none !important;
+}
+.au-memberslist{
+     display: none;
+}

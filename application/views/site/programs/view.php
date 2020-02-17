@@ -37,7 +37,7 @@
 
 		<div class="row flex-column-reverse flex-md-row">
 			<div class="col-lg-3 col-md-4">
-				<div class="au-boxed">
+				<div class="au-boxed au-memberslist">
 					<div class="au-titlebox">Members</div>
 					<div class="au-content">
 						<div class="au-inner au-cscroll">
@@ -66,7 +66,7 @@
 				</div>
 
 				<div class="au-boxed">
-					<a href="#" class="au-lnk"><div class="au-titlebox"><img src="<?= base_url();?>assets/site/img/au-workplace.svg" height="30px;"></div></a>
+					<div class="au-titlebox"><img src="<?= base_url();?>assets/site/img/au-workplace.svg" height="30px;"></div>
 					<div class="au-content au-workplace" style="max-height: 400px;overflow: hidden;overflow-y: auto;padding: 5px;">
 						<!-- insert facebook feed here -->
 						<?php
