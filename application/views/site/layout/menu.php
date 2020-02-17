@@ -20,11 +20,16 @@
 				</a>
 				<div class="d-lg-none">
 					<?php if(empty($user_details[0]->imagepath)) : ?>
-						<img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-avatar" onerror="imgErrorProfile(this);">
+						<img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-avatar">
 					<?php else: ?>
-						<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar" onerror="imgErrorProfile(this);">
+						<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar">
 					<?php endif; ?>
-					
+					<script type="text/javascript">
+						var base_url = '<?=base_url();?>';
+						$('img').on("error", function() {
+				          $(this).attr('src', base_url+"/assets/img/au-avatar.svg");
+				        });
+					</script>
 				</div>
 
 				<div class="collapse navbar-collapse" id="navbarCollapse">
@@ -92,7 +97,6 @@
 	</header>
 	<script type="text/javascript">
 		var base_url = '<?=base_url();?>';
-        
 
 	    function imgErrorProfile(image) {
 	        image.onerror = "";

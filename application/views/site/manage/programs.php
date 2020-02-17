@@ -144,6 +144,7 @@
 <script type="text/javascript">
 
 	var keyword = "";
+	var base_url = '<?=base_url();?>';
 
 	$(document).ready(function(){
 		get_list();
@@ -258,7 +259,9 @@
 		$("#overview").val(overview);
 
 		BM.show("#editPrgoramDetails");
-
+        $('img').on("error", function() {
+          $(this).attr('src', base_url+"/assets/img/broken_img2.jpg");
+        });
 	});
 
 	$(document).on('click', '#btnSubmit', function(){
