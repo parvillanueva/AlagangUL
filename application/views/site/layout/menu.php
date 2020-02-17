@@ -18,13 +18,18 @@
 				<a href="<?= base_url();?>" class="au-navbar-brand navbar-brand">
 					<img src="<?=base_url()?>assets/site/img/au-logo.png" alt="Alagang Unilab Logo" class="au-logo">
 				</a>
-				<div class="d-lg-none">
+				<div class="d-lg-none asd">
 					<?php if(empty($user_details[0]->imagepath)) : ?>
-						<img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-avatar" onerror="imgErrorProfile(this);">
+						<img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-avatar">
 					<?php else: ?>
-						<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar" onerror="imgErrorProfile(this);">
+						<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar">
 					<?php endif; ?>
-					
+					<script type="text/javascript">
+						var base_url = '<?=base_url();?>';
+						$('img').on("error", function() {
+				          $(this).attr('src', base_url+"/assets/img/au-avatar.svg");
+				        });
+					</script>
 				</div>
 
 				<div class="collapse navbar-collapse" id="navbarCollapse">
@@ -92,8 +97,13 @@
 	</header>
 	<script type="text/javascript">
 		var base_url = '<?=base_url();?>';
-        
 
+		$(document).ready(function(){
+			$("<img/>")
+		    .on('load', function() { console.log("image loaded correctly"); })
+		    .on('error', function() { console.log("error loading image"); })
+		    .attr("src", $(originalImage).attr("src"));
+		});
 	    function imgErrorProfile(image) {
 	        image.onerror = "";
 	        image.src = base_url+"/assets/img/au-avatar.svg";
