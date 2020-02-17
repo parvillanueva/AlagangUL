@@ -374,9 +374,14 @@
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                var extension = input.files[0].name.split('.').pop().toLowerCase();
-                var base64 = e.target.result;
-               	$("#previewImageEvent").attr("src",base64);
+               	var extension = input.files[0].name.split('.').pop().toLowerCase();
+                if (!input.files[0].name.match(/.(jpg|jpeg|png)$/i)){
+                	input.val = "";
+               		BM.alert("This file type is not supported.","text");
+                } else {
+                	var base64 = e.target.result;
+               		$("#previewImageEvent").attr("src",base64);
+                }
             }
             reader.readAsDataURL(input.files[0]);
         }
@@ -387,9 +392,13 @@
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                var extension = input.files[0].name.split('.').pop().toLowerCase();
-                var base64 = e.target.result;
-               	$("#previewImageEventEdit").attr("src",base64);
+               	if (!input.files[0].name.match(/.(jpg|jpeg|png)$/i)){
+                	input.val = "";
+               		BM.alert("This file type is not supported.","text");
+                } else {
+                	var base64 = e.target.result;
+               		$("#previewImageEventEdit").attr("src",base64);
+                }
             }
             reader.readAsDataURL(input.files[0]);
         }

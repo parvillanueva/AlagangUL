@@ -309,20 +309,32 @@
             var reader = new FileReader();
             reader.onload = function(e) {
                 var extension = input.files[0].name.split('.').pop().toLowerCase();
-                var base64 = e.target.result;
-               	$("#previewImage").attr("src",base64);
+                if (!input.files[0].name.match(/.(jpg|jpeg|png)$/i)){
+                	input.val = "";
+               		$("#previewImage").attr("src","");
+               		BM.alert("This file type is not supported.","text");
+                } else {
+                	var base64 = e.target.result;
+               		$("#previewImage").attr("src",base64);
+                }
             }
             reader.readAsDataURL(input.files[0]);
         }
     }
 
-	function readURLImgStandardPreviewEdit(input) {
+	function readURLImgStandardPreviewEdit(input, default_image = "") {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
                 var extension = input.files[0].name.split('.').pop().toLowerCase();
-                var base64 = e.target.result;
-               	$("#previewImageEdit").attr("src",base64);
+                if (!input.files[0].name.match(/.(jpg|jpeg|png)$/i)){
+                	input.val = "";
+               		BM.alert("This file type is not supported.","text");
+                } else {
+                	var base64 = e.target.result;
+               		$("#previewImageEdit").attr("src",base64);
+                }
+                
             }
             reader.readAsDataURL(input.files[0]);
         }
