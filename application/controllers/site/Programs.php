@@ -253,6 +253,7 @@ class Programs extends GS_Controller {
 	{
 	    $title = trim(strtolower($title));
 	    $title = preg_replace('#[^a-z0-9\\/]#i', '-', $title);
+	    $title = str_replace('/', '-', $title);
 	    return trim(preg_replace('/-+/', '-', $title), '-/');
 	}
 
