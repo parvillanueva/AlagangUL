@@ -3,17 +3,18 @@
         <div class="modal-content">
             <div class="modal-body">
                 <span class="au-h4">Edit Profile</span>
+                <div class="alert alert_failed alert-warning" id="failed_label">Invalid File! Only accepts .jpeg or .png </div>
                     <form class="au-form" id="editprofile">
                         <div class="au-form form-row">
                             <div class="col">
-                                <input type="text" class="form-control" id="fname" placeholder="First Name" value="<?= @$profile->first_name ?>" name="fname" required>
+                                <input type="text" class="form-control" id="fname" pattern="[a-zA-Z0-9\s]+" placeholder="First Name" value="<?= @$profile->first_name ?>" name="fname" required>
                                 <div class="valid-feedback"></div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
+                                <div class="invalid-feedback">Invalid Entry.</div>
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control" id="lname" placeholder="Last Name" value="<?= @$profile->last_name ?>" name="lname" required>
+                                <input type="text" class="form-control" id="lname" pattern="[a-zA-Z0-9\s]+"  placeholder="Last Name" value="<?= @$profile->last_name ?>" name="lname" required>
                                 <div class="valid-feedback"></div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
+                                <div class="invalid-feedback">Invalid Entry.</div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -27,12 +28,12 @@
                                 
                                 </select>
                                 <div class="valid-feedback"></div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
+                                <div class="invalid-feedback">Invalid Entry.</div>
                             </div>
                             <div class="col">
                                 <input type="email" class="form-control" id="email" placeholder="Work Email" name="email" required value="<?= @$profile->email_address ?>" disabled>
                                 <div class="valid-feedback"></div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
+                                <div class="invalid-feedback">Invalid Entry.</div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -44,7 +45,7 @@
                             <div class="col">											
                                 <input type="text" class="form-control" id="work_number" placeholder="Work Number" value="<?= @$profile->work_number ?>" name="work_number" pattern="[0-9]{11}">
                                 <div class="valid-feedback"></div>
-                                <div class="invalid-feedback">Please fill out this field.</div>
+                                <div class="invalid-feedback">Invalid Entry.</div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -87,6 +88,10 @@ onerror="imgErrorProfile(this);" id="previewImage" />
 
 <script type="text/javascript">
     var base_url = '<?=base_url();?>';
+    var validFile = true;
+    $(document).ready(function(){
+		$('#failed_label').hide();
+	});
     function imgErrorProfile(image) {
         image.onerror = "";
         image.src = base_url+"/assets/img/au-avatar.svg";
@@ -95,12 +100,27 @@ onerror="imgErrorProfile(this);" id="previewImage" />
 
 	$(".custom-file-input").on("change", function() {
         var fileName = $(this).val().split("\\").pop();
+        var idxDot = fileName.lastIndexOf(".") + 1;
+        var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+
+        if(extFile == 'png' || extFile == 'jpeg' || extFile == 'jpg')
+        {
+            $('#failed_label').hide();
+            validFile = true;
+        }
+        else
+        {
+            
+            $('#failed_label').show();
+            validFile = false;
+        }
     });
 
 	$(document).on('click', '#btnsubmit', function(){
+        
         var email = $('#email').val() ? strip_tags($('#email').val()) : '';
-        if(email != '')
+        if(email != '' && validFile)
         {
             update();
         }
