@@ -75,7 +75,7 @@
 	var base_url = '<?=base_url();?>';
     function imgErrorEvent(image) {
         image.onerror = "";
-        image.src = base_url+"/assets/img/broken_img1.jpg";
+        image.src = base_url+"/assets/img/broken_img2.jpg";
         return true;
     }
 </script>

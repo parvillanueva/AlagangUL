@@ -133,7 +133,7 @@
                                         <div class="au-slprograms">
                                             <a href="<?=@$program['url_alias']?>" class="au-lnk">
                                                 <div class="au-opthumbnail">
-                                                    <img src="<?=base_url().@$program['image_thumbnail']?>"class="au-fp-thumbnailimg" >
+                                                    <img src="<?=base_url().@$program['image_thumbnail']?>"class="au-fp-thumbnailimg" onerror="imgErrorProfileDetails(this);">
                                                 </div>
                                             </a>
                                         </div>
@@ -163,7 +163,7 @@
                                                     <div class="au-program">
                                                         <a href="<?= base_url("programs") . "/" . $event['program_id'] . "/" . $event['program_alias'] . "/event/" . $event['event_id'] .  "/" . $event['event_alias']; ?>" class="au-lnk">
                                                             <div class="au-pthumbnail">
-                                                                <img src="<?=base_url(). @$event['image_thumbnail']?>" class="au-fp-thumbnailimg">
+                                                                <img src="<?=base_url(). @$event['image_thumbnail']?>" class="au-fp-thumbnailimg" onerror="imgErrorProfileDetails2(this);">
                                                             </div>
                                                             <span class="au-ptitle"><?= @$event['title']?></span>
                                                             <span class="au-pdetails">
@@ -229,6 +229,12 @@
     function imgErrorProfileDetails(image) {
         image.onerror = "";
         image.src = base_url+"/assets/img/broken_img1.jpg";
+        return true;
+    }
+
+    function imgErrorProfileDetails2(image) {
+        image.onerror = "";
+        image.src = base_url+"/assets/img/broken_img2.jpg";
         return true;
     }
     

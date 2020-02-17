@@ -50,7 +50,7 @@
 									<div class="au-userentry">
 										<a href="<?= base_url('profile') ?>/<?= $value['user_id'];?>" class="au-userentry">
 											<div class="au-inner">
-												<img src="<?= $value['profile_image'];?>" class="au-avatar-lg">
+												<img src="<?= $value['profile_image'];?>" class="au-avatar-lg" onerror="imgErrorProfile(this);">
 											</div>
 											<div class="au-inner">
 												<span class="au-accname"><?= $value['user']; ?></span>
