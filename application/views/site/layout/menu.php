@@ -36,7 +36,7 @@
 					<div class="au-navbar-nav navbar-nav ml-auto flex-column-reverse flex-lg-row">
 						<div class="au-menu">
 							<a id="home" href="<?= base_url();?>" class="nav-item nav-link">Home</a>
-							<a id="about" href="<?= base_url("about");?>" class="nav-item nav-link">About</a>
+							<a id="about" href="<?= base_url("guidelines");?>" class="nav-item nav-link">Guidelines</a>
 							<a id="programs"  href="<?= base_url("programs");?>" class="nav-item nav-link">Programs</a>
 							<a id="events"  href="<?= base_url("events");?>" class="nav-item nav-link">Events</a>
 							<!-- <a id="get_rewards"  href="<?= base_url("get-rewards");?>" class="nav-item nav-link">Get Rewards</a> -->
