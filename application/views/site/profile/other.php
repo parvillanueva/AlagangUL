@@ -35,7 +35,6 @@
         var total_points = <?=$profile->total_points?>;
         var current_points = <?=$profile->current_points?>;
         var point_level = (current_points/total_points) * 100;
-        console.log(point_level);
 		progressBar('#progress1', point_level);
 	});
 </script>

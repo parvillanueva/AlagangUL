@@ -103,7 +103,7 @@
 	        return true;
 	    }
 	    
-		$("#<?= $active_menu;?>").addClass("active");
+		$("#<?= @$active_menu;?>").addClass("active");
 		$(document).on('click', '#logout', function(){
 			window.location.href = "<?php echo base_url('site/logout') ?>";
 		});
