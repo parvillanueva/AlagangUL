@@ -49,6 +49,9 @@
 
 
 
+		$route["job"] = "site/job";
+		$route["job/download"] = "site/job/download";
+
 		$route["manage"] = "site/manage";
 		$route["manage/program_list"] = "site/manage/program_list";
 		$route["manage/event_list"] = "site/manage/get_event_list";
