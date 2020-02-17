@@ -23,6 +23,12 @@
 	.share-wp {
 		display: <?=($_SESSION['user_impersonate_token']=='') ? 'none;' : 'block;' ?>;
 	}
+	.volunteer .au-btnvolunteer {
+		cursor: default;
+	}
+	.disabled_css {
+		cursor: default;
+	}
 </style>
 <div class="au-wrapper">
 	<div class="container-fluid au-heading">
@@ -153,52 +159,43 @@
 										<th scope="col">Needed</th>
 										<th scope="col">Joined</th>
 										<?php if($event_details[0]['is_admin'] == 1) { ?>
-											<th scope="col">Actions</th>
+											<th scope="col" colspan="2">Actions</th>
+										<?php } else{ ?>
+										<th scope="col">Actions</th>
 										<?php } ?>
 									</tr>
 								</thead>
 								<tbody>
 									<?php
-									/* $x = 0;
-									 if($is_allowed_to_volunteer==1 || $event_details[0]['is_admin']){
-									 	$x =1;
-									 	$is_disabled = 'disabled';
-									 	$is_disabled_css = 'disabled_css';
-									 }*/
-									 foreach ($event_task as $key => $value) { ?>
-									 	<?php
+									 foreach ($event_task as $key => $value) {
 									 		$is_disabled = '';
 									 		$is_disabled_css = '';
-									 		/*if($value['required_volunteers']<=$value['joined_volunteers'] && $value['user_id_joined']!=1){
-									 			$is_disabled = 'disabled';
-									 			$is_disabled_css = 'disabled_css';
-									 		}
-									 		else{
-									 			if($x==0){
-									 				$is_disabled = '';
-									 				$is_disabled_css = '';
-									 			}
-									 			else{
-									 				$is_disabled = 'disabled';
-									 				$is_disabled_css = 'disabled_css';
-									 			}
-									 		}*/
+									 		$x = 0;
 									 		if($value['required_volunteers']<=$value['joined_volunteers'] || $event_details[0]['is_joined']==1 || $event_details[0]['is_not_joined']==1 || $event_details[0]['is_admin']==1){ 
 									 			$is_disabled = 'disabled';
 									 			$is_disabled_css = 'disabled_css';
+									 			$x = 1;
 									 			if($event_details[0]['is_joined']==1 && $value['user_id_joined']==1){
 									 				$is_disabled_css = '';
 									 			}
 									 			
 									 		}
 									 	?>
-										<tr class="forvolunteer <?=($value['user_id_joined']==1 ) ? 'volunteer' : ''?> vol-id<?=$value['id']?>" attr-id="<?=$value['id']?>">
+										<tr class="forvolunteer <?=($value['user_id_joined']==1 ) ? 'volunteer' : ''?> vol-id<?=$value['id']?> <?=($is_disabled_css!='') ? $is_disabled : ''?>" attr-id="<?=$value['id']?>" <?=$is_disabled?>>
 											<td data-header="Volunteer your:" class="au-actions">
 												<?php
 													$badge_count = count($value['task_badge']);
 													if($badge_count>0){
 												?>
-												<button class="event-volunteer au-btnvolunteer au-btnvolunteer-<?=$badge_count?> <?=$is_disabled_css?>" attr-id="<?=$value['id']?>" attr-isjoined="<?=$value['user_id_joined']?> <?=$is_disabled?>" <?=$is_disabled?>>
+												<?php foreach ($value['task_badge'] as $key => $badge) {
+												?>
+												<img src="<?=base_url().$badge->image?>" class="au-btnicon">
+												<?php } ?>
+												<?php $htm = ''; ?>
+												<?php 	
+												$htm .= '<span class="au-btnvolunteertype"><i class="'.$badge->icon.'" title="'.$badge->name.'" style="color:'.$badge->color.'"></i><b style="color:'.$badge->color.'">'.$badge->name.'</b></span>';
+												?>
+												<!--  <button class="event-volunteer au-btnvolunteer au-btnvolunteer-<?=$badge_count?> <?=$is_disabled_css?>" attr-id="<?=$value['id']?>" attr-isjoined="<?=$value['user_id_joined']?> <?=$is_disabled?>" <?=$is_disabled?>>
 												<?php $htm = ''; ?>
 												<?php foreach ($value['task_badge'] as $key => $badge) {
 												?>
@@ -213,24 +210,32 @@
 												<i class="fas fa-plus au-plus"></i>
 												<?php } ?>
 												<?php } ?>
-												</button>
+												</button>  -->
+
 												<?php }?>
 
-												<div style="display: none" class="badge-hid">
+												<div style="display: none" class="badge-hid hid-id-<?=$value['id']?>">
 													<?=$htm?>
 												</div>
+												
 											</td>
 											<td data-header="Task"><?= $value['task'];?></td>
 											<td data-header="Qualifications"><?= $value['qualification'];?></td>
 											<td data-header="Needed"><?= $value['required_volunteers'];?></td>
 											<td data-header="Joined" class="joined-<?=$value['id']?>"><?= $value['joined_volunteers'];?></td>
-											
+											<td>												
+												<button class="<?=($x==0) ? 'event-volunteer' : '' ?> au-btnvolunteer au-btn au-btnvolunteer-<?=$badge_count?> <?=$is_disabled_css?>" attr-id="<?=$value['id']?>" attr-isjoined="<?=$value['user_id_joined']?>">
+													Join
+												</button>
+											</td>
+
 											<?php if($event_details[0]['is_admin'] == 1) { ?>
 											<td data-header="Actions:" class="au-actions">
 												<a href="#"  data-toggle="modal" data-id = "<?=$value['id']?>" data-target="#editTask" id="btn_edit_task" class="au-lnk au-action" title="Edit Details"><i class="fas fa-edit"></i></a>
 												<a href="#" id="btn_delete"  data-id = "<?=$value['id']?>"  class="au-lnk au-action" title="Delete"><i class="fas fa-times"></i></a>
 											</td>
 											<?php } ?>
+
 										</tr>
 									<?php } ?>
 								</tbody>
@@ -737,10 +742,11 @@
 		});
 
 		$(document).on('click', '.event-volunteer', function() {
-			var volunteer_type = $(this).siblings('.badge-hid').html();
+			
 			var task = $(this).closest('tr').children(':nth-child(2)').html();
 			var event_task_id = $(this).attr('attr-id');
 			var is_joined = $(this).attr('attr-isjoined');
+			var volunteer_type = $('.hid-id-'+event_task_id).html();
 			$('.volunteer-as').attr('attr-id',event_task_id).attr('attr-isjoined',is_joined);
 			$('.au-yourvolunteer').html(volunteer_type);
 			$('.volunteer-task').html(task);
