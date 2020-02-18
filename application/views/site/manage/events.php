@@ -1,3 +1,13 @@
+<style type="text/css">
+		#btn_Closebtn{
+		margin-right: 10px;
+    	margin-top: 10px;
+	}
+
+	.au-btn .fa-times{
+		color:white;
+	}
+</style>
 <div class="container-fluid au-heading">
 	<div class="au-container au-padding">
 		<strong class="au-h5 no-margin"><?= $details[0]->name;?></strong>

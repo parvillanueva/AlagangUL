@@ -264,11 +264,20 @@
         });
 	});
 
+
 	$(document).on('click', '#btnSubmit', function(){
 		if(validate.standard("addprogramform")) {
+			$('#AddProgramModal').css("opacity","0.5");
 			BM.confirm("Are you sure you want to Add this Programs?", function(result){
 				if(result){
+					BM.loading(true);
 					$("#addprogramform").submit();
+					$('#AddProgramModal').css("opacity","1");
+				}
+				else{
+					// alert(1);
+					$('#AddProgramModal').css('overflow','auto')
+					$('#AddProgramModal').css("opacity","1");				
 				}
 			});
 		}
@@ -276,9 +285,17 @@
 
 	$(document).on('click', '#btnSubmitUpdate', function(){
 		if(validate.standard("editprogramform")) {
+			$('#editPrgoramDetails').css("opacity","0.5");
 			BM.confirm("Are you sure you want to Update this Programs?", function(result){
 				if(result){
+					BM.loading(true);
 					$("#editprogramform").submit();
+					$('#editPrgoramDetails').css("opacity","1");
+				}
+				else{
+					// alert(1);
+					$('#editPrgoramDetails').css('overflow','auto');
+					$('#editPrgoramDetails').css("opacity","1");				
 				}
 			});
 		}
@@ -311,21 +328,33 @@
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                var extension = input.files[0].name.split('.').pop().toLowerCase();
-                var base64 = e.target.result;
-               	$("#previewImage").attr("src",base64);
+               	var extension = input.files[0].name.split('.').pop().toLowerCase();
+                if (!input.files[0].name.match(/.(jpg|jpeg|png)$/i)){
+                	input.val = "";
+               		BM.alert("This file type is not supported.","text");
+               		$('#AddProgramModal').css('overflow','auto')	
+                } else {
+                	var base64 = e.target.result;
+               		$("#previewImage").attr("src",base64);
+                }
             }
             reader.readAsDataURL(input.files[0]);
         }
     }
 
+
 	function readURLImgStandardPreviewEdit(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                var extension = input.files[0].name.split('.').pop().toLowerCase();
-                var base64 = e.target.result;
-               	$("#previewImageEdit").attr("src",base64);
+               	if (!input.files[0].name.match(/.(jpg|jpeg|png)$/i)){
+                	input.val = "";
+               		BM.alert("This file type is not supported.","text");
+               		$('#editPrgoramDetails').css('overflow','auto')	
+                } else {
+                	var base64 = e.target.result;
+               		$("#previewImageEdit").attr("src",base64);
+                }
             }
             reader.readAsDataURL(input.files[0]);
         }
