@@ -69,10 +69,10 @@
 			};
 			aJax.post(url, data, function(result){
 				if(result == 202){
-					modal.loading(false);
+					BM.loading(true);
 					location.href = '<?=base_url("login_otp_fpw");?>';
 				} else{
-					modal.loading(false);
+					//modal.loading(false);
 					$('#email_alert').show();
 				}
 			});

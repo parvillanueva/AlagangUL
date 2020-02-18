@@ -249,7 +249,7 @@
 						</div>
 					</div>
 					<div class="au-gallerywrapper">
-						<?php if($event_details[0]['is_admin'] == 1){ ?>
+						<?php if($event_details[0]['is_joined'] == 1 || $event_details[0]['is_admin'] == 1){ ?>
 						<form class="dropzone" id="FileManagerDropZone">
 			                <div class="fallback">
 			                    <input name="file" type="file" multiple />
@@ -448,7 +448,7 @@
 					</div>	
 					<div class="au-modalbtn text-center">
 						<button type="button" class="au-btn au-btnyellow" id="btnTestimonial_close" data-dismiss="modal">Close</button>
-						<button type="button" class="au-btn" id="btnTestimonial">Submit</button>
+						<button type="button" class="au-btn" id="btnTestimonial_submit">Submit</button>
 					</div>
 				</form>		
 			</div>
@@ -803,13 +803,11 @@
             var _this = this;
             this.on("sending", function(file, xhr, data) {
                 var filename = file.name;
-                var filesize = file.size;
-                console.log(filename);
-               
+                var filesize = file.size;              
             });
         },
         success: function(file, response){
-            console.log("SUCCESS");
+            this.removeFile(file);
         },
         complete: function(response){
         	get_gallery();
@@ -820,6 +818,7 @@
     function get_gallery(){
     	var url = "<?= base_url("events/get_gallery");?>?event_id=<?= $event_details[0]['id']; ?>&limit=" + limit;
 		var is_admin = "<?= $event_details[0]['is_admin'] ?>";
+		var is_joined = "<?= $event_details[0]['is_joined'] ?>";
     	$.get(url, function(data) {
     		var html = "";
     		$.each(data.result, function(x, y){
@@ -828,7 +827,7 @@
 				html += '		<a href="<?= base_url();?>'+y.path+'" data-toggle="lightbox" data-gallery="gallery" class="">';
 				html += '			<img src="<?= base_url();?>'+y.path+'" class="au-gl-thumbnailimg" onerror="imgErrorEvent(this);">';
 				html += '		</a>';
-				if(is_admin == 1){
+				if(is_admin == 1 || is_joined == 1){
 					html += '		<div class="au-gltitle" style="text-align:right; cursor:pointer"><font color="red"><span class="fa fa-trash" path-url= "'+y.path+'" path-id="'+y.id+'" id="delete_image"></span></font></div>';
 				}
 				html += '	</div>';
@@ -891,7 +890,7 @@
 		}
 	});
 	
-	$(document).on('click', '#btnTestimonial', function(result){
+	$(document).on('click', '#btnTestimonial_submit', function(){
 		var event_id = "<?php echo $event_details[0]['id'] ?>";
 		var testimonial = $('#testimonial_comment').val();
 		var url = "<?php echo base_url('site/events/testimonial_save') ?>";
@@ -1007,7 +1006,7 @@
 			});
 		}
 	});
-	function count_image(total){
+/* 	function count_image(total){
 		var div_count = $('.au-opthumbnail').length;
 		if(div_count == total){
 			$('#loadMore').hide();
@@ -1024,7 +1023,7 @@
 				location.reload();
 			}
 		});
-	}
+	} */
 
     $(document).on("click", '[data-toggle="lightbox"]', function(event) {
 		event.preventDefault();
@@ -1045,9 +1044,8 @@
 			id : path_id
 		};
 		var url = "<?php echo base_url('site/events/delete_gallery_image') ?>";
-		var modal_obj = '<?= $this->standard->confirm("confirm_delete"); ?>'; 
-		modal.standard(modal_obj, function(result){
-			if(result){
+		BM.confirm('Are you sure?', function(results){
+			if(results){
 				aJax.post(url, data, function(result){
 					var obj = is_json(result);
 					if(obj.responce == 'success'){

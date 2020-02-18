@@ -57,11 +57,12 @@
 			aJax.post(url, data, function(result){
 				var obj = is_json(result);
 				if(obj.responce == 'success'){
-					modal.loading(false);
+					//modal.loading(false);
+					BM.loading(true);
 					window.location.href = "<?php echo base_url().'reset_password/' ?>"+obj.user_id;
 				} else{
 					$(".alert_failed").show();
-					modal.loading(false);
+					//modal.loading(false);
 				}
 			});
 		} else{
