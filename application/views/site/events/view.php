@@ -225,7 +225,7 @@
 											<td data-header="Joined" class="joined-<?=$value['id']?>"><?= $value['joined_volunteers'];?></td>
 											<td>												
 												<button class="<?=($x==0) ? 'event-volunteer' : '' ?> au-btnvolunteer au-btn au-btnvolunteer-<?=$badge_count?> <?=$is_disabled_css?>" attr-id="<?=$value['id']?>" attr-isjoined="<?=$value['user_id_joined']?>">
-													Join
+													<?=($value['user_id_joined']==1) ? 'Joined' : 'Join' ?>
 												</button>
 											</td>
 
