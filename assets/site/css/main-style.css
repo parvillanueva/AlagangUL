@@ -1195,6 +1195,10 @@ a.au-lnk:hover>* {
      object-position: center;
 }
 
+.au-eventswrapper .au-eventthumbnail .au-eventimg{
+     max-height: 221px;
+}
+
 .au-eventthumbnail::before {
      content: '';
      position: absolute;
