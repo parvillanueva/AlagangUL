@@ -1036,9 +1036,9 @@ a.au-lnk:hover>* {
 }
 
 .au-pdetails {
-     height: 29px;
+     height: 46px;
      font-size: 10px;
-     margin-bottom: 20px;
+     margin-bottom: 10px;
      font-weight: 400;
      color: #222;
      overflow: hidden;
@@ -1053,7 +1053,7 @@ a.au-lnk:hover>* {
 }
 
 .au-pques {
-     font-size: 10px;
+     font-size: 12px;
      font-weight: 700;
      color: #092E6E;
      display: inline-block;
@@ -1403,6 +1403,7 @@ a.au-lnk:hover>* {
      display: block;
      color: #fff;
      opacity: 0.7;
+     margin-bottom: 10px;
 }
 
 .au-badges {
@@ -1735,7 +1736,7 @@ a.au-lnk:hover>* {
 }
 
 .au-modalbtn {
-     margin-top: 0px;
+     margin-top: 1em;
 }
 
 .au-modalbtn .au-btn {
@@ -1988,17 +1989,17 @@ a.au-lnk:hover>* {
 }
 
 .au-workplace a {
-     font-size: 9px;
+     font-size: 11px;
      overflow-wrap: break-word;
 }
 
 .au-workplace label {
-     font-size: 10px;
+     font-size: 12px;
      margin-bottom: 0px;
 }
 
 .au-workplace p {
-     font-size: 8px !important;
+     font-size: 10px !important;
 }
 
 .au-workplace>.row>.col-md-12>.col-md-10 img {
@@ -2110,6 +2111,17 @@ button.close {
      line-height: 1.25em;
 }
 
+.au-imgbadge{
+     max-width: 25px;
+     margin-right: 5px;
+}
+.au-badges .au-imgbadge{
+     max-width: 40px;
+     margin-right: 5px;
+}
+.au-volmessage{
+     color: #222;
+}
 button.btn.btn-secondary {
      border: 0;
      background-color: #F9C417;
@@ -2157,7 +2169,7 @@ button.btn:hover {
 
 .au-terms {
      font-size: 14px;
-     padding: 0px 20px 20px 20px;
+     padding: 0px 20px 0px 20px;
 }
 
 .au-guidelines {
@@ -2209,7 +2221,13 @@ button.btn:hover {
      pointer-events: none;
 }
 
+.au-menu .d-lg-none{
+     border-top: 1px solid rgba(255,255,255,0.3);
+}
 
+.au-flexcenter > .modal {
+    display: none;
+}
 /*Extra small devices (portrait phones, less than 576px)*/
 
 @media (max-width: 575px) {

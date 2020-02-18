@@ -31,7 +31,8 @@ class Login extends CI_Controller {
 	public function login_register(){
 		$arr_where = array(
 			'email_address' => $_POST['email_address'],
-			'password' => md5($_POST['password'])
+			'password' => md5($_POST['password']),
+			'status' => 1
 		);
 
 		$sql_result = $this->Gmodel->get_query('tbl_users',$arr_where);

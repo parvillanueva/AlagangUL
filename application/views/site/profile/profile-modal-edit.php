@@ -42,12 +42,12 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <input type="tel" class="form-control" id="phone" placeholder="Mobile Number" value="<?= @$profile->mobile_number ?>" name="phone" required pattern="[0-9]{11}">
+                                <input type="tel" class="form-control required_input" id="phone" placeholder="Mobile Number" value="<?= @$profile->mobile_number ?>" name="phone" required pattern="[0-9]{11}">
                                 <div class="valid-feedback"></div>
                                 <div class="invalid-feedback">Invalid Mobile Number.</div>
                             </div>
                             <div class="col">											
-                                <input type="text" class="form-control" id="work_number" placeholder="Work Number" value="<?= @$profile->work_number ?>" name="work_number" pattern="[0-9]{11}">
+                                <input type="text" class="form-control required_input_not mobile_number_not" id="work_number" placeholder="Work Number" value="<?= @$profile->work_number ?>" name="work_number" pattern="[0-9]{11}">
                                 <div class="valid-feedback"></div>
                                 <div class="invalid-feedback">Invalid Entry.</div>
                             </div>
@@ -55,7 +55,7 @@
                         <div class="form-row">
                             <div class="col" style="">
                                 <div class="custom-file">
-									<input type="hidden" name="image_file" class="required_input" value="<?= $profile->imagepath;?>">
+									<input type="hidden" name="image_file" class="" value="<?= $profile->imagepath;?>">
                                     <input type="file" class="custom-file-input" name="programImage" id="customFile"  onchange="readURLImgStandardPreview(this);" accept="image/x-png,image/jpeg" />
                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                     <img  style="width: 100%;vertical-align: baseline;" src="<?= base_url() . $profile->imagepath;?>" onerror="imgErrorProfile(this);" id="previewImage" />
@@ -127,14 +127,14 @@
         {
             update();
         } */
-		//alert();
 		var phone_val = $("#phone").val();
 		if(phone_val == ''){
 			$("#phone").addClass('required_input');
 		} else{
 			$("#phone").addClass('mobile_number');
 		}
-		if(validate.standard("editprofile")){
+				console.log(validate.standard("editprofile"));
+		if(validate.standard("editprofile")){				
 			update();
 		}
     });

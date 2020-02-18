@@ -63,7 +63,7 @@
 													}
 												}
 											?>
-											<img src="<?= $profile_image;?>" class="au-avatar-lg">
+											<img src="<?= $profile_image;?>" class="au-avatar-lg" onerror="imgErrorProfile(this);">
 										</div>
 										<div class="au-inner">
 											<span class="au-accname"><?= $value->user;?></span>
@@ -115,10 +115,10 @@
 					<span class="au-p4"><?= $details['details'][0]->overview;?></span>
 				</div>
 				<hr>
-				<div class="au-programdescription">
+				<!-- <div class="au-programdescription" hidden>
 					<span class="au-title">Areas covered: <?= $details['details'][0]->area_covered;?></span>
 				</div>
-				<hr>
+				<hr> -->
 				<?php if(count($details['events']) == 0) { ?>
 					<span class="au-h4">No Upcoming Events</span>
 				<?php } else { ?>
@@ -135,16 +135,16 @@
 								<div class="row">
 									<div class="col-sm-4 au-eventthumbnail">
 										<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> 10 points</span>
-										<img src="<?= $value['image'];?>" class="au-eventimg">
+										<img src="<?= $value['image'];?>" class="au-eventimg" onerror="imgErrorEvent(this);">
 									</div>
 									<div class="col-sm-8 au-eventdetails">
 										<div class="au-program">
 											<a href="<?= $value['link'];?>" class="au-lnk">
 												<div class="au-pthumbnail">
-													<img src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" class="au-fp-thumbnailimg" onerror="imgErrorProgram(this);">
+													<img src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" class="au-fp-thumbnailimg" onerror="imgErrorEvent(this);">
 												</div>
 												<span class="au-ptitle"><?= $value['title'];?></span>
-												<span class="au-pdetails"><?= $value['description'];?></span>
+												<!-- <span class="au-pdetails"><?= $value['description'];?></span> -->
 											</a>
 										</div>
 										<div class="au-programdetails">
@@ -157,7 +157,7 @@
 										</div>
 										<div class="au-volunteers">
 											<?php foreach ($value['get_earn_badge'] as $a => $b) { ?>
-												<i style="color: <?= $b->color;?>" class="<?= $b->icon;?> au-time au-icon" title="<?= $b->name;?>"></i>
+												<img src="<?= base_url() . "/" . $b->icon_image;?>" class="au-imgbadge" title="<?= $b->name;?>">
 											<?php } ?>
 										</div>
 										<div class="au-action">
@@ -231,7 +231,7 @@
 								<input type="file" class="custom-file-input" name="programImage" id="customFile" onchange="readURLImgStandardPreview(this);" accept="image/x-png,image/jpeg" />
 								<label class="custom-file-label" for="customFile">Choose file</label>
 							</div>
-							<img  style="width: 100%;" src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" id="previewImage" onerror="imgErrorEditProgram(this);"/>
+							<img  style="width: 100%;" src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" id="previewImage" onerror="imgErrorProgram(this);"/>
 						</div>
 					</div>
 	        		<div class="form-row">
@@ -373,13 +373,19 @@
 
     function imgErrorProgram(image) {
         image.onerror = "";
+        image.src = base_url+"/assets/img/broken_img1.jpg";
+        return true;
+    }
+
+    function imgErrorEvent(image) {
+        image.onerror = "";
         image.src = base_url+"/assets/img/broken_img2.jpg";
         return true;
     }
 
-    function imgErrorEditProgram(image) {
+    function imgErrorProfile(image) {
         image.onerror = "";
-        image.src = base_url+"/assets/img/broken_img2.jpg";
+        image.src = base_url+"/assets/img/au-avatar.svg";
         return true;
     }
 

@@ -8,7 +8,15 @@
 	$user_details = $ci->Gmodel->get_query('tbl_users',"id = " . $user_id);
 	$points_details = $ci->Gmodel->get_query('tbl_users_points',"user_id = " . $user_id);
 ?>
-
+<script type="text/javascript">
+	var base_url = '<?=base_url();?>';
+	
+	function imgErrorProfile(image) {
+        image.onerror = "";
+        image.src = base_url+"/assets/img/au-avatar.svg";
+        return true;
+    }
+</script>
 <header class="au-header">
 		<div class="au-navigation au-container">
 			<nav class="au-navbar navbar navbar-expand-lg">
@@ -22,11 +30,19 @@
 				</a>
 				<div class="d-lg-none">
 					<?php if(empty($user_details[0]->imagepath)) : ?>
-						<img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-avatar" onerror="imgErrorProfile(ci);">
+						<img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-avatar" >
 					<?php else: ?>
-						<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar" onerror="imgErrorProfile(ci);">
+						<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar" onerror="imgErrorProgram(this);">
 					<?php endif; ?>
+				<script type="text/javascript">
+					var base_url = '<?=base_url();?>';
 					
+					function imgErrorProfile(image) {
+				        image.onerror = "";
+				        image.src = base_url+"/assets/img/au-avatar.svg";
+				        return true;
+				    }
+				</script>	
 				</div>
 
 				<div class="collapse navbar-collapse" id="navbarCollapse">
@@ -57,8 +73,16 @@
 										<?php if(empty($user_details[0]->imagepath)) : ?>
 											<img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-avatar">
 										<?php else: ?>
-											<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar" onerror="imgErrorProfile(ci);">
+											<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar" onerror="imgErrorProgram(this);">
 										<?php endif; ?>
+										<script type="text/javascript">
+											  var base_url = '<?=base_url();?>';
+											function imgErrorProgram(image) {
+										        image.onerror = "";
+										        image.src = base_url+"/assets/img/au-avatar.svg";
+										        return true;
+										    }
+										</script>
 									</div>
 									<div class="au-inner">
 										<span class="au-accname"><?= $user_details[0]->first_name . " " . $user_details[0]->last_name;?></span>
@@ -93,17 +117,6 @@
 		</div>
 	</header>
 	<script type="text/javascript">
-		var base_url = '<?=base_url();?>';
-	    function imgErrorProfile(image) {
-	        image.onerror = "";
-	        image.src = base_url+"/assets/img/au-avatar.svg";
-	        return true;
-	    }
-	   	function imgError(image) {
-	        image.onerror = "";
-	        image.src = base_url+"/assets/img/broken_img1.jpg";
-	        return true;
-	    }
 	    
 		$("#<?= $active_menu;?>").addClass("active");
 		$(document).on('click', '#logout', function(){

@@ -147,6 +147,7 @@ class Programs extends GS_Controller {
 			tbl_program_events.id,
 			tbl_badges.`name`,
 			tbl_badges.icon,
+			tbl_badges.icon_image,
 			tbl_badges.color
 			FROM
 			tbl_program_events

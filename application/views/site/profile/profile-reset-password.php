@@ -61,6 +61,10 @@ var base_url = '<?=base_url();?>';
 	$(document).ready(function() {
 		responsive();
 		$('#email').attr('readonly', true);
+		$('#bootstrapShowModal').hide();
+		$('#bootstrapShowModalLoading').hide();
+		$('#bootstrapShowModalAlert').hide();
+		
 	});
 	
 	

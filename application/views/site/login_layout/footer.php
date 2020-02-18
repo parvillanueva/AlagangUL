@@ -17,3 +17,6 @@
     </div>
 </footer>
 
+<script src="<?=base_url()?>assets/site/js/script.js"></script>
+
+

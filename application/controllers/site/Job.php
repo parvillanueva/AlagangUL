@@ -48,7 +48,20 @@ class Job extends CI_Controller {
 				if(count($data[0]["Events"]) > 0){
 					$data['program_list'] = $data;
 					$data['user_name'] = $user_name;
-					$this->load->view("site/job/email", $data);
+
+					$content = $this->load->view("site/job/email", $data);
+					echo $content;
+					// print_r($content);
+					// $data = array(
+					// 	'from' 		=> "phpdev.unilab@gmail.com",
+					// 	'from_name' => "ALAGANG UNILAB",
+					// 	'to' 		=> $to,
+					// 	'subject' 	=> "VOLUNTEER LIST : " . $event_details[0]->title,
+					// 	'content' 	=> $html,
+					// );
+
+					// print_r($data);
+					//$this->sndgrd->send($data);
 				}
 			}
 

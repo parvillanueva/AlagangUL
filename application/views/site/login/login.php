@@ -35,7 +35,7 @@
 	</header>
 
 	<div class="au-wrapper">
-		<div class="container-fluid au-heading  au-flexcenter">
+		<div class="container-fluid au-heading au-wrapper au-flexcenter">
 			<div class="au-container au-padding">
 				<div class="row au-userbox au-fullheight">					
 					<div class="col-md-6 au-padding au-bg">

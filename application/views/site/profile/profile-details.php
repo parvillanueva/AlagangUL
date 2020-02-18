@@ -110,7 +110,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="au-jprogramswrapper">
-                            <span class="au-title">Programs Created</span>
+                            <!-- <span class="au-title">Programs Created</span> -->
                             <div class="slider programs">
                                 <?php if(!empty($created)) : ?>
                                     <?php foreach($created as $program) : ?>

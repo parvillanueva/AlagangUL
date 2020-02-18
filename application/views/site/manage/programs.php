@@ -21,7 +21,7 @@
 							<tr>
 								<th scope="col" style="width: 30px;"><input type="checkbox" id="select_all"></th>
 								<th scope="col">Program</th>
-								<!-- <th scope="col">Area Covered</th> -->
+								<th scope="col">Area Covered</th>
 								<th scope="col" style="width: 300px;">Created Date</th>
 								<th scope="col">Status</th>
 								<th scope="col">Action</th>
@@ -59,21 +59,21 @@
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<input type="text" class="form-control required_input no_html" id="programName" placeholder="Program Name" name="programName" value="">
+							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Program Name" name="programName" value="">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
-	        		<!-- <div class="form-row">
+	        		<div class="form-row">
 						<div class="col">											
 							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Areas Covered" name="areaCovered" value="">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
-					</div> -->
+					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<textarea type="text" class="form-control required_input no_html" id="overview" placeholder="Program Overview" name="overview" rows=5></textarea>
+							<textarea type="text" class="form-control required_input no_html" id="lname" placeholder="Program Overview" name="overview" rows=5></textarea>
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -81,7 +81,7 @@
 				</form>	
 	        </div>
 	        <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" id="modal_close_button" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 		        <button type="button" class="btn btn-primary" id="btnSubmit">Submit</button>
 		    </div>
 	    </div>
@@ -115,13 +115,13 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
-	        		<!-- <div class="form-row">
+	        		<div class="form-row">
 						<div class="col">											
 							<input type="text" class="form-control required_input no_html" id="areacovered" placeholder="Areas Covered" name="areaCovered" value="">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
-					</div> -->
+					</div>
 	        		<div class="form-row">
 						<div class="col">											
 							<textarea type="text" class="form-control required_input no_html" id="overview" placeholder="Program Overview" name="overview" rows=5></textarea>
@@ -140,6 +140,7 @@
 </div>
 
 
+<script type="text/javascript" src="<?= base_url();?>/assets/site/js/bootstrap-show-modal.js"></script>
 <script type="text/javascript">
 
 	var keyword = "";
@@ -149,7 +150,6 @@
 	});
 
 	function get_list(){
-		BM.loading(true);
 		var url = "<?= base_url("manage/program_list");?>";
 		var data = {};
 		$.ajax({
@@ -169,18 +169,17 @@
 		  			html += "<tr>";
 		  			html += "	<td><input type='checkbox' class='select' data-alias='"+b.url_alias+"' data-id="+b.id+"/></td>";
 		  			html += "	<td>" + b.name + "</td>";
-		  			// html += "	<td>" + b.area_covered + "</td>";
+		  			html += "	<td>" + b.area_covered + "</td>";
 		  			html += "	<td>" + moment(b.create_date).format("LLL") + "</td>";
 		  			html += "	<td>" + status + "</td>";
 		  			html += "	<td>" ;
-		  			html += "		<a href='#' data-image='"+b.image_thumbnail+"' data-id='"+b.id+"' data-urlalias='"+b.url_alias+"' data-name='"+b.name+"' data-overview='"+b.overview+"'  data-area='"+b.area_covered+"' class='au-lnk au-action editProgramBtn' title='Edit Details'><i class='fas fa-edit'></i></a>" ;
-		  			html += "		<a href='<?= base_url("programs");?>/"+b.id+"/"+b.url_alias+"' target='_blank' type='button' class='au-lnk au-action'  title='Manage Page'><i class='fas fa-cog' style='color: #11295b;'></i></a>";
-		  			html += "		<a href='<?= base_url("manage");?>/"+b.id+"/"+b.url_alias+"' type='button' class='au-lnk au-action'><i class='fas fa-calendar-day'  title='Events' style='color: #FF5722;'></i><span class='au-evnu badge badge-pill  badge-light'>"+b.event_count+"</span></a>";
+		  			html += "		<a href='#' data-image='"+b.image_thumbnail+"' data-id='"+b.id+"' data-urlalias='"+b.url_alias+"' data-name='"+b.name+"' data-overview='"+b.overview+"'  data-area='"+b.area_covered+"' class='au-lnk au-action editProgramBtn' id='editProgramBtn' title='Edit Details'><i class='fas fa-edit'></i></a>" ;
+		  			html += "		<a href='<?= base_url("programs");?>/"+b.id+"/"+b.url_alias+"' target='_blank' type='button' class='au-lnk au-action' id='manageProgramBtn' title='Manage Page'><i class='fas fa-cog' style='color: #11295b;'></i></a>";
+		  			html += "		<a href='<?= base_url("manage");?>/"+b.id+"/"+b.url_alias+"' type='button' class='au-lnk au-action' id='viewEvents'><i class='fas fa-calendar-day'  title='Events' style='color: #FF5722;'></i><span class='au-evnu badge badge-pill  badge-light'>"+b.event_count+"</span></a>";
 		  			html += "	</td>";
 		  			html += "</tr>";
 		  		});
 		  		$("#program_list").html(html);
-		  		BM.loading(false);
 		  	}
 		});
 	}
@@ -260,22 +259,16 @@
 
 		BM.show("#editPrgoramDetails");
 
+		$('img').on("error", function() {
+          $(this).attr('src', base_url+"/assets/img/broken_img1.jpg");
+        });
 	});
 
 	$(document).on('click', '#btnSubmit', function(){
 		if(validate.standard("addprogramform")) {
-			$('#AddProgramModal').css("opacity","0.5");
 			BM.confirm("Are you sure you want to Add this Programs?", function(result){
-				// alert(result);
 				if(result){
-					BM.loading(true);
 					$("#addprogramform").submit();
-					$('#AddProgramModal').css("opacity","1");
-				}
-				else{
-					// alert(1);
-					$('#AddProgramModal').css('overflow','auto')
-					$('#AddProgramModal').css("opacity","1");				
 				}
 			});
 		}
@@ -283,26 +276,12 @@
 
 	$(document).on('click', '#btnSubmitUpdate', function(){
 		if(validate.standard("editprogramform")) {
-			$('#editPrgoramDetails').css("opacity","0.5");
 			BM.confirm("Are you sure you want to Update this Programs?", function(result){
 				if(result){
-					BM.loading(true);
 					$("#editprogramform").submit();
-					$('#editPrgoramDetails').css("opacity","1");
-				}
-				else{
-					// alert(1);
-					$('#editPrgoramDetails').css('overflow','auto');
-					$('#editPrgoramDetails').css("opacity","1");				
 				}
 			});
 		}
-	});
-	
-	$(document).on('click', '#modal_close_button', function(){
-		$('#previewImage').remove();
-		$('#programName').val('');
-		$('#overview').val('');
 	});
 
 	function change_status(status){
@@ -332,33 +311,21 @@
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
-               	var extension = input.files[0].name.split('.').pop().toLowerCase();
-                if (!input.files[0].name.match(/.(jpg|jpeg|png)$/i)){
-                	input.val = "";
-               		BM.alert("This file type is not supported.","text");
-               		$('#AddProgramModal').css('overflow','auto')	
-                } else {
-                	var base64 = e.target.result;
-               		$("#previewImage").attr("src",base64);
-                }
+                var extension = input.files[0].name.split('.').pop().toLowerCase();
+                var base64 = e.target.result;
+               	$("#previewImage").attr("src",base64);
             }
             reader.readAsDataURL(input.files[0]);
         }
     }
 
-
 	function readURLImgStandardPreviewEdit(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function(e) {
-               	if (!input.files[0].name.match(/.(jpg|jpeg|png)$/i)){
-                	input.val = "";
-               		BM.alert("This file type is not supported.","text");
-               		$('#editPrgoramDetails').css('overflow','auto')	
-                } else {
-                	var base64 = e.target.result;
-               		$("#previewImageEdit").attr("src",base64);
-                }
+                var extension = input.files[0].name.split('.').pop().toLowerCase();
+                var base64 = e.target.result;
+               	$("#previewImageEdit").attr("src",base64);
             }
             reader.readAsDataURL(input.files[0]);
         }

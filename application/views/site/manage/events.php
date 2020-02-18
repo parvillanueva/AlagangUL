@@ -216,10 +216,12 @@
 		$("#whenpickeredit").val(when);
 		$("#previewImageEventEdit").attr("src",image);
 		$("#editEventForm").attr("action",url);
-
 		
-
 		BM.show("#EditEventModal");
+
+		$('img').on("error", function() {
+          $(this).attr('src', base_url+"/assets/img/broken_img2.jpg");
+        });
 	});
 
 	$(document).on('click', '#btnSubmitEditEvent', function(){

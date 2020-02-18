@@ -42,7 +42,10 @@
 							<!-- <a id="get_rewards"  href="<?= base_url("get-rewards");?>" class="nav-item nav-link">Get Rewards</a> -->
 							<div class="d-lg-none">								
 								<!--<a href="accountsettings.html" class="nav-item nav-link">Account Settings</a>-->
-								<a href="<?= base_url("log-out");?>" class="nav-item nav-link">Logout</a>
+								<a class="nav-item nav-link" href="<?= base_url('profile') ?>">My Profile</a>
+								<a class="nav-item nav-link" href="<?= base_url('manage')?>">Manage Programs</a>
+								<a class="nav-item nav-link" href="<?= base_url('profile/reset')?>">Change Password</a>
+								<a class="nav-item nav-link" href="<?= base_url("log-out");?>">Logout</a>
 							</div>
 						</div>
 						<div class="au-user">
@@ -60,8 +63,14 @@
 										<?php if(empty($user_details[0]->imagepath)) : ?>
 											<img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-avatar">
 										<?php else: ?>
-											<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar" onerror="imgErrorProfile(this);">
+											<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar">
 										<?php endif; ?>
+									<script type="text/javascript">
+										var base_url = '<?=base_url();?>';
+										$('img').on("error", function() {
+								          $(this).attr('src', base_url+"/assets/img/au-avatar.svg");
+								        });
+									</script>
 									</div>
 									<div class="au-inner">
 										<span class="au-accname"><?= $user_details[0]->first_name . " " . $user_details[0]->last_name;?></span>
@@ -69,30 +78,6 @@
 									</div>
 								</button>
 
-								<div class="au-accmobile d-lg-none">
-									<a href="#">
-										<div class="au-inner">
-											<img src="<?=base_url()?>assets/site/img/au-avatar.svg" class="au-avatar-lg" onerror="imgErrorProfile(this);">
-										</div>
-										<div class="au-inner">
-											<span class="au-accname"><?php
-											$str_first = $details['details'][0]->first_name;
-											$str_last = $details['details'][0]->last_name;
-											$str_out_first = $str_first;
-											$str_out_last = $str_last;
-											if (strlen($str_first) > 50){
-												$str_out_first = substr($str_first, 0, 20) . '...';
-											}
-											if (strlen($str_last) > 50){
-												$str_out_last = substr($str_last, 0, 15) . '...';
-											}
-											echo $str_out_first . " " . $str_out_last;
-											
-											?></span>
-											<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> <?= $points_details[0]->current_points ?> points</span>	
-										</div>
-									</a>
-								</div>
 								<div class="au-dropdown dropdown-menu">
 									<a class="dropdown-item" href="<?= base_url('profile') ?>"><i class="fas fa-user"></i> My Profile</a>
 									<a class="dropdown-item" href="<?= base_url('manage')?>"><i class="fas fa-cog"></i> Manage Programs</a>
