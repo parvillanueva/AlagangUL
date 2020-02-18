@@ -12,11 +12,11 @@ switch ($root) {
 		$db_password = '@Rn06ro8';
 		$db_database = 'alagangunilab_db';
 		break;
-	case 'medialibrary.unilab.com.ph':
-		$db_host = '';
-		$db_username =  '';
-		$db_password = '';
-		$db_database = '';
+	case '52.77.135.207':
+		$db_host = 'app-wpsi-2-cbg-server-02.cklr8bwd3nrd.ap-southeast-1.rds.amazonaws.com:3306';
+		$db_username =  'alaga_user2';
+		$db_password = '*Cnj28o6';
+		$db_database = 'alagangunilab2_db';
 		break;
 	
 	default:
