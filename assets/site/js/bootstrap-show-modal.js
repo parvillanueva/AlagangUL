@@ -69,5 +69,14 @@ var BM = {
         }
 
         $("#bootstrapShowModalAlert").modal("toggle");
+    },
+    loading: function(show){
+        var Body = $('body');
+        if(show){
+            $('.preloader-wrapper').show();
+        } else {
+            $('.preloader-wrapper').fadeOut('fast');
+            $('.preloader-wrapper').hide();
+        }
     }
 }

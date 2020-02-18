@@ -140,7 +140,6 @@
 </div>
 
 
-<script type="text/javascript" src="<?= base_url();?>/assets/site/js/bootstrap-show-modal.js"></script>
 <script type="text/javascript">
 
 	var keyword = "";
@@ -150,6 +149,7 @@
 	});
 
 	function get_list(){
+		BM.loading(true);
 		var url = "<?= base_url("manage/program_list");?>";
 		var data = {};
 		$.ajax({
@@ -180,6 +180,7 @@
 		  			html += "</tr>";
 		  		});
 		  		$("#program_list").html(html);
+		  		BM.loading(false);
 		  	}
 		});
 	}
@@ -267,6 +268,7 @@
 			BM.confirm("Are you sure you want to Add this Programs?", function(result){
 				// alert(result);
 				if(result){
+					BM.loading(true);
 					$("#addprogramform").submit();
 					$('#AddProgramModal').css("opacity","1");
 				}
@@ -284,6 +286,7 @@
 			$('#editPrgoramDetails').css("opacity","0.5");
 			BM.confirm("Are you sure you want to Update this Programs?", function(result){
 				if(result){
+					BM.loading(true);
 					$("#editprogramform").submit();
 					$('#editPrgoramDetails').css("opacity","1");
 				}
