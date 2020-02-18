@@ -124,7 +124,7 @@
 					</div> -->
 	        		<div class="form-row">
 						<div class="col">											
-							<textarea type="text" class="form-control required_input no_html" id="overview" placeholder="Program Overview" name="overview" rows=5></textarea>
+							<textarea type="text" class="form-control required_input no_html" id="overview_program" placeholder="Program Overview" name="overview" rows=5></textarea>
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -250,13 +250,15 @@
 		var area = $(this).attr("data-area");
 		var overview = $(this).attr("data-overview");
 
+		console.log(overview);
+
 		var form_post = "<?= base_url("programs");?>/" + id + "/" + urlalias + "/update";
 		$("#editprogramform").attr("action", form_post);
 
 		$("#previewImageEdit").attr("src", "<?= base_url();?>" + image);
 		$("#programname").val(name);
 		$("#areacovered").val(area);
-		$("#overview").val(overview);
+		$("#overview_program").val(overview);
 
 		BM.show("#editPrgoramDetails");
 
