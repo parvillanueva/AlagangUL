@@ -7,6 +7,11 @@ class Logout extends CI_Controller {
 		$this->session->sess_destroy();
 		header('Location: '.base_url());
 	}
+
+	public function unset_session(){
+		$this->session->sess_destroy();
+		// header('Location: '.base_url());
+	}
 	
 	public function already_exist(){
 		$data["content"] = "site/logout/exist";

@@ -14,6 +14,7 @@
 					$inputs = [
 	                'badge_name',
 	                'badge_icon',
+	                'badge_image',
 	                'badge_color',
 	                'badge_required_points',
 	                'status'

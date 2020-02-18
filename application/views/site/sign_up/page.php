@@ -76,7 +76,7 @@
 						location.href = '<?=base_url("user_profile");?>';
 					} else{
 						if(result == 202){
-							//modal.loading(false);
+							BM.loading(true);
 							location.href = '<?=base_url("login_otp");?>';
 						}
 					}

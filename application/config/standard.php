@@ -1943,17 +1943,31 @@ $config['badge_name']      = array(
 
 $config['badge_icon'] = array(
                                 'type'          => 'filemanager',
-                                'name'          => 'icon',
+                                'name'          => 'icon_image',
                                 'form-align'    => 'horizontal',
                                 'class'         => 'form-control',
-                                'id'            => 'icon',
+                                'id'            => 'icon_image',
                                 'accept'        => 'jpg,png,jpeg',
                                 // 'max_size'      => '5',.
                                 'required'      => true,
-                                'placeholder'   => 'Icon',
-                                'label'         => 'Icon',
+                                'placeholder'   => 'Icon Image',
+                                'label'         => 'Icon Image',
                             );
 
+
+
+$config['badge_image'] = array(
+                                'type'          => 'filemanager',
+                                'name'          => 'image',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control',
+                                'id'            => 'image',
+                                'accept'        => 'jpg,png,jpeg',
+                                // 'max_size'      => '5',.
+                                'required'      => true,
+                                'placeholder'   => 'Image',
+                                'label'         => 'Image',
+                            );
 
 
 $config['badge_color']      = array(

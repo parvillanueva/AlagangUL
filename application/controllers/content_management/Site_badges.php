@@ -44,13 +44,15 @@ class Site_badges extends CI_Controller {
 
 	public function insert(){
 		$name 	= $this->input->post('name');
-		$icon 	= $this->input->post('icon');
+		$icon_image 	= $this->input->post('icon_image');
+		$image 	= $this->input->post('image');
 		$color 	= '#'.$this->input->post('color');
 		$status = $this->input->post('status');
 		$minimum_points = $this->input->post('minimum_points');
 		$data   = array(
 					'name' 		  			=> $name,
-					'icon' 					=> $icon,
+					'icon_image' 			=> $icon_image,
+					'image' 				=> $image,
 					'color'					=> $color,
 					'create_date' 			=> date('Y-m-d'),
 					'create_by'				=> $this->session->userdata('sess_uid'),
@@ -70,13 +72,15 @@ class Site_badges extends CI_Controller {
 
 		$id 	= $this->input->post('id');
 		$name 	= $this->input->post('name');
-		$icon 	= $this->input->post('icon');
+		$icon_image = $this->input->post('icon_image');
+		$image 	= $this->input->post('image');
 		$color 	= '#'.$this->input->post('color');
 		$status = $this->input->post('status');
 		$minimum_points = $this->input->post('minimum_points');
 		$data   = array(
 					'name' 		  			=> $name,
-					'icon' 					=> $icon,
+					'icon_image' 			=> $icon_image,
+					'image' 				=> $image,
 					'color'					=> $color,
 					'create_date' 			=> date('Y-m-d'),
 					'create_by'				=> $this->session->userdata('sess_uid'),

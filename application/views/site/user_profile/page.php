@@ -132,6 +132,7 @@
 				var division = $('#division').val();
 				if(division != null){
 					if($('#understood_details').is(":checked")){
+						BM.loading(true);
 						$("#signups").submit();
 					} else{
 						$('.alert_understood').show();
