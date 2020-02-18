@@ -115,7 +115,7 @@ class Events extends GS_Controller {
 		);
 
 		// print_r($data);
-		$this->sndgrd->send($data);
+		//$this->sndgrd->send($data);
 	}
 
 	function volunteer() {
