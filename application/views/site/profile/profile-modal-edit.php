@@ -1,3 +1,8 @@
+<style>
+	.include_class {
+		z-index: 9 !important
+	}
+</style>
 <div class="modal fade text-center" id="profilesettings" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -205,14 +210,19 @@
 
                 if (!input.files[0].name.match(/.(jpg|jpeg|png)$/i)){
                     input.val = "";
+					$('#profilesettings').addClass('include_class');
                     BM.alert("This file type is not supported.","text");
                 } else {
                     var base64 = e.target.result;
                     $("#previewImage").attr("src",base64);
+					
                 }
-
             }
             reader.readAsDataURL(input.files[0]);
         }
     }
+	
+	$(document).on('click', '#not_support', function(){
+		$('#profilesettings').removeClass('include_class');
+	});
 </script>
