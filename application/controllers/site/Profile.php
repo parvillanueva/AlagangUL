@@ -141,7 +141,6 @@ class Profile extends GS_Controller
 
 	public function update()
 	{
-
 		date_default_timezone_set('Asia/Manila');
 		$id = $this->session->userdata('user_sess_id');
 		$email = $this->session->userdata('email_address');
@@ -153,20 +152,19 @@ class Profile extends GS_Controller
 			'division' => $_POST['division'],
 			'update_date' => date('Y-m-d H:i:s')
 		); */
-
+		$userId = $_SESSION['user_sess_id'];
 		$arrData = array(
 			'last_name' => $_POST['lname'],
 			'first_name' => $_POST['fname'],
 			'mobile_number' => $_POST['phone'],
 			'work_number' => $_POST['work_number'],
 			'division' => $_POST['division'],
-			//'imagepath' => $_POST['image_file'],
 			'update_date' => date('Y-m-d H:i:s')
 		);
 
 		if(!empty($_FILES['programImage']['tmp_name'])){
-			$this->upload_file($_FILES, $email);
-			$arrData['imagepath'] = "upload_file/" . $email. "/". $_FILES['programImage']['name'];
+			$this->upload_file($_FILES, $userId, $email);
+			$arrData['imagepath'] = "upload_file/" . $userId. "/". $_FILES['programImage']['name'];
 		} else{
 			$arrData['imagepath'] = $_POST['image_file'];
 		}
@@ -178,11 +176,11 @@ class Profile extends GS_Controller
 		exit();
 	}
 
-	public function upload_file($file, $email){
-		if (!file_exists("./upload_file/" . $email)) {
-			mkdir("./upload_file/" . $email, 0777, true);
+	public function upload_file($file, $userId, $email){
+		if (!file_exists("./upload_file/" . $userId)) {
+			mkdir("./upload_file/" . $userId, 0777, true);
 		}
-		$target_dir = './upload_file/'.$email.'/'. $file['programImage']['name'];
+		$target_dir = './upload_file/'.$userId.'/'. $file['programImage']['name'];
 		$move_file = move_uploaded_file($_FILES["programImage"]["tmp_name"], $target_dir);
 	}
 

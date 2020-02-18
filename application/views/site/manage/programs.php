@@ -59,7 +59,7 @@
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Program Name" name="programName" value="">
+							<input type="text" class="form-control required_input no_html" id="programName" placeholder="Program Name" name="programName" value="">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -73,7 +73,7 @@
 					</div> -->
 	        		<div class="form-row">
 						<div class="col">											
-							<textarea type="text" class="form-control required_input no_html" id="lname" placeholder="Program Overview" name="overview" rows=5></textarea>
+							<textarea type="text" class="form-control required_input no_html" id="overview" placeholder="Program Overview" name="overview" rows=5></textarea>
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -81,7 +81,7 @@
 				</form>	
 	        </div>
 	        <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-secondary" id="modal_close_button" data-dismiss="modal">Close</button>
 		        <button type="button" class="btn btn-primary" id="btnSubmit">Submit</button>
 		    </div>
 	    </div>
@@ -294,6 +294,12 @@
 				}
 			});
 		}
+	});
+	
+	$(document).on('click', '#modal_close_button', function(){
+		$('#previewImage').remove();
+		$('#programName').val('');
+		$('#overview').val('');
 	});
 
 	function change_status(status){
