@@ -125,7 +125,7 @@ p {
 }
 
 .au-footer img {
-     max-width: 150px;
+     max-width: 180px;
 }
 
 .au-pf a:hover {
@@ -558,7 +558,7 @@ a.au-lnk:hover>* {
 
 .au-fp-details {
      padding: 1em;
-     height: 152px;
+     height: 162px;
 }
 
 .au-p1 {
@@ -571,7 +571,7 @@ a.au-lnk:hover>* {
 
 .au-p2 {
      display: block;
-     font-size: 10px;
+     font-size: 12px;
      font-weight: 400;
      color: #fff;
      margin-bottom: 10px;
@@ -612,7 +612,7 @@ a.au-lnk:hover>* {
 }
 
 .au-fp-details>.au-p2 {
-     height: 44px;
+     height: 54px;
      margin-bottom: 20px;
      overflow: hidden;
      text-overflow: ellipsis;
@@ -645,7 +645,7 @@ a.au-lnk:hover>* {
 }
 
 .au-btnyellow {
-     font-size: 10px;
+     font-size: 12px;
      font-weight: 700;
      color: #fff;
      background-color: #F9C417;
@@ -1106,7 +1106,7 @@ a.au-lnk:hover>* {
 }
 
 .au-needed {
-     font-size: 10px;
+     font-size: 12px;
      font-weight: 400;
      color: #092E6E;
      font-style: italic;
@@ -1193,6 +1193,10 @@ a.au-lnk:hover>* {
      height: 100%;
      object-fit: cover;
      object-position: center;
+}
+
+.au-eventswrapper .au-eventthumbnail .au-eventimg{
+     max-height: 221px;
 }
 
 .au-eventthumbnail::before {
