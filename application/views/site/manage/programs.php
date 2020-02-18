@@ -21,7 +21,7 @@
 							<tr>
 								<th scope="col" style="width: 30px;"><input type="checkbox" id="select_all"></th>
 								<th scope="col">Program</th>
-								<th scope="col">Area Covered</th>
+								<!-- <th scope="col">Area Covered</th> -->
 								<th scope="col" style="width: 300px;">Created Date</th>
 								<th scope="col">Status</th>
 								<th scope="col">Action</th>
@@ -64,13 +64,13 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
-	        		<div class="form-row">
+	        		<!-- <div class="form-row">
 						<div class="col">											
 							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Areas Covered" name="areaCovered" value="">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
-					</div>
+					</div> -->
 	        		<div class="form-row">
 						<div class="col">											
 							<textarea type="text" class="form-control required_input no_html" id="lname" placeholder="Program Overview" name="overview" rows=5></textarea>
@@ -115,13 +115,13 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
-	        		<div class="form-row">
+	        		<!-- <div class="form-row">
 						<div class="col">											
 							<input type="text" class="form-control required_input no_html" id="areacovered" placeholder="Areas Covered" name="areaCovered" value="">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
-					</div>
+					</div> -->
 	        		<div class="form-row">
 						<div class="col">											
 							<textarea type="text" class="form-control required_input no_html" id="overview" placeholder="Program Overview" name="overview" rows=5></textarea>
@@ -169,7 +169,7 @@
 		  			html += "<tr>";
 		  			html += "	<td><input type='checkbox' class='select' data-alias='"+b.url_alias+"' data-id="+b.id+"/></td>";
 		  			html += "	<td>" + b.name + "</td>";
-		  			html += "	<td>" + b.area_covered + "</td>";
+		  			// html += "	<td>" + b.area_covered + "</td>";
 		  			html += "	<td>" + moment(b.create_date).format("LLL") + "</td>";
 		  			html += "	<td>" + status + "</td>";
 		  			html += "	<td>" ;
