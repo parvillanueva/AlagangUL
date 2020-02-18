@@ -307,8 +307,8 @@ var validate = {
 		}
 	},
 	standard: function(element_id){
-		
 		var element = '#'+element_id+' .required_input';
+		var element_not_required = '#'+element_id+' .not_required';
 		var counter = 0;
 		$(this).css('border-color','#ccc');
 		$(".validate_error_message").remove();
@@ -351,7 +351,7 @@ var validate = {
 		//validate script tags
 
 		$(element).each(function(){
-			console.log($(this).val());
+			//console.log($(this).val());
 			if($(this).val()){
 				if($(this).val().trim().indexOf("<script") != -1){
 					counter++;
@@ -409,6 +409,25 @@ var validate = {
 					$(this).css('border-color','red');
 					$("<span class='validate_error_message' style='color: red;'>"+form_invalid_mobile_no+"<br></span>").insertAfter(this);
 				
+				}
+			});
+		}
+		
+		//test mobile number no required
+		
+		if ($(element_not_required).hasClass("mobile_number_not")){
+			$(".mobile_number_not").each(function(){
+				var number = $(this).val();
+				console.log(number);
+				if(number != ''){
+					if(/^09\d{9}$/.test(number) === false){
+						counter++;
+						$(this).css('border-color','red');
+						$("<span class='validate_error_message' style='color: red;'>"+form_invalid_mobile_no+"<br></span>").insertAfter(this);
+					
+					}
+				} else{
+					$(this).css('border-color','#ccc');
 				}
 			});
 		}
