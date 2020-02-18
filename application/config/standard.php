@@ -1925,4 +1925,62 @@ $config['content']      = array(
                                 'placeholder'   => 'Content',
                                 'label'         => 'Content',
                             );
+
+$config['badge_name']      = array(
+                                'type'          => 'text',
+                                'name'          => 'name',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control',
+                                'id'            => 'name',
+                                'required'      => true,
+                                'no_html'      => false,
+                                'filemanager'   => false,
+                                'youtube'       => false,
+                                'placeholder'   => 'Badge Name',
+                                'label'         => 'Badge Name',
+                            );
+
+
+$config['badge_icon'] = array(
+                                'type'          => 'filemanager',
+                                'name'          => 'icon',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control',
+                                'id'            => 'icon',
+                                'accept'        => 'jpg,png,jpeg',
+                                // 'max_size'      => '5',.
+                                'required'      => true,
+                                'placeholder'   => 'Icon',
+                                'label'         => 'Icon',
+                            );
+
+
+
+$config['badge_color']      = array(
+                                'type'          => 'text',
+                                'name'          => 'color',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control jscolor',
+                                'id'            => 'color',
+                                'required'      => true,
+                                'no_html'      => false,
+                                'filemanager'   => false,
+                                'youtube'       => false,
+                                'placeholder'   => 'Badge Color',
+                                'label'         => 'Badge Color',
+                            );
+
+$config['badge_required_points']      = array(
+                                'type'          => 'number',
+                                'name'          => 'minimum_points',
+                                'form-align'    => 'horizontal',
+                                'class'         => 'form-control ',
+                                'id'            => 'minimum_points',
+                                'required'      => true,
+                                'no_html'       =>  false,
+                                'filemanager'   => false,
+                                'youtube'       => false,
+                                'placeholder'   => 'Required Points',
+                                'label'         => 'Required Points',
+                            );
 ?>
