@@ -115,10 +115,10 @@
 					<span class="au-p4"><?= $details['details'][0]->overview;?></span>
 				</div>
 				<hr>
-				<div class="au-programdescription" hidden>
+				<!-- <div class="au-programdescription" hidden>
 					<span class="au-title">Areas covered: <?= $details['details'][0]->area_covered;?></span>
 				</div>
-				<hr>
+				<hr> -->
 				<?php if(count($details['events']) == 0) { ?>
 					<span class="au-h4">No Upcoming Events</span>
 				<?php } else { ?>
