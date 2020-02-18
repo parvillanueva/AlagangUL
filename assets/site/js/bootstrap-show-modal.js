@@ -47,13 +47,6 @@ var BM = {
             cb(false);
         });
     },
-    loading : function(show){
-        if(show){
-            $("#bootstrapShowModalLoading").modal("toggle");
-        } else {
-            $("#bootstrapShowModalLoading").modal("hide");
-        }
-    },
     show : function(modal){
         $(modal).modal("toggle");
     },
