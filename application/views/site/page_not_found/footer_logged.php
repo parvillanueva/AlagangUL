@@ -47,6 +47,6 @@ $base_url = str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NA
 
 <?php if(!empty($js)) : ?>
     <?php foreach($js as $path) : ?>
-        <script type="text/javascript" src="<?= $base_url; . $path; ?>"></script>
+        <script type="text/javascript" src="<?= $base_url . $path; ?>"></script>
     <?php endforeach; ?>
 <?php endif; ?>
