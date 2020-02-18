@@ -227,6 +227,7 @@
 			$('#EditEventModal').css("opacity","0.5");
 			BM.confirm("Are you sure you want to Edit this Event?", function(result){
 				if(result){
+					BM.loading(true);
 					$("#editEventForm").submit();
 					$('#EditEventModal').css("opacity","1");
 				}
@@ -243,6 +244,7 @@
 			BM.confirm("Are you sure you want to Add this Event?", function(result){
 				// alert(result)
 				if(result){
+					BM.loading(true);
 					$("#addEventForm").submit();
 					$("#AddEventModal").css("opacity","1");
 				}
@@ -337,6 +339,7 @@
 	}
 
 	function get_list(){
+		BM.loading(true);
 		var url = "<?= base_url("manage/event_list");?>";
 		var data = {
 			program_id : <?= $program_id;?>
@@ -379,6 +382,7 @@
 		  			html += "</tr>";
 		  		});
 		  		$("#program_list").html(html);
+		  		BM.loading(false);
 		  	}
 		});
 	}

@@ -56,6 +56,7 @@
 	});
 
    function get_list(){
+   	BM.loading(true);
             $.ajax({
                 type : "POST",
                 url  :  "<?= base_url('site/manage/volunteers_list');?>",
@@ -101,6 +102,7 @@
 							html += '	</tr>'
                    	});
                    	$('#volunteers_list').html(html);
+                   	BM.loading(false);
 
                   }
             });
@@ -117,6 +119,7 @@
 
     	BM.confirm("Are you sure you want to Qualify selected Volunteer?", function(result){
 			if(result){
+				BM.loading(true);
 	            $.ajax({
 	                type : "POST",
 	                url  :  "<?= base_url('site/manage/update_task_user');?>",
@@ -127,6 +130,7 @@
 	                  success: function(data) {
 	                  },
 	                  complete: function(data){
+	                  	BM.loading(false);
 	                    get_list();
 	                  }
 	            });
@@ -142,19 +146,22 @@
     	var event_task_id = $(this).attr('data-event_task_id');
 
     	BM.confirm("Are you sure you want to Unqualify selected Volunteer?", function(result){
-            $.ajax({
-                type : "POST",
-                url  :  "<?= base_url('site/manage/disqualify_task_user');?>",
-                dataType : "JSON",
-                data : {approval_id:approval_id,points:points,user_id:user_id,event_task_id:event_task_id},
-                  beforeSend: function() {
-                  },
-                  success: function(data) {
-                  },
-                  complete: function(data){
-                    get_list();
-                  }
-            });
+    		if(result){
+    			BM.loading(true);
+	            $.ajax({
+	                type : "POST",
+	                url  :  "<?= base_url('site/manage/disqualify_task_user');?>",
+	                dataType : "JSON",
+	                data : {approval_id:approval_id,points:points,user_id:user_id,event_task_id:event_task_id},
+	                  beforeSend: function() {
+	                  },
+	                  success: function(data) {
+	                  },
+	                  complete: function(data){
+	                    get_list();
+	                  }
+	            });
+    		}
     	});
 	});
 

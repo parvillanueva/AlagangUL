@@ -2,6 +2,8 @@
 
     <body>
 
+    	<div class="preloader-wrapper" style="display: none;"><div class="preloader"><div class="loader"></div></div></div>
+
     	<!-- Google Tag Manager (noscript) -->
 		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N9VJ329"
 		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
