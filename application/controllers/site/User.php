@@ -45,7 +45,8 @@ class User extends CI_Controller {
 			'status' => $_POST['password'],
 			'update_date' => date('Y-m-d H:i:s'),
 			'imagepath' => $image_path,//'upload_file/'.$get_user_data.'/'.$_FILES['file_set']['name'],
-			'impersonate_token' => $impersonate_token
+			'impersonate_token' => $impersonate_token,
+			'status' => 1
 		);
 		
 		$this->Gmodel->update_data('tbl_users', $arrData, 'email_address', $this->session->userdata('email_address'));

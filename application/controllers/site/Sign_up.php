@@ -158,73 +158,51 @@ class Sign_up extends CI_Controller {
 	
 	function email_template_otp($otp){
 		$html = '<html>
-					<head>
-					</head>
-
-					<body style="background: #092E6E;width:100%;height: 100%;font-family: Arial, Helvetica, sans-serif;">
-					<table style="width:100%;">
-						<tbody>
-							<tr>
-								<td>
-									<center>
-										<img width="330" height="150px" src="http://172.29.70.126/alagang_unilab/uploads/au-alagangunilab.png"
-											style="margin-bottom:15px;">
-									</center>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<table width="500" align="center" bgcolor="white" style="border:1px solid #dedede;padding:25px; margin-right:auto;margin-left:auto">
-										<tr>
-											<td>
-												<center>
-													<b style="padding-bottom:35px;color: #092e6e;font-weight:700;font-size:18px;">One-time password for Alagang Unilab signup</b>
-													<p style="font-size:15px;font-weight:300;color: #4b4d4d;line-height: 24px;">
-														Hello Guest;<br>
-														Thank you for your interest in joining the Alagang Unilab program. In order to continue with your Sign up,
-														please
-														enter the One-Time Password provided below:
+					<head></head>
+						<body style="background: #efefef;width:100%;height: 100%;font-family: Arial, sans-serif;">
+						<table align="center" width="500" bgcolor="white" style="display:block;border:1px solid #dedede;margin-top:30px;margin-bottom:30px;margin-left:auto;margin-right:auto;border-radius: 10px;padding:10px;">
+							<tbody>
+								<tr>
+									<td style="background-color: #092E6E;padding:10px 0px;border-radius: 8px 8px 0px 0px;">
+										<img width="220" src="http://172.29.70.126/alagang_unilab/uploads/au-alagangunilab.png">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<table style="padding:20px;">
+											<tr>
+												<td>
+													<p style="font-size:14px;font-weight:300;color: #000;line-height: 24px;">
+														<b style="font-size:15px;">Hello Guest;</b><br>
+														You have requested online access from our website. We have generated a One-Time Registration Code for you, this
+														will verify that you have requested access. This One-Time Registration Code is time sensitive and valid for a
+														single use. On subsequent logins you will not need to enter this One-Time Registration Code.
 													</p>
-													<br><br>
-													<table width="340" align="center" style="border: 1px solid #eee;" >
-														<tr>
-															<td>
-																<center>
-																	<p align="center"
-																		style="text-align:center;padding: 15px 0 15px 25px; display: inline-block; font-size:40px; font-weight: bold; letter-spacing: .75em;margin:0px auto;">
-																		'.$otp.'
-																	</p>
-																</center>
-															</td>
-														</tr>
-													</table>
-												</center>
-											</td>
-										</tr>
-									</table>
-									
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<table width="500" align="center">
-										<tr>
-											<td>
-												<center style="width:500px;margin-left:auto;margin-right:auto;">
-													<p align="center" style="color: #fff; width: 500px; font-size: 14px; margin: 15px auto 15px;">
-														If you received this email by mistake, send us a report. Lorem ipsum dolor sit amet conserctetuer adipiscing
-														nomnumny di dalam hati nay.
-													</p>
-												</center>
-											</td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					</body>
-				</html>';
+													<p style="font-size:17px;font-weight:600;margin: 30px 0px;">Your One-Time Registration Code is: <span style="color: red;">'.$otp.'</span></p>
+													<p style="font-size:14px;font-weight:300;color: #000;line-height: 24px;">Please enter this into the form that you have accessed that thank you for utilizing our services.</p>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<td style="background-color: #092E6E;padding:15px;border-radius:0px 0px 8px 8px ;">
+										<table width="100%">
+											<tr>
+												<td>
+													<p style="color:#fff;font-size:14px;">Alagang Unilab</p>
+												</td>
+												<td style="text-align:right">
+													<p style="color:#fff;font-size:14px;">Website: <a href="javascript:void(0);" style="color:#0e5bdf;text-decoration: none;">www.alagangunilab.unilab.com.ph</a></p>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						</body>
+					</html>';
 		return 	$html;	
 	}
 }
