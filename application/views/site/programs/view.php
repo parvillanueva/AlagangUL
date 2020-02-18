@@ -144,7 +144,7 @@
 													<img src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" class="au-fp-thumbnailimg" onerror="imgErrorProgram(this);">
 												</div>
 												<span class="au-ptitle"><?= $value['title'];?></span>
-												<span class="au-pdetails"><?= $value['description'];?></span>
+												<!-- <span class="au-pdetails"><?= $value['description'];?></span> -->
 											</a>
 										</div>
 										<div class="au-programdetails">
