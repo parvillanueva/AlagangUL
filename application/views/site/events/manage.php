@@ -17,7 +17,7 @@
 		<div class="au-container au-padding">
 			<div class="au-programheading">
 				<div class="au-evthumbnail">
-					<img src="<?= $program_details[0]['image_thumbnail'];?>" class="au-fp-thumbnailimg">
+					<img src="<?= $program_details[0]['image_thumbnail'];?>" class="au-fp-thumbnailimg" onerror="imgErrorProgram(this);">
 				</div>
 				<div class="au-phdetails">
 					<span class="au-h5"><?= $program_details[0]['name'];?></span>
@@ -75,7 +75,7 @@
 						<div class="au-inner">
 							<a href="program.html" class="au-lnk">
 								<div class="au-phthumbnail">
-									<img src="<?= $event_details[0]['image'];?>" class="au-fp-thumbnailimg">
+									<img src="<?= $event_details[0]['image'];?>" class="au-fp-thumbnailimg" onerror="imgErrorEvent(this);">
 								</div>
 							</a>
 						</div>
@@ -125,6 +125,26 @@
 </script>
 <script type="text/javascript">
 	var limit  = 4;
+	var base_url = '<?=base_url();?>';
+
+    function imgErrorProfile(image) {
+        image.onerror = "";
+        image.src = base_url+"/assets/img/au-avatar.svg";
+        return true;
+    }
+
+    function imgErrorProgram(image) {
+        image.onerror = "";
+        image.src = base_url+"/assets/img/broken_img1.jpg";
+        return true;
+    }
+
+    function imgErrorEvent(image) {
+        image.onerror = "";
+        image.src = base_url+"/assets/img/broken_img2.jpg";
+        return true;
+    }
+
 	$(document).ready(function() {
 		var required_volunteer = <?= $event_details[0]['required_volunteer'];?>;
 		var joined_volunteers = <?= $event_details[0]['joined_volunteers'];?>;

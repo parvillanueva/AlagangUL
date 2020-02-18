@@ -63,8 +63,14 @@
 										<?php if(empty($user_details[0]->imagepath)) : ?>
 											<img src="<?=base_url() ?>assets/img/au-avatar.svg" class="au-avatar">
 										<?php else: ?>
-											<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar" onerror="imgErrorProfile(this);">
+											<img src="<?=base_url() . $user_details[0]->imagepath ?>" class="au-avatar">
 										<?php endif; ?>
+									<script type="text/javascript">
+										var base_url = '<?=base_url();?>';
+										$('img').on("error", function() {
+								          $(this).attr('src', base_url+"/assets/img/au-avatar.svg");
+								        });
+									</script>
 									</div>
 									<div class="au-inner">
 										<span class="au-accname"><?= $user_details[0]->first_name . " " . $user_details[0]->last_name;?></span>

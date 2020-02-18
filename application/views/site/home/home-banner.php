@@ -7,7 +7,7 @@
                         <div class="au-inner">
                             <div class="row">
                                 <div class="col-lg-6 au-flexcenter">
-                                    <img src="<?=base_url().$banner['banner_logo']?>" class="au-img-responsive" onerror="imgError(this);">
+                                    <img src="<?=base_url().$banner['banner_logo']?>" class="au-img-responsive" onerror="imgErrorProgram(this);">
                                 </div>
                                 <div class="col-lg-6 au-flexcenter">
                                     <div class="au-inner">
@@ -42,11 +42,11 @@
 </div>
 <script type="text/javascript">
     var base_url = '<?=base_url();?>';
-
-    function imgError(image) {
+    
+    function imgErrorProgram(image) {
         image.onerror = "";
         image.src = base_url+"/assets/img/broken_img1.jpg";
-
         return true;
     }
+
 </script>
