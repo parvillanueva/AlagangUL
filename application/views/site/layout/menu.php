@@ -76,8 +76,8 @@
 										</div>
 										<div class="au-inner">
 											<span class="au-accname"><?php
-											$str_first = $details['details'][0]->first_name;
-											$str_last = $details['details'][0]->last_name;
+											$str_first = $user_details[0]->first_name;
+											$str_last = $user_details[0]->last_name;
 											$str_out_first = $str_first;
 											$str_out_last = $str_last;
 											if (strlen($str_first) > 50){
