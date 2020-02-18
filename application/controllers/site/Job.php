@@ -80,7 +80,7 @@ class Job extends CI_Controller {
 		$worksheet->SetCellValueByColumnAndRow(1, 7, "Name");
 		$worksheet->SetCellValueByColumnAndRow(2, 7, "Email");
 		$worksheet->SetCellValueByColumnAndRow(3, 7, "Task");
-		$worksheet->SetCellValueByColumnAndRow(4, 7, "Date Volunteer");
+		$worksheet->SetCellValueByColumnAndRow(4, 7, "Sign up");
 
 
 		$query = "SELECT
