@@ -96,7 +96,8 @@ class Events extends GS_Controller {
 
 		//check event
 		$page_Status = @$data['event_details'][0]['status'];
-		$is_admin = @$data['event_details'][0]['user_id'] == $_SESSION['user_sess_id'];
+		$is_admin = @$data['event_details'][0]['is_admin'];
+		
 		if($page_Status){
 			if($page_Status == 0){
 				if($is_admin === false){
@@ -104,8 +105,11 @@ class Events extends GS_Controller {
 				}
 			}
 		} else {
-			show_404();
+			if($is_admin === false){
+				show_404();
+			}
 		}
+
 
 		$data['event_task'] = $this->get_event_tasks($event_id);
 		$data['event_volunteers'] = $this->get_volunteers($event_id);
