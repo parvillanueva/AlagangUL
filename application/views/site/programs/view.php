@@ -57,8 +57,10 @@
 										<div class="au-inner">
 											<?php
 												$profile_image = $value->profile_image;
-												if($profile_image==''){
-													$profile_image = base_url().'assets/site/img/au-avatar.svg';
+												if($profile_image==null){
+													if(!file_exists($profile_image)){
+														$profile_image = base_url().'assets/site/img/au-avatar.svg';
+													}
 												}
 											?>
 											<img src="<?= $profile_image;?>" class="au-avatar-lg">
