@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-class Job extends GS_Controller {
+class Job extends CI_Controller {
 
 
 
