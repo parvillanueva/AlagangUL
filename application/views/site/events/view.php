@@ -53,7 +53,7 @@
 							$data_date = date("Y-m-d", strtotime($event_details[0]['when']));
 							if($data_date == $current_date || $data_date > $current_date){ ?>
 							<a href="#" class="au-lnk" id="addTask_button"><span class="au-share"><i class="fas fa-plus"></i>Add Task</span></a>
-							<a href="#" class="au-lnk" data-toggle="modal" data-target="#editEvent"><span class="au-share"><i class="fas fa-pen"></i> Edit Event</a>
+							<!-- <a href="#" class="au-lnk" data-toggle="modal" data-target="#editEvent"><span class="au-share"><i class="fas fa-pen"></i> Edit Event</a> -->
 							<?php
 								if(count($event_task)>0){
 							 	if($event_details[0]['status'] == 0) { ?>

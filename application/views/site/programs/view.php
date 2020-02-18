@@ -24,7 +24,7 @@
 					<a href="#" class="au-lnk workplace-share"><span class="au-share"><i class="fas fa-share-alt"></i> Share on <img src="<?= base_url();?>assets/site/img/au-workplace.svg" alt="Workplace"></span></a>
 					<?php } ?>
 					<?php if($details['is_admin']) { ?>
-						<a href="#" class="au-lnk" data-toggle="modal" data-target="#editPrgoramDetails"><span class="au-share"><i class="fas fa-pen"></i> Edit Details</a>
+						<!-- <a href="#" class="au-lnk" data-toggle="modal" data-target="#editPrgoramDetails"><span class="au-share"><i class="fas fa-pen"></i> Edit Details</a> -->
 						<!-- <a href="#" class="au-lnk" data-toggle="modal" data-target="#addEvent"><span class="au-share"><i class="fas fa-calendar"></i> Add Events</a> -->
 						
 						<?php if($details['details'][0]->status == 0) { ?>
