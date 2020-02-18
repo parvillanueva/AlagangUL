@@ -1735,7 +1735,7 @@ a.au-lnk:hover>* {
 }
 
 .au-modalbtn {
-     margin-top: 0px;
+     margin-top: 1em;
 }
 
 .au-modalbtn .au-btn {
@@ -1988,17 +1988,17 @@ a.au-lnk:hover>* {
 }
 
 .au-workplace a {
-     font-size: 9px;
+     font-size: 11px;
      overflow-wrap: break-word;
 }
 
 .au-workplace label {
-     font-size: 10px;
+     font-size: 12px;
      margin-bottom: 0px;
 }
 
 .au-workplace p {
-     font-size: 8px !important;
+     font-size: 10px !important;
 }
 
 .au-workplace>.row>.col-md-12>.col-md-10 img {
@@ -2157,7 +2157,7 @@ button.btn:hover {
 
 .au-terms {
      font-size: 14px;
-     padding: 0px 20px 20px 20px;
+     padding: 0px 20px 0px 20px;
 }
 
 .au-guidelines {
@@ -2209,6 +2209,9 @@ button.btn:hover {
      pointer-events: none;
 }
 
+.au-menu .d-lg-none{
+     border-top: 1px solid rgba(255,255,255,0.3);
+}
 
 /*Extra small devices (portrait phones, less than 576px)*/
 
