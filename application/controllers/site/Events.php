@@ -528,7 +528,7 @@ class Events extends GS_Controller {
 			$query_joined_volunteer = "SELECT COUNT(id) as count FROM tbl_program_event_task_volunteers WHERE event_id = " . $event_id . " AND event_task_id = " . $value->id." AND status >=0";
 			$joined_volunteer = $this->db->query($query_joined_volunteer)->result();
 
-			$query_event_task_badge = "SELECT b.id, b.name, b.icon, b.color, petb.event_task_id FROM tbl_program_event_task_badge petb LEFT JOIN tbl_badges b ON petb.badge_id = b.id WHERE petb.event_task_id = ".$value->id." ";
+			$query_event_task_badge = "SELECT b.id, b.name, b.icon, b.color, b.image, petb.event_task_id FROM tbl_program_event_task_badge petb LEFT JOIN tbl_badges b ON petb.badge_id = b.id WHERE petb.event_task_id = ".$value->id." ";
 			$event_task_badge = $this->db->query($query_event_task_badge)->result();
 
 			foreach ($event_task_badge as $key => $badge) {

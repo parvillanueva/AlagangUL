@@ -1321,7 +1321,7 @@ p{
      display: none;
 }
 .volunteered .au-btnvolunteer{
-     display: none;
+     /*display: none;*/
 }
 .volunteered .au-volunteermes{
      display: block;
@@ -1800,11 +1800,17 @@ button.btn:hover{
      margin-right: 5px;
 }
 .au-btnicon{
-     max-width: 100px;
+     max-width: 120px;
+     display: block;
 }
-.disabled .au-btnicon{
-     filter: grayscale(100%);
-     opacity: 0.5;
+.au-btnvolunteer.au-btn{
+     background-color: #1AA3F9;     
+    padding: 0.5em 2em;
+    width: auto;
+}
+.disabled .au-btnvolunteer.au-btn{
+     background-color: #a6adb0 !important;  
+     pointer-events:none; 
 }
 /*Extra small devices (portrait phones, less than 576px)*/
  @media (max-width: 575px) {
