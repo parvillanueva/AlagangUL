@@ -336,15 +336,16 @@ var validate = {
 		//alpha only
 		$(element).each(function(){
 			$(this).css('border-color','#ccc');
-		    if ($(this).hasClass("alphaonly")) {
-				$(".alphaonly").each(function(){
+		    if($(this).hasClass("alphaonly")) {
+				//$(".alphaonly").each(function(){
 					var str = $(this).val();
-					if(/^[a-zA-Z-.']*$/.test(str) == false) {
+					if(/^[a-zA-Z-.'\s]*$/.test(str) == false) {
+										console.log(str);
 						counter++;
 						$(this).css('border-color','red');
 		  				$("<span class='validate_error_message' style='color: red;'>This field only required only Letters.<br></span>").insertAfter(this);
 					}
-				});
+				//});
 		    }
 		});
 		//validate script tags

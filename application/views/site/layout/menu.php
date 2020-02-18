@@ -75,7 +75,20 @@
 											<img src="<?=base_url()?>assets/site/img/au-avatar.svg" class="au-avatar-lg" onerror="imgErrorProfile(this);">
 										</div>
 										<div class="au-inner">
-											<span class="au-accname"><?= $user_details[0]->first_name . " " . $user_details[0]->last_name;?></span>
+											<span class="au-accname"><?php
+											$str_first = $details['details'][0]->first_name;
+											$str_last = $details['details'][0]->last_name;
+											$str_out_first = $str_first;
+											$str_out_last = $str_last;
+											if (strlen($str_first) > 50){
+												$str_out_first = substr($str_first, 0, 20) . '...';
+											}
+											if (strlen($str_last) > 50){
+												$str_out_last = substr($str_last, 0, 15) . '...';
+											}
+											echo $str_out_first . " " . $str_out_last;
+											
+											?></span>
 											<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> <?= $points_details[0]->current_points ?> points</span>	
 										</div>
 									</a>
