@@ -60,7 +60,7 @@ class Profile extends GS_Controller
 		$data['meta'] 	 	= array(
 			 "title"        =>  "Reset Password"
 		);
-
+		$data['active_menu']= '';
 		$this->load->view("site/layout/template",$data);
 	}
 
