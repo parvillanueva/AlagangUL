@@ -58,6 +58,7 @@
 				var obj = is_json(result);
 				if(obj.responce == 'success'){
 					//modal.loading(false);
+					BM.loading(true);
 					window.location.href = "<?php echo base_url().'user_profile' ?>";
 				} else{
 					$(".alert_failed").show();

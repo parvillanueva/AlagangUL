@@ -10,13 +10,13 @@ modal += '          </div>';
 modal += '      </div>';
 modal += '  </div>';
 modal += '</div>';
-modal += '<div class="modal fade" id="bootstrapShowModalLoading" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">';
-modal += '  <div class="modal-dialog" role="document">';
-modal += '      <div class="modal-content">';
-modal += '          <div class="modal-body">Loading...</div>';
-modal += '      </div>';
-modal += '  </div>';
-modal += '</div>';
+// modal += '<div class="modal fade" id="bootstrapShowModalLoading" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+// modal += '  <div class="modal-dialog" role="document">';
+// modal += '      <div class="modal-content">';
+// modal += '          <div class="modal-body">Loading...</div>';
+// modal += '      </div>';
+// modal += '  </div>';
+// modal += '</div>';
 
 modal += '<div class="modal fade" id="bootstrapShowModalAlert" tabindex="1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">';
 modal += '  <div class="modal-dialog" role="document">';
@@ -47,6 +47,13 @@ var BM = {
             cb(false);
         });
     },
+    // loading : function(show){
+    //     if(show){
+    //         $("#bootstrapShowModalLoading").modal("toggle");
+    //     } else {
+    //         $("#bootstrapShowModalLoading").modal("hide");
+    //     }
+    // },
     show : function(modal){
         $(modal).modal("toggle");
     },
@@ -54,6 +61,7 @@ var BM = {
         $(modal).modal("hide");
     },
     alert : function(message,type){
+        alert(message);
         if(type == 'html'){
             $('#alert_message').html(message);
         }

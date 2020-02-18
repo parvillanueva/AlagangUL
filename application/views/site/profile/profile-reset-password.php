@@ -1,4 +1,4 @@
-<div class="container-fluid au-heading au-wrapper au-flexcenter">
+<div class="container-fluid au-heading au-flexcenter">
     <div class="au-container au-padding">
         <div class="row au-userbox au-fullheight">	
 
@@ -80,10 +80,12 @@ var base_url = '<?=base_url();?>';
 				};
 				var url = "<?php echo base_url('site/login/update_password') ?>";
 				aJax.post(url, data, function(result){
-					var obj = is_json(result);
-					if(obj.responce == 'success'){
+					var obj = is_json=(result);
+					if(obj.responce = 'success'){
+						BM.loading(true);
 						location.href = '<?=base_url("login");?>';
 					} else{
+						alert(2);
 						location.href = '<?=base_url("profile");?>';
 						
 					}

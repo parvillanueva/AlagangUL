@@ -97,6 +97,7 @@
 	});
 	
 	$(document).on('click', '#btnSubmit', function(){
+		BM.loading(true);
 		var search_box = $('#search_input').val();
 		var types = $('#types_select').val();
 		var task = $('#task_select').val();
@@ -109,7 +110,11 @@
 			date : date
 		};
 		aJax.post(url, data, function(result){
-			$('#event_view').html(result);
+			setTimeout(function(){ 
+				$('#event_view').html(result);
+				BM.loading(false)
+			}, 500);
 		});
+
 	});
 </script>

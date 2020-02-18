@@ -11,6 +11,7 @@
 
 <?php $this->load->view("site/login_layout/header"); ?>    
 <body>
+	<div class="preloader-wrapper" style="display: none;"><div class="preloader"><div class="loader"></div></div></div>
 	<header class="au-header">
 		<div class="au-navigation au-container">
 			<nav class="au-navbar navbar navbar-expand-lg">
@@ -173,10 +174,12 @@
         	});
 			
 			$(document).on('click', '#not_register', function(){
+				BM.loading(true);
 				location.href = '<?=base_url("signup");?>';
 			});
 			
 			$(document).on('click', '#forgot_password', function(){
+				BM.loading(true);
 				location.href = '<?=base_url("forgot_password");?>';
 			});
 			

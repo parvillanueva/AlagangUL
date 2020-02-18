@@ -34,6 +34,9 @@
 
 				<div class="collapse navbar-collapse" id="navbarCollapse">
 					<div class="au-navbar-nav navbar-nav ml-auto flex-column-reverse flex-lg-row">
+						<?php
+							if($this->session->userdata("user_sess_email") != ""){
+						?>
 						<div class="au-menu">
 							<a id="home" href="<?= base_url();?>" class="nav-item nav-link">Home</a>
 							<a id="about" href="<?= base_url("guidelines");?>" class="nav-item nav-link">Guidelines</a>
@@ -88,6 +91,9 @@
 							<!-- end -->
 
 						</div>
+						<?php
+						    }
+						?>
 					</div>
 				</div>
 			</nav>
@@ -112,6 +118,7 @@
 	    }
 	    
 		$(document).on('click', '#logout', function(){
+			BM.loading(true);
 			window.location.href = "<?php echo base_url('site/logout') ?>";
 		});
 

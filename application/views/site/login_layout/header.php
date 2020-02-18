@@ -29,7 +29,7 @@
     <script src="<?= base_url();?>assets/js/footer.js"></script>
 	<script src="<?= base_url();?>cms/js/bootbox.min.js"></script>
     <script src="<?= base_url();?>cms/js/custom.js"></script>
-    <script src="<?= base_url();?>assets/site/js/bootstrap-show-modal.js"></script>
+    <!-- <script src="<?= base_url();?>assets/site/js/bootstrap-show-modal.js"></script> -->
 
 
     <script type="text/javascript">
