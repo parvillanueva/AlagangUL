@@ -1,11 +1,3 @@
-<?php
-	$user_id = $ci->session->userdata('user_sess_id');
-	$arr_where = array(
-		'id' => $user_id
-	);
-	$user_details = $ci->Gmodel->get_query('tbl_users',"id = " . $user_id);
-	$points_details = $ci->Gmodel->get_query('tbl_users_points',"user_id = " . $user_id);
-?>
 
 <header class="au-header">
 		<div class="au-navigation au-container">
