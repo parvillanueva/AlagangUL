@@ -258,7 +258,7 @@ class Events extends GS_Controller {
 				"description"		=> $value->description,
 				"when"				=> $value->when,
 				"where"				=> $value->where,
-				"status"				=> $value->status,
+				"status"			=> $value->status,
 				"volunteer_points"	=> $value->volunteer_points,
 				"is_admin"			=> ($value->user_id == $this->session->userdata('user_sess_id')) ? true : false,
 				"is_joined"			=> $is_joined,
@@ -355,6 +355,7 @@ class Events extends GS_Controller {
 			tbl_program_events.id,
 			tbl_badges.`name`,
 			tbl_badges.icon,
+			tbl_badges.icon_image,
 			tbl_badges.color
 			FROM
 			tbl_program_events
@@ -374,6 +375,7 @@ class Events extends GS_Controller {
 			tbl_program_events.id,
 			tbl_badges.`name`,
 			tbl_badges.icon,
+			tbl_badges.icon_image,
 			tbl_badges.color
 			FROM
 			tbl_program_events

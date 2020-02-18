@@ -66,7 +66,7 @@
 					<div class="au-badges">
 						<span class="au-pb">Badges you can earn</span>
 						<?php foreach ($earn_badge as $key => $value) { ?>
-							<div class="au-badge"><i style="color: <?= $value->color;?>" class="<?= $value->icon;?> au-time au-icon" title="<?= $value->name;?>"></i></div>
+							<img src="<?= base_url() . "/" . $value->icon_image;?>" class="au-imgbadge" title="<?= $value->name;?>">
 						<?php } ?>
 					</div>
 				</div>
@@ -94,7 +94,7 @@
 												<span class="au-accvolunteer">
 													<div class="au-accvicon">
 														<?php foreach ($value['badge'] as $a => $b) { ?>
-															<i style="color: <?= $b->color;?>" class="<?= $b->icon;?> au-time au-icon" title="<?= $b->name;?>"></i>
+															<img src="<?= base_url() . "/" . $b->icon_image;?>" class="au-imgbadge" title="<?= $b->name;?>">
 														<?php } ?>
 													</div>
 												</span>	
@@ -857,7 +857,7 @@
 				html += '					<span class="au-accvolunteer">';
 				html += '						<div class="au-accvicon">';
 					$.each(y['badge'], function(a, b){
-						html += '					<i style="color: '+b.color+';" class="'+b.icon+' au-time au-icon" title="'+b.name+'"></i>';
+						html += '				<img src="<?= base_url();?>/'+b.icon_image+'" class="au-imgbadge" title="'+b.name+'">';
 					});
 				html += '						</div>';
 				html += '					</span>';

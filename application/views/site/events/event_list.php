@@ -41,7 +41,9 @@
 							</div>
 							<div class="au-volunteers">
 								<?php foreach ($eloop['get_earn_badge'] as $a => $b) { ?>
-									<i style="color: <?= $b->color;?>" class="<?= $b->icon;?> au-time au-icon" title="<?= $b->name;?>"></i>
+
+									<img src="<?= base_url() . "/" . $b->icon_image;?>" class="au-imgbadge" title="<?= $b->name;?>">
+
 								<?php } ?>
 							</div>
 							<div class="au-action">
