@@ -25,7 +25,7 @@
 								?>
 								<a href="<?=$link?>" class="au-lnk">
 									<div class="au-pthumbnail">
-										<img src="<?= base_url($eloop['program_details']->image_thumbnail); ?>" class="au-fp-thumbnailimg" onerror="imgErrorEvent(this);">
+										<img src="<?= base_url($eloop['program_details']->image_thumbnail);?>" class="au-fp-thumbnailimg" onerror="imgErrorEvent(this);">
 									</div>
 									<span class="au-ptitle"><?= $eloop['title'] ?></span>
 									<!-- <span class="au-pdetails"><?= $eloop['description'] ?></span> -->
