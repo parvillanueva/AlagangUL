@@ -66,6 +66,8 @@ class Site_badges extends CI_Controller {
 
 
 	public function update_data(){
+
+
 		$id 	= $this->input->post('id');
 		$name 	= $this->input->post('name');
 		$icon 	= $this->input->post('icon');
