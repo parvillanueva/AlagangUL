@@ -2228,6 +2228,9 @@ button.btn:hover {
 .au-flexcenter > .modal {
     display: none;
 }
+.au-exfilter button.btn-primary{
+     margin: 0px;
+}
 /*Extra small devices (portrait phones, less than 576px)*/
 
 @media (max-width: 575px) {
@@ -2661,6 +2664,10 @@ button.btn:hover {
      .modal-open .modal {
           padding-right: 0px;
      }
+     .au-searchbtn {
+         display: block;
+         width: 100%;
+     }
 }
 
 
@@ -2807,6 +2814,13 @@ button.btn:hover {
           background: -webkit-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
           background: linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
           filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#eee", endColorstr="#fff", GradientType=1);
+     }
+     .au-searchbtn .au-stitle {
+          display: none;
+     }
+     .au-searchbtn {
+         display: block;
+         width: 100%;
      }
 }
 
