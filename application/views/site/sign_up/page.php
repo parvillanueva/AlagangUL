@@ -25,7 +25,7 @@
 					<div class="form-row">
 						<div class="col au-iconned">
 							<i class="fas fa-lock"></i>		
-							<input type="email" class="form-control email" id="email" placeholder="Email Address" name="email" required>
+							<input type="email" class="form-control email" id="email" placeholder="Work Email" name="email" required>
 							<div class="valid-feedback" id="html_element"></div>
 							<div class="invalid-feedback error_message">Please fill out this field.</div>
 						</div>

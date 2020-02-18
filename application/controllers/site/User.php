@@ -25,12 +25,12 @@ class User extends CI_Controller {
 	
 	public function submit(){
 		date_default_timezone_set('Asia/Manila');
+		$get_user_data = $this->get_user_data($this->session->userdata('email_address'));
 			$image_path = 'assets/img/broken_img1.jpg';
 		if(!empty($_FILES)){
-			$this->upload_file($_FILES, $this->session->userdata('email_address'));
-			$image_path = $this->upload_file($_FILES, $this->session->userdata('email_address'));
+			//$this->upload_file($_FILES, $get_user_data, $this->session->userdata('email_address'));
+			$image_path = $this->upload_file($_FILES, $get_user_data, $this->session->userdata('email_address'));
 		}
-
 		$impersonate_token = $this->request_impersonate_token($this->session->userdata('email_address'));
 		if($impersonate_token==0){
 			$impersonate_token = '';
@@ -44,7 +44,7 @@ class User extends CI_Controller {
 			'password' => md5($_POST['password']),
 			'status' => $_POST['password'],
 			'update_date' => date('Y-m-d H:i:s'),
-			'imagepath' => 'upload_file/'.$_POST['email'].'/'.$_FILES['file_set']['name'],
+			'imagepath' => 'upload_file/'.$get_user_data.'/'.$_FILES['file_set']['name'],
 			'impersonate_token' => $impersonate_token
 		);
 		
@@ -53,11 +53,20 @@ class User extends CI_Controller {
 		exit();		
 	}
 	
-	public function upload_file($file, $email){
-		if (!file_exists("./upload_file/" . $email)) {
-			mkdir("./upload_file/" . $email, 0777, true);
+	public function get_user_data($email){
+		$arr = array(
+			'email_address' => $email
+		);
+		
+		$sql = $this->Global_model->get_list_query('tbl_users', $arr);
+		return $sql[0]->id;
+	}
+	
+	public function upload_file($file, $userId, $email){
+		if (!file_exists("./upload_file/" . $userId)) {
+			mkdir("./upload_file/" . $userId, 0777, true);
 		}
-		$target_dir = './upload_file/'.$email.'/'. $file['file_set']['name'];
+		$target_dir = './upload_file/'.$userId.'/'. $file['file_set']['name'];
 		$move_file = move_uploaded_file($_FILES["file_set"]["tmp_name"], $target_dir);
 	}
 	function request_impersonate_token($email) {
