@@ -163,8 +163,8 @@ class Profile extends GS_Controller
 		);
 
 		if(!empty($_FILES['programImage']['tmp_name'])){
-			$this->upload_file($_FILES, $userId, $email);
-			$arrData['imagepath'] = "upload_file/" . $userId. "/". $_FILES['programImage']['name'];
+			$file_path = $this->upload_file($_FILES, $userId, $email);
+			$arrData['imagepath'] = $file_path; //"upload_file/" . $userId. "/". $_FILES['programImage']['name'];
 		} else{
 			$arrData['imagepath'] = $_POST['image_file'];
 		}
@@ -175,13 +175,21 @@ class Profile extends GS_Controller
 		header("Location: ".base_url('profile').""); 
 		exit();
 	}
+	
+	function clean_str($string) {
+	   $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+
+	   return preg_replace('/[^A-Za-z0-9-.\-]/', '', $string); // Removes special chars.
+	}
 
 	public function upload_file($file, $userId, $email){
 		if (!file_exists("./upload_file/" . $userId)) {
 			mkdir("./upload_file/" . $userId, 0777, true);
 		}
-		$target_dir = './upload_file/'.$userId.'/'. $file['programImage']['name'];
+		$clean_name = $this->clean_str($file['programImage']['name']);
+		$target_dir = './upload_file/'.$userId.'/'. $clean_name;
 		$move_file = move_uploaded_file($_FILES["programImage"]["tmp_name"], $target_dir);
+		return $target_dir;
 	}
 
 }
