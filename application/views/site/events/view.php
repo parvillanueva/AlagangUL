@@ -245,7 +245,12 @@
 					<hr>
 					<div class="row">
 						<div class="col">
-							<span class="au-h4">Gallery</span>
+							<div class="input-group">
+								<span class="au-h4">Gallery</span>
+								<?php if($event_details[0]['is_joined'] == 1 || $event_details[0]['is_admin'] == 1){ ?>
+								<div class="col" style="margin-right:-15px !important"><button class="au-btn float-right" id="button_dropzone"><i class="fas fa-plus"></i>Upload Photos</button></div>
+								<?php } ?>
+							</div>
 						</div>
 					</div>
 					<div class="au-gallerywrapper">
@@ -580,6 +585,12 @@
 
 <script type="text/javascript">
 	//$('input[name="date"]').daterangepicker();
+	$(document).ready(function(){
+		$('#FileManagerDropZone').hide();
+	});
+	$(document).on('click', '#button_dropzone', function(){
+		$('#FileManagerDropZone').click();
+	});
 </script>
 <script type="text/javascript">
 	var base_url = '<?=base_url();?>';
@@ -801,13 +812,29 @@
         maxFilesize: 50,
         init: function () {
             var _this = this;
-            this.on("sending", function(file, xhr, data) {
-                var filename = file.name;
-                var filesize = file.size;              
-            });
+			this.on("addedfile", function(file) {
+				/* BM.confirm("Are you sure you wan't to upload this photos?", function(result){
+					if(result){
+						this.on("sending", function(file, xhr, data) {
+							var filename = file.name;
+							var filesize = file.size;  
+							BM.loading(true);
+						});
+					} else{
+						this.removeFile(file);
+					}
+				}) */
+				if(!confirm("Do you want to upload this file?")){
+					this.removeFile(file);
+					return false;
+				}
+				BM.loading(true);
+			});
         },
         success: function(file, response){
+			//$('#gallery_photos_name').val(file.name);
             this.removeFile(file);
+			BM.loading(false);
         },
         complete: function(response){
         	get_gallery();

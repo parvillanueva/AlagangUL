@@ -418,7 +418,6 @@ var validate = {
 		if ($(element_not_required).hasClass("mobile_number_not")){
 			$(".mobile_number_not").each(function(){
 				var number = $(this).val();
-				console.log(number);
 				if(number != ''){
 					if(/^09\d{9}$/.test(number) === false){
 						counter++;
