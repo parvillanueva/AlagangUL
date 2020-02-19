@@ -20,7 +20,7 @@ class GS_Controller extends CI_Controller {
 			$str = '?share='.$module.'-'.$id;
 		}
        	if($this->session->userdata('user_sess_id')=='') { 
-			redirect(base_url("login"));
+			redirect(base_url("login".$str));
 		}
     }
 
