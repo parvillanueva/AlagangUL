@@ -181,7 +181,7 @@ class Events extends GS_Controller {
 		}
 			$where_search = '';
 		if($arr['search_box'] != ''){
-			$where_search = 'AND (title like "%'.$arr['search_box'].'%" OR url_alias like "%'.$arr['search_box'].'%" OR description like "%'.$arr['search_box'].'%" OR where like "%'.$arr['search_box'].'%")';
+			$where_search = 'AND (title like "%\\'.$arr['search_box'].'%" OR url_alias like "%\\'.$arr['search_box'].'%" OR description like "%\\'.$arr['search_box'].'%" OR where like "%\\'.$arr['search_box'].'%")';
 		}
 			$where_task = '';
 		if($arr['task'] != ''){
