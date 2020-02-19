@@ -85,7 +85,7 @@
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<input type="text" class="form-control required_input no_html" id="whenpicker" placeholder="When" name="eventWhen" value="">
+							<input type="text" class="form-control required_input no_html" readonly="true" id="whenpicker" placeholder="When" name="eventWhen" value="">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -152,6 +152,7 @@
 	        		<div class="form-row">
 						<div class="col">											
 							<input type="text" class="form-control required_input no_html" readonly="true" id="whenpickeredit" placeholder="When" name="eventWhen" value="">
+
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
