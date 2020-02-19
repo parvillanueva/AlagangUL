@@ -10,7 +10,7 @@
 	</div>
 </div>
 
-
+ 
 <div class="container-fluid">
 	<div class="au-container au-padding">
 		<div class="au-eventswrapper row">
