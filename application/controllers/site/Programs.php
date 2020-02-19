@@ -136,6 +136,7 @@ class Programs extends GS_Controller {
 			"members_count"	=> count($result_members),
 			"members"		=> $result_members,
 			"is_admin"		=> $is_admin,
+			"admin_email"	=> $this->db->query("SELECT * FROM tbl_users WHERE id = " . $program_details[0]->created_by)->result(),
 			"events"		=> $events,
 		);
 

@@ -16,6 +16,9 @@
 						}	
 					?>
 				</span>
+				<div class="au-powner">
+				    <a href="mailto:<?= $details['admin_email'][0]->email_address;?>" class="au-lnk"><span class="au-share">Program Owner: <?= $details['admin_email'][0]->first_name;?> <?= $details['admin_email'][0]->last_name;?> <i class="fas fa-envelope"></i></span></a>
+				</div>
 				<div class="au-phstats">
 					<span class="au-members"><i class="fas fa-user-friends"></i><?= $details['members_count'];?> <?= ($details['members_count'] > 1 ) ? 'Members' : 'Member';?></span>
 					<?php
