@@ -403,6 +403,7 @@
 		  			html += "</tr>";
 		  		});
 
+		  		 $('#select_all').prop("checked",false);
 		  		if(count_task == 0){
 		  		 $('#select_all').attr("disabled",true);
 		  		}

@@ -21,12 +21,12 @@
 
 					<div class="form-row">
 						<div class="col">
-							<input type="text" class="form-control required_input no_html alphaonly" id="fname" placeholder="First Name" name="fname">
+							<input type="text" class="form-control required_input no_html alphaonly" id="fname" placeholder="* First Name" name="fname">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 						<div class="col">											
-							<input type="text" class="form-control required_input no_html alphaonly" id="lname" placeholder="Last Name" name="lname">
+							<input type="text" class="form-control required_input no_html alphaonly" id="lname" placeholder="* Last Name" name="lname">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -34,7 +34,7 @@
 					<div class="form-row">
 						<div class="col">
 							<select class="form-control custom-select required_input" id="division" name="division" required="required" />
-									<option value="" selected disabled>Division / Business Unit</option>
+									<option value="" selected disabled>* Division / Business Unit</option>
 								<?php foreach($division as $div_lop){ ?>
 									<option value="<?php echo $div_lop->id; ?>"><?php echo $div_lop->name; ?></option>
 								<?php } ?>
@@ -43,14 +43,14 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 						<div class="col">											
-							<input type="text" class="form-control required_input email" id="email" placeholder="Work Email" name="email_add" value="<?=$this->session->userdata('email_address');?>">
+							<input type="text" class="form-control required_input email" id="email" placeholder="* Work Email" name="email_add" value="<?=$this->session->userdata('email_address');?>">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
 					<div class="form-row">
 						<div class="col">
-							<input type="text" class="form-control required_input" id="phone" placeholder="Mobile Number" name="phone"">
+							<input type="text" class="form-control required_input" id="phone" placeholder="* Mobile Number" name="phone">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -62,12 +62,12 @@
 					</div>
 					<div class="form-row">
 						<div class="col">
-							<input type="password" class="form-control required_input new-password" id="password" placeholder="Password" name="password" pattern="(?=.*\d)(?=.*[a-z]).{8,}">
+							<input type="password" class="form-control required_input new-password" id="password" placeholder="* Password" name="password" pattern="(?=.*\d)(?=.*[a-z]).{8,}">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback" id="invalid_pass">Password does not meet requirements</div>
 						</div>
 						<div class="col">											
-							<input type="password" class="form-control required_input re-password" id="cpassword" placeholder="Confirm Password" name="cpassword">
+							<input type="password" class="form-control required_input re-password" id="cpassword" placeholder="* Confirm Password" name="cpassword">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback" id="invalid_confirm">Passwords do not match.</div>
 						</div>
@@ -82,7 +82,7 @@
 						<div class="col">
 							<div class="custom-file">
 								<input type="file" class="custom-file-input" name="file_set" id="customFile" accept="image/x-png,image/jpeg" />
-								<label class="custom-file-label" for="customFile">Choose file</label>
+								<label class="custom-file-label" for="customFile">* Choose file</label>
 							</div>
 						</div>
 					</div>
