@@ -1114,8 +1114,8 @@
 			BM.loading(false);
 			var user_img = data3.picture.data.url;
 			var user_fb_name = data3.name;
-			var photo = "<?=base_url().$event_details[0]['image']?>";
-			var desc = "<?=trim(preg_replace('/ +/', ' ', preg_replace('/[^A-Za-z0-9 ]/', ' ', urldecode(html_entity_decode(strip_tags((strlen($event_details[0]['description'])>150) ? substr($event_details[0]['description'], 0, 150).'...' : $event_details[0]['description']))))))?>";
+			var photo = "<?=$event_details[0]['image']?>";
+			var desc = "<?= date("m/d/Y h:i a", strtotime($event_details[0]['when']));?>";
 			var title = "<?=trim(preg_replace('/ +/', ' ', preg_replace('/[^A-Za-z0-9 ]/', ' ', urldecode(html_entity_decode(strip_tags($event_details[0]['title']))))))?>";
 			$('.au-workplacefield').val('');
 			$('.au-workplaceavatar').attr('src',user_img);
@@ -1137,7 +1137,7 @@
 		var id = "<?=$event_details[0]['id']?>";
 		var base_url = "<?=base_url()?>";
 		var photo = "<?=$event_details[0]['image']?>";
-		var desc = "<?=trim(preg_replace('/ +/', ' ', preg_replace('/[^A-Za-z0-9 ]/', ' ', urldecode(html_entity_decode(strip_tags((strlen($event_details[0]['description'])>150) ? substr($event_details[0]['description'], 0, 150).'...' : $event_details[0]['description']))))))?>";
+		var desc = "<?= date("m/d/Y h:i a", strtotime($event_details[0]['when']));?>";
 		var message = $('.au-workplacefield').val();
 		var title = "<?=trim(preg_replace('/ +/', ' ', preg_replace('/[^A-Za-z0-9 ]/', ' ', urldecode(html_entity_decode(strip_tags($event_details[0]['title']))))))?>";	
 		BM.loading(true);

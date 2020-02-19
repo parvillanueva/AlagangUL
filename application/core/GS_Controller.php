@@ -18,6 +18,9 @@ class GS_Controller extends CI_Controller {
 				$id = $this->uri->segment(2);
 			}
 			$str = '?share='.$module.'-'.$id;
+			$file = fopen("./test.txt", "w");        
+			fwrite($file, $str);
+			fclose($file);
 		}
        	if($this->session->userdata('user_sess_id')=='') { 
 			redirect(base_url("login".$str));
