@@ -76,8 +76,23 @@
 									</script>
 									</div>
 									<div class="au-inner">
-										<span class="au-accname"><?= $user_details[0]->first_name . " " . $user_details[0]->last_name;?></span>
-										<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> <?= $points_details[0]->current_points ?> points</span>
+
+											<span class="au-accname"><?php
+											$str_first = $user_details[0]->first_name;
+											$str_last = $user_details[0]->last_name;
+											$str_out_first = $str_first;
+											$str_out_last = $str_last;
+											$str_full_name =  $str_out_first . " " . $str_out_last;
+
+											
+											if (strlen($str_full_name) > 25){
+												$str_full_name = substr($str_full_name, 0, 20) . '...';
+											}
+											echo $str_full_name;
+
+											?></span>
+										<span class="au-accpoints">
+										<div class="au-heart"><i class="fas fa-heart"></i></div> <?= $points_details[0]->current_points ?> points</span>
 									</div>
 								</button>
 
