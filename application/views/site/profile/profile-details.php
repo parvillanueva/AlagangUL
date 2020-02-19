@@ -90,12 +90,14 @@
                                         <?php endif; ?>
                                     </div>
                                     <div class="row">
+                                        <?php if(isset($c_programs)){ ?>
                                         <div class="col-sm-6">
                                             <div class="au-p2">
                                                 <span>Joined Programs</span>
                                                 <span class="au-pfnum"><?= @$c_programs ?></span>
                                             </div>
                                         </div>
+                                        <?php } ?>
                                         <div class="col-sm-6">
                                             <div class="au-p2">
                                                 <span>Volunteered Events</span>
@@ -110,22 +112,24 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="au-jprogramswrapper">
-                            <!-- <span class="au-title">Programs Created</span> -->
-                            <div class="slider programs">
-                                <?php if(!empty($created)) : ?>
-                                    <?php foreach($created as $program) : ?>
-                                        <div class="au-slprograms">
-                                            <a href="<?= base_url()?>programs/<?= @$program['id']?>/<?= @$program['url_alias']?>" class="au-lnk">
-                                                <div class="au-opthumbnail">
-                                                    <img src="<?=base_url().@$program['image_thumbnail']?>" class="au-fp-thumbnailimg" onerror="imgErrorProfileDetails(this);">
-                                                </div>
-                                            </a>
-                                        </div>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                            </div>
-
+                            <?php if(!empty($created)) : ?>
+                                <!-- <span class="au-title">Programs Created</span> -->
+                                <div class="slider programs">
+                                
+                                        <?php foreach($created as $program) : ?>
+                                            <div class="au-slprograms">
+                                                <a href="<?= base_url()?>programs/<?= @$program['id']?>/<?= @$program['url_alias']?>" class="au-lnk">
+                                                    <div class="au-opthumbnail">
+                                                        <img src="<?=base_url().@$program['image_thumbnail']?>" class="au-fp-thumbnailimg" onerror="imgErrorProfileDetails(this);">
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        <?php endforeach; ?>
+                                
+                                </div>
+                            
                             <hr>
+                            <?php endif; ?>
                             <span class="au-title">Programs Joined</span>
                             <div class="slider programs">
                                 <?php if(!empty($programs)) : ?>

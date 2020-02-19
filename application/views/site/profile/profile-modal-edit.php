@@ -9,7 +9,7 @@
             <div class="modal-body">
                 <span class="au-h4">Edit Profile</span>
                     <form action="<?= base_url('update-profile'); ?>" method="post" enctype="multipart/form-data" class="au-form" id="editprofile">
-                        <div class="au-form form-row">
+                        <div class="form-row">
                             <div class="col">
                                 <input type="text" class="form-control required_input no_html alphaonly" id="fname" placeholder="First Name" value="<?= @$profile->first_name ?>" name="fname" required>
                                 <div class="valid-feedback"></div>
