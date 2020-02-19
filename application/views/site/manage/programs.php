@@ -252,6 +252,8 @@
 	
 	$(document).on('click', '#btn_addProgram', function(){
 		$(".validate_error_message").remove();
+		$(".required_input").val('');
+		$("#previewImage").attr('src','');
 		BM.show("#AddProgramModal");
 	});
 
@@ -285,7 +287,7 @@
 	$(document).on('click', '#btnSubmit', function(){
 		if(validate.standard("addprogramform")) {
 			$('#AddProgramModal').css("opacity","0.5");
-			BM.confirm("Are you sure you want to Add this Programs?", function(result){
+			BM.confirm("Are you sure you want to Add this Program?", function(result){
 				if(result){
 					BM.loading(true);
 					$("#addprogramform").submit();
@@ -303,7 +305,7 @@
 	$(document).on('click', '#btnSubmitUpdate', function(){
 		if(validate.standard("editprogramform")) {
 			$('#editPrgoramDetails').css("opacity","0.5");
-			BM.confirm("Are you sure you want to Update this Programs?", function(result){
+			BM.confirm("Are you sure you want to Update this Program?", function(result){
 				if(result){
 					BM.loading(true);
 					$("#editprogramform").submit();
