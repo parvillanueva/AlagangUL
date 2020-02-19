@@ -737,8 +737,10 @@ class Events extends GS_Controller {
 
 		$storeFolder2 = "uploads/events/";
 		$tempFile = $_FILES['eventImage']['tmp_name'];                   
-		$targetPath =  $storeFolder2 . "/";  
-		$targetFile =  $targetPath. str_replace(" ", "_", strtolower($_FILES['eventImage']['name'])); 
+		$targetPath =  $storeFolder2 . "/"; 
+		$file_name_new = $this->clean_str($_FILES['eventImage']['name']);
+		$targetFile =  $targetPath. str_replace(" ", "_", strtolower($file_name_new)); 
+		//$targetFile =  $targetPath. str_replace(" ", "_", strtolower($_FILES['eventImage']['name'])); 
 		$data['image'] = $targetFile;
 
 		$event_id = $this->Gmodel->save_data("tbl_program_events",$data);
@@ -784,7 +786,9 @@ class Events extends GS_Controller {
 			if($_FILES['eventImage']['size'] > 0) { //10 MB (size is also in bytes)
 		        $tempFile = $_FILES['eventImage']['tmp_name'];                   
 			    $targetPath =  $storeFolder . "/";  
-			    $targetFile =  $targetPath. str_replace(" ", "_", strtolower($_FILES['eventImage']['name'])); 
+				$file_name_new = $this->clean_str($_FILES['eventImage']['name']);
+				$targetFile =  $targetPath. str_replace(" ", "_", strtolower($file_name_new)); 
+			    //$targetFile =  $targetPath. str_replace(" ", "_", strtolower($_FILES['eventImage']['name'])); 
 			    move_uploaded_file($tempFile,$targetFile);
 			    $data['image'] = $targetFile;
 		    }
