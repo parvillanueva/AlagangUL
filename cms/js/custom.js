@@ -1332,4 +1332,18 @@ function decode_Html (string) {
   });
 }
 
+function str_rep(detail,length,limit){
+	str = detail;
+	if(str != '' && str != null){
+		if(detail.length > length){
+			str = str.substring(0,limit)+'...';
+		}
+	}
+	else{
+		str = '-';
+	}
+
+	return str;
+}
+
 

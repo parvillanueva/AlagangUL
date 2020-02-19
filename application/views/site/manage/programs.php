@@ -59,7 +59,7 @@
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Program Name" name="programName" value="">
+							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Program Name" maxlength="255" name="programName" value="">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -110,7 +110,7 @@
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<input type="text" class="form-control required_input no_html" id="programname" placeholder="Program Name" name="programName" value="">
+							<input type="text" class="form-control required_input no_html" id="programname" placeholder="Program Name"  maxlength="255" name="programName" value="">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -168,7 +168,7 @@
 
 		  			html += "<tr>";
 		  			html += "	<td><input type='checkbox' class='select' data-alias='"+b.url_alias+"' data-id="+b.id+"/></td>";
-		  			html += "	<td>" + b.name + "</td>";
+		  			html += "	<td title='"+b.name+"'>" + str_rep(b.name,35,30) + "</td>";
 		  			// html += "	<td>" + b.area_covered + "</td>";
 		  			html += "	<td>" + moment(b.create_date).format("LLL") + "</td>";
 		  			html += "	<td>" + status + "</td>";
@@ -237,6 +237,7 @@
 	});
 	
 	$(document).on('click', '#btn_addProgram', function(){
+		$(".validate_error_message").remove();
 		BM.show("#AddProgramModal");
 	});
 
@@ -248,11 +249,11 @@
 		var name = $(this).attr("data-name");
 		var area = $(this).attr("data-area");
 		var overview = $(this).attr("data-overview");
-
 		var form_post = "<?= base_url("programs");?>/" + id + "/" + urlalias + "/update";
 		$("#editprogramform").attr("action", form_post);
 
 		$("#previewImageEdit").attr("src", "<?= base_url();?>" + image);
+		$("#previewImageEdit").attr("onerror",imgError(image));
 		$("#programname").val(name);
 		$("#areacovered").val(area);
 		$("#overview").val(overview);

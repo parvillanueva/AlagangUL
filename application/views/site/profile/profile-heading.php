@@ -11,7 +11,15 @@
             <div class="col-lg-3 col-md-4 d-none d-lg-block">
             </div>
             <div class="au-phdetails au-max-width">
-                <span class="au-h5"><?= $profile->full_name ?></span>
+                <span class="au-h5">
+                <?php 
+                    $str_full_name = $profile->full_name;
+                    if (strlen($str_full_name) > 25){
+                        $str_full_name = substr($str_full_name, 0, 20) . '...';
+                    }
+                    echo $str_full_name;
+                ?>
+                </span>
                 <div class="au-phstats">
                     <a href="#" class="au-lnk au-email"><?= $profile->email_address ?></a>
                 </div>
