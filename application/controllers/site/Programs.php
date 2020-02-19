@@ -174,11 +174,12 @@ class Programs extends GS_Controller {
 		$data['name'] = $post['programName'];
 		$data['url_alias'] = $this->format_slug($post['programName']);
 		$data['overview'] = $post['overview'];
+		$data['headline'] = $post['programHeadLineEdit'];
 		$data['area_covered'] = $post['areaCovered'];
 		$data['update_date'] = date("Y-m-d H:i:s");
 
 
-		$storeFolder = "uploads/programs/" . $program_id ;
+		$storeFolder = "uploads/programs/" . $program_id . "/". date('Y_m_d');
 
 		if (!file_exists($storeFolder)) {
 		    mkdir($storeFolder, 0777, true);
@@ -186,8 +187,9 @@ class Programs extends GS_Controller {
 		if (!empty($_FILES)) {
 			if($_FILES['programImage']['size'] > 0) { //10 MB (size is also in bytes)
 		        $tempFile = $_FILES['programImage']['tmp_name'];                   
-			    $targetPath =  $storeFolder . "/";  
-			    $targetFile =  $targetPath. str_replace(" ", "_", strtolower($_FILES['programImage']['name'])); 
+			    $targetPath =  $storeFolder . "/";   
+				$file_name_new = $this->clean_str($_FILES['programImage']['name']);
+				$targetFile =  $targetPath. str_replace(" ", "_", strtolower($file_name_new)); 
 			    move_uploaded_file($tempFile,$targetFile);
 			    $data['image_thumbnail'] = $targetFile;
 		    }
@@ -208,6 +210,7 @@ class Programs extends GS_Controller {
 		$data['name'] = $post['programName'];
 		$data['url_alias'] = $this->format_slug($post['programName']);
 		$data['overview'] = $post['overview'];
+		$data['headline'] = $post['programHeadLine'];
 		$data['area_covered'] = $post['areaCovered'];
 		$data['created_by'] = $this->session->userdata('user_sess_id');
 		$data['create_date'] = date("Y-m-d H:i:s");
@@ -217,12 +220,13 @@ class Programs extends GS_Controller {
 		$storeFolder2 = "uploads/programs/";
 		$tempFile = $_FILES['programImage']['tmp_name'];                   
 		$targetPath =  $storeFolder2 . "/";  
-		$targetFile =  $targetPath. str_replace(" ", "_", strtolower($_FILES['programImage']['name'])); 
+		$file_name_new = $this->clean_str($_FILES['programImage']['name']);
+		$targetFile =  $targetPath. str_replace(" ", "_", strtolower($file_name_new)); 
 		$data['image_thumbnail'] = $targetFile;
 
 		$program_id = $this->Gmodel->save_data("tbl_programs",$data);
 
-		$storeFolder = "uploads/programs/" . $program_id ;
+		$storeFolder = "uploads/programs/" . $program_id . "/". date('Y_m_d');
 
 		if (!file_exists($storeFolder)) {
 		    mkdir($storeFolder, 0777, true);
@@ -242,6 +246,12 @@ class Programs extends GS_Controller {
 		
 		redirect($_SERVER['HTTP_REFERER']);
 
+	}
+	
+	function clean_str($string) {
+	   $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+
+	   return preg_replace('/[^A-Za-z0-9-.\-]/', '', $string); // Removes special chars.
 	}
 
 	public function publish()
