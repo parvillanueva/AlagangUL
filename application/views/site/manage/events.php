@@ -195,6 +195,7 @@
 	var datatodays = datatoday.setDate(new Date(datatoday).getDate() + 1);
 
 	$(document).ready(function(){
+		BM.loading(true);
 		get_list();
 		$("#EditEventpoints, #add_point").keypress(function (e) {
 			 if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
@@ -336,6 +337,7 @@
 	});
 
 	function change_status(status){
+		// alert(status);
 		BM.loading(true);
 		var total = $('.select:checked').length;
 		var count = 1;
@@ -349,17 +351,14 @@
             }
             $.get(url, function( data ) {
             	if(count == total){
-            		BM.loading(false);
-            		location.reload();
-            	} else {
-					count ++;
-            	}
+            		get_list();
+            	} 
 			});
         });
 	}
 
 	function get_list(){
-		BM.loading(true);
+		// BM.loading(true);
 		var url = "<?= base_url("manage/event_list");?>";
 		var data = {
 			program_id : <?= $program_id;?>
@@ -372,6 +371,7 @@
 
 		  		console.log(result);
 		  		var html = "";
+		  		var count_task = 0;
 		  		
 		  		$.each(result, function(a, b){
 
@@ -385,6 +385,7 @@
 		  			if(b.task_count > 0){
 		  				disabled = "";
 		  				tooltip = "";
+		  				count_task++;
 		  			}
 
 		  			html += "<tr>";
@@ -401,6 +402,10 @@
 		  			html += "	</td>";
 		  			html += "</tr>";
 		  		});
+
+		  		if(count_task == 0){
+		  		 $('#select_all').attr("disabled",true);
+		  		}
 		  		$("#program_list").html(html);
 		  		BM.loading(false);
 		  	}

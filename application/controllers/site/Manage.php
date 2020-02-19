@@ -128,8 +128,7 @@ class Manage extends GS_Controller {
 			tbl_program_events.`where`,
 			tbl_program_events.`url_alias`,
 			tbl_program_events.volunteer_points,
-			CONCAT('programs/',tbl_programs.id, '/', tbl_programs.url_alias, '/event/' , tbl_program_events.id , '/' , tbl_program_events.url_alias ) AS Url,
-			COUNT(tbl_program_event_task.id) as task_count
+			CONCAT('programs/',tbl_programs.id, '/', tbl_programs.url_alias, '/event/' , tbl_program_events.id , '/' , tbl_program_events.url_alias ) AS Url
 			FROM
 			tbl_program_events
 			LEFT JOIN tbl_programs ON tbl_programs.id = tbl_program_events.program_id
@@ -154,11 +153,15 @@ class Manage extends GS_Controller {
 				tbl_program_event_task_volunteers.`status` >= -2 
 				AND 
 				tbl_program_event_task_volunteers.event_id = " . $value->id;
+
 			$colunteer_result = $this->db->query($volunteer_query)->result();
+			$taskcount_query = "SELECT COUNT(id) as id FROM tbl_program_event_task where event_id = $value->id and status >= 0 " ;
+			$taskcount_result = $this->db->query($taskcount_query)->result();
+
 			$data[] = array(
 				"id"				=> $value->id,
 				"title"				=> $value->title,
-				"task_count"		=> $value->task_count,
+				"task_count"		=> $taskcount_result[0]->id,
 				"url_alias"			=> $value->url_alias,
 				"image"				=> base_url() . $value->image,
 				"description"		=> $value->description,
