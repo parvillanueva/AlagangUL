@@ -59,21 +59,28 @@
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Program Name" maxlength="255" name="programName" value="">
+							<input type="text" class="form-control required_input no_html" id="program_name" placeholder="Program Name" maxlength="255" name="programName" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" id="program_head_line" placeholder="Program Head Line" maxlength="255" name="programHeadLine" value="">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
 	        		<!-- <div class="form-row">
 						<div class="col">											
-							<input type="text" class="form-control required_input no_html" id="lname" placeholder="Areas Covered" name="areaCovered" value="">
+							<input type="text" class="form-control required_input no_html" id="area_covered" placeholder="Areas Covered" name="areaCovered" value="">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div> -->
 	        		<div class="form-row">
 						<div class="col">											
-							<textarea type="text" class="form-control required_input no_html" id="lname" placeholder="Program Overview" name="overview" rows=5></textarea>
+							<textarea type="text" class="form-control required_input no_html" id="overview" placeholder="Program Overview" name="overview" rows=5></textarea>
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -115,6 +122,13 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
+					<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" id="program_head_line_edit" placeholder="Program Head Line" maxlength="255" name="programHeadLineEdit" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
 	        		<!-- <div class="form-row">
 						<div class="col">											
 							<input type="text" class="form-control required_input no_html" id="areacovered" placeholder="Areas Covered" name="areaCovered" value="">
@@ -124,9 +138,9 @@
 					</div> -->
 	        		<div class="form-row">
 						<div class="col">											
-							<textarea type="text" class="form-control required_input no_html" id="overview" placeholder="Program Overview" name="overview" rows=5></textarea>
+							<textarea type="text" class="form-control required_input no_html" id="overview_edit" placeholder="Program Overview" name="overview" rows=5></textarea>
 							<div class="valid-feedback"></div>
-							<div class="invalid-feedback">Please fill out this field.</div>x
+							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
 				</form>
@@ -173,7 +187,7 @@
 		  			html += "	<td>" + moment(b.create_date).format("LLL") + "</td>";
 		  			html += "	<td>" + status + "</td>";
 		  			html += "	<td>" ;
-		  			html += "		<a href='#' data-image='"+b.image_thumbnail+"' data-id='"+b.id+"' data-urlalias='"+b.url_alias+"' data-name='"+b.name+"' data-overview='"+b.overview+"'  data-area='"+b.area_covered+"' class='au-lnk au-action editProgramBtn' id='editProgramBtn' title='Edit Details'><i class='fas fa-edit'></i></a>" ;
+		  			html += "		<a href='#' data-image='"+b.image_thumbnail+"' data-id='"+b.id+"' data-urlalias='"+b.url_alias+"' data-name='"+b.name+"' data-overview='"+b.overview+"' data-headline='"+b.headline+"' data-area='"+b.area_covered+"' class='au-lnk au-action editProgramBtn' id='editProgramBtn' title='Edit Details'><i class='fas fa-edit'></i></a>" ;
 		  			html += "		<a href='<?= base_url("programs");?>/"+b.id+"/"+b.url_alias+"' target='_blank' type='button' class='au-lnk au-action' id='manageProgramBtn' title='Manage Page'><i class='fas fa-cog' style='color: #11295b;'></i></a>";
 		  			html += "		<a href='<?= base_url("manage");?>/"+b.id+"/"+b.url_alias+"' type='button' class='au-lnk au-action' id='viewEvents'><i class='fas fa-calendar-day'  title='Events' style='color: #FF5722;'></i><span class='au-evnu badge badge-pill  badge-light'>"+b.event_count+"</span></a>";
 		  			html += "	</td>";
@@ -238,8 +252,6 @@
 	
 	$(document).on('click', '#btn_addProgram', function(){
 		$(".validate_error_message").remove();
-		$(".required_input").val('');
-		$("#previewImage").attr("src", "");
 		BM.show("#AddProgramModal");
 	});
 
@@ -251,6 +263,7 @@
 		var name = $(this).attr("data-name");
 		var area = $(this).attr("data-area");
 		var overview = $(this).attr("data-overview");
+		var headline = $(this).attr("data-headline");
 		var form_post = "<?= base_url("programs");?>/" + id + "/" + urlalias + "/update";
 		$("#editprogramform").attr("action", form_post);
 
@@ -258,7 +271,8 @@
 		$("#previewImageEdit").attr("onerror",imgError(image));
 		$("#programname").val(name);
 		$("#areacovered").val(area);
-		$("#overview").val(overview);
+		$("#program_head_line_edit").val(headline);
+		$("#overview_edit").val(overview);
 
 		BM.show("#editPrgoramDetails");
 
