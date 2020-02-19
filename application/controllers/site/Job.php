@@ -106,21 +106,35 @@ class Job extends CI_Controller {
 			tbl_users.email_address,
 			tbl_program_event_task.task,
 			tbl_program_event_task_volunteers.date_volunteer
+			tbl_program_event_task_volunteers.status
 			FROM
 			tbl_program_event_task_volunteers
 			INNER JOIN tbl_program_event_task ON tbl_program_event_task_volunteers.event_task_id = tbl_program_event_task.id
 			INNER JOIN tbl_users ON tbl_program_event_task_volunteers.user_id = tbl_users.id
 			WHERE
-			tbl_program_event_task_volunteers.event_id = ". $event_id;
+			tbl_program_event_task_volunteers.event_id = ". $event_id . " AND tbl_program_event_task_volunteers.status > -3 ORDER BY tbl_program_event_task_volunteers.date_volunteer DESC";
 		$result = $this->db->query($query)->result();
 		$row = 8;
 		if(count($result) > 0){
 			foreach ($result as $key => $value) {
+				
+				switch ($value->status) {
+					case 0:
+						$status = "For Approval";
+						break;
+					case 1:
+						$status = "Qualified";
+						break;
+					case -2:
+						$status = "Not Qualified";
+						break;
+				}
+
 				$worksheet->SetCellValueByColumnAndRow(0, $row, $key + 1);
 				$worksheet->SetCellValueByColumnAndRow(1, $row, $value->Name);
 				$worksheet->SetCellValueByColumnAndRow(2, $row, $value->email_address);
 				$worksheet->SetCellValueByColumnAndRow(3, $row, $value->task);
-				$worksheet->SetCellValueByColumnAndRow(4, $row, $value->status);
+				$worksheet->SetCellValueByColumnAndRow(4, $row, $status);
 				$worksheet->SetCellValueByColumnAndRow(5, $row, $value->date_volunteer);
 				$worksheet->SetCellValueByColumnAndRow(6, $row, $value->date_volunteer);
 				$row++;
