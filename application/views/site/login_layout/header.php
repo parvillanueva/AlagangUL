@@ -2,14 +2,29 @@
 <html lang="en">
 
 <head>
-	<title>Alagang Unilab</title>
+	<?php
+        if(isset($og)){
+    ?>
+        <title><?=$og_title?></title>
+    <?php }  else{?>
+        <title>Alagang Unilab</title>
+    <?php } ?>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
+     <?php
+        if(isset($og)){
+    ?>
+        <meta property="title" content="<?=$og_title?>">
+        <meta property="og:url" content="<?=base_url().$og_url?>">
+        <meta property="og:title" content="<?=$og_title?>">
+        <meta property="og:image" content="<?=base_url().$og_image?>">
+        <meta property="og:description" content="<?=$og_desc?>">
 
+    <?php } ?>
     <!-- ANIMATION -->
 
     <!-- Bootstrap core CSS -->

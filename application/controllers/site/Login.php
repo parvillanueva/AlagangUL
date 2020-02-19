@@ -12,6 +12,30 @@ class Login extends CI_Controller {
 	} 
 	
 	public function index(){
+		if(isset($_GET['share'])){
+			$share = explode('-',$_GET['share']);
+			$module = $share[0];
+			$id = $share['1'];
+			if($module=='program'){
+				$table = 'tbl_programs';	
+			}
+			else{
+				$table = 'tbl_program_events';
+			}
+			$where = array(
+				'id' => $id
+			);
+			$sql_result = $this->Gmodel->get_query($table,$where);
+
+			if(count($sql_result)>0){
+				$data['og'] = true;
+				$data['og_title'] = $sql_result[0]->name;
+				$data['og_image'] = $sql_result[0]->image_thumbnail;
+				$data['og_desc'] = $sql_result[0]->overview;
+				$data['og_url'] = 'login?share='.$module.'-'.$id;
+				
+			}		
+		}
 		$data['token'] = '214379c94ea72a85f638ca88292248c6';
 		$this->load->view("site/login/login", $data);	
 	}	
