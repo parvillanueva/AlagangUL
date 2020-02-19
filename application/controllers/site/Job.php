@@ -102,17 +102,22 @@ class Job extends CI_Controller {
 
 
 		$query = "SELECT
-			CONCAT(tbl_users.first_name, ' ', tbl_users.last_name) as Name,
+			CONCAT(tbl_users.first_name, ' ', tbl_users.last_name) AS `Name`,
 			tbl_users.email_address,
 			tbl_program_event_task.task,
+			tbl_program_event_task.id as task_id,
 			tbl_program_event_task_volunteers.date_volunteer,
-			tbl_program_event_task_volunteers.status
+			tbl_program_event_task_volunteers.`status`
 			FROM
 			tbl_program_event_task_volunteers
 			INNER JOIN tbl_program_event_task ON tbl_program_event_task_volunteers.event_task_id = tbl_program_event_task.id
 			INNER JOIN tbl_users ON tbl_program_event_task_volunteers.user_id = tbl_users.id
-			WHERE
-			tbl_program_event_task_volunteers.event_id = ". $event_id . " AND tbl_program_event_task_volunteers.status > -3 ORDER BY tbl_program_event_task_volunteers.date_volunteer DESC";
+			INNER JOIN tbl_program_event_task_badge ON tbl_program_event_task.id = tbl_program_event_task_badge.event_task_id
+			WHERE tbl_program_event_task_volunteers.event_id = ".$event_id." 
+			AND tbl_program_event_task_volunteers.status > -3
+			GROUP BY tbl_users.id
+			ORDER BY tbl_program_event_task_volunteers.date_volunteer DESC
+			";
 		$result = $this->db->query($query)->result();
 		$row = 8;
 		if(count($result) > 0){
