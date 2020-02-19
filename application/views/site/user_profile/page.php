@@ -55,7 +55,7 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 						<div class="col">											
-							<input type="text" class="form-control not_required mobile_number_not" id="work_number" placeholder="Work Number" name="work_number" maxlength="11" pattern="[0-9]{9}">
+							<input type="text" class="form-control" id="work_number" placeholder="Work Number" name="work_number" maxlength="11" pattern="[0-9]{9}">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
