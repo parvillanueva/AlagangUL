@@ -409,6 +409,7 @@
 			var photo = "<?=base_url().$details['details'][0]->image_thumbnail;?>";
 			var desc = "<?=trim(preg_replace('/ +/', ' ', preg_replace('/[^A-Za-z0-9 ]/', ' ', urldecode(html_entity_decode(strip_tags((strlen($details['details'][0]->overview)>150) ? substr($details['details'][0]->overview, 0, 150).'...' : $details['details'][0]->overview))))))?>";
 			var title = "<?=trim(preg_replace('/ +/', ' ', preg_replace('/[^A-Za-z0-9 ]/', ' ', urldecode(html_entity_decode(strip_tags($details['details'][0]->name))))))?>";
+			$('.au-workplacefield').val('');
 			$('.au-workplaceavatar').attr('src',user_img);
 			$('.au-workplaceusername').html(user_fb_name);
 			$('.au-workplaceimg').attr('src',photo);

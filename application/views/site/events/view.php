@@ -1106,4 +1106,49 @@
     		
     		count_checked = 0;
     });
+
+    $(document).on('click', '.workplace-share', function() {
+		var user_fb_id = "<?=$_SESSION['user_impersonate_token']?>";
+		BM.loading(true);
+		$.get('https://graph.facebook.com/'+user_fb_id+'?fields=picture,name&access_token=DQVJ1X3JxZAlRfM2pWN2I5eFVmVUJBYmhORENMSXM1bjZArbW4yOU13ZAmNYdFlqZA2hITWpQcnJEblg4UzB4bWYtV1BMcngxUE8xR2Q3SEI1WWk2bEdDX0toV0xFNVg5LXBnazV1Q1lmRHFNRHl1d1ZATeW9MaVMtdTBKckoyejQtX1lDTVRVc3poOWNTamx0d2RQRGtGeGtmVExRUDRTRi1ybl9Ub0liZAXlORU9VZAjVjaUlZAa1VvRDJMSWxQSUtkdjRWQ2xVWWNn', function(data3) {
+			BM.loading(false);
+			var user_img = data3.picture.data.url;
+			var user_fb_name = data3.name;
+			var photo = "<?=base_url().$event_details[0]['image']?>";
+			var desc = "<?=trim(preg_replace('/ +/', ' ', preg_replace('/[^A-Za-z0-9 ]/', ' ', urldecode(html_entity_decode(strip_tags((strlen($event_details[0]['description'])>150) ? substr($event_details[0]['description'], 0, 150).'...' : $event_details[0]['description']))))))?>";
+			var title = "<?=trim(preg_replace('/ +/', ' ', preg_replace('/[^A-Za-z0-9 ]/', ' ', urldecode(html_entity_decode(strip_tags($event_details[0]['title']))))))?>";
+			$('.au-workplacefield').val('');
+			$('.au-workplaceavatar').attr('src',user_img);
+			$('.au-workplaceusername').html(user_fb_name);
+			$('.au-workplaceimg').attr('src',photo);
+			$('.au-workplacecontenttitle').html(title);
+			$('.au-workplacecontenttext').html(desc);
+			$('#sharetoworkplace').modal('show');
+		}, 'json');	
+		
+	});
+	
+
+	$(document).on('click', '.share-to-workplace', function() {
+		var user_fb_id = "<?=$_SESSION['user_impersonate_token']?>";
+		var url_root = document.location.host;
+		var uri = window.location.href;
+		var url = url_root;
+		var id = "<?=$event_details[0]['id']?>";
+		var base_url = "<?=base_url()?>";
+		var photo = "<?=$event_details[0]['image']?>";
+		var desc = "<?=trim(preg_replace('/ +/', ' ', preg_replace('/[^A-Za-z0-9 ]/', ' ', urldecode(html_entity_decode(strip_tags((strlen($event_details[0]['description'])>150) ? substr($event_details[0]['description'], 0, 150).'...' : $event_details[0]['description']))))))?>";
+		var message = $('.au-workplacefield').val();
+		var title = "<?=trim(preg_replace('/ +/', ' ', preg_replace('/[^A-Za-z0-9 ]/', ' ', urldecode(html_entity_decode(strip_tags($event_details[0]['title']))))))?>";	
+		BM.loading(true);
+		$.get('https://graph.facebook.com/'+user_fb_id+'?fields=impersonate_token&access_token=DQVJ1X3JxZAlRfM2pWN2I5eFVmVUJBYmhORENMSXM1bjZArbW4yOU13ZAmNYdFlqZA2hITWpQcnJEblg4UzB4bWYtV1BMcngxUE8xR2Q3SEI1WWk2bEdDX0toV0xFNVg5LXBnazV1Q1lmRHFNRHl1d1ZATeW9MaVMtdTBKckoyejQtX1lDTVRVc3poOWNTamx0d2RQRGtGeGtmVExRUDRTRi1ybl9Ub0liZAXlORU9VZAjVjaUlZAa1VvRDJMSWxQSUtkdjRWQ2xVWWNn', function(data) {
+			var impersonate_token = data.impersonate_token;
+			$.post('https://graph.facebook.com/355003108168230/feed?access_token='+impersonate_token+'&name='+title+'&link='+uri+'&picture='+base_url+photo+'&caption='+url+'&description='+desc+'&message='+message, function(data) {
+					BM.loading(false);
+					$('#sharesuccess').modal('show');
+
+			}, 'json');
+		}, 'json');
+
+	});
 </script>
