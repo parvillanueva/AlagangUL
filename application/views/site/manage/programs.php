@@ -237,6 +237,7 @@
 	});
 	
 	$(document).on('click', '#btn_addProgram', function(){
+		$(".validate_error_message").remove();
 		BM.show("#AddProgramModal");
 	});
 
