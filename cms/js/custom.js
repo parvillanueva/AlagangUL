@@ -422,7 +422,7 @@ var validate = {
 					if(/^09\d{9}$/.test(number) === false){
 						counter++;
 						$(this).css('border-color','red');
-						$("<span class='validate_error_message' style='color: red;'>"+form_invalid_mobile_no+"<br></span>").insertAfter(this);
+						$("<span style='color: red;'>Invalid mobile number.<br></span>").insertAfter(this);
 					
 					}
 				} else{
