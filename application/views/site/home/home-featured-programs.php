@@ -11,7 +11,7 @@
                     </div>
                     <div class="au-fp-details">
                         <span class="au-p1">{name}</span>
-                        <span class="au-p2">{overview}</span>
+                        <span class="au-p2">{headline}</span>
                         <div class="au-fp-fdetails">
                             <span class="au-p2 au-memcounter"><i class="fas fa-user-friends"></i> {member_count} </span>
                             <a href="<?= base_url("programs");?>/{id}/{url_alias}"><button type="button" class="au-btnyellow">Read More</button></a>
