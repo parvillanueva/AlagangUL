@@ -401,8 +401,9 @@
 	});
 	$(document).on('click', '.workplace-share', function() {
 		var user_fb_id = "<?=$_SESSION['user_impersonate_token']?>";
-
+		BM.loading(true);
 		$.get('https://graph.facebook.com/'+user_fb_id+'?fields=picture,name&access_token=DQVJ1X3JxZAlRfM2pWN2I5eFVmVUJBYmhORENMSXM1bjZArbW4yOU13ZAmNYdFlqZA2hITWpQcnJEblg4UzB4bWYtV1BMcngxUE8xR2Q3SEI1WWk2bEdDX0toV0xFNVg5LXBnazV1Q1lmRHFNRHl1d1ZATeW9MaVMtdTBKckoyejQtX1lDTVRVc3poOWNTamx0d2RQRGtGeGtmVExRUDRTRi1ybl9Ub0liZAXlORU9VZAjVjaUlZAa1VvRDJMSWxQSUtkdjRWQ2xVWWNn', function(data3) {
+			BM.loading(false);
 			var user_img = data3.picture.data.url;
 			var user_fb_name = data3.name;
 			var photo = "<?=base_url().$details['details'][0]->image_thumbnail;?>";
@@ -430,10 +431,11 @@
 		var desc = "<?=trim(preg_replace('/ +/', ' ', preg_replace('/[^A-Za-z0-9 ]/', ' ', urldecode(html_entity_decode(strip_tags($details['details'][0]->overview))))))?>";
 		var message = $('.au-workplacefield').val();
 		var title = "<?=trim(preg_replace('/ +/', ' ', preg_replace('/[^A-Za-z0-9 ]/', ' ', urldecode(html_entity_decode(strip_tags($details['details'][0]->name))))))?>";	
-
+		BM.loading(true);
 		$.get('https://graph.facebook.com/'+user_fb_id+'?fields=impersonate_token&access_token=DQVJ1X3JxZAlRfM2pWN2I5eFVmVUJBYmhORENMSXM1bjZArbW4yOU13ZAmNYdFlqZA2hITWpQcnJEblg4UzB4bWYtV1BMcngxUE8xR2Q3SEI1WWk2bEdDX0toV0xFNVg5LXBnazV1Q1lmRHFNRHl1d1ZATeW9MaVMtdTBKckoyejQtX1lDTVRVc3poOWNTamx0d2RQRGtGeGtmVExRUDRTRi1ybl9Ub0liZAXlORU9VZAjVjaUlZAa1VvRDJMSWxQSUtkdjRWQ2xVWWNn', function(data) {
 			var impersonate_token = data.impersonate_token;
 			$.post('https://graph.facebook.com/355003108168230/feed?access_token='+impersonate_token+'&name='+title+'&link='+uri+'&picture='+base_url+photo+'&caption='+url+'&description='+desc+'&message='+message, function(data) {
+					BM.loading(false);
 					$('#sharesuccess').modal('show');
 
 			}, 'json');
