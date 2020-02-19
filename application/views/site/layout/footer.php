@@ -82,18 +82,18 @@
     </div>
 </div>
 <div class="modal fade text-center" id="sharesuccess">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-workplace">Share on <img src="<?=base_url()?>assets/img/au-workplace.svg" class="au-workplacelogo"></div>
-                <div class="modal-body">
-                    <span class="au-p6">Your post has been successfully shared.</span>
-                    <div class="au-modalbtn text-center">
-                        <button type="button" class="au-btn" data-dismiss="modal">Close</button>
-                    </div>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-workplace">Share on <img src="<?=base_url()?>assets/img/au-workplace.svg" class="au-workplacelogo"></div>
+            <div class="modal-body">
+                <span class="au-p6">Your post has been successfully shared.</span>
+                <div class="au-modalbtn text-center">
+                    <button type="button" class="au-btn" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 <script src="<?=base_url()?>assets/site/js/jquery-3.4.1.min.js" type="text/javascript"></script>
 <script src="<?=base_url()?>assets/site/js/popper.min.js" text="type/javascript"></script>
 <script src="<?=base_url()?>assets/site/js/bootstrap.min.js" type="text/javascript"></script>
