@@ -105,7 +105,7 @@ class Job extends CI_Controller {
 			CONCAT(tbl_users.first_name, ' ', tbl_users.last_name) as Name,
 			tbl_users.email_address,
 			tbl_program_event_task.task,
-			tbl_program_event_task_volunteers.date_volunteer
+			tbl_program_event_task_volunteers.date_volunteer,
 			tbl_program_event_task_volunteers.status
 			FROM
 			tbl_program_event_task_volunteers
