@@ -26,7 +26,7 @@ class Manage extends GS_Controller {
 	}
 	public function events()
 	{
-
+ 
 		$program_id = $this->uri->segment(2);
 		$program_url = $this->uri->segment(3);
 
