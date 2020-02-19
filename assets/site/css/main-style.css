@@ -2296,9 +2296,28 @@ button.btn:hover {
      height: 90px;
 }
 .au-workplacesharecontentcon{
+     text-align: left;
      margin-top: 10px;
      border: 1px solid rgba(0,0,0,0.1);
-     padding: 0.1em;
+     overflow-y: auto;
+     max-height: 300px;
+}
+.au-workplaceimg{
+     width: 100%;
+}
+.au-workplacecontent{
+     padding: 10px;
+}
+.au-workplacecontenttitle{
+     display: block;
+     font-size: 16px;
+     font-weight: bold;
+}
+.au-workplacecontenttext{
+     margin-top: 10px;
+     display: block;
+     font-size: 14px;
+     font-weight: normal;
 }
 /*Extra small devices (portrait phones, less than 576px)*/
 

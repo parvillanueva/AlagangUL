@@ -44,13 +44,15 @@ class Job extends CI_Controller {
 				);
 			}
 
+			echo "<pre>";
 			if(@$data[0]){
 				if(count($data[0]["Events"]) > 0){
 					$data['program_list'] = $data;
 					$data['user_name'] = $user_name;
 
 					$content = $this->load->view("site/job/email", $data);
-					echo $content;
+					$email_body = htmlspecialchars($content->output->final_output);
+					// echo $email_body;
 					// print_r($content);
 					// $data = array(
 					// 	'from' 		=> "phpdev.unilab@gmail.com",
