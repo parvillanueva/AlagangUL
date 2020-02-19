@@ -125,7 +125,7 @@ p {
 }
 
 .au-footer img {
-     max-width: 180px;
+     max-width: 220px;
 }
 
 .au-pf a:hover {
@@ -1196,7 +1196,7 @@ a.au-lnk:hover>* {
 }
 
 .au-eventswrapper .au-eventthumbnail .au-eventimg{
-     max-height: 221px;
+     max-height: 244px;
 }
 
 .au-eventthumbnail::before {
@@ -1993,17 +1993,17 @@ a.au-lnk:hover>* {
 }
 
 .au-workplace a {
-     font-size: 11px;
+     font-size: 12px;
      overflow-wrap: break-word;
 }
 
 .au-workplace label {
-     font-size: 12px;
+     font-size: 13px;
      margin-bottom: 0px;
 }
 
 .au-workplace p {
-     font-size: 10px !important;
+     font-size: 11px !important;
 }
 
 .au-workplace>.row>.col-md-12>.col-md-10 img {
@@ -2234,6 +2234,9 @@ button.btn:hover {
 }
 .au-exfilter button.btn-primary{
      margin: 0px;
+}
+.au-form .form-control[readonly]{
+     background-color: #fff;
 }
 /*Extra small devices (portrait phones, less than 576px)*/
 

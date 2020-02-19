@@ -1,5 +1,5 @@
 var modal = '';
-modal += '<div class="modal fade" id="bootstrapShowModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+modal += '<div class="modal fade" id="bootstrapShowModal"  data-backdrop="static"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">';
 modal += '  <div class="modal-dialog" role="document">';
 modal += '      <div class="modal-content">';
 modal += '          <div class="modal-body" id="confirmmessage"></div>';

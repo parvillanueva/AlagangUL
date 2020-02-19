@@ -36,7 +36,7 @@
 						<div class="col-lg col-sm-6">
 							<span class="au-stitle">Schedule</span>
 							<div class="form-row">
-								<input type="text" class="form-control" id="date_input" placeholder="Type a keyword" name="date">
+								<input type="text" class="form-control" id="date_input" readonly="true" placeholder="Type a keyword" name="date">
 			  				</div>
 						</div>
 						<div class="col-lg col-sm-6">
