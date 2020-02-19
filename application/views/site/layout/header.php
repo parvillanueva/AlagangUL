@@ -12,7 +12,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <?php
-            $fullurl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+            $request_uri = htmlspecialchars($_SERVER['REQUEST_URI']);
+            $fullurl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$request_uri";
             $url = str_replace(base_url(), '', $fullurl);
             if($fullurl == base_url())
             {
