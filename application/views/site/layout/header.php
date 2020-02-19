@@ -45,8 +45,8 @@
         ?>
         
         <!-- Scripts -->
-         <script type="text/javascript" src="<?= base_url();?>/assets/js/jquery.min.js" ></script>
-        <script type="text/javascript" src="<?= base_url();?>/assets/js/bootstrap.min.js" ></script>
+        <script type="text/javascript" src="<?= base_url();?>/assets/js/jquery.min.js" ></script>
+        <script type="text/javascript" src="<?= base_url();?>/assets/js/bootstrap.min.js" ></script>		
         <script type="text/javascript" src="<?= base_url();?>/assets/js/masking.js" ></script>
         <script type="text/javascript" src="<?= base_url();?>/assets/js/numeral.min.js" ></script>
         <script type="text/javascript" src="<?= base_url();?>/cms/js/jquery-ui.js" ></script>
@@ -60,6 +60,7 @@
         <!-- bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="https://use.typekit.net/scj2ogv.css">
         <link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/site/css/bootstrap.min.css">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/site/slick/slick.css">
         <link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/site/slick/slick-theme.css">
         <link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/site/css/main-style.css">
@@ -70,7 +71,7 @@
         <link href="<?= base_url();?>assets/site/css/dropzone.css" type="text/css" rel="stylesheet" />
         <script src="<?= base_url();?>assets/site/js/dropzone.js"></script>
         <script src="<?= base_url();?>assets/site/js/event.js"></script>
-
+		
         <script src="<?= base_url();?>assets/site/slick/slick.js"></script>
         
         <link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/site/css/daterangepicker.css" />

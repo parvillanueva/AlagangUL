@@ -851,8 +851,8 @@
     		$.each(data.result, function(x, y){
     			html += '<div class="col-lg-3 col-md-6 col-6">';
 				html += '	<div class="au-opthumbnail au-lnk au-plink">';
-				html += '		<a href="<?= base_url();?>'+y.path+'" data-toggle="lightbox" data-gallery="gallery" class="">';
-				html += '			<img src="<?= base_url();?>'+y.path+'" class="au-gl-thumbnailimg" onerror="imgErrorEvent(this);">';
+				html += '		<a href="<?= base_url();?>'+y.path+'" data-toggle="lightbox" data-gallery="gallery" class="toggle_image">';
+				html += '			<img src="<?= base_url();?>'+y.path+'" class="au-gl-thumbnailimg img-fluid" onerror="imgErrorEvent(this);">';
 				html += '		</a>';
 				if(is_admin == 1 || is_joined == 1){
 					html += '		<div class="au-gltitle" style="text-align:right; cursor:pointer"><font color="red"><span class="fa fa-trash" path-url= "'+y.path+'" path-id="'+y.id+'" id="delete_image"></span></font></div>';
@@ -865,6 +865,11 @@
 			count_image(data.count);
 		});
     }
+	
+	$(document).on("click", '[data-toggle="lightbox"]', function(event){
+		event.preventDefault();
+		$(this).ekkoLightbox();
+	});
 	
 	function get_testimonial(){
 		var url = "<?= base_url("site/events/get_testimonial");?>?event_id=<?= $event_details[0]['id']; ?>&limit=" + limit;
@@ -1051,11 +1056,6 @@
 			}
 		});
 	} */
-
-    $(document).on("click", '[data-toggle="lightbox"]', function(event) {
-		event.preventDefault();
-		$(this).ekkoLightbox();
-	});
 
     $(document).on("click", '#loadMore', function(event) {
 		event.preventDefault();
