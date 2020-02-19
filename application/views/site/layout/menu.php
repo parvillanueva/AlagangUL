@@ -77,7 +77,7 @@
 									</div>
 									<div class="au-inner">
 
-											<span class="au-accname"><?php
+											<span class="au-accname" title ="<?=  $user_details[0]->first_name . '' . $user_details[0]->last_name ?>" ><?php
 											$str_first = $user_details[0]->first_name;
 											$str_last = $user_details[0]->last_name;
 											$str_out_first = $str_first;
