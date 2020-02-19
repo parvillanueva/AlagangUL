@@ -88,6 +88,7 @@ class Manage extends GS_Controller {
 			tbl_programs.`name`,
 			tbl_programs.overview,
 			tbl_programs.area_covered,
+			tbl_programs.headline,
 			tbl_programs.created_by,
 			tbl_programs.create_date,
 			tbl_programs.update_date,
