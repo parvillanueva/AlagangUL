@@ -57,7 +57,7 @@
                     <div class="au-workplaceuser">
                     
                         <div class="au-workplaceavatarcon">
-                            <img src="assets/img/au-avatar.svg" class="au-workplaceavatar">
+                            <img src="<?=base_url()?>assets/img/au-avatar.svg" class="au-workplaceavatar">
                         </div>
                         <div class="au-workplaceuserdet">
                             <a href="#" class="au-lnk"><span class="au-workplaceusername">Juan Dela Cruz</span></a>
@@ -65,7 +65,7 @@
                         </div>
                     </div>
                     <div class="au-workplacesharecontentcon">
-                        <img src="assets/img/au-sample-thumbnail.jpg" class="au-workplaceimg">
+                        <img src="<?=base_url()?>ssets/img/au-sample-thumbnail.jpg" class="au-workplaceimg">
                         <div class="au-workplacecontent">
                             <span class="au-workplacecontenttitle">Lorem Ipsum is simply dummy text of the printing</span>
                             <span class="au-workplacecontenttext">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</span>
@@ -84,7 +84,7 @@
 <div class="modal fade text-center" id="sharesuccess">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-workplace">Share on <img src="assets/img/au-workplace.svg" class="au-workplacelogo"></div>
+                <div class="modal-workplace">Share on <img src="<?=base_url()?>assets/img/au-workplace.svg" class="au-workplacelogo"></div>
                 <div class="modal-body">
                     <span class="au-p6">Your post has been successfully shared.</span>
                     <div class="au-modalbtn text-center">
