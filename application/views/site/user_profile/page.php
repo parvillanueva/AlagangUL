@@ -125,6 +125,8 @@
 		} else{
 			$("#phone").addClass('mobile_number');
 		}
+		var password = $('#password').val();
+		var pass_check = checkPasswordStrength(password);
 		if(validate.standard("signups")){
 			var password = $('#password').val();
 			var pass_check = checkPasswordStrength(password);
@@ -157,9 +159,12 @@
 			return false;
 		} else {
 			if (password.match(number) && password.match(alphabets) && password.match(special_characters)) {
+				$('#invalid_pass').hide();
 				if(confirm_password(password, confirm_pass)){
+					$('#invalid_pass').hide();
 					return true;
 				} else{
+					$('#invalid_pass').show();
 					return false;
 				}
 				

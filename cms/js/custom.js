@@ -158,7 +158,7 @@ var validate = {
 					if(/^[a-zA-Z -]*$/.test(str) == false) {
 							counter++;
 							$(this).css('border-color','red');
-	          	$("<span class='validate_error_message' style='color: red;'>This field only required only Letters.<br></span>").insertAfter(this);
+	          	$("<span class='validate_error_message' style='color: red;'>This field only accept letters.<br></span>").insertAfter(this);
 					}
 				});
 
@@ -244,7 +244,7 @@ var validate = {
 					if(/^[a-zA-Z -]*$/.test(str) == false) {
 							counter++;
 							$(this).css('border-color','red');
-	          	$("<span class='validate_error_message' style='color: red;'>This field only required only Letters.<br></span>").insertAfter(this);
+	          	$("<span class='validate_error_message' style='color: red;'>This field only accept letters.<br></span>").insertAfter(this);
 					}
 				});
 
@@ -343,7 +343,7 @@ var validate = {
 										console.log(str);
 						counter++;
 						$(this).css('border-color','red');
-		  				$("<span class='validate_error_message' style='color: red;'>This field only required only Letters.<br></span>").insertAfter(this);
+		  				$("<span class='validate_error_message' style='color: red;'>This field only accept letters.<br></span>").insertAfter(this);
 					}
 				//});
 		    }
@@ -422,7 +422,7 @@ var validate = {
 					if(/^09\d{9}$/.test(number) === false){
 						counter++;
 						$(this).css('border-color','red');
-						$("<span style='color: red;'>Invalid mobile number.<br></span>").insertAfter(this);
+						$("<span class='validate_error_message' style='color: red;'>Invalid mobile number.<br></span>").insertAfter(this);
 					
 					}
 				} else{
