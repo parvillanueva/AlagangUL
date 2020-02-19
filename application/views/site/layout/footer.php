@@ -53,6 +53,7 @@
 <script src="<?=base_url()?>assets/site/js/jquery-3.4.1.min.js" type="text/javascript"></script>
 <script src="<?=base_url()?>assets/site/js/popper.min.js" text="type/javascript"></script>
 <script src="<?=base_url()?>assets/site/js/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="<?=base_url();?>assets/site/js/ekko-lightbox.js"></script>
 <script src="<?=base_url()?>assets/site/js/script.js"></script>
 <script src="<?=base_url()?>assets/site/js/moment.min.js" type="text/javascript" ></script>
 <script src="<?=base_url()?>assets/site/js/daterangepicker.js" type="text/javascript" ></script>

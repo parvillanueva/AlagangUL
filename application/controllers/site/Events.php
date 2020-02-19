@@ -549,15 +549,16 @@ class Events extends GS_Controller {
 
 	public function upload(){
 		$ds = DIRECTORY_SEPARATOR; 
-		$storeFolder = "uploads/events/gallery/".$_GET['event_id'];
+		$storeFolder = "uploads/events/gallery/".$_GET['event_id']. "/". date('Y_m_d');
 
 		if (!file_exists($storeFolder)) {
 		    mkdir($storeFolder, 0777, true);
 		}
 		if (!empty($_FILES)) {
 		    $tempFile = $_FILES['file']['tmp_name'];                   
-		    $targetPath =  $storeFolder . "/";  
-		    $targetFile =  $targetPath. str_replace(" ", "_", strtolower($_FILES['file']['name'])); 
+		    $targetPath =  $storeFolder . "/";
+			$file_name_new = $this->clean_str($_FILES['file']['name']);
+		    $targetFile =  $targetPath. str_replace(" ", "_", strtolower($file_name_new)); 
 		    move_uploaded_file($tempFile,$targetFile);
 
 		    $data = array(
@@ -568,6 +569,12 @@ class Events extends GS_Controller {
 		    );
 		    echo $this->Gmodel->save_data('tbl_program_event_gallery', $data);
 		}
+	}
+	
+	function clean_str($string) {
+	   $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+
+	   return preg_replace('/[^A-Za-z0-9-.\-]/', '', $string); // Removes special chars.
 	}
 
 	public function get_gallery(){
