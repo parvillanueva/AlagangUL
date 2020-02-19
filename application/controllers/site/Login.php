@@ -28,10 +28,23 @@ class Login extends CI_Controller {
 			$sql_result = $this->Gmodel->get_query($table,$where);
 
 			if(count($sql_result)>0){
+				if($module=='program'){
+					$title = $sql_result[0]->name;
+					$image = $sql_result[0]->image_thumbnail;
+					$desc = $sql_result[0]->overview;
+				}
+				else{
+					$title = $sql_result[0]->title;
+					$image = $sql_result[0]->image;
+					$desc = date("m/d/Y h:i a", strtotime($sql_result[0]->when));
+					$file = fopen("./test.txt", "w");        
+					fwrite($file, $image);
+					fclose($file);
+				}
 				$data['og'] = true;
-				$data['og_title'] = $sql_result[0]->name;
-				$data['og_image'] = $sql_result[0]->image_thumbnail;
-				$data['og_desc'] = $sql_result[0]->overview;
+				$data['og_title'] = $title;
+				$data['og_image'] = $image;
+				$data['og_desc'] = $desc;
 				$data['og_url'] = 'login?share='.$module.'-'.$id;
 				
 			}		
