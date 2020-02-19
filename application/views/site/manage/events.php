@@ -10,7 +10,15 @@
 </style>
 <div class="container-fluid au-heading">
 	<div class="au-container au-padding">
-		<strong class="au-h5 no-margin"><?= $details[0]->name;?></strong>
+		<strong class="au-h5 no-margin" style="max-width: 100%;" title = "<?= $details[0]->name; ?>">
+			<?php 
+				$name = $details[0]->name;
+				if (strlen($name) > 40){
+					$name = substr($name, 0, 35) . '...';
+				}
+				echo $name;
+			?>
+		</strong>
 
 		<button class="au-btn" id="btn_Closebtn" style="background-color: #f44336;"><i class="fa fa-times"></i>Close</button>
 		<button class="au-btn" id="btn_addEvent" style="background-color: #11295b;"><i class="fa fa-plus"></i>Add Event</button>

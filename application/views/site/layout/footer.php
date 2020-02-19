@@ -82,7 +82,7 @@ $(document).ready(function(){
                 keyboard: false
             });
             idleState = true;
-        }, 60000);
+        }, 1800000);
 
         $(document).on('click','#modalClose',function(){
             location.href = "<?= base_url('log-out')?>"
