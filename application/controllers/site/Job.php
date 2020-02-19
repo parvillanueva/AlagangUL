@@ -36,12 +36,13 @@ class Job extends CI_Controller {
 							"DownloadLink" 	=> base_url("job/download") . "/?programeventid=" . $events_value->id
 						);
 					}
+					$data[] = array(
+						"ProgramName"	=> $program_name,
+						"Events"		=> $event_data
+					);
 				}
 
-				$data[] = array(
-					"ProgramName"	=> $program_name,
-					"Events"		=> $event_data
-				);
+				
 			}
 
 			echo "<pre>";
@@ -95,7 +96,9 @@ class Job extends CI_Controller {
 		$worksheet->SetCellValueByColumnAndRow(1, 7, "Name");
 		$worksheet->SetCellValueByColumnAndRow(2, 7, "Email");
 		$worksheet->SetCellValueByColumnAndRow(3, 7, "Task");
-		$worksheet->SetCellValueByColumnAndRow(4, 7, "Sign up");
+		$worksheet->SetCellValueByColumnAndRow(4, 7, "Status");
+		$worksheet->SetCellValueByColumnAndRow(5, 7, "Badge");
+		$worksheet->SetCellValueByColumnAndRow(6, 7, "Sign up");
 
 
 		$query = "SELECT
@@ -108,26 +111,32 @@ class Job extends CI_Controller {
 			INNER JOIN tbl_program_event_task ON tbl_program_event_task_volunteers.event_task_id = tbl_program_event_task.id
 			INNER JOIN tbl_users ON tbl_program_event_task_volunteers.user_id = tbl_users.id
 			WHERE
-			tbl_program_event_task_volunteers.event_id = ". $event_id." AND
-			tbl_program_event_task_volunteers.`status` >= 0
-		";
+			tbl_program_event_task_volunteers.event_id = ". $event_id;
 		$result = $this->db->query($query)->result();
 		$row = 8;
-		foreach ($result as $key => $value) {
-			$worksheet->SetCellValueByColumnAndRow(0, $row, $key + 1);
-			$worksheet->SetCellValueByColumnAndRow(1, $row, $value->Name);
-			$worksheet->SetCellValueByColumnAndRow(2, $row, $value->email_address);
-			$worksheet->SetCellValueByColumnAndRow(3, $row, $value->task);
-			$worksheet->SetCellValueByColumnAndRow(4, $row, $value->date_volunteer);
-			$row++;
+		if(count($result) > 0){
+			foreach ($result as $key => $value) {
+				$worksheet->SetCellValueByColumnAndRow(0, $row, $key + 1);
+				$worksheet->SetCellValueByColumnAndRow(1, $row, $value->Name);
+				$worksheet->SetCellValueByColumnAndRow(2, $row, $value->email_address);
+				$worksheet->SetCellValueByColumnAndRow(3, $row, $value->task);
+				$worksheet->SetCellValueByColumnAndRow(4, $row, $value->status);
+				$worksheet->SetCellValueByColumnAndRow(5, $row, $value->date_volunteer);
+				$worksheet->SetCellValueByColumnAndRow(6, $row, $value->date_volunteer);
+				$row++;
+			}
+		} else {
+			$worksheet->SetCellValueByColumnAndRow(0, 8, "No Record found.");
 		}
 
 
 		$worksheet->getColumnDimension('A')->setWidth(5);
-		$worksheet->getColumnDimension('B')->setAutoSize(TRUE);
-		$worksheet->getColumnDimension('C')->setAutoSize(TRUE);
-		$worksheet->getColumnDimension('D')->setAutoSize(TRUE);
-		$worksheet->getColumnDimension('E')->setAutoSize(TRUE);
+		$worksheet->getColumnDimension('B')->setWidth(37);
+		$worksheet->getColumnDimension('C')->setWidth(27);
+		$worksheet->getColumnDimension('D')->setWidth(37);
+		$worksheet->getColumnDimension('E')->setWidth(20);
+		$worksheet->getColumnDimension('F')->setWidth(20);
+		$worksheet->getColumnDimension('G')->setWidth(20);
 
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 		header('Content-Disposition: attachment;filename="'.strtoupper($event_details[0]->title) . ' ' . date("F-d-Y h-i-a") .' .xlsx"');
