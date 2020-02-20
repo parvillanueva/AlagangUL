@@ -22,8 +22,8 @@
 								<!-- otp sent message -->
 								<div class="au-form-box au-flexcenter">
 									<div class="au-inner">
-										<span class="au-h4">Password Changed!</span><span class="au-p2">Your password has been changed successfully.</span>
-										<span class="au-p2"><a href="<?= base_url('login'); ?>">Click here</a> to go back to the login screen.</span>
+										<span class="au-h4">Password Changed!</span><span class="au-p4">Your password has been changed successfully.</span>
+										<span class="au-p4"><a href="<?= base_url('login'); ?>"><strong>Click here</strong></a> to go back to the login screen.</span>
 									</div>
 								</div>
 								

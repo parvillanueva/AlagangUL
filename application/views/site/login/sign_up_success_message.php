@@ -22,14 +22,11 @@
 								<!-- otp sent message -->
 								<div class="au-form-box au-flexcenter">
 									<div class="au-inner">
-										<span class="au-h4">Thank you!</span><span class="au-p2">You have successfully registered.</span>
-										<span class="au-p2"><a href="<?= base_url('login'); ?>">Click here</a> to login.</span>
+										<span class="au-h4">Thank you!</span><span class="au-p4">You have successfully registered.</span>
+										<span class="au-p4"><a href="<?= base_url('login'); ?>"><strong>Click here</strong></a> to login.</span>
 									</div>
 								</div>
-								
 							</div>
-							
-
 						</div>
 					</div>
 				</div>

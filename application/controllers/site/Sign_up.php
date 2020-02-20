@@ -54,7 +54,8 @@ class Sign_up extends CI_Controller {
 	
 	function email_check($email){
 		$arrWhere = array(
-			'email_address' => $email
+			'email_address' => $email,
+			'status' => 1
 		);
 		
 		$sql = $this->Global_model->get_list_query('tbl_users', $arrWhere);
@@ -174,12 +175,9 @@ class Sign_up extends CI_Controller {
 												<td>
 													<p style="font-size:14px;font-weight:300;color: #000;line-height: 24px;">
 														<b style="font-size:15px;">Hello Guest;</b><br>
-														You have requested online access from our website. We have generated a One-Time Registration Code for you, this
-														will verify that you have requested access. This One-Time Registration Code is time sensitive and valid for a
-														single use. On subsequent logins you will not need to enter this One-Time Registration Code.
+														You have requested online access for the Alagang Unilab online portal.  We have generated a One-Time Registration Code for you.  Kindly input this code in the sign up form accordingly.
 													</p>
 													<p style="font-size:17px;font-weight:600;margin: 30px 0px;">Your One-Time Registration Code is: <span style="color: red;">'.$otp.'</span></p>
-													<p style="font-size:14px;font-weight:300;color: #000;line-height: 24px;">Please enter this into the form that you have accessed that thank you for utilizing our services.</p>
 												</td>
 											</tr>
 										</table>
