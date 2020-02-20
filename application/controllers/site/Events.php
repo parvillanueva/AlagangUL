@@ -46,7 +46,8 @@ class Events extends GS_Controller {
 			'event_id'	 	=> $_GET['event_id'],
 			'event_task_id' => $_GET['event_task_id'],
 			'user_id'		=> $user_id,
-			'date_volunteer'=> date('Y-m-d H:i:s')
+			'date_volunteer'=> date('Y-m-d H:i:s'),
+			'status'		=> 1
 			);
 		$data_array2 = $data_array;
 
@@ -54,7 +55,7 @@ class Events extends GS_Controller {
 		$this->db->query("DELETE FROM tbl_users_points_approved WHERE event_id = '".$_GET['event_id']."' AND user_id ='".$user_id."'");
 		$this->db->query("DELETE FROM tbl_users_badge WHERE event_id = '".$_GET['event_id']."' AND user_id ='".$user_id."'");
 		if($_GET['is_submit']==0){
-			
+			$this->db->query("DELETE FROM tbl_program_event_task_volunteers WHERE event_id = '".$_GET['event_id']."' AND user_id ='".$user_id."'"." AND event_task_id ='".$_GET['event_task_id']."'");
 		}
 		else{
 			$this->db->query("UPDATE tbl_program_event_task_volunteers SET status = -3 WHERE event_id = '".$_GET['event_id']."' AND user_id ='".$user_id."'");
@@ -92,8 +93,10 @@ class Events extends GS_Controller {
 
 		$data['program_details'] = $this->get_program_details($program_id, $program_alias);
 		$data['event_details'] = $this->get_event_details($event_id, $event_alias);
-		
 
+		$data['testimonials'] = $this->get_testimonial(1,4,$event_id,0,"all");
+		$data['testimonials_count'] = ceil($this->get_testimonial(1,9999,$event_id,0,"count")/4);
+		$data['galleries'] = $this->get_gallery(4,$event_id,0);
 		//check event
 		$page_Status = @$data['event_details'][0]['status'];
 		$is_admin = @$data['event_details'][0]['is_admin'];
@@ -577,39 +580,66 @@ class Events extends GS_Controller {
 	   return preg_replace('/[^A-Za-z0-9-.\-]/', '', $string); // Removes special chars.
 	}
 
-	public function get_gallery(){
-		header('Content-Type: application/json');
+	function get_gallery($limit,$event_id,$is_load_page,$is_admin=null,$is_joined=null){
+		//header('Content-Type: application/json');
 
-		$event_id = $_GET['event_id'];
-		$limit = $_GET['limit'];
+		//$event_id = $_GET['event_id'];
+		//$limit = $_GET['limit'];
 		$gallery_query_count = "SELECT count(*) as total_data FROM tbl_program_event_gallery WHERE event_id = " . $event_id ." and status = '1'";
 		$gallery_result_count = $this->db->query($gallery_query_count)->result();
-		$gallery_query = "SELECT * FROM tbl_program_event_gallery WHERE event_id = " . $event_id . " and status = '1' LIMIT " . $limit;
+		$gallery_query = "SELECT * FROM tbl_program_event_gallery WHERE event_id = " . $event_id . " and status = '1' ORDER BY create_date DESC LIMIT " . $limit;
 		$gallery_result = $this->db->query($gallery_query)->result();
 		$array_data = array(
 			'result' => $gallery_result,
 			'count' => $gallery_result_count[0]->total_data
 		);
-		echo json_encode($array_data);
+		if($is_load_page==0){
+			return $array_data;
+		}
+		else{
+			$data['galleries'] = $array_data['result'];
+			$data['galleries_pages'] = $array_data['count'];
+			$data['is_admin'] = $is_admin;
+			$data['is_joined'] = $is_joined;
+			$this->load->view('site/events/gallery',$data);
+		}
+		
 	}
 	
-	public function get_testimonial(){
-		header('Content-Type: application/json');
-		
-		$event_id = $_GET['event_id'];
-		$limit = $_GET['limit'];
-		$testimonial_query = "SELECT * FROM tbl_program_event_testimonials WHERE event_id = " . $event_id ;
-		$testimonial_result = $this->db->query($testimonial_query)->result();
-		$arr_testi = array();
-		foreach($testimonial_result as $tes_loop){
-			$array_data[] = array(
-				'testimonial' 	=> $tes_loop->testimonial,
-				'badge'			=> $this->get_volunteer_badge($event_id, $tes_loop->user_id),
-				'picture' 		=> $this->profile_image($tes_loop->user_id),
-				'date_posted'	=> date('F d, Y h:s A', strtotime($tes_loop->create_date))
-			);
+	function get_testimonial($page,$limit,$event_id,$is_load_page,$select){
+		$x =0;
+		if($select=='all'){
+			$select = 'testimonial,user_id,create_date';
+			$x = 1;
 		}
-		echo json_encode($array_data);
+		else{
+			$select = 'COUNT(id) as count';
+		}
+		$start = ($page-1) * $limit;
+		$testimonial_query = "SELECT ".$select." FROM tbl_program_event_testimonials WHERE event_id = " . $event_id." ORDER BY create_date DESC LIMIT ".$start.", ".$limit;
+		$testimonial_result = $this->db->query($testimonial_query)->result();
+		if($x==0){
+			return $testimonial_result[0]->count;
+		}
+		else{
+			$array_data = array();
+			foreach($testimonial_result as $tes_loop){
+				$array_data[] = array(
+					'testimonial' 	=> $tes_loop->testimonial,
+					'badge'			=> $this->get_volunteer_badge($event_id, $tes_loop->user_id),
+					'picture' 		=> $this->profile_image($tes_loop->user_id),
+					'date_posted'	=> date('F d, Y h:s A', strtotime($tes_loop->create_date))
+				);
+			}
+			if($is_load_page==0){
+				return $array_data;
+			}
+			else{
+				$data['testimonials'] = $array_data;
+				$data['testimonials_page'] = (count($array_data)>0) ? 1 : 0 ;
+				$this->load->view('site/events/testimonials',$data);
+			}
+		}
 	}
 	
 	public function profile_image($user_id){
@@ -618,7 +648,8 @@ class Events extends GS_Controller {
 		$data_arr = array(
 			'image_path' => $user_result[0]->imagepath,
 			'email' => $user_result[0]->email_address,
-			'name' => $user_result[0]->first_name.' '.$user_result[0]->last_name
+			'name' => $user_result[0]->first_name.' '.$user_result[0]->last_name,
+			'user_id' => $user_result[0]->id
 		);
 		return $data_arr;
 	}
