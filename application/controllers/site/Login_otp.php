@@ -33,21 +33,38 @@ class Login_otp extends CI_Controller {
 		);
 		$result = $this->Gmodel->get_query('tbl_otp_record', $arr);
 		if(!empty($result)){
-			$email_data = $result[0]->email_address;
-			$email_check = $this->email_exist($email_data);
-			if($email_check['result'] == 'empty'){
-				$insert_result = $this->create_user($email_data);
-				if($insert_result){
-					$email_check = $this->email_exist($email_data);
+			$expiry_date = $this->expiration_date($result[0]->email_address);
+			if($expiry_date){
+				$email_data = $result[0]->email_address;
+				$email_check = $this->email_exist($email_data);
+				if($email_check['result'] == 'empty'){
+					$insert_result = $this->create_user($email_data);
+					if($insert_result){
+						$email_check = $this->email_exist($email_data);
+					}
 				}
+				$arr = array('responce'=>'success', 'user_id'=>$email_check['user_id']);
+				echo json_encode($arr);
+			} else{
+				$arr = array('responce'=>'expired');
+				echo json_encode($arr);
 			}
-			$arr = array('responce'=>'success', 'user_id'=>$email_check['user_id']);
-			echo json_encode($arr);
+			
 		} else{
 			$arr = array('responce'=>'failed');
 			echo json_encode($arr);
 		}
 		//$this->session->sess_destroy();
+	}
+	
+	public function expiration_date($id){
+		$data = "SELECT * FROM tbl_otp_record Where id='".$id."' AND expiration_date = '".date('Y-m-d H:i:s')."' AND expiration_date < '".date('Y-m-d H:i:s')."'";
+		$result = $this->db->query($data)->result();
+		if(empty($result)){
+			return true;
+		} else{
+			return false;
+		}
 	}
 	
 	public function check_email($token){

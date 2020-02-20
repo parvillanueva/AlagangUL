@@ -97,12 +97,15 @@ class Sign_up extends CI_Controller {
 	}
 	
 	function otp_save($otp, $email, $token){
-	date_default_timezone_set('Asia/Manila'); 
+	date_default_timezone_set('Asia/Manila');
+		$date = date('Y-m-d H:i:s');
+		$expiry = date('Y-m-d H:i:s', strtotime('+30 minutes',strtotime($date)));
 		$arrInsert = array(
 			'otp_code' => $otp,
 			'email_address' => $email,
 			'token' => $token,
-			'create_date' => date('Y-m-d H:i:s'),
+			'create_date' => $date,
+			'expiration_date'=> $expiry
 		);
 		$this->Gmodel->save_data('tbl_otp_record', $arrInsert);
 	}

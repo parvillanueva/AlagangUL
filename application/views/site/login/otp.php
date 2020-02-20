@@ -18,6 +18,7 @@
 				<div class="au-form" id="otp">
 					<span class="au-h4">Input One-Time Password</span>
 					<div class="alert alert_failed alert-warning">Incorrect OTP!</div>
+					<div class="alert alert_expiry alert-warning">OTP is already expired!</div>
 					<span class="au-p2">Please input the one-time-password that has been sent to your email address.</span>
 					<div class="form-row">
 						<div class="col">
@@ -40,6 +41,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$(".alert_failed").hide();
+		$(".alert_expiry").hide();
 	});
 	$(".custom-file-input").on("change", function() {
 		var fileName = $(this).val().split("\\").pop();
@@ -60,6 +62,9 @@
 					//modal.loading(false);
 					BM.loading(true);
 					window.location.href = "<?php echo base_url().'user_profile' ?>";
+				} else if(obj.responce == 'expired'){
+					$(".alert_expiry").show();
+					$('#otp_data').val(otp);
 				} else{
 					$(".alert_failed").show();
 					$('#otp_data').val(otp);
