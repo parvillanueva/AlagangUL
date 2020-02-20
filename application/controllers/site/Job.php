@@ -45,14 +45,13 @@ class Job extends CI_Controller {
 				
 			}
 
-			echo "<pre>";
 			if(@$data[0]){
 				if(count($data[0]["Events"]) > 0){
 					$data['program_list'] = $data;
 					$data['user_name'] = $user_name;
 
-					$content = $this->load->view("site/job/email", $data);
-					$email_body = htmlspecialchars($content->output->final_output);
+					$content = "";
+					$content = $this->load->view("site/job/email", $data, true);
 					// echo $email_body;
 					// print_r($content);
 					$email_data = array(
@@ -60,10 +59,9 @@ class Job extends CI_Controller {
 						'from_name' => "Alagang UNILAB",
 						'to' 		=> $user_email,
 						'subject' 	=> "VOLUNTEER LIST",
-						'content' 	=> $email_body,
+						'content' 	=> $content,
 					);
 
-					print_r($email_data);
 					echo $this->sndgrd->send($email_data);
 				}
 			}

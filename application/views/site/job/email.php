@@ -43,7 +43,7 @@
                                             <tr>
                                                 <td style="padding: 5px; border-right: 1px solid #eee; border-bottom: 1px solid #eee;"><span><?= $b['EventTitle'];?></span></td>
                                                 <td style="padding: 5px; border-right: 1px solid #eee; border-bottom: 1px solid #eee; width: 245px;"><span><?= $b['EventDate'];?></span></td>
-                                                <td style="padding: 5px; border-right: 1px solid #eee; border-bottom: 1px solid #eee; width: 70px;"><a href="<?= $b['DownloadLink'];?>" target="_blank">Download</a></td>
+                                                <td style="padding: 5px; border-right: 1px solid #eee; border-bottom: 1px solid #eee; width: 70px;"><a href="<?= $b['DownloadLink'];?>">Download</a></td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>
