@@ -10,7 +10,7 @@
 						</button> -->
 					</div>
 					<a href="<?= base_url();?>" class="au-navbar-brand navbar-brand">
-						<img src="<?php echo base_url().'assets/img/au-logo.png'?>" alt="Alagang Unilab Logo" class="au-logo">
+						<img src="<?=base_url()?>assets/site/img/au-logo.png" alt="Alagang Unilab Logo" class="au-logo">
 					</a>
 					<div class="d-lg-none">
 						<!-- <img src="assets/img/au-avatar.svg" class="au-avatar"> -->
