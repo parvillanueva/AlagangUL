@@ -354,6 +354,9 @@
             	if(count == total){
             		get_list();
             	} 
+            	else{
+            		count++;
+            	}
 			});
         });
 	}
