@@ -1,3 +1,10 @@
+<style type="text/css">
+	li {
+	    margin-bottom: 10px;
+	    margin-top: 10px;
+	}
+</style>
+
 <div class="container-fluid au-heading">
 	<div class="au-container au-padding">
 		<!-- <span class="au-h5 no-margin">About Alagang Unilab</span> -->
