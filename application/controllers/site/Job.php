@@ -33,7 +33,7 @@ class Job extends CI_Controller {
 							"EventId" 		=> $events_value->id,
 							"EventTitle" 	=> $events_value->title,
 							"EventDate" 	=> date("F d, Y h:i a",strtotime($events_value->when)),
-							"DownloadLink" 	=> base_url("job/download") . "/?programeventid=" . $events_value->id
+							"DownloadLink" 	=> base_url("job/download") . "/?programeventid=" . $events_value->id . "&date_requested=" . date("Y-m-d H:i:s")
 						);
 					}
 					$data[] = array(
@@ -55,16 +55,16 @@ class Job extends CI_Controller {
 					$email_body = htmlspecialchars($content->output->final_output);
 					// echo $email_body;
 					// print_r($content);
-					// $data = array(
-					// 	'from' 		=> "phpdev.unilab@gmail.com",
-					// 	'from_name' => "ALAGANG UNILAB",
-					// 	'to' 		=> $to,
-					// 	'subject' 	=> "VOLUNTEER LIST : " . $event_details[0]->title,
-					// 	'content' 	=> $html,
-					// );
+					$email_data = array(
+						'from' 		=> "alagangunilab@unilab.com.ph",
+						'from_name' => "Alagang UNILAB",
+						'to' 		=> $user_email,
+						'subject' 	=> "VOLUNTEER LIST",
+						'content' 	=> $email_body,
+					);
 
-					// print_r($data);
-					//$this->sndgrd->send($data);
+					print_r($email_data);
+					echo $this->sndgrd->send($email_data);
 				}
 			}
 

@@ -66,8 +66,7 @@
                         <td>
                             <center style="width:500px;margin-left:auto;margin-right:auto;">
                                 <p align="center" style="color: #fff; width: 500px; font-size: 14px; margin: 15px auto 15px;">
-                                    If you received this email by mistake, send us a report. Lorem ipsum dolor sit amet conserctetuer adipiscing
-                                    nomnumny di dalam hati nay.
+                                    If you received this email by mistake, send us a report.
                                 </p>
                             </center>
                         </td>
