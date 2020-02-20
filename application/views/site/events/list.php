@@ -55,9 +55,12 @@
 							<div class="form-row">
 								<select class="form-control custom-select" id="task_select">
 									<option value="" selected>All Tasks</option>
-									<?php foreach($event_task as $etloop){ ?>
-										<option value="<?= $etloop->task;?>"><?= $etloop->task;?></option>
-									<?php } ?>
+									<?php foreach($event_task as $ttask=>$etloop){ ?>
+										<?php if(!empty($etloop['task'])){ ?>
+										<optgroup label="<?= $ttask;?>">
+											<?php foreach($etloop['task'] as $task){?>
+												<option value="<?= $task->task;?>" badge-id="<?= $etloop['badge_id'];?>" ><?= $task->task;?></option>
+										<?php } } }?>
 				  				</select>
 			  				</div>
 						</div>
@@ -111,13 +114,15 @@
 		var search_box = $('#search_input').val();
 		var location = $('#location').val();
 		var task = $('#task_select').val();
+		var badge_id = $('#task_select option:selected').attr('badge-id');
 		var date = $('#date_input').val();
 		var url = "<?= base_url('site/events/submit_filter') ?>";
 		var data = {
 			search_box : search_box,
 			location : location,
 			task : task,
-			date : date
+			date : date,
+			badge_id : badge_id
 		};
 		aJax.post(url, data, function(result){
 			setTimeout(function(){ 
