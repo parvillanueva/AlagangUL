@@ -164,7 +164,8 @@ class Events extends GS_Controller {
 			'location' => $_POST['location'],
 			'task' => $_POST['task'],
 			'date_from' => $date_from,
-			'date_to' => $date_to
+			'date_to' => $date_to,
+			'badge_id' => $_POST['badge_id']
 		);
 		$data_arry = $this->get_details($arr);
 		if(!empty($data_arry)){
@@ -190,7 +191,7 @@ class Events extends GS_Controller {
 		}
 			$where_task = '';
 		if($arr['task'] != ''){
-			$task_event = $this->event_task($arr['task']);
+			$task_event = $this->event_task($arr['task'], $arr['badge_id']);
 			$eve = '';
 			foreach($task_event as $eve_loop){
 				$eve .= "id like '%".$eve_loop->event_id."%' OR ";
@@ -276,8 +277,8 @@ class Events extends GS_Controller {
 		return $events;
 	}
 	
-	public function event_task($task_title){
-		$data = "SELECT event_id FROM tbl_program_event_task where task like '%".$task_title."%'";
+	public function event_task($task_title, $badge_id){
+		$data = "SELECT event_id FROM tbl_program_event_task et INNER JOIN tbl_program_event_task_badge etb ON et.id=etb.event_task_id where et.task like '%".$task_title."%' and etb.badge_id='".$badge_id."'";
 		$result = $this->db->query($data)->result();
 		return $result;
 	}
@@ -309,9 +310,22 @@ class Events extends GS_Controller {
 	}
 	
 	public function get_event_tasks_all(){
-		$sql = "Select * From tbl_program_event_task group by task";
-		$result = $this->db->query($sql)->result();
-		return $result;
+		$sql = "Select * From tbl_badges";
+		$result_badges = $this->db->query($sql)->result();
+		$arr = array();
+		foreach($result_badges as $lbadge){
+			$arr[$lbadge->name] = array(
+				'task' => $this->task_event_set($lbadge->id),
+				'badge_id' => $lbadge->id
+			);
+		}
+		return $arr;
+	}
+	
+	public function task_event_set($badgeId){
+		$sql = "Select task From tbl_program_event_task tblpret INNER JOIN tbl_program_event_task_badge tblpetb ON tblpret.id=tblpetb.event_task_id WHERE tblpetb.badge_id='".$badgeId."' GROUP BY tblpret.task";
+		$result_badges = $this->db->query($sql)->result();
+		return $result_badges;
 	}
 
 	public function check_is_allowed($event_id,$date){
