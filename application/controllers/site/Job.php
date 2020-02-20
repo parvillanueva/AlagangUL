@@ -4,9 +4,76 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Job extends CI_Controller {
 
+	public function index(){
+		$users = $this->Gmodel->get_query("tbl_users","status = 1");
+		foreach ($users as $users_key => $users_value) {
+			$data = array();
+			$user_id = $users_value->id;
+			$user_email = $users_value->email_address;
+			$user_name = $users_value->first_name . " " . $users_value->last_name;
 
+			$query = 'SELECT
+				tbl_programs.`name` AS program_name,
+				tbl_program_events.title AS event_name,
+				tbl_program_event_task.task AS task,
+				tbl_program_event_task.id AS task_id,
+				tbl_program_event_task.required_volunteers AS required_volunteers,
+				COUNT(tbl_program_event_task_volunteers.id) as joined_volunteers
+				FROM
+				tbl_program_event_task
+				INNER JOIN tbl_program_events ON tbl_program_event_task.event_id = tbl_program_events.id
+				INNER JOIN tbl_programs ON tbl_program_events.program_id = tbl_programs.id
+				LEFT JOIN tbl_program_event_task_volunteers ON tbl_program_event_task_volunteers.event_task_id = tbl_program_event_task.id
+				WHERE
+				tbl_programs.created_by = '.$user_id.'
+				GROUP BY tbl_program_event_task.id
+				ORDER BY
+				program_name ASC';
+			$result = $this->db->query($query)->result();
 
-	public function index()
+			$data = array();
+			foreach ($result as $key => $value) {
+
+				$badge_query = 'SELECT
+					GROUP_CONCAT(tbl_badges.`name`) as Badges
+					FROM
+					tbl_program_event_task_badge
+					INNER JOIN tbl_badges ON tbl_program_event_task_badge.badge_id = tbl_badges.id
+					WHERE tbl_program_event_task_badge.event_task_id = '.$value->task_id.'
+					GROUP BY tbl_program_event_task_badge.event_task_id';
+				$badge_result = $this->db->query($badge_query)->result();
+
+				$data[] = array(
+					"program_name"			=> $value->program_name,
+					"event_name"			=> $value->event_name,
+					"task"					=> $value->task,
+					"required_volunteers"	=> $value->required_volunteers,
+					"joined_volunteers"		=> $value->joined_volunteers,
+					"badges"				=> $badge_result[0]->Badges,
+				);
+			}
+
+			$data['listing'] = $data;
+			$data['user_name'] = $user_name;
+			$content = $this->load->view("site/job/email", $data, true);
+
+			$email_data = array(
+				'from' 		=> "alagangunilab@unilab.com.ph",
+				'from_name' => "Alagang UNILAB",
+				'to' 		=> $user_email,
+				'subject' 	=> "VOLUNTEER LIST",
+				'content' 	=> $content,
+			);
+
+			$email_status = $this->sndgrd->send($email_data);
+
+			echo $email_status;
+
+		}
+
+	}
+
+	public function index_2()
 	{
 	
 		$users = $this->Gmodel->get_query("tbl_users","status = 1");
@@ -29,7 +96,9 @@ class Job extends CI_Controller {
 				$event_data = array();
 				if(count($events) > 0){
 					foreach ($events as $events_key => $events_value) {
+
 						$event_data[] = array(
+							"ProgramName" 	=> $program_name,
 							"EventId" 		=> $events_value->id,
 							"EventTitle" 	=> $events_value->title,
 							"EventDate" 	=> date("F d, Y h:i a",strtotime($events_value->when)),
@@ -53,24 +122,24 @@ class Job extends CI_Controller {
 					$content = "";
 					$content = $this->load->view("site/job/email", $data, true);
 					// echo $email_body;
-					// print_r($content);
-					$email_data = array(
-						'from' 		=> "alagangunilab@unilab.com.ph",
-						'from_name' => "Alagang UNILAB",
-						'to' 		=> $user_email,
-						'subject' 	=> "VOLUNTEER LIST",
-						'content' 	=> $content,
-					);
+					print_r($content);
+					// $email_data = array(
+					// 	'from' 		=> "alagangunilab@unilab.com.ph",
+					// 	'from_name' => "Alagang UNILAB",
+					// 	'to' 		=> $user_email,
+					// 	'subject' 	=> "VOLUNTEER LIST",
+					// 	'content' 	=> $content,
+					// );
 
-					$email_status = $this->sndgrd->send($email_data);
+					// $email_status = $this->sndgrd->send($email_data);
 
-					$logs = array(
-						"user_id"		=> $user_id,
-						"email_address"	=> $user_email,
-						"status"		=> $email_status,
-						"date"			=> date("Y-m-d H:i:s")
-					);
-					$this->Gmodel->save_data("tbl_email_job_logs", $logs);
+					// $logs = array(
+					// 	"user_id"		=> $user_id,
+					// 	"email_address"	=> $user_email,
+					// 	"status"		=> $email_status,
+					// 	"date"			=> date("Y-m-d H:i:s")
+					// );
+					// $this->Gmodel->save_data("tbl_email_job_logs", $logs);
 				}
 			}
 
