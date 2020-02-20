@@ -55,7 +55,7 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>-->
 						<div class="col">											
-							<input type="text" class="form-control mobile_number_not" id="work_number" placeholder="Mobile Number/ Work Number" name="work_number" maxlength="11" pattern="[0-9]{9}">
+							<input type="text" class="form-control mobile_number_not" id="work_number" placeholder="Mobile Number" name="work_number" maxlength="11" pattern="[0-9]{9}">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -69,7 +69,7 @@
 						<div class="col">											
 							<input type="password" class="form-control required_input re-password" id="cpassword" placeholder="* Confirm Password" name="cpassword">
 							<div class="valid-feedback"></div>
-							<div class="invalid-feedback" id="invalid_confirm">Passwords do not match.</div>
+							<div class="invalid-feedback" id="invalid_confirm">Password do not match.</div>
 						</div>
 						<div class="col-12">
 							<span class="au-p3">Use 8 or more characters with a mix of letters, numbers & symbols for a strong password.</span>
@@ -155,6 +155,7 @@
 	
 	function checkPasswordStrength(password) {
 		$('#invalid_pass').hide();
+		$('#invalid_confirm').hide();
 		var number = /([0-9])/;
 		var alphabets = /([a-zA-Z])/;
 		var special_characters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
