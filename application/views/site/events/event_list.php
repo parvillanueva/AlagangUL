@@ -10,6 +10,10 @@
 			?>
 				<div class="col-12"><span class="au-ptitle"><?php echo $month;?></span></div>
 			<?php } ?>
+
+			<?php
+				$link = base_url('programs/'.$eloop['program_details']->id.'/'.$eloop['program_details']->url_alias.'/event/'.$eloop['id'].'/'.$eloop['url_alias']);
+			?>
 			<div class="au-event-entry col-lg-6 vol-time vol-treasure volunteered" id="progress1">
 				<div class="au-event">
 					<div class="row">
@@ -20,9 +24,7 @@
 						</div>
 						<div class="col-sm-8 au-eventdetails">
 							<div class="au-program">
-								<?php
-									$link = base_url('programs/'.$eloop['program_details']->id.'/'.$eloop['program_details']->url_alias.'/event/'.$eloop['id'].'/'.$eloop['url_alias']);
-								?>
+								
 								<a href="<?=$link?>" class="au-lnk">
 									<div class="au-pthumbnail">
 										<img src="<?= base_url($eloop['program_details']->image_thumbnail);?>" class="au-fp-thumbnailimg" onerror="imgErrorEvent(this);">
