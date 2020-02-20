@@ -154,11 +154,12 @@
 	});
 	
 	function checkPasswordStrength(password) {
+		$('#invalid_pass').hide();
 		var number = /([0-9])/;
 		var alphabets = /([a-zA-Z])/;
 		var special_characters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
 		var confirm_pass = $('#cpassword').val();
-		if(password != ''){
+		if(password.trim() != ''){
 			if (password.length < 8) {
 				$('#invalid_pass').show();
 				confirm_password(password, confirm_pass);
