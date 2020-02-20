@@ -46,11 +46,6 @@
                                 <div class="valid-feedback"></div>
                                 <div class="invalid-feedback">Invalid Mobile Number.</div>
                             </div>
-                            <div class="col">											
-                                <input type="text" class="form-control required_input_not mobile_number_not" id="work_number" placeholder="Work Number" value="<?= @$profile->work_number ?>" name="work_number" pattern="[0-9]{11}">
-                                <div class="valid-feedback"></div>
-                                <div class="invalid-feedback">Invalid Entry.</div>
-                            </div>
                         </div>
                         <div class="form-row">
                             <div class="col" style="">
