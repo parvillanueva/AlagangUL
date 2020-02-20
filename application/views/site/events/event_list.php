@@ -39,13 +39,13 @@
 									<span class="au-pans"><span class="au-pques">Where:</span><?= $eloop['where'] ?></span>
 								</div>
 							</div>
-							<div class="au-volunteers">
+							<!-- <div class="au-volunteers">
 								<?php foreach ($eloop['get_earn_badge'] as $a => $b) { ?>
 
 									<img src="<?= base_url() . "/" . $b->icon_image;?>" class="au-imgbadge" title="<?= $b->name;?>">
 
 								<?php } ?>
-							</div>
+							</div> -->
 							<div class="au-action">
 								<div class="row">
 									<div class="col"><span class="au-needed"><?= $eloop['required_volunteer'] ?> volunteers needed</span></div>

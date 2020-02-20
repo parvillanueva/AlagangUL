@@ -75,20 +75,20 @@
                                         <span class="au-fpoints">Points Earned</span>
                                         <span class="au-pfaccpoints"><div class="au-heart"><i class="fas fa-heart"></i></div><?=$profile->current_points?></span>
                                     </div>
-                                    <div class="au-p2">
-                                        <?php if(!empty($badges)) : ?>
-                                            <span>Badges</span>
-                                                <div class="au-badges">
-                                                    <?php foreach($badges as $badge) : ?>
+                                    <!-- <div class="au-p2"> -->
+                                        <?php // if(!empty($badges)) : ?>
+                                            <!-- <span>Badges</span> -->
+                                                <!-- <div class="au-badges"> -->
+                                                   <!--  <?php foreach($badges as $badge) : ?>
                                                         <div class="au-badge">
                                                             <i class="au-icon <?=@$badge['icon']?>" title="<?=@$badge['title']?>" style="color:<?=@$badge['color']?>"></i>
                                                         </div>
-                                                    <?php endforeach; ?>
+                                                    <?php endforeach; ?> -->
                                                     <!-- <div class="au-badge"><i class="fas fa-hands-helping au-talent au-icon" title="Talent"></i></div>
                                                     <div class="au-badge"><i class="fas fa-gem au-treasure au-icon" title="Treasure"></i></div> -->
-                                                </div>
-                                        <?php endif; ?>
-                                    </div>
+                                                <!-- </div> -->
+                                        <?php // endif; ?>
+                                    <!-- </div> -->
                                     <div class="row">
                                         <?php if(isset($c_programs)){ ?>
                                         <div class="col-sm-6">
