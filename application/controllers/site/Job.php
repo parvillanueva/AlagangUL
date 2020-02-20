@@ -73,6 +73,53 @@ class Job extends CI_Controller {
 
 	}
 
+	public function download(){
+		$user_id = $this->input->get("user_id");
+		$date_requested = date("Y-m-d H:i:s", strtotime($this->input->get("date_requested")));
+
+		$query = 'SELECT
+			tbl_programs.`name` AS program_name,
+			tbl_program_events.title AS event_name,
+			tbl_program_event_task.task AS task,
+			tbl_program_event_task.id AS task_id,
+			tbl_program_event_task.required_volunteers AS required_volunteers,
+			COUNT(tbl_program_event_task_volunteers.id) as joined_volunteers
+			FROM
+			tbl_program_event_task
+			INNER JOIN tbl_program_events ON tbl_program_event_task.event_id = tbl_program_events.id
+			INNER JOIN tbl_programs ON tbl_program_events.program_id = tbl_programs.id
+			LEFT JOIN tbl_program_event_task_volunteers ON tbl_program_event_task_volunteers.event_task_id = tbl_program_event_task.id
+			WHERE
+			tbl_programs.created_by = '.$user_id.' 
+			AND  tbl_program_event_task_volunteers.date_volunteer <= "'.$date_requested.'"
+			GROUP BY tbl_program_event_task.id
+			ORDER BY
+			program_name ASC';
+		$result = $this->db->query($query)->result();
+
+		$data = array();
+		foreach ($result as $key => $value) {
+
+			$badge_query = 'SELECT
+				GROUP_CONCAT(tbl_badges.`name`) as Badges
+				FROM
+				tbl_program_event_task_badge
+				INNER JOIN tbl_badges ON tbl_program_event_task_badge.badge_id = tbl_badges.id
+				WHERE tbl_program_event_task_badge.event_task_id = '.$value->task_id.'
+				GROUP BY tbl_program_event_task_badge.event_task_id';
+			$badge_result = $this->db->query($badge_query)->result();
+
+			$data[] = array(
+				"program_name"			=> $value->program_name,
+				"event_name"			=> $value->event_name,
+				"task"					=> $value->task,
+				"required_volunteers"	=> $value->required_volunteers,
+				"joined_volunteers"		=> $value->joined_volunteers,
+				"badges"				=> $badge_result[0]->Badges,
+			);
+		}
+	}
+
 	public function index_2()
 	{
 	
@@ -149,7 +196,7 @@ class Job extends CI_Controller {
 		
 	}
 
-	public function download(){
+	public function download_x(){
 		$event_id = $this->input->get("programeventid");
 		$date_requested = date("Y-m-d H:i:s", strtotime($this->input->get("date_requested")));
 		$event_details = $this->Gmodel->get_query("tbl_program_events","id = " . $event_id);
