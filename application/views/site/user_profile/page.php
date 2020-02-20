@@ -55,7 +55,7 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>-->
 						<div class="col">											
-							<input type="number" class="form-control required_input mobile_number_not" id="work_number" placeholder="* Mobile Number/ Work Number" name="work_number" maxlength="11" pattern="[0-9]{9}">
+							<input type="text" class="form-control required_input mobile_number_not" id="work_number" placeholder="* Mobile Number/ Work Number" name="work_number" maxlength="11" pattern="[0-9]{9}">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -110,6 +110,11 @@
 		responsive();
 		$('#email').attr('readonly', true);
 		$('.alert_understood').hide();
+		$("#work_number").keypress(function (e) {
+			if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+				return false;
+			}
+		});
 	});
 	
 	$(".custom-file-input").on("change", function() {

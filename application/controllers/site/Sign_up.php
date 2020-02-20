@@ -25,7 +25,7 @@ class Sign_up extends CI_Controller {
 				$status = 1;
 				$from = $_POST['email'];
 				$fr_name = 'Guest';
-				$subject = 'Link Registration and OTP';
+				$subject = 'One-Time-Password for Alagang Unilab';
 				$this->send_sgrid($from, $fr_name, $from, $subject);
 			}
 		}
@@ -119,7 +119,7 @@ class Sign_up extends CI_Controller {
 	function email_send_fpw(){
 		$from = $_POST['email'];
 		$fr_name = 'Guest';
-		$subject = 'Link Registration and OTP';
+		$subject = 'One-Time-Password for Alagang Unilab';
 		$this->send_sgrid_fpw($from, $fr_name, $from, $subject);
 	}
 	
