@@ -415,7 +415,7 @@ var validate = {
 		
 		//test mobile number no required
 		
-		if ($(element_not_required).hasClass("mobile_number_not")){
+		if ($(element).hasClass("mobile_number_not")){
 			$(".mobile_number_not").each(function(){
 				var number = $(this).val();
 				if(number != ''){
