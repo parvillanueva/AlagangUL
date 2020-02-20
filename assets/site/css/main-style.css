@@ -163,7 +163,7 @@ a.au-lnk:hover>* {
 }
 
 .au-logo {
-     width: 230px;
+     width: 260px;
 }
 
 .au-user {
@@ -1009,16 +1009,18 @@ a.au-lnk:hover>* {
 }
 
 .au-program {
-     padding-left: 56px;
+     padding-left: 83px;
      position: relative;
+     min-height: 70px;
+     margin-bottom: 10px;
 }
 
 .au-pthumbnail {
      position: absolute;
      top: 0;
      left: 0;
-     width: 42px;
-     height: 42px;
+     width: 70px;
+     height: 70px;
      background: #fff;
 }
 
@@ -1110,6 +1112,7 @@ a.au-lnk:hover>* {
      font-weight: 400;
      color: #092E6E;
      font-style: italic;
+     white-space: nowrap;
 }
 
 .au-volunteered {
@@ -1193,10 +1196,10 @@ a.au-lnk:hover>* {
      height: 100%;
      object-fit: cover;
      object-position: center;
+     margin-left: 8px;
 }
 
 .au-eventswrapper .au-eventthumbnail .au-eventimg{
-     max-height: 244px;
 }
 
 .au-eventthumbnail::before {
@@ -1749,6 +1752,7 @@ a.au-lnk:hover>* {
      font-weight: bold;
      font-size: 12px;
      width: auto;
+     min-width: 110px;
 }
 
 .au-yourvolunteer {
@@ -1781,6 +1785,14 @@ a.au-lnk:hover>* {
 
 .completed img {
      filter: grayscale(100%);
+}
+
+.completed .au-btnvolunteer.au-btn {
+     background-color: #555;
+}
+
+.completed .volunteer .au-btnvolunteer:after{
+     background-color: #222;
 }
 
 .au-volunteeredwrapper .au-event {
@@ -2218,6 +2230,7 @@ button.btn:hover {
      background-color: #1AA3F9;
      padding: 0.5em 2em;
      width: auto;
+     color: #fff !important;
 }
 
 .disabled .au-btnvolunteer.au-btn {
@@ -2318,6 +2331,52 @@ button.btn:hover {
      display: block;
      font-size: 14px;
      font-weight: normal;
+}
+.au-boxed .au-volunteers .au-imgbadge{
+     margin-top: 20px;
+}
+.lSSlideOuter {
+     background-color: #222;
+}
+.lSSlideOuter .lSPager.lSGallery li.active, .lSSlideOuter .lSPager.lSGallery li:hover{
+     border-radius: 0px;
+}
+.au-gallerythumb{
+     width: 100%;
+}
+ul.lSPager.lSGallery{
+     display: flex;
+}
+.lSSlideOuter .lSPager.lSGallery li{
+     height: inherit;
+}
+.lSSlideOuter .lSPager.lSGallery li a{
+     display: block;
+     height: 100%;
+}
+.lSSlideOuter .lSPager.lSGallery img{     
+     height: 100%;
+     width: 100%;
+     max-width: 100%;
+     object-fit: cover;
+     object-position: center;
+     display: block;
+     margin: 0 auto;
+}
+.lSAction > a{
+     color: #fff;
+     text-align: center;
+     font-size: 16px;
+     width: 32px;
+     background-color: rgba(0,0,0,0.5);
+     display: inline-block;
+     border-radius: 50%;
+}
+.lSAction > a i{
+     line-height: 32px;
+}
+.lSAction > a:hover{
+     color: #fff !important;
 }
 /*Extra small devices (portrait phones, less than 576px)*/
 
@@ -2923,7 +2982,7 @@ button.btn:hover {
           margin-left: 25px;
      }
      .au-logo {
-          width: 180px;
+          width: 260px;
      }
      .au-navbar .navbar-nav .nav-link {
           height: 35px;
