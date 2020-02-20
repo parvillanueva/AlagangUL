@@ -23,7 +23,7 @@
 								<div class="au-form-box au-flexcenter">
 									<div class="au-inner">
 										<span class="au-h4">Thank you!</span><span class="au-p2">You have successfully registered.</span>
-										<span class="au-p2"><a href="<?= base_url('login'); ?>">Click here</a> to go back to the login screen.</span>
+										<span class="au-p2"><a href="<?= base_url('login'); ?>">Click here</a> to login.</span>
 									</div>
 								</div>
 								
