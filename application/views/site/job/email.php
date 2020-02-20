@@ -46,6 +46,7 @@
                                         <?php } ?>
                                         </tbody>
                                 </table>
+                                <br>
                                 <a href="<?= $download;?>">Download / Export</a>
                         </td>
                     </tr>

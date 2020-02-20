@@ -48,7 +48,7 @@
 		$route["programs/(:any)/(:any)/event/(:any)/(:any)/manage"] = "site/events/manage/$1/$3/$4";
 		$route["programs/(:any)/(:any)/event/(:any)/(:any)/publish/(:any)"] = "site/events/publish/$1/$2/$3/$4/$5";
 
-
+		$route["programs/(:any)/(:any)/event/(:any)/(:any)/gallery"] = "site/gallery/view/$1/$2/$3/$4";
 
 		$route["job"] = "site/job";
 		$route["job/test_email"] = "site/job/test_email";

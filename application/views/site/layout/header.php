@@ -66,6 +66,7 @@
         <link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/site/slick/slick-theme.css">
         <link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/site/css/main-style.css">
 		<link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/site/css/temp-style.css">
+        <link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/site/css/lightslider.css">
         <link rel="icon" href="<?= base_url();?>assets/site/img/favicon.png" type="image/png" sizes="16x16">
 
 

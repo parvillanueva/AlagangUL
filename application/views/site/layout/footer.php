@@ -103,6 +103,7 @@
 <script src="<?=base_url()?>assets/site/js/daterangepicker.js" type="text/javascript" ></script>
 <script src="<?=base_url()?>assets/site/slick/slick.js"></script>
 <script src="<?= base_url();?>assets/site/js/bootstrap-show-modal.js"></script>
+<script src="<?= base_url();?>assets/site/js/lightslider.js"></script>
 
 
 <?php if(!empty($js)) : ?>
