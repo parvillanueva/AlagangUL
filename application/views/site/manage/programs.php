@@ -335,6 +335,8 @@
             $.get(url, function( data ) {
             	if(count == total){
             		BM.loading(false);
+            		$("#btn_unpublishEvent").hide();        
+					$("#btn_publishEvent").hide();   
             		location.reload();
             	} else {
 					count ++;

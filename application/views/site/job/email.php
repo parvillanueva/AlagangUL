@@ -25,12 +25,12 @@
                                 <table style="font-size:15px;font-weight:300;color: #4b4d4d;line-height: 24px;border-spacing: 0px; border-top: 1px solid #eee; border-left: 1px solid #eee;width: 100%;">
                                     <thead style="color: #092e6e;">
                                         <tr>
-                                            <th style="padding: 5px; border-right: 1px solid #eee; border-bottom: 1px solid #eee; width:16.67%;">Program</th>
-                                            <th style="padding: 5px; border-right: 1px solid #eee; border-bottom: 1px solid #eee; width:16.67%;">Event</th>
-                                            <th style="padding: 5px; border-right: 1px solid #eee; border-bottom: 1px solid #eee; width:16.67%;">Badge</th>
-                                            <th style="padding: 5px; border-right: 1px solid #eee; border-bottom: 1px solid #eee; width:16.67%;">Task</th>
-                                            <th style="padding: 5px; border-right: 1px solid #eee; border-bottom: 1px solid #eee; width:16.67%;">Required</th>
-                                            <th style="padding: 5px; border-right: 1px solid #eee; border-bottom: 1px solid #eee; width:16.67%;">Joined</th>
+                                            <th style="padding: 5px; border-right: 1px solid #eee; border-bottom: 1px solid #eee; width:133px;">Program</th>
+                                            <th style="padding: 5px; border-right: 1px solid #eee; border-bottom: 1px solid #eee; width:133px;">Event</th>
+                                            <th style="padding: 5px; border-right: 1px solid #eee; border-bottom: 1px solid #eee; width:133px;">Badge</th>
+                                            <th style="padding: 5px; border-right: 1px solid #eee; border-bottom: 1px solid #eee; width:193px;">Task</th>
+                                            <th style="padding: 5px; border-right: 1px solid #eee; border-bottom: 1px solid #eee; width:103px;">Required</th>
+                                            <th style="padding: 5px; border-right: 1px solid #eee; border-bottom: 1px solid #eee; width:103px;">Joined</th>
                                         </tr>
                                     </thead>
                                     <tbody>

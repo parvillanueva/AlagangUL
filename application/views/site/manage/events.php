@@ -352,6 +352,8 @@
             }
             $.get(url, function( data ) {
             	if(count == total){
+            		$("#btn_unpublishEvent").hide();        
+					$("#btn_publishEvent").hide();   
             		get_list();
             	} 
             	else{
