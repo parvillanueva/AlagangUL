@@ -62,7 +62,15 @@ class Job extends CI_Controller {
 						'content' 	=> $content,
 					);
 
-					echo $this->sndgrd->send($email_data);
+					$email_status = $this->sndgrd->send($email_data);
+
+					$logs = array(
+						"user_id"		=> $user_id,
+						"email_address"	=> $user_email,
+						"status"		=> $email_status,
+						"date"			=> date("Y-m-d H:i:s")
+					);
+					$this->Gmodel->save_data("tbl_email_job_logs", $logs);
 				}
 			}
 
