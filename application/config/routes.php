@@ -50,7 +50,7 @@
 
 
 		$route["job"] = "site/job";
-		$route["job/test"] = "site/job/test";
+		$route["job/test_email"] = "site/job/test_email";
 		$route["job/download"] = "site/job/download";
 
 		$route["manage"] = "site/manage";
