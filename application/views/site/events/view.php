@@ -813,22 +813,22 @@
         init: function () {
             var _this = this;
 			this.on("addedfile", function(file) {
-				/* BM.confirm("Are you sure you wan't to upload this photos?", function(result){
-					if(result){
+				//BM.confirm("Are you sure you wan't to upload this photos?", function(result){
+					//if(result){
 						this.on("sending", function(file, xhr, data) {
 							var filename = file.name;
 							var filesize = file.size;  
 							BM.loading(true);
 						});
-					} else{
-						this.removeFile(file);
-					}
-				}) */
-				if(!confirm("Do you want to upload this file?")){
+					//} else{
+						//this.removeFile(file);
+					//}
+				//})
+				/* if(!confirm("Do you want to upload this file?")){
 					this.removeFile(file);
 					return false;
 				}
-				BM.loading(true);
+				BM.loading(true); */
 			});
         },
         success: function(file, response){

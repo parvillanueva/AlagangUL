@@ -153,25 +153,27 @@
 		var alphabets = /([a-zA-Z])/;
 		var special_characters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
 		var confirm_pass = $('#cpassword').val();
-		if (password.length < 8) {
-			$('#invalid_pass').show();
-			confirm_password(password, confirm_pass);
-			return false;
-		} else {
-			if (password.match(number) && password.match(alphabets) && password.match(special_characters)) {
-				$('#invalid_pass').hide();
-				if(confirm_password(password, confirm_pass)){
-					$('#invalid_pass').hide();
-					return true;
-				} else{
-					$('#invalid_pass').show();
-					return false;
-				}
-				
-			} else {
+		if(password != ''){
+			if (password.length < 8) {
 				$('#invalid_pass').show();
 				confirm_password(password, confirm_pass);
-				return false;
+				//return false;
+			} else {
+				if (password.match(number) && password.match(alphabets) && password.match(special_characters)) {
+					$('#invalid_pass').hide();
+					if(confirm_password(password, confirm_pass)){
+						$('#invalid_pass').hide();
+						return true;
+					} else{
+						$('#invalid_pass').show();
+						return false;
+					}
+					
+				} else {
+					$('#invalid_pass').show();
+					confirm_password(password, confirm_pass);
+					//return false;
+				}
 			}
 		}
 	}
