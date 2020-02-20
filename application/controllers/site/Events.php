@@ -8,6 +8,7 @@ class Events extends GS_Controller {
 		$data['events'] = $this->get_details();
 		$data['badges'] = $this->get_badges();
 		$data['event_task'] = $this->get_event_tasks_all();
+		$data['event_program'] = $this->get_event_list();
 		$data['content'] = "site/events/list";
 		$data['meta'] = array(
 			"title"         =>  "Event List",
@@ -160,7 +161,7 @@ class Events extends GS_Controller {
 		$date_to = date('Y-m-d', strtotime($date_explode[1]));
 		$arr = array(
 			'search_box' => $_POST['search_box'],
-			'types' => $_POST['types'],
+			'location' => $_POST['location'],
 			'task' => $_POST['task'],
 			'date_from' => $date_from,
 			'date_to' => $date_to
@@ -179,6 +180,10 @@ class Events extends GS_Controller {
 		if($arr['date_from'] != '' && $arr['date_to'] != ''){
 			$where_date = 'AND "'.$arr['date_from'].'" <= when AND when <= "'.$arr['date_to'].'"';
 		}
+			$where_location = '';
+		if($arr['location'] != ''){
+			$where_location = "AND where like '%".$arr['location']."%'";
+		}
 			$where_search = '';
 		if($arr['search_box'] != ''){
 			$where_search = 'AND (title like "%\\'.$arr['search_box'].'%" OR url_alias like "%\\'.$arr['search_box'].'%" OR description like "%\\'.$arr['search_box'].'%" OR where like "%\\'.$arr['search_box'].'%")';
@@ -194,7 +199,7 @@ class Events extends GS_Controller {
 			$where_task = 'AND ('.$string.')';
 		}
 			$where_type = '';
-		if($arr['types'] != ''){
+		/* if($arr['types'] != ''){
 			$type_event = $this->event_type($arr['types']);
 			$task = '';
 			foreach($type_event as $typ_loop){
@@ -202,12 +207,12 @@ class Events extends GS_Controller {
 			}
 			$string_type = rtrim($task, 'OR ');
 			$where_type = 'AND ('.$string_type.')';
-		}
+		} */
 		
 		$result = array(
-			'search_date' => $where_date .' '. $where_search,
+			'search_date' => $where_date .' '. $where_search.' '.$where_location,
 			'task' => $where_task,
-			'type' => $where_type
+			//'type' => $where_type
 			
 		);
 		return $result;
@@ -221,7 +226,7 @@ class Events extends GS_Controller {
 			$result_where = $this->filter_where($dat_arr);
 			$filter_where = $result_where['search_date'];
 			$task_where = $result_where['task'];
-			$type_where = $result_where['type'];
+			//$type_where = $result_where['type'];
 		}
 		
 		$event_list = $this->Gmodel->get_query('tbl_program_events',"status = 1 ".$filter_where." ".$task_where." ".$type_where." ORDER BY month(`when`)");
@@ -503,6 +508,12 @@ class Events extends GS_Controller {
 			);
 		}
 		return $program;
+	}
+	
+	public function get_event_list(){
+		$sql = "Select * From tbl_program_events group by `where`";
+		$result = $this->db->query($sql)->result();
+		return $result;
 	}
 
 	public function get_event_details($event_id, $event_alias){

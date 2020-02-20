@@ -22,21 +22,32 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg col-sm-6">
+						<!--<div class="col-lg col-sm-6">
 							<span class="au-stitle">Volunteer Type</span>
 							<div class="form-row">
 								<select class="form-control custom-select" id="types_select">
 									<option value="" selected>All Types</option>
-									<?php foreach($badges as $bloop){ ?>
-										<option value="<?= $bloop->id;?>"><?= $bloop->name;?></option>
-									<?php } ?>
+									<?php //foreach($badges as $bloop){ ?>
+										<option value="<?php //echo $bloop->id;?>"><?php //echo $bloop->name;?></option>
+									<?php //} ?>
 				  				</select>
 			  				</div>
-						</div>
+						</div>-->
 						<div class="col-lg col-sm-6">
 							<span class="au-stitle">Schedule</span>
 							<div class="form-row">
 								<input type="text" class="form-control" id="date_input" readonly="true" placeholder="Type a keyword" name="date">
+			  				</div>
+						</div>
+						<div class="col-lg col-sm-6">
+							<span class="au-stitle">Location</span>
+							<div class="form-row">
+								<select class="form-control custom-select" id="location">
+									<option value="" selected>All Types</option>
+									<?php foreach($event_program as $eprogram){ ?>
+										<option value="<?php echo $eprogram->where;?>"><?php echo $eprogram->where;?></option>
+									<?php } ?>
+				  				</select>
 			  				</div>
 						</div>
 						<div class="col-lg col-sm-6">
@@ -91,7 +102,6 @@
 			var start = start.format('YYYY-MM-DD');
 			var end = end.format('YYYY-MM-DD');
 			var date_set = start+'-'+end;
-			console.log(date_set);
 			$(this).val(date_set);
 		});
 	});
@@ -99,13 +109,13 @@
 	$(document).on('click', '#btnSubmit', function(){
 		BM.loading(true);
 		var search_box = $('#search_input').val();
-		var types = $('#types_select').val();
+		var location = $('#location').val();
 		var task = $('#task_select').val();
 		var date = $('#date_input').val();
 		var url = "<?= base_url('site/events/submit_filter') ?>";
 		var data = {
 			search_box : search_box,
-			types : types,
+			location : location,
 			task : task,
 			date : date
 		};
