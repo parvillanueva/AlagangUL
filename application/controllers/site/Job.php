@@ -55,6 +55,7 @@ class Job extends CI_Controller {
 
 			$data['listing'] = $data;
 			$data['user_name'] = $user_name;
+			$data['download'] = base_url("job/download") . "?user_id=" . $user_id . "&date_requested=" . date("Y-m-d H:i:s");
 			$content = $this->load->view("site/job/email", $data, true);
 
 			$email_data = array(
@@ -77,6 +78,72 @@ class Job extends CI_Controller {
 		$user_id = $this->input->get("user_id");
 		$date_requested = date("Y-m-d H:i:s", strtotime($this->input->get("date_requested")));
 
+
+		$this->load->library("Excel");
+		$objPHPExcel = new PHPExcel();
+		$objPHPExcel->setActiveSheetIndex(0);
+		$worksheet = $objPHPExcel->getActiveSheet();
+
+		$worksheet->SetCellValueByColumnAndRow(0, 1, "Data as of : " . date("F d, Y h:i a", strtotime($date_requested)));
+
+		$worksheet->SetCellValueByColumnAndRow(0, 3, "#");
+		$worksheet->SetCellValueByColumnAndRow(1, 3, "Program");
+		$worksheet->SetCellValueByColumnAndRow(2, 3, "Event");
+		$worksheet->SetCellValueByColumnAndRow(3, 3, "Badge");
+		$worksheet->SetCellValueByColumnAndRow(4, 3, "Task");
+		$worksheet->SetCellValueByColumnAndRow(5, 3, "Required");
+		$worksheet->SetCellValueByColumnAndRow(6, 3, "Joined");
+
+		$style_head = array(
+	        'alignment' => array(
+	            'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+	            'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+	            'wrap' => true
+	        ),
+	        'fill' => array(
+	            'type' => PHPExcel_Style_Fill::FILL_SOLID,
+	            'color' => array('rgb' => '0096b7')
+	        ),
+	        'borders' => array(
+	            'allborders' => array(
+	                'style' => PHPExcel_Style_Border::BORDER_THIN,
+	                'color' => array('rgb' => '000000')
+	            )
+	        ),
+	        'font'  => array(
+		        'bold'  => true
+		    )
+	    );
+		$style_body = array(
+	        'borders' => array(
+	            'allborders' => array(
+	                'style' => PHPExcel_Style_Border::BORDER_THIN,
+	                'color' => array('rgb' => '000000')
+	            )
+	        )
+	    );
+		$style_body_index = array(
+			'alignment' => array(
+	            'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+	            'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+	            'wrap' => true
+	        ),
+	        'borders' => array(
+	            'allborders' => array(
+	                'style' => PHPExcel_Style_Border::BORDER_THIN,
+	                'color' => array('rgb' => '000000')
+	            )
+	        )
+	    );
+	    $worksheet->getCellByColumnAndRow(0,3)->getStyle()->applyFromArray($style_head);
+	    $worksheet->getCellByColumnAndRow(1,3)->getStyle()->applyFromArray($style_head);
+	    $worksheet->getCellByColumnAndRow(2,3)->getStyle()->applyFromArray($style_head);
+	    $worksheet->getCellByColumnAndRow(3,3)->getStyle()->applyFromArray($style_head);
+	    $worksheet->getCellByColumnAndRow(4,3)->getStyle()->applyFromArray($style_head);
+	    $worksheet->getCellByColumnAndRow(5,3)->getStyle()->applyFromArray($style_head);
+	    $worksheet->getCellByColumnAndRow(6,3)->getStyle()->applyFromArray($style_head);
+
+
 		$query = 'SELECT
 			tbl_programs.`name` AS program_name,
 			tbl_program_events.title AS event_name,
@@ -98,6 +165,7 @@ class Job extends CI_Controller {
 		$result = $this->db->query($query)->result();
 
 		$data = array();
+		$row = 4;
 		foreach ($result as $key => $value) {
 
 			$badge_query = 'SELECT
@@ -109,15 +177,36 @@ class Job extends CI_Controller {
 				GROUP BY tbl_program_event_task_badge.event_task_id';
 			$badge_result = $this->db->query($badge_query)->result();
 
-			$data[] = array(
-				"program_name"			=> $value->program_name,
-				"event_name"			=> $value->event_name,
-				"task"					=> $value->task,
-				"required_volunteers"	=> $value->required_volunteers,
-				"joined_volunteers"		=> $value->joined_volunteers,
-				"badges"				=> $badge_result[0]->Badges,
-			);
+			$worksheet->SetCellValueByColumnAndRow(0, $row, $key + 1);
+			$worksheet->SetCellValueByColumnAndRow(1, $row, $value->program_name);
+			$worksheet->SetCellValueByColumnAndRow(2, $row, $value->event_name);
+			$worksheet->SetCellValueByColumnAndRow(3, $row, $badge_result[0]->Badges);
+			$worksheet->SetCellValueByColumnAndRow(4, $row, $value->task);
+			$worksheet->SetCellValueByColumnAndRow(5, $row, $value->required_volunteers);
+			$worksheet->SetCellValueByColumnAndRow(6, $row, $value->joined_volunteers);
+
+			$worksheet->getCellByColumnAndRow(0,$row)->getStyle()->applyFromArray($style_body_index);
+			$worksheet->getCellByColumnAndRow(1,$row)->getStyle()->applyFromArray($style_body);
+			$worksheet->getCellByColumnAndRow(2,$row)->getStyle()->applyFromArray($style_body);
+			$worksheet->getCellByColumnAndRow(3,$row)->getStyle()->applyFromArray($style_body);
+			$worksheet->getCellByColumnAndRow(4,$row)->getStyle()->applyFromArray($style_body);
+			$worksheet->getCellByColumnAndRow(5,$row)->getStyle()->applyFromArray($style_body);
+			$worksheet->getCellByColumnAndRow(6,$row)->getStyle()->applyFromArray($style_body);
+			$row++;
 		}
+
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		header('Content-Disposition: attachment;filename="'.strtoupper($event_details[0]->title) . ' ' . date("F-d-Y h-i-a", strtotime($date_requested)) .' .xlsx"');
+		header('Cache-Control: max-age=0');
+		header('Cache-Control: max-age=1');
+		header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+		header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
+		header ('Cache-Control: cache, must-revalidate'); 
+		header ('Pragma: public'); 
+		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+
+		ob_end_clean();
+		$objWriter->save('php://output');
 	}
 
 	public function index_2()

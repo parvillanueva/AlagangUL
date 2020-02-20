@@ -2,10 +2,19 @@
 defined("BASEPATH") OR exit("No direct script access allowed");
 
 class Sign_up extends CI_Controller {
+
+	public function __construct() 
+	{
+		parent::__construct();
+		if($this->session->userdata('user_sess_id') !='' ) { 
+			redirect(base_url("home"));
+		}
+	}
+
 	
 	function index(){
 		$data['content'] = "site/sign_up/page";
-		$this->load->view("site/layout/template2",$data);
+		$this->load->view("site/layout/template_signup",$data);
 	}
 	
 	function email_send(){

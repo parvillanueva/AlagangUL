@@ -163,7 +163,7 @@ a.au-lnk:hover>* {
 }
 
 .au-logo {
-     width: 260px;
+     width: 290px;
 }
 
 .au-user {
@@ -2377,6 +2377,15 @@ ul.lSPager.lSGallery{
 }
 .lSAction > a:hover{
      color: #fff !important;
+}
+.au-back{
+     margin: 10px 10px 0px 0px;
+}
+.au-loginbutton{
+     background-color: #1AA3F9;
+}
+.au-signup{
+     justify-content: space-between !important;
 }
 /*Extra small devices (portrait phones, less than 576px)*/
 

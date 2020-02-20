@@ -5,7 +5,7 @@ class Logout extends CI_Controller {
 	
 	public function index(){
 		$this->session->sess_destroy();
-		header('Location: '.base_url());
+		header('Location: '.base_url("login"));
 	}
 
 	public function unset_session(){
