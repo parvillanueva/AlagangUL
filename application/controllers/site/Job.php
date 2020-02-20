@@ -257,4 +257,17 @@ class Job extends CI_Controller {
 
 	}
 
+	public function test_email(){
+		$email_data = array(
+			'from' 		=> "alagangunilab@unilab.com.ph",
+			'from_name' => "Alagang UNILAB",
+			'to' 		=> "c_prvillanueva@unilab.com.ph",
+			'subject' 	=> "VOLUNTEER LIST - TEST EMAIL",
+			'content' 	=> "TEST EMAIL",
+		);
+
+		print_r($email_data);
+		echo $this->sndgrd->send($email_data);
+	}
+
 }
