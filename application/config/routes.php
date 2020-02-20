@@ -13,6 +13,7 @@
 		$route["home"] = "site/home";
 		$route["forgot_password"] = "site/login/forgot_password";
 		$route["login_otp_fpw"] = "site/login_otp/otp_fpw";
+		$route["successfull_register"] = "site/user/successfull_register";
 		$route["reset_password/(:any)"] = "site/login/reset_password/$1";
 		$route["guidelines"] = "site/guidelines";
 		$route["programs"] = "site/programs";

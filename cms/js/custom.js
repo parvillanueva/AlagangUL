@@ -419,11 +419,13 @@ var validate = {
 			$(".mobile_number_not").each(function(){
 				var number = $(this).val();
 				if(number != ''){
-					if(/^09\d{9}$/.test(number) === false){
+					if(isNaN(number) === true){
 						counter++;
 						$(this).css('border-color','red');
 						$("<span class='validate_error_message' style='color: red;'>Invalid mobile number.<br></span>").insertAfter(this);
 					
+					} else{
+						$(this).css('border-color','#ccc');
 					}
 				} else{
 					$(this).css('border-color','#ccc');

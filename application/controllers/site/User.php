@@ -38,7 +38,7 @@ class User extends CI_Controller {
 		$arrData = array(
 			'last_name' => $_POST['lname'],
 			'first_name' => $_POST['fname'],
-			'mobile_number' => $_POST['phone'],
+			//'mobile_number' => $_POST['phone'],
 			'division' => $_POST['division'],
 			'work_number' => $_POST['work_number'],
 			'password' => md5($_POST['password']),
@@ -50,7 +50,7 @@ class User extends CI_Controller {
 		);
 		
 		$this->Gmodel->update_data('tbl_users', $arrData, 'email_address', $this->session->userdata('email_address'));
-		header("Location: ".base_url('login').""); 
+		header("Location: ".base_url('successfull_register').""); 
 		exit();		
 	}
 	
@@ -102,5 +102,10 @@ class User extends CI_Controller {
 		$api_response_header = trim(substr($api_response, 0, $api_response_info['header_size']));
 		$api_response_body = substr($api_response, $api_response_info['header_size']);
 		return json_decode($api_response_body);
+	}
+	
+	function successfull_register(){
+		$data["content"] = "site/login/sign_up_success_message";
+		$this->load->view("site/layout/template2",$data);	
 	}
 }
