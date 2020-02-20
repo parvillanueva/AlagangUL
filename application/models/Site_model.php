@@ -19,7 +19,7 @@ date_default_timezone_set('Asia/Taipei');
 			$this->db->where("p.status", 1);
 			$this->db->join("tbl_program_event_task_volunteers pm", "pm.program_id = p.id", "LEFT");
 			$this->db->group_by("p.id");
-			$this->db->order_by("p.update_date","desc");
+			$this->db->order_by("p.name","asc");
 			$this->db->limit(6);
 
 			$query = $this->db->get();
@@ -33,7 +33,7 @@ date_default_timezone_set('Asia/Taipei');
 			$this->db->join("tbl_program_event_task_volunteers pm", "pm.program_id = p.id", "LEFT");
 			$this->db->where("p.status", 1);
 			$this->db->group_by("p.id");
-			$this->db->order_by("p.update_date","desc");
+			$this->db->order_by("p.name","asc");
 
 			$query = $this->db->get();
 			return $query->result_array();
