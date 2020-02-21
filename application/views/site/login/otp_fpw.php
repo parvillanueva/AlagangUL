@@ -5,7 +5,7 @@
 				<img src="assets/img/au-alagangunilab.png" class="au-img-responsive au-signupimg">
 			</div>
 			<div class="col-12">
-				<span class="au-h1">Mula sa simula, hanggang sa pagtanda, may Alagang Unilab.</span>
+				<span class="au-h1">&nbsp;</span>
 				<span class="au-h2"><b>Alagang Unilab</b> is the United Health Group’s banner advocacy program committed to make primary healthcare accessible to communities.  Grounded on bayanihan, we work closely with partners and volunteers to ensure sustainability and impact.</span>
 			</div>
 		</div>
