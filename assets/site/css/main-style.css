@@ -110,9 +110,12 @@ p {
 }
 
 .au-footer-details {
-     text-align: right;
+     text-align: left;
 }
 
+.au-footer-detailsr {
+     text-align: right;
+}
 .au-pf {
      font-size: 10px;
      display: inline-block;
@@ -2494,6 +2497,9 @@ ul.lSPager.lSGallery{
      .au-footer-details {
           text-align: center;
      }
+     .au-footer-detailsr {
+          text-align: center;
+     }
      .au-footerimg {
           display: block;
           text-align: center;
@@ -2717,6 +2723,9 @@ ul.lSPager.lSGallery{
           margin: 3px 5px 3px 5px;
      }
      .au-footer-details {
+          text-align: center;
+     }
+     .au-footer-detailsr {
           text-align: center;
      }
      .au-footerimg {
