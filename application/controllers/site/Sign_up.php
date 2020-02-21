@@ -203,7 +203,7 @@ class Sign_up extends CI_Controller {
 													<p style="color:#fff;font-size:14px;">Alagang Unilab</p>
 												</td>
 												<td style="text-align:right">
-													<p style="color:#fff;font-size:14px;">Website: <a href="javascript:void(0);" style="color:#0e5bdf;text-decoration: none;">www.alagangunilab.unilab.com.ph</a></p>
+													<p style="color:#fff;font-size:14px;">Website: <a href="'.base_url().'" style="color:#0e5bdf;text-decoration: none;">www.alagangunilab.unilab.com.ph</a></p>
 												</td>
 											</tr>
 										</table>
