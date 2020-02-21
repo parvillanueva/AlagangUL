@@ -23,7 +23,7 @@ class User extends CI_Controller {
 		$this->load->view("site/layout/template2",$data);		
 	}
 	public function division_list(){
-		$data = "SELECT * FROM tbl_division ORDER BY name";
+		$data = "SELECT * FROM tbl_division Where status = '1' ORDER BY name";
 		$result = $this->db->query($data)->result();
 		return $result;
 	}

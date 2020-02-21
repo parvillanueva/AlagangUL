@@ -31,6 +31,13 @@
 		cursor: default;
 	}
 </style>
+<?php 
+/* echo '<pre>';
+print_r($event_details);
+echo '</pre>';
+die(); */
+?>
+
 <div class="au-wrapper">
 	<div class="container-fluid au-heading">
 		<div class="au-container au-padding">
@@ -881,7 +888,8 @@
 
     function get_gallery(){
     	var url = "<?= base_url("site/events/get_gallery")?>/"+limit+"/<?= $event_details[0]['id'] ?>/1/<?= $event_details[0]['is_admin'] ?>/<?= $event_details[0]['is_joined'] ?>";
-    	$.get(url, function(data) {
+    	console.log(url);
+		$.get(url, function(data) {
     		$("#gallery_photos").html(data);
 		});
     }

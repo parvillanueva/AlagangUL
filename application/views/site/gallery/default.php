@@ -4,6 +4,7 @@
 	$back_url = explode('/', $actual_link);
 	array_pop($back_url);
 	$back_url =  implode('/', $back_url); 
+	$user_id = $this->session->userdata('user_sess_id');
 ?>
 
 <div class="container-fluid au-heading">
@@ -20,19 +21,14 @@
 	<div class="au-container au-padding">
 
 		<div class="au-gallerywrapper row">
-			
-			<!-- <ul id="imageGallery">
-				<?php foreach ($photos as $key => $value) { ?>
-					<li data-thumb="<?= base_url() . "/" . $value->path;?>" data-src="<?= base_url() . "/" . $value->path;?>">
-						<img src="<?= base_url() . "/" . $value->path;?>" class="au-gallerythumb"/>
-					</li>
-				<?php } ?>
-			</ul>
-			 -->
-
-
 			<?php foreach ($photos as $key => $value) { ?>
 				<div class="col-lg-3 col-md-6 col-6">
+					<?php
+					if($is_admin==1 || $user_id==$value->uploader_id){
+
+					?>
+					<button class="au-delete" id="delete_image" path-url= "<?= $value->path?>" path-id="<?=$value->id?>" title="Delete"><i class="fas fa-trash"></i></button>
+					<?php } ?>
 					<a href="<?= base_url() . "/" . $value->path;?>" data-toggle="lightbox" data-gallery="gallery" class="au-lnk au-glink">
 						<div class="au-opthumbnail">
 							<img src="<?= base_url() . "/" . $value->thumb;?>" class="au-gl-thumbnailimg" onerror="imgErrorEvent(this);">
@@ -77,5 +73,26 @@
 					});
 			}	 
 			});	
+	});
+	
+	$(document).on('click', '#delete_image', function(){
+		var path_url = $(this).attr('path-url');
+		var path_id = $(this).attr('path-id');
+		var data = {
+			path : path_url,
+			id : path_id
+		};
+		var url = "<?php echo base_url('site/gallery/delete_gallery_image') ?>";
+		BM.confirm('Are you sure?', function(results){
+			if(results){
+				BM.loading(true);
+				aJax.post(url, data, function(result){
+					var obj = is_json(result);
+					if(obj.response == 'success'){
+						location.reload();
+					}
+				});
+			}
+		});
 	});
 </script>
