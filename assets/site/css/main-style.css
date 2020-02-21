@@ -905,10 +905,10 @@ a.au-lnk:hover>* {
      padding: 1em;
 }
 
-.au-form-box {
+.au-form-box {/*
      padding: 1em;
      border: 1px solid rgba(0, 0, 0, 0.3);
-     background-color: #fff;
+     background-color: #fff;*/
      height: inherit;
 }
 
