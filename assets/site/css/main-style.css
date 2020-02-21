@@ -163,7 +163,7 @@ a.au-lnk:hover>* {
 }
 
 .au-logo {
-     width: 260px;
+     width: 290px;
 }
 
 .au-user {
@@ -1215,6 +1215,7 @@ a.au-lnk:hover>* {
      background: -webkit-linear-gradient(45deg, rgba(10, 35, 63, 0.5) 0%, rgba(26, 163, 249, 0) 100%);
      background: linear-gradient(45deg, rgba(10, 35, 63, 0.5) 0%, rgba(26, 163, 249, 0) 100%);
      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0a233f", endColorstr="#1aa3f9", GradientType=1);
+     pointer-events: none !important;
 }
 
 .au-eventthumbnail .au-accpoints {
@@ -2172,6 +2173,7 @@ button.btn.btn-secondary {
      width: auto;
      white-space: nowrap;
      border-radius: 0px;
+     min-width: 70px;
 }
 
 button.btn-primary {
@@ -2187,6 +2189,7 @@ button.btn-primary {
      width: auto;
      white-space: nowrap;
      border-radius: 0px;
+     min-width: 70px;
 }
 
 button.btn:hover {
@@ -2399,7 +2402,6 @@ ul.lSPager.lSGallery{
 .lSAction > a:hover{
      color: #fff !important;
 }
-
 .au-back{
      margin: 10px 10px 0px 0px;
 }

@@ -20,7 +20,9 @@
 						<div class="col-sm-4 au-eventthumbnail">
 							<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> 10 points</span>
 							<span class="au-accpoints au-accpointsv"><div class="au-heart"><i class="fas fa-heart"></i></div>Volunteered</span>
-							<img src="<?= $eloop['image']; ?>" class="au-eventimg" onerror="imgErrorEvent(this);">
+							<a href="<?=$link?>">
+								<img src="<?= $eloop['image']; ?>" class="au-eventimg" onerror="imgErrorEvent(this);">
+							</a>
 						</div>
 						<div class="col-sm-8 au-eventdetails">
 							<div class="au-program">

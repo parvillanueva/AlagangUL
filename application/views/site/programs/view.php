@@ -138,7 +138,9 @@
 								<div class="row">
 									<div class="col-sm-4 au-eventthumbnail">
 										<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> 10 points</span>
-										<img src="<?= $value['image'];?>" class="au-eventimg" onerror="imgErrorEvent(this);">
+										<a href="<?= $value['link'];?>">
+											<img src="<?= $value['image'];?>" class="au-eventimg" onerror="imgErrorEvent(this);">
+										</a>
 									</div>
 									<div class="col-sm-8 au-eventdetails">
 										<div class="au-program">
