@@ -183,28 +183,43 @@
                                                         </a>
                                                     </div>
                                                     
-                                                    <div class="au-volunteers">
-                                                        <span class="au-volunteeredmes">
-                                                        <?php if(!empty($event['badges'])) : ?>
-                                                            
-                                                            <?php foreach($event['badges'] as $badges) : ?>
-                                                                <span>
+                                                    <div class="volunteer">
+
+
+                                                        <div class="row">	
+                                                            <div class="au-volunteers col">
+                                                                <?php if(!empty($event['badges'])) : ?>
+                                                                    <?php foreach($event['badges'] as $badges) : ?>
+                                                                        <!-- <span>
+                                                                           <i 
+                                                                                class="<?=$badges[1]; ?>" 
+                                                                                style="color:<?=$badges[2]?>" 
+                                                                                title="<?=$badges[0]?>">
+                                                                            </i>
+                                                                        </span> -->
+                                                                        <?php if($badges[0] == 'Treasure') : ?>
+                                                                            <img src="assets/img/au-treasure-2.jpg" class="au-imgbadge" title="Treasure">
+                                                                        <?php endif; ?> 
+                                                                        <?php if($badges[0] == 'Talent') : ?>
+                                                                            <img src="assets/img/au-talent-2.jpg" class="au-imgbadge" title="Talent">
+                                                                        <?php endif; ?> 
+                                                                        <?php if($badges[0] == 'Time') : ?> 
+                                                                            <img src="assets/img/au-time-2.jpg" class="au-imgbadge" title="Time">
+                                                                        <?php endif; ?>   
+                                                                    <?php endforeach; ?>
+                                                                <?php endif; ?>
                                                                 
-                                                                    <i 
-                                                                        class="<?=$badges[1]; ?>" 
-                                                                        style="color:<?=$badges[2]?>" 
-                                                                        title="<?=$badges[0]?>">
-                                                                    </i>Volunteered <?=$badges[0]?>
-                                                                </span>
+																
+																
+															
+                                                            </div>
+                                                            <div class="col">
+                                                                <button class="au-btnvolunteer au-btn float-right" data-toggle="modal" data-target="#volunteermodal">
+                                                                    Joined
+                                                                </button>
+                                                            </div>
+                                                        </div>
                                                         
-                                                            <?php endforeach; ?>
-                                                        <?php endif; ?>
-                                                        
-                                                        <!-- <span class="au-volunteeredmes"><i class="fas fa-hands-helping au-talent" title="Talent"></i>Volunteered Talent</span> -->
-                                                        <!-- <span class="au-volunteeredmes"><i class="fas fa-gem au-treasure" title="Treasure"></i>Volunteered Treasure</span> -->
-                                                        <!-- <span class="au-volunteeredmes"><i class="fas fa-hourglass au-time" title="Time"></i><i class="fas fa-hands-helping au-talent" title="Talent"></i>Volunteered Time & Talent</span> -->
-                                                        <!-- <span class="au-volunteeredmes"><i class="fas fa-gem au-treasure" title="Treasure"></i><i class="fas fa-hourglass au-time" title="Time"></i>Volunteered Treasure & Time</span> -->
-                                                        <!-- <span class="au-volunteeredmes"><i class="fas fa-hands-helping au-talent" title="Talent"></i><i class="fas fa-gem au-treasure" title="Treasure"></i>Volunteered Talent & Treasure</span> -->
                                                     </div>
                                                 </div>
                                             </div>
