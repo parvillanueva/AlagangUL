@@ -625,11 +625,12 @@ class Events extends GS_Controller {
 
 
 			    $data = array(
-			    	"event_id"		=> $_GET['event_id'],
-			    	"path"			=> $imagePath,
-			    	"thumb"			=> $thumb_path . $uploadData['file_name'],
-					"status"		=> 1,
-			    	"create_date"	=> date("Y-m-d H:i:s")
+			    	"event_id"			=> $_GET['event_id'],
+			    	"path"				=> $imagePath,
+			    	"thumb"				=> $thumb_path . $uploadData['file_name'],
+					"status"			=> 1,
+					"uploader_id" 		=> $this->session->userdata('user_sess_id'),
+			    	"create_date"		=> date("Y-m-d H:i:s")
 			    );
 			    echo $this->Gmodel->save_data('tbl_program_event_gallery', $data);
 			}
@@ -689,7 +690,7 @@ class Events extends GS_Controller {
 		$gallery_result = $this->db->query($gallery_query)->result();
 		$array_data = array(
 			'result' => $gallery_result,
-			'count' => $gallery_result_count[0]->total_data
+			'count' => $gallery_result_count[0]->total_data,
 		);
 		if($is_load_page==0){
 			return $array_data;

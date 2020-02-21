@@ -1215,6 +1215,7 @@ a.au-lnk:hover>* {
      background: -webkit-linear-gradient(45deg, rgba(10, 35, 63, 0.5) 0%, rgba(26, 163, 249, 0) 100%);
      background: linear-gradient(45deg, rgba(10, 35, 63, 0.5) 0%, rgba(26, 163, 249, 0) 100%);
      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0a233f", endColorstr="#1aa3f9", GradientType=1);
+     pointer-events: none !important;
 }
 
 .au-eventthumbnail .au-accpoints {
@@ -1317,6 +1318,8 @@ a.au-lnk:hover>* {
      width: 100%;
      margin-bottom: 30px;
      display: inline-block;
+     position: relative;
+     z-index: 1;
 }
 
 .au-opthumbnail {
@@ -2172,6 +2175,7 @@ button.btn.btn-secondary {
      width: auto;
      white-space: nowrap;
      border-radius: 0px;
+     min-width: 70px;
 }
 
 button.btn-primary {
@@ -2187,6 +2191,7 @@ button.btn-primary {
      width: auto;
      white-space: nowrap;
      border-radius: 0px;
+     min-width: 70px;
 }
 
 button.btn:hover {
@@ -2410,6 +2415,29 @@ ul.lSPager.lSGallery{
 }
 .au-btnw1{
      min-width: 140px;
+}
+.au-delete{
+     float: right;
+     border: 0px;
+     color: #fff;
+     background-color: #cd2028;
+     width: 28px;
+     height: 28px;
+     border-radius: 50%;
+     padding: 0px;
+     position: absolute;
+     float: right;
+     top: -7px;
+     right: 10px;
+     z-index: 2;
+
+}
+.au-delete:hover{
+     opacity: 0.7;
+}
+.au-delete i{
+     font-size: 10px;
+     line-height: 28px;
 }
 /*Extra small devices (portrait phones, less than 576px)*/
 
