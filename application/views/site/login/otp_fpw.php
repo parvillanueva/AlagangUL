@@ -6,7 +6,7 @@
 			</div>
 			<div class="col-12">
 				<span class="au-h1">Mula sa simula, hanggang sa pagtanda, may Alagang Unilab.</span>
-				<span class="au-h2"><b>Alagang Unilab</b> is the United Health Group’s banner advocacy program committed to make primary healthcare accessible to communities. This is in line with our mission to help build a healthier nation and to care for the well-being of every Filipino. Grounded on bayanihan, we work closely with partners and volunteers to ensure sustainability and impact.</span>
+				<span class="au-h2"><b>Alagang Unilab</b> is the United Health Group’s banner advocacy program committed to make primary healthcare accessible to communities.  Grounded on bayanihan, we work closely with partners and volunteers to ensure sustainability and impact.</span>
 			</div>
 		</div>
 	</div>

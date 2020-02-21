@@ -6,7 +6,7 @@
 			</div>
 			<div class="col-12">
 				<span class="au-h1">Working towards a healthier Philippines, One community at a time.</span>
-				<span class="au-h2">Alagang Unilab is the corporate advocacy movement committed to care for the Filipinos through various community-based healthcare programs.</span>
+				<span class="au-h2"><b>Alagang Unilab</b> is the United Health Group’s banner advocacy program committed to make primary healthcare accessible to communities.  Grounded on bayanihan, we work closely with partners and volunteers to ensure sustainability and impact.</span>
 			</div>
 		</div>
 	</div>
