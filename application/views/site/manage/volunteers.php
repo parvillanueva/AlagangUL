@@ -92,23 +92,12 @@
 							html += '		<td data-header="Task">'+y["task_name"]+'</td>'
 							html += '		<td data-header="Volunteer Name">'+y["volunteer_name"]+'</td>'
 							html += '		<td data-header="Volunteer Status">'+status+'</td>'
-								if(y['status'] == 0){ 
-
-						  			html += "	<td>" ;
-						  			html += "		<a href='javascript:void(0)'  class='au-lnk au-action btn_approve' data-user_id = '"+y["volunteer_id"]+"' data-event_task_id = '"+y["event_task_id"]+"' data-id = '"+y["approval_id"]+"'  data-points = '"+y["points"]+"' style='color: #1894e7;' title='Volunteer Qualified'><i class='fas fa-check'></i></a>";
-						  			html += "		<a href='javascript:void(0)'   class='au-lnk au-action btn_disqualify ' data-user_id = '"+y["volunteer_id"]+"' data-event_task_id = '"+y["event_task_id"]+"' data-id = '"+y["approval_id"]+"'  data-points = '"+y["points"]+"' style='color: red !important;' title='Volunteer Not Qualified'><i class='fas fa-times'></i></a>";
-						  			html += "	</td>";
-								}
-								else if(y['status'] == 1){
+								if(y['status'] == 1){
 						  			html += "	<td>" ;
 						  			html += "		<a href='javascript:void(0)'   class='au-lnk au-action btn_disqualify ' data-user_id = '"+y["volunteer_id"]+"' data-event_task_id = '"+y["event_task_id"]+"' data-id = '"+y["approval_id"]+"'  data-points = '"+y["points"]+"' style='color: red !important;' title='Volunteer Not Qualified'><i class='fas fa-times'></i></a>";
 						  			html += "	</td>";						
 								}
-								else{				
-						  			html += "	<td>" ;
-						  			html += "		<a href='javascript:void(0)'   class='au-lnk au-action btn_approve' data-user_id = '"+y["volunteer_id"]+"' data-event_task_id = '"+y["event_task_id"]+"' data-id = '"+y["approval_id"]+"'  data-points = '"+y["points"]+"' style='color: #1894e7;' title='Volunteer Qualified'><i class='fas fa-check'></i></a>";
-						  			html += "	</td>";
-								}
+
 							html += '	</tr>'
                    	});
                    	$('#volunteers_list').html(html);
