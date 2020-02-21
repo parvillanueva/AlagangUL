@@ -132,6 +132,7 @@ date_default_timezone_set('Asia/Taipei');
 			$this->db->select("id, name");
 			$this->db->from("tbl_division");
 			$this->db->where("status", 1);
+			$this->db->order_by("name", "ASC");
 			return $this->db->get()->result_array();
 		}
 		//ABOUT US
