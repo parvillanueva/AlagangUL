@@ -1312,6 +1312,13 @@ a.au-lnk:hover>* {
      margin-bottom: 30px;
 }
 
+.au-glink{
+     height: auto;
+     width: 100%;
+     margin-bottom: 30px;
+     display: inline-block;
+}
+
 .au-opthumbnail {
      height: 150px;
      background-color: #fff;
@@ -1352,12 +1359,15 @@ a.au-lnk:hover>* {
 }
 
 .au-content .au-userentry .au-accname{
-     font-size: 12px;
+     font-size: 11px;
 }
 
 .au-content .au-avatar-lg{
-     width: 50px;
-     height: 50px;
+     width: 45px;
+     height: 45px;
+}
+.au-content .au-imgbadge{
+     max-width: 20px;
 }
 .au-cscroll {
      max-height: 714px;

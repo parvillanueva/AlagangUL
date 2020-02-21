@@ -33,11 +33,11 @@
 
 			<?php foreach ($photos as $key => $value) { ?>
 				<div class="col-lg-3 col-md-6 col-6">
-					<div class="au-opthumbnail au-lnk au-plink">
-						<a href="<?= base_url() . "/" . $value->path;?>" data-toggle="lightbox" data-gallery="gallery" class="toggle_image">
-							<img src="<?= base_url() . "/" . $value->thumb;?>" class="au-gl-thumbnailimg img-fluid" onerror="imgErrorEvent(this);">
-						</a>
-					</div>
+					<a href="<?= base_url() . "/" . $value->path;?>" data-toggle="lightbox" data-gallery="gallery" class="au-lnk au-glink">
+						<div class="au-opthumbnail">
+							<img src="<?= base_url() . "/" . $value->thumb;?>" class="au-gl-thumbnailimg" onerror="imgErrorEvent(this);">
+						</div>
+					</a>
 				</div>
 			<?php } ?>
 		</div>
