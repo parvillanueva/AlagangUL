@@ -121,7 +121,7 @@ date_default_timezone_set('Asia/Taipei');
 		
 			$this->db->where("etv.user_id", $id);
 			$this->db->group_by("etv.event_id");
-
+			$this->db->order_by("pe.when", "DESC");
 
 			return $this->db->get()->result_array();
 
@@ -132,6 +132,7 @@ date_default_timezone_set('Asia/Taipei');
 			$this->db->select("id, name");
 			$this->db->from("tbl_division");
 			$this->db->where("status", 1);
+			$this->db->order_by("name", "ASC");
 			return $this->db->get()->result_array();
 		}
 		//ABOUT US
