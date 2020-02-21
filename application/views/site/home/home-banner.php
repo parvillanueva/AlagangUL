@@ -11,7 +11,7 @@
                                 </div>
                                 <div class="col-lg-6 au-flexcenter">
                                     <div class="au-inner">
-                                        <span class="au-h1"></span>
+                                        <span class="au-h1">&nbsp;</span>
                                         <span class="au-h2"><?=$banner['description']?> </span>
                                         <button type="button" class="au-btnblue" onclick="location.href='<?=base_url().$banner['button_url']?>'">
                                             <?=$banner['button_text']?>
