@@ -11,7 +11,7 @@ class User extends CI_Controller {
 	}
 	
 	public function view(){
-		$data['division'] = $this->Global_model->get_list_all('tbl_division');
+		$data['division'] = $this->division_list();
 		/*$arrWhere = array(
 			'id' => $user_id
 		);
@@ -21,6 +21,11 @@ class User extends CI_Controller {
 		$data["PageName"] = ("User");
 		$data["content"] = "site/user_profile/page";
 		$this->load->view("site/layout/template2",$data);		
+	}
+	public function division_list(){
+		$data = "SELECT * FROM tbl_division ORDER BY name";
+		$result = $this->db->query($data)->result();
+		return $result;
 	}
 	
 	public function submit(){
