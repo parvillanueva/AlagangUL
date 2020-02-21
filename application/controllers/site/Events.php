@@ -582,21 +582,94 @@ class Events extends GS_Controller {
 		if (!file_exists($storeFolder)) {
 		    mkdir($storeFolder, 0777, true);
 		}
-		if (!empty($_FILES)) {
-		    $tempFile = $_FILES['file']['tmp_name'];                   
-		    $targetPath =  $storeFolder . "/";
-			$file_name_new = $this->clean_str($_FILES['file']['name']);
-		    $targetFile =  $targetPath. str_replace(" ", "_", strtolower($file_name_new)); 
-		    move_uploaded_file($tempFile,$targetFile);
-
-		    $data = array(
-		    	"event_id"		=> $_GET['event_id'],
-		    	"path"			=> $targetFile,
-				"status"		=> 1,
-		    	"create_date"	=> date("Y-m-d H:i:s")
-		    );
-		    echo $this->Gmodel->save_data('tbl_program_event_gallery', $data);
+		if (!file_exists($storeFolder . "/thumb/")) {
+		    mkdir($storeFolder . "/thumb/", 0777, true);
 		}
+		if (!empty($_FILES)) {
+
+			$config['upload_path']         = "./" . $storeFolder;
+            $config['allowed_types']       = 'gif|jpg|png';
+            $config['encrypt_name']        = true;
+            $this->load->library('upload', $config);
+
+            if($this->upload->do_upload('file')){ 
+	            $uploadData = $this->upload->data(); 
+	            $uploadedImage = $uploadData['file_name']; 
+	            $org_image_size = $uploadData['image_width'].'x'.$uploadData['image_height']; 
+	             $imagePath = $storeFolder . "/" . $uploadData['file_name'];
+	             
+	            $source_path = $storeFolder . "/" .$uploadedImage; 
+	            $thumb_path = $storeFolder .'/thumb/'; 
+	            $thumb_width = 200; 
+	             
+	            // Image resize config 
+	            $config['image_library']    = 'gd2'; 
+	            $config['source_image']     = $source_path; 
+	            $config['new_image']         = $thumb_path; 
+	            $config['maintain_ratio']   = TRUE; 
+	            $config['width']            = $thumb_width; 
+	             
+	            // Load and initialize image_lib library 
+	            $this->load->library('image_lib', $config); 
+	            $this->image_lib->resize();
+             
+         	
+
+			    // $tempFile = $_FILES['file']['tmp_name'];                   
+			 //    $targetPath =  $storeFolder . "/";
+				// $file_name_new = $this->clean_str($_FILES['file']['name']);
+			 //    $targetFile =  $targetPath. str_replace(" ", "_", strtolower($file_name_new)); 
+			 //    move_uploaded_file($tempFile,$targetFile);
+
+				// $this->createThumbs($storeFolder,$storeFolder . "/thumb/",100);
+
+
+			    $data = array(
+			    	"event_id"		=> $_GET['event_id'],
+			    	"path"			=> $imagePath,
+			    	"thumb"			=> $thumb_path . $uploadData['file_name'],
+					"status"		=> 1,
+			    	"create_date"	=> date("Y-m-d H:i:s")
+			    );
+			    echo $this->Gmodel->save_data('tbl_program_event_gallery', $data);
+			}
+		}
+	}
+	function createThumbs( $pathToImages, $pathToThumbs, $thumbWidth ) 
+	{
+	  // open the directory
+	  $dir = opendir( $pathToImages );
+
+	  // loop through it, looking for any/all JPG files:
+	  while (false !== ($fname = readdir( $dir ))) {
+	    // parse path for the extension
+	    $info = pathinfo($pathToImages . $fname);
+	    // continue only if this is a JPEG image
+	    if ( strtolower($info['extension']) == 'jpg' ) 
+	    {
+	      echo "Creating thumbnail for {$fname} <br />";
+
+	      // load image and get image size
+	      $img = imagecreatefromjpeg( "{$pathToImages}{$fname}" );
+	      $width = imagesx( $img );
+	      $height = imagesy( $img );
+
+	      // calculate thumbnail size
+	      $new_width = $thumbWidth;
+	      $new_height = floor( $height * ( $thumbWidth / $width ) );
+
+	      // create a new temporary image
+	      $tmp_img = imagecreatetruecolor( $new_width, $new_height );
+
+	      // copy and resize old image into new image 
+	      imagecopyresized( $tmp_img, $img, 0, 0, 0, 0, $new_width, $new_height, $width, $height );
+
+	      // save thumbnail into a file
+	      imagejpeg( $tmp_img, "{$pathToThumbs}{$fname}" );
+	    }
+	  }
+	  // close the directory
+	  closedir( $dir );
 	}
 	
 	function clean_str($string) {

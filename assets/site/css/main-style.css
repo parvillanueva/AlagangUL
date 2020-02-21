@@ -1197,12 +1197,15 @@ a.au-lnk:hover>* {
      object-fit: cover;
      object-position: center;
      margin-left: 8px;
+     position: absolute;
+     z-index: 1;
 }
 
 .au-eventswrapper .au-eventthumbnail .au-eventimg{
 }
 
 .au-eventthumbnail::before {
+     z-index: 2;
      content: '';
      position: absolute;
      width: 100%;
@@ -1348,6 +1351,14 @@ a.au-lnk:hover>* {
      color: #222;
 }
 
+.au-content .au-userentry .au-accname{
+     font-size: 12px;
+}
+
+.au-content .au-avatar-lg{
+     width: 50px;
+     height: 50px;
+}
 .au-cscroll {
      max-height: 714px;
      padding: 1em;
@@ -2386,6 +2397,9 @@ ul.lSPager.lSGallery{
 }
 .au-signup{
      justify-content: space-between !important;
+}
+.au-btnw1{
+     min-width: 140px;
 }
 /*Extra small devices (portrait phones, less than 576px)*/
 
