@@ -69,7 +69,7 @@
                 <div class="row">
                     <div class="col-lg-6">								
                         <div class="au-boxed au-achivements">
-                            <div class="au-titlebox">Achivements
+                            <div class="au-titlebox">Achievements
                                 <div class="au-inner">
                                     <div class="au-p2">
                                         <span class="au-fpoints">Points Earned</span>
@@ -169,7 +169,7 @@
                                                             <div class="au-pthumbnail">
                                                                 <img src="<?=base_url(). @$event['image_thumbnail']?>" class="au-fp-thumbnailimg" onerror="imgErrorProfileDetails2(this);">
                                                             </div>
-                                                            <span class="au-ptitle"><?= @$event['title']?></span>
+                                                            <span class="au-ptitle" attr-program-id="<?=$event['program_id']?>" attr-event-id="<?= @$event['event_id']?>"><?= @$event['title']?></span>
                                                             <span class="au-pdetails">
                                                                 <div class="au-programdetails">
                                                                     <div class="au-inner">
@@ -207,7 +207,7 @@
 															
                                                             </div>
                                                             <div class="col">
-                                                                <button class="au-btnvolunteer au-btn float-right" data-toggle="modal" data-target="#volunteermodal">
+                                                                <button class="au-btnvolunteer au-btn float-right" data-toggle="modal" onclick="volunteer('<?=$event['task_name']?>','<?=$event['program_name']?>',<?=$event['program_id']?>,<?= @$event['event_id']?>,<?= @$event['task_id']?>)">
                                                                     Joined
                                                                 </button>
                                                             </div>
@@ -230,6 +230,53 @@
         </div>				
     </div>
 </div>
+
+<div class="modal fade text-center" id="volunteermodal">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-body">
+				<span class="au-h4">Thank you for volunteering</span>
+				<div class="au-yourvolunteer" attr-prog-id="" attr-event-id="" task-id="">
+					
+				</div>
+				<span class="au-p6">in <span class="au-programvolunteer"></span>
+				<br><br>Task: <span class="volunteer-task"></span></span>
+				<hr>	
+				<form>
+					<div class="form-row au-terms">
+						<!-- <div class="col">
+		      				<label class="form-check-label">
+		        				<input class="form-check-input is_agree_checkbox" type="checkbox" name="terms" required=""> I have read and understood the <a href="#" class="au-lnk event-guidelines" data-toggle="modal" data-target="#eventdetails">Guidelines</a>.
+			        			<div class="valid-feedback"></div>
+			        			<div class="invalid-feedback"></div>
+		      				</label>
+		      				
+		      			</div> -->
+		      			<!-- <span class="au-p6 au-errormessage"><i class="fas fa-exclamation-triangle"></i> Please read and agree to the event guidelines above.</span> -->
+	    			</div>
+					<div class="au-modalbtn text-center">
+						<button type="button" class="au-btn au-btnyellow volunteer-as" data-dismiss="modal" attr-submit="0">No, I made a mistake</button>
+						<!-- <button type="button" class="au-btn volunteer-as" attr-submit="1">Yes, sign me up!</button> -->
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade text-center" id="volunteerthankyou" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-body">
+				<span class="au-h4 volunteer-title">Thank you!</span>
+				<span class="au-p6 volunteer-body">Your help is greatly appreciate. Please standby for more details.</span>
+				<div class="au-modalbtn text-center">
+					<button type="button" class="au-btn close-btn" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 <script type="text/javascript">
     var base_url = '<?=base_url();?>';
     function imgErrorProfile(image) {
@@ -249,5 +296,82 @@
         image.src = base_url+"/assets/img/broken_img2.jpg";
         return true;
     }
+
+    function volunteer(task, program, prog_id,event_id, task_id)
+    {
+        $('.au-yourvolunteer').attr('attr-prog-id',prog_id).attr('attr-event-id',event_id).attr('task-id',task_id);
+        $('.volunteer-task').html(task);
+        $('.au-programvolunteer').html(program);
+
+       
+        $('#volunteermodal').modal('show');
+    }
     
+    $(document).ready(function() {
+        $(document).on('click', '.event-volunteer', function() {
+			
+			var task = $(this).closest('tr').children(':nth-child(2)').html();
+			var event_task_id = $(this).attr('attr-id');
+			var is_joined = $(this).attr('attr-isjoined');
+			var volunteer_type = $('.hid-id-'+event_task_id).html();
+
+			if(is_joined==1){
+				$('.au-terms').hide();
+			}
+			else{
+				$('.au-terms').show();
+			}
+
+			$('.volunteer-as').attr('attr-id',event_task_id).attr('attr-isjoined',is_joined);
+			$('.au-yourvolunteer').html(volunteer_type);
+			$('.volunteer-task').html(task);
+			$('#volunteermodal').modal('show');
+			$('.au-errormessage').hide();
+		});
+
+		$(document).on('click', '.close-btn', function() {
+			location.reload();
+		});
+
+		$(document).on('click', '.volunteer-as', function() {
+           
+            var program_id = $('.au-yourvolunteer').attr('attr-prog-id');
+            var event_id = $('.au-yourvolunteer').attr('attr-event-id');
+            var event_task_id = $('.au-yourvolunteer').attr('task-id');
+
+
+			var is_submit = $(this).attr('attr-submit');
+            var task = $(this).closest('tr').children(':nth-child(2)').html();
+			var is_joined = $(this).attr('attr-isjoined');
+			var volunteer_type = $('.hid-id-'+event_task_id).html();
+			var is_joined = $(this).attr('attr-isjoined');
+
+			// if($('.is_agree_checkbox').is(':checked') || (is_submit==0 && is_joined==1) ){
+				var url = "<?= base_url("events/volunteer");?>?program_id="+program_id+"&event_id="+event_id+"&event_task_id="+event_task_id+"&is_submit="+is_submit;
+		    	$.get(url, function(data) {
+		    		$('#volunteermodal').modal('hide');
+		    		var vol_id = $('.volunteer').attr('attr-id');
+		    		$('tr.forvolunteer').removeClass('volunteer'); 
+		    		$('.event-volunteer').attr('attr-isjoined',0);
+		    		$('.joined-'+vol_id).html(parseInt($('.joined-'+vol_id).html())-1);
+		    		if(is_submit==1){
+		    			$(".vol-id"+event_task_id).addClass('volunteer');
+		    			$('.event-volunteer[attr-id="'+event_task_id+'"]').attr('attr-isjoined',1);
+		    			$('.joined-'+event_task_id).html(parseInt($('.joined-'+event_task_id).html())+1);
+		    			
+		    		}
+		    		else{
+		    			$('.volunteer-body').html('Your volunteered task has been cancelled.');
+		    		}
+		    		$('#volunteerthankyou').modal('show');
+
+				});
+			// }
+			// else{
+			// 	$('.au-errormessage').show();
+			// }
+			
+
+		});
+    });
 </script>
