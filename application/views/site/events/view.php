@@ -10,6 +10,7 @@
 	    margin-left: auto;
 	    margin-right: auto;
 	    margin-bottom: 10px;
+	    display: none;
 	}
 	.disabled_css .au-btnvolunteertype {
 		background-color: #cfd8dc !important;
@@ -23,9 +24,9 @@
 	.share-wp {
 		display: <?=($_SESSION['user_impersonate_token']=='') ? 'none;' : 'block;' ?>;
 	}
-	.volunteer .au-btnvolunteer {
+	/*.volunteer .au-btnvolunteer {
 		cursor: default;
-	}
+	}*/
 	.disabled_css {
 		cursor: default;
 	}
@@ -63,12 +64,12 @@
 							<?php } }?>	
 						<?php } }?>
 					</div>
-					<div class="au-badges">
+					<!-- <div class="au-badges">
 						<span class="au-pb">Badges you can earn</span>
 						<?php foreach ($earn_badge as $key => $value) { ?>
 							<img src="<?= base_url() . "/" . $value->icon_image;?>" class="au-imgbadge" title="<?= $value->name;?>">
 						<?php } ?>
-					</div>
+					</div> -->
 				</div>
 			</div>
 			
@@ -92,11 +93,11 @@
 											<div class="au-inner">
 												<span class="au-accname"><?= $value['user']; ?></span>
 												<span class="au-accvolunteer">
-													<div class="au-accvicon">
+													<!-- <div class="au-accvicon">
 														<?php foreach ($value['badge'] as $a => $b) { ?>
 															<img src="<?= base_url() . "/" . $b->icon_image;?>" class="au-imgbadge" title="<?= $b->name;?>">
 														<?php } ?>
-													</div>
+													</div> -->
 												</span>	
 											</div>
 										</a>
@@ -154,12 +155,12 @@
 								<thead>
 									<tr>
 										<th scope="col">Volunteer your:</th>
-										<th scope="col">Possible task for volunteers</th>
+										<th scope="col">Tasks</th>
 										<th scope="col">Qualifications</th>
 										<th scope="col">Needed</th>
 										<th scope="col">Joined</th>
 										<?php if($event_details[0]['is_admin'] == 1) { ?>
-											<th scope="col" colspan="2">Actions</th>
+											<th scope="col">Actions</th>
 										<?php } else{ ?>
 										<th scope="col">Actions</th>
 										<?php } ?>
@@ -223,12 +224,13 @@
 											<td data-header="Qualifications"><?= $value['qualification'];?></td>
 											<td data-header="Needed"><?= $value['required_volunteers'];?></td>
 											<td data-header="Joined" class="joined-<?=$value['id']?>"><?= $value['joined_volunteers'];?></td>
+											<?php if($event_details[0]['is_admin'] != 1) { ?>
 											<td>												
-												<button class="<?=($x==0) ? 'event-volunteer' : '' ?> au-btnvolunteer au-btn au-btnvolunteer-<?=$badge_count?> <?=$is_disabled_css?>" attr-id="<?=$value['id']?>" attr-isjoined="<?=$value['user_id_joined']?>">
+												<button class="event-volunteer au-btnvolunteer au-btn au-btnvolunteer-<?=$badge_count?> <?=$is_disabled_css?>" attr-id="<?=$value['id']?>" attr-isjoined="<?=$value['user_id_joined']?>">
 													<?=($value['user_id_joined']==1) ? 'Joined' : 'Join' ?>
 												</button>
 											</td>
-
+											<?php } ?>
 											<?php if($event_details[0]['is_admin'] == 1) { ?>
 											<td data-header="Actions:" class="au-actions">
 												<a href="#"  data-toggle="modal" data-id = "<?=$value['id']?>" data-target="#editTask" id="btn_edit_task" class="au-lnk au-action" title="Edit Details"><i class="fas fa-edit"></i></a>
@@ -261,10 +263,22 @@
 			                </div>
 			            </form>
 						<?php } ?>
-						<div class="row" id="gallery_photos"></div>
-						<div class="row">
-							<div class="col"><button class="au-btn float-right" id="loadMore">Load More</button></div>
+						<div class="row" id="gallery_photos">
+							<?php 
+								$data2['galleries'] = $galleries['result'];
+								$data2['galleries_pages'] = $galleries['count'];
+								$data2['is_admin'] = $event_details[0]['is_admin'];
+								$data2['is_joined'] = $event_details[0]['is_joined'];
+								$this->load->view('site/events/gallery',$data2);
+							?>
 						</div>
+						<?php
+							if($galleries['count']>4){
+						?>
+						<div class="row">
+							<div class="col"><button class="au-btn float-right" id="loadMore" onclick="window.location.href = '<?=base_url()?>programs/<?=$program_details[0]["id"]?>/<?=$program_details[0]["url_alias"]?>/event/<?=$event_details[0]["id"]?>/<?=$event_details[0]["url_alias"]?>/gallery';">Load More</button></div>
+						</div>
+						<?php } ?>
 					</div>				
 				</div>
 			</div>
@@ -281,7 +295,20 @@
 					</div>
 					<div class="row">
 						<div class="col au-testimonialwrapper">
-							<div class="row" id="testimonial_div"></div>
+							<div class="row" id="testimonial_div">
+								<?php 
+									$data['testimonials'] = $testimonials;
+									$data['testimonials_page'] = $testimonials_count;
+									$this->load->view('site/events/testimonials',$data);
+								?>
+							</div>
+							<?php
+								if($testimonials_count>1){
+							?>
+							<div class="row">
+								<div class="col"><button class="au-btn float-right" id="loadMoreTestimonials">Load More</button></div>
+							</div>
+							<?php } ?>
 						</div>
 					</div>
 				</div>
@@ -377,15 +404,13 @@
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-body">
-				<span class="au-h4">We have a volunteer!</span>
-				<span class="au-p6">Thank you for your intent to volunteer your:</span>
+				<span class="au-h4">Thank you for volunteering your</span>
 				<div class="au-yourvolunteer">
 					
 				</div>
-				<span class="au-p6">as a:</span>
-				<span class="au-p4 volunteer-task"></span>
-				<span class="au-p6">is this correct?</span>
-				<hr>
+				<span class="au-p6">in <?=$program_details[0]['name']?>: <?= $event_details[0]['title'];?> on <?= date("F d, Y h:i a", strtotime($event_details[0]['when']))?>.
+				<br><br>Task: <span class="volunteer-task"></span></span>
+				<hr>	
 				<form>
 					<div class="form-row au-terms">
 						<div class="col">
@@ -399,7 +424,7 @@
 		      			<span class="au-p6 au-errormessage"><i class="fas fa-exclamation-triangle"></i> Please read and agree to the event guidelines above.</span>
 	    			</div>
 					<div class="au-modalbtn text-center">
-						<button type="button" class="au-btn au-btnyellow" data-dismiss="modal" attr-submit="0">No, I made a mistake</button>
+						<button type="button" class="au-btn au-btnyellow volunteer-as" data-dismiss="modal" attr-submit="0">No, I made a mistake</button>
 						<button type="button" class="au-btn volunteer-as" attr-submit="1">Yes, sign me up!</button>
 					</div>
 				</form>
@@ -427,10 +452,10 @@
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-body">
-				<span class="au-h4">Thank you!</span>
-				<span class="au-p6">Your help is greatly appreciated. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+				<span class="au-h4 volunteer-title">Thank you!</span>
+				<span class="au-p6 volunteer-body">Your help is greatly appreciate. Please standby for more details.</span>
 				<div class="au-modalbtn text-center">
-					<button type="button" class="au-btn close-btn" data-dismiss="modal">Close</button>
+					<button type="button" class="au-btn close-btn" data-dismiss="modal">OK</button>
 				</div>
 			</div>
 		</div>
@@ -722,14 +747,16 @@
                   }
             });
 	});
+	var testi_page  = 1;
+	var testi_page_count  = '<?=$testimonials_count?>';
 	var limit  = 4;
 	$(document).ready(function() {
 		var required_volunteer = <?= $event_details[0]['required_volunteer'];?>;
 		var joined_volunteers = <?= $event_details[0]['joined_volunteers'];?>;
 		var result = (joined_volunteers * 100) / required_volunteer;
 		//progressBar('#progress1 .au-bar', result);
-		get_gallery();
-		get_testimonial();
+		//get_gallery();
+		//get_testimonial();
 
 		$(document).on('click', '.event-guidelines', function() {
 			$('#volunteermodal').modal('hide');
@@ -758,6 +785,14 @@
 			var event_task_id = $(this).attr('attr-id');
 			var is_joined = $(this).attr('attr-isjoined');
 			var volunteer_type = $('.hid-id-'+event_task_id).html();
+
+			if(is_joined==1){
+				$('.au-terms').hide();
+			}
+			else{
+				$('.au-terms').show();
+			}
+
 			$('.volunteer-as').attr('attr-id',event_task_id).attr('attr-isjoined',is_joined);
 			$('.au-yourvolunteer').html(volunteer_type);
 			$('.volunteer-task').html(task);
@@ -776,7 +811,7 @@
 			var event_id = '<?=$event_id?>';	
 			var is_joined = $(this).attr('attr-isjoined');
 
-			if($('.is_agree_checkbox').is(':checked')){
+			if($('.is_agree_checkbox').is(':checked') || (is_submit==0 && is_joined==1) ){
 				var url = "<?= base_url("events/volunteer");?>?program_id="+program_id+"&event_id="+event_id+"&event_task_id="+event_task_id+"&is_submit="+is_submit;
 		    	$.get(url, function(data) {
 		    		$('#volunteermodal').modal('hide');
@@ -788,11 +823,13 @@
 		    			$(".vol-id"+event_task_id).addClass('volunteer');
 		    			$('.event-volunteer[attr-id="'+event_task_id+'"]').attr('attr-isjoined',1);
 		    			$('.joined-'+event_task_id).html(parseInt($('.joined-'+event_task_id).html())+1);
-		    			$('#volunteerthankyou').modal('show');
+		    			
 		    		}
 		    		else{
-		    			location.reload();
-		    		}		    		
+		    			$('.volunteer-body').html('Your volunteered task has been cancelled.');
+		    		}
+		    		$('#volunteerthankyou').modal('show');
+
 				});
 			}
 			else{
@@ -843,26 +880,9 @@
 
 
     function get_gallery(){
-    	var url = "<?= base_url("events/get_gallery");?>?event_id=<?= $event_details[0]['id']; ?>&limit=" + limit;
-		var is_admin = "<?= $event_details[0]['is_admin'] ?>";
-		var is_joined = "<?= $event_details[0]['is_joined'] ?>";
+    	var url = "<?= base_url("site/events/get_gallery")?>/"+limit+"/<?= $event_details[0]['id'] ?>/1/<?= $event_details[0]['is_admin'] ?>/<?= $event_details[0]['is_joined'] ?>";
     	$.get(url, function(data) {
-    		var html = "";
-    		$.each(data.result, function(x, y){
-    			html += '<div class="col-lg-3 col-md-6 col-6">';
-				html += '	<div class="au-opthumbnail au-lnk au-plink">';
-				html += '		<a href="<?= base_url();?>'+y.path+'" data-toggle="lightbox" data-gallery="gallery" class="toggle_image">';
-				html += '			<img src="<?= base_url();?>'+y.path+'" class="au-gl-thumbnailimg img-fluid" onerror="imgErrorEvent(this);">';
-				html += '		</a>';
-				if(is_admin == 1 || is_joined == 1){
-					html += '		<div class="au-gltitle" style="text-align:right; cursor:pointer"><font color="red"><span class="fa fa-trash" path-url= "'+y.path+'" path-id="'+y.id+'" id="delete_image"></span></font></div>';
-				}
-				html += '	</div>';
-				html += '</div>';
-    		});
-
-    		$("#gallery_photos").html(html);
-			count_image(data.count);
+    		$("#gallery_photos").html(data);
 		});
     }
 	
@@ -870,41 +890,20 @@
 		event.preventDefault();
 		$(this).ekkoLightbox();
 	});
+	$(document).on("click", '#loadMoreTestimonials', function(event){
+		BM.loading(true);
+		get_testimonial();
+	});
 	
 	function get_testimonial(){
-		var url = "<?= base_url("site/events/get_testimonial");?>?event_id=<?= $event_details[0]['id']; ?>&limit=" + limit;
+		testi_page = testi_page + 1;
+		if(testi_page==testi_page_count){
+			$('#loadMoreTestimonials').hide();
+		}
+		var url = "<?= base_url("site/events/get_testimonial");?>/"+testi_page+"/4/<?= $event_details[0]['id']; ?>/1/all";
 		$.get(url, function(data) {
-    		var html = "";
-    		$.each(data, function(x, y){
-    			html += '<div class="col-lg-6 au-fullheight au-testimonialentry">';
-				html += '	<div class="au-testimonial au-fullheight">';
-				html += '		<div class="au-userentry">';
-				html += '			<a href="profile.html" class="au-userentry">';
-				html += '				<div class="au-inner">';
-				html += '					<img src="<?php echo base_url("'+y['picture']['image_path']+'") ?>" class="au-avatar-lg" onerror="imgErrorProfile(this);">';
-				html += '				</div>';
-				html += '				<div class="au-inner">';
-				html += '					<span class="au-accname">'+y['picture']['name']+'</span>';
-				html += '					<span class="au-accvolunteer">';
-				html += '						<div class="au-accvicon">';
-					$.each(y['badge'], function(a, b){
-						html += '				<img src="<?= base_url();?>/'+b.icon_image+'" class="au-imgbadge" title="'+b.name+'">';
-					});
-				html += '						</div>';
-				html += '					</span>';
-				html += '				</div>';
-				html += '			</a>';
-				html += '		</div>';
-				html += '		<span class="au-date">'+y.date_posted+'</span>';
-				html += '		<span class="au-p5">'+y['testimonial']+'</span>';
-				html += '		<div class="text-right">';
-				html += '			<a href="#" class="au-lnk"><span class="au-share share-wp"><i class="fas fa-share-alt"></i> Share on <img src="<?php echo base_url("assets/img/au-workplace2.svg")?>" alt="Workplace"></span></a>';
-				html += '		</div>';
-				html += '	</div>';
-				html += '</div>';
-    		});
-
-    		$("#testimonial_div").html(html);
+			BM.loading(false);
+    		$("#testimonial_div").append(data);
 		});
 	}
 	
