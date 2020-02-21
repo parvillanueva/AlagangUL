@@ -127,6 +127,7 @@ class Events extends GS_Controller {
 		$data['is_allowed_to_volunteer'] = $this->check_is_allowed($event_id,date('Y-m-d',strtotime($data['event_details'][0]['when'])));
 
 		$data['guidelines'] = $this->get_guidelines();
+		$data['waiver'] = $this->get_waiver();
 
 		//$data['is_volunteered'] = array_search($user_id, array_column($data['event_volunteers'], 'user_id'));
 		/*echo "<pre>";
@@ -153,6 +154,13 @@ class Events extends GS_Controller {
 
 	public function get_guidelines(){
 		$data = "SELECT title, description FROM tbl_guidelines";
+		$result = $this->db->query($data)->result();
+		return $result;
+	}
+	
+
+	public function get_waiver(){
+		$data = "SELECT title, description FROM tbl_waivers";
 		$result = $this->db->query($data)->result();
 		return $result;
 	}

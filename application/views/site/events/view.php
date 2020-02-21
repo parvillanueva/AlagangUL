@@ -426,10 +426,15 @@ die(); */
 			        			<div class="valid-feedback"></div>
 			        			<div class="invalid-feedback"></div>
 		      				</label>
+		      				<label class="form-check-label">
+								<input class="form-check-input is_agree_waiver" type="checkbox" name="terms" required=""> I agree to the terms of the <a href="#" class="au-lnk event-waiver" data-toggle="modal" data-target="#eventwaiver">Waiver</a>.
+								<div class="valid-feedback"></div>
+								<div class="invalid-feedback"></div>
+							</label>
 		      				
 		      			</div>
-		      			<span class="au-p6 au-errormessage"><i class="fas fa-exclamation-triangle"></i> Please read and agree to the event guidelines above.</span>
 	    			</div>
+		      		<span class="au-p6 au-errormessage"><i class="fas fa-exclamation-triangle"></i> Please read and agree to the Guidelines and Waiver above.</span>
 					<div class="au-modalbtn text-center">
 						<button type="button" class="au-btn au-btnyellow volunteer-as" data-dismiss="modal" attr-submit="0">No, I made a mistake</button>
 						<button type="button" class="au-btn volunteer-as" attr-submit="1">Yes, sign me up!</button>
@@ -440,21 +445,37 @@ die(); */
 	</div>
 </div>
 <div class="modal fade text-center" id="eventdetails">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-body">
-					<span class="au-h4"><?=$guidelines[0]->title?></span>
-					<div class="au-inner au-cscroll au-guidelines text-left">
-						<?=$guidelines[0]->description?>
-					</div>
-					<div class="au-modalbtn text-center">
-						<button type="button" class="au-btn au-btnyellow au-guidlinebtn guidelinebtn" data-dismiss="modal" attr-data="0">I disagree</button>
-						<button type="button" class="au-btn au-guidlinebtn guidelinebtn" data-dismiss="modal" attr-data="1">I agree</button>
-					</div>
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-body">
+				<span class="au-h4"><?=$guidelines[0]->title?></span>
+				<div class="au-inner au-cscroll au-guidelines text-left">
+					<?=$guidelines[0]->description?>
+				</div>
+				<div class="au-modalbtn text-center">
+					<button type="button" class="au-btn au-btnyellow au-guidlinebtn guidelinebtn" data-dismiss="modal" attr-data="0">I disagree</button>
+					<button type="button" class="au-btn au-guidlinebtn guidelinebtn" data-dismiss="modal" attr-data="1">I agree</button>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
+<div class="modal fade text-center" id="eventwaiver">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-body">
+				<span class="au-h4"><?=$waiver[0]->title?></span>
+				<div class="au-inner au-cscroll au-guidelines text-left">
+					<?=$waiver[0]->description?>
+				</div>
+				<div class="au-modalbtn text-center">
+					<button type="button" class="au-btn au-btnyellow au-guidlinebtn waiverbtn" data-dismiss="modal" attr-data="0">I disagree</button>
+					<button type="button" class="au-btn au-guidlinebtn waiverbtn" data-dismiss="modal" attr-data="1">I agree</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="modal fade text-center" id="volunteerthankyou" data-backdrop="static" data-keyboard="false">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
@@ -769,10 +790,25 @@ die(); */
 			$('#volunteermodal').modal('hide');
 		});	
 
+		$(document).on('click', '.event-waiver', function() {
+			$('#volunteermodal').modal('hide');
+		});	
+
 		$(document).on('click', '.is_agree_checkbox', function() {
 			if($(this).is(':checked')){
 				$('.au-errormessage').hide();
 			}
+		});
+
+		$(document).on('click', '.waiverbtn', function() {
+			var is_agree = $(this).attr('attr-data');
+			if(is_agree==1){
+				$('.is_agree_waiver').attr('checked',true);
+			}
+			else{
+				$('.is_agree_waiver').attr('checked',false);
+			}
+			$('#volunteermodal').modal('show');
 		});
 
 		$(document).on('click', '.guidelinebtn', function() {
@@ -818,7 +854,7 @@ die(); */
 			var event_id = '<?=$event_id?>';	
 			var is_joined = $(this).attr('attr-isjoined');
 
-			if($('.is_agree_checkbox').is(':checked') || (is_submit==0 && is_joined==1) ){
+			if($('.is_agree_waiver').is(':checked') || $('.is_agree_checkbox').is(':checked') || (is_submit==0 && is_joined==1) ){
 				var url = "<?= base_url("events/volunteer");?>?program_id="+program_id+"&event_id="+event_id+"&event_task_id="+event_task_id+"&is_submit="+is_submit;
 		    	$.get(url, function(data) {
 		    		$('#volunteermodal').modal('hide');
@@ -840,7 +876,7 @@ die(); */
 				});
 			}
 			else{
-				$('.au-errormessage').show();
+				$('.au-errormessage').attr("style","display: block;");
 			}
 			
 
