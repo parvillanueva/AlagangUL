@@ -82,8 +82,10 @@ class Events extends GS_Controller {
 				unset($data_array2['date_volunteer']);
 				$this->Gmodel->save_data('tbl_users_badge', $data_array2);
 			}
+			$this->event_email_send($_GET['event_task_id']);
 		}
 	}
+	
 	public function view()
 	{
 
@@ -1018,6 +1020,104 @@ class Events extends GS_Controller {
 		$query = "UPDATE tbl_program_event_task SET status = '-2' WHERE id = $id";
 		$result = $this->db->query($query);
 		echo json_encode($result);
+	}
+	
+	public function event_email_send($event_task_id){
+		$event_badge = $this->get_event_badge($event_task_id);
+		$content = $this->email_content($event_badge);
+		$user_id = $this->session->userdata('user_sess_id');
+		$query = "SELECT * FROM tbl_users WHERE id = $user_id ";
+		$result = $this->db->query($query)->result();
+		$from = $result[0]->email_address;
+		$fr_name = 'Guest';
+		$to = $result[0]->email_address;
+		$subject = 'Event Success Reply';
+		return $this->send_sgrid($from, $fr_name, $to, $subject, $content);
+	}
+	
+	public function get_event_badge($event_task_id){
+		$query = "SELECT badge_id FROM tbl_program_event_task_badge WHERE event_task_id = $event_task_id ";
+		$result = $this->db->query($query)->result();
+		$arr = array();
+		foreach($result as $rloop){
+			$query_badge = "SELECT * FROM tbl_badges WHERE id = $rloop->badge_id ";
+			$result_badge = $this->db->query($query_badge)->result();
+			$arr[] = $result_badge;
+		}
+		return	$arr;	
+	}
+	
+	function send_sgrid($from, $fr_name, $to, $subject, $content){ 
+		$arr = array(
+			'from' => $from,
+			'from_name' => $fr_name,
+			'to' => $to,
+			'subject' => $subject,
+			'content' => $content,
+		);
+		return $this->sndgrd->send($arr);
+	}
+	
+	function email_content($badge){
+		$html="<html>
+				<head>
+				</head>
+
+				<body style='background: #efefef;width:100%;height: 100%;font-family: Arial, sans-serif;'>
+				<table align='center' width='500' bgcolor='white' style='display:block;border:1px solid #dedede;margin-top:30px;margin-bottom:30px;margin-left:auto;margin-right:auto;border-radius: 10px;padding:10px;'>
+					<tbody>
+						<tr>
+							<td style='background-color: #092E6E;padding:10px 0px;border-radius: 8px 8px 0px 0px;'>
+								<img width='220' src='http://172.29.70.126/alagang_unilab/uploads/au-alagangunilab.png'>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<table style='padding:20px;margin:15px auto;'>
+									<tr>
+										<td align='center'>
+											<p style='font-size:22px;font-weight:300;color: #092E6E;padding-bottom:10px;'>
+												<b><i>Thank you for volunteering your</i></b>
+											</p>
+											<table align='center'>";
+											
+											foreach($badge as $bloop){
+												$html .="<tr>
+															<td width='24'>
+																<img width='24' style='width:24px;height:auto;' src='".base_url().$bloop[0]->icon_image."'>
+															</td>
+															<td style='padding-top:4px;'>
+																<b style='font-size:18px;margin-top:-3px;'>".$bloop[0]->name."</b>
+															</td>
+														</tr>";
+											}	
+										$html .= "</table>
+											<p style='font-size:17px; color:#4b4d4d;line-height: 25px;padding-top:15px;'>in AKAP: Alaga Sa Kalusugan ng Pamayanan's Community Wellness Program on January 19, 2020.</p>
+											<p style='font-size:17px; color:#4b4d4d;padding-top:10px;'>Task: Registration</p>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td style='background-color: #092E6E;padding:15px;border-radius:0px 0px 8px 8px ;'>
+								<table width='100%'>
+									<tr>
+										<td>
+											<p style='color:#fff;font-size:14px;'>Alagang Unilab</p>
+										</td>
+										<td style='text-align:right'>
+											<p style='color:#fff;font-size:14px;'>Website: <a href='http://alagangunilab.unilab.com.ph/' style='color:#0e5bdf;text-decoration: none;'>www.alagangunilab.unilab.com.ph</a></p>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				</body>
+				</html>";
+		return $html;
 	}
 
 }
