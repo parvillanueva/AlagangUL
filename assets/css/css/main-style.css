@@ -51,7 +51,7 @@ html {
 }
 
 body {
-     font-family: montserrat, sans-serif !important;
+     font-family: myriad-pro, sans-serif !important;
      background-color: #F5F5F5;
      color: #222;
 }
@@ -427,7 +427,7 @@ a.au-lnk:hover>* {
 }
 
 .au-h1 {
-     font-family: montserrat, sans-serif;
+     font-family: myriad-pro, sans-serif;
      font-size: 24px;
      display: block;
      line-height: 1.25em;
@@ -436,7 +436,7 @@ a.au-lnk:hover>* {
 }
 
 .au-h2 {
-     font-family: montserrat, sans-serif;
+     font-family: myriad-pro, sans-serif;
      font-size: 18px;
      display: block;
      font-weight: 400;
@@ -1197,12 +1197,15 @@ a.au-lnk:hover>* {
      object-fit: cover;
      object-position: center;
      margin-left: 8px;
+     position: absolute;
+     z-index: 1;
 }
 
 .au-eventswrapper .au-eventthumbnail .au-eventimg{
 }
 
 .au-eventthumbnail::before {
+     z-index: 2;
      content: '';
      position: absolute;
      width: 100%;
@@ -1309,6 +1312,13 @@ a.au-lnk:hover>* {
      margin-bottom: 30px;
 }
 
+.au-glink{
+     height: auto;
+     width: 100%;
+     margin-bottom: 30px;
+     display: inline-block;
+}
+
 .au-opthumbnail {
      height: 150px;
      background-color: #fff;
@@ -1348,6 +1358,17 @@ a.au-lnk:hover>* {
      color: #222;
 }
 
+.au-content .au-userentry .au-accname{
+     font-size: 11px;
+}
+
+.au-content .au-avatar-lg{
+     width: 45px;
+     height: 45px;
+}
+.au-content .au-imgbadge{
+     max-width: 20px;
+}
 .au-cscroll {
      max-height: 714px;
      padding: 1em;
@@ -2386,6 +2407,9 @@ ul.lSPager.lSGallery{
 }
 .au-signup{
      justify-content: space-between !important;
+}
+.au-btnw1{
+     min-width: 140px;
 }
 /*Extra small devices (portrait phones, less than 576px)*/
 

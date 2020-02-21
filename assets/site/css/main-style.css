@@ -51,7 +51,7 @@ html {
 }
 
 body {
-     font-family: montserrat, sans-serif !important;
+     font-family: myriad-pro, sans-serif !important;
      background-color: #F5F5F5;
      color: #222;
 }
@@ -427,7 +427,7 @@ a.au-lnk:hover>* {
 }
 
 .au-h1 {
-     font-family: montserrat, sans-serif;
+     font-family: myriad-pro, sans-serif;
      font-size: 24px;
      display: block;
      line-height: 1.25em;
@@ -436,7 +436,7 @@ a.au-lnk:hover>* {
 }
 
 .au-h2 {
-     font-family: montserrat, sans-serif;
+     font-family: myriad-pro, sans-serif;
      font-size: 18px;
      display: block;
      font-weight: 400;
