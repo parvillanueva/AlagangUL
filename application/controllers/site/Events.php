@@ -600,7 +600,7 @@ class Events extends GS_Controller {
 	             
 	            $source_path = $storeFolder . "/" .$uploadedImage; 
 	            $thumb_path = $storeFolder .'/thumb/'; 
-	            $thumb_width = 200; 
+	            $thumb_width = 300; 
 	             
 	            // Image resize config 
 	            $config['image_library']    = 'gd2'; 
