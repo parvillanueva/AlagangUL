@@ -190,21 +190,14 @@
                                                             <div class="au-volunteers col">
                                                                 <?php if(!empty($event['badges'])) : ?>
                                                                     <?php foreach($event['badges'] as $badges) : ?>
-                                                                        <!-- <span>
-                                                                           <i 
-                                                                                class="<?=$badges[1]; ?>" 
-                                                                                style="color:<?=$badges[2]?>" 
-                                                                                title="<?=$badges[0]?>">
-                                                                            </i>
-                                                                        </span> -->
                                                                         <?php if($badges[0] == 'Treasure') : ?>
-                                                                            <img src="assets/img/au-treasure-2.jpg" class="au-imgbadge" title="Treasure">
+                                                                            <img src="<?=base_url()?>assets/img/au-treasure-2.jpg" class="au-imgbadge" title="Treasure">
                                                                         <?php endif; ?> 
                                                                         <?php if($badges[0] == 'Talent') : ?>
-                                                                            <img src="assets/img/au-talent-2.jpg" class="au-imgbadge" title="Talent">
+                                                                            <img src="<?=base_url()?>assets/img/au-talent-2.jpg" class="au-imgbadge" title="Talent">
                                                                         <?php endif; ?> 
                                                                         <?php if($badges[0] == 'Time') : ?> 
-                                                                            <img src="assets/img/au-time-2.jpg" class="au-imgbadge" title="Time">
+                                                                            <img src="<?=base_url()?>assets/img/au-time-2.jpg" class="au-imgbadge" title="Time">
                                                                         <?php endif; ?>   
                                                                     <?php endforeach; ?>
                                                                 <?php endif; ?>
