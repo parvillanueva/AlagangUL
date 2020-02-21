@@ -943,6 +943,7 @@ die(); */
 				if(obj.responce == 'success'){
 					$("#addtestimonial").modal('hide');
 					$('#testimonial_comment').val('');
+					testi_page = 0;
 					get_testimonial();
 				}
 			});
