@@ -168,8 +168,11 @@ class Events extends GS_Controller {
 			'task' => $_POST['task'],
 			'date_from' => $date_from,
 			'date_to' => $date_to,
-			'badge_id' => $_POST['badge_id']
+			//'badge_id' => $_POST['badge_id']
 		);
+		if(!empty($_POST['task'])){
+			$arr['badge_id'] = $_POST['badge_id'];
+		}
 		$data_arry = $this->get_details($arr);
 		if(!empty($data_arry)){
 			$data['events'] = $data_arry;
