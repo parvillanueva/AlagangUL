@@ -8,7 +8,7 @@
 
 <div class="container-fluid au-heading">
 	<div class="au-container au-padding">
-		<span class="au-h5 no-margin">Event Name Gallery</span>
+		<span class="au-h5 no-margin">Event Gallery</span>
 		<a href="<?= $back_url;?>" class="au-lnk">
 			<button class="au-btn au-back"><i class="fas fa-arrow-left"></i> Go back</button>
 		</a>
@@ -21,20 +21,43 @@
 
 		<div class="au-gallerywrapper row">
 			
-			<ul id="imageGallery">
+			<!-- <ul id="imageGallery">
 				<?php foreach ($photos as $key => $value) { ?>
 					<li data-thumb="<?= base_url() . "/" . $value->path;?>" data-src="<?= base_url() . "/" . $value->path;?>">
 						<img src="<?= base_url() . "/" . $value->path;?>" class="au-gallerythumb"/>
 					</li>
 				<?php } ?>
 			</ul>
+			 -->
 
+
+			<?php foreach ($photos as $key => $value) { ?>
+				<div class="col-lg-3 col-md-6 col-6">
+					<a href="<?= base_url() . "/" . $value->path;?>" data-toggle="lightbox" data-gallery="gallery" class="au-lnk au-glink">
+						<div class="au-opthumbnail">
+							<img src="<?= base_url() . "/" . $value->thumb;?>" class="au-gl-thumbnailimg" onerror="imgErrorEvent(this);">
+						</div>
+					</a>
+				</div>
+			<?php } ?>
 		</div>
 
 	</div>
 </div>
 
 <script type="text/javascript">
+	var base_url = '<?=base_url();?>';
+
+	function imgErrorEvent(image) {
+        image.onerror = "";
+        image.src = base_url+"/assets/img/broken_img2.jpg";
+        return true;
+    }
+
+	$(document).on("click", '[data-toggle="lightbox"]', function(event){
+		event.preventDefault();
+		$(this).ekkoLightbox();
+	});
 	$(document).ready(function() {
 			$('#imageGallery').lightSlider({
 			gallery:true,

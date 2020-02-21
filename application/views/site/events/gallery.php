@@ -6,7 +6,7 @@ if($galleries_pages>0){
 <div class="col-lg-3 col-md-6 col-6">
 	<div class="au-opthumbnail au-lnk au-plink">
 		<a href="<?= base_url().$gallery->path?>" data-toggle="lightbox" data-gallery="gallery" class="toggle_image">
-			<img src="<?= base_url().$gallery->path?>" class="au-gl-thumbnailimg img-fluid" onerror="imgErrorEvent(this);">
+			<img src="<?= base_url().$gallery->thumb?>" class="au-gl-thumbnailimg img-fluid" onerror="imgErrorEvent(this);">
 		</a>
 <?php
 if($is_admin==1 || $is_joined==1){
