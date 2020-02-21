@@ -215,7 +215,7 @@ if($role <= 3 || $role == 6){
   $(document).ready(function(){
     $('#breadcrumb').remove();
     get_urls();
-    get_analytics();
+    // get_analytics();
 
     $('.collapse').collapse()
 
@@ -230,12 +230,12 @@ if($role <= 3 || $role == 6){
 
   $(document).on('change', '.chart_limit', function(e){
     days = $(this).val();
-    get_analytics();
+    // get_analytics();
   });
 
   $(document).on('change', '.chart_filter', function(e){
     uri = $(this).val();
-    get_analytics();
+    // get_analytics();
   });
 
   //get report analytics

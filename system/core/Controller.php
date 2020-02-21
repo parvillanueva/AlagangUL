@@ -77,7 +77,7 @@ class CI_Controller {
 
 		$this->load =& load_class('Loader', 'core');
 		$this->load->initialize();
-		$this->load->site_analytics();
+		// $this->load->site_analytics();
 		log_message('info', 'Controller Class Initialized');
 	}
 
