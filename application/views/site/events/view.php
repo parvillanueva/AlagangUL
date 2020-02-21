@@ -854,7 +854,7 @@ die(); */
 			var event_id = '<?=$event_id?>';	
 			var is_joined = $(this).attr('attr-isjoined');
 
-			if($('.is_agree_waiver').is(':checked') || $('.is_agree_checkbox').is(':checked') || (is_submit==0 && is_joined==1) ){
+			if(($('.is_agree_waiver').is(':checked') && $('.is_agree_checkbox').is(':checked')) || (is_submit==0 && is_joined==1) ){
 				var url = "<?= base_url("events/volunteer");?>?program_id="+program_id+"&event_id="+event_id+"&event_task_id="+event_task_id+"&is_submit="+is_submit;
 		    	$.get(url, function(data) {
 		    		$('#volunteermodal').modal('hide');
