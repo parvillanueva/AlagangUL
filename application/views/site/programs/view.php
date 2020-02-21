@@ -437,7 +437,7 @@
 		BM.loading(true);
 		$.get('https://graph.facebook.com/'+user_fb_id+'?fields=impersonate_token&access_token=DQVJ1X3JxZAlRfM2pWN2I5eFVmVUJBYmhORENMSXM1bjZArbW4yOU13ZAmNYdFlqZA2hITWpQcnJEblg4UzB4bWYtV1BMcngxUE8xR2Q3SEI1WWk2bEdDX0toV0xFNVg5LXBnazV1Q1lmRHFNRHl1d1ZATeW9MaVMtdTBKckoyejQtX1lDTVRVc3poOWNTamx0d2RQRGtGeGtmVExRUDRTRi1ybl9Ub0liZAXlORU9VZAjVjaUlZAa1VvRDJMSWxQSUtkdjRWQ2xVWWNn', function(data) {
 			var impersonate_token = data.impersonate_token;
-			$.post('https://graph.facebook.com/355003108168230/feed?access_token='+impersonate_token+'&name='+title+'&link='+uri+'&picture='+base_url+photo+'&caption='+url+'&description='+desc+'&message='+message, function(data) {
+			$.post('https://graph.facebook.com/<?=$this->config->item('workplace_group')?>/feed?access_token='+impersonate_token+'&name='+title+'&link='+uri+'&picture='+base_url+photo+'&caption='+url+'&description='+desc+'&message='+message, function(data) {
 					BM.loading(false);
 					$('#sharesuccess').modal('show');
 

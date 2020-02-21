@@ -1135,8 +1135,17 @@ die(); */
 		
 	});
 	
+	$(document).on('click', '.wokplace-testimonial', function() {
+		var message = $(this).attr('attr-message');
+		shareWorkplace(message);
+	});
 
 	$(document).on('click', '.share-to-workplace', function() {
+		var message = $('.au-workplacefield').val();
+		shareWorkplace(message);
+	});
+
+	function shareWorkplace(message) {
 		var user_fb_id = "<?=$_SESSION['user_impersonate_token']?>";
 		var url_root = document.location.host;
 		var uri = window.location.href;
@@ -1145,17 +1154,16 @@ die(); */
 		var base_url = "<?=base_url()?>";
 		var photo = "<?=$event_details[0]['image']?>";
 		var desc = "<?= date("m/d/Y h:i a", strtotime($event_details[0]['when']));?>";
-		var message = $('.au-workplacefield').val();
+		
 		var title = "<?=trim(preg_replace('/ +/', ' ', preg_replace('/[^A-Za-z0-9 ]/', ' ', urldecode(html_entity_decode(strip_tags($event_details[0]['title']))))))?>";	
 		BM.loading(true);
 		$.get('https://graph.facebook.com/'+user_fb_id+'?fields=impersonate_token&access_token=DQVJ1X3JxZAlRfM2pWN2I5eFVmVUJBYmhORENMSXM1bjZArbW4yOU13ZAmNYdFlqZA2hITWpQcnJEblg4UzB4bWYtV1BMcngxUE8xR2Q3SEI1WWk2bEdDX0toV0xFNVg5LXBnazV1Q1lmRHFNRHl1d1ZATeW9MaVMtdTBKckoyejQtX1lDTVRVc3poOWNTamx0d2RQRGtGeGtmVExRUDRTRi1ybl9Ub0liZAXlORU9VZAjVjaUlZAa1VvRDJMSWxQSUtkdjRWQ2xVWWNn', function(data) {
 			var impersonate_token = data.impersonate_token;
-			$.post('https://graph.facebook.com/355003108168230/feed?access_token='+impersonate_token+'&name='+title+'&link='+uri+'&picture='+base_url+photo+'&caption='+url+'&description='+desc+'&message='+message, function(data) {
+			$.post('https://graph.facebook.com/<?=$this->config->item('workplace_group')?>/feed?access_token='+impersonate_token+'&name='+title+'&link='+uri+'&picture='+base_url+photo+'&caption='+url+'&description='+desc+'&message='+message, function(data) {
 					BM.loading(false);
 					$('#sharesuccess').modal('show');
 
 			}, 'json');
 		}, 'json');
-
-	});
+	}
 </script>
