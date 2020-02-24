@@ -25,8 +25,18 @@
 
                             <div class="col">
                                 <select class="form-control custom-select required_input" id="division" name="division" required="required" />
-                                        <option value="" selected disabled>Division / Business Unit</option>
-                                        <?php foreach($division as $div_lop){ ?>
+                                        <option value="" selected disabled>Business Unit/Division</option>
+                                        <?php 
+                                        $group = '';
+                                        foreach($division as $div_lop){ ?>
+                                            <?php
+                                        
+                                                if($group!=$div_lop['group_name']){
+                                                    $group = $div_lop['group_name'];
+                                            ?>
+
+                                            <optgroup label="<?=$group?>">
+                                            <?php } ?>
                                             <option value="<?php echo $div_lop['id']; ?>" <?php if($profile->division == $div_lop['id']) echo ' selected'?>><?php echo $div_lop['name']; ?></option>
                                         <?php } ?>
                                 

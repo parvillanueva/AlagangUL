@@ -17,7 +17,7 @@ class Profile extends GS_Controller
 		//get joined activities and events
 		$joined_events		= $this->Site_model->get_joined_events($user_id);
 
-		$divisions 			= $this->Site_model->get_divisions();
+		$divisions 			= $this->division_list();
 
 		$arr_badge = array();
 		foreach($joined_events as $i => $event)
@@ -53,7 +53,11 @@ class Profile extends GS_Controller
 
 		$this->load->view("site/layout/template",$data);
 	}
-
+	public function division_list(){
+		$data = "SELECT tbld.id, tbld.name, tbldg.name as group_name FROM tbl_division tbld LEFT JOIN tbl_division_group tbldg ON tbld.group_id = tbldg.id WHERE tbld.status = '1' ORDER BY tbldg.id, tbld.name";
+		$result = $this->db->query($data)->result_array();
+		return $result;
+	}
 	public function reset()
 	{
 		$data['content'] 	= "site/profile/profile-reset-password";
