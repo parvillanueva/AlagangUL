@@ -8,7 +8,7 @@
                 <div class="col-md-6 col-md-push-6 au-footer-detailsr">
                     <div class="au-footer-links">
                         <?php if($this->session->userdata("user_sess_email") != ""){ ?>
-                            <span class="au-pf"><a href="<?= base_url("terms-and-conditions");?>">Terms and Conditions</a></span>
+                            <!-- <span class="au-pf"><a href="<?= base_url("terms-and-conditions");?>">Terms and Conditions</a></span> -->
                             <span class="au-pf"><a href="<?= base_url("privacy-statement");?>">Privacy Statement</a></span>
                         <?php }?>
                     </div>

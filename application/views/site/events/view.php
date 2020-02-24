@@ -436,8 +436,8 @@ die(); */
 	    			</div>
 		      		<span class="au-p6 au-errormessage"><i class="fas fa-exclamation-triangle"></i> Please read and agree to the Guidelines and Waiver above.</span>
 					<div class="au-modalbtn text-center">
-						<button type="button" class="au-btn au-btnyellow volunteer-as" data-dismiss="modal" attr-submit="0">No, I made a mistake</button>
-						<button type="button" class="au-btn volunteer-as" attr-submit="1">Yes, sign me up!</button>
+						<button type="button" class="au-btn au-btnyellow volunteer-as" data-dismiss="modal" attr-submit="0">Cancel</button>
+						<button type="button" class="au-btn volunteer-as yes-s" attr-submit="1">Yes, sign me up!</button>
 					</div>
 				</form>
 			</div>
@@ -481,7 +481,7 @@ die(); */
 		<div class="modal-content">
 			<div class="modal-body">
 				<span class="au-h4 volunteer-title">Thank you!</span>
-				<span class="au-p6 volunteer-body">Your help is greatly appreciate. Please standby for more details.</span>
+				<span class="au-p6 volunteer-body">Your help is greatly appreciate. Please standby for more details.<br />We will get in touch with you soon.</span>
 				<div class="au-modalbtn text-center">
 					<button type="button" class="au-btn close-btn" data-dismiss="modal">OK</button>
 				</div>
@@ -831,9 +831,11 @@ die(); */
 
 			if(is_joined==1){
 				$('.au-terms').hide();
+				$('.yes-s').hide();
 			}
 			else{
 				$('.au-terms').show();
+				$('.yes-s').show();
 			}
 
 			$('.volunteer-as').attr('attr-id',event_task_id).attr('attr-isjoined',is_joined);

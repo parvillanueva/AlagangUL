@@ -339,7 +339,7 @@ class Events extends GS_Controller {
 	}
 	
 	public function task_event_set($badgeId){
-		$sql = "Select task From tbl_program_event_task tblpret INNER JOIN tbl_program_event_task_badge tblpetb ON tblpret.id=tblpetb.event_task_id WHERE tblpetb.badge_id='".$badgeId."' GROUP BY tblpret.task";
+		$sql = "Select task From tbl_program_event_task tblpret INNER JOIN tbl_program_event_task_badge tblpetb ON tblpret.id=tblpetb.event_task_id RIGHT JOIN tbl_program_events tblpe ON tblpe.id = tblpret.event_id WHERE tblpetb.badge_id='".$badgeId."' AND tblpe.status = 1 GROUP BY tblpret.task";
 		$result_badges = $this->db->query($sql)->result();
 		return $result_badges;
 	}
