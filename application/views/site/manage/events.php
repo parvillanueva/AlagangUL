@@ -314,7 +314,6 @@
 
 
 		if(tba != "null"){
-			alert("checked");
 			$("#dateTBAedit").click();
 		}
 		
