@@ -133,6 +133,8 @@ class Programs extends GS_Controller {
 				"get_earn_badge"	=> $this->get_earn_badge($value->id),
 				"required_volunteer"=> ($needed_volunteer[0]->count != "") ? $needed_volunteer[0]->count : 0,
 				"joined_volunteers"	=> ($joined_volunteer[0]->count != "") ? $joined_volunteer[0]->count : 0,
+				"contact_person"	=> $value->contact_person,
+				"contact_number"	=> $value->contact_number,
 			);
 		}
 

@@ -1066,7 +1066,8 @@ a.au-lnk:hover>* {
      font-weight: 700;
      color: #092E6E;
      display: inline-block;
-     width: 63px;
+     min-width: 53px;
+     margin-right: 10px;
 }
 
 .au-pans {
@@ -1256,9 +1257,23 @@ a.au-lnk:hover>* {
      padding: 0px;
 }
 
+.au-phthumbnailxs {
+     min-width: 40px;
+     width: 50px;
+     height: 50px;
+     background-color: #fff;
+     padding: 0px;
+     margin-bottom: 10px;
+}
+
 .au-phdetails {
      padding: 0 1em;
      align-self: flex-end;
+}
+
+.au-phdetails .au-p5{
+     color: #fff;
+     margin-bottom: 10px;
 }
 
 .au-members {
@@ -1486,7 +1501,9 @@ a.au-lnk:hover>* {
 }
 
 .au-programdetailsinside .au-pques {
-     width: 65px;
+     min-width: 55px;
+     width: unset;
+     margin-right: 10px !important;
 }
 
 .au-programdetailsinside .au-pans,

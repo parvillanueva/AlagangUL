@@ -306,7 +306,9 @@ class Events extends GS_Controller {
 				"is_not_joined"		=> ($is_not_joined[0]->count>=2) ? 1 : 0, 
 				"required_volunteer"=> ($needed_volunteer[0]->count != "") ? $needed_volunteer[0]->count : 0,
 				"joined_volunteers"	=> ($joined_volunteer[0]->count != "") ? $joined_volunteer[0]->count : 0,
-				"filter_where" 		=> $filter_where 
+				"filter_where" 		=> $filter_where,
+				"contact_person"	=> $value->contact_person,
+				"contact_number"	=> $value->contact_number,
 			);
 		}
 
@@ -609,6 +611,8 @@ class Events extends GS_Controller {
 				"is_not_joined"		=> ($is_not_joined[0]->count>=2) ? 1 : 0, 
 				"required_volunteer"=> ($needed_volunteer[0]->count != "") ? $needed_volunteer[0]->count : 0,
 				"joined_volunteers"	=> ($joined_volunteer[0]->count != "") ? $joined_volunteer[0]->count : 0,
+				"contact_person"	=> $value->contact_person,
+				"contact_number"	=> $value->contact_number,
 			);
 		}
 		return $events;
@@ -1165,6 +1169,7 @@ class Events extends GS_Controller {
 										$html .= "</table>
 											<p style='font-size:17px; color:#4b4d4d;line-height: 25px;padding-top:15px;'>in ".$programSet['program'][0]->name.": ".$programSet['program_event'][0]->title." on ".date('F d, Y', strtotime($programSet['program_event'][0]->when)).".</p>
 											<p style='font-size:17px; color:#4b4d4d;padding-top:10px;'>Task: ".$task[0]->task."</p>
+											<p style='font-size:17px; color:#4b4d4d;padding-top:10px;'>Kindly stand by for the Program Owners to email you on next steps.</p>
 										</td>
 									</tr>
 								</table>

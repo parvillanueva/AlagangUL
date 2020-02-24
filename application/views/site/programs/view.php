@@ -6,7 +6,8 @@
 			</div>
 			<div class="au-phdetails">
 				<span class="au-h5" title="<?= $details['details'][0]->name; ?>">
-					<?php 
+					<?php
+
 						$str = $details['details'][0]->name;
 						if (strlen($str) > 50){
 							$str_out = substr($str, 0, 50) . '...';
@@ -16,6 +17,7 @@
 						}	
 					?>
 				</span>
+				<span class="au-p5"><em><?=$details['details'][0]->headline?></em></span>
 				<div class="au-powner">
 				    <a href="mailto:<?= @$details['admin_email'][0]->email_address;?>" class="au-lnk"><span class="au-share">Program Owner: <?= @$details['admin_email'][0]->first_name;?> <?= @$details['admin_email'][0]->last_name;?> <i class="fas fa-envelope"></i></span></a>
 				</div>
@@ -159,6 +161,17 @@
 											<div class="au-inner">
 												<span class="au-pans"><span class="au-pques">Where:</span><?= $value['where'];?></span>
 											</div>
+											<?php 
+												if($value['contact_person']!=''){
+											?>
+											<div class="au-inner">
+												<span class="au-pans">
+												    <span class="au-pques">Contact Person:</span>
+												    <?=$value['contact_person']?>(<?=$value['contact_number']?>)
+												</span>
+											</div>
+											<?php } ?>
+											
 										</div>
 										<!-- <div class="au-volunteers">
 											<?php foreach ($value['get_earn_badge'] as $a => $b) { ?>
@@ -188,7 +201,11 @@
 											</div>
 										</div>
 										<div class="au-pprogress">
-											<div class="au-bar"></div>
+											<?php
+												$bar_width = 0;
+												@$bar_width = ceil($value['joined_volunteers'] / $value['required_volunteer']);
+											?>
+											<div class="au-bar" style="width:<?=$bar_width?>%"></div>
 											<span class="au-numbers"><i class="fas fa-walking"></i> <?= $value['joined_volunteers'] ;?> of <?= $value['required_volunteer'] ;?> Volunteers</span>
 										</div>
 									</div>

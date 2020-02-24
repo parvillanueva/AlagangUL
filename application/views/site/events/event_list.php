@@ -1,7 +1,6 @@
 <div class="col">
 	<div class="row">
 		<?php $month = '';
-
 		foreach($events as $key => $eloop){ ?>
 			<?php 
 			$when = date('F', strtotime($eloop['when']));
@@ -42,6 +41,16 @@
 								<div class="au-inner">
 									<span class="au-pans"><span class="au-pques">Where:</span><?= $eloop['where'] ?></span>
 								</div>
+								<?php 
+								if($eloop['contact_person']!=''){
+								?>
+								<div class="au-inner">
+								<span class="au-pans">
+								    <span class="au-pques">Contact Person:</span>
+								    <?=$eloop['contact_person']?>(<?=$eloop['contact_number']?>)
+								</span>
+								</div>
+								<?php } ?>
 							</div>
 							<!-- <div class="au-volunteers">
 								<?php foreach ($eloop['get_earn_badge'] as $a => $b) { ?>
@@ -67,7 +76,11 @@
 								</div>
 							</div>
 							<div class="au-pprogress">
-								<div class="au-bar"></div>
+								<?php
+									$bar_width = 0;
+									@$bar_width = ceil($eloop['joined_volunteers'] / $eloop['required_volunteer']);
+								?>
+								<div class="au-bar" style="width:<?=$bar_width?>%"></div>
 								<span class="au-numbers"><i class="fas fa-walking"></i> <?= $eloop['joined_volunteers'] ?> of <?= $eloop['required_volunteer'] ?> Volunteers</span>
 							</div>
 						</div>

@@ -46,6 +46,10 @@ die(); */
 					<img src="<?= $event_details[0]['image'];?>" class="au-fp-thumbnailimg" onerror="imgErrorEvent(this);">
 				</div>
 				<div class="au-phdetails">
+					<div class="au-phthumbnailxs">
+
+						<img src="<?= $program_details[0]['image_thumbnail'];?>" class="au-fp-thumbnailimg" onerror="imgErrorEvent(this);">
+					</div>
 					<span class="au-h5"><?= $event_details[0]['title'];?></span>
 					<div class="au-phstats">
 						<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> <?= $event_details[0]['volunteer_points'];?> Join to receive points</span>
@@ -147,7 +151,8 @@ die(); */
 							<span class="au-dtitle">Volunteers Needed:</span>
 							<div class="au-pprogress" id="progress1">
 								<?php
-									$bar_width = ceil($event_details[0]['joined_volunteers'] / $event_details[0]['required_volunteer']);
+									$bar_width = 0;
+									@$bar_width = ceil($event_details[0]['joined_volunteers'] / $event_details[0]['required_volunteer']);
 								?>
 								<div class="au-bar" style="width:<?=$bar_width?>%"></div>
 								<span class="au-numbers"><i class="fas fa-walking"></i> <?= $event_details[0]['joined_volunteers'];?> of <?= $event_details[0]['required_volunteer'];?> Volunteers</span>
@@ -158,6 +163,13 @@ die(); */
 							<div class="au-inner">
 								<span class="au-pques">Where:</span><span class="au-pans"><?= $event_details[0]['where'];?></span>
 							</div>
+							<?php 
+								if($event_details[0]['contact_person']!=''){
+							?>
+							<div class="au-inner">
+							<span class="au-pques">Contact Person:</span><span class="au-pans"><?=$event_details[0]['contact_person']?>(<?=$event_details[0]['contact_number']?>)</span>
+							</div>
+							<?php } ?>
 						</div>
 					</div>
 					<div class="au-programdescription">
