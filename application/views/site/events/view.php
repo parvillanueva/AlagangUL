@@ -146,7 +146,10 @@ die(); */
 						<div class="au-inner au-max-width">
 							<span class="au-dtitle">Volunteers Needed:</span>
 							<div class="au-pprogress" id="progress1">
-								<div class="au-bar"></div>
+								<?php
+									$bar_width = ceil($event_details[0]['joined_volunteers'] / $event_details[0]['required_volunteer']);
+								?>
+								<div class="au-bar" style="width:<?=$bar_width?>%"></div>
 								<span class="au-numbers"><i class="fas fa-walking"></i> <?= $event_details[0]['joined_volunteers'];?> of <?= $event_details[0]['required_volunteer'];?> Volunteers</span>
 							</div>
 							<div class="au-inner">
@@ -489,7 +492,7 @@ die(); */
 		<div class="modal-content">
 			<div class="modal-body">
 				<span class="au-h4 volunteer-title">Thank you!</span>
-				<span class="au-p6 volunteer-body">Your help is greatly appreciate. Please standby for more details.<br />We will get in touch with you soon.</span>
+				<span class="au-p6 volunteer-body">Your help is greatly appreciated. Please standby for more details.<br />We will get in touch with you soon.</span>
 				<div class="au-modalbtn text-center">
 					<button type="button" class="au-btn close-btn" data-dismiss="modal">OK</button>
 				</div>

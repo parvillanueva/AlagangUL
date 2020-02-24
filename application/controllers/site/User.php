@@ -17,15 +17,21 @@ class User extends CI_Controller {
 		);
 		$result = $this->Gmodel->get_query('tbl_users', $arrWhere);
 		$data['data_set'] = $result;*/
+		$data['terms_and_condition'] = (array)$this->getTermsAndCondition();
 		$data["title"] = "Content Management";
 		$data["PageName"] = ("User");
 		$data["content"] = "site/user_profile/page";
 		$this->load->view("site/layout/template2",$data);		
 	}
 	public function division_list(){
-		$data = "SELECT * FROM tbl_division Where status = '1' ORDER BY name";
+		$data = "SELECT tbld.id, tbld.name, tbldg.name as group_name FROM tbl_division tbld LEFT JOIN tbl_division_group tbldg ON tbld.group_id = tbldg.id WHERE tbld.status = '1' ORDER BY tbldg.id, tbld.name";
 		$result = $this->db->query($data)->result();
 		return $result;
+	}
+	public function getTermsAndCondition(){
+		// $this->session->userdata("sess_email")
+		$result = $this->Global_model->get_list_query_sort('tbl_terms_and_condition','id = 1','title','asc');
+		return $result[0];
 	}
 	
 	public function submit(){
