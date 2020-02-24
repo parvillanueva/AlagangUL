@@ -66,19 +66,20 @@
 					email : email_address
 				};
 				var url = "<?php echo base_url('site/sign_up/email_send') ?>";
-				aJax.post(url, data, function(result){
-					var obj = is_json(result);
+				aJax.post(url, data, function(result){	
+					var obj = is_json(result);	
 					if(obj.responce == 'exist'){
 						$('#failed_label').show();
 					} else if(obj.responce == 'no_list'){
 						$('#failed_list').show();
 					} else if(obj.responce == 'pass_empty'){
-						location.href = '<?=base_url("user_profile");?>';
+						//location.href = '<?=base_url("user_profile");?>';
 					} else{
-						if(result == 202){
+						 if(obj.result_sgrid == 202){
+							 console.log('doms');
 							BM.loading(true);
 							location.href = '<?=base_url("login_otp");?>';
-						}
+						} 
 					}
 				});
 			} else{
@@ -90,7 +91,7 @@
 	function email_validates(email){
 		var counter = 0;
 		var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
-		console.log(pattern.test(email));
+		//console.log(pattern.test(email));
 		if(!pattern.test(email)){
 		counter++;
 			$('#failed_valid').show();

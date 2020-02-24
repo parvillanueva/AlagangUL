@@ -74,7 +74,8 @@ class Login_otp extends CI_Controller {
 		$result = $this->Gmodel->get_query('tbl_otp_record', $arr);
 		if(count($result) > 0 ){
 			$arr_user = array(
-				'email_address' => @$result[0]->email_address
+				'email_address' => @$result[0]->email_address,
+				'status' => 1
 			);
 			$result_user = $this->Gmodel->get_query('tbl_users', $arr_user);
 			if(!empty($result_user)){
@@ -127,7 +128,8 @@ class Login_otp extends CI_Controller {
 	
 	public function email_exist($email){
 		$arr = array(
-			'email_address' => $email
+			'email_address' => $email,
+			'status' => 1
 		);
 		$result = $this->Gmodel->get_query('tbl_users', $arr);
 		if(!empty($result)){

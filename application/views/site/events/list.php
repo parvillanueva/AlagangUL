@@ -40,6 +40,12 @@
 			  				</div>
 						</div>
 						<div class="col-lg col-sm-6">
+							<span class="au-stitle">Time Schedule</span>
+							<div class="form-row">
+								<input type="text" class="form-control" id="time_input" readonly="true" placeholder="Type a keyword" name="time">
+			  				</div>
+						</div>
+						<div class="col-lg col-sm-6">
 							<span class="au-stitle">Location</span>
 							<div class="form-row">
 								<select class="form-control custom-select" id="location">
@@ -107,6 +113,15 @@
 			var date_set = start+'-'+end;
 			$(this).val(date_set);
 		});
+		
+		$('#time_input').daterangepicker({
+			timePicker: true,
+            locale: {
+                format: 'HH:mm A'
+            }
+        }).on('show.daterangepicker', function (ev, picker) {
+            picker.container.find(".calendar-table").hide();
+        });
 	});
 	
 	$(document).on('click', '#btnSubmit', function(){

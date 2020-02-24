@@ -24,6 +24,17 @@ date_default_timezone_set('Asia/Taipei');
 			    return "failed";
 			endif;
 		}
+		
+		function update_data_arr($table,$data,$where_arr){
+			$this->db->where($where_arr);
+			$this->db->update($table, $data);
+			$updated_status = $this->db->affected_rows();
+			if($updated_status):
+			    return "success";
+			else:
+			    return "failed";
+			endif;
+		}
 
 		function delete_data($table, $id){
 			$this->db->where("id", $id);

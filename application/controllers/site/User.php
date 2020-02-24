@@ -54,7 +54,12 @@ class User extends CI_Controller {
 			'status' => 1
 		);
 		
-		$this->Gmodel->update_data('tbl_users', $arrData, 'email_address', $this->session->userdata('email_address'));
+		$where_arr = array(
+			'email_address' => $this->session->userdata('email_address'),
+			'status' =>  1
+		);
+		
+		$this->Gmodel->update_data_arr('tbl_users', $arrData, $where_arr);
 		header("Location: ".base_url('successfull_register').""); 
 		exit();		
 	}
