@@ -178,7 +178,7 @@ class Sign_up extends CI_Controller {
 							<tbody>
 								<tr>
 									<td style="background-color: #092E6E;padding:10px 0px;border-radius: 8px 8px 0px 0px;">
-										<img width="220" src="http://172.29.70.126/alagang_unilab/uploads/au-alagangunilab.png">
+										<img width="220" src="'.base_url().'alagang_unilab/uploads/au-alagangunilab.png">
 									</td>
 								</tr>
 								<tr>

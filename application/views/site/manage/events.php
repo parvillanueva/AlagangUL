@@ -141,6 +141,20 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
+					<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control no_html" id="contact_person" placeholder="Contact Person" name="contact_person" value="" >
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col">											
+							<input type="number" class="form-control no_html" id="contact_number" placeholder="Contact Number" name="contact_number" value="" >
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
 	        		<!-- <div class="form-row">
 						<div class="col">											
 							<textarea type="text" class="form-control required_input no_html" id="event_overview" placeholder="Event Overview" name="overview" rows=5></textarea>
@@ -226,7 +240,7 @@
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<select class="form-control required_input no_html" id="cityedit" placeholder="City" name="eventCity">
+							<select class="form-control" id="cityedit" placeholder="City" name="eventCity">
 								<option selected disable value="">Select City..</option>
 								<?php foreach ($city as $key => $value) {?>
 									<option value="<?= $value->city_name;?>"><?= $value->city_name;?></option>
@@ -236,6 +250,20 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
+					<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control" id="contact_person_edit" placeholder="Contact Person" name="contact_person" value="" >
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col">											
+							<input type="number" class="form-control" id="contact_number_edit" placeholder="Contact Number" name="contact_number" value="" >
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>          
 	        		<!-- <div class="form-row">
 						<div class="col">											
 							<textarea type="text" class="form-control required_input no_html" id="EditEventoverview" placeholder="Event Overview" name="overview" rows=5></textarea>
@@ -269,7 +297,7 @@
 			}
 		});
 	});
-
+                
 	$(document).on('click', '#btn_Closebtn', function(){
 		location.href = '<?= base_url("manage");?>';
 	});
@@ -295,6 +323,8 @@
 		var timeend = $(this).attr("data-timeend");
 		var venue = $(this).attr("data-venue");
 		var city = $(this).attr("data-city");
+		var con_person = $(this).attr("data-con-person");
+		var con_number = $(this).attr("data-con-number");
 
 		var url = "<?= base_url("programs/") . $program_id . "/" . $program_url . "/event/";?>" + id + "/" + alis + "/update";
 
@@ -308,7 +338,9 @@
 		$("#starttimeedit").val(timestart);
 		$("#endtimeedit").val(timeend);
 		$("#venueedit").val(venue);
-		$("#cityedit").val(city);
+		$("#cityedit option[value='"+city+"']").attr('selected',true);
+		$("#contact_person_edit").val(con_person);
+		$("#contact_number_edit").val(con_number);
 		$("#previewImageEventEdit").attr("src",image);
 		$("#editEventForm").attr("action",url);
 
@@ -489,7 +521,7 @@
 		  			html += "	<td>" + status + "</td>";
 		  			html += "	<td>" + moment(b.create_date).format("LLL") + "</td>";
 		  			html += "	<td>" ;
-		  			html += "		<a href='#' data-city="+b.city+" data-tba="+b.tba+" data-timeend="+b.time_end+" data-timestart="+b.time_start+" data-venue="+b.venue+" data-id="+b.id+" data-alias='"+b.url_alias+"' data-when='"+moment(b.when).format("MM/DD/YYYY hh:mm a")+"' data-image='"+b.image+"' data-overview='"+b.description+"' data-points='"+b.volunteer_points+"' data-where='"+b.where+"' data-title='"+b.title+"' type='button' class='au-lnk au-action editEventBtn' title='Edit Event'><i class='fas fa-edit'></i></button>";
+		  			html += "		<a href='#' data-city="+b.city+" data-con-person='"+b.contact_person+"' data-con-number="+b.contact_number+" data-tba="+b.tba+" data-timeend="+b.time_end+" data-timestart="+b.time_start+" data-venue="+b.venue+" data-id="+b.id+" data-alias='"+b.url_alias+"' data-when='"+moment(b.when).format("MM/DD/YYYY hh:mm a")+"' data-image='"+b.image+"' data-overview='"+b.description+"' data-points='"+b.volunteer_points+"' data-where='"+b.where+"' data-title='"+b.title+"' type='button' class='au-lnk au-action editEventBtn' title='Edit Event'><i class='fas fa-edit'></i></button>";
 		  			html += "		<a href='"+b.Url+"' target='_blank' type='button' class='au-lnk au-action' title='Manage Page'><i class='fas fa-cog' style='color: #11295b;'></i></a>";
 		  			html += "		<a href='<?= base_url("volunteers");?>/"+b.id+"' type='button' class='au-lnk au-action' title='Volunteers' ><i class='fas fa-users' style='color: #795548;'></i><span class='au-evnu badge badge-pill  badge-light'>"+b.volunteers+"</span></a>";
 		  			html += "	</td>";
