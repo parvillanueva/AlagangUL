@@ -162,7 +162,8 @@ die(); */
 								<thead>
 									<tr>
 										<th scope="col">Volunteer your:</th>
-										<th scope="col">Tasks</th>
+										<th scope="col">Task</th>
+										<th scope="col">Description</th>
 										<th scope="col">Qualifications</th>
 										<th scope="col">Needed</th>
 										<th scope="col">Joined</th>
@@ -228,6 +229,7 @@ die(); */
 												
 											</td>
 											<td data-header="Task"><?= $value['task'];?></td>
+											<td data-header="Description" title="<?=$value['description']?>"><?=(strlen($value['description'])>50) ? substr($value['description'],0,50).'...' : $value['description']?></td>
 											<td data-header="Qualifications"><?= $value['qualification'];?></td>
 											<td data-header="Needed"><?= $value['required_volunteers'];?></td>
 											<td data-header="Joined" class="joined-<?=$value['id']?>"><?= $value['joined_volunteers'];?></td>
@@ -538,6 +540,14 @@ die(); */
 					</div>
 					<div class="form-row">
 						<div class="col">
+							<label for="comment" class="au-p4">Description</label>
+							<textarea class="form-control required_input reset_data" id="description"></textarea>
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col">
 							<label for="comment" class="au-p4">Needed Volunteer</label>
 							<input type="number" class="form-control required_input reset_data" rows="5" id="needed" placeholder="" required="" />
 							<div class="valid-feedback"></div>
@@ -576,6 +586,14 @@ die(); */
 						<div class="col">
 							<label for="comment" class="au-p4">Possible task for volunteers</label>
 							<input class="form-control required_input" rows="5" id="edit_possible_volunteer" placeholder="" required="" />
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col">
+							<label for="comment" class="au-p4">Description</label>
+							<textarea class="form-control required_input" id="edit_description"></textarea>
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -757,6 +775,7 @@ die(); */
                    		$('#table_id').val(y['id']);
                    		$('#edit_possible_volunteer').val(y['task']);
                    		$('#edit_qualification').val(y['qualification']);
+                   		$('#edit_description').val(y['description']);
                    		$('#edit_needed').val(y['required_volunteers']);
                    		$.each(y[0],function(a,b){
                    			console.log(b)
@@ -1029,6 +1048,7 @@ die(); */
 	function add_task(){
 		var possible_volunteer = $('#possible_volunteer').val();
 		var qualification = $('#qualification').val();
+		var description = $('#description').val();
 		var needed = $('#needed').val();
 		var val_badges = [];
         $('.badges_input:checkbox:checked').each(function(i){
@@ -1038,6 +1058,7 @@ die(); */
 			event_id : "<?= $event_details[0]['id']; ?>",
 			possible_volunteer : possible_volunteer,
 			qualification : qualification,
+			description : description,
 			needed : needed,
 			badges : val_badges
 		};
@@ -1049,6 +1070,7 @@ die(); */
 					$('#possible_volunteer').val('');
 					$('#needed').val('');
 					$('#qualification').val('');
+					$('#description').val('');
 					$('.badges_input').prop('checked', false); 
 					$("#addtask").modal('hide');
 					location.reload();
@@ -1060,6 +1082,7 @@ die(); */
 	$(document).on('click', '#btn_editBadges', function(result){
 		var possible_volunteer = $('#edit_possible_volunteer').val();
 		var qualification = $('#edit_qualification').val();
+		var description = $('#edit_description').val();
 		var needed = $('#edit_needed').val();
 		var id = $('#table_id').val();
 		var val_badges = [];
@@ -1070,6 +1093,7 @@ die(); */
 			event_id : "<?= $event_details[0]['id']; ?>",
 			possible_volunteer : possible_volunteer,
 			qualification : qualification,
+			description : description,
 			needed : needed,
 			badges : val_badges,
 			task_id	: id

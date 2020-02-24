@@ -89,7 +89,7 @@
 					<div class="form-row">
 						<div class="col">
 							<label class="form-check-label">
-								<input class="form-check-input required_input" required="required" id="understood_details" type="checkbox" name="terms"> I have read and understood the <a href="<?= base_url("terms-and-conditions");?>" class="au-lnk">Terms of Use</a> and <a href="<?= base_url("privacy-statement");?>" class="au-lnk">Privacy Statement</a>.
+								<input class="form-check-input required_input" required="required" id="understood_details" type="checkbox" name="terms"> I have read and understood the <a href="#" data-toggle="modal" data-target="#termsandcondition">Terms of Use</a> and <a href="<?= base_url("privacy-statement");?>" class="au-lnk">Privacy Statement</a>.
 								<div class="alert_understood"><font color="red">This field is required.</font></div>
 							</label>
 						</div>
@@ -104,7 +104,39 @@
 		</div>
 	</div>
 </div>
-
+<div class="modal fade text-center" id="termsandcondition">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-body">
+					<span class="au-h4">Terms and Conditions</span>
+					<div class="au-inner au-cscroll au-guidelines text-left">
+						<ul>
+				          <li>If A or B are mixed numbersconvert mixed numbers to improper fractions</li>
+				          <li>If A or B are decimal numbers multiply both values by the same factor of 10 that will eliminate all decimal places</li>
+				          <li>If one value is a fraction and the other a whole number, reduce the fraction to a whole number if you can or turn the whole number into a fraction by giving it a denominator of 1.</li>
+				          <li>If both A and B are fractions and have like denominators, multiply both fractions by the denominator to eliminate it and you are left with two whole numbers</li>
+				          <li>If both A and B are fractions and have unlike denominators, find the LCD(A, B) and rewrite the fractions with the LCD as the denominator. Multiply both fractions by the denominator to eliminate it and you are left with two whole numbers</li>
+				          <li>If both A and B are whole numbers, Find the greatest common factor of A and B, GCF(A, B), and divide A and B each by the GCF</li><li>If A or B are mixed numbersconvert mixed numbers to improper fractions</li>
+				          <li>If A or B are decimal numbers multiply both values by the same factor of 10 that will eliminate all decimal places</li>
+				          <li>If one value is a fraction and the other a whole number, reduce the fraction to a whole number if you can or turn the whole number into a fraction by giving it a denominator of 1.</li>
+				          <li>If both A and B are fractions and have like denominators, multiply both fractions by the denominator to eliminate it and you are left with two whole numbers</li>
+				          <li>If both A and B are fractions and have unlike denominators, find the LCD(A, B) and rewrite the fractions with the LCD as the denominator. Multiply both fractions by the denominator to eliminate it and you are left with two whole numbers</li>
+				          <li>If both A and B are whole numbers, Find the greatest common factor of A and B, GCF(A, B), and divide A and B each by the GCF</li><li>If A or B are mixed numbersconvert mixed numbers to improper fractions</li>
+				          <li>If A or B are decimal numbers multiply both values by the same factor of 10 that will eliminate all decimal places</li>
+				          <li>If one value is a fraction and the other a whole number, reduce the fraction to a whole number if you can or turn the whole number into a fraction by giving it a denominator of 1.</li>
+				          <li>If both A and B are fractions and have like denominators, multiply both fractions by the denominator to eliminate it and you are left with two whole numbers</li>
+				          <li>If both A and B are fractions and have unlike denominators, find the LCD(A, B) and rewrite the fractions with the LCD as the denominator. Multiply both fractions by the denominator to eliminate it and you are left with two whole numbers</li>
+				          <li>If both A and B are whole numbers, Find the greatest common factor of A and B, GCF(A, B), and divide A and B each by the GCF</li>
+				        </ul>
+					</div>
+					<div class="au-modalbtn text-center">
+						<button type="button" class="au-btn au-btnyellow au-guidlinebtn" data-dismiss="modal">I disagree</button>
+						<button type="button" class="au-btn au-guidlinebtn" data-dismiss="modal">I agree</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 <script type="text/javascript">
 	$(document).ready(function() {
 		responsive();
@@ -121,6 +153,10 @@
 			}
 		});
 	});
+
+	$(document).on('click', '.terms-modal', function() {
+		$('#termsandcondition').modal('show');
+	})
 	
 	$(".custom-file-input").on("change", function() {
 		var fileName = $(this).val().split("\\").pop();

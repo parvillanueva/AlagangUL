@@ -2,6 +2,7 @@
 <div class="container-fluid au-heading">
 	<div class="au-container au-padding">
 		<span class="au-h5 no-margin">Explore Events</span>
+		<span class="au-p5" style="color: #fff">Select your preferred location, date range or tasks to make the list of volunteer opportunities more suitable for you, then click SEARCH.</span>
 	</div>
 </div>
 
