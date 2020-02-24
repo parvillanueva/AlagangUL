@@ -269,6 +269,12 @@ class Events extends GS_Controller {
 			$query_program_details = "SELECT id, image_thumbnail, url_alias FROM tbl_programs WHERE id = " . $value->program_id;
 			$program_details = $this->db->query($query_program_details)->result();
 			
+			if((int)$value->tba > 0){
+				$when  = "TBA";
+			} else {
+				$when = date("F d, Y",strtotime($value->when)) . " " . date("h:i a",strtotime($value->time_start)) . " to " . date("h:i a",strtotime($value->time_end));
+			}
+			
 			$events[] = array( 
 				"id"				=> $value->id,
 				"get_earn_badge"	=> $this->get_earn_badge($value->id),
@@ -278,8 +284,8 @@ class Events extends GS_Controller {
 				"title"				=> $value->title,
 				"image"				=> base_url() . $value->image,
 				"description"		=> $value->description,
-				"when"				=> $value->when,
-				"where"				=> $value->where,
+				"when"				=> $when,
+				"where"				=> $value->venue . " " . $value->city,
 				"status"			=> $value->status,
 				"volunteer_points"	=> $value->volunteer_points,
 				"is_admin"			=> ($value->user_id == $this->session->userdata('user_sess_id')) ? true : false,
@@ -566,14 +572,19 @@ class Events extends GS_Controller {
 			}
 			$is_not_joined = $this->db->query("SELECT count(id) as count FROM tbl_program_event_task_volunteers WHERE user_id = " . $this->session->userdata('user_sess_id') . " AND event_id = " . $value->id)->result(); 
 
+			if((int)$value->tba > 0){
+				$when  = "TBA";
+			} else {
+				$when = date("F d, Y",strtotime($value->when)) . " " . date("h:i a",strtotime($value->time_start)) . " to " . date("h:i a",strtotime($value->time_end));
+			}
 
 			$events[] = array(
 				"id"				=> $value->id,
 				"title"				=> $value->title,
 				"image"				=> base_url() . $value->image,
 				"description"		=> $value->description,
-				"when"				=> $value->when,
-				"where"				=> $value->where,
+				"when"				=> $when,
+				"where"				=> $value->venue . " " . $value->city,
 				"status"			=> $value->status,
 				"url_alias"			=> $value->url_alias,
 				"volunteer_points"	=> $value->volunteer_points,
@@ -870,8 +881,15 @@ class Events extends GS_Controller {
 		$data['title'] = $post['eventTitle'];
 		$data['url_alias'] = $this->format_slug($post['eventTitle']);
 		$data['description'] = $post['overview'];
+		
 		$data['when'] = date("Y-m-d H:i:s", strtotime($post['eventWhen']));
-		$data['where'] = $post['eventWhere'];
+		$data['time_start'] = date("H:i:s", strtotime($post['eventStartTime']));
+		$data['time_end'] = date("H:i:s", strtotime($post['eventEndTime']));
+		$data['venue'] = $post['eventVenue'];
+		$data['city'] = $post['eventCity'];
+		$data['tba'] = $post['dateTBA'];
+
+
 		$data['volunteer_points'] = $post['eventPoints'];
 		$data['create_date'] = date("Y-m-d H:i:s");
 		$data['update_date'] = date("Y-m-d H:i:s");
@@ -914,11 +932,18 @@ class Events extends GS_Controller {
 
 		$data['title'] = $post['eventTitle'];
 		$data['url_alias'] = $this->format_slug($post['eventTitle']);
-		$data['description'] = $post['overview'];
+		$data['description'] = @$post['overview'];
 		$data['when'] = date("Y-m-d H:i:s", strtotime($post['eventWhen']));
 		$data['where'] = $post['eventWhere'];
 		$data['volunteer_points'] = $post['eventPoints'];
 		$data['update_date'] = date("Y-m-d H:i:s");
+
+		$data['when'] = date("Y-m-d H:i:s", strtotime($post['eventWhen']));
+		$data['time_start'] = date("H:i:s", strtotime($post['eventStartTime']));
+		$data['time_end'] = date("H:i:s", strtotime($post['eventEndTime']));
+		$data['venue'] = $post['eventVenue'];
+		$data['city'] = $post['eventCity'];
+		$data['tba'] = $post['dateTBA'];
 
 		$storeFolder = "uploads/events/" ;
 

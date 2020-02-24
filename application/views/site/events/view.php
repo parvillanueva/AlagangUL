@@ -144,7 +144,7 @@ die(); */
 								<span class="au-numbers"><i class="fas fa-walking"></i> <?= $event_details[0]['joined_volunteers'];?> of <?= $event_details[0]['required_volunteer'];?> Volunteers</span>
 							</div>
 							<div class="au-inner">
-								<span class="au-pques">When:</span><span class="au-pans"><?= date("F d, Y h:i a", strtotime($event_details[0]['when']));?></span>
+								<span class="au-pques">When:</span><span class="au-pans"><?= $event_details[0]['when'];?></span>
 							</div>
 							<div class="au-inner">
 								<span class="au-pques">Where:</span><span class="au-pans"><?= $event_details[0]['where'];?></span>

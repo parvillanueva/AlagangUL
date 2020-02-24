@@ -34,6 +34,7 @@ class Manage extends GS_Controller {
 		$data['program_id'] = $program_id;
 		$data['program_url'] = $program_url;
 		$data['details'] = $this->db->query("SELECT * FROM tbl_programs WHERE id = " . $program_id)->result();
+		$data['city'] = $this->db->query("SELECT * FROM tbl_city GROUP BY city_name ORDER BY city_name ASC")->result();
 		$data['content'] = "site/manage/events";
 		$data['meta'] = array(
 			"title"         =>  "Manage",
@@ -126,6 +127,11 @@ class Manage extends GS_Controller {
 			tbl_program_events.status,
 			tbl_program_events.`when`,
 			tbl_program_events.`where`,
+			tbl_program_events.`venue`,
+			tbl_program_events.`city`,
+			tbl_program_events.`tba`,
+			tbl_program_events.`time_start`,
+			tbl_program_events.`time_end`,
 			tbl_program_events.`url_alias`,
 			tbl_program_events.volunteer_points,
 			CONCAT('programs/',tbl_programs.id, '/', tbl_programs.url_alias, '/event/' , tbl_program_events.id , '/' , tbl_program_events.url_alias ) AS Url
@@ -168,6 +174,11 @@ class Manage extends GS_Controller {
 				"when"				=> $value->when,
 				"where"				=> $value->where,
 				"status"			=> $value->status,
+				"venue"				=> $value->venue,
+				"city"				=> $value->city,
+				"time_start"		=> $value->time_start,
+				"time_end"			=> $value->time_end,
+				"tba"				=> $value->tba,
 				"volunteer_points"	=> $value->volunteer_points,
 				"volunteers"		=> $colunteer_result[0]->count,
 				"create_date"		=> $value->create_date,

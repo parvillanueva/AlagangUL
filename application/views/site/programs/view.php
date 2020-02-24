@@ -154,7 +154,7 @@
 										</div>
 										<div class="au-programdetails">
 											<div class="au-inner">
-												<span class="au-pans"><span class="au-pques">When:</span><?= date("F d, Y h:i a", strtotime($value['when']));?></span>
+												<span class="au-pans"><span class="au-pques">When:</span><?= $value['when'];?></span>
 											</div>
 											<div class="au-inner">
 												<span class="au-pans"><span class="au-pques">Where:</span><?= $value['where'];?></span>

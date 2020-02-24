@@ -108,15 +108,24 @@ class Programs extends GS_Controller {
 
 
 			$event_page_url = base_url("programs") . "/" . $program_id . "/" . $program_alias . "/event/" . $value->id . "/" . $value->url_alias;
+
+			
+
+			if((int)$value->tba > 0){
+				$when  = "TBA";
+			} else {
+				$when = date("F d, Y",strtotime($value->when)) . " " . date("h:i a",strtotime($value->time_start)) . " to " . date("h:i a",strtotime($value->time_end));
+			}
+
 			$events[] = array(
 				"id"				=> $value->id,
 				"link"				=> $event_page_url,
 				"title"				=> $value->title,
 				"image"				=> base_url() . $value->image,
 				"description"		=> $value->description,
-				"when"				=> $value->when,
-				"where"				=> $value->where,
-				"status"				=> $value->status,
+				"when"				=> $when,
+				"where"				=> $value->venue . " " . $value->city,
+				"status"			=> $value->status,
 				"volunteer_points"	=> $value->volunteer_points,
 				"is_admin"			=> ($value->user_id == $this->session->userdata('user_sess_id')) ? true : false,
 				"is_joined"			=> $is_joined,

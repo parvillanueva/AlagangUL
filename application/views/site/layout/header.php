@@ -208,6 +208,10 @@
                 );
             };
         </script>
+
+
+        <link href="<?= base_url();?>cms/css/bootstrap-material-datetimepicker.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="<?= base_url();?>/cms/js/bootstrap-material-datetimepicker.js" ></script>
     </head>
     
     <p id="loading_div_standard"><i class="fa fa-spinner fa-spin" style="font-size:54px"></i></p>

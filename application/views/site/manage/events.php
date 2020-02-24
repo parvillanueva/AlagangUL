@@ -39,7 +39,8 @@
 								<th scope="col" style="width: 30px;"><input type="checkbox" id="select_all"></th>
 								<th scope="col">Title</th>
 								<th scope="col" style="width: 200px;">When</th>
-								<th scope="col">Where</th>
+								<th scope="col" style="width: 200px;">Time</th>
+								<th scope="col">Venue</th>
 								<th scope="col">Status</th>
 								<th scope="col">Created Date</th>
 								<th scope="col">Action</th>
@@ -85,14 +86,50 @@
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
+							<div class="form-check">
+							 	<label class="form-check-label">
+							    	<input type="checkbox" class="form-check-input" value="1" id="dateTBA" name="dateTBA">Date : TBA
+							  	</label>
+							</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
 							<input type="text" class="form-control required_input no_html" readonly="true" id="whenpicker" placeholder="When" name="eventWhen" value="">
+
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<input type="text" class="form-control required_input no_html" id="where" placeholder="Where" name="eventWhere" value="" >
+							<input type="text" class="form-control required_input no_html" readonly="true" id="starttime" placeholder="Start Time" name="eventStartTime" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" readonly="true" id="endtime" placeholder="End Time" name="eventEndTime" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" id="where" placeholder="Venue" name="eventVenue" value="" >
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<select class="form-control required_input no_html" id="where" placeholder="City" name="eventCity">
+								<option selected disable value="">Select City..</option>
+								<?php foreach ($city as $key => $value) {?>
+									<option value="<?= $value->city_name;?>"><?= $value->city_name;?></option>
+								<?php } ?>
+							</select>
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -151,6 +188,15 @@
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
+							<div class="form-check">
+							 	<label class="form-check-label">
+							    	<input type="checkbox" class="form-check-input" value="1" id="dateTBAedit" name="dateTBA">Date : TBA
+							  	</label>
+							</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
 							<input type="text" class="form-control required_input no_html" readonly="true" id="whenpickeredit" placeholder="When" name="eventWhen" value="">
 
 							<div class="valid-feedback"></div>
@@ -159,14 +205,33 @@
 					</div>
 	        		<div class="form-row">
 						<div class="col">											
-							<input type="text" class="form-control required_input no_html" id="EditEventwhere" placeholder="Where" name="eventWhere" value="">
+							<input type="text" class="form-control required_input no_html" readonly="true" id="starttimeedit" placeholder="Start Time" name="eventStartTime" value="">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
-	        		<div class="form-row" hidden>
+	        		<div class="form-row">
 						<div class="col">											
-							<input type="number" class="form-control required_input no_html" id="EditEventpoints" placeholder="Add Points" name="eventPoints" value="0">
+							<input type="text" class="form-control required_input no_html" readonly="true" id="endtimeedit" placeholder="End Time" name="eventEndTime" value="">
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<input type="text" class="form-control required_input no_html" id="venueedit" placeholder="Venue" name="eventVenue" value="" >
+							<div class="valid-feedback"></div>
+							<div class="invalid-feedback">Please fill out this field.</div>
+						</div>
+					</div>
+	        		<div class="form-row">
+						<div class="col">											
+							<select class="form-control required_input no_html" id="cityedit" placeholder="City" name="eventCity">
+								<option selected disable value="">Select City..</option>
+								<?php foreach ($city as $key => $value) {?>
+									<option value="<?= $value->city_name;?>"><?= $value->city_name;?></option>
+								<?php } ?>
+							</select>
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
@@ -225,6 +290,12 @@
 		var id = $(this).attr("data-id");
 		var alis = $(this).attr("data-alias");
 
+		var tba = $(this).attr("data-tba");
+		var timestart = $(this).attr("data-timestart");
+		var timeend = $(this).attr("data-timeend");
+		var venue = $(this).attr("data-venue");
+		var city = $(this).attr("data-city");
+
 		var url = "<?= base_url("programs/") . $program_id . "/" . $program_url . "/event/";?>" + id + "/" + alis + "/update";
 
 		// $('#whenpickeredit').data("DateTimePicker").minDate(when);
@@ -233,9 +304,19 @@
 		$("#EditEventwhere").val(where);
 		$("#EditEventpoints").val(points);
 		$("#EditEventoverview").val(overview);
-		$("#whenpickeredit").val(when);
+		$("#whenpickeredit").val(moment(when).format("LL"));
+		$("#starttimeedit").val(timestart);
+		$("#endtimeedit").val(timeend);
+		$("#venueedit").val(venue);
+		$("#cityedit").val(city);
 		$("#previewImageEventEdit").attr("src",image);
 		$("#editEventForm").attr("action",url);
+
+
+		if(tba != "null"){
+			alert("checked");
+			$("#dateTBAedit").click();
+		}
 		
 		BM.show("#EditEventModal");
 
@@ -397,12 +478,19 @@
 		  			html += "<tr>";
 		  			html += "	<td><input title='"+tooltip+"' "+disabled+" type='checkbox' class='select' data-alias='"+b.url_alias+"' data-id="+b.id+"/></td>";
 		  			html += "	<td>" + b.title + "</td>";
-		  			html += "	<td>" + moment(b.when).format("LLL") + "</td>";
-		  			html += "	<td>" + b.where + "</td>";
+
+		  			if(b.tba == 1){
+		  				html += "	<td>TBA</td>";
+		  				html += "	<td>TBA</td>";
+		  			} else {
+		  				html += "	<td>" + moment(b.when).format("LL") + "</td>";
+		  				html += "	<td>" + tConvert(b.time_start) + " to " + tConvert(b.time_end) + "</td>";
+		  			}
+		  			html += "	<td>" + b.venue + " " + b.city +  "</td>";
 		  			html += "	<td>" + status + "</td>";
 		  			html += "	<td>" + moment(b.create_date).format("LLL") + "</td>";
 		  			html += "	<td>" ;
-		  			html += "		<a href='#' data-id="+b.id+" data-alias='"+b.url_alias+"' data-when='"+moment(b.when).format("MM/DD/YYYY hh:mm a")+"' data-image='"+b.image+"' data-overview='"+b.description+"' data-points='"+b.volunteer_points+"' data-where='"+b.where+"' data-title='"+b.title+"' type='button' class='au-lnk au-action editEventBtn' title='Edit Event'><i class='fas fa-edit'></i></button>";
+		  			html += "		<a href='#' data-city="+b.city+" data-tba="+b.tba+" data-timeend="+b.time_end+" data-timestart="+b.time_start+" data-venue="+b.venue+" data-id="+b.id+" data-alias='"+b.url_alias+"' data-when='"+moment(b.when).format("MM/DD/YYYY hh:mm a")+"' data-image='"+b.image+"' data-overview='"+b.description+"' data-points='"+b.volunteer_points+"' data-where='"+b.where+"' data-title='"+b.title+"' type='button' class='au-lnk au-action editEventBtn' title='Edit Event'><i class='fas fa-edit'></i></button>";
 		  			html += "		<a href='"+b.Url+"' target='_blank' type='button' class='au-lnk au-action' title='Manage Page'><i class='fas fa-cog' style='color: #11295b;'></i></a>";
 		  			html += "		<a href='<?= base_url("volunteers");?>/"+b.id+"' type='button' class='au-lnk au-action' title='Volunteers' ><i class='fas fa-users' style='color: #795548;'></i><span class='au-evnu badge badge-pill  badge-light'>"+b.volunteers+"</span></a>";
 		  			html += "	</td>";
@@ -417,6 +505,20 @@
 		  		BM.loading(false);
 		  	}
 		});
+	}
+
+	function tConvert (time, ignoreZero = true) {
+		if(time){
+			// Check correct time format and split into components
+				var [hours, minutes] = time.split(':')
+		      	var modifier = +hours < 12 ? 'am' : 'pm'
+		      	hours = +hours % 12 || 12
+		      	minutes = ignoreZero && +minutes === 0 ? '' : `:${minutes}`
+		      	return hours + minutes + modifier
+		} else {
+			return "";
+		}
+	  
 	}
 
 
@@ -457,20 +559,82 @@
         }
     }
 
-    $('#whenpicker').datetimepicker({
-	    controlType: 'select',
-	    minDate: datatoday,
-	    oneLine: true,
-	    timeFormat: 'hh:mm tt'
+
+	$('#whenpicker').materialDatePicker({
+		time : false,
+		minDate : new Date(),
+		weekStart : 0
 	});
 
-    $('#whenpickeredit').datetimepicker({
-	    controlType: 'select',
-	    minDate: datatoday,
-	    oneLine: true,
-	    timeFormat: 'hh:mm tt'
+	$('#starttime').materialDatePicker({
+		date : false,
+		switchOnClick: true,
+		format: 'hh:mm A'
 	});
 
+	$('#endtime').materialDatePicker({
+		date : false,
+		switchOnClick: true,
+		format: 'hh:mm A'
+	});
+
+	$('#whenpickeredit').materialDatePicker({
+		time : false,
+		minDate : new Date(),
+		weekStart : 0
+	});
+
+	$('#starttimeedit').materialDatePicker({
+		date : false,
+		switchOnClick: true,
+		format: 'hh:mm A'
+	});
+
+	$('#endtimeedit').materialDatePicker({
+		date : false,
+		switchOnClick: true,
+		format: 'hh:mm A'
+	});
+
+
+	$("#dateTBA").change(function() {
+	    if(this.checked) {
+	        $("#whenpicker").parent().parent().hide();
+	        $("#whenpicker").removeClass("required_input");
+	        $("#starttime").parent().parent().hide();
+	        $("#starttime").removeClass("required_input");
+	        $("#endtime").parent().parent().hide();
+	        $("#endtime").removeClass("required_input");
+	    } else {
+	        $("#whenpicker").parent().parent().show();
+	        $("#whenpicker").addClass("required_input");
+	        $("#starttime").parent().parent().show();
+	        $("#starttime").addClass("required_input");
+	        $("#endtime").parent().parent().show();
+	        $("#endtime").addClass("required_input");
+
+	    }
+	});
+    
+
+	$("#dateTBAedit").change(function() {
+	    if(this.checked) {
+	        $("#whenpickeredit").parent().parent().hide();
+	        $("#whenpickeredit").removeClass("required_input");
+	        $("#starttimeedit").parent().parent().hide();
+	        $("#starttimeedit").removeClass("required_input");
+	        $("#endtimeedit").parent().parent().hide();
+	        $("#endtimeedit").removeClass("required_input");
+	    } else {
+	        $("#whenpickeredit").parent().parent().show();
+	        $("#whenpickeredit").addClass("required_input");
+	        $("#starttimeedit").parent().parent().show();
+	        $("#starttimeedit").addClass("required_input");
+	        $("#endtimeedit").parent().parent().show();
+	        $("#endtimeedit").addClass("required_input");
+
+	    }
+	});
     
 
 </script>
