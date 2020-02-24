@@ -910,6 +910,8 @@ class Events extends GS_Controller {
 		$data['venue'] = $post['eventVenue'];
 		$data['city'] = $post['eventCity'];
 		$data['tba'] = $post['dateTBA'];
+		$data['contact_number'] = $post['contact_number'];
+		$data['contact_person'] = $post['contact_person'];
 
 
 		$data['volunteer_points'] = $post['eventPoints'];
@@ -966,6 +968,8 @@ class Events extends GS_Controller {
 		$data['venue'] = $post['eventVenue'];
 		$data['city'] = $post['eventCity'];
 		$data['tba'] = $post['dateTBA'];
+		$data['contact_number'] = $post['contact_number'];
+		$data['contact_person'] = $post['contact_person'];
 
 		$storeFolder = "uploads/events/" ;
 

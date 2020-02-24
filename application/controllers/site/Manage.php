@@ -129,6 +129,8 @@ class Manage extends GS_Controller {
 			tbl_program_events.`where`,
 			tbl_program_events.`venue`,
 			tbl_program_events.`city`,
+			tbl_program_events.`contact_person`,
+			tbl_program_events.`contact_number`,
 			tbl_program_events.`tba`,
 			tbl_program_events.`time_start`,
 			tbl_program_events.`time_end`,
@@ -182,7 +184,9 @@ class Manage extends GS_Controller {
 				"volunteer_points"	=> $value->volunteer_points,
 				"volunteers"		=> $colunteer_result[0]->count,
 				"create_date"		=> $value->create_date,
-				"Url"				=> base_url() . $value->Url
+				"Url"				=> base_url() . $value->Url,
+				"contact_person"	=> $value->contact_person,
+				"contact_number"	=> $value->contact_number,
 			);
 		}
 		echo json_encode($data);
