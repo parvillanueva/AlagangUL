@@ -61,7 +61,7 @@
 							</div> -->
 							<div class="au-action">
 								<div class="row">
-									<div class="col"><span class="au-needed"><?= $eloop['required_volunteer'] ?> volunteers needed</span></div>
+									<!-- <div class="col"><span class="au-needed"><?= $eloop['required_volunteer'] ?> volunteers needed</span></div> -->
 									<div class="col">
 										<?php 
 										if($eloop['required_volunteer']!=0 && $eloop['is_not_joined'] !=1){

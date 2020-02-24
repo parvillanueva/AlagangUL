@@ -180,7 +180,7 @@
 										</div> -->
 										<div class="au-action">
 											<div class="row">
-												<div class="col"><span class="au-needed"><?= $value['required_volunteer'] ;?> volunteers needed</span></div>
+												<!-- <div class="col"><span class="au-needed"><?= $value['required_volunteer'] ;?> volunteers needed</span></div> -->
 												<div class="col">
 													<?php if($details['is_admin']) { ?>
 														<!-- <?php if($value['status'] == 1) { ?>
