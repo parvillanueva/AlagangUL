@@ -24,9 +24,9 @@ class Logout extends CI_Controller {
 		$arrUpdate = array(
 			'status' => -2
 		);
-		//$user = $this->Gmodel->update_data('tbl_users', $arrUpdate, 'email_address', $replace);
-		$user = $this->Gmodel->delete_data_user('tbl_users', $arr);
+		$user = $this->Gmodel->update_data('tbl_users', $arrUpdate, 'email_address', $replace);
+		//$user = $this->Gmodel->delete_data_user('tbl_users', $arr);
 		$user_otop = $this->Gmodel->delete_data_user('tbl_otp_record', $arr);
-		echo $user.'<br/>'.$user_otop;
+		echo 'User - '.$user.'<br/> OTP - '.$user_otop;
 	}
 }

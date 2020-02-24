@@ -35,7 +35,8 @@ class Sign_up extends CI_Controller {
 				$from = $_POST['email'];
 				$fr_name = 'Guest';
 				$subject = 'One-Time-Password for Alagang Unilab';
-				$this->send_sgrid($from, $fr_name, $from, $subject);
+				$result_sgrid = $this->send_sgrid($from, $fr_name, $from, $subject);
+				echo json_encode(array('responce'=>'success', 'result_sgrid'=>$result_sgrid));
 			}
 		}
 		$data_array = array(
@@ -94,7 +95,7 @@ class Sign_up extends CI_Controller {
 			'subject' => $subject,
 			'content' => $content,
 		);
-		echo $this->sndgrd->send($arr);
+		return $this->sndgrd->send($arr);
 	}
 	
 	public function session_set($token){
