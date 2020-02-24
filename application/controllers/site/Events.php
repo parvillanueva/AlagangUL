@@ -203,7 +203,7 @@ class Events extends GS_Controller {
 	public function filter_where($arr){
 			$where_date = '';
 		if($arr['date_from'] != '' && $arr['date_to'] != ''){
-			$where_date = 'AND "'.$arr['date_from'].'" >= `when` AND `when` <= "'.$arr['date_to'].'"';
+			$where_date = 'AND "'.$arr['date_from'].'" <= `when` AND `when` <= "'.$arr['date_to'].'"';
 		}
 		
 			$where_time = '';
