@@ -588,6 +588,7 @@ class Events extends GS_Controller {
 				"where"				=> $value->venue . " " . $value->city,
 				"status"			=> $value->status,
 				"url_alias"			=> $value->url_alias,
+				"tba"				=> $value->tba,
 				"volunteer_points"	=> $value->volunteer_points,
 				"is_admin"			=> ($value->user_id == $this->session->userdata('user_sess_id')) ? 1 : 0,
 				"is_joined"			=> $is_joined,

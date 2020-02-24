@@ -57,19 +57,25 @@ die(); */
 						<?php } ?>						
 						<?php if($event_details[0]['is_admin'] == 1){ ?>
 							<?php
-							$current_date = date('Y-m-d');
-							$data_date = date("Y-m-d", strtotime($event_details[0]['when']));
-							if($data_date == $current_date || $data_date > $current_date){ ?>
-							<a href="#" class="au-lnk" id="addTask_button"><span class="au-share"><i class="fas fa-plus"></i>Add Task</span></a>
-							<!-- <a href="#" class="au-lnk" data-toggle="modal" data-target="#editEvent"><span class="au-share"><i class="fas fa-pen"></i> Edit Event</a> -->
-							<?php
-								if(count($event_task)>0){
-							 	if($event_details[0]['status'] == 0) { ?>
-								<a href="<?= base_url("programs/").$program_details[0]['id']."/".$program_details[0]['url_alias']."/event/" . $event_details[0]['id'] . "/" . $event_details[0]['url_alias'] . "/publish/1";?>" class="au-lnk pub-program"><span class="au-share"><i class="fas fa-check"></i> Publish Event</span></a>
-							<?php }else{ ?>
-								<a href="<?= base_url("programs/").$program_details[0]['id']."/".$program_details[0]['url_alias']."/event/" . $event_details[0]['id'] . "/" . $event_details[0]['url_alias']. "/publish/0";?>" class="au-lnk pub-program"><span class="au-share"><i class="fas fa-minus"></i> Unpublish Event</span></a>
-							<?php } }?>	
-						<?php } }?>
+								$current_date = date('Y-m-d');
+								$data_date = date("Y-m-d", strtotime($event_details[0]['when']));
+								if($data_date == $current_date || $data_date > $current_date){ ?>
+									<a href="#" class="au-lnk" id="addTask_button"><span class="au-share"><i class="fas fa-plus"></i>Add Task</span></a>
+								<!-- <a href="#" class="au-lnk" data-toggle="modal" data-target="#editEvent"><span class="au-share"><i class="fas fa-pen"></i> Edit Event</a> -->
+								<?php
+									if(count($event_task)>0){
+								 	if($event_details[0]['status'] == 0) { ?>
+									<a href="<?= base_url("programs/").$program_details[0]['id']."/".$program_details[0]['url_alias']."/event/" . $event_details[0]['id'] . "/" . $event_details[0]['url_alias'] . "/publish/1";?>" class="au-lnk pub-program"><span class="au-share"><i class="fas fa-check"></i> Publish Event</span></a>
+								<?php }else{ ?>
+									<a href="<?= base_url("programs/").$program_details[0]['id']."/".$program_details[0]['url_alias']."/event/" . $event_details[0]['id'] . "/" . $event_details[0]['url_alias']. "/publish/0";?>" class="au-lnk pub-program"><span class="au-share"><i class="fas fa-minus"></i> Unpublish Event</span></a>
+								<?php } }?>	
+							<?php } else { ?>
+								<?php if($event_details[0]['tba'] == 1) { ?>
+									<a href="#" class="au-lnk" id="addTask_button"><span class="au-share"><i class="fas fa-plus"></i>Add Task</span></a>
+								<?php } ?>
+
+							<?php } ?>
+						<?php } ?>
 					</div>
 					<!-- <div class="au-badges">
 						<span class="au-pb">Badges you can earn</span>
