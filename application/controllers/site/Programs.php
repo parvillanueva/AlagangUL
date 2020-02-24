@@ -84,7 +84,7 @@ class Programs extends GS_Controller {
 		// if($is_admin == 1){
 		// 	$event_list = $this->Gmodel->get_query('tbl_program_events',"program_id = " . $program_id . " AND when >= '" . date("Y-m-d H:i:s") . "'");
 		// } else 	{
-			$event_list = $this->Gmodel->get_query('tbl_program_events',"program_id = " . $program_id . " AND status = 1 AND when >= '" . date("Y-m-d H:i:s") . "'");
+			$event_list = $this->Gmodel->get_query('tbl_program_events',"program_id = " . $program_id . " AND status = 1 AND (when >= '" . date("Y-m-d H:i:s") . "' OR tba = 1 )");
 		// }
 
 		$events = array();
