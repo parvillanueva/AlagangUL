@@ -1,4 +1,3 @@
-
 <div class="container-fluid au-heading">
 	<div class="au-container au-padding">
 		<span class="au-h5 no-margin">Explore Events</span>
@@ -51,9 +50,15 @@
 							<div class="form-row">
 								<select class="form-control custom-select" id="location">
 									<option value="" selected>All Types</option>
-									<?php foreach($event_program as $eprogram){ ?>
-										<option value="<?php echo $eprogram->where;?>"><?php echo $eprogram->where;?></option>
-									<?php } ?>
+									<?php foreach($event_program as $eprogram){ 
+										if($eprogram->venue != ''){
+										$city = '';
+										if($eprogram->city != ''){
+											$city = ' '.$eprogram->city;
+										}
+										?>
+										<option value="<?php echo $eprogram->venue.$city;?>"><?php echo $eprogram->venue.$city;?></option>
+									<?php } }?>
 				  				</select>
 			  				</div>
 						</div>
@@ -118,7 +123,7 @@
 		$('#time_input').daterangepicker({
 			timePicker: true,
             locale: {
-                format: 'HH:mm A'
+                format: 'h:mm A'
             }
         }).on('show.daterangepicker', function (ev, picker) {
             picker.container.find(".calendar-table").hide();
@@ -130,6 +135,7 @@
 		var search_box = $('#search_input').val();
 		var location = $('#location').val();
 		var task = $('#task_select').val();
+		var time = $('#time_input').val();
 		var badge_id = $('#task_select option:selected').attr('badge-id');
 		var date = $('#date_input').val();
 		var url = "<?= base_url('site/events/submit_filter') ?>";
@@ -138,7 +144,8 @@
 			location : location,
 			task : task,
 			date : date,
-			badge_id : badge_id
+			badge_id : badge_id,
+			time : time
 		};
 		aJax.post(url, data, function(result){
 			setTimeout(function(){ 

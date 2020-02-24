@@ -82,7 +82,9 @@ class Events extends GS_Controller {
 				unset($data_array2['date_volunteer']);
 				$this->Gmodel->save_data('tbl_users_badge', $data_array2);
 			}
-			$this->event_email_send($_GET['event_task_id']);
+			echo '<pre>';
+			print_r($this->event_email_send($_GET['event_task_id']));
+			echo '</pre>';
 		}
 	}
 	
@@ -168,8 +170,12 @@ class Events extends GS_Controller {
 	}
 	
 	public function submit_filter(){
-		$date = $_POST['date']; 
+		$date = $_POST['date'];
+		$time = $_POST['time'];		
 		$date_explode = explode('-',$date);
+		$time_explode = explode('-',$time);
+		$time_from = date('H:i:s', strtotime($time_explode[0]));
+		$time_to = date('H:i:s', strtotime($time_explode[1]));
 		$date_from = date('Y-m-d', strtotime($date_explode[0]));
 		$date_to = date('Y-m-d', strtotime($date_explode[1]));
 		$arr = array(
@@ -178,6 +184,8 @@ class Events extends GS_Controller {
 			'task' => $_POST['task'],
 			'date_from' => $date_from,
 			'date_to' => $date_to,
+			'time_from' => $time_from,
+			'time_to' => $time_to
 			//'badge_id' => $_POST['badge_id']
 		);
 		if(!empty($_POST['task'])){
@@ -195,11 +203,16 @@ class Events extends GS_Controller {
 	public function filter_where($arr){
 			$where_date = '';
 		if($arr['date_from'] != '' && $arr['date_to'] != ''){
-			$where_date = 'AND "'.$arr['date_from'].'" <= when AND when <= "'.$arr['date_to'].'"';
+			$where_date = 'AND "'.$arr['date_from'].'" <= `when` AND `when` <= "'.$arr['date_to'].'"';
+		}
+		
+			$where_time = '';
+		if($arr['time_from'] != '' && $arr['time_to'] != ''){
+			$where_time = 'AND "'.$arr['time_from'].'" <= `time_start` AND `time_end` <= "'.$arr['time_to'].'"';
 		}
 			$where_location = '';
 		if($arr['location'] != ''){
-			$where_location = "AND where like '%".$arr['location']."%'";
+			$where_location = "AND CONCAT(`venue`, ' ', city) like '%".$arr['location']."%'";
 		}
 			$where_search = '';
 		if($arr['search_box'] != ''){
@@ -227,7 +240,7 @@ class Events extends GS_Controller {
 		} */
 		
 		$result = array(
-			'search_date' => $where_date .' '. $where_search.' '.$where_location,
+			'search_date' => $where_date .' '. $where_time .' '. $where_search.' '.$where_location,
 			'task' => $where_task,
 			//'type' => $where_type
 			
@@ -236,7 +249,7 @@ class Events extends GS_Controller {
 	}
 	
 	public function get_details($dat_arr = null){
-			$filter_where = "AND when like '%" . date("Y") . "%'";
+			$filter_where = "AND `when` like '%" . date("Y") . "%'";
 			$task_where = '';
 			$type_where = '';
 		if(!empty($dat_arr)){
@@ -293,6 +306,7 @@ class Events extends GS_Controller {
 				"is_not_joined"		=> ($is_not_joined[0]->count>=2) ? 1 : 0, 
 				"required_volunteer"=> ($needed_volunteer[0]->count != "") ? $needed_volunteer[0]->count : 0,
 				"joined_volunteers"	=> ($joined_volunteer[0]->count != "") ? $joined_volunteer[0]->count : 0,
+				"filter_where" 		=> $filter_where 
 			);
 		}
 
@@ -548,7 +562,7 @@ class Events extends GS_Controller {
 	}
 	
 	public function get_event_list(){
-		$sql = "Select * From tbl_program_events group by `where`";
+		$sql = "Select * From tbl_program_events where status = 1 group by `city`, venue";
 		$result = $this->db->query($sql)->result();
 		return $result;
 	}
@@ -1061,7 +1075,9 @@ class Events extends GS_Controller {
 	
 	public function event_email_send($event_task_id){
 		$event_badge = $this->get_event_badge($event_task_id);
-		$content = $this->email_content($event_badge);
+		$event_task = $this->get_event_task($event_task_id);
+		$program_event = $this->program_events($event_task);
+		$content = $this->email_content($event_badge, $event_task, $program_event);
 		$user_id = $this->session->userdata('user_sess_id');
 		$query = "SELECT * FROM tbl_users WHERE id = $user_id ";
 		$result = $this->db->query($query)->result();
@@ -1070,6 +1086,18 @@ class Events extends GS_Controller {
 		$to = $result[0]->email_address;
 		$subject = 'Event Success Reply';
 		return $this->send_sgrid($from, $fr_name, $to, $subject, $content);
+	}
+	
+	public function program_events($event_task){
+		$query_pevent = "SELECT * FROM tbl_program_events WHERE id = '".$event_task[0]->event_id."'";
+		$result_pevent = $this->db->query($query_pevent)->result();
+		$query_program = "SELECT * FROM tbl_programs WHERE id = '".$result_pevent[0]->program_id."'";
+		$result_program = $this->db->query($query_program)->result();
+		$arr_result = array(
+			'program'=>$result_program,
+			'program_event'=>$result_pevent
+		);
+		return $arr_result;
 	}
 	
 	public function get_event_badge($event_task_id){
@@ -1084,6 +1112,12 @@ class Events extends GS_Controller {
 		return	$arr;	
 	}
 	
+	public function get_event_task($event_task_id){
+		$query = "SELECT * FROM tbl_program_event_task WHERE id = $event_task_id ";
+		$result = $this->db->query($query)->result();
+		return $result;
+	}
+	
 	function send_sgrid($from, $fr_name, $to, $subject, $content){ 
 		$arr = array(
 			'from' => $from,
@@ -1095,7 +1129,7 @@ class Events extends GS_Controller {
 		return $this->sndgrd->send($arr);
 	}
 	
-	function email_content($badge){
+	function email_content($badge, $task, $programSet){
 		$html="<html>
 				<head>
 				</head>
@@ -1105,7 +1139,7 @@ class Events extends GS_Controller {
 					<tbody>
 						<tr>
 							<td style='background-color: #092E6E;padding:10px 0px;border-radius: 8px 8px 0px 0px;'>
-								<img width='220' src='http://172.29.70.126/alagang_unilab/uploads/au-alagangunilab.png'>
+								<img width='220' src='".base_url('uploads/au-alagangunilab.png')."'>
 							</td>
 						</tr>
 						<tr>
@@ -1129,8 +1163,8 @@ class Events extends GS_Controller {
 														</tr>";
 											}	
 										$html .= "</table>
-											<p style='font-size:17px; color:#4b4d4d;line-height: 25px;padding-top:15px;'>in AKAP: Alaga Sa Kalusugan ng Pamayanan's Community Wellness Program on January 19, 2020.</p>
-											<p style='font-size:17px; color:#4b4d4d;padding-top:10px;'>Task: Registration</p>
+											<p style='font-size:17px; color:#4b4d4d;line-height: 25px;padding-top:15px;'>in ".$programSet['program'][0]->name.": ".$programSet['program_event'][0]->title." on ".date('F d, Y', strtotime($programSet['program_event'][0]->when)).".</p>
+											<p style='font-size:17px; color:#4b4d4d;padding-top:10px;'>Task: ".$task[0]->task."</p>
 										</td>
 									</tr>
 								</table>
