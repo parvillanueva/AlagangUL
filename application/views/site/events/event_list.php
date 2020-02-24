@@ -81,7 +81,9 @@
 									@$bar_width = ceil($eloop['joined_volunteers'] / $eloop['required_volunteer']);
 								?>
 								<div class="au-bar" style="width:<?=$bar_width?>%"></div>
-								<span class="au-numbers"><i class="fas fa-walking"></i> <?= $eloop['joined_volunteers'] ?> of <?= $eloop['required_volunteer'] ?> Volunteers</span>
+								<span class="au-numbers" style="position: absolute;right: 50%;"><?=$bar_width?>%</span>
+								<span class="au-numbers"><i class="fas fa-walking"></i> <?= intval($eloop['required_volunteer']-$eloop['joined_volunteers'])?> Volunteers Needed</span>
+				
 							</div>
 						</div>
 					</div>

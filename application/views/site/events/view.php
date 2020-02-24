@@ -155,7 +155,8 @@ die(); */
 									@$bar_width = ceil($event_details[0]['joined_volunteers'] / $event_details[0]['required_volunteer']);
 								?>
 								<div class="au-bar" style="width:<?=$bar_width?>%"></div>
-								<span class="au-numbers"><i class="fas fa-walking"></i> <?= $event_details[0]['joined_volunteers'];?> of <?= $event_details[0]['required_volunteer'];?> Volunteers</span>
+								<span class="au-numbers" style="position: absolute;right: 50%;"><?=$bar_width?>%</span>
+								<span class="au-numbers"><i class="fas fa-walking"></i> <?= intval($event_details[0]['required_volunteer']-$event_details[0]['joined_volunteers'])?> Volunteers Needed</span>
 							</div>
 							<div class="au-inner">
 								<span class="au-pques">When:</span><span class="au-pans"><?= $event_details[0]['when'];?></span>

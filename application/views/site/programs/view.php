@@ -206,7 +206,8 @@
 												@$bar_width = ceil($value['joined_volunteers'] / $value['required_volunteer']);
 											?>
 											<div class="au-bar" style="width:<?=$bar_width?>%"></div>
-											<span class="au-numbers"><i class="fas fa-walking"></i> <?= $value['joined_volunteers'] ;?> of <?= $value['required_volunteer'] ;?> Volunteers</span>
+											<span class="au-numbers" style="position: absolute;right: 50%;"><?=$bar_width?>%</span>
+											<span class="au-numbers"><i class="fas fa-walking"></i> <?= intval($value['required_volunteer']-$value['joined_volunteers'])?> Volunteers Needed</span>
 										</div>
 									</div>
 								</div>
