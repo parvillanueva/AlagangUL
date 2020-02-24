@@ -72,7 +72,7 @@
 							<div class="invalid-feedback" id="invalid_confirm">Password do not match.</div>
 						</div>
 						<div class="col-12">
-							<span class="au-p3">Use 8 or more characters with a mix of letters, numbers & symbols for a strong password.</span>
+							<span class="au-p3" style="font-size:14px;">Use 8 or more characters with a mix of letters, numbers & symbols for a strong password.</span>
 						</div>
 					</div>
 					<div class="form-row">
