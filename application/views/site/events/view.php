@@ -450,16 +450,16 @@ die(); */
 				<form>
 					<div class="form-row au-terms">
 						<div class="col">
-		      				<label class="form-check-label">
+		      				<div class="form-check-label">
 		        				<input style="pointer-events: none;" class="form-check-input is_agree_checkbox" type="checkbox" name="terms" required=""> I have read and understood the <a href="#" class="au-lnk event-guidelines" data-toggle="modal" data-target="#eventdetails">Guidelines</a>.
 			        			<div class="valid-feedback"></div>
 			        			<div class="invalid-feedback"></div>
-		      				</label>
-		      				<label class="form-check-label">
+		      				</div>
+		      				<div class="form-check-label">
 								<input  style="pointer-events: none;" class="form-check-input is_agree_waiver" type="checkbox" name="terms" required=""> I agree to the terms of the <a href="#" class="au-lnk event-waiver" data-toggle="modal" data-target="#eventwaiver">Waiver</a>.
 								<div class="valid-feedback"></div>
 								<div class="invalid-feedback"></div>
-							</label>
+							</div>
 		      				
 		      			</div>
 	    			</div>
@@ -933,27 +933,41 @@ die(); */
 
 			//check if time is limit
 			var is_joined = $(this).attr('attr-isjoined');
+			var hasttime = $(this).attr('attr-hastime');
 			var task = $(this).closest('tr').children(':nth-child(2)').html();
 			var event_task_id = $(this).attr('attr-id');
 			var volunteer_type = $('.hid-id-'+event_task_id).html();
 
 			if(is_joined != 1){
-				var url = "<?= base_url("site/events/check_time_limit");?>";
-		    	$.get(url, function(data) {
-		    		if(data.valid === false){
-		    			BM.alert(data.message);
-		    		} else {
-		    			$('.au-terms').show();
-						$('.yes-s').show();
+				if(hasttime){
+					var url = "<?= base_url("site/events/check_time_limit");?>";
+			    	$.get(url, function(data) {
+			    		if(data.valid === false){
+			    			BM.alert(data.message);
+			    		} else {
+			    			$('.au-terms').show();
+							$('.yes-s').show();
 
-						$('.volunteer-as').attr('attr-id',event_task_id).attr('attr-isjoined',is_joined);
-						$('.waiverbtn').attr('attr-id',event_task_id);
-						$('.au-yourvolunteer').html(volunteer_type);
-						$('.volunteer-task').html(task);
-						$('#volunteermodal').modal('show');
-						$('.au-errormessage').hide();
-		    		}
-		    	});
+							$('.volunteer-as').attr('attr-id',event_task_id).attr('attr-isjoined',is_joined);
+							$('.waiverbtn').attr('attr-id',event_task_id);
+							$('.au-yourvolunteer').html(volunteer_type);
+							$('.volunteer-task').html(task);
+							$('#volunteermodal').modal('show');
+							$('.au-errormessage').hide();
+			    		}
+			    	});
+				} else {
+					$('.au-terms').show();
+					$('.yes-s').show();
+
+					$('.volunteer-as').attr('attr-id',event_task_id).attr('attr-isjoined',is_joined);
+					$('.waiverbtn').attr('attr-id',event_task_id);
+					$('.au-yourvolunteer').html(volunteer_type);
+					$('.volunteer-task').html(task);
+					$('#volunteermodal').modal('show');
+					$('.au-errormessage').hide();
+				}
+				
 			} else {
 				$('.au-terms').hide();
 				$('.yes-s').hide();
