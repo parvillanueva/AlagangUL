@@ -1207,8 +1207,25 @@ class Events extends GS_Controller {
 
 
 	public function check_time_limit(){
-		$event_id = $this->input->get("event_id");
 		$user_id = $this->session->userdata('user_sess_id');
+
+		$query = "SELECT count(tbl_program_event_task_volunteers.id) as Count_time
+			FROM
+			tbl_program_event_task_volunteers
+			LEFT JOIN tbl_program_event_task_badge ON tbl_program_event_task_volunteers.event_task_id = tbl_program_event_task_badge.event_task_id
+			LEFT JOIN tbl_program_events ON tbl_program_event_task_volunteers.event_id = tbl_program_events.id
+			WHERE tbl_program_event_task_volunteers.user_id = " . $user_id . "
+			AND badge_id = 1
+			AND tbl_program_events.when >= CURDATE()
+		";
+		$result = $this->db->query($query)->result();
+
+
+		if($result[0]->Count_time >= 2){
+			echo json_encode(array("valid"=>false,"message"=>"Time-based sign-ups are limited to 2 slots per employee."));
+		} else {
+			echo json_encode(array("valid"=>true,"message"=>""));
+		}
 	}
 
 }
