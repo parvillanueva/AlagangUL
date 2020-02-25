@@ -1247,4 +1247,15 @@ class Events extends GS_Controller {
 		}
 	}
 
+	function signature() {
+		$user_id = $this->session->userdata('user_sess_id');
+		$data_array = array(
+			'event_task_id' => $_POST['event_task_id'],
+			'user_id'		=> $user_id,
+			'signature'		=> $_POST['signature'],
+			'create_date'	=> date('Y-m-d H:i:s')
+			);
+		$this->Gmodel->save_data('tbl_program_event_task_signatures', $data_array);
+	}
+
 }
