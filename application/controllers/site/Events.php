@@ -180,11 +180,11 @@ class Events extends GS_Controller {
 	
 	public function submit_filter(){
 		$date = $_POST['date'];
-		$time = $_POST['time'];		
+		//$time = $_POST['time'];		
 		$date_explode = explode('-',$date);
-		$time_explode = explode('-',$time);
-		$time_from = date('H:i:s', strtotime($time_explode[0]));
-		$time_to = date('H:i:s', strtotime($time_explode[1]));
+		//$time_explode = explode('-',$time);
+		//$time_from = date('H:i:s', strtotime($time_explode[0]));
+		//$time_to = date('H:i:s', strtotime($time_explode[1]));
 		$date_from = date('Y-m-d', strtotime($date_explode[0]));
 		$date_to = date('Y-m-d', strtotime($date_explode[1]));
 		$arr = array(
@@ -193,8 +193,8 @@ class Events extends GS_Controller {
 			'task' => $_POST['task'],
 			'date_from' => $date_from,
 			'date_to' => $date_to,
-			'time_from' => $time_from,
-			'time_to' => $time_to
+			//'time_from' => $time_from,
+			//'time_to' => $time_to
 			//'badge_id' => $_POST['badge_id']
 		);
 		if(!empty($_POST['task'])){
@@ -216,16 +216,17 @@ class Events extends GS_Controller {
 		}
 		
 			$where_time = '';
-		if($arr['time_from'] != '' && $arr['time_to'] != ''){
+	/* 	if($arr['time_from'] != '' && $arr['time_to'] != ''){
 			$where_time = 'AND "'.$arr['time_from'].'" <= `time_start` AND `time_end` <= "'.$arr['time_to'].'"';
-		}
+		} */
 			$where_location = '';
 		if($arr['location'] != ''){
-			$where_location = "AND CONCAT(`venue`, ' ', city) like '%".$arr['location']."%'";
+			//$where_location = "AND CONCAT(`venue`, ' ', city) like '%".$arr['location']."%'";
+			$where_location = "AND city like '%".$arr['location']."%'";
 		}
 			$where_search = '';
 		if($arr['search_box'] != ''){
-			$where_search = 'AND (title like "%\\'.$arr['search_box'].'%" OR url_alias like "%\\'.$arr['search_box'].'%" OR description like "%\\'.$arr['search_box'].'%" OR where like "%\\'.$arr['search_box'].'%")';
+			$where_search = 'AND (venue like "%'.$arr['search_box'].'%" OR title like "%'.$arr['search_box'].'%" OR url_alias like "%'.$arr['search_box'].'%" OR description like "%'.$arr['search_box'].'%" OR where like "%'.$arr['search_box'].'%")';
 		}
 			$where_task = '';
 		if($arr['task'] != ''){
@@ -268,8 +269,10 @@ class Events extends GS_Controller {
 			//$type_where = $result_where['type'];
 		}
 		
-		$event_list = $this->Gmodel->get_query('tbl_program_events',"status = 1 ".$filter_where." ".$task_where." ".$type_where." ORDER BY month(`when`)");
-
+		$event_list_without_tba = $this->Gmodel->get_query('tbl_program_events',"status = 1 ".$filter_where." ".$task_where." ".$type_where." AND tba is NULL ORDER BY month(`when`)");
+		$event_list_with_tba = $this->Gmodel->get_query('tbl_program_events',"status = 1 ".$filter_where." ".$task_where." ".$type_where." AND tba ='1'");
+		$event_list = array_merge($event_list_without_tba, $event_list_with_tba);
+		
 		$events = array();
 		foreach ($event_list as $key => $value) {
 
@@ -293,10 +296,12 @@ class Events extends GS_Controller {
 			
 			if((int)$value->tba > 0){
 				$when  = "TBA";
+				$when_set  = "TBA";
 			} else {
 				$when = date("F d, Y",strtotime($value->when)) . " " . date("h:i a",strtotime($value->time_start)) . " to " . date("h:i a",strtotime($value->time_end));
+				$when_set = date("F d, Y",strtotime($value->when));
 			}
-			
+
 			$events[] = array( 
 				"id"				=> $value->id,
 				"get_earn_badge"	=> $this->get_earn_badge($value->id),
@@ -307,6 +312,7 @@ class Events extends GS_Controller {
 				"image"				=> base_url() . $value->image,
 				"description"		=> $value->description,
 				"when"				=> $when,
+				"when_set"			=> $when_set,
 				"where"				=> $value->venue . " " . $value->city,
 				"status"			=> $value->status,
 				"volunteer_points"	=> $value->volunteer_points,
@@ -573,7 +579,7 @@ class Events extends GS_Controller {
 	}
 	
 	public function get_event_list(){
-		$sql = "Select * From tbl_program_events where status = 1 group by `city`, venue";
+		$sql = "Select * From tbl_program_events where status = 1 group by `city`";
 		$result = $this->db->query($sql)->result();
 		return $result;
 	}
