@@ -316,7 +316,7 @@ class Events extends GS_Controller {
 	}
 	
 	public function event_task($task_title, $badge_id){
-		$data = "SELECT event_id FROM tbl_program_event_task et INNER JOIN tbl_program_event_task_badge etb ON et.id=etb.event_task_id where et.task like '%".$task_title."%' and etb.badge_id='".$badge_id."'";
+		$data = "SELECT event_id FROM tbl_program_event_task et INNER JOIN tbl_program_event_task_badge etb ON et.id=etb.event_task_id where et.task like '%".trim($task_title)."%' and etb.badge_id='".$badge_id."' GROUP BY event_id";
 		$result = $this->db->query($data)->result();
 		return $result;
 	}
