@@ -1011,7 +1011,7 @@ a.au-lnk:hover>* {
 }
 
 .au-eventdetails {
-     padding: 1em 2em 1em 1em;
+     padding: 1em 2em 0em 1em;
 }
 
 .au-program {
@@ -1140,6 +1140,10 @@ a.au-lnk:hover>* {
 
 .volunteered .au-volunteered {
      display: block;
+}
+
+.volunteer{
+     margin-bottom: 10px;
 }
 
 .au-action {

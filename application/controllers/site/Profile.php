@@ -50,7 +50,7 @@ class Profile extends GS_Controller
 		);
 		$data['css']		= array("assets/site/css/calendar.css");
 		$data['js']			= array("assets/site/js/calendar.js", "assets/site/js/profile.js");
-
+		$data['active_menu']= '';
 		$this->load->view("site/layout/template",$data);
 	}
 	public function division_list(){
