@@ -1197,7 +1197,7 @@ class Events extends GS_Controller {
 										$html .= "</table>
 											<p style='font-size:17px; color:#4b4d4d;line-height: 25px;padding-top:15px;'>in ".$programSet['program'][0]->name.": ".$programSet['program_event'][0]->title." on ".date('F d, Y', strtotime($programSet['program_event'][0]->when)).".</p>
 											<p style='font-size:17px; color:#4b4d4d;padding-top:10px;'>Task: ".$task[0]->task."</p>
-											<p style='font-size:17px; color:#4b4d4d;padding-top:10px;'>Kindly stand by for the Program Owners to email you on next steps.</p>
+											<p style='font-size:17px; color:#4b4d4d;padding-top:10px;'>Kindly stand by for more details. We will get in touch with you soon.</p>
 										</td>
 									</tr>
 								</table>
