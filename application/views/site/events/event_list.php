@@ -2,10 +2,10 @@
 	<div class="row">
 		<?php $month = '';
 		foreach($events as $key => $eloop){ ?>
-			<?php 
-			$when = date('F', strtotime($eloop['when']));
-			if($month != $when){ 
-			$month = $when;
+			<?php
+			$when = ($eloop['when_set'] == 'TBA') ? 'TBA' : date('F', strtotime($eloop['when_set']));
+			if($month != $when){
+				$month = $when;
 			?>
 				<div class="col-12"><span class="au-ptitle"><?php echo $month;?></span></div>
 			<?php } ?>
