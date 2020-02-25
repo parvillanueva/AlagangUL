@@ -995,8 +995,10 @@ die(); */
 			var is_joined = $(this).attr('attr-isjoined');
 
 			if(($('.is_agree_waiver').is(':checked') && $('.is_agree_checkbox').is(':checked')) || (is_submit==0 && is_joined==1) ){
+				BM.loading(true);
 				var url = "<?= base_url("events/volunteer");?>?program_id="+program_id+"&event_id="+event_id+"&event_task_id="+event_task_id+"&is_submit="+is_submit;
 		    	$.get(url, function(data) {
+		    		BM.loading(false);
 		    		$('#volunteermodal').modal('hide');
 		    		var vol_id = $('.volunteer').attr('attr-id');
 		    		$('tr.forvolunteer').removeClass('volunteer'); 
