@@ -260,7 +260,7 @@ class Events extends GS_Controller {
 			//$type_where = $result_where['type'];
 		}
 		
-		$event_list_without_tba = $this->Gmodel->get_query('tbl_program_events',"status = 1 ".$filter_where." ".$task_where." ".$type_where." AND tba is NULL ORDER BY month(`when`)");
+		$event_list_without_tba = $this->Gmodel->get_query('tbl_program_events',"status = 1 ".$filter_where." ".$task_where." ".$type_where." AND tba is NULL ORDER BY month(`when`), (`when`)");
 		$event_list_with_tba = $this->Gmodel->get_query('tbl_program_events',"status = 1 ".$filter_where." ".$task_where." ".$type_where." AND tba ='1'");
 		$event_list = array_merge($event_list_without_tba, $event_list_with_tba);
 		
