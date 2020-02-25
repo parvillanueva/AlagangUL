@@ -451,12 +451,12 @@ die(); */
 					<div class="form-row au-terms">
 						<div class="col">
 		      				<label class="form-check-label">
-		        				<input class="form-check-input is_agree_checkbox" type="checkbox" name="terms" required=""> I have read and understood the <a href="#" class="au-lnk event-guidelines" data-toggle="modal" data-target="#eventdetails">Guidelines</a>.
+		        				<input style="pointer-events: none;" class="form-check-input is_agree_checkbox" type="checkbox" name="terms" required=""> I have read and understood the <a href="#" class="au-lnk event-guidelines" data-toggle="modal" data-target="#eventdetails">Guidelines</a>.
 			        			<div class="valid-feedback"></div>
 			        			<div class="invalid-feedback"></div>
 		      				</label>
 		      				<label class="form-check-label">
-								<input class="form-check-input is_agree_waiver" type="checkbox" name="terms" required=""> I agree to the terms of the <a href="#" class="au-lnk event-waiver" data-toggle="modal" data-target="#eventwaiver">Waiver</a>.
+								<input  style="pointer-events: none;" class="form-check-input is_agree_waiver" type="checkbox" name="terms" required=""> I agree to the terms of the <a href="#" class="au-lnk event-waiver" data-toggle="modal" data-target="#eventwaiver">Waiver</a>.
 								<div class="valid-feedback"></div>
 								<div class="invalid-feedback"></div>
 							</label>
@@ -917,6 +917,7 @@ die(); */
 
 		$(document).on('click', '.guidelinebtn', function() {
 			var is_agree = $(this).attr('attr-data');
+			$('#volunteermodal').modal('show');
 			
 			if(is_agree==1){
 				$('.is_agree_checkbox').attr('checked',true);
@@ -924,7 +925,6 @@ die(); */
 			else{
 				$('.is_agree_checkbox').attr('checked',false);
 			}
-			$('#volunteermodal').modal('show');
 		});
 
 		$(document).on('click', '.event-volunteer', function() {
