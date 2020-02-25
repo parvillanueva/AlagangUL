@@ -155,7 +155,7 @@ die(); */
 									@$bar_width = ceil($event_details[0]['joined_volunteers'] / $event_details[0]['required_volunteer']);
 								?>
 								<div class="au-bar" style="width:<?=$bar_width?>%"></div>
-								<span class="au-numbers" style="position: absolute;right: 50%;"><?=($bar_width!=0)? $bar_width.'%' : ''?></span>
+								<!-- <span class="au-numbers" style="position: absolute;right: 50%;"><?=($bar_width!=0)? $bar_width.'%' : ''?></span> -->
 								<span class="au-numbers"><i class="fas fa-walking"></i> <?= intval($event_details[0]['required_volunteer']-$event_details[0]['joined_volunteers'])?> Volunteers Needed</span>
 							</div>
 							<div class="au-inner">
@@ -885,17 +885,25 @@ die(); */
 			var event_task_id = $(this).attr('attr-id');
 			var is_agree = $(this).attr('attr-data');
 			if(is_agree==1){
+
 				if(document.getElementById('signaturecanvas').toDataURL() === emptyImage){
 					$('#signature-pad .au-errormessage').css('display', 'block');
 				}else{
+					BM.loading(true);
 					$('#signature-pad .au-errormessage').css('display', 'none');
 					var dataURL = canvas.toDataURL();
-					var url = "<?= base_url("events/signature");?>?event_task_id="+event_task_id+'&signature='+dataURL;
-			    	$.get(url, function(data) {
-			    		$('.is_agree_waiver').attr('checked',true);
+
+					var url = "<?php echo base_url('site/events/signature') ?>";
+					var data = {
+						event_task_id : event_task_id,
+						signature : dataURL
+					};
+					aJax.post(url, data, function(result){
+						BM.loading(false);
+						$('.is_agree_waiver').attr('checked',true);
 						$('#eventwaiver').modal('toggle');
 						$('#volunteermodal').modal('show');
-			    	});
+					});
 					
 				}
 				
