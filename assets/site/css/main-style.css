@@ -3110,3 +3110,33 @@ ul.lSPager.lSGallery{
           min-height: 520px;
      }
 }
+
+
+span.select2.select2-container.select2-container--default {
+    width: 100% !important;
+    text-align: left;
+     border-radius: 0;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    font-size: 12px;
+    padding: 0 1em;
+    height: 42px;   
+}
+.select2-container--default .select2-selection--single{
+     border: 0px !important;
+     height: 40px !important;
+     line-height: 42px !important;
+}
+.select2-container .select2-selection--single .select2-selection__rendered{
+     padding-left: 0px !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+     height: 42px !important;
+     line-height: 42px !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+     height: 38px !important;
+}
+
+.au-opptable.au-manageprogramtable table td:last-child {
+    white-space: nowrap !important;
+}

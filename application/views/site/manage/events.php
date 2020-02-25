@@ -7,6 +7,10 @@
 	.au-btn .fa-times{
 		color:white;
 	}
+
+	.daterangepicker {
+		width: 190px !important;
+	}
 </style>
 <div class="container-fluid au-heading">
 	<div class="au-container au-padding">
@@ -84,7 +88,7 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
-	        		<div class="form-row">
+	        		<div class="form-row text-left">
 						<div class="col">											
 							<div class="form-check">
 							 	<label class="form-check-label">
@@ -200,7 +204,7 @@
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>
 					</div>
-	        		<div class="form-row">
+	        		<div class="form-row  text-left">
 						<div class="col">											
 							<div class="form-check">
 							 	<label class="form-check-label">
@@ -296,6 +300,8 @@
 				return false;
 			}
 		});
+
+		$('select').select2();
 	});
                 
 	$(document).on('click', '#btn_Closebtn', function(){
@@ -335,14 +341,57 @@
 		$("#EditEventpoints").val(points);
 		$("#EditEventoverview").val(overview);
 		$("#whenpickeredit").val(moment(when).format("LL"));
-		$("#starttimeedit").val(timestart);
-		$("#endtimeedit").val(timeend);
+		// $("#starttimeedit").val(timestart);
+		// $("#endtimeedit").val(timeend);
 		$("#venueedit").val(venue);
 		$("#cityedit option[value='"+city+"']").attr('selected',true);
 		$("#contact_person_edit").val(con_person);
 		$("#contact_number_edit").val(con_number);
 		$("#previewImageEventEdit").attr("src",image);
 		$("#editEventForm").attr("action",url);
+
+		$(".select2-selection__rendered").html(city);
+		$(".select2-selection__rendered").attr("title",city);
+
+
+		// $('#starttimeedit').daterangepicker('setDate', timestart);
+		// $('#endtimeedit').daterangepicker('setDate', timeend);
+
+		$('#starttimeedit').daterangepicker(
+		{
+			timePicker: true,
+			"startDate": timestart,
+			autoUpdateInput : false,
+            locale: {
+                format: 'h:mm A'
+            }
+        }
+	    ).on('show.daterangepicker', function (ev, picker) {
+	        picker.container.find(".calendar-table").hide();
+	        picker.container.find(".right").hide();
+	        picker.container.find(".drp-selected").hide();
+	    }).on('apply.daterangepicker', function (e, picker) {
+		    var selectedTime = picker.startDate.format('h:mm A');
+		    $('#starttimeedit').val(selectedTime);
+		}).val(tConvert(timestart));
+
+		$('#endtimeedit').daterangepicker(
+			{
+				timePicker: true,
+				"startDate": timeend,
+				autoUpdateInput : false,
+	            locale: {
+	                format: 'h:mm A'
+	            }
+	        }
+	    ).on('show.daterangepicker', function (ev, picker) {
+	        picker.container.find(".calendar-table").hide();
+	        picker.container.find(".right").hide();
+	        picker.container.find(".drp-selected").hide();
+	    }).on('apply.daterangepicker', function (e, picker) {
+		    var selectedTime = picker.startDate.format('h:mm A');
+		    $('#endtimeedit').val(selectedTime);
+		}).val(tConvert(timeend));
 
 
 		if(tba != "null"){
@@ -538,14 +587,14 @@
 		});
 	}
 
-	function tConvert (time, ignoreZero = true) {
+	function tConvert (time, ignoreZero = false) {
 		if(time){
 			// Check correct time format and split into components
 				var [hours, minutes] = time.split(':')
-		      	var modifier = +hours < 12 ? 'am' : 'pm'
+		      	var modifier = +hours < 12 ? 'AM' : 'PM'
 		      	hours = +hours % 12 || 12
 		      	minutes = ignoreZero && +minutes === 0 ? '' : `:${minutes}`
-		      	return hours + minutes + modifier
+		      	return hours + minutes + " " + modifier
 		} else {
 			return "";
 		}
@@ -597,35 +646,12 @@
 		weekStart : 0
 	});
 
-	$('#starttime').materialDatePicker({
-		date : false,
-		switchOnClick: true,
-		format: 'hh:mm A'
-	});
-
-	$('#endtime').materialDatePicker({
-		date : false,
-		switchOnClick: true,
-		format: 'hh:mm A'
-	});
-
 	$('#whenpickeredit').materialDatePicker({
 		time : false,
 		minDate : new Date(),
 		weekStart : 0
 	});
 
-	$('#starttimeedit').materialDatePicker({
-		date : false,
-		switchOnClick: true,
-		format: 'hh:mm A'
-	});
-
-	$('#endtimeedit').materialDatePicker({
-		date : false,
-		switchOnClick: true,
-		format: 'hh:mm A'
-	});
 
 
 	$("#dateTBA").change(function() {
@@ -666,6 +692,43 @@
 
 	    }
 	});
+
+	$('#starttime').daterangepicker(
+		{
+			timePicker: true,
+			autoUpdateInput : false,
+            locale: {
+                format: 'h:mm A'
+            }
+        }
+    ).on('show.daterangepicker', function (ev, picker) {
+        picker.container.find(".calendar-table").hide();
+        picker.container.find(".right").hide();
+        picker.container.find(".drp-selected").hide();
+    }).on('apply.daterangepicker', function (e, picker) {
+	    var selectedTime = picker.startDate.format('h:mm A');
+	    $('#starttime').val(selectedTime);
+	});
+
+	$('#endtime').daterangepicker(
+		{
+			timePicker: true,
+			autoUpdateInput : false,
+            locale: {
+                format: 'h:mm A'
+            }
+        }
+    ).on('show.daterangepicker', function (ev, picker) {
+        picker.container.find(".calendar-table").hide();
+        picker.container.find(".right").hide();
+        picker.container.find(".drp-selected").hide();
+    }).on('apply.daterangepicker', function (e, picker) {
+	    var selectedTime = picker.startDate.format('h:mm A');
+	    $('#endtime').val(selectedTime);
+	});
+
+
+	
     
 
 </script>

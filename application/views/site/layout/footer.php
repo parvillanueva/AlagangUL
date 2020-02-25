@@ -90,7 +90,6 @@
         </div>
     </div>
 </div>
-<script src="<?=base_url()?>assets/site/js/jquery-3.4.1.min.js" type="text/javascript"></script>
 <script src="<?=base_url()?>assets/site/js/popper.min.js" text="type/javascript"></script>
 <script src="<?=base_url()?>assets/site/js/bootstrap.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?=base_url();?>assets/site/js/ekko-lightbox.js"></script>
