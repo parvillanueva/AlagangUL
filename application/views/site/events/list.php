@@ -39,26 +39,25 @@
 								<input type="text" class="form-control" id="date_input" readonly="true" placeholder="Type a keyword" name="date">
 			  				</div>
 						</div>
-						<div class="col-lg col-sm-6">
+						<!--<div class="col-lg col-sm-6">
 							<span class="au-stitle">Time Schedule</span>
 							<div class="form-row">
 								<input type="text" class="form-control" id="time_input" readonly="true" placeholder="Type a keyword" name="time">
 			  				</div>
-						</div>
+						</div>-->
 						<div class="col-lg col-sm-6">
 							<span class="au-stitle">Location</span>
 							<div class="form-row">
 								<select class="form-control custom-select" id="location">
 									<option value="" selected>All Types</option>
 									<?php foreach($event_program as $eprogram){ 
-										if($eprogram->venue != ''){
-										$city = '';
+										//if($eprogram->venue != ''){
+										//$city = '';
 										if($eprogram->city != ''){
-											$city = ' '.$eprogram->city;
-										}
-										?>
-										<option value="<?php echo $eprogram->venue.$city;?>"><?php echo $eprogram->venue.$city;?></option>
-									<?php } }?>
+											$city = $eprogram->city; ?>
+											<option value="<?php echo $city;?>"><?php echo $city;?></option>
+										<?php } ?>
+									<?php } //}?>
 				  				</select>
 			  				</div>
 						</div>
@@ -120,14 +119,14 @@
 			$(this).val(date_set);
 		});
 		
-		$('#time_input').daterangepicker({
+		/* $('#time_input').daterangepicker({
 			timePicker: true,
             locale: {
                 format: 'h:mm A'
             }
         }).on('show.daterangepicker', function (ev, picker) {
             picker.container.find(".calendar-table").hide();
-        });
+        }); */
 	});
 	
 	$(document).on('click', '#btnSubmit', function(){
@@ -145,7 +144,7 @@
 			task : task,
 			date : date,
 			badge_id : badge_id,
-			time : time
+			//time : time
 		};
 		aJax.post(url, data, function(result){
 			setTimeout(function(){ 
