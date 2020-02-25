@@ -2239,6 +2239,7 @@ button.btn:hover {
 }
 
 .au-guidelines {
+     padding: 10px !important;
      font-size: 12px;
      border-top: 1px solid rgba(0, 0, 0, .1);
      border-bottom: 1px solid rgba(0, 0, 0, .1);
@@ -2264,7 +2265,7 @@ button.btn:hover {
      background-color: rgba(255, 0, 0, 0.1);
      padding: 10px;
      margin: 10px auto -10px auto;
-     display: block;
+     display: none;
 }
 
 .au-errormessage i {
@@ -2466,6 +2467,11 @@ ul.lSPager.lSGallery{
 /*Extra small devices (portrait phones, less than 576px)*/
 
 @media (max-width: 575px) {
+     .au-phthumbnailxs{
+          position: absolute;
+          top: 19px;
+          left: calc(50% + 60px);
+     }
      .au-logo {
           width: 170px;
      }
@@ -2705,6 +2711,11 @@ ul.lSPager.lSGallery{
 /*Small devices (landscape phones, 576px and up)*/
 
 @media (min-width: 576px) and (max-width: 767px) {
+     .au-phthumbnailxs{
+          position: absolute;
+          top: 19px;
+          left: calc(50% + 60px);
+     }
      .au-navbar .navbar-nav .nav-link {
           margin: 0 0;
           padding: 10px 0;
@@ -3111,7 +3122,6 @@ ul.lSPager.lSGallery{
      }
 }
 
-
 span.select2.select2-container.select2-container--default {
     width: 100% !important;
     text-align: left;
@@ -3136,7 +3146,6 @@ span.select2.select2-container.select2-container--default {
 .select2-container--default .select2-selection--single .select2-selection__arrow{
      height: 38px !important;
 }
-
 .au-opptable.au-manageprogramtable table td:last-child {
     white-space: nowrap !important;
 }

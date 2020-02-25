@@ -168,7 +168,7 @@ die(); */
 								if($event_details[0]['contact_person']!=''){
 							?>
 							<div class="au-inner">
-							<span class="au-pques">Contact Person:</span><span class="au-pans"><?=$event_details[0]['contact_person']?>(<?=$event_details[0]['contact_number']?>)</span>
+							<span class="au-pques">Contact Person:</span><span class="au-pans"><?=$event_details[0]['contact_person']?> (<?=$event_details[0]['contact_number']?>)</span>
 							</div>
 							<?php } ?>
 						</div>
@@ -443,7 +443,7 @@ die(); */
 				<div class="au-yourvolunteer">
 					
 				</div>
-				<span class="au-p6">in <?=$program_details[0]['name']?>: <?= $event_details[0]['title'];?> on <?= ($event_details[0]['tba']!='1') ? date("F d, Y h:i a", strtotime($event_details[0]['when'])) : $event_details[0]['when'] ?>.
+				<span class="au-p6">in <?=$program_details[0]['name']?>: <?= $event_details[0]['title'];?><?= ($event_details[0]['tba']!='1') ? ' on '.$event_details[0]['when'] : '' ?>.
 				<br><br>Task: <span class="volunteer-task"></span></span>
 				<hr>	
 				<form>
@@ -495,9 +495,31 @@ die(); */
 				<span class="au-h4"><?=$waiver[0]->title?></span>
 				<div class="au-inner au-cscroll au-guidelines text-left">
 					<?=$waiver[0]->description?>
-					<div>
-						<iframe id="signature" src="<?=base_url()?>esig/my_sign.php" style="width:100%;height: 500px;border: none;resize: none;"></iframe>
-					</div>
+					<div id="signature-pad">
+							<span class="au-p6 au-errormessage text-center"><i class="fas fa-exclamation-triangle"></i> Please provide your signature first.</span>	
+							<div class="col-12 signature-container">
+								<section class="signature-component">
+									<div id="signature-pad" class="m-signature-pad">
+										<div class="m-signature-pad--body">
+											<canvas id="signaturecanvas"></canvas>
+										</div>
+										<div class="m-signature-pad--footer">
+											<div class="description">Sign above</div>
+										</div>
+									</div>
+								</section>
+							</div>
+							<div class="signature-pad--actions">
+								<div>
+									<button type="button" class="button clear" data-action="clear">Reset</button>
+									<button style="display: none;" type="button" class="button" data-action=debug-points>Debug</button>
+								</div>
+								<div style="display: none;">
+									<button type="button" class="button save" data-action="save-png">Save as PNG</button>
+									<button type="button" class="button save" data-action="save-svg">Save as SVG</button>
+								</div>
+							</div>
+						</div>
 				</div>
 				<div class="au-modalbtn text-center">
 					<button type="button" class="au-btn au-btnyellow au-guidlinebtn waiverbtn" data-dismiss="modal" attr-data="0">I disagree</button>
@@ -681,7 +703,9 @@ die(); */
     </div>
 </div>
 </div>
-<script type="text/javascript" src="<?= base_url();?>/assets/site/js/bootstrap-show-modal.js"></script>
+<script type="text/javascript" src="<?= base_url();?>assets/site/js/bootstrap-show-modal.js"></script>
+<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/site/esignature/signaturepad.css">
+<script type="text/javascript" src="<?=base_url()?>assets/site/esignature/signaturepad.js"></script>
 
 <script type="text/javascript">
 	//$('input[name="date"]').daterangepicker();
@@ -697,6 +721,8 @@ die(); */
 	var datatoday = new Date();
 	var datatodays = datatoday.setDate(new Date(datatoday).getDate() + 1);
 	var count_checked = 0;
+	var canvas;
+	var emptyImage;
 
     function imgErrorEvent(image) {
         image.onerror = "";
@@ -834,6 +860,12 @@ die(); */
 		//get_gallery();
 		//get_testimonial();
 
+		$('#eventwaiver').on('shown.bs.modal', function (e) {
+			resizeCanvas();				
+			canvas = document.getElementById('signaturecanvas');
+			emptyImage = canvas.toDataURL();
+		})
+
 		$(document).on('click', '.event-guidelines', function() {
 			$('#volunteermodal').modal('hide');
 		});	
@@ -849,23 +881,34 @@ die(); */
 		});
 
 		$(document).on('click', '.waiverbtn', function() {
-			//$('#signature')[0].contentWindow.save_sign();
-
-			$('#signature').contents().find('#btnSaveSign').click();
-
-			exit(0);
+			var event_task_id = $(this).attr('attr-id');
 			var is_agree = $(this).attr('attr-data');
 			if(is_agree==1){
-				$('.is_agree_waiver').attr('checked',true);
+				if(document.getElementById('signaturecanvas').toDataURL() === emptyImage){
+					$('#signature-pad .au-errormessage').css('display', 'block');
+				}else{
+					$('#signature-pad .au-errormessage').css('display', 'none');
+					var dataURL = canvas.toDataURL();
+					var url = "<?= base_url("events/signature");?>?event_task_id="+event_task_id+'&signature='+dataURL;
+			    	$.get(url, function(data) {
+			    		$('.is_agree_waiver').attr('checked',true);
+						$('#eventwaiver').modal('toggle');
+						$('#volunteermodal').modal('show');
+			    	});
+					
+				}
+				
 			}
 			else{
 				$('.is_agree_waiver').attr('checked',false);
+				$('#volunteermodal').modal('show');
 			}
-			$('#volunteermodal').modal('show');
+			
 		});
 
 		$(document).on('click', '.guidelinebtn', function() {
 			var is_agree = $(this).attr('attr-data');
+			
 			if(is_agree==1){
 				$('.is_agree_checkbox').attr('checked',true);
 			}
@@ -892,6 +935,7 @@ die(); */
 			}
 
 			$('.volunteer-as').attr('attr-id',event_task_id).attr('attr-isjoined',is_joined);
+			$('.waiverbtn').attr('attr-id',event_task_id);
 			$('.au-yourvolunteer').html(volunteer_type);
 			$('.volunteer-task').html(task);
 			$('#volunteermodal').modal('show');

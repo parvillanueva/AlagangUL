@@ -47,7 +47,7 @@
 								<div class="au-inner">
 								<span class="au-pans">
 								    <span class="au-pques">Contact Person:</span>
-								    <?=$eloop['contact_person']?>(<?=$eloop['contact_number']?>)
+								    <?=$eloop['contact_person']?> (<?=$eloop['contact_number']?>)
 								</span>
 								</div>
 								<?php } ?>
@@ -81,7 +81,7 @@
 									@$bar_width = ceil($eloop['joined_volunteers'] / $eloop['required_volunteer']);
 								?>
 								<div class="au-bar" style="width:<?=$bar_width?>%"></div>
-								<span class="au-numbers" style="position: absolute;right: 50%;"><?=$bar_width?>%</span>
+								<span class="au-numbers" style="position: absolute;right: 50%;"><?=($bar_width!=0) ? $bar_width.'%' : '' ?></span>
 								<span class="au-numbers"><i class="fas fa-walking"></i> <?= intval($eloop['required_volunteer']-$eloop['joined_volunteers'])?> Volunteers Needed</span>
 				
 							</div>
