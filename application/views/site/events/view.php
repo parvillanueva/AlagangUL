@@ -155,7 +155,7 @@ die(); */
 									@$bar_width = ceil($event_details[0]['joined_volunteers'] / $event_details[0]['required_volunteer']);
 								?>
 								<div class="au-bar" style="width:<?=$bar_width?>%"></div>
-								<span class="au-numbers" style="position: absolute;right: 50%;"><?=$bar_width?>%</span>
+								<span class="au-numbers" style="position: absolute;right: 50%;"><?=($bar_width!=0)? $bar_width.'%' : ''?></span>
 								<span class="au-numbers"><i class="fas fa-walking"></i> <?= intval($event_details[0]['required_volunteer']-$event_details[0]['joined_volunteers'])?> Volunteers Needed</span>
 							</div>
 							<div class="au-inner">
@@ -430,7 +430,6 @@ die(); */
     </div>
 </div>
 </div>
-
 <div class="modal fade text-center" id="volunteermodal">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
@@ -439,7 +438,7 @@ die(); */
 				<div class="au-yourvolunteer">
 					
 				</div>
-				<span class="au-p6">in <?=$program_details[0]['name']?>: <?= $event_details[0]['title'];?> on <?= date("F d, Y h:i a", strtotime($event_details[0]['when']))?>.
+				<span class="au-p6">in <?=$program_details[0]['name']?>: <?= $event_details[0]['title'];?> on <?= ($event_details[0]['tba']!='1') ? date("F d, Y h:i a", strtotime($event_details[0]['when'])) : $event_details[0]['when'] ?>.
 				<br><br>Task: <span class="volunteer-task"></span></span>
 				<hr>	
 				<form>
@@ -491,10 +490,13 @@ die(); */
 				<span class="au-h4"><?=$waiver[0]->title?></span>
 				<div class="au-inner au-cscroll au-guidelines text-left">
 					<?=$waiver[0]->description?>
+					<div>
+						<iframe id="signature" src="<?=base_url()?>esig/my_sign.php" style="width:100%;height: 500px;border: none;resize: none;"></iframe>
+					</div>
 				</div>
 				<div class="au-modalbtn text-center">
 					<button type="button" class="au-btn au-btnyellow au-guidlinebtn waiverbtn" data-dismiss="modal" attr-data="0">I disagree</button>
-					<button type="button" class="au-btn au-guidlinebtn waiverbtn" data-dismiss="modal" attr-data="1">I agree</button>
+					<button type="button" class="au-btn au-guidlinebtn waiverbtn" attr-data="1">I agree</button>
 				</div>
 			</div>
 		</div>
@@ -842,6 +844,11 @@ die(); */
 		});
 
 		$(document).on('click', '.waiverbtn', function() {
+			//$('#signature')[0].contentWindow.save_sign();
+
+			$('#signature').contents().find('#btnSaveSign').click();
+
+			exit(0);
 			var is_agree = $(this).attr('attr-data');
 			if(is_agree==1){
 				$('.is_agree_waiver').attr('checked',true);
