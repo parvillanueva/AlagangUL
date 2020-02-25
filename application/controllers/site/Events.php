@@ -39,16 +39,7 @@ class Events extends GS_Controller {
 		$this->Gmodel->update_data("tbl_program_events",$data,"id",$event_id);
 		redirect(base_url("programs") . "/" . $program_id . "/" . $program_alias. "/event/" . $event_id . "/" . $event_alias);
 	}
-	function signature() {
-		$user_id = $this->session->userdata('user_sess_id');
-		$data_array = array(
-			'event_task_id' => $_POST['event_task_id'],
-			'user_id'		=> $user_id,
-			'signature'		=> $_POST['signature'],
-			'create_date'	=> date('Y-m-d H:i:s')
-			);
-		$this->Gmodel->save_data('tbl_program_event_task_signatures', $data_array);
-	}
+
 	function volunteer() {
 		$user_id = $this->session->userdata('user_sess_id');
 		$data_array = array(
@@ -226,7 +217,8 @@ class Events extends GS_Controller {
 		}
 			$where_search = '';
 		if($arr['search_box'] != ''){
-			$where_search = 'AND (venue like "%'.$arr['search_box'].'%" OR title like "%'.$arr['search_box'].'%" OR url_alias like "%'.$arr['search_box'].'%" OR description like "%'.$arr['search_box'].'%" OR where like "%'.$arr['search_box'].'%")';
+			$program = $this->program_filter($arr['search_box']);
+			$where_search = 'AND (venue like "%'.$arr['search_box'].'%" OR title like "%'.$arr['search_box'].'%" OR url_alias like "%'.$arr['search_box'].'%" OR description like "%'.$arr['search_box'].'%" OR where like "%'.$arr['search_box'].'%" '.$program.')';
 		}
 			$where_task = '';
 		if($arr['task'] != ''){
@@ -340,6 +332,23 @@ class Events extends GS_Controller {
 		$data = "SELECT event_task_id FROM tbl_program_event_task_badge where badge_id = '".$type_id."'";
 		$result = $this->db->query($data)->result();
 		return $result;
+	}
+	
+	public function program_filter($data){
+			$where_program = '';
+		if($data != ''){
+			$data = "SELECT id FROM tbl_programs where name like '%".$data."%'";
+			$result = $this->db->query($data)->result();
+			if(!empty($result)){
+					$prog_id = '';
+				foreach($result as $loop){
+					$prog_id .= "program_id like '%".$loop->id."%' OR ";
+				}
+				$string = rtrim($prog_id, 'OR ');
+				$where_program = 'OR '.$string;
+			}
+		}
+		return $where_program;
 	}
 	
 	public function validate_testimonial($event_id, $user_id){
@@ -1107,7 +1116,7 @@ class Events extends GS_Controller {
 		$from = $result[0]->email_address;
 		$fr_name = 'Guest';
 		$to = $result[0]->email_address;
-		$subject = 'Alagang Unilab Volunteer: ' . $program_event['program_event'][0]->title;
+		$subject = 'Event Success Reply';
 		return $this->send_sgrid($from, $fr_name, $to, $subject, $content);
 	}
 	
@@ -1185,15 +1194,10 @@ class Events extends GS_Controller {
 															</td>
 														</tr>";
 											}	
-										$html .= "</table>";
-
-										if($programSet['program_event'][0]->tba == 1){
-											$html .= "<p style='font-size:17px; color:#4b4d4d;line-height: 25px;padding-top:15px;'>in ".$programSet['program'][0]->name.": ".$programSet['program_event'][0]->title.".</p>";
-										} else {
-											$html .= "<p style='font-size:17px; color:#4b4d4d;line-height: 25px;padding-top:15px;'>in ".$programSet['program'][0]->name.": ".$programSet['program_event'][0]->title." on ".date('F d, Y', strtotime($programSet['program_event'][0]->when)).".</p>";
-										}
-									$html .= "<p style='font-size:17px; color:#4b4d4d;padding-top:10px;'>Task: ".$task[0]->task."</p>
-											<p style='font-size:17px; color:#4b4d4d;padding-top:10px;'>Kindly stand by for more details. We will get in touch with you soon.</p>
+										$html .= "</table>
+											<p style='font-size:17px; color:#4b4d4d;line-height: 25px;padding-top:15px;'>in ".$programSet['program'][0]->name.": ".$programSet['program_event'][0]->title." on ".date('F d, Y', strtotime($programSet['program_event'][0]->when)).".</p>
+											<p style='font-size:17px; color:#4b4d4d;padding-top:10px;'>Task: ".$task[0]->task."</p>
+											<p style='font-size:17px; color:#4b4d4d;padding-top:10px;'>Kindly stand by for the Program Owners to email you on next steps.</p>
 										</td>
 									</tr>
 								</table>
@@ -1218,30 +1222,6 @@ class Events extends GS_Controller {
 				</body>
 				</html>";
 		return $html;
-	}
-
-
-	public function check_time_limit(){
-		header('Content-Type: application/json');
-		$user_id = $this->session->userdata('user_sess_id');
-
-		$query = "SELECT count(tbl_program_event_task_volunteers.id) as Count_time
-			FROM
-			tbl_program_event_task_volunteers
-			LEFT JOIN tbl_program_event_task_badge ON tbl_program_event_task_volunteers.event_task_id = tbl_program_event_task_badge.event_task_id
-			LEFT JOIN tbl_program_events ON tbl_program_event_task_volunteers.event_id = tbl_program_events.id
-			WHERE tbl_program_event_task_volunteers.user_id = " . $user_id . "
-			AND badge_id = 1
-			AND tbl_program_events.when >= CURDATE()
-		";
-		$result = $this->db->query($query)->result();
-
-
-		if($result[0]->Count_time >= 2){
-			echo json_encode(array("valid"=>false,"message"=>"Time-based sign-ups are limited to 2 slots per employee."));
-		} else {
-			echo json_encode(array("valid"=>true,"message"=>""));
-		}
 	}
 
 }
