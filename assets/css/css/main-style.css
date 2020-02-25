@@ -26,7 +26,7 @@ body.preloader-site {
      transform: translate(-50%, -50%);
      width: 120px;
 }
-a
+
 .loader {
      border: 10px solid rgba(255, 255, 255, 0.5);
      border-top: 10px solid #1AA3F9;
@@ -588,7 +588,6 @@ a.au-lnk:hover>* {
      font-size: 12px;
      font-weight: 400;
      color: #222;
-     opacity: 0.5;
      margin-top: 5px;
 }
 
@@ -1584,7 +1583,7 @@ a.au-lnk:hover>* {
 }
 
 .au-opptable table tr {
-     font-size: 12px;
+     font-size: 14px;
 }
 
 .fa-times {
@@ -1644,7 +1643,7 @@ a.au-lnk:hover>* {
 }
 
 .au-actions::before {
-     font-size: 12px;
+     font-size: 14px;
 }
 
 .au-opptable .au-actions {
@@ -2137,6 +2136,7 @@ a.au-lnk:hover>* {
 
 .au-eventdetails .au-action {
      margin-right: 0px;
+     height: 30px;
 }
 
 .file-label {
@@ -2466,9 +2466,18 @@ ul.lSPager.lSGallery{
      font-size: 10px;
      line-height: 28px;
 }
+.au-reset{
+     margin-left: 15px !important;
+}
+#filter .au-max-width .row > .col-lg{
+     padding-right: 0px;
+}
 /*Extra small devices (portrait phones, less than 576px)*/
 
 @media (max-width: 575px) {
+     #filter .au-max-width .row > .col-lg{
+          padding-right: 15px;
+     }
      .au-phthumbnailxs{
           position: absolute;
           top: 19px;
@@ -2552,6 +2561,17 @@ ul.lSPager.lSGallery{
      }
      .au-form .au-btnblue {
           width: 100%;
+     }
+     .au-form .au-searchbtn .au-btnblue{
+          width: calc(100% - 87px);
+     }
+     .au-form .au-searchbtn .au-reset{
+          width: unset;
+          margin-left: 15px !important;
+     }
+     .au-form .au-searchbtn .au-reset{
+          width: auto !important;
+          float: right;
      }
      .au-eventthumbnail {
           height: 200px;
@@ -2713,6 +2733,9 @@ ul.lSPager.lSGallery{
 /*Small devices (landscape phones, 576px and up)*/
 
 @media (min-width: 576px) and (max-width: 767px) {
+     #filter .au-max-width .row > .col-lg{
+          padding-right: 15px;
+     }
      .au-phthumbnailxs{
           position: absolute;
           top: 19px;
@@ -2785,6 +2808,13 @@ ul.lSPager.lSGallery{
      }
      .au-form .au-btnblue {
           width: 100%;
+     }
+     .au-form .au-searchbtn .au-btnblue{
+          width: calc(100% - 87px);
+     }
+     .au-form .au-searchbtn .au-reset{
+          width: unset;
+          margin-left: 15px !important;
      }
      .au-phthumbnail {
           min-width: 100px;
@@ -2931,6 +2961,9 @@ ul.lSPager.lSGallery{
 /*Medium devices (tablets, 768px and up)*/
 
 @media (min-width: 768px) and (max-width: 991px) {
+     #filter .au-max-width .row > .col-lg{
+          padding-right: 15px;
+     }
      .au-navbar .navbar-nav .nav-link {
           margin: 0 0;
      }
@@ -2984,6 +3017,13 @@ ul.lSPager.lSGallery{
      }
      .au-form .au-btnblue {
           width: 100%;
+     }
+     .au-form .au-searchbtn .au-btnblue{
+          width: calc(100% - 87px);
+     }
+     .au-form .au-searchbtn .au-reset{
+          width: unset;
+          margin-left: 15px !important;
      }
      .au-plink {
           height: 250px;
