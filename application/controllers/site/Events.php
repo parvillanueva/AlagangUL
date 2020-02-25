@@ -39,7 +39,16 @@ class Events extends GS_Controller {
 		$this->Gmodel->update_data("tbl_program_events",$data,"id",$event_id);
 		redirect(base_url("programs") . "/" . $program_id . "/" . $program_alias. "/event/" . $event_id . "/" . $event_alias);
 	}
-
+	function signature() {
+		$user_id = $this->session->userdata('user_sess_id');
+		$data_array = array(
+			'event_task_id' => $_GET['event_task_id'],
+			'user_id'		=> $user_id,
+			'signature'		=> $_GET['signature'],
+			'create_date'	=> date('Y-m-d H:i:s')
+			);
+		$this->Gmodel->save_data('tbl_program_event_task_signatures', $data_array);
+	}
 	function volunteer() {
 		$user_id = $this->session->userdata('user_sess_id');
 		$data_array = array(

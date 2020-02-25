@@ -21,6 +21,7 @@
 		$route["events/upload"] = "site/events/upload";
 		$route["events/get_gallery"] = "site/events/get_gallery";
 		$route["events/volunteer"] = "site/events/volunteer";
+		$route["events/signature"] = "site/events/signature";
 
 		$route["events"] = "site/events";
 		$route["get-rewards"] = "site/get_rewards";

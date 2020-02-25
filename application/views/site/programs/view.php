@@ -167,7 +167,7 @@
 											<div class="au-inner">
 												<span class="au-pans">
 												    <span class="au-pques">Contact Person:</span>
-												    <?=$value['contact_person']?>(<?=$value['contact_number']?>)
+												    <?=$value['contact_person']?> (<?=$value['contact_number']?>)
 												</span>
 											</div>
 											<?php } ?>
@@ -206,7 +206,7 @@
 												@$bar_width = ceil($value['joined_volunteers'] / $value['required_volunteer']);
 											?>
 											<div class="au-bar" style="width:<?=$bar_width?>%"></div>
-											<span class="au-numbers" style="position: absolute;right: 50%;"><?=$bar_width?>%</span>
+											<span class="au-numbers" style="position: absolute;right: 50%;"><?=($bar_width!=0) ? $bar_width.'%' : ''?></span>
 											<span class="au-numbers"><i class="fas fa-walking"></i> <?= intval($value['required_volunteer']-$value['joined_volunteers'])?> Volunteers Needed</span>
 										</div>
 									</div>
