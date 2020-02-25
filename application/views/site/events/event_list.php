@@ -50,6 +50,12 @@
 								    <?=$eloop['contact_person']?> (<?=$eloop['contact_number']?>)
 								</span>
 								</div>
+								<?php } else{ ?>
+									<div class="au-inner">
+									<span class="au-pans">
+										<span class="au-pques">&nbsp;</span>
+									</span>
+									</div>
 								<?php } ?>
 							</div>
 							<!-- <div class="au-volunteers">
@@ -71,7 +77,9 @@
 										<?php } else { ?>
 
 										<a href="<?=$link?>" class="au-volunteered au-btnyellow float-right">Volunteered</a>
-									<?php } }  ?>
+									<?php } } else{ ?>
+										<a class=" float-right">&nbsp;</a>
+									<?php }  ?>
 									</div>
 								</div>
 							</div>
