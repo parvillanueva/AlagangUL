@@ -919,27 +919,45 @@ die(); */
 		});
 
 		$(document).on('click', '.event-volunteer', function() {
-			
+
+
+
+			//check if time is limit
+			var is_joined = $(this).attr('attr-isjoined');
 			var task = $(this).closest('tr').children(':nth-child(2)').html();
 			var event_task_id = $(this).attr('attr-id');
-			var is_joined = $(this).attr('attr-isjoined');
 			var volunteer_type = $('.hid-id-'+event_task_id).html();
 
-			if(is_joined==1){
+			if(is_joined != 1){
+				var url = "<?= base_url("site/events/check_time_limit");?>";
+		    	$.get(url, function(data) {
+		    		if(data.valid === false){
+		    			BM.alert(data.message);
+		    		} else {
+		    			$('.au-terms').show();
+						$('.yes-s').show();
+
+						$('.volunteer-as').attr('attr-id',event_task_id).attr('attr-isjoined',is_joined);
+						$('.waiverbtn').attr('attr-id',event_task_id);
+						$('.au-yourvolunteer').html(volunteer_type);
+						$('.volunteer-task').html(task);
+						$('#volunteermodal').modal('show');
+						$('.au-errormessage').hide();
+		    		}
+		    	});
+			} else {
 				$('.au-terms').hide();
 				$('.yes-s').hide();
-			}
-			else{
-				$('.au-terms').show();
-				$('.yes-s').show();
-			}
 
-			$('.volunteer-as').attr('attr-id',event_task_id).attr('attr-isjoined',is_joined);
-			$('.waiverbtn').attr('attr-id',event_task_id);
-			$('.au-yourvolunteer').html(volunteer_type);
-			$('.volunteer-task').html(task);
-			$('#volunteermodal').modal('show');
-			$('.au-errormessage').hide();
+				$('.volunteer-as').attr('attr-id',event_task_id).attr('attr-isjoined',is_joined);
+				$('.waiverbtn').attr('attr-id',event_task_id);
+				$('.au-yourvolunteer').html(volunteer_type);
+				$('.volunteer-task').html(task);
+				$('#volunteermodal').modal('show');
+				$('.au-errormessage').hide();
+			}
+		
+			
 		});
 
 		$(document).on('click', '.close-btn', function() {

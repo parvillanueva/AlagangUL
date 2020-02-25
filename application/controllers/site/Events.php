@@ -1216,6 +1216,7 @@ class Events extends GS_Controller {
 
 
 	public function check_time_limit(){
+		header('Content-Type: application/json');
 		$user_id = $this->session->userdata('user_sess_id');
 
 		$query = "SELECT count(tbl_program_event_task_volunteers.id) as Count_time

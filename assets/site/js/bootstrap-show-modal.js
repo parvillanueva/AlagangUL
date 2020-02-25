@@ -61,7 +61,6 @@ var BM = {
         $(modal).modal("hide");
     },
     alert : function(message,type){
-        alert(message);
         if(type == 'html'){
             $('#alert_message').html(message);
         }
