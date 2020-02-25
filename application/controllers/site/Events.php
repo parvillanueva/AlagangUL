@@ -1092,7 +1092,7 @@ class Events extends GS_Controller {
 		$from = $result[0]->email_address;
 		$fr_name = 'Guest';
 		$to = $result[0]->email_address;
-		$subject = 'Event Success Reply';
+		$subject = 'Alagang Unilab Volunteer: ' . $program_event['program_event'][0]->title;
 		return $this->send_sgrid($from, $fr_name, $to, $subject, $content);
 	}
 	
@@ -1170,9 +1170,14 @@ class Events extends GS_Controller {
 															</td>
 														</tr>";
 											}	
-										$html .= "</table>
-											<p style='font-size:17px; color:#4b4d4d;line-height: 25px;padding-top:15px;'>in ".$programSet['program'][0]->name.": ".$programSet['program_event'][0]->title." on ".date('F d, Y', strtotime($programSet['program_event'][0]->when)).".</p>
-											<p style='font-size:17px; color:#4b4d4d;padding-top:10px;'>Task: ".$task[0]->task."</p>
+										$html .= "</table>";
+
+										if($programSet['program_event'][0]->tba == 1){
+											$html .= "<p style='font-size:17px; color:#4b4d4d;line-height: 25px;padding-top:15px;'>in ".$programSet['program'][0]->name.": ".$programSet['program_event'][0]->title.".</p>";
+										} else {
+											$html .= "<p style='font-size:17px; color:#4b4d4d;line-height: 25px;padding-top:15px;'>in ".$programSet['program'][0]->name.": ".$programSet['program_event'][0]->title." on ".date('F d, Y', strtotime($programSet['program_event'][0]->when)).".</p>";
+										}
+									$html .= "<p style='font-size:17px; color:#4b4d4d;padding-top:10px;'>Task: ".$task[0]->task."</p>
 											<p style='font-size:17px; color:#4b4d4d;padding-top:10px;'>Kindly stand by for more details. We will get in touch with you soon.</p>
 										</td>
 									</tr>
@@ -1198,6 +1203,12 @@ class Events extends GS_Controller {
 				</body>
 				</html>";
 		return $html;
+	}
+
+
+	public function check_time_limit(){
+		$event_id = $this->input->get("event_id");
+		$user_id = $this->session->userdata('user_sess_id');
 	}
 
 }

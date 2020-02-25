@@ -216,9 +216,14 @@ die(); */
 											<td data-header="Volunteer your:" class="au-actions">
 												<?php
 													$badge_count = count($value['task_badge']);
+													$has_time = false;
 													if($badge_count>0){
 												?>
 												<?php foreach ($value['task_badge'] as $key => $badge) {
+
+													if($badge->id == 1){
+														$has_time = true;
+													}
 												?>
 												<img src="<?=base_url().$badge->image?>" class="au-btnicon">
 												<?php } ?>
@@ -257,7 +262,7 @@ die(); */
 											<td data-header="Joined" class="joined-<?=$value['id']?>"><?= $value['joined_volunteers'];?></td>
 											<?php if($event_details[0]['is_admin'] != 1) { ?>
 											<td>												
-												<button class="event-volunteer au-btnvolunteer au-btn au-btnvolunteer-<?=$badge_count?> <?=$is_disabled_css?>" attr-id="<?=$value['id']?>" attr-isjoined="<?=$value['user_id_joined']?>">
+												<button class="event-volunteer au-btnvolunteer au-btn au-btnvolunteer-<?=$badge_count?> <?=$is_disabled_css?>" attr-id="<?=$value['id']?>" attr-isjoined="<?=$value['user_id_joined']?>" attr-hastime="<?= $has_time;?>">
 													<?=($value['user_id_joined']==1) ? 'Joined' : 'Join' ?>
 												</button>
 											</td>
