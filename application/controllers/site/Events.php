@@ -1116,7 +1116,7 @@ class Events extends GS_Controller {
 		$from = $result[0]->email_address;
 		$fr_name = 'Guest';
 		$to = $result[0]->email_address;
-		$subject = 'Event Success Reply';
+		$subject = 'Alagang Unilab Volunteer: ' . $program_event['program_event'][0]->title;
 		return $this->send_sgrid($from, $fr_name, $to, $subject, $content);
 	}
 	
