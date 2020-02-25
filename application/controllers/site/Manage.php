@@ -22,7 +22,7 @@ class Manage extends GS_Controller {
 		);
 		
 		$data['active_menu'] = "manage";
-		$this->parser->parse("site/layout/template",$data);
+		$this->parser->parse("site/layout/template_manage",$data);
 	}
 	public function events()
 	{
@@ -50,7 +50,7 @@ class Manage extends GS_Controller {
 		);
 		
 		$data['active_menu'] = "events";
-		$this->parser->parse("site/layout/template",$data);
+		$this->parser->parse("site/layout/template_manage",$data);
 	}
 	public function volunteers()
 	{
@@ -75,7 +75,7 @@ class Manage extends GS_Controller {
 		);
 		
 		$data['active_menu'] = "events";
-		$this->parser->parse("site/layout/template",$data);
+		$this->parser->parse("site/layout/template_manage",$data);
 	}
 
 	public function program_list()

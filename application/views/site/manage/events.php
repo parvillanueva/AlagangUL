@@ -301,7 +301,11 @@
 			}
 		});
 
+
+		$('script[src="<?=base_url()?>assets/site/js/jquery-3.4.1.min.js"]').remove();
+
 		$('select').select2();
+
 	});
                 
 	$(document).on('click', '#btn_Closebtn', function(){
@@ -726,6 +730,8 @@
 	    var selectedTime = picker.startDate.format('h:mm A');
 	    $('#endtime').val(selectedTime);
 	});
+
+
 
 
 	
