@@ -187,8 +187,8 @@
 
 
                                                         <div class="row">	
-                                                            <div class="au-volunteers col">
-                                                                <?php if(!empty($event['badges'])) : ?>
+                                                            <div class="au-volunteers col" >
+                                                                <!-- <?php if(!empty($event['badges'])) : ?>
                                                                     <?php foreach($event['badges'] as $badges) : ?>
                                                                         <?php if($badges[0] == 'Treasure') : ?>
                                                                             <img src="<?=base_url()?>assets/img/au-treasure-2.jpg" class="au-imgbadge" title="Treasure">
@@ -201,7 +201,7 @@
                                                                         <?php endif; ?>   
                                                                     <?php endforeach; ?>
                                                                 <?php endif; ?>
-                                                                
+                                                                 -->
 																
 																
 															
