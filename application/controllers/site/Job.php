@@ -49,7 +49,7 @@ class Job extends CI_Controller {
 					"task"					=> $value->task,
 					"required_volunteers"	=> $value->required_volunteers,
 					"joined_volunteers"		=> $value->joined_volunteers,
-					"badges"				=> $badge_result[0]->Badges,
+					"badges"				=> @$badge_result[0]->Badges,
 				);
 			}
 

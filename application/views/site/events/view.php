@@ -216,9 +216,14 @@ die(); */
 											<td data-header="Volunteer your:" class="au-actions">
 												<?php
 													$badge_count = count($value['task_badge']);
+													$has_time = false;
 													if($badge_count>0){
 												?>
 												<?php foreach ($value['task_badge'] as $key => $badge) {
+
+													if($badge->id == 1){
+														$has_time = true;
+													}
 												?>
 												<img src="<?=base_url().$badge->image?>" class="au-btnicon">
 												<?php } ?>
@@ -258,7 +263,7 @@ die(); */
 											<td data-header="Joined" class="joined-<?=$value['id']?>"><?= $value['joined_volunteers'];?></td>
 											<?php if($event_details[0]['is_admin'] != 1) { ?>
 											<td>												
-												<button class="event-volunteer au-btnvolunteer au-btn au-btnvolunteer-<?=$badge_count?> <?=$is_disabled_css?>" attr-id="<?=$value['id']?>" attr-isjoined="<?=$value['user_id_joined']?>">
+												<button class="event-volunteer au-btnvolunteer au-btn au-btnvolunteer-<?=$badge_count?> <?=$is_disabled_css?>" attr-id="<?=$value['id']?>" attr-isjoined="<?=$value['user_id_joined']?>" attr-hastime="<?= $has_time;?>">
 													<?=($value['user_id_joined']==1) ? 'Joined' : 'Join' ?>
 												</button>
 											</td>
@@ -915,27 +920,45 @@ die(); */
 		});
 
 		$(document).on('click', '.event-volunteer', function() {
-			
+
+
+
+			//check if time is limit
+			var is_joined = $(this).attr('attr-isjoined');
 			var task = $(this).closest('tr').children(':nth-child(2)').html();
 			var event_task_id = $(this).attr('attr-id');
-			var is_joined = $(this).attr('attr-isjoined');
 			var volunteer_type = $('.hid-id-'+event_task_id).html();
 
-			if(is_joined==1){
+			if(is_joined != 1){
+				var url = "<?= base_url("site/events/check_time_limit");?>";
+		    	$.get(url, function(data) {
+		    		if(data.valid === false){
+		    			BM.alert(data.message);
+		    		} else {
+		    			$('.au-terms').show();
+						$('.yes-s').show();
+
+						$('.volunteer-as').attr('attr-id',event_task_id).attr('attr-isjoined',is_joined);
+						$('.waiverbtn').attr('attr-id',event_task_id);
+						$('.au-yourvolunteer').html(volunteer_type);
+						$('.volunteer-task').html(task);
+						$('#volunteermodal').modal('show');
+						$('.au-errormessage').hide();
+		    		}
+		    	});
+			} else {
 				$('.au-terms').hide();
 				$('.yes-s').hide();
-			}
-			else{
-				$('.au-terms').show();
-				$('.yes-s').show();
-			}
 
-			$('.volunteer-as').attr('attr-id',event_task_id).attr('attr-isjoined',is_joined);
-			$('.waiverbtn').attr('attr-id',event_task_id);
-			$('.au-yourvolunteer').html(volunteer_type);
-			$('.volunteer-task').html(task);
-			$('#volunteermodal').modal('show');
-			$('.au-errormessage').hide();
+				$('.volunteer-as').attr('attr-id',event_task_id).attr('attr-isjoined',is_joined);
+				$('.waiverbtn').attr('attr-id',event_task_id);
+				$('.au-yourvolunteer').html(volunteer_type);
+				$('.volunteer-task').html(task);
+				$('#volunteermodal').modal('show');
+				$('.au-errormessage').hide();
+			}
+		
+			
 		});
 
 		$(document).on('click', '.close-btn', function() {

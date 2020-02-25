@@ -1101,7 +1101,7 @@ class Events extends GS_Controller {
 		$from = $result[0]->email_address;
 		$fr_name = 'Guest';
 		$to = $result[0]->email_address;
-		$subject = 'Event Success Reply';
+		$subject = 'Alagang Unilab Volunteer: ' . $program_event['program_event'][0]->title;
 		return $this->send_sgrid($from, $fr_name, $to, $subject, $content);
 	}
 	
@@ -1179,10 +1179,15 @@ class Events extends GS_Controller {
 															</td>
 														</tr>";
 											}	
-										$html .= "</table>
-											<p style='font-size:17px; color:#4b4d4d;line-height: 25px;padding-top:15px;'>in ".$programSet['program'][0]->name.": ".$programSet['program_event'][0]->title." on ".date('F d, Y', strtotime($programSet['program_event'][0]->when)).".</p>
-											<p style='font-size:17px; color:#4b4d4d;padding-top:10px;'>Task: ".$task[0]->task."</p>
-											<p style='font-size:17px; color:#4b4d4d;padding-top:10px;'>Kindly stand by for the Program Owners to email you on next steps.</p>
+										$html .= "</table>";
+
+										if($programSet['program_event'][0]->tba == 1){
+											$html .= "<p style='font-size:17px; color:#4b4d4d;line-height: 25px;padding-top:15px;'>in ".$programSet['program'][0]->name.": ".$programSet['program_event'][0]->title.".</p>";
+										} else {
+											$html .= "<p style='font-size:17px; color:#4b4d4d;line-height: 25px;padding-top:15px;'>in ".$programSet['program'][0]->name.": ".$programSet['program_event'][0]->title." on ".date('F d, Y', strtotime($programSet['program_event'][0]->when)).".</p>";
+										}
+									$html .= "<p style='font-size:17px; color:#4b4d4d;padding-top:10px;'>Task: ".$task[0]->task."</p>
+											<p style='font-size:17px; color:#4b4d4d;padding-top:10px;'>Kindly stand by for more details. We will get in touch with you soon.</p>
 										</td>
 									</tr>
 								</table>
@@ -1207,6 +1212,30 @@ class Events extends GS_Controller {
 				</body>
 				</html>";
 		return $html;
+	}
+
+
+	public function check_time_limit(){
+		header('Content-Type: application/json');
+		$user_id = $this->session->userdata('user_sess_id');
+
+		$query = "SELECT count(tbl_program_event_task_volunteers.id) as Count_time
+			FROM
+			tbl_program_event_task_volunteers
+			LEFT JOIN tbl_program_event_task_badge ON tbl_program_event_task_volunteers.event_task_id = tbl_program_event_task_badge.event_task_id
+			LEFT JOIN tbl_program_events ON tbl_program_event_task_volunteers.event_id = tbl_program_events.id
+			WHERE tbl_program_event_task_volunteers.user_id = " . $user_id . "
+			AND badge_id = 1
+			AND tbl_program_events.when >= CURDATE()
+		";
+		$result = $this->db->query($query)->result();
+
+
+		if($result[0]->Count_time >= 2){
+			echo json_encode(array("valid"=>false,"message"=>"Time-based sign-ups are limited to 2 slots per employee."));
+		} else {
+			echo json_encode(array("valid"=>true,"message"=>""));
+		}
 	}
 
 }
