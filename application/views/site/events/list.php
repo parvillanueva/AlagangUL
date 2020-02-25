@@ -82,6 +82,7 @@
 						<span class="au-stitle">&nbsp;</span>
 						<div class="form-row right-flex">
 							<button type="button" class="btn btn-primary au-btnblue" id="btnSubmit">Search</button>
+							<button type="reset" class="btn btn-primary au-btnblue au-reset" title="reset"><i class="fas fa-redo-alt"></i></button>
 						</div>
 					</div>
 				</div>
