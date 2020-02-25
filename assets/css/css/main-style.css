@@ -26,7 +26,7 @@ body.preloader-site {
      transform: translate(-50%, -50%);
      width: 120px;
 }
-
+a
 .loader {
      border: 10px solid rgba(255, 255, 255, 0.5);
      border-top: 10px solid #1AA3F9;
@@ -154,7 +154,7 @@ a.au-lnk:hover>* {
      padding-top: 5px;
      padding-bottom: 5px;
      margin: 0 25px;
-     font-size: 11px;
+     font-size: 13px;
 }
 
 .au-navbar .navbar-nav .nav-link:hover {
@@ -500,11 +500,11 @@ a.au-lnk:hover>* {
 }
 
 .au-btnblue {
-     font-size: 12px;
+     font-size: 14px;
      font-weight: 700;
      color: #fff;
      background-color: #1AA3F9;
-     padding: 1em 2em;
+     padding: 0.8em 2em;
      display: block;
      border: 0;
      border-radius: 0;
@@ -564,12 +564,12 @@ a.au-lnk:hover>* {
 
 .au-fp-details {
      padding: 1em;
-     height: 162px;
+     height: 176px;
 }
 
 .au-p1 {
      display: block;
-     font-size: 14px;
+     font-size: 18px;
      font-weight: 700;
      color: #fff;
      margin-bottom: 10px;
@@ -618,17 +618,18 @@ a.au-lnk:hover>* {
 }
 
 .au-fp-details>.au-p2 {
-     height: 54px;
+     height: 62px;
      margin-bottom: 20px;
      overflow: hidden;
      text-overflow: ellipsis;
      display: -webkit-box;
      -webkit-box-orient: vertical;
      -webkit-line-clamp: 3;
+     font-size: 14px;
 }
 
 .au-fp-details>.au-p1 {
-     height: 20px;
+     height: 26px;
      overflow: hidden;
      text-overflow: ellipsis;
      display: -webkit-box;
@@ -1019,6 +1020,8 @@ a.au-lnk:hover>* {
      position: relative;
      min-height: 70px;
      margin-bottom: 10px;
+     display: flex;
+     align-items: center;
 }
 
 .au-pthumbnail {
@@ -1032,7 +1035,7 @@ a.au-lnk:hover>* {
 
 .au-ptitle {
      font-size: 16px;
-     height: 48px;
+     max-height: 48px;
      margin-bottom: 10px;
      font-weight: 700;
      color: #092E6E;
@@ -1065,7 +1068,8 @@ a.au-lnk:hover>* {
      font-weight: 700;
      color: #092E6E;
      display: inline-block;
-     width: 63px;
+     min-width: 53px;
+     margin-right: 10px;
 }
 
 .au-pans {
@@ -1255,9 +1259,23 @@ a.au-lnk:hover>* {
      padding: 0px;
 }
 
+.au-phthumbnailxs {
+     min-width: 40px;
+     width: 50px;
+     height: 50px;
+     background-color: #fff;
+     padding: 0px;
+     margin-bottom: 10px;
+}
+
 .au-phdetails {
      padding: 0 1em;
      align-self: flex-end;
+}
+
+.au-phdetails .au-p5{
+     color: #fff;
+     margin-bottom: 10px;
 }
 
 .au-members {
@@ -1485,7 +1503,9 @@ a.au-lnk:hover>* {
 }
 
 .au-programdetailsinside .au-pques {
-     width: 65px;
+     min-width: 55px;
+     width: unset;
+     margin-right: 10px !important;
 }
 
 .au-programdetailsinside .au-pans,
@@ -2221,6 +2241,7 @@ button.btn:hover {
 }
 
 .au-guidelines {
+     padding: 10px !important;
      font-size: 12px;
      border-top: 1px solid rgba(0, 0, 0, .1);
      border-bottom: 1px solid rgba(0, 0, 0, .1);
@@ -2246,7 +2267,7 @@ button.btn:hover {
      background-color: rgba(255, 0, 0, 0.1);
      padding: 10px;
      margin: 10px auto -10px auto;
-     display: block;
+     display: none;
 }
 
 .au-errormessage i {
@@ -2254,7 +2275,7 @@ button.btn:hover {
 }
 
 .au-btnicon {
-     max-width: 120px;
+     max-width: 70px;
      display: block;
 }
 
@@ -2448,6 +2469,11 @@ ul.lSPager.lSGallery{
 /*Extra small devices (portrait phones, less than 576px)*/
 
 @media (max-width: 575px) {
+     .au-phthumbnailxs{
+          position: absolute;
+          top: 19px;
+          left: calc(50% + 60px);
+     }
      .au-logo {
           width: 170px;
      }
@@ -2678,12 +2704,20 @@ ul.lSPager.lSGallery{
      .modal-open .modal {
           padding-right: 0px !important;
      }
+     .au-btnicon{
+          display: inline-block;
+     }
 }
 
 
 /*Small devices (landscape phones, 576px and up)*/
 
 @media (min-width: 576px) and (max-width: 767px) {
+     .au-phthumbnailxs{
+          position: absolute;
+          top: 19px;
+          left: calc(50% + 60px);
+     }
      .au-navbar .navbar-nav .nav-link {
           margin: 0 0;
           padding: 10px 0;
@@ -2888,6 +2922,9 @@ ul.lSPager.lSGallery{
          display: block;
          width: 100%;
      }
+     .au-btnicon{
+          display: inline-block;
+     }
 }
 
 
@@ -3042,6 +3079,9 @@ ul.lSPager.lSGallery{
          display: block;
          width: 100%;
      }
+     .au-btnicon{
+          display: inline-block;
+     }
 }
 
 
@@ -3069,7 +3109,7 @@ ul.lSPager.lSGallery{
 @media (min-width: 1200px) {
      .au-navbar .navbar-nav .nav-link {
           height: 35px;
-          margin-top: 13px;
+          margin-top: 9px;
      }
 }
 
@@ -3082,4 +3122,32 @@ ul.lSPager.lSGallery{
      .au-hero-bg {
           min-height: 520px;
      }
+}
+
+span.select2.select2-container.select2-container--default {
+    width: 100% !important;
+    text-align: left;
+     border-radius: 0;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    font-size: 12px;
+    padding: 0 1em;
+    height: 42px;   
+}
+.select2-container--default .select2-selection--single{
+     border: 0px !important;
+     height: 40px !important;
+     line-height: 42px !important;
+}
+.select2-container .select2-selection--single .select2-selection__rendered{
+     padding-left: 0px !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+     height: 42px !important;
+     line-height: 42px !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+     height: 38px !important;
+}
+.au-opptable.au-manageprogramtable table td:last-child {
+    white-space: nowrap !important;
 }
