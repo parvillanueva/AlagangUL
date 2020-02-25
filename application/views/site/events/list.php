@@ -82,7 +82,7 @@
 						<span class="au-stitle">&nbsp;</span>
 						<div class="form-row right-flex">
 							<button type="button" class="btn btn-primary au-btnblue" id="btnSubmit">Search</button>
-							<a href="<?php echo base_url('events');?>"><button type="reset" class="btn btn-primary au-btnblue au-reset" title="reset"><i class="fas fa-redo-alt"></i></button></a>
+							<button type="reset" class="btn btn-primary au-btnblue au-reset" id="reset" title="reset"><i class="fas fa-redo-alt"></i></button>
 						</div>
 					</div>
 				</div>
@@ -128,6 +128,10 @@
         }).on('show.daterangepicker', function (ev, picker) {
             picker.container.find(".calendar-table").hide();
         }); */
+	});
+	
+	$(document).on('click', '#reset', function(){
+		location.reload();
 	});
 	
 	$(document).on('click', '#btnSubmit', function(){
