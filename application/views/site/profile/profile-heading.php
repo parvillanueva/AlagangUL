@@ -11,7 +11,7 @@
             <div class="col-lg-3 col-md-4 d-none d-lg-block">
             </div>
             <div class="au-phdetails au-max-width">
-                <span class="au-h5">
+                <span class="au-h5" id="profile_name">
                 <?php 
                     $str_full_name = $profile->full_name;
                     if (strlen($str_full_name) > 25){

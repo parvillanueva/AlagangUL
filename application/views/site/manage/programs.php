@@ -187,9 +187,9 @@
 		  			html += "	<td>" + moment(b.create_date).format("LLL") + "</td>";
 		  			html += "	<td>" + status + "</td>";
 		  			html += "	<td>" ;
-		  			html += "		<a href='#' data-image='"+b.image_thumbnail+"' data-id='"+b.id+"' data-urlalias='"+b.url_alias+"' data-name='"+b.name+"' data-overview='"+b.overview+"' data-headline='"+b.headline+"' data-area='"+b.area_covered+"' class='au-lnk au-action editProgramBtn' id='editProgramBtn' title='Edit Details'><i class='fas fa-edit'></i></a>" ;
-		  			html += "		<a href='<?= base_url("programs");?>/"+b.id+"/"+b.url_alias+"' target='_blank' type='button' class='au-lnk au-action' id='manageProgramBtn' title='Manage Page'><i class='fas fa-cog' style='color: #11295b;'></i></a>";
-		  			html += "		<a href='<?= base_url("manage");?>/"+b.id+"/"+b.url_alias+"' type='button' class='au-lnk au-action' id='viewEvents'><i class='fas fa-calendar-day'  title='Events' style='color: #FF5722;'></i><span class='au-evnu badge badge-pill  badge-light'>"+b.event_count+"</span></a>";
+		  			html += "		<a href='#' data-image='"+b.image_thumbnail+"' data-id='"+b.id+"' data-urlalias='"+b.url_alias+"' data-name='"+b.name+"' data-overview='"+b.overview+"' data-headline='"+b.headline+"' data-area='"+b.area_covered+"' class='au-lnk au-action editProgramBtn' id='editProgramBtn' title='Edit Details'><i class='fas fa-edit' id='editProgramBtn'></i></a>" ;
+		  			html += "		<a href='<?= base_url("programs");?>/"+b.id+"/"+b.url_alias+"' target='_blank' type='button' class='au-lnk au-action' id='manageProgramBtn' title='Manage Page'><i class='fas fa-cog' style='color: #11295b;' id='manageProgramBtn'></i></a>";
+		  			html += "		<a href='<?= base_url("manage");?>/"+b.id+"/"+b.url_alias+"' type='button' class='au-lnk au-action' id='viewEvents'><i class='fas fa-calendar-day' title='Events' style='color: #FF5722;' id='viewEvents'></i><span class='au-evnu badge badge-pill  badge-light'>"+b.event_count+"</span></a>";
 		  			html += "	</td>";
 		  			html += "</tr>";
 		  		});

@@ -5,7 +5,7 @@
 				<img src="<?= base_url() . $details['details'][0]->image_thumbnail;?>" class="au-fp-thumbnailimg" onerror="imgErrorProgram(this);">
 			</div>
 			<div class="au-phdetails">
-				<span class="au-h5" title="<?= $details['details'][0]->name; ?>">
+				<span class="au-h5" id="progran_title" title="<?= $details['details'][0]->name; ?>">
 					<?php
 
 						$str = $details['details'][0]->name;
@@ -192,7 +192,7 @@
 														if($value['required_volunteer']!=0 && $value['is_not_joined'] !=1){
 															if(!$value['is_joined']){
 													?>	
-														<a href="<?= $value['link'];?>" class="au-volunteer au-btnyellow float-right" style="display: block">Volunteer</a>
+														<a href="<?= $value['link'];?>" class="au-volunteer au-btnyellow float-right" id="volunteer" style="display: block">Volunteer</a>
 														<?php } else { ?>
 
 														<a href="<?= $value['link'];?>" class="au-volunteered au-btnyellow float-right">Volunteered</a>

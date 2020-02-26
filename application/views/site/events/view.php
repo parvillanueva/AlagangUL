@@ -50,7 +50,7 @@ die(); */
 
 						<img src="<?= $program_details[0]['image_thumbnail'];?>" class="au-fp-thumbnailimg" onerror="imgErrorEvent(this);">
 					</div>
-					<span class="au-h5"><?= $event_details[0]['title'];?></span>
+					<span class="au-h5" id="event_title"><?= $event_details[0]['title'];?></span>
 					<div class="au-phstats">
 						<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> <?= $event_details[0]['volunteer_points'];?> Join to receive points</span>
 						<span class="au-members"><i class="fas fa-walking"></i><?= $event_details[0]['joined_volunteers'];?> <?= ($event_details[0]['joined_volunteers'] > 1 ) ? 'Volunteers' : 'Volunteer';?> </span>
