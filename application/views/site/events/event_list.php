@@ -73,7 +73,7 @@
 										if($eloop['required_volunteer']!=0 && $eloop['is_not_joined'] !=1){
 											if(!$eloop['is_joined']){
 										?>	
-										<a href="<?=$link?>" class="au-volunteer au-btnyellow float-right" style="display: block">Volunteer</a>
+										<a href="<?=$link?>" class="au-volunteer au-btnyellow float-right" id="volunteer" style="display: block">Volunteer</a>
 										<?php } else { ?>
 
 										<a href="<?=$link?>" class="au-volunteered au-btnyellow float-right">Volunteered</a>
