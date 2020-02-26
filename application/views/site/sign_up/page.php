@@ -73,7 +73,7 @@
 					} else if(obj.responce == 'no_list'){
 						$('#failed_list').show();
 					} else if(obj.responce == 'pass_empty'){
-						//location.href = '<?=base_url("user_profile");?>';
+						location.href = '<?=base_url("user_profile");?>';
 					} else{
 						 if(obj.result_sgrid == 202){
 							 console.log('doms');
