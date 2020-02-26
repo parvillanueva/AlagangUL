@@ -2071,12 +2071,12 @@ a.au-lnk:hover>* {
      font-size: 11px !important;
 }
 
-.au-workplace>.row>.col-md-12>.col-md-10 img {
+.au-workplace>.row>.col-md-12>.col-md-12 img {
      margin-top: 10px;
      border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.au-workplace>.row>.col-md-12>.col-md-10 {
+.au-workplace>.row>.col-md-12>.col-md-12 {
      padding: 0px 0.5em;
 }
 

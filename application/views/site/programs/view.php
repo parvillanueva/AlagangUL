@@ -93,10 +93,10 @@
 							
 						
 						<div class="col-md-12" style="margin-bottom:12px;border-bottom: 1px solid #9B9B9B;">
-							<div class="col-md-2" style="float: left;padding: 0px;">
+							<!-- <div class="col-md-2" style="float: left;padding: 0px;">
 								<img src="<?=$value->post_by_img?>" style="width:92%;margin-right:2px;">
-							</div>
-							<div class="col-md-10" style="float: left;">
+							</div> -->
+							<div class="col-md-12" style="float: left;">
 								<label style="font-weight:bold;"><?=$value->post_by?></label>
 								<p style="font-size: 10px;"><?=date('F d, Y h:i A',strtotime($value->date_posted))?></p>
 								<div class="row">
