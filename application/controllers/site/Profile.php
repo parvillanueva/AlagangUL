@@ -160,8 +160,8 @@ class Profile extends GS_Controller
 		$arrData = array(
 			'last_name' => $_POST['lname'],
 			'first_name' => $_POST['fname'],
-			'mobile_number' => $_POST['phone'],
-			'work_number' => $_POST['work_number'],
+			//'mobile_number' => $_POST['phone'],
+			'work_number' => $_POST['phone'],
 			'division' => $_POST['division'],
 			'update_date' => date('Y-m-d H:i:s')
 		);

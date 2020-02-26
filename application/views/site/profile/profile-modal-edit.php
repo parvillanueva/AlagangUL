@@ -52,7 +52,7 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <input type="tel" class="form-control required_input" id="phone" placeholder="Mobile Number" value="<?= @$profile->mobile_number ?>" name="phone" required pattern="[0-9]{11}">
+                                <input type="tel" class="form-control required_input" id="phone" placeholder="Mobile Number" value="<?= @$profile->work_number ?>" name="phone" required pattern="[0-9]{11}">
                                 <div class="valid-feedback"></div>
                                 <div class="invalid-feedback">Invalid Mobile Number.</div>
                             </div>

@@ -8,10 +8,12 @@
                 <thead>
                     <tr>
                         <th style="width: 50px"><center><i class="glyphicon glyphicon-th-list"></i></center></th>
-                        <th>Name</th>
-                        <th>Image</th>
-                        <th>Overview</th>
-                        <th>Headline</th>
+                        <th>Title</th>
+                        <th>Url Alias</th>
+                        <th>Venue</th>
+						<th>City</th>
+                        <th>When</th>
+						<th>Contact Person</th>
 						<th>Creator</th>
                         <th>Status</th>
                     </tr>
@@ -39,16 +41,16 @@
     function get_data(keyword){
         AJAX.select.offset(offset); //offset or Start
         AJAX.select.limit(limit); //limit result
-        AJAX.select.table('tbl_programs'); //selecting table
-        AJAX.select.select('tbl_programs.id,image_thumbnail,name,overview,headline,area_covered,created_by,tbl_programs.status,tbl_programs.create_date, tbl_users.last_name, tbl_users.first_name'); //selecting result : 
+        AJAX.select.table('tbl_program_events tblpe'); //selecting table
+        AJAX.select.select('tblpe.id, title, url_alias, venue, city, when, contact_person, user_id, tblpe.status, tblpe.create_date, tbl_users.last_name, tbl_users.first_name'); //selecting result : 
 
         if(keyword) {
-            AJAX.select.query(" (tbl_users.first_name like '%"+keyword+"%' OR tbl_users.last_name like '%"+keyword+"%' OR name like '%"+keyword+"%' OR overview like '%"+keyword+"%' OR headline like '%"+keyword+"%') and tbl_programs.status >= 0");
+            AJAX.select.query(" (tbl_users.first_name like '%"+keyword+"%' OR tbl_users.last_name like '%"+keyword+"%' OR title like '%"+keyword+"%' OR url_alias like '%"+keyword+"%' OR city like '%"+keyword+"%' OR contact_person like '%"+keyword+"%' OR venue like '%"+keyword+"%') and tblpe.status >= 0");
         }else{
-            AJAX.select.where.greater_equal("tbl_programs.status",0); 
+            AJAX.select.where.greater_equal("tblpe.status",0); 
         }
-		AJAX.select.join.inner('tbl_users', 'tbl_programs.created_by', 'tbl_users.id'); 
-        AJAX.select.order.asc("tbl_programs.create_date"); 
+		AJAX.select.join.inner('tbl_users', 'tblpe.user_id', 'tbl_users.id'); 
+        AJAX.select.order.asc("tblpe.create_date"); 
         AJAX.select.exec(function(result){
            var obj = result;
            var html = '';
@@ -57,10 +59,12 @@
                 var status = (y.status === "1") ? status = "Active" : status = "Inactive";
                 html += '<tr>';
                 html+="     <td class='text-center'><i class='glyphicon glyphicon-th'></i></td>";
-                html += '   <td>'+y.name+'</td>';
-                html += '   <td><img src="<?= base_url()?>'+y.image_thumbnail+'" alt ="" style="max-width: 100px;"></td>';
-                html += '   <td>'+y.overview+'</td>';
-				html += '   <td>'+y.headline+'</td>';
+                html += '   <td>'+y.title+'</td>';
+                html += '   <td>'+y.url_alias+'</td>';
+				html += '   <td>'+y.venue+'</td>';
+				html += '   <td>'+y.city+'</td>';
+				html += '   <td>'+y.when+'</td>';
+				html += '   <td>'+y.contact_person+'</td>';
 				html += '   <td>'+y.first_name+' '+y.last_name+'</td>';
                 html += '   <td>'+status+'</td>';
                 html += '</tr>'
