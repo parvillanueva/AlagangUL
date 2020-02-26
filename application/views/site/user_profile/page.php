@@ -99,7 +99,7 @@
 					<div class="form-row">
 						<div class="col">
 							<label class="form-check-label">
-								<input class="form-check-input required_input" required="required" id="understood_details" type="checkbox" name="terms">I hereby consent to the processing of personal data that I have provided to the Alagang Unilab program for purposes of coordination, monitoring, and evaluation of tasks in relation to the program I volunteered to. I have read and understood the <a href="<?= base_url("privacy-statement");?>" class="au-lnk">Privacy Statement</a> of the company.
+								<input class="form-check-input required_input" required="required" id="understood_details" type="checkbox" name="terms">I hereby consent to the processing of personal data that I have provided to the Alagang Unilab program for purposes of coordination, monitoring, and evaluation of tasks in relation to the program I volunteer to. I have read and understood the <a href="<?= base_url("privacy-statement");?>" class="au-lnk">Privacy Statement</a> of the company.
 								<div class="alert_understood"><font color="red">This field is required.</font></div>
 							</label>
 						</div>
