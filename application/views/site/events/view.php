@@ -257,7 +257,7 @@ die(); */
 											</td>
 											<td data-header="Task"><?= $value['task'];?></td>
 											<!-- <td data-header="Description" title="<?=$value['description']?>"><?=(strlen($value['description'])>50) ? substr($value['description'],0,50).'...' : $value['description']?></td> -->
-											<td data-header="Description" title="<?=$value['description']?>"><?=$value['description']?></td>
+											<td data-header="Description" title="<?=$value['description']?>"><?= nl2br($value['description']);?></td>
 											<td data-header="Qualifications"><?= $value['qualification'];?></td>
 											<td data-header="Needed"><?= $value['required_volunteers'];?></td>
 											<td data-header="Joined" class="joined-<?=$value['id']?>"><?= $value['joined_volunteers'];?></td>
