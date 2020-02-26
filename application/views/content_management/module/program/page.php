@@ -11,8 +11,8 @@
                         <th>Name</th>
                         <th>Image</th>
                         <th>Overview</th>
-                        <!-- <th>Color</th> -->
                         <th>Headline</th>
+						<th>Creator</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -40,15 +40,15 @@
         AJAX.select.offset(offset); //offset or Start
         AJAX.select.limit(limit); //limit result
         AJAX.select.table('tbl_programs'); //selecting table
-        AJAX.select.select('id,image_thumbnail,name,overview,headline,area_covered,status,create_date'); //selecting result : 
+        AJAX.select.select('tbl_programs.id,image_thumbnail,name,overview,headline,area_covered,created_by,tbl_programs.status,tbl_programs.create_date, tbl_users.last_name, tbl_users.first_name'); //selecting result : 
 
         if(keyword) {
-            AJAX.select.query(" (name like '%"+keyword+"%' OR overview like '%"+keyword+"%' OR headline like '%"+keyword+"%') and status >= 0");
+            AJAX.select.query(" (tbl_users.first_name like '%"+keyword+"%' OR tbl_users.last_name like '%"+keyword+"%' OR name like '%"+keyword+"%' OR overview like '%"+keyword+"%' OR headline like '%"+keyword+"%') and tbl_programs.status >= 0");
         }else{
-            AJAX.select.where.greater_equal("status",0); 
+            AJAX.select.where.greater_equal("tbl_programs.status",0); 
         }
-
-        AJAX.select.order.asc("create_date"); 
+		AJAX.select.join.inner('tbl_users', 'tbl_programs.created_by', 'tbl_users.id'); 
+        AJAX.select.order.asc("tbl_programs.create_date"); 
         AJAX.select.exec(function(result){
            var obj = result;
            var html = '';
@@ -61,6 +61,7 @@
                 html += '   <td><img src="<?= base_url()?>'+y.image_thumbnail+'" alt ="" style="max-width: 100px;"></td>';
                 html += '   <td>'+y.overview+'</td>';
 				html += '   <td>'+y.headline+'</td>';
+				html += '   <td>'+y.first_name+' '+y.last_name+'</td>';
                 html += '   <td>'+status+'</td>';
                 html += '</tr>'
              });
