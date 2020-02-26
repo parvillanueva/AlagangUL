@@ -11,6 +11,10 @@
 
 <?php $this->load->view("site/login_layout/header"); ?>    
 <body>
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N9VJ329"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
 	<div class="preloader-wrapper" style="display: none;"><div class="preloader"><div class="loader"></div></div></div>
 	<header class="au-header">
 		<div class="au-navigation au-container">

@@ -45,7 +45,14 @@
 	<script src="<?= base_url();?>cms/js/bootbox.min.js"></script>
     <script src="<?= base_url();?>cms/js/custom.js"></script>
     <!-- <script src="<?= base_url();?>assets/site/js/bootstrap-show-modal.js"></script> -->
-
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-N9VJ329');</script>
+    <!-- End Google Tag Manager -->
 
     <script type="text/javascript">
         var base_url = "<?= base_url();?>";
