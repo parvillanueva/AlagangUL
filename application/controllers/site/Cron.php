@@ -49,10 +49,10 @@ class Cron extends CI_Controller {
 					}
 					else{
 						if(isset($data2->attachments->data[0]->subattachments->data[0]->media)){
-                            $post_image = $data2->attachments->data[0]->subattachments->data[0]->subattachments->data[0]->media->image->src;
+                            $post_image = $data2->attachments->data[0]->subattachments->data[0]->media->image->src;
                         }
                         else{
-                            $post_image = $data2->attachments->data[0]->subattachments->data[0]->media->image->src;
+                            $post_image = @$data2->attachments->data[0]->subattachments->data[0]->media->image->src;
 
                         }      
 					}

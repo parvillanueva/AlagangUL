@@ -11,7 +11,7 @@
             <div class="col-lg-3 col-md-4 d-none d-lg-block">
             </div>
             <div class="au-phdetails au-max-width">
-                <span class="au-h5"><?= $profile->full_name ?></span>
+                <span class="au-h5" id="profile_image"><?= $profile->full_name ?></span>
                 <div class="au-phstats">
                     <a href="#" class="au-lnk au-email"><?= $profile->email_address ?></a>
                 </div>
