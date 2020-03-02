@@ -35,6 +35,7 @@ class Profile extends GS_Controller
 			
 			
 		}
+		$data['my_profile'] =true;
 		$data['division']	= $divisions;
 		$data['profile']	= $profile_details;
 		$data['created']	= $created_programs;
@@ -117,7 +118,7 @@ class Profile extends GS_Controller
 				);
 				$data['css']		= array("assets/site/css/calendar.css");
 				$data['js']			= array("assets/site/js/calendar.js", "assets/site/js/profile.js");
-	
+				$data['my_profile'] =false;
 				$this->load->view("site/layout/template",$data);
 			
 			

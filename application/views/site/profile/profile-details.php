@@ -207,9 +207,11 @@
 															
                                                             </div>
                                                             <div class="col">
+                                                            <?php if($my_profile) : ?>
                                                                 <button class="au-btnvolunteer au-btn float-right" data-toggle="modal" onclick="volunteer('<?=$event['task_name']?>','<?=$event['program_name']?>',<?=$event['program_id']?>,<?= @$event['event_id']?>,<?= @$event['task_id']?>)">
                                                                     Joined
                                                                 </button>
+                                                            <?php endif; ?>  
                                                             </div>
                                                         </div>
                                                         
