@@ -953,6 +953,7 @@ class Events extends GS_Controller {
 		$data['image'] = $targetFile;
 
 		$event_id = $this->Gmodel->save_data("tbl_program_events",$data);
+		$this->audit_trail_lib->save('Event', 'Add');
 
 		if (!empty($_FILES)) {
 			if($_FILES['eventImage']['size'] > 0) { //10 MB (size is also in bytes)		        
@@ -1015,7 +1016,7 @@ class Events extends GS_Controller {
 
 
 		$this->Gmodel->update_data("tbl_program_events",$data,"id",$event_id);
-
+		$this->audit_trail_lib->save('Event', 'Update');
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 

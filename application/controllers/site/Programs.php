@@ -209,6 +209,7 @@ class Programs extends GS_Controller {
 
 
 		$this->Gmodel->update_data("tbl_programs",$data,"id",$program_id);
+		$this->audit_trail_lib->save('Manage Program', 'Update');
 
 		redirect($_SERVER['HTTP_REFERER']);
 
@@ -236,6 +237,7 @@ class Programs extends GS_Controller {
 		$data['image_thumbnail'] = $targetFile;
 
 		$program_id = $this->Gmodel->save_data("tbl_programs",$data);
+		$this->audit_trail_lib->save('Manage Program', 'Add');
 
 		$storeFolder = "uploads/programs/" . $program_id . "/". date('Y_m_d');
 
