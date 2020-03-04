@@ -92,7 +92,11 @@
 
 											?></span>
 										<span class="au-accpoints">
-										<div class="au-heart"><i class="fas fa-heart"></i></div> <?= $points_details[0]->current_points ?> points</span>
+										<div class="au-heart"><i class="fas fa-heart"></i></div> <?php
+										if(isset($points_details[0]->current_points)){
+											echo $points_details[0]->current_pointsl;
+										}
+										 ?> points</span>
 									</div>
 								</button>
 

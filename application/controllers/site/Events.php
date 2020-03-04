@@ -829,6 +829,7 @@ class Events extends GS_Controller {
 			'create_date' => date('Y-m-d H:i:s')
 		);
 		$sql_result = $this->Gmodel->save_data('tbl_program_event_testimonials', $arr);
+		$this->audit_trail_lib->save('Testimonial', 'Add');
 		if($sql_result != ''){
 			echo json_encode(array('responce' => 'success'));
 		} else{
@@ -858,6 +859,7 @@ class Events extends GS_Controller {
 			'status' => 1,
 		);
 		$sql_result = $this->Gmodel->save_data('tbl_program_event_task', $arr);
+		$this->audit_trail_lib->save('Event Task', 'Add');
 		$task_query = "SELECT max(id) as task_id FROM tbl_program_event_task" ;
 		$task_result = $this->db->query($task_query)->result();
 		$this->add_badges_details($task_result[0]->task_id, $_POST['badges']);
@@ -884,6 +886,7 @@ class Events extends GS_Controller {
 		);
 
 		$sql_result = $this->Gmodel->update_data('tbl_program_event_task',$arr,'id',$id);
+		$this->audit_trail_lib->save('Event Task', 'Update');
 		// $task_query = "SELECT max(id) as task_id FROM tbl_program_event_task" ;
 		// $task_result = $this->db->query($task_query)->result();
 		$result = $this->update_badges_details($id,$_POST['badges']);
@@ -953,6 +956,7 @@ class Events extends GS_Controller {
 		$data['image'] = $targetFile;
 
 		$event_id = $this->Gmodel->save_data("tbl_program_events",$data);
+		$this->audit_trail_lib->save('Event', 'Add');
 
 		if (!empty($_FILES)) {
 			if($_FILES['eventImage']['size'] > 0) { //10 MB (size is also in bytes)		        
@@ -1015,7 +1019,7 @@ class Events extends GS_Controller {
 
 
 		$this->Gmodel->update_data("tbl_program_events",$data,"id",$event_id);
-
+		$this->audit_trail_lib->save('Event', 'Update');
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 

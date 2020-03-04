@@ -83,7 +83,7 @@
 			id : path_id
 		};
 		var url = "<?php echo base_url('site/gallery/delete_gallery_image') ?>";
-		BM.confirm('Are you sure?', function(results){
+		BM.confirm('Are you sure you want to delete this photo?', function(results){
 			if(results){
 				BM.loading(true);
 				aJax.post(url, data, function(result){
