@@ -73,8 +73,14 @@ class Job extends CI_Controller {
 			);
 
 			$email_status = $this->sndgrd->send($email_data);
-
-			echo $email_status;
+			$arr_sndgrd = array(
+				'email_reciever' 	=> $user_email,
+				'email_sender' 		=> "alagangunilab@unilab.com.ph",
+				'sndgrd_response' 	=> $email_status,
+				'create_date' 		=> date('Y-m-d H:i:s'),
+			);
+			$sndgrd_result = $this->Global_model->save_data('tbl_audit_trail_sndgrd', $arr_sndgrd);
+			echo $email_status .'-'. $sndgrd_result;
 
 		}
 
