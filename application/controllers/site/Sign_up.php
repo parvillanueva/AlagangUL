@@ -95,7 +95,19 @@ class Sign_up extends CI_Controller {
 			'subject' => $subject,
 			'content' => $content,
 		);
-		return $this->sndgrd->send($arr);
+		$email_status = $this->sndgrd->send($arr);
+		
+		$arr_sndgrd = array(
+			'email_reciever' 	=> $to,
+			'email_sender' 		=> $from,
+			'sndgrd_response' 	=> $email_status,
+			'module'			=> 'Sign Up',
+			'create_date' 		=> date('Y-m-d H:i:s'),
+		);
+		
+		$sndgrd_result = $this->Global_model->save_data('tbl_audit_trail_sndgrd', $arr_sndgrd);
+		
+		return $email_status;
 	}
 	
 	public function session_set($token){
