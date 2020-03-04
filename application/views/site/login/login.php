@@ -33,6 +33,7 @@
 
 				<div class="collapse navbar-collapse" id="navbarCollapse">
 					<div class="au-navbar-nav navbar-nav ml-auto flex-column-reverse flex-lg-row">
+					<a href="#"><button class="au-btn au-loginbutton" id="not_register">Register</button></a>
 					</div>
 				</div>
 			</nav>
@@ -104,7 +105,7 @@
 			    						</div>								
 									</form>
 									<hr>
-									<a href="#"><button type="submit" class="au-btnblue mx-auto font-italic" id="not_register">Not yet registered? Sign up now!</button></a>
+									<!--<a href="#"><button type="submit" class="au-btnblue mx-auto font-italic" id="not_register">Not yet registered? Sign up now!</button></a>-->
 								</div>
 								
 
