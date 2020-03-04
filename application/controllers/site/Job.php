@@ -5,7 +5,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Job extends CI_Controller {
 
 	public function index(){
-		$users = $this->Gmodel->get_query("tbl_users","status = 1");
+
+		// $users = $this->Gmodel->get_query("tbl_users","status = 1");
+		$query_users = 'SELECT * FROM tbl_users WHERE id IN(SELECT created_by FROM tbl_programs WHERE status = 1 GROUP BY created_by)';
+		$users = $this->db->query($query_users)->result();
+
+
+
 		foreach ($users as $users_key => $users_value) {
 			$data = array();
 			$user_id = $users_value->id;
