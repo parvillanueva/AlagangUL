@@ -18,18 +18,18 @@
 	<div class="preloader-wrapper" style="display: none;"><div class="preloader"><div class="loader"></div></div></div>
 	<header class="au-header">
 		<div class="au-navigation au-container">
-			<nav class="au-navbar navbar navbar-expand-lg">
-				<div>
-					<!-- <button type="button" class="au-navbar-toggler navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+			<nav class="au-navbar navbar navbar-expand-lg au-signup">
+				<!-- <div>
+					<button type="button" class="au-navbar-toggler navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
 						<img src="assets/img/au-menu.svg" width="28px" height="28px">
-					</button> -->
-				</div>
+					</button> 
+				</div>-->
 				<a href="<?= base_url();?>" class="au-navbar-brand navbar-brand">
 					<img src="<?=base_url()?>assets/site/img/au-logo.png" alt="Alagang Unilab Logo" class="au-logo">
 				</a>
-				<div class="d-lg-none">
-					<!-- <img src="assets/img/au-avatar.svg" class="au-avatar"> -->
-				</div>
+				<!--<div class="d-lg-none">
+					 <img src="assets/img/au-avatar.svg" class="au-avatar"> 
+				</div>-->
 				<div class="navbar-right">
 					<div class="au-navbar-nav navbar-nav ml-auto flex-column-reverse flex-lg-row">
 						<div class="au-menu">
