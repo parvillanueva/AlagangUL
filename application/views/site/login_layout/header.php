@@ -32,8 +32,8 @@
     
     <link href="<?= base_url();?>assets/css/css/bootstrap.min.css" rel="stylesheet" type="text/css" />  
 
-	<link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/css/css/main-style.css">
-	<link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/css/css/temp-style.css">
+	<link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/site/css/main-style.css">
+	<link rel="stylesheet" type="text/css" href="<?= base_url();?>assets/site/css/temp-style.css">
 	<link rel="icon" type="image/png" href="<?= base_url();?>assets/img/favicon.png" sizes="16x16">
 
     <!-- Custom styles for this template -->

@@ -30,10 +30,11 @@
 				<div class="d-lg-none">
 					<!-- <img src="assets/img/au-avatar.svg" class="au-avatar"> -->
 				</div>
-
-				<div class="collapse navbar-collapse" id="navbarCollapse">
+				<div class="navbar-right">
 					<div class="au-navbar-nav navbar-nav ml-auto flex-column-reverse flex-lg-row">
-					<a href="#"><button class="au-btn au-loginbutton" id="not_register">Register</button></a>
+						<div class="au-menu">
+							<a href="#"><button class="au-btn au-loginbutton" id="not_register">Register</button></a>
+						</div>
 					</div>
 				</div>
 			</nav>
