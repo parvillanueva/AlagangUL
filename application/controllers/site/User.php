@@ -10,6 +10,68 @@ class User extends CI_Controller {
 		$this->load->view("site/layout/template2",$data);	
 	}
 	
+	public function listview(){
+		$data['division'] = $this->division_list_info();
+		$data['user_info'] = $this->user_list_info();
+		$data['content'] = "site/user_profile/listview";
+		$data['meta'] = array(
+			"title"         =>  "User List",
+			"description"   =>  "",
+			"keyword"       =>  ""
+		);
+		
+		$data['active_menu'] = "User List";
+		$this->parser->parse("site/layout/template_manage",$data);	
+	}
+	
+	public function add_user_profile(){
+		$check_dubplicate = $this->check_dubplicate_entry(trim($_POST['email']));
+		if($check_dubplicate == 'empty'){
+			$this->insert_profile_user($_POST);
+			echo json_encode(array('response'=>'success'));
+		} else{
+			echo json_encode(array('response'=>'duplicate'));
+		}
+	}
+	
+	public function check_dubplicate_entry($email){
+		$arr = array(
+			'email_address' => $email,
+		);
+		$sql = $this->Global_model->get_list_query('tbl_users', $arr);
+		if(empty($sql)){
+			return 'empty';
+		} else{
+			return 'not_empty';
+		}
+	}
+	
+	public function insert_profile_user($post){
+		$arr_insert = array(
+			'last_name' => $post['lastname'],
+			'first_name' => $post['firstname'],
+			'email_address' => $post['email'],
+			'division' => $post['division'],
+			'password' => md5('Unilab@1234'),
+			'status' => 1,
+		);
+		
+		$result = $this->Global_model->save_data($arr_insert);
+		return $result;
+	}
+	
+	public function user_list_info(){
+		$data = "Select * From tbl_users where status <> -2 limit 10";
+		$result = $this->db->query($data)->result();
+		return $result;
+	}
+	
+	public function division_list_info(){
+		$data = "Select * From tbl_division where status = '1'";
+		$result = $this->db->query($data)->result();
+		return $result;
+	}
+	
 	public function view(){
 		$data['division'] = $this->division_list();
 		/*$arrWhere = array(

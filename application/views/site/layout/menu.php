@@ -104,6 +104,10 @@
 									<a class="dropdown-item" href="<?= base_url('profile') ?>"><i class="fas fa-user"></i> My Profile</a>
 									<a class="dropdown-item" href="<?= base_url('manage')?>"><i class="fas fa-cog"></i> Manage Programs</a>
 									<a class="dropdown-item" href="<?= base_url('profile/reset')?>"><i class="fas fa-user-cog"></i> Change Password</a>
+									<?php if($_SESSION['is_admin'] == '1'){ ?>
+										<a class="dropdown-item" href="<?= base_url('userlist')?>"><i class="fas fa-users"></i> User</a>
+										<a class="dropdown-item" href="<?= base_url('registered_volunteered')?>"><i class="fas fa-signal"></i> Report</a>
+									<?php }?>
 									<a class="dropdown-item" href="<?= base_url("log-out");?>"><i class="fas fa-sign-out-alt"></i> Logout</a>
 								</div>
 							</div>

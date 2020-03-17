@@ -59,6 +59,7 @@ class Login extends CI_Controller {
 			'user_sess_id'  => $data[0]->id,
 			'user_sess_pass'  => $data[0]->password,
 			'user_sess_role'  => 1,
+			'is_admin' => $data[0]->isAdmin,
 			'user_impersonate_token' => $data[0]->impersonate_token
 		);
 		$this->session->set_userdata($arr_session);
