@@ -1093,15 +1093,15 @@ a.au-lnk:hover>* {
 }
 
 .au-time {
-     color: #EA1126;
+     color: #a80033;
 }
 
 .au-talent {
-     color: #105E99;
+     color: #004179;
 }
 
 .au-treasure {
-     color: #EBB400;
+     color: #c5960c;
 }
 
 .vol-time .au-time {
@@ -1571,9 +1571,13 @@ a.au-lnk:hover>* {
      margin-right: 5px;
 }
 
-.au-opptable, .au-opptablex {
+.au-opptable {
      margin-top: 10px;
      font-size: 14px;
+}
+.au-opptablex {
+     font-size: 14px;
+     position: relative;
 }
 
 .au-opptablex{
@@ -2010,7 +2014,7 @@ a.au-lnk:hover>* {
      display: inline-block;
      width: 40px;
      height: 40px;
-     padding: 8px 3px;
+     padding: 5px 3px;
      border-radius: 50%;
      border: 2px solid #092E6E;
      text-align: center;
@@ -3275,17 +3279,14 @@ span.select2.select2-container.select2-container--default {
      border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
-.pagination{
-     justify-content: center;
-}
 
 button.au-tab-menu-link {
     background-color: transparent;
-    font-size: 14px;
+    font-size: 12px;
     border: 0px;
     margin: 0px;
     display: inline-block;
-    padding: 0.6em 1.2em;
+    padding: 0.6em 1em;
     color: #fff;
     font-weight: lighter;
      -webkit-transition: all 0.3s ease-in-out;
@@ -3316,6 +3317,7 @@ button.au-tab-menu-link:hover{
      display: none;
 }
 .au-tab-menu .dropdown button.btn-primary{
+     text-align: left;
      display: block;
      margin: 0.5em;
      width: calc(100% - 1em);
@@ -3370,7 +3372,79 @@ button.au-tab-menu-link:hover{
      color: #222;     
 }
 
+.au-report-counter{
+     font-size: 8em;
+     font-weight: bold;
+     color: #092e6e;
+     line-height: 1em;
+}
+.au-report-counter-title{
+     font-size: 16px;
+     color: #092e6e;
+     font-weight: bold;
+     font-style: italic;
+     margin-bottom: 15px;
+}
+.au-report-ave{
+     font-weight: bold;
+     display: inline-block;
+     font-size: 35px;
+     color: #1AA3F9;
+}
+.ave-cont{
+     display: inline-block;
+     margin-left: 10px;
+     text-align: left;
+     font-size: 14px;
+     color: #222;
+     line-height: 14px;
+     max-width: 120px;
+     font-weight: normal;
+}
 
+.au-report{     
+     border: 1px solid rgba(0, 0, 0, 0.05);
+     background-color: #fff;
+     margin: 0 1.5em 1.5em 1.5em ;
+     width: 100%;
+     background: rgb(238, 238, 238);
+     background: -moz-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
+     background: -webkit-linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
+     background: linear-gradient(45deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
+     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#eee", endColorstr="#fff", GradientType=1);
+}
+
+.au-report-details{
+     font-size: 14px;
+     color: #222;
+     margin-top: 15px;
+}
+
+.au-graph{
+     margin: 15px auto;
+}
+
+.au-display{
+     text-align: right;
+}
+
+.au-displaycount{
+     max-width: 100px;
+}
+
+.au-display .au-inner{
+     display: inline-block !important;
+     vertical-align: top;
+}
+.au-display .au-stitle{
+     margin-right: 5px;
+     line-height: 38px;
+}
+.au-report-counter-title img{
+     max-width: 150px;
+     width: 100%;
+     margin: 15px 15px 0px 15px;
+}
 @media (max-width:991px) {     
      .au-tab-menu-desktop{
           display: none;
@@ -3378,4 +3452,47 @@ button.au-tab-menu-link:hover{
      .au-tab-menu .dropdown{
           display: block;
      }
+     .au-tab-menu{
+          padding: 0px calc(1em + 15px) 15px calc(1em + 15px);
+     }
+
+}
+
+
+@media (max-width:767px) {
+     .pagination{
+          justify-content: center;
+     }
+     .au-display{
+          text-align: center;
+     }
+}
+
+.au-report-counter-type{
+     font-size: 4em;
+     line-height: 1em;
+    font-weight: bold;
+}
+
+.au-addcolumn{
+     position: absolute;
+     top: 85px;
+     right: -39px;
+     background-color: #fff;
+     border: 0px;
+     font-size: 14px;
+     border: 1px solid rgba(0, 0, 0, 0.3);
+     border-bottom: 0;
+     color: #222;
+     opacity: 0.7;
+     transform: rotate(-90deg);
+     -webkit-transform: rotate(-90deg);
+     -moz-transform: rotate(-90deg);
+     -ms-transform: rotate(-90deg);
+     -o-transform: rotate(-90deg);
+     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+.au-addcolumn:hover{
+     opacity: 1;
 }

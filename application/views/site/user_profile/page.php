@@ -21,7 +21,7 @@
 
 					<div class="form-row">
 						<div class="col">
-							<input type="text" class="form-control required_input no_html alphaonly" id="fname" placeholder="* First Name" name="fname">
+							<input type="text" class="required_input no_html alphaonly" id="fname" placeholder="* First Name" name="fname">
 							<div class="valid-feedback"></div>
 							<div class="invalid-feedback">Please fill out this field.</div>
 						</div>

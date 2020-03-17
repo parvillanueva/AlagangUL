@@ -56,8 +56,10 @@
         <script type="text/javascript" src="<?= base_url();?>/cms/js/moment.js" ></script>
         <script type="text/javascript" src="<?= base_url();?>/cms/js/custom.js" ></script>
         <script type="text/javascript" src="<?= base_url();?>/cms/js/placeholder.js" ></script> 
+		<script type="text/javascript" src="<?= base_url();?>/cms/js/placeholder.js" ></script> 
         <script src='https://www.google.com/recaptcha/api.js'></script>
-        <script type="text/javascript" src="<?= base_url();?>/cms/js/gcontroller.js" ></script>
+        <script type="text/javascript"> var sortable_base_url = "<?php echo base_url()?>"; </script>
+		<script type="text/javascript" src="<?= base_url();?>assets/site/js/sorttable.js" ></script>
 
         <!-- bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="https://use.typekit.net/scj2ogv.css">

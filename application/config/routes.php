@@ -17,6 +17,15 @@
 		$route["reset_password/(:any)"] = "site/login/reset_password/$1";
 		$route["guidelines"] = "site/guidelines";
 		$route["programs"] = "site/programs";
+		
+		$route["userlist"] = "site/user/listview";
+		
+		$route["registered_volunteered"] = "site/report/registered_volunteered";
+		$route["volunteered_division"] = "site/report/volunteered_division";
+		$route["volunteered_program"] = "site/report/volunteered_program";
+		$route["volunteer_type"] = "site/report/volunteer_type";
+		$route["registered"] = "site/report/registered";
+		$route["volunteered"] = "site/report/volunteered";
 
 		$route["events/upload"] = "site/events/upload";
 		$route["events/get_gallery"] = "site/events/get_gallery";
