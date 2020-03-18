@@ -45,15 +45,7 @@
 		</div>
 		
 		<div class="row">
-			<div class="col-md-6">
-				<ul class="pagination">
-				  <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-				  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-				  <li class="page-item"><a class="page-link" href="#">2</a></li>
-				  <li class="page-item"><a class="page-link" href="#">3</a></li>
-				  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-				</ul>
-			</div>
+			<div class="col-md-6"></div>
 			<div class="col-md-6 au-display">
 				<div class="au-inner"><span class="au-stitle">Results per page</span></div>
 				<div class="au-inner au-displaycount">
@@ -92,14 +84,8 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-6">
-				<ul class="pagination">
-				  <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-				  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-				  <li class="page-item"><a class="page-link" href="#">2</a></li>
-				  <li class="page-item"><a class="page-link" href="#">3</a></li>
-				  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-				</ul>
+			<div class="col-md-6" id="page_div">
+				<ul class="pagination" id="pagination"></ul>
 			</div>
 			<div class="col-md-6 au-display">
 				<div class="au-inner"><span class="au-stitle">Results per page</span></div>
@@ -118,7 +104,7 @@
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
-		//$(".table").addSortWidget();
+		pagination("<?php echo $total_data ?>", '10');
 		$('#date_input').daterangepicker({
 			"showDropdowns": true,
 			"linkedCalendars": false,
@@ -161,6 +147,44 @@
 			division : select_division,
 			date : date_input,
 			filter_limit : filter_limit
+			
+		}
+		aJax.post(url, data, function(result){
+			$('#user_list').html(result);
+		}); 
+		pagination("<?php echo $total_data ?>", filter_limit);
+	}
+	
+	function get_data_filter_pagination(){
+		var input_search = $('#search_input').val();
+		var select_division = $('#division_set').val();
+		var date_input = $('#date_input').val();
+		var filter_limit = $('#filter_limit').val();
+		var url = "<?php echo base_url('site/report/user_search')?>";
+		var data = {
+			search : input_search,
+			division : select_division,
+			date : date_input,
+			filter_limit : filter_limit
+			
+		}
+		aJax.post(url, data, function(result){
+			$('#user_list').html(result);
+		}); 		
+	}
+	
+	function filter_pagination(limit_page, total){
+		var input_search = $('#search_input').val();
+		var select_division = $('#division_set').val();
+		var date_input = $('#date_input').val();
+		var limit_set = ""+limit_page+","+total+"";	
+		var filter_limit = $('#filter_limit').val();
+		var url = "<?php echo base_url('site/report/user_search')?>";
+		var data = {
+			search : input_search,
+			division : select_division,
+			date : date_input,
+			filter_limit : limit_set
 			
 		}
 		aJax.post(url, data, function(result){

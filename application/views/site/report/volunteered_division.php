@@ -29,13 +29,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6">
-				<ul class="pagination">
-				  <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-				  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-				  <li class="page-item"><a class="page-link" href="#">2</a></li>
-				  <li class="page-item"><a class="page-link" href="#">3</a></li>
-				  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-				</ul>
+				<!--<ul class="pagination" id="pagination"></ul>-->
 			</div>
 			<div class="col-md-6 au-display">
 				<div class="au-inner"><span class="au-stitle">Results per page</span></div>
@@ -60,7 +54,6 @@
 									<th scope="col">Division</th>
 									<th scope="col">Registered</th>
 									<th scope="col">Volunteered</th>
-									<option value="9999999">ALL</option>
 								</tr>
 							</thead>
 							<tbody id="division_list">
@@ -73,13 +66,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6">
-				<ul class="pagination">
-				  <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-				  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-				  <li class="page-item"><a class="page-link" href="#">2</a></li>
-				  <li class="page-item"><a class="page-link" href="#">3</a></li>
-				  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-				</ul>
+				<ul class="pagination" id="pagination"></ul>
 			</div>
 			<div class="col-md-6 au-display">
 				<div class="au-inner"><span class="au-stitle">Results per page</span></div>
@@ -98,6 +85,9 @@
 </div>
 
 <script type="text/javascript">
+	$(document).ready(function(){
+		pagination("<?php echo $total_data ?>", '10');
+	});
 	$(document).on('click', '#btnSubmitsSearch', function(){
 		var select_division = $('#division_set').val();
 		var filter_limit = $('#filter_limit').val();
@@ -108,7 +98,8 @@
 		}
 		aJax.post(url, data, function(result){
 			$('#division_list').html(result);
-		}); 
+		});
+		//pagination("<?php echo $total_data ?>", filter_limit);		
 	});
 	
 	$(document).on('click','#reset',function(){
@@ -126,5 +117,33 @@
 		aJax.post(url, data, function(result){
 			$('#division_list').html(result);
 		}); 
+		pagination("<?php echo $total_data ?>", filter_limit);		
+	}
+
+	function get_data_filter_pagination(){
+		var select_division = $('#division_set').val();
+		var filter_limit = $('#filter_limit').val();
+		var url = "<?php echo base_url('site/report/division_search')?>";
+		var data = {
+			division : select_division,
+			limit: filter_limit
+		}
+		aJax.post(url, data, function(result){
+			$('#division_list').html(result);
+		}); 		
+	}
+	
+	function filter_pagination(limit_page, total){
+		var select_division = $('#division_set').val();
+		var filter_limit = $('#filter_limit').val();
+		var limit_set = ""+limit_page+","+total+"";	
+		var url = "<?php echo base_url('site/report/division_search')?>";
+		var data = {
+			division : select_division,
+			limit: limit_set
+		}
+		aJax.post(url, data, function(result){
+			$('#division_list').html(result);
+		});
 	}
 </script>
