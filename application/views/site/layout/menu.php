@@ -106,7 +106,7 @@
 									<a class="dropdown-item" href="<?= base_url('profile/reset')?>"><i class="fas fa-user-cog"></i> Change Password</a>
 									<?php if($_SESSION['is_admin'] == '1'){ ?>
 										<a class="dropdown-item" href="<?= base_url('userlist')?>"><i class="fas fa-users"></i> User</a>
-										<a class="dropdown-item" href="<?= base_url('registered_volunteered')?>"><i> <img src="<?php echo base_url('assets/images/excel.jpg'); ?>" height="20" width="20" /></i> Report</a>
+										<a class="dropdown-item" href="<?= base_url('registered_volunteered')?>"><i class="fas fa-file-invoice"></i> Report</a>
 									<?php }?>
 									<a class="dropdown-item" href="<?= base_url("log-out");?>"><i class="fas fa-sign-out-alt"></i> Logout</a>
 								</div>
