@@ -57,8 +57,9 @@ class Report extends CI_Controller {
 	
 	public function volunteer_type()
 	{
-		$data['data_set']['event_task'] = $this->program_list();
 		$data['data_set']['graph'] = $this->graph_data($this->vol_type_listing());
+		$data['data_set']['event_task'] = $this->program_list();
+		
 		$data['data_set']['type_info']['type_list'] = $this->vol_type_listing();
 		$data['data_set']['total_data'] = $this->vol_type_listing_count();
 		$data['meta'] = array(
@@ -532,11 +533,12 @@ class Report extends CI_Controller {
 		$label = array();
 		foreach($data['data'] as $dkey => $dloop){
 				$data_arr = array();
+			$label[] = $dkey;
 			foreach($dloop as $ddkey => $ddloop){
 				$data_arr[] = $this->graph_label($ddkey, $data['data'], $data['header'][0]);
-				if($arr_keys[0] == $dkey){
+				/* if($arr_keys[0] == $dkey){
 					$label[] = $ddkey;
-				}
+				} */
 			}
 		}
 		//$label_set = rtrim($label, ',');
