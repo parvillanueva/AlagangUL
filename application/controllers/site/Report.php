@@ -25,6 +25,7 @@ class Report extends CI_Controller {
 	{
 		$data['data_set']['vol_div']['vol_division'] = $this->vol_division_data();
 		$data['data_set']['division'] = $this->division_list_info();
+		$data['data_set']['total_data'] = $this->vol_division_data_count();
 		$data['meta'] = array(
 			"title"         =>  "Volunteered Division",
 			"description"   =>  "",
@@ -41,6 +42,7 @@ class Report extends CI_Controller {
 	{
 		$data['data_set']['vol_prog']['vol_prog_list'] = $this->volunteered_program_list();
 		$data['data_set']['program'] = $this->program_list();
+		$data['data_set']['total_data'] = $this->volunteered_program_list_count();
 		$data['meta'] = array(
 			"title"         =>  "Volunteered Program",
 			"description"   =>  "",
@@ -58,6 +60,7 @@ class Report extends CI_Controller {
 		$data['data_set']['event_task'] = $this->program_list();
 		$data['data_set']['graph'] = $this->graph_data($this->vol_type_listing());
 		$data['data_set']['type_info']['type_list'] = $this->vol_type_listing();
+		$data['data_set']['total_data'] = $this->vol_type_listing_count();
 		$data['meta'] = array(
 			"title"         =>  "Volunteered Type",
 			"description"   =>  "",
@@ -74,6 +77,7 @@ class Report extends CI_Controller {
 	{
 		$data['data_set']['division'] = $this->division_list_info();
 		$data['data_set']['user_info'] = $this->user_list_info();
+		$data['data_set']['total_data'] = $this->user_list_info_count();
 		$data['meta'] = array(
 			"title"         =>  "Registered",
 			"description"   =>  "",
@@ -92,6 +96,7 @@ class Report extends CI_Controller {
 		$data['data_set']['division'] = $this->division_list_info();
 		$data['data_set']['program'] = $this->program_list();
 		$data['data_set']['event_task'] = $this->get_event_tasks_all();
+		$data['data_set']['total_data'] = $this->volunteered_list_count();
 		$data['meta'] = array(
 			"title"         =>  "Volunteered",
 			"description"   =>  "",
@@ -114,6 +119,12 @@ class Report extends CI_Controller {
 		$data = "Select * From tbl_users LEFT JOIN tbl_division ON tbl_users.division=tbl_division.id where tbl_users.status <> -2 limit 10";
 		$result = $this->db->query($data)->result();
 		return $result;
+	}
+
+	public function user_list_info_count(){
+		$data = "Select * From tbl_users LEFT JOIN tbl_division ON tbl_users.division=tbl_division.id where tbl_users.status <> -2";
+		$result = $this->db->query($data)->result();
+		return count($result);
 	}
 	
 	public function user_search(){
@@ -190,6 +201,21 @@ class Report extends CI_Controller {
 		return $arr_result;
 	}
 	
+	public function vol_division_data_count(){
+		$data = "Select * From tbl_division where tbl_division.status = 1";
+		$result = $this->db->query($data)->result();
+		$arr_result = array();
+		foreach($result as $rloop){
+			$arr_result[] = array(
+				'registered' => $this->user_division($rloop->id),
+				'volunteered' => $this->volunteered_division_set($rloop->id),
+				'division_name' => $rloop->name,
+				'division_id' => $rloop->id,
+			);
+		}
+		return count($arr_result);
+	}
+	
 	public function user_division($id){
 		$data = "Select * From tbl_users where division = '".$id."' AND tbl_users.status <> -2";
 		$result = $this->db->query($data)->result();
@@ -241,6 +267,23 @@ class Report extends CI_Controller {
 			);
 		}
 		return $arr_result;
+	}
+
+	public function volunteered_program_list_count(){
+		$data = "Select * From tbl_programs where tbl_programs.status = '1' limit 10";
+		$result = $this->db->query($data)->result();
+		$arr_result = array();
+		foreach($result as $rloop){
+			$arr_result[] = array(
+				'program_name' => $rloop->name,
+				'program_id' => $rloop->id,
+				'needed' => $this->volunteered_program_needed($rloop->id),
+				'volunteered' => $this->volunteered_prog($rloop->id),
+				'difference' => $this->volunteered_program_needed($rloop->id) - $this->volunteered_prog($rloop->id),
+				
+			);
+		}
+		return count($arr_result);
 	}
 	
 	public function volunteered_program_needed($program_id){
@@ -352,6 +395,53 @@ class Report extends CI_Controller {
 		);
 		return $data_final;
 	}
+
+	public function vol_type_listing_count(){
+		$sql = "select a.name as program_name, e.name as badge_name, count(b.user_id) as total
+				from tbl_programs as a 
+				inner join tbl_program_event_task_volunteers as b on b.program_id = a.id
+				inner join tbl_program_event_task as c on b.event_task_id = c.id
+				inner join tbl_program_event_task_badge as d on c.id = d.event_task_id
+				inner join tbl_badges as e on d.badge_id = e.id
+				group by a.name, e.name";
+		$sql_result = $this->db->query($sql)->result();
+		$sql_badge = "SELECT id, name, icon, color, image FROM tbl_badges WHERE status='1'";
+		$result_badge = $this->db->query($sql_badge)->result();
+		$badge_array = array();
+		$badge_array_head = array();
+		foreach($result_badge as $key => $badges){
+			$badge_array[$badges->name] = '';
+			$badge_array_head[$badges->name] = array(
+				'icon' => $badges->icon,
+				'color' => $badges->color,
+				'image' => $badges->image,
+				'total' => $this->total_badge($badges->id),
+			);
+			
+		}
+
+		$arr = array();
+		$head = array();
+		$program_name = '';
+
+		foreach($sql_result as $key => $loop){
+			if($program_name != $loop->program_name){
+				$program_name = $loop->program_name;
+				$head[] = $badge_array_head;
+				$arr[$program_name] = $badge_array;
+				$arr[$program_name][$loop->badge_name] = $loop->total;
+			}
+			else{
+				$head[] = $badge_array_head;
+				$arr[$program_name][$loop->badge_name] = $loop->total;
+			}
+		}
+		$data_final = array(
+			'data' => $arr,
+			'header' => $head
+		);
+		return count($data_final);
+	}
 	
 	public function total_badge($id){
 		$sql_badge = "SELECT * FROM tbl_program_event_task_badge WHERE badge_id='".$id."'";
@@ -400,6 +490,41 @@ class Report extends CI_Controller {
 			);
 		}
 			return $arr;
+	}
+
+	public function volunteered_list_count(){
+		$sql = "Select
+				tbl_users.id as user_id,
+				tbl_users.first_name as first_name,
+				tbl_users.last_name as last_name,
+				tbl_users.email_address as email_address,
+				tbl_users.work_number as work_number,
+				tbl_division.name as division,
+				tbl_programs.name as name,
+				tbl_program_events.title as title,
+				tbl_program_event_task.task as task,
+				tbl_program_event_task_volunteers.date_volunteer as date_volunteer
+				From tbl_users 
+				INNER JOIN tbl_division ON tbl_users.division=tbl_division.id
+				INNER JOIN tbl_program_event_task_volunteers ON tbl_users.id=tbl_program_event_task_volunteers.user_id
+				INNER JOIN tbl_programs ON tbl_programs.id=tbl_program_event_task_volunteers.program_id
+				INNER JOIN tbl_program_events ON tbl_program_events.program_id=tbl_programs.id
+				INNER JOIN tbl_program_event_task ON tbl_program_event_task.event_id=tbl_program_events.id WHERE tbl_users.status = '1' AND tbl_programs.status = '1' AND tbl_program_events.status = '1' AND tbl_program_event_task_volunteers.status = '1'";
+		$sql_result = $this->db->query($sql)->result();
+			$arr = array();
+		foreach($sql_result as $loop){
+			$arr[] = array(
+				'profile_name' => $loop->first_name.' '.$loop->last_name,
+				'email'=> $loop->email_address,
+				'work_number' => $loop->work_number,
+				'division' => $loop->division,
+				'program_name' =>  $loop->name,
+				'event_name' => $loop->title,
+				'task_name' => $loop->task,
+				'date_volunteer' => $loop->date_volunteer
+			);
+		}
+			return count($arr);
 	}
 	
 	public function graph_data($data){
@@ -797,5 +922,9 @@ class Report extends CI_Controller {
 
 		ob_end_clean();
 		$objWriter->save('php://output');		
+	}
+	
+	public function pagination(){
+		
 	}
 }	

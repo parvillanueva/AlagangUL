@@ -45,15 +45,7 @@
 			</div>
 		</form>
 		<div class="row">
-			<div class="col-md-6">
-				<ul class="pagination">
-				  <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-				  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-				  <li class="page-item"><a class="page-link" href="#">2</a></li>
-				  <li class="page-item"><a class="page-link" href="#">3</a></li>
-				  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-				</ul>
-			</div>
+			<div class="col-md-6"></div>
 			<div class="col-md-6 au-display">
 				<div class="au-inner"><span class="au-stitle">Results per page</span></div>
 				<div class="au-inner au-displaycount">
@@ -90,13 +82,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6">
-				<ul class="pagination">
-				  <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-				  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-				  <li class="page-item"><a class="page-link" href="#">2</a></li>
-				  <li class="page-item"><a class="page-link" href="#">3</a></li>
-				  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-				</ul>
+				<ul class="pagination"></ul>
 			</div>
 			<div class="col-md-6 au-display">
 				<div class="au-inner"><span class="au-stitle">Results per page</span></div>
@@ -123,6 +109,9 @@
 </div>
 
 <script type="text/javascript">
+	$(document).ready(function(){
+		pagination("<?php echo $total_data ?>", '10');
+	});
 	$('input[name="date"]').daterangepicker({
 		autoUpdateInput: false,
 		locale: {
@@ -142,6 +131,47 @@
 			$('#tbody_table').html(result);
 		});
 	});
+
+	function get_data_filter(){
+		var task_val = $(".filter_task").val();
+		var filter_limit = $('#filter_limit').val();
+		var data = {
+			task_val : task_val,
+			filter : filter_limit
+		}
+		var url = "<?php echo base_url('site/report/volunteer_type_report')?>";
+		aJax.post(url, data, function(result){
+			$('#program_listview').html(result);
+		});
+		pagination("<?php echo $total_data ?>", filter_limit);	
+	}
+
+	function get_data_filter_pagination(){
+		var task_val = $(".filter_task").val();
+		var filter = $('#filter_limit').val();
+		var data = {
+			task_val : task_val,
+			filter : filter
+		}
+		var url = "<?php echo base_url('site/report/volunteer_type_report')?>";
+		aJax.post(url, data, function(result){
+			$('#program_listview').html(result);
+		});		
+	}
+	
+	function filter_pagination(limit_page, total){
+		var task_val = $(".filter_task").val();
+		var filter_limit = $('#filter_limit').val();
+		var limit_set = ""+limit_page+","+total+"";	
+		var url = "<?php echo base_url('site/report/volunteer_type_report')?>";
+		var data = {
+			task_val : task_val,
+			filter : limit_set
+		}
+		aJax.post(url, data, function(result){
+			$('#program_listview').html(result);
+		});
+	}
 
 	//$(function() {
 	//	$("#myTable").tablesorter();

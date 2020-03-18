@@ -2,7 +2,7 @@
 <div class="au-wrapper">
 	<div class="container-fluid au-heading">
 		<div class="au-container au-padding">
-			<button class="au-btn float-right" id="excel_extract"><i class="fas fa-file-excel"></i>Export to Excel</button>
+			<button class="au-btn float-right" id="excel_extract"><img src="<?php echo base_url('assets/images/excel.jpg'); ?>" height="20" width="20" /> Export to Excel</button>
 			<span class="au-h5 no-margin">Alagang Unilab Report</span>
 		</div>
 		<div class="au-container">
@@ -53,6 +53,7 @@
 				$('#excel_extract').addClass('vol_excel');
 			break;
 		}
+		
 	});
 	
 	$(document).on('change', '#filter_limit', function(){

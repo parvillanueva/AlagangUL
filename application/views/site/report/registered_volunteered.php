@@ -14,7 +14,7 @@
 					<div class="col-sm-6 au-padding">
 						<div class="au-report-counter"><?php echo $data_set['emp_volunteer']?></div>
 						<div class="au-report-counter-title">Employees have signed up for Volunteer Work</div>
-						<div class="au-report-ave">1.4</div><div class="ave-cont">Average employee sign-ups</div>
+						<div class="au-report-ave"><?php echo round(($data_set['registered'] / $data_set['emp_volunteer']), 1); ?></div><div class="ave-cont">Average employee sign-ups</div>
 						<div class="au-report-details">Additional <?php echo $data_set['emp_volunteer_as_of']; ?> Volunteered as of <?php echo date('F d, Y h:i A');?></div>		
 					</div>
 				</div>

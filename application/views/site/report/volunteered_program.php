@@ -29,13 +29,6 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6">
-				<ul class="pagination">
-				  <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-				  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-				  <li class="page-item"><a class="page-link" href="#">2</a></li>
-				  <li class="page-item"><a class="page-link" href="#">3</a></li>
-				  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-				</ul>
 			</div>
 			<div class="col-md-6 au-display">
 				<div class="au-inner"><span class="au-stitle">Results per page</span></div>
@@ -73,13 +66,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6">
-				<ul class="pagination">
-				  <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-				  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-				  <li class="page-item"><a class="page-link" href="#">2</a></li>
-				  <li class="page-item"><a class="page-link" href="#">3</a></li>
-				  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-				</ul>
+				<ul class="pagination" id="pagination"></ul>
 			</div>
 			<div class="col-md-6 au-display">
 				<div class="au-inner"><span class="au-stitle">Results per page</span></div>
@@ -98,7 +85,9 @@
 </div>
 
 <script type="text/javascript">
-
+	$(document).ready(function(){
+		pagination("<?php echo $total_data ?>", '10');
+	});
 	$(document).on('click', '#btnSubmitsSearch', function(){
 		var program_filter = $('#program_filter').val();
 		var filter_limit = $('#filter_limit').val();
@@ -126,6 +115,34 @@
 		}
 		aJax.post(url, data, function(result){
 			$('#program_listview').html(result);
-		}); 
+		});
+		pagination("<?php echo $total_data ?>", filter_limit);	
+	}
+
+	function get_data_filter_pagination(){
+		var program_filter = $('#program_filter').val();
+		var filter_limit = $('#filter_limit').val();
+		var url = "<?php echo base_url('site/report/vol_program_filter')?>";
+		var data = {
+			program : program_filter,
+			limit : filter_limit
+		}
+		aJax.post(url, data, function(result){
+			$('#program_listview').html(result);
+		}); 		
+	}
+	
+	function filter_pagination(limit_page, total){
+		var program_filter = $('#program_filter').val();
+		var filter_limit = $('#filter_limit').val();
+		var limit_set = ""+limit_page+","+total+"";	
+		var url = "<?php echo base_url('site/report/vol_program_filter')?>";
+		var data = {
+			program : program_filter,
+			limit : limit_set
+		}
+		aJax.post(url, data, function(result){
+			$('#program_listview').html(result);
+		});
 	}
 </script>
