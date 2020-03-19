@@ -26,6 +26,7 @@ class Report extends CI_Controller {
 		$data['data_set']['vol_div']['vol_division'] = $this->vol_division_data();
 		$data['data_set']['division'] = $this->division_list_info();
 		$data['data_set']['total_data'] = $this->vol_division_data_count();
+		$data['title_set'] = 'Registeered Volunteer by Division';
 		$data['meta'] = array(
 			"title"         =>  "Volunteered Division",
 			"description"   =>  "",
@@ -43,6 +44,7 @@ class Report extends CI_Controller {
 		$data['data_set']['vol_prog']['vol_prog_list'] = $this->volunteered_program_list();
 		$data['data_set']['program'] = $this->program_list();
 		$data['data_set']['total_data'] = $this->volunteered_program_list_count();
+		$data['title_set'] = 'Volunteered by Program';
 		$data['meta'] = array(
 			"title"         =>  "Volunteered Program",
 			"description"   =>  "",
@@ -57,8 +59,9 @@ class Report extends CI_Controller {
 	
 	public function volunteer_type()
 	{
-		$data['data_set']['event_task'] = $this->program_list();
 		$data['data_set']['graph'] = $this->graph_data($this->vol_type_listing());
+		$data['data_set']['event_task'] = $this->program_list();
+		$data['title_set'] = 'Volunteered by Type';
 		$data['data_set']['type_info']['type_list'] = $this->vol_type_listing();
 		$data['data_set']['total_data'] = $this->vol_type_listing_count();
 		$data['meta'] = array(
@@ -78,6 +81,7 @@ class Report extends CI_Controller {
 		$data['data_set']['division'] = $this->division_list_info();
 		$data['data_set']['user_info'] = $this->user_list_info();
 		$data['data_set']['total_data'] = $this->user_list_info_count();
+		$data['title_set'] = 'Registered';
 		$data['meta'] = array(
 			"title"         =>  "Registered",
 			"description"   =>  "",
@@ -97,6 +101,7 @@ class Report extends CI_Controller {
 		$data['data_set']['program'] = $this->program_list();
 		$data['data_set']['event_task'] = $this->get_event_tasks_all();
 		$data['data_set']['total_data'] = $this->volunteered_list_count();
+		$data['title_set'] = 'Volunteered';
 		$data['meta'] = array(
 			"title"         =>  "Volunteered",
 			"description"   =>  "",
@@ -532,11 +537,12 @@ class Report extends CI_Controller {
 		$label = array();
 		foreach($data['data'] as $dkey => $dloop){
 				$data_arr = array();
+			$label[] = $dkey;
 			foreach($dloop as $ddkey => $ddloop){
 				$data_arr[] = $this->graph_label($ddkey, $data['data'], $data['header'][0]);
-				if($arr_keys[0] == $dkey){
+				/* if($arr_keys[0] == $dkey){
 					$label[] = $ddkey;
-				}
+				} */
 			}
 		}
 		//$label_set = rtrim($label, ',');
@@ -924,7 +930,105 @@ class Report extends CI_Controller {
 		$objWriter->save('php://output');		
 	}
 	
-	public function pagination(){
+	public function table_excel_report(){
+		$data_arr = json_decode($_POST['data'], true);
+		$header = $data_arr['header'];
+		$body = $data_arr['body'];
+		$title = $data_arr['title'];
+		$this->load->library("Excel");
+		$objPHPExcel = new PHPExcel();
+		$objPHPExcel->setActiveSheetIndex(0);
+		$worksheet = $objPHPExcel->getActiveSheet();
+		$objPHPExcel->getActiveSheet()->setTitle('Report Sheet');
+		$style_head = array(
+	        'alignment' => array(
+	            'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+	            'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+	            'wrap' => true
+	        ),
+	        'fill' => array(
+	            'type' => PHPExcel_Style_Fill::FILL_SOLID,
+	            'color' => array('rgb' => 'FFFF00')
+	        ),
+	        'borders' => array(
+	            'allborders' => array(
+	                'style' => PHPExcel_Style_Border::BORDER_THIN,
+	                'color' => array('rgb' => '000000')
+	            )
+	        ),
+	        'font'  => array(
+		        'bold'  => true
+		    )
+	    );
+		$style_title = array(
+	        'font'  => array(
+		        'bold'  => true
+		    )
+	    );
+	    $style_body = array(
+	        'alignment' => array(
+	            'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+	            'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+	            'wrap' => true
+	        )
+	    );
 		
+		$style = array(
+			'alignment' => array(
+				'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+			),
+			'fill' => array(
+	            'type' => PHPExcel_Style_Fill::FILL_SOLID,
+	            'color' => array('rgb' => 'RRGGBB')
+	        ),
+	        'borders' => array(
+	            'allborders' => array(
+	                'style' => PHPExcel_Style_Border::BORDER_THIN,
+	                'color' => array('rgb' => '000000')
+	            )
+	        ),
+	        'font'  => array(
+		        'bold'  => true
+		    )
+		);
+
+		//header
+		$alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+		$head_count = (count($header)) - 1;
+		foreach($header as $hkey=>$hloop){
+			$worksheet->SetCellValueByColumnAndRow($hkey, 2, $hloop);
+			foreach($alphabet as $akey=>$aloop){
+				if($hkey == $akey){
+					$worksheet->getColumnDimension($aloop)->setWidth(25);
+				}
+			}
+		}
+		foreach($alphabet as $akey=>$aloop){
+			if($head_count == $akey){
+				$var = "A2:".$aloop."2";
+				$worksheet->getStyle($var)->applyFromArray($style_head);
+			}
+		}
+
+		$colstart = 3;
+		foreach ($body as $key => $value) {
+			foreach($value as $key2=>$val){
+				$worksheet->SetCellValueByColumnAndRow($key2, $colstart, $val);
+			}
+			$colstart++;
+		}
+
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		header('Content-Disposition: attachment;filename="'.strtoupper($details[0]->event_name).' '.$title.' '.date('F, d, Y').'.xlsx"');
+		header('Cache-Control: max-age=0');
+		header('Cache-Control: max-age=1');
+		header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+		header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
+		header ('Cache-Control: cache, must-revalidate'); 
+		header ('Pragma: public'); 
+		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+
+		ob_end_clean();
+		$objWriter->save('php://output');
 	}
 }	

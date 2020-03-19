@@ -65,7 +65,7 @@
 				<div class="au-programdescription">
 					<div class="au-opptablex">
 						<table id="myTable" class="tablesorter table">
-							<thead>
+							<thead id="table_header">
 								<tr>
 									<th scope="col">Division</th>
 									<th scope="col">Last Name</th>
@@ -75,7 +75,7 @@
 									<th scope="col">Date Registered</th>
 								</tr>
 							</thead>
-							<tbody id="user_list">
+							<tbody id="user_list" class="tbody_table">
 								<?php $this->load->view('site/report/registered_listview', $user_info)?>
 							</tbody>
 						</table>

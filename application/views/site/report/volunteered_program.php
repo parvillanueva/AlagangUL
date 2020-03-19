@@ -48,7 +48,7 @@
 				<div class="au-programdescription">
 					<div class="au-opptablex">
 						<table id="myTable" class="tablesorter">
-							<thead>
+							<thead id="table_header">
 								<tr>
 									<th scope="col">Programs</th>
 									<th scope="col">Needed</th>
@@ -56,7 +56,7 @@
 									<th scope="col">Difference</th>
 								</tr>
 							</thead>
-							<tbody id="program_listview">
+							<tbody id="program_listview" class="tbody_table">
 								<?php $this->load->view("site/report/volunteered_pro_listview",$vol_prog);?>
 							</tbody>
 						</table>

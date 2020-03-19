@@ -49,14 +49,14 @@
 				<div class="au-programdescription">
 					<div class="au-opptablex">
 						<table id="myTable" class="tablesorter">
-							<thead>
+							<thead id="table_header">
 								<tr>
 									<th scope="col">Division</th>
 									<th scope="col">Registered</th>
 									<th scope="col">Volunteered</th>
 								</tr>
 							</thead>
-							<tbody id="division_list">
+							<tbody id="division_list" class="tbody_table">
 								<?php $this->load->view("site/report/vol_division_listview",$vol_div); ?>
 							</tbody>
 						</table>
