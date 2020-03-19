@@ -87,7 +87,7 @@
 				<div class="au-programdescription">
 					<div class="au-opptablex">
 						<table id="myTable" class="tablesorter">
-							<thead>
+							<thead id="table_header">
 								<tr>
 									<th scope="col">Program</th>
 									<th scope="col">Event</th>
@@ -99,7 +99,7 @@
 									<th scope="col">Date Volunteered</th>
 								</tr>
 							</thead>
-							<tbody id="table_tbody">
+							<tbody id="table_tbody" class="tbody_table">
 								<?php $this->load->view('site/report/volunteered_listview', $type_vol)?>
 							</tbody>
 						</table>

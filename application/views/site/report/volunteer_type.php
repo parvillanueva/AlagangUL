@@ -64,7 +64,7 @@
 				<div class="au-programdescription">
 					<div class="au-opptablex">
 						<table id="myTable" class="tablesorter">
-							<thead>
+							<thead id="table_header">
 								<tr>
 									<td scope="col">Program</td>
 									<?php foreach($type_info['type_list']['header'][0] as $key=>$in_loop){ ?>	
@@ -72,7 +72,7 @@
 									<?php } ?>
 								</tr>
 							</thead>
-							<tbody id="tbody_table">
+							<tbody id="tbody_table" class="tbody_table">
 								<?php $this->load->view('site/report/volunteer_type_listview', $type_info)?>
 							</tbody>
 						</table>

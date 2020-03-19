@@ -107,6 +107,7 @@
 									<?php if($_SESSION['is_admin'] == '1'){ ?>
 										<a class="dropdown-item" href="<?= base_url('userlist')?>"><i class="fas fa-users"></i> User</a>
 										<a class="dropdown-item" href="<?= base_url('registered_volunteered')?>"><i class="fas fa-file-invoice"></i> Report</a>
+										<a class="dropdown-item" href="<?= base_url('site/report/extract_excel_report')?>"><i class="fas fa-file-excel"></i> Export to Excel</a>
 									<?php }?>
 									<a class="dropdown-item" href="<?= base_url("log-out");?>"><i class="fas fa-sign-out-alt"></i> Logout</a>
 								</div>

@@ -59,9 +59,30 @@
 	$(document).on('change', '#filter_limit', function(){
 		get_data_filter();
 	});
+
 	
 	$(document).on('click', '#excel_extract', function(){
-		var url = "<?php echo base_url('site/report/extract_excel_report') ?>";
-		window.location.href = url;
+		var header = Array();
+		$("#table_header tr th").each(function(i, v){
+			header[i] = $(this).text();
+        });
+		
+		var body = Array();
+            
+        $(".tbody_table tr").each(function(i, v){
+            body[i] = Array();
+            $(this).children('td').each(function(ii, vv){
+                body[i][ii] = $(this).text();
+            }); 
+
+        });
+		
+		var data = {
+			header : header,
+			body : body,
+			title : "<?php echo $title_set; ?>"
+		}
+		var url = "<?php echo base_url('site/report/table_excel_report') ?>";
+		$('<form id="filterform" method="POST" action="'+url+'"><input type="text" hidden name="data" value=' + "'" +JSON.stringify(data) + "'" + ' /></form>').appendTo("body").submit();
 	});
 </script>
