@@ -1044,6 +1044,18 @@ a.au-lnk:hover>* {
      -webkit-box-orient: vertical;
      -webkit-line-clamp: 2;
 }
+.au-retitle {
+     font-size: 16px;
+     max-height: 48px;
+     margin-bottom: 10px;
+     font-weight: 700;
+     color: #092E6E;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     display: -webkit-box;
+     -webkit-box-orient: vertical;
+     -webkit-line-clamp: 1;
+}
 
 .au-pdetails {
      height: 46px;
@@ -1055,7 +1067,7 @@ a.au-lnk:hover>* {
      text-overflow: ellipsis;
      display: -webkit-box;
      -webkit-box-orient: vertical;
-     -webkit-line-clamp: 2;
+     -webkit-line-clamp: 3;
 }
 
 .au-programdetails {
@@ -1203,6 +1215,11 @@ a.au-lnk:hover>* {
      overflow: hidden;
      padding: 0;
 }
+.au-rewardthumbnail {
+     position: relative;
+     overflow: hidden;
+     padding: 0;
+}
 
 .au-eventthumbnail .au-eventimg {
      width: 100%;
@@ -1213,9 +1230,16 @@ a.au-lnk:hover>* {
      position: absolute;
      z-index: 1;
 }
-
-.au-eventswrapper .au-eventthumbnail .au-eventimg{
+.au-rewardthumbnail .au-eventimg {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     object-position: center;
+     margin-left: 8px;
+     position: absolute;
+     z-index: 1;
 }
+
 
 .au-eventthumbnail::before {
      z-index: 2;
@@ -2197,6 +2221,10 @@ a.au-lnk:hover>* {
      margin-right: 0px;
      height: 30px;
 }
+.au-rewarddetails {
+     padding: 1em 2em 0em 1em;
+}
+
 
 .file-label {
      font-size: 14px;
@@ -2635,6 +2663,9 @@ ul.lSPager.lSGallery{
      .au-eventthumbnail {
           height: 200px;
      }
+     .au-rewardthumbnail {
+          height: 200px;
+     }
      .au-eventdetails {
           padding: 1em 2em 0 2em;
      }
@@ -2785,6 +2816,9 @@ ul.lSPager.lSGallery{
      }
      .au-btnicon{
           display: inline-block;
+     }
+     .au-rewarddetails {
+          padding: 1em 2em 0 2em;
      }
 }
 
@@ -3459,12 +3493,33 @@ button.au-tab-menu-link:hover{
 }
 
 
+.au-mobile-selectall{
+     display: none;
+     margin-bottom: 0px;
+}
+.
+.au-mobile-selectall input{
+     margin-right: 5px;
+     display: inline-block;
+}
+
+.au-heading .form-row{
+     margin-bottom: 5px;
+}
 @media (max-width:767px) {
+
+     .au-mobile-selectall{
+          display: block;
+     }
      .pagination{
           justify-content: center;
      }
      .au-display{
           text-align: center;
+     }
+     .au-heading .form-row{
+          margin-bottom: 5px;
+          margin-top: 10px;
      }
 }
 
@@ -3495,4 +3550,35 @@ button.au-tab-menu-link:hover{
 
 .au-addcolumn:hover{
      opacity: 1;
+}
+
+.custom-select{
+     border-radius: 0px;
+}
+
+
+.au-stars {
+     font-size: 14px;
+     line-height: 18px;
+     font-weight: 400;
+     color: #092E6E;
+     white-space: nowrap;
+}
+.au-stars i{
+     font-size: 18px;
+     margin-right: 5px;
+     color: #F9C417;
+}
+
+.au-rewarditem {
+    position: relative;
+    min-height: 70px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.au-rewarddetails .au-accpoints{
+     margin-left: 0px;
+     margin-bottom: 10px;
 }
