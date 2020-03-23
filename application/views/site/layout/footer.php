@@ -102,6 +102,7 @@
 <script src="<?= base_url();?>assets/site/js/bootstrap-show-modal.js"></script>
 <script src="<?= base_url();?>assets/site/js/lightslider.js"></script>
 <script src="<?= base_url();?>assets/site/js/jquery.twbsPagination.js" text="type/javascript"></script>
+<script src="<?= base_url();?>assets/site/js/sorttable.js" text="type/javascript"></script>
 
 
 <?php if(!empty($js)) : ?>

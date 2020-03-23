@@ -63,12 +63,12 @@
 			<div class="col">
 				<div class="au-programdescription">
 					<div class="au-opptablex">
-						<table id="myTable" class="tablesorter">
+						<table id="myTable" class="table">
 							<thead id="table_header">
 								<tr>
-									<td scope="col">Program</td>
+									<th scope="col">Program</th>
 									<?php foreach($type_info['type_list']['header'][0] as $key=>$in_loop){ ?>	
-										<td scope="col"><?php echo $key; ?></td>	
+										<th scope="col"><?php echo $key; ?></th>	
 									<?php } ?>
 								</tr>
 							</thead>
@@ -111,6 +111,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		pagination("<?php echo $total_data ?>", '10');
+		$(".table").addSortWidget();
 	});
 	$('input[name="date"]').daterangepicker({
 		autoUpdateInput: false,

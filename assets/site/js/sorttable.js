@@ -23,7 +23,8 @@ jQuery.fn.addSortWidget = function(options){
             .addClass('sorttable_img')
             .css({
                 cursor: 'pointer',
-                'margin-left': '10px',
+				'position': 'absolute',
+				'margin-left': '5px'
             })
             .on('click', function(){
                 $(".sorttable_img", $destElement).attr('src', options.img_nosort); 

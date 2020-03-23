@@ -349,6 +349,73 @@ a.au-lnk:hover>* {
      color: #1AA3F9;
 }
 
+.au-dropdown ul{
+     margin-bottom: 0px;
+     padding-inline-start: 0px;
+     list-style: none;
+}
+.au-dropdown ul li{
+     padding-left: 0px;
+     position: relative;
+}
+.dropdown-item.sub{
+     position: relative;
+}
+.dropdown-item.sub:after{
+     position: absolute;
+     right: 5px;
+     top: 10px;
+     content: '\f0d7';
+     font-family: "Font Awesome 5 Free";
+     font-weight: 900;
+     color: #212529;
+     opacity: 0.5;
+}
+
+.au-dropdown li > ul{
+     display: none;
+}
+.au-dropdown li > ul li{
+     margin-left: 10px;
+
+}
+.au-dropdown li:hover > ul{
+     display: block;
+}
+
+.au-menu ul{
+     margin-bottom: 0px;
+     padding-inline-start: 0px;
+     list-style: none;
+}
+.au-menu ul li{
+     padding-left: 0px;
+     position: relative;
+}
+.au-menu .nav-item.sub{
+     position: relative;
+}
+.au-menu .nav-item.sub:after{
+     position: absolute;
+     right: 5px;
+     top: 10px;
+     content: '\f0d7';
+     font-family: "Font Awesome 5 Free";
+     font-weight: 900;
+     color: #fff;
+     opacity: 0.5;
+}
+.au-menu li > ul{
+     display: none;
+}
+.au-menu li > ul li{
+     margin-left: 10px;
+
+}
+.au-menu li:hover > ul{
+     display: block;
+}
+
 .navbar-expand-lg .navbar-nav .au-dropdown {
      position: absolute;
      right: 0;
@@ -750,8 +817,20 @@ a.au-lnk:hover>* {
      font-weight: 700;
      color: #222;
 }
+.au-stars-bg {
+     display: block;
+     font-size: 18px;
+     font-weight: 700;
+     color: #222;
+}
 
 .au-stars i {
+     color: #F9C417;
+}
+.au-rating i {
+     color: rgba(0,0,0,0.3);
+}
+.au-rating i.active {
      color: #F9C417;
 }
 
@@ -1375,6 +1454,11 @@ a.au-lnk:hover>* {
 
 .au-opthumbnail {
      height: 150px;
+     background-color: #fff;
+}
+
+.au-productgallery .au-opthumbnail {
+     height: 100px;
      background-color: #fff;
 }
 
@@ -2559,6 +2643,144 @@ ul.lSPager.lSGallery{
 #filter .au-max-width .row > .col-lg{
      padding-right: 0px;
 }
+
+
+.au-report-counter-type{
+     font-size: 4em;
+     line-height: 1em;
+    font-weight: bold;
+}
+
+.au-addcolumn{
+     position: absolute;
+     top: 85px;
+     right: -39px;
+     background-color: #fff;
+     border: 0px;
+     font-size: 14px;
+     border: 1px solid rgba(0, 0, 0, 0.3);
+     border-bottom: 0;
+     color: #222;
+     opacity: 0.7;
+     transform: rotate(-90deg);
+     -webkit-transform: rotate(-90deg);
+     -moz-transform: rotate(-90deg);
+     -ms-transform: rotate(-90deg);
+     -o-transform: rotate(-90deg);
+     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+.au-addcolumn:hover{
+     opacity: 1;
+}
+
+.custom-select{
+     border-radius: 0px;
+}
+
+
+.au-stars {
+     font-size: 14px;
+     line-height: 18px;
+     font-weight: 400;
+     color: #092E6E;
+     white-space: nowrap;
+}
+.au-stars i{
+     font-size: 18px;
+     margin-right: 5px;
+     color: #F9C417;
+}
+
+.au-rewarditem {
+    position: relative;
+    min-height: 70px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.au-rewarddetails .au-accpoints{
+     margin-left: 0px;
+     margin-bottom: 10px;
+}
+
+a.au-back{
+     font-size: 10px;
+     margin-top: -10px;
+     margin-bottom: 5px;
+     color: #fff !important;
+     display: block;
+}
+
+.au-back i{
+     margin-right: 5px;
+}
+
+.au-productgallery{
+     margin-top: 20px;
+}
+
+.au-productgallery{
+     margin-bottom: 0px;
+}
+
+.au-productgallery .au-opthumbnail{
+     margin-right: -15px;
+}
+
+.au-rwthumbnail {
+     min-width: 50%;
+     width: 50%;
+     height: 500px;
+     background-color: #fff;
+     padding: 0px;
+     margin-bottom: -320px;
+}
+.au-rewarddetailsinfo{
+     padding-top: 320px;
+     position: relative;
+}
+.au-rewarddetailsinfo > .au-inner{
+     position: absolute;
+     top: 0px;
+     padding-left: calc(50% + 15px);
+}
+
+.au-btnyellow-lg {
+     font-size: 14px;
+     font-weight: 700;
+     color: #fff;
+     background-color: #F9C417;
+     padding: 0.8em 2em;
+     display: inline-block;
+     border: 0;
+     margin-right: 5px;
+}
+
+.au-btnyellow-lg:hover {
+     opacity: 0.7;
+     color: #fff;
+}
+.au-options{
+     display: inline-block;
+}
+.au-options select{
+     height: 43px;
+}
+.au-rewardpoints{
+     margin-left: 0px;
+     margin-top: 10px;
+     font-size: 18px;
+}
+.au-rewardpoints .au-heart i{
+     font-size: 24px;
+}
+.au-rewardpoints .au-heart{
+     width: 38px;
+     height: 38px;
+     line-height: 38px;
+}
 /*Extra small devices (portrait phones, less than 576px)*/
 
 @media (max-width: 575px) {
@@ -2704,6 +2926,9 @@ ul.lSPager.lSGallery{
      .au-opthumbnail {
           height: 150px;
      }
+     .au-productgallery .au-opthumbnail {
+          height: 100px;
+     }
      .au-titlebox {
           font-size: 14px;
      }
@@ -2819,6 +3044,34 @@ ul.lSPager.lSGallery{
      }
      .au-rewarddetails {
           padding: 1em 2em 0 2em;
+     }
+     .au-rwthumbnail{
+          max-width: 100%;
+          width: 100%;
+          height: 0px;
+          padding-top: 66.6%;
+          margin-bottom: auto;
+          position: relative;
+     }
+     .au-rwthumbnail img{
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          width: 100%;
+          display: block;
+         object-fit: cover;
+         object-position: center;
+     }
+     .au-productgallery{
+          margin-right: 15px;
+     }
+     .au-rewarddetailsinfo{
+          padding-top: 0px;
+          margin-bottom: 30px;
+     }
+     .au-rewarddetailsinfo > .au-inner{
+          padding-left: 0px;
+          position: relative;
      }
 }
 
@@ -3048,6 +3301,35 @@ ul.lSPager.lSGallery{
      .au-btnicon{
           display: inline-block;
      }
+     .au-rwthumbnail{
+          max-width: 100%;
+          width: 100%;
+          height: 0px;
+          padding-top: 66.6%;
+          margin-bottom: auto;
+          position: relative;
+     }
+     .au-rwthumbnail img{
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          width: 100%;
+          display: block;
+         object-fit: cover;
+         object-position: center;
+     }
+     .au-productgallery{
+          margin-right: 15px;
+     }
+     .au-rewarddetailsinfo{
+          padding-top: 0px;
+          margin-bottom: 30px;
+     }
+     .au-rewarddetailsinfo > .au-inner{
+          padding-left: 0px;
+          position: relative;
+     }
+}
 }
 
 
@@ -3123,6 +3405,9 @@ ul.lSPager.lSGallery{
      }
      .au-opthumbnail {
           height: 250px;
+     }
+     .au-productgallery .au-opthumbnail {
+          height: 100px;
      }
      .au-phstats>* {
           display: block;
@@ -3521,64 +3806,4 @@ button.au-tab-menu-link:hover{
           margin-bottom: 5px;
           margin-top: 10px;
      }
-}
-
-.au-report-counter-type{
-     font-size: 4em;
-     line-height: 1em;
-    font-weight: bold;
-}
-
-.au-addcolumn{
-     position: absolute;
-     top: 85px;
-     right: -39px;
-     background-color: #fff;
-     border: 0px;
-     font-size: 14px;
-     border: 1px solid rgba(0, 0, 0, 0.3);
-     border-bottom: 0;
-     color: #222;
-     opacity: 0.7;
-     transform: rotate(-90deg);
-     -webkit-transform: rotate(-90deg);
-     -moz-transform: rotate(-90deg);
-     -ms-transform: rotate(-90deg);
-     -o-transform: rotate(-90deg);
-     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
-}
-
-.au-addcolumn:hover{
-     opacity: 1;
-}
-
-.custom-select{
-     border-radius: 0px;
-}
-
-
-.au-stars {
-     font-size: 14px;
-     line-height: 18px;
-     font-weight: 400;
-     color: #092E6E;
-     white-space: nowrap;
-}
-.au-stars i{
-     font-size: 18px;
-     margin-right: 5px;
-     color: #F9C417;
-}
-
-.au-rewarditem {
-    position: relative;
-    min-height: 70px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-}
-
-.au-rewarddetails .au-accpoints{
-     margin-left: 0px;
-     margin-bottom: 10px;
 }
