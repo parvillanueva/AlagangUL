@@ -47,7 +47,7 @@
 			<div class="col">
 				<div class="au-programdescription">
 					<div class="au-opptablex">
-						<table id="myTable" class="tablesorter">
+						<table id="myTable" class="table">
 							<thead id="table_header">
 								<tr>
 									<th scope="col">Programs</th>
@@ -87,6 +87,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		pagination("<?php echo $total_data ?>", '10');
+		$(".table").addSortWidget();
 	});
 	$(document).on('click', '#btnSubmitsSearch', function(){
 		var program_filter = $('#program_filter').val();

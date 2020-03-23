@@ -86,7 +86,7 @@
 			<div class="col">
 				<div class="au-programdescription">
 					<div class="au-opptablex">
-						<table id="myTable" class="tablesorter">
+						<table id="myTable" class="table">
 							<thead id="table_header">
 								<tr>
 									<th scope="col">Program</th>
@@ -95,8 +95,8 @@
 									<th scope="col">Employee</th>
 									<th scope="col">Division</th>
 									<th scope="col">Email Address</th>
-									<th scope="col">Work Number</th>
-									<th scope="col">Date Volunteered</th>
+									<th scope="col" class="remove_img">Work Number</th>
+									<th scope="col" class="remove_img">Date Volunteered</th>
 								</tr>
 							</thead>
 							<tbody id="table_tbody" class="tbody_table">
@@ -132,6 +132,8 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		pagination("<?php echo $total_data ?>", '10');
+		$(".table").addSortWidget();
+		$(".remove_img img").remove();
 		$('#date_input').daterangepicker({
 			"showDropdowns": true,
 			"linkedCalendars": false,

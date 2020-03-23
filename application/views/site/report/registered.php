@@ -64,7 +64,7 @@
 			<div class="col">
 				<div class="au-programdescription">
 					<div class="au-opptablex">
-						<table id="myTable" class="tablesorter table">
+						<table id="myTable" class="table">
 							<thead id="table_header">
 								<tr>
 									<th scope="col">Division</th>
@@ -72,7 +72,7 @@
 									<th scope="col">First Name</th>
 									<th scope="col">Email Address</th>
 									<th scope="col">Work Number</th>
-									<th scope="col">Date Registered</th>
+									<th scope="col" class="remove_img">Date Registered</th>
 								</tr>
 							</thead>
 							<tbody id="user_list" class="tbody_table">
@@ -105,6 +105,8 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		pagination("<?php echo $total_data ?>", '10');
+		$(".table").addSortWidget();
+		$(".remove_img img").remove();
 		$('#date_input').daterangepicker({
 			"showDropdowns": true,
 			"linkedCalendars": false,
