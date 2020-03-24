@@ -222,7 +222,7 @@
 		var division = $('#select_division').val();
 		var date = $('#date_input').val();
 		var limit = $('#filter_limit').val();
-		var limit_set = ""+limit_page+","+total+"";	
+		var limit_set = ""+limit_page+","+limit+"";	
 		var url = "<?php echo base_url('site/report/volunteered_filter')?>";
 		var data = {
 			'search' : search,

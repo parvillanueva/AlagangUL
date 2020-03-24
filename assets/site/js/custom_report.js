@@ -8,6 +8,7 @@ $(document).on('click','#reset',function(){
 });
 
 function pagination(total, filter){
+
 	$('.pagination').twbsPagination('destroy');
 	var grand_total = parseInt(Math.ceil(total/filter));
 	var visible = (grand_total < 3) ? grand_total : 3;
@@ -16,6 +17,7 @@ function pagination(total, filter){
 		visiblePages: visible,
 		onPageClick: function (event, page) {
 			var filter_set = (page - 1) * filter;
+
 			if(filter_set == 0){
 				get_data_filter_pagination();
 			}
