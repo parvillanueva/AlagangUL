@@ -10,7 +10,7 @@
 						<div class="col-sm-4 au-padding">
 							<div class="au-report-counter-type au-talent"><?php echo $in_loop['total']; ?></div>
 							<div class="au-report-counter-title"><img src="<?php echo $in_loop['image']; ?>" title="<?php echo $key; ?>"></div>
-							<div class="au-report-details">1,592 volunteers needed</div>
+							<div class="au-report-details"><?php echo $in_loop['vol_needed']; ?></div>
 						</div>	
 					<?php } ?>
 				</div>

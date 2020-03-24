@@ -59,10 +59,9 @@ class Report extends CI_Controller {
 	
 	public function volunteer_type()
 	{
+		$data['data_set']['type_info']['type_list'] = $this->vol_type_listing();
 		$data['data_set']['graph'] = $this->graph_data($this->vol_type_listing());
 		$data['data_set']['event_task'] = $this->program_list();
-		$data['title_set'] = 'Volunteered by Type';
-		$data['data_set']['type_info']['type_list'] = $this->vol_type_listing();
 		$data['data_set']['total_data'] = $this->vol_type_listing_count();
 		$data['meta'] = array(
 			"title"         =>  "Volunteered Type",
@@ -374,6 +373,7 @@ class Report extends CI_Controller {
 				'color' => $badges->color,
 				'image' => $badges->image,
 				'total' => $this->total_badge($badges->id),
+				'vol_needed' => $this->vol_needed($badges->id),
 			);
 			
 		}
@@ -452,6 +452,13 @@ class Report extends CI_Controller {
 		$sql_badge = "SELECT * FROM tbl_program_event_task_badge WHERE badge_id='".$id."'";
 		$result_badge = $this->db->query($sql_badge)->result();
 		return count($result_badge);
+	}
+	
+	public function vol_needed($badge_id){
+		$sql_badge = "SELECT sum(tbl_pet.required_volunteers) as total_vol_req FROM tbl_program_event_task tbl_pet INNER JOIN tbl_program_event_task_badge tbl_petb
+					  ON tbl_pet.id=tbl_petb.event_task_id WHERE tbl_petb.badge_id='".$badge_id."'";
+		$result_vol = $this->db->query($sql_badge)->result();
+		return $result_vol[0]->total_vol_req;
 	}
 	
 	public function badge_count_data($id){
