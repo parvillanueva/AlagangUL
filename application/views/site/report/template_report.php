@@ -1,4 +1,12 @@
 <script src="<?= base_url();?>assets/site/js/custom_report.js" text="type/javascript"></script>
+<style>
+	table th{
+		position: relative;
+	}
+	.sorttable_img {
+		right: 10px;
+	}
+</style>
 <div class="au-wrapper">
 	<div class="container-fluid au-heading">
 		<div class="au-container au-padding">
