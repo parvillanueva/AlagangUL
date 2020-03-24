@@ -136,7 +136,7 @@
 	function filter_pagination(limit_page, total){
 		var program_filter = $('#program_filter').val();
 		var filter_limit = $('#filter_limit').val();
-		var limit_set = ""+limit_page+","+total+"";	
+		var limit_set = ""+filter_limit+","+limit_page+"";	
 		var url = "<?php echo base_url('site/report/vol_program_filter')?>";
 		var data = {
 			program : program_filter,

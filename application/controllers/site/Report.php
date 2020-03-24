@@ -486,7 +486,7 @@ class Report extends CI_Controller {
 				INNER JOIN tbl_program_event_task_volunteers ON tbl_users.id=tbl_program_event_task_volunteers.user_id
 				INNER JOIN tbl_programs ON tbl_programs.id=tbl_program_event_task_volunteers.program_id
 				INNER JOIN tbl_program_events ON tbl_program_events.program_id=tbl_programs.id
-				INNER JOIN tbl_program_event_task ON tbl_program_event_task.event_id=tbl_program_events.id WHERE tbl_users.status = '1' AND tbl_programs.status = '1' AND tbl_program_events.status = '1' AND tbl_program_event_task_volunteers.status = '1' limit 10";
+				INNER JOIN tbl_program_event_task ON tbl_program_event_task.event_id=tbl_program_events.id WHERE tbl_users.status = '1' AND tbl_programs.status = '1' AND tbl_program_events.status = '1' AND tbl_program_event_task_volunteers.status = '1' limit 5";
 		$sql_result = $this->db->query($sql)->result();
 			$arr = array();
 		foreach($sql_result as $loop){
@@ -593,6 +593,7 @@ class Report extends CI_Controller {
 	}
 	
 	public function volunteered_filter(){
+
 		$where_filter = $this->volunteered_filter_where($_POST);
 		$sql = "Select
 				tbl_users.id as user_id,
@@ -611,6 +612,7 @@ class Report extends CI_Controller {
 				INNER JOIN tbl_programs ON tbl_programs.id=tbl_program_event_task_volunteers.program_id
 				INNER JOIN tbl_program_events ON tbl_program_events.program_id=tbl_programs.id
 				INNER JOIN tbl_program_event_task ON tbl_program_event_task.event_id=tbl_program_events.id WHERE tbl_users.status = '1' ".$where_filter." AND tbl_programs.status = '1' AND tbl_program_events.status = '1' AND tbl_program_event_task_volunteers.status = '1' limit ".$_POST['limit']."";
+
 		$sql_result = $this->db->query($sql)->result();
 			$arr = array();
 		foreach($sql_result as $loop){

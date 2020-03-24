@@ -179,8 +179,8 @@
 		var input_search = $('#search_input').val();
 		var select_division = $('#division_set').val();
 		var date_input = $('#date_input').val();
-		var limit_set = ""+limit_page+","+total+"";	
 		var filter_limit = $('#filter_limit').val();
+		var limit_set = ""+filter_limit+","+limit_page+"";	
 		var url = "<?php echo base_url('site/report/user_search')?>";
 		var data = {
 			search : input_search,
