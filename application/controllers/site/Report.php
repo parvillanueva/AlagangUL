@@ -63,6 +63,7 @@ class Report extends CI_Controller {
 		$data['data_set']['graph'] = $this->graph_data($this->vol_type_listing());
 		$data['data_set']['event_task'] = $this->program_list();
 		$data['data_set']['total_data'] = $this->vol_type_listing_count();
+		$data['title_set'] = 'Volunteered Type';
 		$data['meta'] = array(
 			"title"         =>  "Volunteered Type",
 			"description"   =>  "",
