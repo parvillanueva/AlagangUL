@@ -110,6 +110,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		$("#vol_type").addClass('active');
 		pagination("<?php echo $total_data ?>", '10');
 		$(".table").addSortWidget();
 	});

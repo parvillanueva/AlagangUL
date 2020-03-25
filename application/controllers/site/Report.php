@@ -63,6 +63,7 @@ class Report extends CI_Controller {
 		$data['data_set']['graph'] = $this->graph_data($this->vol_type_listing());
 		$data['data_set']['event_task'] = $this->program_list();
 		$data['data_set']['total_data'] = $this->vol_type_listing_count();
+		$data['title_set'] = 'Volunteered Type';
 		$data['meta'] = array(
 			"title"         =>  "Volunteered Type",
 			"description"   =>  "",
@@ -449,7 +450,11 @@ class Report extends CI_Controller {
 	}
 	
 	public function total_badge($id){
-		$sql_badge = "SELECT * FROM tbl_program_event_task_badge WHERE badge_id='".$id."'";
+		$sql_badge = "SELECT * FROM tbl_programs as a 
+				inner join tbl_program_event_task_volunteers as b on b.program_id = a.id
+				inner join tbl_program_event_task as c on b.event_task_id = c.id
+				inner join tbl_program_event_task_badge as d on c.id = d.event_task_id
+				inner join tbl_badges as e on d.badge_id = e.id WHERE d.badge_id='".$id."'";
 		$result_badge = $this->db->query($sql_badge)->result();
 		return count($result_badge);
 	}

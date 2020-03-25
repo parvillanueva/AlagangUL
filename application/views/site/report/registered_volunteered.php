@@ -22,3 +22,10 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#reg_vol").addClass('active');
+		$('#excel_extract').remove();
+	});
+</script>
