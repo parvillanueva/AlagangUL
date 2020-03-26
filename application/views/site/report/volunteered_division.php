@@ -100,7 +100,8 @@
 		aJax.post(url, data, function(result){
 			$('#division_list').html(result);
 		});
-		//pagination("<?php echo $total_data ?>", filter_limit);		
+		var total_data = $(".tbody_table tr").length;
+		pagination(total_data, filter_limit);		
 	});
 	
 	$(document).on('click','#reset',function(){

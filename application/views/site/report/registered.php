@@ -136,6 +136,8 @@
 		aJax.post(url, data, function(result){
 			$('#user_list').html(result);
 		}); 
+		var total_data = $(".tbody_table tr").length;
+		pagination(total_data, filter_limit);
 	});
 	
 	function get_data_filter(){

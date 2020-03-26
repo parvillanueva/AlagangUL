@@ -100,6 +100,8 @@
 		aJax.post(url, data, function(result){
 			$('#program_listview').html(result);
 		}); 
+		var total_data = $(".tbody_table tr").length;
+		pagination(total_data, filter_limit);
 	});
 	
 	$(document).on('click','#reset',function(){

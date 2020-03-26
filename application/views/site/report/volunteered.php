@@ -166,6 +166,8 @@
 		aJax.post(url, data, function(result){
 			$('#table_tbody').html(result);
 		});
+		var total_data = $(".tbody_table tr").length;
+		pagination(total_data, limit);
 	});
 	
 	$(document).on('click','#reset',function(){

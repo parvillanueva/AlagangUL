@@ -670,18 +670,20 @@ class Report extends CI_Controller {
 	}
 	
 	public function volunteer_type_report(){
+		$type_info['olddata'] = $this->vol_type_listing();
 		$type_info['type_list'] = $this->volunteer_type_result($_POST);
 		$this->load->view('site/report/volunteer_type_listview', $type_info);
 	}
 	
 	public function volunteer_type_result($post){
+		$where = ($post['task_val'] == '') ? '' : "where a.id='".$post['task_val']."'";
 		$sql = "select a.id as id, a.name as program_name, e.name as badge_name, count(b.user_id) as total
 				from tbl_programs as a 
 				inner join tbl_program_event_task_volunteers as b on b.program_id = a.id
 				inner join tbl_program_event_task as c on b.event_task_id = c.id
 				inner join tbl_program_event_task_badge as d on c.id = d.event_task_id
 				inner join tbl_badges as e on d.badge_id = e.id
-				where a.id='".$post['task_val']."'
+				".$where."
 				group by a.name, e.name limit ".$post['filter']."";
 		$sql_result = $this->db->query($sql)->result();
 		$sql_badge = "SELECT id, name, icon, color, image FROM tbl_badges WHERE status='1'";
