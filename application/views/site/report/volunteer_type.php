@@ -25,6 +25,7 @@
 							<span class="au-stitle">Type</span>
 							<div class="form-row">
 								<select class="form-control custom-select filter_task">
+									<option selected disabled="disabled">Please Select</option>
 									<?php foreach($event_task as $pro_loop){ ?>
 										<option value="<?php echo $pro_loop->id; ?>"><?php echo $pro_loop->name; ?></option>
 									<?php } ?>
@@ -132,6 +133,8 @@
 		aJax.post(url, data, function(result){
 			$('#tbody_table').html(result);
 		});
+		var total_data = $(".tbody_table tr").length;
+		pagination(total_data, filter);
 	});
 
 	function get_data_filter(){
