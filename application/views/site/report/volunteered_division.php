@@ -138,7 +138,7 @@
 	function filter_pagination(limit_page, total){
 		var select_division = $('#division_set').val();
 		var filter_limit = $('#filter_limit').val();
-		var limit_set = ""+filter_limit+","+limit_page+"";	
+		var limit_set = ""+limit_page+","+filter_limit+"";	
 		var url = "<?php echo base_url('site/report/division_search')?>";
 		var data = {
 			division : select_division,

@@ -17,7 +17,7 @@ function pagination(total, filter){
 		visiblePages: visible,
 		onPageClick: function (event, page) {
 			var filter_set = (page - 1) * filter;
-
+console.log(filter_set);
 			if(filter_set == 0){
 				get_data_filter_pagination();
 			}
