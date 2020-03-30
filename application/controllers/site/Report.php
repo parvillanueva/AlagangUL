@@ -725,7 +725,7 @@ class Report extends CI_Controller {
 	}
 	
 	public function extract_excel_report(){
-		$sql_program_event = "SELECT
+		/* $sql_program_event = "SELECT
 		tbl_programs.`name` AS ProgramName,
 		tbl_program_events.title AS EventName,
 		DATE(tbl_program_events.`when`) AS EventDate,
@@ -735,14 +735,33 @@ class Report extends CI_Controller {
 		tbl_program_event_task.required_volunteers as `vol_required`,
 		(Select Count(*) From tbl_program_event_task_volunteers where event_task_id=tbl_program_event_task.id) as `vol_joined`
 		FROM
-		tbl_program_event_task_volunteers
+		tbl_program_event_task
+		LEFT JOIN tbl_program_event_task_volunteers ON tbl_program_event_task_volunteers.event_task_id = tbl_program_event_task.id
 		INNER JOIN tbl_programs ON tbl_program_event_task_volunteers.program_id = tbl_programs.id
 		INNER JOIN tbl_program_events ON tbl_program_event_task_volunteers.event_id = tbl_program_events.id
-		INNER JOIN tbl_program_event_task ON tbl_program_event_task_volunteers.event_task_id = tbl_program_event_task.id
 		WHERE tbl_program_events.`status` = '1'
+		GROUP BY tbl_program_event_task.`id`
 		ORDER BY 
-		tbl_programs.id ASC";
+		tbl_programs.id ASC"; */
 		
+		$sql_program_event= "SELECT
+		tbl_programs.`name` AS ProgramName,
+		tbl_program_events.title AS EventName,
+		DATE(tbl_program_events.`when`) AS EventDate,
+		CONCAT(tbl_program_events.venue, ' ', tbl_program_events.city) AS EventVenue,
+		tbl_program_event_task.task AS Task,
+		(SELECT GROUP_CONCAT(b.name) FROM tbl_badges b LEFT JOIN tbl_program_event_task_badge petb ON petb.badge_id = b.id WHERE petb.event_task_id = tbl_program_event_task.id) as Type,
+		tbl_program_event_task.required_volunteers as `vol_required`,
+		(Select Count(*) From tbl_program_event_task_volunteers where event_task_id=tbl_program_event_task.id) as `vol_joined`
+		FROM
+		tbl_program_event_task
+		LEFT JOIN tbl_program_event_task_volunteers ON tbl_program_event_task_volunteers.event_task_id = tbl_program_event_task.id
+		LEFT JOIN tbl_program_events ON tbl_program_event_task.event_id = tbl_program_events.id
+		LEFT JOIN tbl_programs ON tbl_program_events.program_id = tbl_programs.id
+		
+		WHERE tbl_program_events.`status` = '1'
+		GROUP BY tbl_program_event_task.`id`  
+		ORDER BY `EventDate`  ASC";
 		
 		$sql_program = "SELECT
 		tbl_programs.`name` AS ProgramName,
@@ -880,26 +899,26 @@ class Report extends CI_Controller {
 		$worksheet2->SetCellValueByColumnAndRow(3, 2, "Event Venue");
 		$worksheet2->SetCellValueByColumnAndRow(4, 2, "Task Type");
 		$worksheet2->SetCellValueByColumnAndRow(5, 2, "Task");
-		$worksheet2->SetCellValueByColumnAndRow(6, 2, "# of Volunteers - Required");
-		$worksheet2->SetCellValueByColumnAndRow(7, 2, "# of Volunteers - Joined");
-		$worksheet2->SetCellValueByColumnAndRow(8, 2, "Volunteer Name");
-		$worksheet2->SetCellValueByColumnAndRow(9, 2, "Email Address");
-		$worksheet2->SetCellValueByColumnAndRow(10, 2, "Mobile Number");
-		$worksheet2->getStyle("I1:K1")->applyFromArray($style);
-		$worksheet2->mergeCells("I1:K1");
-		$worksheet2->SetCellValueByColumnAndRow(8, 1, "VOLUNTEER DETAILS");
+		//$worksheet2->SetCellValueByColumnAndRow(6, 2, "# of Volunteers - Required");
+		//$worksheet2->SetCellValueByColumnAndRow(7, 2, "# of Volunteers - Joined");
+		$worksheet2->SetCellValueByColumnAndRow(6, 2, "Volunteer Name");
+		$worksheet2->SetCellValueByColumnAndRow(7, 2, "Email Address");
+		$worksheet2->SetCellValueByColumnAndRow(8, 2, "Mobile Number");
+		$worksheet2->getStyle("G1:I1")->applyFromArray($style);
+		$worksheet2->mergeCells("G1:I1");
+		$worksheet2->SetCellValueByColumnAndRow(6, 1, "VOLUNTEER DETAILS");
 		$worksheet2->getColumnDimension('A')->setAutoSize(TRUE);
 		$worksheet2->getColumnDimension('B')->setWidth(25);
 		$worksheet2->getColumnDimension('C')->setWidth(25);
 		$worksheet2->getColumnDimension('D')->setWidth(25);
 		$worksheet2->getColumnDimension('E')->setWidth(25);
 		$worksheet2->getColumnDimension('F')->setWidth(25);
+		//$worksheet2->getColumnDimension('G')->setWidth(25);
+		//$worksheet2->getColumnDimension('H')->setWidth(25);
 		$worksheet2->getColumnDimension('G')->setWidth(25);
 		$worksheet2->getColumnDimension('H')->setWidth(25);
 		$worksheet2->getColumnDimension('I')->setWidth(25);
-		$worksheet2->getColumnDimension('J')->setWidth(25);
-		$worksheet2->getColumnDimension('K')->setWidth(25);
-		$worksheet2->getStyle("A2:K2")->applyFromArray($style_head);
+		$worksheet2->getStyle("A2:I2")->applyFromArray($style_head);
 
 
 
@@ -912,11 +931,11 @@ class Report extends CI_Controller {
 			$worksheet2->SetCellValueByColumnAndRow(3, $colstart2, $value->EventVenue);
 			$worksheet2->SetCellValueByColumnAndRow(4, $colstart2, $value->Task);
 			$worksheet2->SetCellValueByColumnAndRow(5, $colstart2, $value->Type);
-			$worksheet2->SetCellValueByColumnAndRow(6, $colstart2, $value->vol_required);
-			$worksheet2->SetCellValueByColumnAndRow(7, $colstart2, $value->vol_joined);
-			$worksheet2->SetCellValueByColumnAndRow(8, $colstart2, $value->EmployeeName);
-			$worksheet2->SetCellValueByColumnAndRow(9, $colstart2, $value->EmailAddress);
-			$worksheet2->SetCellValueByColumnAndRow(10, $colstart2, $value->WorkNumber);
+			//$worksheet2->SetCellValueByColumnAndRow(6, $colstart2, $value->vol_required);
+			//$worksheet2->SetCellValueByColumnAndRow(7, $colstart2, $value->vol_joined);
+			$worksheet2->SetCellValueByColumnAndRow(6, $colstart2, $value->EmployeeName);
+			$worksheet2->SetCellValueByColumnAndRow(7, $colstart2, $value->EmailAddress);
+			$worksheet2->SetCellValueByColumnAndRow(8, $colstart2, $value->WorkNumber);
 
 			$worksheet2->getCellByColumnAndRow(0,$colstart2)->getStyle('B1:E999')->getAlignment()->setWrapText(true); 
 			$worksheet2->getCellByColumnAndRow(1,$colstart2)->getStyle()->applyFromArray($style_body);
@@ -924,11 +943,11 @@ class Report extends CI_Controller {
 			$worksheet2->getCellByColumnAndRow(3,$colstart2)->getStyle()->applyFromArray($style_body);
 			$worksheet2->getCellByColumnAndRow(4,$colstart2)->getStyle()->applyFromArray($style_body);
 			$worksheet2->getCellByColumnAndRow(5,$colstart2)->getStyle()->applyFromArray($style_body);
+			//$worksheet2->getCellByColumnAndRow(6,$colstart2)->getStyle()->applyFromArray($style_body);
+			//$worksheet2->getCellByColumnAndRow(7,$colstart2)->getStyle()->applyFromArray($style_body);
 			$worksheet2->getCellByColumnAndRow(6,$colstart2)->getStyle()->applyFromArray($style_body);
 			$worksheet2->getCellByColumnAndRow(7,$colstart2)->getStyle()->applyFromArray($style_body);
 			$worksheet2->getCellByColumnAndRow(8,$colstart2)->getStyle()->applyFromArray($style_body);
-			$worksheet2->getCellByColumnAndRow(9,$colstart2)->getStyle()->applyFromArray($style_body);
-			$worksheet2->getCellByColumnAndRow(10,$colstart2)->getStyle()->applyFromArray($style_body);
 			$colstart2++;
 		}
 

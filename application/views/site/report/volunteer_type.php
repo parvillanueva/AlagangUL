@@ -167,7 +167,7 @@
 	function filter_pagination(limit_page, total){
 		var task_val = $(".filter_task").val();
 		var filter_limit = $('#filter_limit').val();
-		var limit_set = ""+limit_page+","+total+"";	
+		var limit_set = ""+limit_page+","+filter_limit+"";	
 		var url = "<?php echo base_url('site/report/volunteer_type_report')?>";
 		var data = {
 			task_val : task_val,
