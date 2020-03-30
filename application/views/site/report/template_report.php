@@ -31,7 +31,7 @@
 	</div>
 	<?php $this->load->view($content_view, $data_set); ?>
 </div>
-
+<form id="filterform" method="POST" action="<?php echo base_url('site/report/table_excel_report') ?>"><input type="hidden"  name="data" id="report_data" /></form>
 <script type="text/javascript">
 	$(document).ready(function(){
 		var module = "<?php echo $module ?>";
@@ -91,6 +91,9 @@
 			title : "<?php echo $title_set; ?>"
 		}
 		var url = "<?php echo base_url('site/report/table_excel_report') ?>";
-		$('<form id="filterform" method="POST" action="'+url+'"><input type="text" hidden name="data" value=' + "'" +JSON.stringify(data) + "'" + ' /></form>').appendTo("body").submit();
+		var json_data = JSON.stringify(data);
+		$("#report_data").val(json_data);
+		$('#filterform').submit();
+		//$('<form id="filterform" method="POST" action="'+url+'"><input type="text" hidden name="data" value=' + "'" +JSON.stringify(data) + "'" + ' /></form>').appendTo("body").submit();
 	});
 </script>

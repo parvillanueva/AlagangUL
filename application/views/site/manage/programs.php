@@ -1,3 +1,8 @@
+<style>
+	#s01.au-p4 {
+		display: none;
+	}
+</style>
 <div class="container-fluid au-heading">
 	<div class="au-container au-padding">
 		<span class="au-h5 no-margin">Manage Programs</span>
@@ -15,6 +20,7 @@
 	<div class="au-container au-padding">
 		<div class="au-eventswrapper row">
 			<div class="col">
+				<span class="au-p4 text-center" id="s01">No items to display</span>
 				<div class="au-manageprogramtable au-opptable">
 					<table>
 						<thead>
