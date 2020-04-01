@@ -25,14 +25,25 @@
 						</div>
 						<div class="col-sm-8 au-eventdetails">
 							<div class="au-program">
+								<?php 
+									$when_set = date('Y-m-d', strtotime($when));
+									$current_date = date('Y-m-d');
+									if($eloop['required_volunteer']!=0 && $eloop['is_not_joined'] !=1 && $when_set >= $current_date){ 
+								?>
+									<a href="<?=$link?>" class="au-lnk">
+										<div class="au-pthumbnail">
+											<img src="<?= base_url($eloop['program_details']->image_thumbnail);?>" class="au-fp-thumbnailimg" onerror="imgErrorEvent(this);">
+										</div>
+										<span class="au-ptitle"><?= $eloop['title'] ?></span>
+										<!-- <span class="au-pdetails"><?= $eloop['description'] ?></span> -->
+									</a>
 								
-								<a href="<?=$link?>" class="au-lnk">
-									<div class="au-pthumbnail">
-										<img src="<?= base_url($eloop['program_details']->image_thumbnail);?>" class="au-fp-thumbnailimg" onerror="imgErrorEvent(this);">
-									</div>
-									<span class="au-ptitle"><?= $eloop['title'] ?></span>
-									<!-- <span class="au-pdetails"><?= $eloop['description'] ?></span> -->
-								</a>
+								<?php } else{ ?>
+										<div class="au-pthumbnail">
+											<img src="<?= base_url($eloop['program_details']->image_thumbnail);?>" class="au-fp-thumbnailimg" onerror="imgErrorEvent(this);">
+										</div>
+										<span class="au-ptitle"><?= $eloop['title'] ?></span>
+								<?php } ?>
 							</div>
 							<div class="au-programdetails">
 								<div class="au-inner">
@@ -70,13 +81,15 @@
 									<!-- <div class="col"><span class="au-needed"><?= $eloop['required_volunteer'] ?> volunteers needed</span></div> -->
 									<div class="col">
 										<?php 
-										if($eloop['required_volunteer']!=0 && $eloop['is_not_joined'] !=1){
+										$when_set = date('Y-m-d', strtotime($when));
+										$current_date = date('Y-m-d');
+										if($eloop['required_volunteer']!=0 && $eloop['is_not_joined'] !=1 && $when_set >= $current_date){
 											if(!$eloop['is_joined']){
 										?>	
 										<a href="<?=$link?>" class="au-volunteer au-btnyellow float-right" id="volunteer" style="display: block">Volunteer</a>
 										<?php } else { ?>
 
-										<a href="<?=$link?>" class="au-volunteered au-btnyellow float-right">Volunteered</a>
+										<a href="#" class="au-volunteered au-btnyellow float-right">Volunteered</a>
 									<?php } } else{ ?>
 										<a class=" float-right">&nbsp;</a>
 									<?php }  ?>
