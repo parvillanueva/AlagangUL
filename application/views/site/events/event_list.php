@@ -20,7 +20,7 @@
 							<span class="au-accpoints"><div class="au-heart"><i class="fas fa-heart"></i></div> 10 points</span>
 							<span class="au-accpoints au-accpointsv"><div class="au-heart"><i class="fas fa-heart"></i></div>Volunteered</span>
 							<a href="<?=$link?>">
-								<img src="<?= $eloop['image']; ?>" class="au-eventimg" onerror="imgErrorEvent(this);">
+								<img src="<?= $eloop['image']; ?>" class="au-eventimg" onerror="imgErrorEvent(this);" />
 							</a>
 						</div>
 						<div class="col-sm-8 au-eventdetails">
@@ -32,7 +32,7 @@
 								?>
 									<a href="<?=$link?>" class="au-lnk">
 										<div class="au-pthumbnail">
-											<img src="<?= base_url($eloop['program_details']->image_thumbnail);?>" class="au-fp-thumbnailimg" onerror="imgErrorEvent(this);">
+											<img src="<?= base_url($eloop['program_details']->image_thumbnail);?>" class="au-fp-thumbnailimg" onerror="imgErrorEvent(this);" />
 										</div>
 										<span class="au-ptitle"><?= $eloop['title'] ?></span>
 										<!-- <span class="au-pdetails"><?= $eloop['description'] ?></span> -->
@@ -40,7 +40,7 @@
 								
 								<?php } else{ ?>
 										<div class="au-pthumbnail">
-											<img src="<?= base_url($eloop['program_details']->image_thumbnail);?>" class="au-fp-thumbnailimg" onerror="imgErrorEvent(this);">
+											<img src="<?= base_url($eloop['program_details']->image_thumbnail);?>" class="au-fp-thumbnailimg" onerror="imgErrorEvent(this);" />
 										</div>
 										<span class="au-ptitle"><?= $eloop['title'] ?></span>
 								<?php } ?>
